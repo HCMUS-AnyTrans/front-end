@@ -46,7 +46,7 @@ export default function AccountDialog({ open, onOpenChange, defaultTab = "profil
 
   const content = (
     <div className="w-full">
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+      <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "profile" | "billing" | "settings")} className="w-full">
         <TabsList className="grid w-full grid-cols-3 mb-8">
           <TabsTrigger value="profile" className="flex items-center gap-2">
             <User size={16} />

@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import AboutPageClient from "./about-client";
+import AboutPageClient from "@/app/about/about-client";
 
 export const metadata: Metadata = {
   title: "About Us - AnyTrans",

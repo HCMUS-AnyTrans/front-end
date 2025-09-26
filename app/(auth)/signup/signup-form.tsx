@@ -44,7 +44,7 @@ export function SignupForm() {
         if (result?.error) {
           setError(result.error);
         }
-      } catch (err) {
+      } catch {
         setError("An unexpected error occurred. Please try again.");
       }
     });

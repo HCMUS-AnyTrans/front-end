@@ -78,7 +78,7 @@ export function NotificationsInterface() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedNotification, setSelectedNotification] = useState<NotificationData | null>(null);
+  const [, setSelectedNotification] = useState<NotificationData | null>(null);
   const [showPreferences, setShowPreferences] = useState(false);
 
   // Filter notifications based on active filter and search
@@ -299,7 +299,7 @@ export function NotificationsInterface() {
               <div className="text-center py-12">
                 <Bell className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 font-nunito mb-2">
-                  You're all caught up!
+                  You&apos;re all caught up!
                 </h3>
                 <p className="text-gray-600 font-nunito mb-6">
                   No notifications match your current filter.

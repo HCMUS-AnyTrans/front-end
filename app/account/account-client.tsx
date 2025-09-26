@@ -3,21 +3,19 @@
 import React, { useState } from "react";
 import { User, CreditCard, Shield, Settings, Bell } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import Header from "@/src/components/common/Header";
 import Footer from "@/src/components/Footer";
 import ProfileTab from "@/src/components/account/ProfileTab";
 import BillingTab from "@/src/components/account/BillingTab";
 
 interface SidebarItemProps {
-  id: string;
   label: string;
   icon: React.ReactNode;
   active: boolean;
   onClick: () => void;
 }
 
-function SidebarItem({ id, label, icon, active, onClick }: SidebarItemProps) {
+function SidebarItem({ label, icon, active, onClick }: SidebarItemProps) {
   return (
     <button
       onClick={onClick}
@@ -121,7 +119,6 @@ export default function AccountPageClient() {
                       {sidebarItems.map((item) => (
                         <SidebarItem
                           key={item.id}
-                          id={item.id}
                           label={item.label}
                           icon={item.icon}
                           active={activeSection === item.id}

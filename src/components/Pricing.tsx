@@ -77,7 +77,7 @@ export default function Pricing() {
             <div className="flex flex-col gap-9">
               <h2 className="font-bold text-[50px] leading-[1.3] text-[#191a15] font-inter max-w-[492px]">
                 Choose Plan<br />
-                That's Right For You
+                That&apos;s Right For You
               </h2>
               <p className="text-lg text-[#a6a6a6] font-inter">
                 Choose plan that works best for you, feel free to contact us

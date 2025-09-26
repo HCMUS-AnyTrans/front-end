@@ -38,7 +38,7 @@ export default function AboutPageClient() {
             <CoreValues />
 
             {/* Team Section */}
-            <TeamSection />
+            <TeamSection members={[]} />
 
             {/* Milestones Section */}
             <Milestones />

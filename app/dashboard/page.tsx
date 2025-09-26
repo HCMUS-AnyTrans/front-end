@@ -21,7 +21,7 @@ export default function DashboardPage() {
               Dashboard
             </h1>
             <p className="text-sm text-[#717680] font-nunito">
-              Welcome back! Here's an overview of your translation activity.
+              Welcome back! Here&apos;s an overview of your translation activity.
             </p>
           </div>
         </div>

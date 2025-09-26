@@ -42,7 +42,7 @@ export function LoginForm() {
         if (result?.error) {
           setError(result.error);
         }
-      } catch (err) {
+      } catch {
         setError("An unexpected error occurred. Please try again.");
       }
     });
@@ -159,7 +159,7 @@ export function LoginForm() {
 
         {/* Sign up link */}
         <div className="text-center text-sm text-muted-foreground">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link
             href="/signup"
             className="font-medium text-primary hover:underline"
