@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import React, { useState, useTransition } from "react";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { AuthShell } from "@/src/components/auth/AuthShell";
-import { PasswordField } from "@/src/components/auth/PasswordField";
-import { OAuthButtons } from "@/src/components/auth/OAuthButtons";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
+import React, { useState, useTransition } from 'react';
+import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AuthShell } from '@/src/components/auth/AuthShell';
+import { PasswordField } from '@/src/components/auth/PasswordField';
+import { OAuthButtons } from '@/src/components/auth/OAuthButtons';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Form,
   FormControl,
@@ -17,9 +17,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { loginAction } from "../actions";
-import { loginSchema, type LoginFormData } from "../schemas";
+} from '@/components/ui/form';
+import { loginAction } from '../actions';
+import { loginSchema, type LoginFormData } from '../schemas';
 
 export function LoginForm() {
   const [isPending, startTransition] = useTransition();
@@ -28,8 +28,8 @@ export function LoginForm() {
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       rememberMe: false,
     },
   });
@@ -43,7 +43,7 @@ export function LoginForm() {
           setError(result.error);
         }
       } catch {
-        setError("An unexpected error occurred. Please try again.");
+        setError('An unexpected error occurred. Please try again.');
       }
     });
   };
@@ -54,21 +54,6 @@ export function LoginForm() {
       description="Sign in to your account to continue"
     >
       <div className="space-y-6">
-        {/* OAuth Buttons */}
-        <OAuthButtons />
-
-        {/* Separator */}
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">
-              Or continue with
-            </span>
-          </div>
-        </div>
-
         {/* Login Form */}
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -82,7 +67,7 @@ export function LoginForm() {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex flex-col gap-0.5">
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
@@ -102,7 +87,7 @@ export function LoginForm() {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex flex-col gap-0.5">
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <PasswordField
@@ -122,7 +107,7 @@ export function LoginForm() {
                 control={form.control}
                 name="rememberMe"
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                  <FormItem className="flex flex-row items-center space-x-3 space-y-0">
                     <FormControl>
                       <Checkbox
                         checked={field.value}
@@ -152,14 +137,14 @@ export function LoginForm() {
               className="w-full bg-[#19398f] hover:bg-[#142457]"
               disabled={isPending}
             >
-              {isPending ? "Signing in..." : "Sign in"}
+              {isPending ? 'Signing in...' : 'Sign in'}
             </Button>
           </form>
         </Form>
 
         {/* Sign up link */}
         <div className="text-center text-sm text-muted-foreground">
-          Don&apos;t have an account?{" "}
+          Don&apos;t have an account?{' '}
           <Link
             href="/signup"
             className="font-medium text-primary hover:underline"
@@ -167,7 +152,22 @@ export function LoginForm() {
             Sign up
           </Link>
         </div>
+
+        {/* Separator */}
+        <div className="relative mb-6">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">
+              Or continue with
+            </span>
+          </div>
+        </div>
       </div>
+
+      {/* OAuth Buttons */}
+      <OAuthButtons />
     </AuthShell>
   );
 }
