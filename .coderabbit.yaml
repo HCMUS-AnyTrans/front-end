@@ -1,0 +1,20 @@
+reviews:
+  profile: assertive          # Review chi tiết, “nghiêm khắc” như senior dev
+  high_level_summary: true    # Luôn có tóm tắt PR để reviewer nắm bối cảnh nhanh
+  auto_review:
+    enabled: true             # Không cần gõ /review thủ công
+    drafts: false             # Không review draft → tránh spam comment sớm
+  review_status: true         # Hiển thị trạng thái review rõ ràng trong PR
+  commit_status: true         # Set status ✅❌ cho CI/CD dễ theo dõi
+  tools:
+    eslint:
+      enabled: true           # Chạy lint tự động
+    gitleaks:
+      enabled: true           # Quét secrets (token, password, API key, ...)
+  path_filters:
+    - "!node_modules/"
+    - "!dist/"
+    - "!build/"
+    - "!apps/**/.next/"
+    - "apps/"
+    - "packages/"
