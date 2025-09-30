@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import React, { useState, useTransition } from "react";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { AuthShell } from "@/src/components/auth/AuthShell";
-import { PasswordField } from "@/src/components/auth/PasswordField";
-import { OAuthButtons } from "@/src/components/auth/OAuthButtons";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
+import React, { useState, useTransition } from 'react';
+import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AuthShell } from '@/src/components/auth/AuthShell';
+import { PasswordField } from '@/src/components/auth/PasswordField';
+import { OAuthButtons } from '@/src/components/auth/OAuthButtons';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Form,
   FormControl,
@@ -17,9 +17,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { signupAction } from "../actions";
-import { signupSchema, type SignupFormData } from "../schemas";
+} from '@/components/ui/form';
+import { signupAction } from '../actions';
+import { signupSchema, type SignupFormData } from '../schemas';
+import { redirect } from 'next/navigation';
 
 export function SignupForm() {
   const [isPending, startTransition] = useTransition();
@@ -28,26 +29,27 @@ export function SignupForm() {
   const form = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
       agreeToTerms: false,
     },
   });
 
   const onSubmit = (data: SignupFormData) => {
     setError(null);
-    startTransition(async () => {
-      try {
-        const result = await signupAction(data);
-        if (result?.error) {
-          setError(result.error);
-        }
-      } catch {
-        setError("An unexpected error occurred. Please try again.");
-      }
-    });
+    redirect('/verify-otp');
+    // startTransition(async () => {
+    //   try {
+    //     const result = await signupAction(data);
+    //     if (result?.error) {
+    //       setError(result.error);
+    //     }
+    //   } catch {
+    //     setError('An unexpected error occurred. Please try again.');
+    //   }
+    // });
   };
 
   return (
@@ -84,7 +86,7 @@ export function SignupForm() {
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex flex-col gap-0.5">
                   <FormLabel>Full name</FormLabel>
                   <FormControl>
                     <Input
@@ -103,7 +105,7 @@ export function SignupForm() {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex flex-col gap-0.5">
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
@@ -123,7 +125,7 @@ export function SignupForm() {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex flex-col gap-0.5">
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <PasswordField
@@ -142,7 +144,7 @@ export function SignupForm() {
               control={form.control}
               name="confirmPassword"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex flex-col gap-0.5">
                   <FormLabel>Confirm password</FormLabel>
                   <FormControl>
                     <PasswordField
@@ -161,7 +163,7 @@ export function SignupForm() {
               control={form.control}
               name="agreeToTerms"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                <FormItem className="flex flex-row items-center space-x-3 space-y-0">
                   <FormControl>
                     <Checkbox
                       checked={field.value}
@@ -171,14 +173,14 @@ export function SignupForm() {
                   </FormControl>
                   <div className="space-y-1 leading-none">
                     <FormLabel className="text-sm font-normal">
-                      I agree to the{" "}
+                      I agree to the{' '}
                       <Link
                         href="/terms"
                         className="text-primary hover:underline"
                       >
                         Terms of Service
-                      </Link>{" "}
-                      and{" "}
+                      </Link>{' '}
+                      and{' '}
                       <Link
                         href="/privacy"
                         className="text-primary hover:underline"
@@ -197,14 +199,14 @@ export function SignupForm() {
               className="w-full bg-[#19398f] hover:bg-[#142457]"
               disabled={isPending}
             >
-              {isPending ? "Creating account..." : "Create account"}
+              {isPending ? 'Creating account...' : 'Create account'}
             </Button>
           </form>
         </Form>
 
         {/* Sign in link */}
         <div className="text-center text-sm text-muted-foreground">
-          Already have an account?{" "}
+          Already have an account?{' '}
           <Link
             href="/login"
             className="font-medium text-primary hover:underline"
