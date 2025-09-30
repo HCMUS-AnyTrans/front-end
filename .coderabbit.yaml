@@ -15,6 +15,3 @@ reviews:
     - '!node_modules/'
     - '!dist/'
     - '!build/'
-    - '!apps/**/.next/'
-    - 'apps/'
-    - 'packages/'
