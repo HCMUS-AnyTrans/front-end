@@ -1,12 +1,12 @@
-import Header from "@/src/components/common/Header";
-import Hero from "@/src/components/Hero";
-import Statistics from "@/src/components/Statistics";
-import FeatureGrid from "@/src/components/home/FeatureGrid";
-import About from "@/src/components/About";
-import PricingTabs from "@/src/components/home/PricingTabs";
-import ReviewSection from "@/src/components/home/ReviewSection";
-import Footer from "@/src/components/Footer";
-import BackgroundDecorations from "@/src/components/common/BackgroundDecorations";
+import Header from '@/src/components/common/Header';
+import Hero from '@/src/components/Hero';
+import Statistics from '@/src/components/Statistics';
+import FeatureGrid from '@/src/components/home/FeatureGrid';
+import About from '@/src/components/About';
+import PricingTabs from '@/src/components/home/PricingTabs';
+import ReviewSection from '@/src/components/home/ReviewSection';
+import Footer from '@/src/components/Footer';
+import BackgroundDecorations from '@/src/components/common/BackgroundDecorations';
 
 export default function Home() {
   return (
