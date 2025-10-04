@@ -1,25 +1,29 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { 
-  LayoutDashboard, 
-  FileText, 
-  Film, 
-  Bell, 
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import {
+  LayoutDashboard,
+  FileText,
+  Film,
+  History,
+  Bell,
   Info,
   ChevronRight,
-  MoreHorizontal
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+  MoreHorizontal,
+  X,
+  Menu,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useAccountDialog } from "@/src/contexts/AccountDialogContext";
+} from '@/components/ui/dropdown-menu';
+import { useAccountDialog } from '@/src/contexts/AccountDialogContext';
 
 interface SidebarProps {
   className?: string;
@@ -27,31 +31,36 @@ interface SidebarProps {
 
 const navigationItems = [
   {
-    label: "Dashboard",
-    href: "/dashboard",
+    label: 'Dashboard',
+    href: '/dashboard',
     icon: LayoutDashboard,
   },
   {
-    label: "Document Translator",
-    href: "/features/document-translation",
+    label: 'Document Translator',
+    href: '/features/document-translation',
     icon: FileText,
   },
   {
-    label: "Subtitle Translator", 
-    href: "/features/subtitle-translation",
+    label: 'Subtitle Translator',
+    href: '/features/subtitle-translation',
     icon: Film,
+  },
+  {
+    label: 'Translation History',
+    href: '/translation-history',
+    icon: History,
   },
 ];
 
 const secondaryItems = [
   {
-    label: "Notification",
-    href: "/notifications",
+    label: 'Notification',
+    href: '/notifications',
     icon: Bell,
   },
   {
-    label: "Support",
-    href: "/support",
+    label: 'Support',
+    href: '/support',
     icon: Info,
   },
 ];
@@ -59,31 +68,83 @@ const secondaryItems = [
 export function Sidebar({ className }: SidebarProps) {
   const pathname = usePathname();
   const { openAccount } = useAccountDialog();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if screen is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   const isActive = (href: string) => {
-    if (href === "/dashboard") {
-      return pathname === "/dashboard" || pathname === "/";
+    if (href === '/dashboard') {
+      return pathname === '/dashboard' || pathname === '/';
     }
     return pathname.startsWith(href);
   };
 
-  return (
-    <div className={`bg-white w-[280px] h-screen flex flex-col border-r border-gray-100 ${className || ""}`}>
+  // Mobile Header Component
+  const MobileHeader = () => (
+    <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 px-4 py-3">
+      <div className="flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/logo-icon-mono.svg"
+            alt="AnyTrans Logo"
+            width={100}
+            height={100}
+          />
+        </Link>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="p-2"
+        >
+          {isMobileMenuOpen ? (
+            <X className="w-5 h-5" />
+          ) : (
+            <Menu className="w-5 h-5" />
+          )}
+        </Button>
+      </div>
+    </div>
+  );
+
+  // Mobile Overlay
+  const MobileOverlay = () =>
+    isMobileMenuOpen && (
+      <div
+        className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+        onClick={() => setIsMobileMenuOpen(false)}
+      />
+    );
+
+  // Sidebar Content Component
+  const SidebarContent = () => (
+    <>
       {/* Logo Section - Brand Link */}
-      <Link 
-        href="/"
-        className="flex items-center gap-2 px-3 py-6 mx-3 rounded-lg transition-all duration-200 hover:bg-gray-50 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-[#19398f] focus:ring-offset-2 group"
-      >
-        <div className="w-7 h-7 relative">
-          {/* Logo placeholder - would use actual logo component */}
-          <div className="w-full h-full bg-[#19398f] rounded-md flex items-center justify-center group-hover:bg-[#142457] transition-colors">
-            <span className="text-white text-xs font-bold">AT</span>
-          </div>
-        </div>
-        <h1 className="text-[24px] font-bold text-[#19398f] font-hero-light leading-none group-hover:text-[#142457] transition-colors">
-          anytrans
-        </h1>
-      </Link>
+      <div className="flex justify-center py-6">
+        <Link href="/">
+          <Image
+            src="/logo-icon-mono.svg"
+            alt="AnyTrans Logo"
+            width={150}
+            height={150}
+          />
+        </Link>
+      </div>
 
       {/* Main Navigation */}
       <nav className="flex-1 px-6">
@@ -91,20 +152,21 @@ export function Sidebar({ className }: SidebarProps) {
           {navigationItems.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.href);
-            
+
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={`
                   flex items-center gap-3 px-4 py-3 rounded-full text-sm font-semibold transition-colors
-                  ${active 
-                    ? "bg-[#eaf4ff] text-[#19398f]" 
-                    : "text-[#717680] hover:bg-gray-50"
+                  ${
+                    active
+                      ? 'bg-[#eaf4ff] text-[#19398f]'
+                      : 'text-[#717680] hover:bg-gray-50'
                   }
                 `}
               >
-                <Icon className="w-[10.67px] h-[10.67px]" strokeWidth={2} />
+                <Icon className="w-4 h-4" strokeWidth={2} />
                 <span className="font-nunito">{item.label}</span>
               </Link>
             );
@@ -119,20 +181,21 @@ export function Sidebar({ className }: SidebarProps) {
           {secondaryItems.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.href);
-            
+
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={`
                   flex items-center gap-3 px-4 py-3 rounded-full text-sm font-semibold transition-colors
-                  ${active 
-                    ? "bg-[#eaf4ff] text-[#19398f]" 
-                    : "text-[#717680] hover:bg-gray-50"
+                  ${
+                    active
+                      ? 'bg-[#eaf4ff] text-[#19398f]'
+                      : 'text-[#717680] hover:bg-gray-50'
                   }
                 `}
               >
-                <Icon className="w-[10.67px] h-[10.67px]" strokeWidth={2} />
+                <Icon className="w-4 h-4" strokeWidth={2} />
                 <span className="font-nunito">{item.label}</span>
               </Link>
             );
@@ -149,7 +212,9 @@ export function Sidebar({ className }: SidebarProps) {
               <div className="w-12 h-12 bg-[#19398f] rounded-full mx-auto mb-2 flex items-center justify-center">
                 <span className="text-white text-lg">💎</span>
               </div>
-              <p className="text-xs text-gray-600 font-nunito">Upgrade to Pro</p>
+              <p className="text-xs text-gray-600 font-nunito">
+                Upgrade to Pro
+              </p>
             </div>
           </div>
           <Button className="w-full bg-[#19398f] hover:bg-[#142457] text-white font-semibold font-nunito rounded-full">
@@ -162,7 +227,7 @@ export function Sidebar({ className }: SidebarProps) {
           <div className="flex items-center p-4">
             <Button
               variant="ghost"
-              onClick={() => openAccount("profile")}
+              onClick={() => openAccount('profile')}
               className="flex items-center gap-3 w-full justify-start p-0 h-auto hover:bg-gray-50 cursor-pointer"
               aria-label="Open account"
             >
@@ -170,11 +235,15 @@ export function Sidebar({ className }: SidebarProps) {
                 <span className="text-white text-sm font-bold">J</span>
               </div>
               <div className="flex-1 min-w-0 text-left">
-                <p className="text-xs text-slate-500 font-medium">Welcome back 👋</p>
-                <p className="text-sm text-[#081021] font-medium truncate">Johnathan</p>
+                <p className="text-xs text-slate-500 font-medium">
+                  Welcome back 👋
+                </p>
+                <p className="text-sm text-[#081021] font-medium truncate">
+                  Johnathan
+                </p>
               </div>
             </Button>
-            
+
             {/* Quick Actions Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -188,20 +257,20 @@ export function Sidebar({ className }: SidebarProps) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem 
-                  onClick={() => openAccount("profile")}
+                <DropdownMenuItem
+                  onClick={() => openAccount('profile')}
                   className="cursor-pointer"
                 >
                   Personal Info
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={() => openAccount("billing")}
+                <DropdownMenuItem
+                  onClick={() => openAccount('billing')}
                   className="cursor-pointer"
                 >
                   Billing & Subscription
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={() => openAccount("settings")}
+                <DropdownMenuItem
+                  onClick={() => openAccount('settings')}
                   className="cursor-pointer"
                 >
                   Settings
@@ -211,6 +280,32 @@ export function Sidebar({ className }: SidebarProps) {
           </div>
         </div>
       </div>
-    </div>
+    </>
+  );
+
+  return (
+    <>
+      {/* Mobile Header */}
+      <MobileHeader />
+
+      {/* Mobile Overlay */}
+      <MobileOverlay />
+
+      {/* Desktop Sidebar */}
+      <div
+        className={`hidden lg:flex bg-white w-[280px] h-screen flex-col border-r border-gray-100 ${className || ''}`}
+      >
+        <SidebarContent />
+      </div>
+
+      {/* Mobile Sidebar */}
+      <div
+        className={`lg:hidden fixed top-0 left-0 z-50 bg-white w-[280px] h-screen flex flex-col border-r border-gray-100 transform transition-transform duration-300 ease-in-out ${
+          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <SidebarContent />
+      </div>
+    </>
   );
 }
