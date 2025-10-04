@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -13,6 +13,8 @@ import {
   Info,
   ChevronRight,
   MoreHorizontal,
+  X,
+  Menu,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -66,6 +68,24 @@ const secondaryItems = [
 export function Sidebar({ className }: SidebarProps) {
   const pathname = usePathname();
   const { openAccount } = useAccountDialog();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if screen is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   const isActive = (href: string) => {
     if (href === '/dashboard') {
@@ -74,10 +94,46 @@ export function Sidebar({ className }: SidebarProps) {
     return pathname.startsWith(href);
   };
 
-  return (
-    <div
-      className={`bg-white w-[280px] h-screen flex flex-col border-r border-gray-100 ${className || ''}`}
-    >
+  // Mobile Header Component
+  const MobileHeader = () => (
+    <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 px-4 py-3">
+      <div className="flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/logo-icon-mono.svg"
+            alt="AnyTrans Logo"
+            width={100}
+            height={100}
+          />
+        </Link>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="p-2"
+        >
+          {isMobileMenuOpen ? (
+            <X className="w-5 h-5" />
+          ) : (
+            <Menu className="w-5 h-5" />
+          )}
+        </Button>
+      </div>
+    </div>
+  );
+
+  // Mobile Overlay
+  const MobileOverlay = () =>
+    isMobileMenuOpen && (
+      <div
+        className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+        onClick={() => setIsMobileMenuOpen(false)}
+      />
+    );
+
+  // Sidebar Content Component
+  const SidebarContent = () => (
+    <>
       {/* Logo Section - Brand Link */}
       <div className="flex justify-center py-6">
         <Link href="/">
@@ -224,6 +280,32 @@ export function Sidebar({ className }: SidebarProps) {
           </div>
         </div>
       </div>
-    </div>
+    </>
+  );
+
+  return (
+    <>
+      {/* Mobile Header */}
+      <MobileHeader />
+
+      {/* Mobile Overlay */}
+      <MobileOverlay />
+
+      {/* Desktop Sidebar */}
+      <div
+        className={`hidden lg:flex bg-white w-[280px] h-screen flex-col border-r border-gray-100 ${className || ''}`}
+      >
+        <SidebarContent />
+      </div>
+
+      {/* Mobile Sidebar */}
+      <div
+        className={`lg:hidden fixed top-0 left-0 z-50 bg-white w-[280px] h-screen flex flex-col border-r border-gray-100 transform transition-transform duration-300 ease-in-out ${
+          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <SidebarContent />
+      </div>
+    </>
   );
 }

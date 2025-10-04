@@ -29,7 +29,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="flex-1 px-8 py-6 overflow-y-auto">
+        <div className="flex-1 px-8 py-6 pt-20 lg:pt-6 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             {/* Quick Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">

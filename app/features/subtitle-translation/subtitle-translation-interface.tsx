@@ -320,7 +320,7 @@ export function SubtitleTranslationInterface() {
           </div>
         </div>
 
-        <div className="flex-1 px-8 py-6 overflow-y-auto">
+        <div className="flex-1 px-8 py-6 pt-20 lg:pt-6 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             {!showReview ? (
               <div className="space-y-6">

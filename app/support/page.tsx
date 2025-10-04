@@ -21,7 +21,7 @@ export default function SupportPage() {
             </p>
           </div>
         </div>
-        <div className="flex-1 px-8 py-6">
+        <div className="flex-1 px-8 py-6 pt-20 lg:pt-6">
           <div className="max-w-7xl mx-auto">
             <p className="text-[#717680] font-nunito">
               Support center coming soon...

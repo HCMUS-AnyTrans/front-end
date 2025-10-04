@@ -219,7 +219,7 @@ export function TranslationHistoryInterface() {
           </div>
         </div>
 
-        <div className="flex-1 px-8 py-6 overflow-y-auto">
+        <div className="flex-1 px-8 py-6 pt-20 lg:pt-6 overflow-y-auto">
           <div className="max-w-7xl mx-auto">
             {/* Stats Overview */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
