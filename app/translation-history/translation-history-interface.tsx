@@ -209,7 +209,7 @@ export function TranslationHistoryInterface() {
       <div className="flex-1 flex flex-col max-w-none overflow-hidden">
         {/* Header */}
         <div className="px-8 py-6 border-b border-gray-100">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <h1 className="text-[32px] font-bold text-[#414651] font-nunito leading-tight mb-1">
               Translation History
             </h1>
@@ -220,7 +220,7 @@ export function TranslationHistoryInterface() {
         </div>
 
         <div className="flex-1 px-8 py-6 overflow-y-auto">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             {/* Stats Overview */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
               <div className="bg-white border border-gray-200 rounded-xl p-6">

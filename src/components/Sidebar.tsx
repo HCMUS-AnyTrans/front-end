@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard,
@@ -78,20 +79,16 @@ export function Sidebar({ className }: SidebarProps) {
       className={`bg-white w-[280px] h-screen flex flex-col border-r border-gray-100 ${className || ''}`}
     >
       {/* Logo Section - Brand Link */}
-      <Link
-        href="/"
-        className="flex items-center gap-2 px-3 py-6 mx-3 rounded-lg transition-all duration-200 hover:bg-gray-50 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-[#19398f] focus:ring-offset-2 group"
-      >
-        <div className="w-7 h-7 relative">
-          {/* Logo placeholder - would use actual logo component */}
-          <div className="w-full h-full bg-[#19398f] rounded-md flex items-center justify-center group-hover:bg-[#142457] transition-colors">
-            <span className="text-white text-xs font-bold">AT</span>
-          </div>
-        </div>
-        <h1 className="text-[24px] font-bold text-[#19398f] font-hero-light leading-none group-hover:text-[#142457] transition-colors">
-          anytrans
-        </h1>
-      </Link>
+      <div className="flex justify-center py-6">
+        <Link href="/">
+          <Image
+            src="/logo-icon-mono.svg"
+            alt="AnyTrans Logo"
+            width={150}
+            height={150}
+          />
+        </Link>
+      </div>
 
       {/* Main Navigation */}
       <nav className="flex-1 px-6">
@@ -113,7 +110,7 @@ export function Sidebar({ className }: SidebarProps) {
                   }
                 `}
               >
-                <Icon className="w-[10.67px] h-[10.67px]" strokeWidth={2} />
+                <Icon className="w-4 h-4" strokeWidth={2} />
                 <span className="font-nunito">{item.label}</span>
               </Link>
             );
@@ -142,7 +139,7 @@ export function Sidebar({ className }: SidebarProps) {
                   }
                 `}
               >
-                <Icon className="w-[10.67px] h-[10.67px]" strokeWidth={2} />
+                <Icon className="w-4 h-4" strokeWidth={2} />
                 <span className="font-nunito">{item.label}</span>
               </Link>
             );
