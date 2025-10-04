@@ -1,25 +1,26 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { 
-  LayoutDashboard, 
-  FileText, 
-  Film, 
-  Bell, 
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import {
+  LayoutDashboard,
+  FileText,
+  Film,
+  History,
+  Bell,
   Info,
   ChevronRight,
-  MoreHorizontal
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+  MoreHorizontal,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useAccountDialog } from "@/src/contexts/AccountDialogContext";
+} from '@/components/ui/dropdown-menu';
+import { useAccountDialog } from '@/src/contexts/AccountDialogContext';
 
 interface SidebarProps {
   className?: string;
@@ -27,31 +28,36 @@ interface SidebarProps {
 
 const navigationItems = [
   {
-    label: "Dashboard",
-    href: "/dashboard",
+    label: 'Dashboard',
+    href: '/dashboard',
     icon: LayoutDashboard,
   },
   {
-    label: "Document Translator",
-    href: "/features/document-translation",
+    label: 'Document Translator',
+    href: '/features/document-translation',
     icon: FileText,
   },
   {
-    label: "Subtitle Translator", 
-    href: "/features/subtitle-translation",
+    label: 'Subtitle Translator',
+    href: '/features/subtitle-translation',
     icon: Film,
+  },
+  {
+    label: 'Translation History',
+    href: '/translation-history',
+    icon: History,
   },
 ];
 
 const secondaryItems = [
   {
-    label: "Notification",
-    href: "/notifications",
+    label: 'Notification',
+    href: '/notifications',
     icon: Bell,
   },
   {
-    label: "Support",
-    href: "/support",
+    label: 'Support',
+    href: '/support',
     icon: Info,
   },
 ];
@@ -61,16 +67,18 @@ export function Sidebar({ className }: SidebarProps) {
   const { openAccount } = useAccountDialog();
 
   const isActive = (href: string) => {
-    if (href === "/dashboard") {
-      return pathname === "/dashboard" || pathname === "/";
+    if (href === '/dashboard') {
+      return pathname === '/dashboard' || pathname === '/';
     }
     return pathname.startsWith(href);
   };
 
   return (
-    <div className={`bg-white w-[280px] h-screen flex flex-col border-r border-gray-100 ${className || ""}`}>
+    <div
+      className={`bg-white w-[280px] h-screen flex flex-col border-r border-gray-100 ${className || ''}`}
+    >
       {/* Logo Section - Brand Link */}
-      <Link 
+      <Link
         href="/"
         className="flex items-center gap-2 px-3 py-6 mx-3 rounded-lg transition-all duration-200 hover:bg-gray-50 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-[#19398f] focus:ring-offset-2 group"
       >
@@ -91,16 +99,17 @@ export function Sidebar({ className }: SidebarProps) {
           {navigationItems.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.href);
-            
+
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={`
                   flex items-center gap-3 px-4 py-3 rounded-full text-sm font-semibold transition-colors
-                  ${active 
-                    ? "bg-[#eaf4ff] text-[#19398f]" 
-                    : "text-[#717680] hover:bg-gray-50"
+                  ${
+                    active
+                      ? 'bg-[#eaf4ff] text-[#19398f]'
+                      : 'text-[#717680] hover:bg-gray-50'
                   }
                 `}
               >
@@ -119,16 +128,17 @@ export function Sidebar({ className }: SidebarProps) {
           {secondaryItems.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.href);
-            
+
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={`
                   flex items-center gap-3 px-4 py-3 rounded-full text-sm font-semibold transition-colors
-                  ${active 
-                    ? "bg-[#eaf4ff] text-[#19398f]" 
-                    : "text-[#717680] hover:bg-gray-50"
+                  ${
+                    active
+                      ? 'bg-[#eaf4ff] text-[#19398f]'
+                      : 'text-[#717680] hover:bg-gray-50'
                   }
                 `}
               >
@@ -149,7 +159,9 @@ export function Sidebar({ className }: SidebarProps) {
               <div className="w-12 h-12 bg-[#19398f] rounded-full mx-auto mb-2 flex items-center justify-center">
                 <span className="text-white text-lg">💎</span>
               </div>
-              <p className="text-xs text-gray-600 font-nunito">Upgrade to Pro</p>
+              <p className="text-xs text-gray-600 font-nunito">
+                Upgrade to Pro
+              </p>
             </div>
           </div>
           <Button className="w-full bg-[#19398f] hover:bg-[#142457] text-white font-semibold font-nunito rounded-full">
@@ -162,7 +174,7 @@ export function Sidebar({ className }: SidebarProps) {
           <div className="flex items-center p-4">
             <Button
               variant="ghost"
-              onClick={() => openAccount("profile")}
+              onClick={() => openAccount('profile')}
               className="flex items-center gap-3 w-full justify-start p-0 h-auto hover:bg-gray-50 cursor-pointer"
               aria-label="Open account"
             >
@@ -170,11 +182,15 @@ export function Sidebar({ className }: SidebarProps) {
                 <span className="text-white text-sm font-bold">J</span>
               </div>
               <div className="flex-1 min-w-0 text-left">
-                <p className="text-xs text-slate-500 font-medium">Welcome back 👋</p>
-                <p className="text-sm text-[#081021] font-medium truncate">Johnathan</p>
+                <p className="text-xs text-slate-500 font-medium">
+                  Welcome back 👋
+                </p>
+                <p className="text-sm text-[#081021] font-medium truncate">
+                  Johnathan
+                </p>
               </div>
             </Button>
-            
+
             {/* Quick Actions Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -188,20 +204,20 @@ export function Sidebar({ className }: SidebarProps) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem 
-                  onClick={() => openAccount("profile")}
+                <DropdownMenuItem
+                  onClick={() => openAccount('profile')}
                   className="cursor-pointer"
                 >
                   Personal Info
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={() => openAccount("billing")}
+                <DropdownMenuItem
+                  onClick={() => openAccount('billing')}
                   className="cursor-pointer"
                 >
                   Billing & Subscription
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={() => openAccount("settings")}
+                <DropdownMenuItem
+                  onClick={() => openAccount('settings')}
                   className="cursor-pointer"
                 >
                   Settings

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { Upload, FileText, Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { PreviewModal } from "@/src/components/PreviewModal";
-import { Sidebar } from "@/src/components/Sidebar";
+import React, { useState } from 'react';
+import { Upload, FileText, Download } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { PreviewModal } from '@/src/components/PreviewModal';
+import { Sidebar } from '@/src/components/Sidebar';
 
 export function DocumentTranslatorInterface() {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -64,7 +64,7 @@ Chúng tôi dự đoán tăng 25% hiệu quả hoạt động và cải thiện 
   const handleFileUpload = () => {
     // Simulate file upload
     setHasDocument(true);
-    console.log("File uploaded successfully");
+    console.log('File uploaded successfully');
   };
 
   const handlePreview = () => {
@@ -73,16 +73,18 @@ Chúng tôi dự đoán tăng 25% hiệu quả hoạt động và cải thiện 
 
   const handleDownload = () => {
     // In a real implementation, this would trigger a DOCX download
-    console.log("Downloading translated document...");
+    console.log('Downloading translated document...');
   };
 
   return (
-    <div className="flex min-h-screen bg-white">
-      {/* Sidebar */}
-      <Sidebar />
-      
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col max-w-none">
+    <div className="flex h-screen bg-white">
+      {/* Sidebar - Fixed */}
+      <div className="flex-shrink-0">
+        <Sidebar />
+      </div>
+
+      {/* Main Content Area - Scrollable */}
+      <div className="flex-1 flex flex-col max-w-none overflow-hidden">
         {/* Header */}
         <div className="px-8 py-6 border-b border-gray-100">
           <div className="max-w-6xl mx-auto">
@@ -90,123 +92,132 @@ Chúng tôi dự đoán tăng 25% hiệu quả hoạt động và cải thiện 
               Document Translator
             </h1>
             <p className="text-sm text-[#717680] font-nunito">
-              Translate your documents in seconds — accurate, fast, and beautifully formatted
+              Translate your documents in seconds — accurate, fast, and
+              beautifully formatted
             </p>
           </div>
         </div>
 
-        <div className="flex-1 px-8 py-6">
+        <div className="flex-1 px-8 py-6 overflow-y-auto">
           <div className="max-w-6xl mx-auto">
-        {/* Configuration Panel */}
-        <div className="bg-white rounded-xl border border-[#d5d7da] p-6 mb-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div>
-              <label className="block text-sm font-semibold text-black mb-2 font-nunito">
-                Source language
-              </label>
-              <select className="w-full px-4 py-2 border border-[#e9eaeb] rounded-md text-sm text-[#717680] font-nunito focus:outline-none focus:ring-2 focus:ring-[#19398f] focus:border-transparent">
-                <option>Choose language</option>
-                <option>English</option>
-                <option>Spanish</option>
-                <option>French</option>
-              </select>
-            </div>
-            
-            <div>
-              <label className="block text-sm font-semibold text-black mb-2 font-nunito">
-                Target language
-              </label>
-              <select className="w-full px-4 py-2 border border-[#e9eaeb] rounded-md text-sm text-slate-900 font-nunito focus:outline-none focus:ring-2 focus:ring-[#19398f] focus:border-transparent">
-                <option>Vietnamese</option>
-                <option>Chinese</option>
-                <option>Japanese</option>
-                <option>Korean</option>
-              </select>
-            </div>
-            
-            <div>
-              <label className="block text-sm font-semibold text-black mb-2 font-nunito">
-                Process
-              </label>
-              <select className="w-full px-4 py-2 border border-[#e9eaeb] rounded-md text-sm text-[#717680] font-nunito focus:outline-none focus:ring-2 focus:ring-[#19398f] focus:border-transparent">
-                <option>Professional Translation</option>
-                <option>Quick Translation</option>
-                <option>High Accuracy</option>
-              </select>
-            </div>
-            
-            <div>
-              <label className="block text-sm font-semibold text-black mb-2 font-nunito">
-                Domain
-              </label>
-              <select className="w-full px-4 py-2 border border-[#e9eaeb] rounded-md text-sm text-[#717680] font-nunito focus:outline-none focus:ring-2 focus:ring-[#19398f] focus:border-transparent">
-                <option>Auto detect</option>
-                <option>Business</option>
-                <option>Technical</option>
-                <option>Legal</option>
-              </select>
-            </div>
-          </div>
-        </div>
+            {/* Configuration Panel */}
+            <div className="bg-white rounded-xl border border-[#d5d7da] p-6 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div>
+                  <label className="block text-sm font-semibold text-black mb-2 font-nunito">
+                    Source language
+                  </label>
+                  <select className="w-full px-4 py-2 border border-[#e9eaeb] rounded-md text-sm text-[#717680] font-nunito focus:outline-none focus:ring-2 focus:ring-[#19398f] focus:border-transparent">
+                    <option>Choose language</option>
+                    <option>English</option>
+                    <option>Spanish</option>
+                    <option>French</option>
+                  </select>
+                </div>
 
-        {/* Upload Area */}
-        <div className="rounded-xl border-2 border-dashed border-[#a4a7ae] p-16 mb-6 text-center">
-          <div className="flex flex-col items-center gap-4">
-            <div className="w-16 h-16 flex items-center justify-center">
-              <Upload className="w-16 h-16 text-[#19398f]" strokeWidth={1.5} />
-            </div>
-            <div className="max-w-md">
-              <p className="text-sm text-[#717680] font-nunito">
-                <span className="text-[#19398f] font-semibold">Drag and drop</span>{" "}
-                here to upload multiple files
-                <br />
-                File types supported: MS Word (.docx), PDF, MS Excel (.xlsx), MS PowerPoint (.pptx), Text File (.txt) | The maximum file size: 300MB
-              </p>
-            </div>
-            <Button 
-              onClick={handleFileUpload}
-              className="bg-[#19398f] hover:bg-[#142457] text-white font-semibold font-nunito"
-            >
-              <FileText className="w-4 h-4 mr-2" />
-              Upload Sample Document
-            </Button>
-          </div>
-        </div>
+                <div>
+                  <label className="block text-sm font-semibold text-black mb-2 font-nunito">
+                    Target language
+                  </label>
+                  <select className="w-full px-4 py-2 border border-[#e9eaeb] rounded-md text-sm text-slate-900 font-nunito focus:outline-none focus:ring-2 focus:ring-[#19398f] focus:border-transparent">
+                    <option>Vietnamese</option>
+                    <option>Chinese</option>
+                    <option>Japanese</option>
+                    <option>Korean</option>
+                  </select>
+                </div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-3">
-          <Button 
-            className="bg-[#19398f] hover:bg-[#142457] text-white font-semibold font-nunito px-8"
-            disabled={!hasDocument}
-          >
-            Translation
-          </Button>
-          
-          <Button 
-            variant="outline" 
-            onClick={handlePreview}
-            className="border-[#19398f] text-[#19398f] hover:bg-[#19398f] hover:text-white font-semibold font-nunito px-8"
-            disabled={!hasDocument}
-          >
-            Preview
-          </Button>
-          
-          <Button 
-            variant="outline" 
-            onClick={handleDownload}
-            className="border-[#19398f] text-[#19398f] hover:bg-[#19398f] hover:text-white font-semibold font-nunito px-8"
-            disabled={!hasDocument}
-          >
-            <Download className="w-4 h-4 mr-2" />
-            Download
-          </Button>
-        </div>
+                <div>
+                  <label className="block text-sm font-semibold text-black mb-2 font-nunito">
+                    Process
+                  </label>
+                  <select className="w-full px-4 py-2 border border-[#e9eaeb] rounded-md text-sm text-[#717680] font-nunito focus:outline-none focus:ring-2 focus:ring-[#19398f] focus:border-transparent">
+                    <option>Professional Translation</option>
+                    <option>Quick Translation</option>
+                    <option>High Accuracy</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-black mb-2 font-nunito">
+                    Domain
+                  </label>
+                  <select className="w-full px-4 py-2 border border-[#e9eaeb] rounded-md text-sm text-[#717680] font-nunito focus:outline-none focus:ring-2 focus:ring-[#19398f] focus:border-transparent">
+                    <option>Auto detect</option>
+                    <option>Business</option>
+                    <option>Technical</option>
+                    <option>Legal</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            {/* Upload Area */}
+            <div className="rounded-xl border-2 border-dashed border-[#a4a7ae] p-16 mb-6 text-center">
+              <div className="flex flex-col items-center gap-4">
+                <div className="w-16 h-16 flex items-center justify-center">
+                  <Upload
+                    className="w-16 h-16 text-[#19398f]"
+                    strokeWidth={1.5}
+                  />
+                </div>
+                <div className="max-w-md">
+                  <p className="text-sm text-[#717680] font-nunito">
+                    <span className="text-[#19398f] font-semibold">
+                      Drag and drop
+                    </span>{' '}
+                    here to upload multiple files
+                    <br />
+                    File types supported: MS Word (.docx), PDF, MS Excel
+                    (.xlsx), MS PowerPoint (.pptx), Text File (.txt) | The
+                    maximum file size: 300MB
+                  </p>
+                </div>
+                <Button
+                  onClick={handleFileUpload}
+                  className="bg-[#19398f] hover:bg-[#142457] text-white font-semibold font-nunito"
+                >
+                  <FileText className="w-4 h-4 mr-2" />
+                  Upload Sample Document
+                </Button>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-3">
+              <Button
+                className="bg-[#19398f] hover:bg-[#142457] text-white font-semibold font-nunito px-8"
+                disabled={!hasDocument}
+              >
+                Translation
+              </Button>
+
+              <Button
+                variant="outline"
+                onClick={handlePreview}
+                className="border-[#19398f] text-[#19398f] hover:bg-[#19398f] hover:text-white font-semibold font-nunito px-8"
+                disabled={!hasDocument}
+              >
+                Preview
+              </Button>
+
+              <Button
+                variant="outline"
+                onClick={handleDownload}
+                className="border-[#19398f] text-[#19398f] hover:bg-[#19398f] hover:text-white font-semibold font-nunito px-8"
+                disabled={!hasDocument}
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Download
+              </Button>
+            </div>
 
             {/* Status indicator */}
             {hasDocument && (
               <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
                 <p className="text-sm text-green-700 font-nunito">
-                  ✓ Sample business proposal uploaded successfully. Ready for translation and preview.
+                  ✓ Sample business proposal uploaded successfully. Ready for
+                  translation and preview.
                 </p>
               </div>
             )}
