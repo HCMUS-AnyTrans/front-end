@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { User, CreditCard, Shield, Settings, Bell } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import Header from "@/src/components/common/Header";
-import Footer from "@/src/components/Footer";
-import ProfileTab from "@/src/components/account/ProfileTab";
-import BillingTab from "@/src/components/account/BillingTab";
+import React, { useState } from 'react';
+import { User, CreditCard, Shield, Settings, Bell } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import Header from '@/src/components/common/Header';
+import Footer from '@/src/components/Footer';
+import ProfileTab from '@/src/components/account/ProfileTab';
+import BillingTab from '@/src/components/account/BillingTab';
 
 interface SidebarItemProps {
   label: string;
@@ -20,9 +20,9 @@ function SidebarItem({ label, icon, active, onClick }: SidebarItemProps) {
     <button
       onClick={onClick}
       className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors cursor-pointer ${
-        active 
-          ? "bg-[#19398f] text-white" 
-          : "text-[#717680] hover:bg-gray-100 hover:text-[#142457]"
+        active
+          ? 'bg-[#19398f] text-white'
+          : 'text-[#717680] hover:bg-gray-100 hover:text-[#142457]'
       }`}
     >
       {icon}
@@ -32,53 +32,53 @@ function SidebarItem({ label, icon, active, onClick }: SidebarItemProps) {
 }
 
 export default function AccountPageClient() {
-  const [activeSection, setActiveSection] = useState("profile");
+  const [activeSection, setActiveSection] = useState('profile');
 
   // Mock user data - in real app this would come from auth context
   const userData = {
-    fullName: "John Doe",
-    email: "john.doe@example.com",
-    phone: "+84 123 456 789",
-    company: "AnyTrans Inc.",
+    fullName: 'John Doe',
+    email: 'john.doe@example.com',
+    phone: '+84 123 456 789',
+    company: 'AnyTrans Inc.',
     avatar: undefined,
   };
 
   const sidebarItems = [
     {
-      id: "profile",
-      label: "Profile",
+      id: 'profile',
+      label: 'Profile',
       icon: <User size={20} />,
     },
     {
-      id: "preferences",
-      label: "Preferences", 
+      id: 'preferences',
+      label: 'Preferences',
       icon: <Settings size={20} />,
     },
     {
-      id: "security",
-      label: "Security",
+      id: 'security',
+      label: 'Security',
       icon: <Shield size={20} />,
     },
     {
-      id: "billing",
-      label: "Billing",
+      id: 'billing',
+      label: 'Billing',
       icon: <CreditCard size={20} />,
     },
     {
-      id: "notifications",
-      label: "Notifications",
+      id: 'notifications',
+      label: 'Notifications',
       icon: <Bell size={20} />,
     },
   ];
 
   const renderContent = () => {
     switch (activeSection) {
-      case "profile":
-      case "preferences":
-      case "security":
-      case "notifications":
+      case 'profile':
+      case 'preferences':
+      case 'security':
+      case 'notifications':
         return <ProfileTab userData={userData} />;
-      case "billing":
+      case 'billing':
         return <BillingTab />;
       default:
         return <ProfileTab userData={userData} />;
@@ -96,7 +96,7 @@ export default function AccountPageClient() {
       {/* Main content */}
       <div className="relative z-10 flex-1 flex flex-col">
         <Header />
-        
+
         <main className="flex-1">
           <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             {/* Page Header */}
@@ -139,11 +139,16 @@ export default function AccountPageClient() {
                       {activeSection}
                     </h2>
                     <p className="text-[#717680] font-nunito mt-1">
-                      {activeSection === "profile" && "Update your personal information and avatar"}
-                      {activeSection === "preferences" && "Customize your experience and notification settings"}
-                      {activeSection === "security" && "Manage your password and security settings"}
-                      {activeSection === "billing" && "View and manage your subscription and payment methods"}
-                      {activeSection === "notifications" && "Control how and when you receive notifications"}
+                      {activeSection === 'profile' &&
+                        'Update your personal information and avatar'}
+                      {activeSection === 'preferences' &&
+                        'Customize your experience and notification settings'}
+                      {activeSection === 'security' &&
+                        'Manage your password and security settings'}
+                      {activeSection === 'billing' &&
+                        'View and manage your subscription and payment methods'}
+                      {activeSection === 'notifications' &&
+                        'Control how and when you receive notifications'}
                     </p>
                   </div>
 
@@ -154,7 +159,7 @@ export default function AccountPageClient() {
             </div>
           </div>
         </main>
-        
+
         <Footer />
       </div>
     </div>

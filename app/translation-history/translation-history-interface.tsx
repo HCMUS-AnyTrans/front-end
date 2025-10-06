@@ -7,96 +7,85 @@ import {
   Download,
   Eye,
   Trash2,
-  Calendar,
   FileText,
   Languages,
   Clock,
-  CheckCircle,
+  CheckCircle2,
   AlertCircle,
-  MoreHorizontal,
+  MoreVertical,
+  ChevronDown,
+  RefreshCw,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { Sidebar } from '@/src/components/Sidebar';
 
-interface TranslationHistoryItem {
-  id: string;
-  fileName: string;
-  fileType: string;
-  sourceLanguage: string;
-  targetLanguage: string;
-  status: 'completed' | 'processing' | 'failed';
-  translatedAt: string;
-  fileSize: string;
-  wordCount: number;
-  credits: number;
-}
-
-export function TranslationHistoryInterface() {
-  const [searchQuery, setSearchQuery] = useState('');
+export default function TranslationHistoryInterface() {
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [filterStatus, setFilterStatus] = useState<string>('all');
+  const [filterCategory, setFilterCategory] = useState<
+    'all' | 'document' | 'subtitle'
+  >('all');
+  const [showFilterMenu, setShowFilterMenu] = useState<boolean>(false);
+  const [showActionMenu, setShowActionMenu] = useState<string | null>(null);
 
-  // Sample data for demo
-  const translationHistory: TranslationHistoryItem[] = [
+  const translationHistory = [
     {
       id: '1',
-      fileName: 'Business Proposal Q4 2024.docx',
+      fileName: 'Business_Proposal_2024.docx',
       fileType: 'DOCX',
+      category: 'document',
       sourceLanguage: 'English',
       targetLanguage: 'Vietnamese',
       status: 'completed',
       translatedAt: '2024-01-15T10:30:00Z',
-      fileSize: '2.4 MB',
+      fileSize: '245 KB',
       wordCount: 2847,
-      credits: 15,
+      credits: 28,
     },
     {
       id: '2',
-      fileName: 'Marketing Campaign Brief.pdf',
+      fileName: 'Marketing_Campaign_Brief.pdf',
       fileType: 'PDF',
+      category: 'document',
       sourceLanguage: 'English',
       targetLanguage: 'Spanish',
       status: 'completed',
       translatedAt: '2024-01-14T15:45:00Z',
       fileSize: '1.8 MB',
       wordCount: 1923,
-      credits: 12,
+      credits: 19,
     },
     {
       id: '3',
-      fileName: 'Technical Documentation.docx',
+      fileName: 'Technical_Documentation.docx',
       fileType: 'DOCX',
+      category: 'document',
       sourceLanguage: 'English',
       targetLanguage: 'Japanese',
       status: 'completed',
       translatedAt: '2024-01-13T09:15:00Z',
       fileSize: '4.2 MB',
       wordCount: 5634,
-      credits: 28,
+      credits: 56,
     },
     {
       id: '4',
-      fileName: 'Financial Report 2023.xlsx',
+      fileName: 'Financial_Report_2023.xlsx',
       fileType: 'XLSX',
+      category: 'document',
       sourceLanguage: 'English',
       targetLanguage: 'Chinese',
       status: 'processing',
       translatedAt: '2024-01-12T14:20:00Z',
       fileSize: '3.1 MB',
       wordCount: 2156,
-      credits: 11,
+      credits: 0,
     },
     {
       id: '5',
-      fileName: 'Product Manual.pdf',
+      fileName: 'Product_Manual.pdf',
       fileType: 'PDF',
+      category: 'document',
       sourceLanguage: 'English',
       targetLanguage: 'French',
       status: 'failed',
@@ -107,15 +96,16 @@ export function TranslationHistoryInterface() {
     },
     {
       id: '6',
-      fileName: 'Presentation Deck.pptx',
-      fileType: 'PPTX',
+      fileName: 'movie_subtitles.srt',
+      fileType: 'SRT',
+      category: 'subtitle',
       sourceLanguage: 'English',
-      targetLanguage: 'German',
+      targetLanguage: 'Vietnamese',
       status: 'completed',
-      translatedAt: '2024-01-10T16:45:00Z',
-      fileSize: '2.9 MB',
-      wordCount: 1234,
-      credits: 7,
+      translatedAt: '2024-01-10T10:00:00Z',
+      fileSize: '120 KB',
+      wordCount: 1380,
+      credits: 12,
     },
   ];
 
@@ -126,42 +116,50 @@ export function TranslationHistoryInterface() {
       (now.getTime() - date.getTime()) / (1000 * 60 * 60)
     );
 
-    if (diffInHours < 24) {
-      return `${diffInHours} hours ago`;
-    } else if (diffInHours < 48) {
-      return 'Yesterday';
-    } else {
-      return date.toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-      });
-    }
+    if (diffInHours < 1) return 'Just now';
+    if (diffInHours < 24) return `${diffInHours}h ago`;
+    if (diffInHours < 48) return 'Yesterday';
+    return date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
   };
 
-  const getStatusIcon = (status: string) => {
+  const getStatusConfig = (status: string) => {
     switch (status) {
       case 'completed':
-        return <CheckCircle className="w-4 h-4 text-green-500" />;
+        return {
+          icon: CheckCircle2,
+          color: 'text-green-600',
+          bg: 'bg-green-50',
+          border: 'border-green-200',
+          label: 'Completed',
+        };
       case 'processing':
-        return <Clock className="w-4 h-4 text-blue-500" />;
+        return {
+          icon: RefreshCw,
+          color: 'text-blue-600',
+          bg: 'bg-blue-50',
+          border: 'border-blue-200',
+          label: 'Processing',
+        };
       case 'failed':
-        return <AlertCircle className="w-4 h-4 text-red-500" />;
+        return {
+          icon: AlertCircle,
+          color: 'text-red-600',
+          bg: 'bg-red-50',
+          border: 'border-red-200',
+          label: 'Failed',
+        };
       default:
-        return <Clock className="w-4 h-4 text-gray-500" />;
-    }
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'completed':
-        return 'bg-green-100 text-green-700';
-      case 'processing':
-        return 'bg-blue-100 text-blue-700';
-      case 'failed':
-        return 'bg-red-100 text-red-700';
-      default:
-        return 'bg-gray-100 text-gray-700';
+        return {
+          icon: Clock,
+          color: 'text-gray-600',
+          bg: 'bg-gray-50',
+          border: 'border-gray-200',
+          label: 'Unknown',
+        };
     }
   };
 
@@ -170,302 +168,326 @@ export function TranslationHistoryInterface() {
       item.fileName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.sourceLanguage.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.targetLanguage.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesFilter =
+    const matchesStatus =
       filterStatus === 'all' || item.status === filterStatus;
-    return matchesSearch && matchesFilter;
+    const matchesCategory =
+      filterCategory === 'all' || item.category === filterCategory;
+    return matchesSearch && matchesStatus && matchesCategory;
   });
 
-  const handleSelectAll = () => {
-    if (selectedItems.length === filteredHistory.length) {
-      setSelectedItems([]);
-    } else {
-      setSelectedItems(filteredHistory.map((item) => item.id));
-    }
-  };
-
   const handleSelectItem = (id: string) => {
-    setSelectedItems((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    setSelectedItems((prev: string[]) =>
+      prev.includes(id)
+        ? prev.filter((item: string) => item !== id)
+        : [...prev, id]
     );
   };
 
-  const handleBulkDownload = () => {
-    console.log('Downloading selected items:', selectedItems);
-  };
-
-  const handleBulkDelete = () => {
-    console.log('Deleting selected items:', selectedItems);
-    setSelectedItems([]);
-  };
+  const totalCompleted = translationHistory.filter(
+    (item) => item.status === 'completed'
+  ).length;
+  const totalWords = translationHistory.reduce(
+    (sum, item) => sum + item.wordCount,
+    0
+  );
+  const totalCredits = translationHistory.reduce(
+    (sum, item) => sum + item.credits,
+    0
+  );
 
   return (
-    <div className="flex h-screen bg-white">
-      {/* Sidebar - Fixed */}
-      <div className="flex-shrink-0">
-        <Sidebar />
-      </div>
+    <div className="flex h-screen bg-gray-50">
+      {/* Sidebar */}
+      <Sidebar />
 
-      {/* Main Content Area - Scrollable */}
-      <div className="flex-1 flex flex-col max-w-none overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <div className="px-8 py-6 border-b border-gray-100">
+        <div className="bg-white border-b border-gray-200 px-6 lg:px-8 py-6 mt-16 lg:mt-0">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-[32px] font-bold text-[#414651] font-nunito leading-tight mb-1">
-              Translation History
-            </h1>
-            <p className="text-sm text-[#717680] font-nunito">
-              View and manage all your translation projects and download results
-            </p>
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                  Translation History
+                </h1>
+                <p className="text-sm text-gray-600">
+                  View and manage all your translation projects
+                </p>
+              </div>
+              <div className="flex items-center gap-6 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                  <span className="text-gray-600">
+                    <span className="font-semibold text-gray-900">
+                      {totalCompleted}
+                    </span>{' '}
+                    Completed
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                  <span className="text-gray-600">
+                    <span className="font-semibold text-gray-900">
+                      {totalWords.toLocaleString()}
+                    </span>{' '}
+                    Words
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="flex-1 px-8 py-6 pt-20 lg:pt-6 overflow-y-auto">
-          <div className="max-w-7xl mx-auto">
-            {/* Stats Overview */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-              <div className="bg-white border border-gray-200 rounded-xl p-6">
-                <h3 className="text-sm font-semibold text-[#717680] font-nunito mb-2">
-                  Total Translations
-                </h3>
-                <p className="text-2xl font-bold text-[#414651] font-nunito">
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto px-6 lg:px-8 py-6">
+          <div className="max-w-7xl mx-auto space-y-6">
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="bg-white rounded-xl p-5 border border-gray-200">
+                <p className="text-sm text-gray-600 mb-1">Total Projects</p>
+                <p className="text-2xl font-bold text-gray-900">
                   {translationHistory.length}
                 </p>
               </div>
-
-              <div className="bg-white border border-gray-200 rounded-xl p-6">
-                <h3 className="text-sm font-semibold text-[#717680] font-nunito mb-2">
-                  Completed
-                </h3>
-                <p className="text-2xl font-bold text-green-600 font-nunito">
-                  {
-                    translationHistory.filter(
-                      (item) => item.status === 'completed'
-                    ).length
-                  }
+              <div className="bg-white rounded-xl p-5 border border-gray-200">
+                <p className="text-sm text-gray-600 mb-1">Completed</p>
+                <p className="text-2xl font-bold text-green-600">
+                  {totalCompleted}
                 </p>
               </div>
-
-              <div className="bg-white border border-gray-200 rounded-xl p-6">
-                <h3 className="text-sm font-semibold text-[#717680] font-nunito mb-2">
-                  Total Words
-                </h3>
-                <p className="text-2xl font-bold text-[#414651] font-nunito">
-                  {translationHistory
-                    .reduce((sum, item) => sum + item.wordCount, 0)
-                    .toLocaleString()}
+              <div className="bg-white rounded-xl p-5 border border-gray-200">
+                <p className="text-sm text-gray-600 mb-1">Total Words</p>
+                <p className="text-2xl font-bold text-gray-900">
+                  {totalWords.toLocaleString()}
                 </p>
               </div>
-
-              <div className="bg-white border border-gray-200 rounded-xl p-6">
-                <h3 className="text-sm font-semibold text-[#717680] font-nunito mb-2">
-                  Credits Used
-                </h3>
-                <p className="text-2xl font-bold text-[#19398f] font-nunito">
-                  {translationHistory.reduce(
-                    (sum, item) => sum + item.credits,
-                    0
-                  )}
+              <div className="bg-white rounded-xl p-5 border border-gray-200">
+                <p className="text-sm text-gray-600 mb-1">Credits Used</p>
+                <p className="text-2xl font-bold text-blue-600">
+                  {totalCredits}
                 </p>
               </div>
             </div>
 
-            {/* Search and Filter Bar */}
-            <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
-              <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-                <div className="flex flex-col md:flex-row gap-4 flex-1">
-                  {/* Search */}
-                  <div className="relative flex-1 max-w-md">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                    <Input
-                      placeholder="Search translations..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 border-[#e9eaeb] focus:ring-2 focus:ring-[#19398f] focus:border-transparent"
-                    />
-                  </div>
-
-                  {/* Filter */}
-                  <div className="flex gap-2">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className="border-[#e9eaeb] text-[#717680] hover:bg-gray-50"
-                        >
-                          <Filter className="w-4 h-4 mr-2" />
-                          Filter
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="w-48">
-                        <DropdownMenuItem
-                          onClick={() => setFilterStatus('all')}
-                          className="cursor-pointer"
-                        >
-                          All Status
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() => setFilterStatus('completed')}
-                          className="cursor-pointer"
-                        >
-                          Completed
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() => setFilterStatus('processing')}
-                          className="cursor-pointer"
-                        >
-                          Processing
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() => setFilterStatus('failed')}
-                          className="cursor-pointer"
-                        >
-                          Failed
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
+            {/* Search & Filter */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
+              <div className="flex flex-col md:flex-row gap-3 items-center">
+                <div className="relative flex-1 w-full">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <input
+                    type="text"
+                    placeholder="Search by filename, language..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
                 </div>
 
-                {/* Bulk Actions */}
+                <div className="relative">
+                  <button
+                    onClick={() => setShowFilterMenu(!showFilterMenu)}
+                    className={`flex items-center gap-2 px-5 py-3 border rounded-xl font-medium transition-all ${
+                      filterStatus !== 'all' || filterCategory !== 'all'
+                        ? 'bg-blue-50 border-blue-200 text-blue-700'
+                        : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    <Filter className="w-4 h-4" />
+                    <span>Filter</span>
+                    {(filterStatus !== 'all' || filterCategory !== 'all') && (
+                      <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+                    )}
+                    <ChevronDown className="w-4 h-4" />
+                  </button>
+
+                  {showFilterMenu && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-10">
+                      {['all', 'completed', 'processing', 'failed'].map(
+                        (status) => (
+                          <button
+                            key={status}
+                            onClick={() => {
+                              setFilterStatus(status);
+                              setShowFilterMenu(false);
+                            }}
+                            className={`w-full text-left px-4 py-2 text-sm transition-colors ${
+                              filterStatus === status
+                                ? 'bg-blue-50 text-blue-700 font-medium'
+                                : 'text-gray-700 hover:bg-gray-50'
+                            }`}
+                          >
+                            {status.charAt(0).toUpperCase() + status.slice(1)}
+                          </button>
+                        )
+                      )}
+                      <div className="my-2 h-px bg-gray-100" />
+                      {[
+                        { id: 'all', label: 'All Types' },
+                        { id: 'document', label: 'Document' },
+                        { id: 'subtitle', label: 'Subtitle' },
+                      ].map((c) => (
+                        <button
+                          key={c.id}
+                          onClick={() => {
+                            setFilterCategory(
+                              c.id as 'all' | 'document' | 'subtitle'
+                            );
+                            setShowFilterMenu(false);
+                          }}
+                          className={`w-full text-left px-4 py-2 text-sm transition-colors ${
+                            filterCategory === c.id
+                              ? 'bg-blue-50 text-blue-700 font-medium'
+                              : 'text-gray-700 hover:bg-gray-50'
+                          }`}
+                        >
+                          {c.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
                 {selectedItems.length > 0 && (
-                  <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      onClick={handleBulkDownload}
-                      className="border-[#19398f] text-[#19398f] hover:bg-[#19398f] hover:text-white"
-                    >
-                      <Download className="w-4 h-4 mr-2" />
-                      Download ({selectedItems.length})
-                    </Button>
-                    <Button
-                      variant="outline"
-                      onClick={handleBulkDelete}
-                      className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
-                    >
-                      <Trash2 className="w-4 h-4 mr-2" />
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-gray-600 font-medium">
+                      {selectedItems.length} selected
+                    </span>
+                    <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all">
+                      <Download className="w-4 h-4" />
+                      Download
+                    </button>
+                    <button className="flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg font-medium transition-all">
+                      <Trash2 className="w-4 h-4" />
                       Delete
-                    </Button>
+                    </button>
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Translation History List */}
-            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-              {/* Header */}
-              <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={
-                      selectedItems.length === filteredHistory.length &&
-                      filteredHistory.length > 0
-                    }
-                    onChange={handleSelectAll}
-                    className="w-4 h-4 text-[#19398f] bg-gray-100 border-gray-300 rounded focus:ring-[#19398f] focus:ring-2"
-                  />
-                  <span className="ml-3 text-sm font-semibold text-[#717680] font-nunito">
-                    Select All
-                  </span>
+            {/* Table */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+              <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                <div className="grid grid-cols-12 gap-4 items-center text-sm font-semibold text-gray-600">
+                  <div className="col-span-5">Document</div>
+                  <div className="col-span-2">Languages</div>
+                  <div className="col-span-2">Status</div>
+                  <div className="col-span-2">Date</div>
+                  <div className="col-span-1 text-right">Actions</div>
                 </div>
               </div>
 
-              {/* History Items */}
               <div className="divide-y divide-gray-100">
-                {filteredHistory.map((item) => (
-                  <div
-                    key={item.id}
-                    className="px-6 py-4 hover:bg-gray-50 transition-colors"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center flex-1">
-                        <input
-                          type="checkbox"
-                          checked={selectedItems.includes(item.id)}
-                          onChange={() => handleSelectItem(item.id)}
-                          className="w-4 h-4 text-[#19398f] bg-gray-100 border-gray-300 rounded focus:ring-[#19398f] focus:ring-2 mr-4"
-                        />
+                {filteredHistory.map((item) => {
+                  const statusConfig = getStatusConfig(item.status);
+                  const StatusIcon = statusConfig.icon;
 
-                        {/* File Icon and Info */}
-                        <div className="flex items-center flex-1">
-                          <div className="w-10 h-10 bg-[#19398f] bg-opacity-10 rounded-lg flex items-center justify-center mr-4">
-                            <FileText className="w-5 h-5 text-[#19398f]" />
+                  return (
+                    <div
+                      key={item.id}
+                      className="px-6 py-4 hover:bg-gray-50 transition-colors"
+                    >
+                      <div className="grid grid-cols-12 gap-4 items-center">
+                        <div className="col-span-5 flex items-center gap-3">
+                          <input
+                            type="checkbox"
+                            checked={selectedItems.includes(item.id)}
+                            onChange={() => handleSelectItem(item.id)}
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                          />
+                          <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <FileText className="w-5 h-5 text-blue-600" />
                           </div>
-
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-3 mb-1">
-                              <h3 className="text-sm font-semibold text-[#414651] font-nunito truncate">
-                                {item.fileName}
-                              </h3>
-                              <span
-                                className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}
-                              >
-                                {item.status}
-                              </span>
-                            </div>
-
-                            <div className="flex items-center gap-4 text-xs text-[#717680] font-nunito">
-                              <div className="flex items-center gap-1">
-                                <Languages className="w-3 h-3" />
-                                {item.sourceLanguage} → {item.targetLanguage}
-                              </div>
-                              <div className="flex items-center gap-1">
-                                <Calendar className="w-3 h-3" />
-                                {formatDate(item.translatedAt)}
-                              </div>
+                            <p className="font-semibold text-gray-900 truncate mb-1">
+                              {item.fileName}
+                            </p>
+                            <div className="flex items-center gap-2 text-xs text-gray-500">
                               <span>
                                 {item.wordCount.toLocaleString()} words
                               </span>
+                              <span>•</span>
                               <span>{item.fileSize}</span>
-                              <span>{item.credits} credits</span>
                             </div>
                           </div>
                         </div>
-                      </div>
 
-                      {/* Actions */}
-                      <div className="flex items-center gap-2">
-                        {getStatusIcon(item.status)}
+                        <div className="col-span-2">
+                          <div className="flex items-center gap-2 text-sm text-gray-700">
+                            <Languages className="w-4 h-4 text-gray-400" />
+                            <span className="truncate">
+                              {item.sourceLanguage} → {item.targetLanguage}
+                            </span>
+                          </div>
+                        </div>
 
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="w-8 h-8 p-0 hover:bg-gray-100"
+                        <div className="col-span-2">
+                          <div
+                            className={`inline-flex items-center gap-2 px-3 py-1.5 ${statusConfig.bg} ${statusConfig.border} border rounded-full`}
+                          >
+                            <StatusIcon
+                              className={`w-3.5 h-3.5 ${statusConfig.color} ${item.status === 'processing' ? 'animate-spin' : ''}`}
+                            />
+                            <span
+                              className={`text-xs font-medium ${statusConfig.color}`}
                             >
-                              <MoreHorizontal className="w-4 h-4 text-gray-400" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end" className="w-48">
-                            <DropdownMenuItem className="cursor-pointer">
-                              <Eye className="w-4 h-4 mr-2" />
-                              View Details
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="cursor-pointer">
-                              <Download className="w-4 h-4 mr-2" />
-                              Download
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="cursor-pointer text-red-600">
-                              <Trash2 className="w-4 h-4 mr-2" />
-                              Delete
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
+                              {statusConfig.label}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="col-span-2">
+                          <div className="flex items-center gap-2 text-sm text-gray-600">
+                            <Clock className="w-4 h-4 text-gray-400" />
+                            {formatDate(item.translatedAt)}
+                          </div>
+                        </div>
+
+                        <div className="col-span-1 flex justify-end">
+                          <div className="relative">
+                            <button
+                              onClick={() =>
+                                setShowActionMenu(
+                                  showActionMenu === item.id ? null : item.id
+                                )
+                              }
+                              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                            >
+                              <MoreVertical className="w-5 h-5 text-gray-400" />
+                            </button>
+
+                            {showActionMenu === item.id && (
+                              <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-10">
+                                <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3">
+                                  <Eye className="w-4 h-4" />
+                                  View Details
+                                </button>
+                                <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3">
+                                  <Download className="w-4 h-4" />
+                                  Download
+                                </button>
+                                <button className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3">
+                                  <Trash2 className="w-4 h-4" />
+                                  Delete
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
-              {/* Empty State */}
               {filteredHistory.length === 0 && (
-                <div className="px-6 py-12 text-center">
-                  <FileText className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-[#414651] font-nunito mb-2">
+                <div className="px-6 py-16 text-center">
+                  <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <FileText className="w-8 h-8 text-gray-400" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
                     No translations found
                   </h3>
-                  <p className="text-sm text-[#717680] font-nunito">
+                  <p className="text-sm text-gray-600">
                     {searchQuery
                       ? 'Try adjusting your search criteria'
                       : 'Start translating documents to see your history here'}
@@ -474,20 +496,32 @@ export function TranslationHistoryInterface() {
               )}
             </div>
 
-            {/* Pagination */}
             {filteredHistory.length > 0 && (
-              <div className="flex items-center justify-between mt-6">
-                <p className="text-sm text-[#717680] font-nunito">
-                  Showing {filteredHistory.length} of{' '}
-                  {translationHistory.length} translations
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-gray-600">
+                  Showing{' '}
+                  <span className="font-semibold text-gray-900">
+                    {filteredHistory.length}
+                  </span>{' '}
+                  of{' '}
+                  <span className="font-semibold text-gray-900">
+                    {translationHistory.length}
+                  </span>{' '}
+                  translations
                 </p>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm" disabled>
+                  <button
+                    className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    disabled
+                  >
                     Previous
-                  </Button>
-                  <Button variant="outline" size="sm" disabled>
+                  </button>
+                  <button
+                    className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    disabled
+                  >
                     Next
-                  </Button>
+                  </button>
                 </div>
               </div>
             )}

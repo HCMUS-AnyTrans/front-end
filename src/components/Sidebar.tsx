@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard,
@@ -11,30 +10,22 @@ import {
   History,
   Bell,
   Info,
-  ChevronRight,
+  Languages,
+  Zap,
   MoreHorizontal,
   X,
   Menu,
+  Coins,
+  TrendingUp,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { useAccountDialog } from '@/src/contexts/AccountDialogContext';
+import AccountDialog from '@/src/components/account/AccountDialog';
 
 interface SidebarProps {
   className?: string;
 }
 
 const navigationItems = [
-  {
-    label: 'Dashboard',
-    href: '/dashboard',
-    icon: LayoutDashboard,
-  },
+  { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   {
     label: 'Document Translator',
     href: '/features/document-translation',
@@ -45,47 +36,45 @@ const navigationItems = [
     href: '/features/subtitle-translation',
     icon: Film,
   },
-  {
-    label: 'Translation History',
-    href: '/translation-history',
-    icon: History,
-  },
+  { label: 'Translation History', href: '/translation-history', icon: History },
 ];
 
 const secondaryItems = [
-  {
-    label: 'Notification',
-    href: '/notifications',
-    icon: Bell,
-  },
-  {
-    label: 'Support',
-    href: '/support',
-    icon: Info,
-  },
+  { label: 'Notification', href: '/notifications', icon: Bell },
+  { label: 'Support', href: '/support', icon: Info },
 ];
 
 export function Sidebar({ className }: SidebarProps) {
   const pathname = usePathname();
-  const { openAccount } = useAccountDialog();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isAccountOpen, setIsAccountOpen] = useState(false);
 
-  // Check if screen is mobile
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024); // lg breakpoint
-    };
+  // Credit system state - có thể lấy từ API hoặc context
+  const [credits, setCredits] = useState({
+    current: 45,
+    total: 100,
+    plan: 'Free',
+  });
 
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [pathname]);
+
+  // Accessibility & UX: close on ESC, lock body scroll when menu open
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsMobileMenuOpen(false);
+    };
+    if (isMobileMenuOpen) {
+      document.addEventListener('keydown', onKeyDown);
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.removeEventListener('keydown', onKeyDown);
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [isMobileMenuOpen]);
 
   const isActive = (href: string) => {
     if (href === '/dashboard') {
@@ -94,215 +83,248 @@ export function Sidebar({ className }: SidebarProps) {
     return pathname.startsWith(href);
   };
 
-  // Mobile Header Component
+  const creditPercentage = (credits.current / credits.total) * 100;
+  const isLowCredit = creditPercentage < 30;
+
   const MobileHeader = () => (
-    <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 px-4 py-3">
+    <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 px-4 py-3">
       <div className="flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <Image
-            src="/logo-icon-mono.svg"
-            alt="AnyTrans Logo"
-            width={100}
-            height={100}
-          />
-        </Link>
-        <Button
-          variant="ghost"
-          size="sm"
+        <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="p-2"
+          className="p-2 hover:bg-gray-100 rounded-lg"
+          aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? (
             <X className="w-5 h-5" />
           ) : (
             <Menu className="w-5 h-5" />
           )}
-        </Button>
+        </button>
       </div>
     </div>
   );
 
-  // Mobile Overlay
   const MobileOverlay = () =>
     isMobileMenuOpen && (
       <div
-        className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+        className="lg:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
         onClick={() => setIsMobileMenuOpen(false)}
+        aria-hidden="true"
       />
     );
 
-  // Sidebar Content Component
-  const SidebarContent = () => (
-    <>
-      {/* Logo Section - Brand Link */}
-      <div className="flex justify-center py-6">
-        <Link href="/">
-          <Image
-            src="/logo-icon-mono.svg"
-            alt="AnyTrans Logo"
-            width={150}
-            height={150}
-          />
-        </Link>
-      </div>
-
-      {/* Main Navigation */}
-      <nav className="flex-1 px-6">
-        <div className="space-y-1 mb-6">
-          {navigationItems.map((item) => {
-            const Icon = item.icon;
-            const active = isActive(item.href);
-
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`
-                  flex items-center gap-3 px-4 py-3 rounded-full text-sm font-semibold transition-colors
-                  ${
-                    active
-                      ? 'bg-[#eaf4ff] text-[#19398f]'
-                      : 'text-[#717680] hover:bg-gray-50'
-                  }
-                `}
-              >
-                <Icon className="w-4 h-4" strokeWidth={2} />
-                <span className="font-nunito">{item.label}</span>
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Divider */}
-        <div className="h-px bg-slate-200 mb-6" />
-
-        {/* Secondary Navigation */}
-        <div className="space-y-1">
-          {secondaryItems.map((item) => {
-            const Icon = item.icon;
-            const active = isActive(item.href);
-
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`
-                  flex items-center gap-3 px-4 py-3 rounded-full text-sm font-semibold transition-colors
-                  ${
-                    active
-                      ? 'bg-[#eaf4ff] text-[#19398f]'
-                      : 'text-[#717680] hover:bg-gray-50'
-                  }
-                `}
-              >
-                <Icon className="w-4 h-4" strokeWidth={2} />
-                <span className="font-nunito">{item.label}</span>
-              </Link>
-            );
-          })}
-        </div>
-      </nav>
-
-      {/* Upgrade CTA */}
-      <div className="px-6 pb-6">
-        <div className="bg-white rounded-lg p-4 mb-4">
-          {/* Upgrade illustration placeholder */}
-          <div className="w-full h-32 bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg mb-3 flex items-center justify-center">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-[#19398f] rounded-full mx-auto mb-2 flex items-center justify-center">
-                <span className="text-white text-lg">💎</span>
-              </div>
-              <p className="text-xs text-gray-600 font-nunito">
-                Upgrade to Pro
+  const CreditSection = () => (
+    <div className="px-4 pb-4">
+      <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-4 border border-slate-200">
+        {/* Credit Header */}
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <div
+              className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                isLowCredit
+                  ? 'bg-gradient-to-br from-amber-500 to-orange-500'
+                  : 'bg-gradient-to-br from-emerald-500 to-teal-500'
+              }`}
+            >
+              <Coins className="w-4 h-4 text-white" />
+            </div>
+            <div>
+              <p className="text-xs font-medium text-gray-500">
+                Translation Credits
               </p>
             </div>
           </div>
-          <Button className="w-full bg-[#19398f] hover:bg-[#142457] text-white font-semibold font-nunito rounded-full">
-            Buy more credits
-          </Button>
+          <Link
+            href="/credits"
+            className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors"
+          >
+            View Details
+          </Link>
         </div>
 
-        {/* User Profile */}
-        <div className="border-t border-slate-200">
-          <div className="flex items-center p-4">
-            <Button
-              variant="ghost"
-              onClick={() => openAccount('profile')}
-              className="flex items-center gap-3 w-full justify-start p-0 h-auto hover:bg-gray-50 cursor-pointer"
-              aria-label="Open account"
+        {/* Credit Display */}
+        <div className="mb-3">
+          <div className="flex items-baseline gap-1 mb-2">
+            <span
+              className={`text-2xl font-bold ${
+                isLowCredit ? 'text-amber-600' : 'text-gray-900'
+              }`}
             >
-              <div className="w-10 h-10 bg-[#ffb31f] rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-bold">J</span>
-              </div>
-              <div className="flex-1 min-w-0 text-left">
-                <p className="text-xs text-slate-500 font-medium">
-                  Welcome back 👋
-                </p>
-                <p className="text-sm text-[#081021] font-medium truncate">
-                  Johnathan
-                </p>
-              </div>
-            </Button>
+              {credits.current}
+            </span>
+            <span className="text-sm text-gray-500">
+              / {credits.total} credits
+            </span>
+          </div>
 
-            {/* Quick Actions Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="w-8 h-8 p-0 hover:bg-gray-50 cursor-pointer"
-                  aria-label="Account options"
-                >
-                  <MoreHorizontal className="w-4 h-4 text-gray-400" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem
-                  onClick={() => openAccount('profile')}
-                  className="cursor-pointer"
-                >
-                  Personal Info
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => openAccount('billing')}
-                  className="cursor-pointer"
-                >
-                  Billing & Subscription
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => openAccount('settings')}
-                  className="cursor-pointer"
-                >
-                  Settings
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+          {/* Progress Bar */}
+          <div className="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div
+              className={`absolute top-0 left-0 h-full rounded-full transition-all duration-500 ${
+                isLowCredit
+                  ? 'bg-gradient-to-r from-amber-500 to-orange-500'
+                  : 'bg-gradient-to-r from-emerald-500 to-teal-500'
+              }`}
+              style={{ width: `${creditPercentage}%` }}
+            />
           </div>
         </div>
+
+        {/* Low Credit Warning */}
+        {isLowCredit && (
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-2.5 mb-3">
+            <div className="flex items-start gap-2">
+              <TrendingUp className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
+              <p className="text-xs text-amber-800 leading-relaxed">
+                Credits are running low! Upgrade to get unlimited translations.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Action Buttons */}
+        <div className="grid grid-cols-2 gap-2">
+          <Link
+            href="/buy-credits"
+            className="text-center text-xs font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 py-2 rounded-lg transition-colors"
+          >
+            Buy Credits
+          </Link>
+          <Link
+            href="/pricing"
+            className="text-center text-xs font-semibold text-gray-700 bg-white hover:bg-gray-50 py-2 rounded-lg transition-colors border border-gray-200"
+          >
+            View Plans
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+
+  const SidebarContent = () => (
+    <>
+      <div className="flex items-center gap-3 px-6 py-6">
+        <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
+          <Languages className="w-6 h-6 text-white" />
+        </div>
+        <span className="font-bold text-[40px] leading-[30px] text-[#19398f] font-['Hero_Light'] tracking-tight">
+          anytrans
+        </span>
+      </div>
+
+      <nav className="flex-1 px-4 space-y-1 overflow-y-auto">
+        {navigationItems.map((item) => {
+          const Icon = item.icon;
+          const active = isActive(item.href);
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                active
+                  ? 'bg-blue-50 text-blue-700'
+                  : 'text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              <Icon className="w-5 h-5" />
+              <span>{item.label}</span>
+            </Link>
+          );
+        })}
+
+        <div className="h-px bg-gray-200 my-4" />
+
+        {secondaryItems.map((item) => {
+          const Icon = item.icon;
+          const active = isActive(item.href);
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                active
+                  ? 'bg-blue-50 text-blue-700'
+                  : 'text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              <Icon className="w-5 h-5" />
+              <span>{item.label}</span>
+            </Link>
+          );
+        })}
+      </nav>
+
+      {/* Credit Section */}
+      <CreditSection />
+
+      {/* Upgrade Card */}
+      <div className="px-4 pb-4">
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 mb-4">
+          <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl mx-auto mb-3 flex items-center justify-center">
+            <Zap className="w-6 h-6 text-white" />
+          </div>
+          <p className="text-sm font-semibold text-gray-900 text-center mb-1">
+            Upgrade to Pro
+          </p>
+          <p className="text-xs text-gray-600 text-center mb-3">
+            Get unlimited translations & priority support
+          </p>
+          <button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-sm font-semibold py-2.5 rounded-lg transition-all shadow-sm hover:shadow-md">
+            Upgrade Now
+          </button>
+        </div>
+      </div>
+
+      {/* User Profile */}
+      <div className="p-4">
+        <button
+          onClick={() => setIsAccountOpen(true)}
+          className="w-full flex items-center gap-3 p-3 border-t border-gray-200 hover:bg-gray-50 rounded-lg text-left"
+          aria-label="Open account settings"
+        >
+          <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-pink-500 rounded-full flex items-center justify-center">
+            <span className="text-white text-sm font-bold">J</span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-gray-900 truncate">
+              Johnathan
+            </p>
+            <p className="text-xs text-gray-500">
+              {credits.plan} Plan • Manage
+            </p>
+          </div>
+          <span className="p-1 rounded-lg text-gray-400">
+            <MoreHorizontal className="w-5 h-5" />
+          </span>
+        </button>
       </div>
     </>
   );
 
   return (
     <>
-      {/* Mobile Header */}
+      <AccountDialog
+        open={isAccountOpen}
+        onOpenChange={setIsAccountOpen}
+        defaultTab="profile"
+        userData={{ fullName: 'Johnathan', email: 'johnathan@example.com' }}
+      />
       <MobileHeader />
-
-      {/* Mobile Overlay */}
       <MobileOverlay />
 
-      {/* Desktop Sidebar */}
       <div
-        className={`hidden lg:flex bg-white w-[280px] h-screen flex-col border-r border-gray-100 ${className || ''}`}
+        className={`hidden lg:flex bg-white w-[260px] xl:w-[300px] h-screen flex-col border-r border-gray-200 ${className || ''}`}
       >
         <SidebarContent />
       </div>
 
-      {/* Mobile Sidebar */}
       <div
-        className={`lg:hidden fixed top-0 left-0 z-50 bg-white w-[280px] h-screen flex flex-col border-r border-gray-100 transform transition-transform duration-300 ease-in-out ${
+        className={`lg:hidden fixed top-0 left-0 z-50 bg-white w-[80vw] sm:w-[300px] h-screen flex flex-col border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
       >
         <SidebarContent />
       </div>

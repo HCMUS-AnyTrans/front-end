@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { TranslationHistoryInterface } from './translation-history-interface';
+import TranslationHistoryInterface from './translation-history-interface';
 
 export const metadata: Metadata = {
   title: 'Translation History - AnyTrans',

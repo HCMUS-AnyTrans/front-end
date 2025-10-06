@@ -12,19 +12,12 @@ import {
   Eye,
   CheckCircle,
   Film,
-  Globe,
   Sparkles,
   RefreshCw,
-  Search,
   FileText,
-  Calendar,
-  User,
   Tag,
   BookOpen,
   ArrowRight,
-  Copy,
-  Edit3,
-  Save,
   ArrowLeft,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -66,6 +59,7 @@ interface SubtitleEntry {
 }
 
 export function SubtitleTranslationInterface() {
+  const [currentStep, setCurrentStep] = useState(1); // 1: Upload, 2: Configure, 3: Review
   const [uploadedFiles, setUploadedFiles] = useState<SubtitleFile[]>([]);
   const [selectedFile, setSelectedFile] = useState<SubtitleFile | null>(null);
   const [movieContext, setMovieContext] = useState<MovieContext | null>(null);
@@ -241,6 +235,7 @@ export function SubtitleTranslationInterface() {
         setSelectedFile(newFiles[0]);
         setOriginalSubtitles(sampleSubtitles);
       }
+      setCurrentStep(2);
     }
   };
 
@@ -264,6 +259,7 @@ export function SubtitleTranslationInterface() {
       setTranslatedSubtitles(translatedSubtitles);
       setIsProcessing(false);
       setShowReview(true);
+      setCurrentStep(3);
     }, 3000);
   };
 
@@ -283,62 +279,170 @@ export function SubtitleTranslationInterface() {
   };
 
   return (
-    <div className="flex h-screen bg-white">
-      {/* Sidebar - Fixed */}
-      <div className="flex-shrink-0">
-        <Sidebar />
-      </div>
+    <div className="flex h-screen bg-gray-50">
+      {/* Sidebar */}
+      <Sidebar />
 
-      {/* Main Content Area - Scrollable */}
-      <div className="flex-1 flex flex-col max-w-none overflow-hidden">
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <div className="px-8 py-6 border-b border-gray-100">
+        <div className="bg-white border-b border-gray-200 px-6 lg:px-8 py-6 mt-16 lg:mt-0">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
-                <h1 className="text-[32px] font-bold text-[#414651] font-nunito leading-tight mb-1">
-                  Subtitle Translation
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                  Subtitle Translator
                 </h1>
-                <p className="text-sm text-[#717680] font-nunito">
+                <p className="text-sm text-gray-600">
                   AI-powered context-aware translation for movies, TV shows, and
                   video content
                 </p>
               </div>
 
-              <div className="flex items-center gap-3">
-                {showReview && (
-                  <Button
-                    onClick={handleExport}
-                    className="bg-[#19398f] hover:bg-[#142457] text-white"
-                  >
-                    <Download className="w-4 h-4 mr-2" />
-                    Export
-                  </Button>
-                )}
+              {/* Progress Steps */}
+              <div className="flex items-center gap-2 lg:gap-3">
+                {[
+                  { number: 1, label: 'Upload', icon: Upload },
+                  { number: 2, label: 'Configure', icon: Settings },
+                  { number: 3, label: 'Review', icon: Eye },
+                ].map((step, index) => {
+                  const Icon = step.icon;
+                  const isActive = currentStep === step.number;
+                  const isCompleted = currentStep > step.number;
+                  return (
+                    <React.Fragment key={step.number}>
+                      <div className="flex flex-col items-center gap-1">
+                        <div
+                          className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+                            isCompleted
+                              ? 'bg-green-100 text-green-700'
+                              : isActive
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-gray-100 text-gray-400'
+                          }`}
+                        >
+                          {isCompleted ? (
+                            <CheckCircle className="w-5 h-5" />
+                          ) : (
+                            <Icon className="w-5 h-5" />
+                          )}
+                        </div>
+                        <span
+                          className={`text-xs font-medium ${isActive ? 'text-blue-700' : 'text-gray-500'}`}
+                        >
+                          {step.label}
+                        </span>
+                      </div>
+                      {index < 2 && (
+                        <div
+                          className={`w-8 h-0.5 mb-6 ${currentStep > step.number ? 'bg-green-500' : 'bg-gray-200'}`}
+                        />
+                      )}
+                    </React.Fragment>
+                  );
+                })}
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex-1 px-8 py-6 pt-20 lg:pt-6 overflow-y-auto">
+        {/* Content Area */}
+        <div className="flex-1 overflow-y-auto px-6 lg:px-8 py-6">
           <div className="max-w-7xl mx-auto">
-            {!showReview ? (
+            {currentStep === 1 && (
               <div className="space-y-6">
-                {/* Translation Settings - Top Panel */}
-                <div className="bg-white border border-gray-200 rounded-xl p-6">
-                  <h3 className="text-lg font-semibold text-[#414651] font-nunito mb-4">
+                {/* Upload Area */}
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+                  <div className="max-w-2xl mx-auto text-center">
+                    <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                      <Film className="w-8 h-8 text-blue-600" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                      Upload Your Subtitle Files
+                    </h2>
+                    <p className="text-gray-600 mb-6">
+                      Drag and drop your files or click to browse
+                    </p>
+
+                    <div className="border-2 border-dashed border-gray-300 hover:border-blue-400 rounded-xl p-12 transition-all cursor-pointer bg-gray-50 hover:bg-blue-50">
+                      <input
+                        type="file"
+                        multiple
+                        accept=".srt,.vtt,.ass,.ssa,.mp4"
+                        onChange={handleFileUpload}
+                        className="hidden"
+                        id="subtitle-upload"
+                      />
+                      <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                      <button
+                        onClick={() =>
+                          document.getElementById('subtitle-upload')?.click()
+                        }
+                        className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all"
+                      >
+                        <Upload className="w-5 h-5" />
+                        Choose File
+                      </button>
+                      <p className="text-sm text-gray-500 mt-4">
+                        Supported formats: SRT, VTT, ASS, SSA, MP4
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {currentStep === 2 && (
+              <div className="space-y-6">
+                {/* Document Info */}
+                {selectedFile && (
+                  <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-semibold text-gray-900">
+                        File Information
+                      </h3>
+                      <button
+                        onClick={() => setCurrentStep(1)}
+                        className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
+                      >
+                        <ArrowLeft className="w-4 h-4" />
+                        Change files
+                      </button>
+                    </div>
+                    <div className="flex items-start gap-4 p-4 bg-blue-50 rounded-xl border border-blue-100">
+                      <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <FileVideo className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold text-gray-900 mb-1">
+                          {selectedFile.fileName}
+                        </p>
+                        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+                          <span>{selectedFile.fileType}</span>
+                          <span>•</span>
+                          <span>{selectedFile.fileSize}</span>
+                          <span>•</span>
+                          <span>{selectedFile.subtitleCount} subtitles</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Translation Settings */}
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-6">
                     Translation Settings
                   </h3>
-
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                     <div>
-                      <label className="block text-sm font-semibold text-black mb-2 font-nunito">
+                      <label className="block text-sm font-semibold text-gray-900 mb-2">
                         Source language
                       </label>
                       <select
                         value={sourceLanguage}
                         onChange={(e) => setSourceLanguage(e.target.value)}
-                        className="w-full px-4 py-2 border border-[#e9eaeb] rounded-md text-sm text-[#717680] font-nunito focus:outline-none focus:ring-2 focus:ring-[#19398f] focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option>English</option>
                         <option>Spanish</option>
@@ -347,15 +451,14 @@ export function SubtitleTranslationInterface() {
                         <option>Japanese</option>
                       </select>
                     </div>
-
                     <div>
-                      <label className="block text-sm font-semibold text-black mb-2 font-nunito">
+                      <label className="block text-sm font-semibold text-gray-900 mb-2">
                         Target language
                       </label>
                       <select
                         value={targetLanguage}
                         onChange={(e) => setTargetLanguage(e.target.value)}
-                        className="w-full px-4 py-2 border border-[#e9eaeb] rounded-md text-sm text-[#717680] font-nunito focus:outline-none focus:ring-2 focus:ring-[#19398f] focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option>Vietnamese</option>
                         <option>Chinese</option>
@@ -364,15 +467,14 @@ export function SubtitleTranslationInterface() {
                         <option>Indonesian</option>
                       </select>
                     </div>
-
                     <div>
-                      <label className="block text-sm font-semibold text-black mb-2 font-nunito">
+                      <label className="block text-sm font-semibold text-gray-900 mb-2">
                         Translation Mode
                       </label>
                       <select
                         value={translationMode}
                         onChange={(e) => setTranslationMode(e.target.value)}
-                        className="w-full px-4 py-2 border border-[#e9eaeb] rounded-md text-sm text-[#717680] font-nunito focus:outline-none focus:ring-2 focus:ring-[#19398f] focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option value="context-aware">
                           Context-Aware (Recommended)
@@ -382,402 +484,209 @@ export function SubtitleTranslationInterface() {
                         <option value="formal">Formal/Documentary</option>
                       </select>
                     </div>
-
-                    <div className="flex items-end">
-                      <Button
-                        onClick={handleTranslation}
-                        disabled={!selectedFile || isProcessing}
-                        className="w-full bg-[#19398f] hover:bg-[#142457] text-white font-semibold font-nunito"
-                      >
-                        {isProcessing ? (
-                          <>
-                            <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
-                            Processing...
-                          </>
-                        ) : (
-                          <>
-                            <Zap className="w-4 h-4 mr-2" />
-                            Start Translation
-                          </>
-                        )}
-                      </Button>
-                    </div>
                   </div>
+
+                  {movieContext && (
+                    <div className="flex items-center gap-3 p-4 bg-amber-50 rounded-xl border border-amber-200">
+                      <Sparkles className="w-5 h-5 text-amber-600" />
+                      <p className="text-sm text-amber-800">
+                        <strong>Detected context:</strong> {movieContext.title}{' '}
+                        • {movieContext.year} • {movieContext.genre.join(', ')}
+                      </p>
+                    </div>
+                  )}
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  {/* Left Panel - Upload & Context */}
-                  <div className="lg:col-span-1 space-y-6">
-                    {/* File Upload */}
-                    <div className="bg-white border border-gray-200 rounded-xl p-6">
-                      <h3 className="text-lg font-semibold text-[#414651] font-nunito mb-4">
-                        Upload Subtitle Files
-                      </h3>
-
-                      <div className="border-2 border-dashed border-[#a4a7ae] rounded-lg p-8 text-center">
-                        <Film className="w-12 h-12 text-[#19398f] mx-auto mb-4" />
-                        <p className="text-sm text-[#717680] font-nunito mb-4">
-                          <span className="text-[#19398f] font-semibold">
-                            Drag & drop
-                          </span>{' '}
-                          subtitle files here
-                        </p>
-                        <p className="text-xs text-[#717680] font-nunito mb-4">
-                          SRT • VTT • ASS • SSA • MP4
-                        </p>
-                        <input
-                          type="file"
-                          multiple
-                          accept=".srt,.vtt,.ass,.ssa,.mp4"
-                          onChange={handleFileUpload}
-                          className="hidden"
-                          id="subtitle-upload"
-                        />
-                        <Button
-                          onClick={() =>
-                            document.getElementById('subtitle-upload')?.click()
-                          }
-                          className="bg-[#19398f] hover:bg-[#142457] text-white"
-                        >
-                          <Upload className="w-4 h-4 mr-2" />
-                          Choose Files
-                        </Button>
-                      </div>
-
-                      {/* Uploaded Files */}
-                      {uploadedFiles.length > 0 && (
-                        <div className="mt-4 space-y-2">
-                          {uploadedFiles.map((file) => (
+                {/* Subtitle Preview */}
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-200">
+                  <div className="px-6 py-4 border-b border-gray-200">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      Subtitle Preview
+                    </h3>
+                  </div>
+                  <div className="p-6">
+                    <div className="bg-gray-50 rounded-xl p-6 max-h-96 overflow-y-auto">
+                      {originalSubtitles.length > 0 ? (
+                        <div className="space-y-2">
+                          {originalSubtitles.slice(0, 8).map((subtitle) => (
                             <div
-                              key={file.id}
-                              className={`p-3 rounded-lg border cursor-pointer transition-colors ${
-                                selectedFile?.id === file.id
-                                  ? 'border-[#19398f] bg-[#eaf4ff]'
-                                  : 'border-gray-200 hover:border-gray-300'
-                              }`}
-                              onClick={() => setSelectedFile(file)}
+                              key={subtitle.id}
+                              className="p-3 border border-gray-200 rounded-lg bg-white"
                             >
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-3">
-                                  <FileVideo className="w-5 h-5 text-[#19398f]" />
-                                  <div>
-                                    <p className="text-sm font-medium text-[#414651] font-nunito">
-                                      {file.fileName}
-                                    </p>
-                                    <p className="text-xs text-[#717680] font-nunito">
-                                      {file.fileType} • {file.fileSize} •{' '}
-                                      {file.subtitleCount} subtitles
-                                    </p>
-                                  </div>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                  <span
-                                    className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                      file.status === 'uploaded'
-                                        ? 'bg-green-100 text-green-700'
-                                        : file.status === 'processing'
-                                          ? 'bg-blue-100 text-blue-700'
-                                          : file.status === 'completed'
-                                            ? 'bg-green-100 text-green-700'
-                                            : 'bg-red-100 text-red-700'
-                                    }`}
-                                  >
-                                    {file.status}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Movie Context Detection */}
-                    {movieContext && (
-                      <div className="bg-white border border-gray-200 rounded-xl p-6">
-                        <div className="flex items-center gap-2 mb-4">
-                          <Sparkles className="w-5 h-5 text-[#19398f]" />
-                          <h3 className="text-lg font-semibold text-[#414651] font-nunito">
-                            Content Analysis
-                          </h3>
-                          <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
-                            {movieContext.confidence}% match
-                          </span>
-                        </div>
-
-                        <div className="space-y-4">
-                          <div>
-                            <div className="flex items-center gap-2 mb-2">
-                              {movieContext.sourceType === 'tv_show' && (
-                                <Tag className="w-4 h-4 text-blue-500" />
-                              )}
-                              {movieContext.sourceType === 'movie' && (
-                                <Film className="w-4 h-4 text-purple-500" />
-                              )}
-                              {movieContext.sourceType === 'documentary' && (
-                                <BookOpen className="w-4 h-4 text-green-500" />
-                              )}
-                              <h4 className="text-lg font-bold text-[#414651] font-nunito">
-                                {movieContext.title} ({movieContext.year})
-                              </h4>
-                            </div>
-
-                            {movieContext.season && movieContext.episode && (
-                              <p className="text-sm text-[#19398f] font-nunito mb-2">
-                                {movieContext.season} • {movieContext.episode}
-                              </p>
-                            )}
-
-                            <p className="text-sm text-[#717680] font-nunito">
-                              {movieContext.genre.join(' • ')}
-                            </p>
-                          </div>
-
-                          <div className="text-sm text-[#717680] font-nunito space-y-1">
-                            {movieContext.director && (
-                              <p>
-                                <span className="font-semibold">Director:</span>{' '}
-                                {movieContext.director}
-                              </p>
-                            )}
-                            <p>
-                              <span className="font-semibold">Cast:</span>{' '}
-                              {movieContext.cast.slice(0, 3).join(', ')}
-                            </p>
-                          </div>
-
-                          <div className="text-sm text-[#717680] font-nunito">
-                            <p className="font-semibold mb-1">Plot:</p>
-                            <p>{movieContext.plot}</p>
-                          </div>
-
-                          <div className="flex items-center gap-2 pt-2">
-                            <CheckCircle className="w-4 h-4 text-green-500" />
-                            <span className="text-xs text-green-600 font-nunito">
-                              Context verified - Ready for translation
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Right Panel - Original Subtitles Preview */}
-                  <div className="lg:col-span-1">
-                    <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-                      <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
-                        <div className="flex items-center justify-between">
-                          <h3 className="text-lg font-semibold text-[#414651] font-nunito">
-                            Subtitle Preview
-                          </h3>
-                          {originalSubtitles.length > 0 && (
-                            <span className="text-sm text-[#717680] font-nunito">
-                              {originalSubtitles.length} subtitles
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="p-6">
-                        {originalSubtitles.length > 0 ? (
-                          <div className="space-y-2 max-h-96 overflow-y-auto">
-                            {originalSubtitles.map((subtitle) => (
-                              <div
-                                key={subtitle.id}
-                                className="p-3 border border-gray-200 rounded-lg hover:border-[#19398f] hover:bg-[#f8fafc] transition-colors"
-                              >
-                                <div className="flex items-start gap-3">
-                                  <div className="flex-shrink-0">
-                                    <div className="w-7 h-7 bg-[#19398f] bg-opacity-10 rounded-lg flex items-center justify-center">
-                                      <span className="text-xs font-bold text-[#19398f]">
-                                        {subtitle.id}
-                                      </span>
-                                    </div>
-                                  </div>
-
-                                  <div className="flex-1 min-w-0">
-                                    <div className="flex items-center gap-3 mb-2">
-                                      <div className="flex items-center gap-1 text-xs text-[#717680] font-nunito">
-                                        <Clock className="w-3 h-3" />
-                                        <span>{subtitle.startTime}</span>
-                                      </div>
-                                      <ArrowRight className="w-3 h-3 text-gray-400" />
-                                      <div className="flex items-center gap-1 text-xs text-[#717680] font-nunito">
-                                        <Clock className="w-3 h-3" />
-                                        <span>{subtitle.endTime}</span>
-                                      </div>
-                                    </div>
-
-                                    <p className="text-sm text-[#414651] font-nunito leading-relaxed">
-                                      {subtitle.originalText}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          <div className="text-center py-12">
-                            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                              <FileText className="w-8 h-8 text-gray-400" />
-                            </div>
-                            <h4 className="text-lg font-semibold text-[#414651] font-nunito mb-2">
-                              No subtitles loaded
-                            </h4>
-                            <p className="text-sm text-[#717680] font-nunito">
-                              Upload a subtitle file to see preview and start
-                              translation
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              /* Review Panel - Before/After Translation */
-              <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Button
-                      variant="outline"
-                      onClick={() => setShowReview(false)}
-                      className="border-gray-300 hover:border-[#19398f] hover:text-[#19398f]"
-                    >
-                      <ArrowLeft className="w-4 h-4 mr-2" />
-                      Back to Settings
-                    </Button>
-                    <h2 className="text-xl font-bold text-[#414651] font-nunito">
-                      Translation Review
-                    </h2>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <span className="text-sm text-[#717680] font-nunito">
-                      {translatedSubtitles.length} subtitles
-                    </span>
-                    <Button
-                      onClick={handleExport}
-                      className="bg-[#19398f] hover:bg-[#142457] text-white"
-                    >
-                      <Download className="w-4 h-4 mr-2" />
-                      Export SRT
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {/* Original Subtitles */}
-                  <div className="bg-white border border-gray-200 rounded-xl p-6">
-                    <div className="flex items-center gap-2 mb-4">
-                      <FileText className="w-5 h-5 text-[#19398f]" />
-                      <h3 className="text-lg font-semibold text-[#414651] font-nunito">
-                        Original ({sourceLanguage})
-                      </h3>
-                    </div>
-
-                    <div className="space-y-3 max-h-96 overflow-y-auto">
-                      {originalSubtitles.map((subtitle) => (
-                        <div
-                          key={subtitle.id}
-                          className="p-3 border border-gray-200 rounded-lg"
-                        >
-                          <div className="flex items-start gap-3">
-                            <div className="flex-shrink-0">
-                              <div className="w-6 h-6 bg-[#19398f] bg-opacity-10 rounded-full flex items-center justify-center">
-                                <span className="text-xs font-bold text-[#19398f]">
-                                  {subtitle.id}
-                                </span>
-                              </div>
-                            </div>
-
-                            <div className="flex-1">
-                              <div className="flex items-center gap-3 mb-2">
-                                <span className="text-xs font-medium text-[#717680] font-nunito">
+                              <div className="flex items-center gap-2 text-xs text-gray-600 mb-1">
+                                <Clock className="w-3 h-3" />
+                                <span>
                                   {subtitle.startTime} → {subtitle.endTime}
                                 </span>
                               </div>
-
-                              <p className="text-sm text-[#414651] font-nunito">
+                              <p className="text-sm text-gray-800">
                                 {subtitle.originalText}
                               </p>
                             </div>
-                          </div>
+                          ))}
                         </div>
-                      ))}
+                      ) : (
+                        <div className="text-center text-sm text-gray-600">
+                          No subtitles loaded yet.
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action Button */}
+                <div className="flex justify-end">
+                  <button
+                    onClick={handleTranslation}
+                    disabled={!selectedFile || isProcessing}
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:from-gray-400 disabled:to-gray-500 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg transition-all"
+                  >
+                    {isProcessing ? (
+                      <>
+                        <RefreshCw className="w-5 h-5 animate-spin" />
+                        Processing...
+                      </>
+                    ) : (
+                      <>
+                        <Zap className="w-5 h-5" />
+                        Start Translation
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {currentStep === 3 && (
+              <div className="space-y-6">
+                {/* Success Banner */}
+                <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl p-6 text-white shadow-lg">
+                  <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <CheckCircle className="w-8 h-8" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold mb-1">
+                        Translation Complete!
+                      </h3>
+                      <p className="text-green-50">
+                        Your subtitles have been translated and are ready for
+                        review.
+                      </p>
+                    </div>
+                    <button
+                      onClick={handleExport}
+                      className="bg-white hover:bg-green-50 text-green-700 px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-all shadow-lg"
+                    >
+                      <Download className="w-5 h-5" />
+                      Export SRT
+                    </button>
+                  </div>
+                </div>
+
+                {/* Translation Stats */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <div className="bg-white rounded-xl p-5 border border-gray-200">
+                    <p className="text-sm text-gray-600 mb-1">
+                      Words Translated
+                    </p>
+                    <p className="text-2xl font-bold text-gray-900">2,847</p>
+                  </div>
+                  <div className="bg-white rounded-xl p-5 border border-gray-200">
+                    <p className="text-sm text-gray-600 mb-1">Time Taken</p>
+                    <p className="text-2xl font-bold text-gray-900">3.2s</p>
+                  </div>
+                  <div className="bg-white rounded-xl p-5 border border-gray-200">
+                    <p className="text-sm text-gray-600 mb-1">Accuracy</p>
+                    <p className="text-2xl font-bold text-gray-900">98%</p>
+                  </div>
+                  <div className="bg-white rounded-xl p-5 border border-gray-200">
+                    <p className="text-sm text-gray-600 mb-1">Credits Used</p>
+                    <p className="text-2xl font-bold text-gray-900">28</p>
+                  </div>
+                </div>
+
+                {/* Side by Side Review */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="bg-white rounded-2xl shadow-sm border border-gray-200">
+                    <div className="px-6 py-4 border-b border-gray-200 bg-gray-50 rounded-t-2xl">
+                      <div className="flex items-center gap-2">
+                        <FileText className="w-5 h-5 text-blue-600" />
+                        <h3 className="font-semibold text-gray-900">
+                          Original ({sourceLanguage})
+                        </h3>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <div className="bg-gray-50 rounded-xl p-6 max-h-96 overflow-y-auto">
+                        <div className="space-y-3">
+                          {originalSubtitles.map((s) => (
+                            <div key={s.id} className="text-sm text-gray-800">
+                              <span className="text-gray-500 mr-2">
+                                {s.startTime} → {s.endTime}
+                              </span>
+                              {s.originalText}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Translated Subtitles */}
-                  <div className="bg-white border border-gray-200 rounded-xl p-6">
-                    <div className="flex items-center gap-2 mb-4">
-                      <Languages className="w-5 h-5 text-green-500" />
-                      <h3 className="text-lg font-semibold text-[#414651] font-nunito">
-                        Translation ({targetLanguage})
-                      </h3>
+                  <div className="bg-white rounded-2xl shadow-sm border-2 border-green-200">
+                    <div className="px-6 py-4 border-b border-green-200 bg-green-50 rounded-t-2xl">
+                      <div className="flex items-center gap-2">
+                        <Languages className="w-5 h-5 text-green-600" />
+                        <h3 className="font-semibold text-gray-900">
+                          Translation ({targetLanguage})
+                        </h3>
+                      </div>
                     </div>
-
-                    <div className="space-y-3 max-h-96 overflow-y-auto">
-                      {translatedSubtitles.map((subtitle) => (
-                        <div
-                          key={subtitle.id}
-                          className={`p-3 border rounded-lg ${
-                            subtitle.isEdited
-                              ? 'border-blue-300 bg-blue-50'
-                              : 'border-gray-200'
-                          }`}
-                        >
-                          <div className="flex items-start gap-3">
-                            <div className="flex-shrink-0">
-                              <div
-                                className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                                  subtitle.isEdited
-                                    ? 'bg-blue-100'
-                                    : 'bg-green-100'
-                                }`}
-                              >
-                                <span
-                                  className={`text-xs font-bold ${
-                                    subtitle.isEdited
-                                      ? 'text-blue-700'
-                                      : 'text-green-700'
-                                  }`}
-                                >
-                                  {subtitle.id}
-                                </span>
-                              </div>
+                    <div className="p-6">
+                      <div className="bg-green-50 rounded-xl p-6 max-h-96 overflow-y-auto">
+                        <div className="space-y-3">
+                          {translatedSubtitles.map((s) => (
+                            <div key={s.id} className="text-sm text-gray-800">
+                              <span className="text-gray-500 mr-2">
+                                {s.startTime} → {s.endTime}
+                              </span>
+                              {s.translatedText}
                             </div>
-
-                            <div className="flex-1">
-                              <div className="flex items-center gap-3 mb-2">
-                                <span className="text-xs font-medium text-[#717680] font-nunito">
-                                  {subtitle.startTime} → {subtitle.endTime}
-                                </span>
-                                {subtitle.isEdited && (
-                                  <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                                    Edited
-                                  </span>
-                                )}
-                              </div>
-
-                              <textarea
-                                value={subtitle.translatedText}
-                                onChange={(e) =>
-                                  handleEditTranslation(
-                                    subtitle.id,
-                                    e.target.value
-                                  )
-                                }
-                                className="w-full text-sm text-[#414651] font-nunito bg-transparent border-none resize-none focus:outline-none"
-                                rows={2}
-                                placeholder="Translation will appear here..."
-                              />
-                            </div>
-                          </div>
+                          ))}
                         </div>
-                      ))}
+                      </div>
                     </div>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white rounded-2xl p-6 border border-gray-200">
+                  <button
+                    onClick={() => {
+                      setCurrentStep(1);
+                      setShowReview(false);
+                      setSelectedFile(null);
+                      setOriginalSubtitles([]);
+                      setTranslatedSubtitles([]);
+                    }}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-gray-300 hover:border-blue-600 hover:bg-blue-50 text-gray-700 hover:text-blue-700 px-6 py-3 rounded-xl font-semibold transition-all"
+                  >
+                    <ArrowLeft className="w-5 h-5" />
+                    Translate Another Document
+                  </button>
+
+                  <div className="flex items-center gap-3 w-full sm:w-auto">
+                    <button className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-700 hover:bg-blue-50 px-6 py-3 rounded-xl font-semibold transition-all">
+                      <Eye className="w-5 h-5" />
+                      Preview
+                    </button>
+                    <button
+                      onClick={handleExport}
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-xl font-semibold shadow-lg transition-all"
+                    >
+                      <Download className="w-5 h-5" />
+                      Download
+                    </button>
                   </div>
                 </div>
               </div>
