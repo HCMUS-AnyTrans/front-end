@@ -218,13 +218,6 @@ export default function ReviewSection() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-block mb-4">
-            <div className="flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">
-              <Star size={16} className="fill-blue-700" />
-              <span>Testimonials</span>
-            </div>
-          </div>
-
           <h2 className="font-bold text-4xl lg:text-6xl leading-tight text-[#0F172A] mb-6">
             What Our Users Say
           </h2>

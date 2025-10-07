@@ -32,10 +32,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${nunito.variable} antialiased min-h-screen flex flex-col`}
       >
-        <AccountDialogProvider>
-          <main className="flex-1">{children}</main>
-          <Toaster position="top-center" richColors />
-        </AccountDialogProvider>
+        {children}
       </body>
     </html>
   );
