@@ -1,157 +1,212 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import React, { useState } from 'react';
+import { Facebook, Twitter, Instagram, Linkedin, Send } from 'lucide-react';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [hoveredSocial, setHoveredSocial] = useState<string | null>(null);
+
+  const handleSubmit = () => {
+    console.log('Email submitted:', email);
+    setEmail('');
+  };
+
   return (
-    <footer className="bg-[#142457] text-white mt-auto relative overflow-hidden">
-      {/* Background decoration */}
+    <footer className="relative overflow-hidden bg-gradient-to-br from-[#0F172A] via-[#1e293b] to-[#0F172A]">
+      {/* Animated background decoration */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-gradient-to-br from-[#19398F] to-[#59A7FF] rounded-full -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-blue-500 to-purple-600 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-pulse" />
+        <div
+          className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-purple-500 to-blue-600 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-pulse"
+          style={{ animationDelay: '1s' }}
+        />
       </div>
 
-      <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
-        <div className="flex flex-col gap-[31px]">
+      {/* Dotted pattern overlay */}
+      <div
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle, white 1px, transparent 1px)',
+          backgroundSize: '30px 30px',
+        }}
+      />
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="flex flex-col gap-12">
           {/* Main footer content */}
-          <div className="flex flex-col lg:flex-row items-start justify-between gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Left section - Logo and newsletter */}
-            <div className="flex flex-col gap-[37px] w-full lg:w-[384px]">
+            <div className="lg:col-span-5 flex flex-col gap-8">
               {/* Logo */}
-              <div className="w-[356px] h-[135px] relative">
-                <Image
-                  src="/LogoName.svg"
-                  alt="AnyTrans Logo"
-                  width={356}
-                  height={135}
-                  className="w-full h-full object-contain"
-                />
+              <div className="flex flex-col gap-4">
+                <h2 className="font-bold text-4xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                  anytrans
+                </h2>
+                <p className="text-gray-400 text-sm leading-relaxed max-w-md">
+                  Professional translation services for documents, subtitles,
+                  and more. Empowering global communication with cutting-edge
+                  technology.
+                </p>
               </div>
 
               {/* Newsletter signup */}
-              <div className="flex flex-col gap-[6px]">
-                <label className="font-medium text-[14px] leading-[20px] text-white font-inter">
-                  Email
-                </label>
-                <div className="flex items-center gap-[8px]">
-                  <div className="flex-1">
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      className="w-full bg-white border border-slate-300 rounded-[6px] px-[12px] py-[8px] text-[16px] text-gray-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 font-inter"
-                    />
-                  </div>
-                  <button className="bg-slate-900 text-white px-[16px] py-[8px] rounded-[6px] font-medium text-[14px] hover:bg-slate-800 transition-colors font-inter cursor-pointer">
-                    Submit
+              <div className="flex flex-col gap-4">
+                <div>
+                  <h3 className="font-semibold text-lg text-white mb-2">
+                    Stay Updated
+                  </h3>
+                  <p className="text-gray-400 text-sm">
+                    Subscribe to our newsletter for latest updates
+                  </p>
+                </div>
+
+                <div className="relative">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-5 py-3.5 pr-12 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300"
+                  />
+                  <button
+                    onClick={handleSubmit}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-500 to-purple-600 text-white p-2 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300"
+                  >
+                    <Send size={18} />
                   </button>
                 </div>
-                <p className="font-normal text-[14px] leading-[20px] text-slate-400 font-inter">
-                  Enter your email address
-                </p>
               </div>
             </div>
 
             {/* Right section - Links */}
-            <div className="flex items-start justify-between w-full lg:w-[510px] gap-8">
+            <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-8">
               {/* Our Link */}
-              <div className="flex flex-col gap-[30px]">
-                <h3 className="font-semibold text-[20px] leading-[1.4] text-white font-nunito">
-                  Our Link
+              <div className="flex flex-col gap-6">
+                <h3 className="font-bold text-lg text-white relative inline-block">
+                  Quick Links
+                  <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full" />
                 </h3>
-                <div className="flex flex-col gap-[20px]">
-                  <Link
-                    href="/"
-                    className="font-semibold text-[16px] leading-[1.5] text-[#a4a7ae] hover:text-white transition-colors font-nunito cursor-pointer"
-                  >
-                    Home
-                  </Link>
-                  <Link
-                    href="/features"
-                    className="font-semibold text-[16px] leading-[1.5] text-[#a4a7ae] hover:text-white transition-colors font-nunito cursor-pointer"
-                  >
-                    Features
-                  </Link>
-                  <Link
-                    href="/pricing"
-                    className="font-semibold text-[16px] leading-[1.5] text-[#a4a7ae] hover:text-white transition-colors font-nunito cursor-pointer"
-                  >
-                    Pricing
-                  </Link>
-                  <Link
-                    href="/about"
-                    className="font-semibold text-[16px] leading-[1.5] text-[#a4a7ae] hover:text-white transition-colors font-nunito cursor-pointer"
-                  >
-                    About Us
-                  </Link>
+                <div className="flex flex-col gap-4">
+                  {['Home', 'Features', 'Pricing', 'About Us'].map(
+                    (link, index) => (
+                      <a
+                        key={index}
+                        href={
+                          link === 'Home'
+                            ? '/'
+                            : `/${link.toLowerCase().replace(' ', '-')}`
+                        }
+                        className="text-gray-400 hover:text-white transition-all duration-300 hover:translate-x-2 text-[15px] font-medium group flex items-center gap-2"
+                      >
+                        <span className="w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 group-hover:w-4 transition-all duration-300 rounded-full" />
+                        {link}
+                      </a>
+                    )
+                  )}
                 </div>
               </div>
 
               {/* Our Service */}
-              <div className="flex flex-col gap-[30px]">
-                <h3 className="font-semibold text-[20px] leading-[1.4] text-white font-nunito">
-                  Our Service
+              <div className="flex flex-col gap-6">
+                <h3 className="font-bold text-lg text-white relative inline-block">
+                  Services
+                  <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full" />
                 </h3>
-                <div className="flex flex-col gap-[20px]">
-                  <Link
-                    href="/features/document-translation"
-                    className="font-semibold text-[16px] leading-[1.5] text-[#a4a7ae] hover:text-white transition-colors font-nunito cursor-pointer"
-                  >
-                    Document Translation
-                  </Link>
-                  <Link
-                    href="/features/subtitle-translation"
-                    className="font-semibold text-[16px] leading-[1.5] text-[#a4a7ae] hover:text-white transition-colors font-nunito cursor-pointer"
-                  >
-                    Subtitle Translation
-                  </Link>
+                <div className="flex flex-col gap-4">
+                  {[
+                    {
+                      name: 'Document Translation',
+                      href: '/features/document-translation',
+                    },
+                    {
+                      name: 'Subtitle Translation',
+                      href: '/features/subtitle-translation',
+                    },
+                  ].map((service, index) => (
+                    <a
+                      key={index}
+                      href={service.href}
+                      className="text-gray-400 hover:text-white transition-all duration-300 hover:translate-x-2 text-[15px] font-medium group flex items-center gap-2"
+                    >
+                      <span className="w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 group-hover:w-4 transition-all duration-300 rounded-full" />
+                      {service.name}
+                    </a>
+                  ))}
                 </div>
               </div>
 
               {/* Social Media */}
-              <div className="flex flex-col gap-[27px] w-[148px]">
-                <h3 className="font-semibold text-[20px] leading-[1.4] text-white font-nunito">
-                  Other
+              <div className="flex flex-col gap-6">
+                <h3 className="font-bold text-lg text-white relative inline-block">
+                  Connect
+                  <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full" />
                 </h3>
-                <div className="grid grid-cols-2 gap-[27px] w-[71px] h-[71px]">
-                  <div className="w-[22px] h-[22px] flex items-center justify-center rounded-full bg-white/10 hover:bg-[#19398f] transition-colors cursor-pointer">
-                    <Facebook size={16} className="text-white" />
-                  </div>
-                  <div className="w-[22px] h-[22px] flex items-center justify-center rounded-full bg-white/10 hover:bg-[#19398f] transition-colors cursor-pointer">
-                    <Twitter size={16} className="text-white" />
-                  </div>
-                  <div className="w-[22px] h-[22px] flex items-center justify-center rounded-full bg-white/10 hover:bg-[#19398f] transition-colors cursor-pointer">
-                    <Instagram size={16} className="text-white" />
-                  </div>
-                  <div className="w-[22px] h-[22px] flex items-center justify-center rounded-full bg-white/10 hover:bg-[#19398f] transition-colors cursor-pointer">
-                    <Linkedin size={16} className="text-white" />
-                  </div>
+                <div className="flex items-center gap-3">
+                  {[
+                    { name: 'facebook', icon: Facebook, color: '#1877F2' },
+                    { name: 'twitter', icon: Twitter, color: '#1DA1F2' },
+                    { name: 'instagram', icon: Instagram, color: '#E4405F' },
+                    { name: 'linkedin', icon: Linkedin, color: '#0A66C2' },
+                  ].map((social) => {
+                    const Icon = social.icon;
+                    return (
+                      <button
+                        key={social.name}
+                        onMouseEnter={() => setHoveredSocial(social.name)}
+                        onMouseLeave={() => setHoveredSocial(null)}
+                        className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/30 transition-all duration-300 hover:scale-110 hover:shadow-lg group relative overflow-hidden"
+                        style={{
+                          backgroundColor:
+                            hoveredSocial === social.name
+                              ? `${social.color}20`
+                              : undefined,
+                        }}
+                      >
+                        <Icon
+                          size={18}
+                          className="text-gray-400 group-hover:text-white transition-colors duration-300 relative z-10"
+                        />
+                        <div
+                          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          style={{
+                            background: `linear-gradient(135deg, ${social.color}40, ${social.color}20)`,
+                          }}
+                        />
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
           </div>
 
+          {/* Divider */}
+          <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
           {/* Bottom section */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="font-medium text-[18px] leading-[30px] text-white font-inter">
-              © 2025 AnyTrans Inc. Copyright and rights reserved
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <p className="text-gray-400 text-sm">
+              © 2025{' '}
+              <span className="text-white font-semibold">AnyTrans Inc.</span>{' '}
+              All rights reserved
             </p>
 
-            <div className="flex items-center gap-2">
-              <Link
+            <div className="flex items-center gap-6">
+              <a
                 href="/terms"
-                className="font-semibold text-[16px] leading-[1.5] text-white hover:text-gray-300 transition-colors px-[16px] py-[8px] font-nunito cursor-pointer"
+                className="text-gray-400 hover:text-white transition-colors text-sm font-medium"
               >
-                Terms and Conditions
-              </Link>
-              <div className="w-[4px] h-[4px] bg-white rounded-full"></div>
-              <Link
+                Terms & Conditions
+              </a>
+              <div className="w-1 h-1 bg-gray-600 rounded-full" />
+              <a
                 href="/privacy"
-                className="font-semibold text-[16px] leading-[1.5] text-white hover:text-gray-300 transition-colors px-[16px] py-[8px] font-nunito cursor-pointer"
+                className="text-gray-400 hover:text-white transition-colors text-sm font-medium"
               >
                 Privacy Policy
-              </Link>
+              </a>
             </div>
           </div>
         </div>

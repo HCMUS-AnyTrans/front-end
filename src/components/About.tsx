@@ -1,15 +1,17 @@
 'use client';
 
-import React from 'react';
-import { Users, FileText, Video, BookOpen } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import React, { useState } from 'react';
+import { FileText, Video, BookOpen, Users } from 'lucide-react';
 
 interface FloatingCardProps {
   icon: React.ReactNode;
   category: string;
   title: string;
   bgColor: string;
-  position: string;
+  hoverBgColor: string;
+  delay: number;
+  isHovered: boolean;
+  onHover: (hovered: boolean) => void;
 }
 
 function FloatingCard({
@@ -17,37 +19,73 @@ function FloatingCard({
   category,
   title,
   bgColor,
-  position,
+  hoverBgColor,
+  delay,
+  isHovered,
+  onHover,
 }: FloatingCardProps) {
   return (
     <div
-      className={`${position} bg-white rounded-[12px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] p-[10px] w-[285px] h-[83px] flex items-center gap-[10px] hover:shadow-xl transition-shadow duration-200`}
+      className={`bg-white rounded-2xl shadow-lg p-4 flex items-center gap-4 cursor-pointer transition-all duration-500 ease-out hover:shadow-2xl hover:scale-105`}
+      style={{
+        animationDelay: `${delay}ms`,
+      }}
+      onMouseEnter={() => onHover(true)}
+      onMouseLeave={() => onHover(false)}
     >
       <div
-        className={`${bgColor} rounded-[29.5px] w-[59px] h-[59px] flex items-center justify-center flex-shrink-0 p-[17px]`}
+        className={`rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 transition-all duration-500 ${
+          isHovered ? hoverBgColor : bgColor
+        }`}
       >
-        {icon}
+        <div className="text-white">{icon}</div>
       </div>
-      <div className="flex flex-col text-[#142457] flex-1 text-[14px] leading-[1.5]">
-        <div className="font-normal font-nunito">{category}</div>
-        <div className="font-bold font-nunito leading-tight">{title}</div>
+      <div className="flex flex-col flex-1 min-w-0">
+        <div
+          className={`text-sm font-medium transition-colors duration-500 ${
+            isHovered ? 'text-[#5BA3FF]' : 'text-gray-500'
+          }`}
+        >
+          {category}
+        </div>
+        <div
+          className={`font-bold text-[15px] leading-tight transition-colors duration-500 ${
+            isHovered ? 'text-[#142457]' : 'text-[#142457]'
+          }`}
+        >
+          {title}
+        </div>
       </div>
     </div>
   );
 }
 
 export default function About() {
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+
   return (
-    <section className="w-full py-16 lg:py-24 overflow-hidden bg-gradient-to-r from-white to-[#DDEBFF]">
-      <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-[34px]">
+    <section className="w-full py-20 overflow-hidden relative">
+      {/* Background with gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white via-[#F0F7FF] to-[#DDEBFF]" />
+
+      {/* Large circle decoration */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-[#E3F2FF]/40 to-[#C5E3FF]/60 blur-3xl" />
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
           {/* Left content */}
-          <div className="flex flex-col gap-6 text-center lg:text-left w-full lg:w-[524px]">
-            <h2 className="font-bold text-3xl sm:text-4xl lg:text-[50px] leading-normal text-black font-inter">
+          <div className="flex flex-col gap-8 text-center lg:text-left w-full lg:max-w-xl">
+            <h2
+              className="font-bold text-4xl lg:text-5xl xl:text-6xl leading-tight text-[#0F172A]"
+              style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+            >
               Everything You Need to Translate Better
             </h2>
 
-            <p className="font-normal text-[16px] leading-[1.5] text-[#414651] font-nunito w-full lg:w-[508px]">
+            <p
+              className="text-lg leading-relaxed text-gray-600"
+              style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+            >
               Our platform empowers you to translate documents, subtitles, and
               videos effortlessly. Upload DOCX, PDF, or PPTX files and get
               instant Vietnamese translations without losing formatting.
@@ -57,56 +95,109 @@ export default function About() {
             </p>
 
             <div className="flex justify-center lg:justify-start">
-              <Button
-                variant="default"
-                size="sm"
-                className="bg-[#19398f] text-white hover:bg-[#142457] font-semibold text-[16px] font-nunito cursor-pointer px-[16px] py-[8px] rounded-[6px]"
-              >
+              <button className="bg-[#19398f] text-white hover:bg-[#142457] font-semibold text-base px-8 py-3 rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105">
                 Read More
-              </Button>
+              </button>
             </div>
           </div>
 
           {/* Right floating cards section */}
-          <div className="relative w-full lg:w-auto">
-            {/* Floating cards with absolute positioning */}
-            <div className="relative w-full lg:w-[387px] h-[387px]">
-              {/* Card 1 - Top left */}
-              <div className="absolute top-[43px] left-0 lg:left-10">
+          <div className="relative w-full lg:w-auto flex items-center justify-center">
+            <div className="relative w-full max-w-md lg:w-[450px] h-[500px]">
+              {/* Decorative circle behind cards */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-gradient-to-br from-[#B8DBFF]/30 to-[#E8F4FF]/50 blur-2xl" />
+
+              {/* Card 1 - Top */}
+              <div
+                className="absolute top-8 right-0 w-[320px] animate-float"
+                style={{
+                  animation: 'float 6s ease-in-out infinite',
+                  animationDelay: '0s',
+                }}
+              >
                 <FloatingCard
-                  icon={<FileText size={24} stroke="white" strokeWidth={2} />}
+                  icon={<Users size={28} strokeWidth={2} />}
                   category="Translation"
                   title="Document Translation & Management"
                   bgColor="bg-[#80eac2]"
-                  position="relative"
+                  hoverBgColor="bg-[#5BA3FF]"
+                  delay={0}
+                  isHovered={hoveredCard === 'document'}
+                  onHover={(hovered) =>
+                    setHoveredCard(hovered ? 'document' : null)
+                  }
                 />
               </div>
 
-              {/* Card 2 - Middle left */}
-              <div className="absolute top-[149px] left-0 lg:left-[110px]">
+              {/* Card 2 - Middle */}
+              <div
+                className="absolute top-1/2 -translate-y-1/2 left-8 w-[320px] animate-float z-10"
+                style={{
+                  animation: 'float 6s ease-in-out infinite',
+                  animationDelay: '2s',
+                }}
+              >
                 <FloatingCard
-                  icon={<Video size={24} stroke="white" strokeWidth={2} />}
+                  icon={<Users size={28} strokeWidth={2} />}
                   category="Media"
                   title="Subtitle & Video Translation"
                   bgColor="bg-[#7d87ff]"
-                  position="relative"
+                  hoverBgColor="bg-[#5BA3FF]"
+                  delay={200}
+                  isHovered={hoveredCard === 'subtitle'}
+                  onHover={(hovered) =>
+                    setHoveredCard(hovered ? 'subtitle' : null)
+                  }
                 />
               </div>
 
-              {/* Card 3 - Bottom left */}
-              <div className="absolute top-[255px] left-0 lg:left-0">
+              {/* Card 3 - Bottom */}
+              <div
+                className="absolute bottom-8 right-4 w-[300px] animate-float"
+                style={{
+                  animation: 'float 6s ease-in-out infinite',
+                  animationDelay: '4s',
+                }}
+              >
                 <FloatingCard
-                  icon={<BookOpen size={24} stroke="white" strokeWidth={2} />}
+                  icon={<Users size={28} strokeWidth={2} />}
                   category="Productivity"
                   title="Glossary & Consistency Tools"
                   bgColor="bg-[#f3aa01]"
-                  position="relative"
+                  hoverBgColor="bg-[#5BA3FF]"
+                  delay={400}
+                  isHovered={hoveredCard === 'glossary'}
+                  onHover={(hovered) =>
+                    setHoveredCard(hovered ? 'glossary' : null)
+                  }
                 />
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          25% {
+            transform: translateY(-10px) rotate(1deg);
+          }
+          50% {
+            transform: translateY(-20px) rotate(0deg);
+          }
+          75% {
+            transform: translateY(-10px) rotate(-1deg);
+          }
+        }
+
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 }

@@ -1,9 +1,7 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Star, FileText, Video, Globe } from "lucide-react";
-import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import React, { useState } from 'react';
+import { Star, FileText, Video, Globe, Quote } from 'lucide-react';
 
 interface ReviewCardProps {
   name: string;
@@ -14,141 +12,255 @@ interface ReviewCardProps {
   review: string;
   metadata: string;
   icon: React.ReactNode;
+  isHovered?: boolean;
+  onHover?: (hovered: boolean) => void;
 }
 
-function ReviewCard({ name, role, company, avatar, rating, review, metadata, icon }: ReviewCardProps) {
+function ReviewCard({
+  name,
+  role,
+  company,
+  avatar,
+  rating,
+  review,
+  metadata,
+  icon,
+  isHovered = false,
+  onHover,
+}: ReviewCardProps) {
+  const initials = name
+    .split(' ')
+    .map((n) => n[0])
+    .join('');
+
   return (
-    <Card className="h-full flex flex-col bg-white border border-gray-200 hover:border-[#19398f]/20 hover:shadow-lg transition-all duration-200">
-      <CardHeader className="space-y-4">
-        <div className="flex items-start gap-4">
-          <Avatar className="w-12 h-12">
-            <AvatarImage src={avatar} alt={name} />
-            <AvatarFallback className="bg-[#19398f] text-white font-semibold">
-              {name.split(' ').map(n => n[0]).join('')}
-            </AvatarFallback>
-          </Avatar>
-          
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
-              <h4 className="font-semibold text-[#142457] font-nunito truncate">
-                {name}
-              </h4>
-              <div className="flex-shrink-0 w-5 h-5 text-[#19398f]">
-                {icon}
-              </div>
+    <div
+      className={`bg-white rounded-2xl p-6 h-full flex flex-col relative overflow-hidden transition-all duration-500 ease-out border ${
+        isHovered
+          ? 'border-blue-300 shadow-2xl -translate-y-2 scale-[1.02]'
+          : 'border-gray-100 shadow-lg hover:shadow-xl'
+      }`}
+      onMouseEnter={() => onHover?.(true)}
+      onMouseLeave={() => onHover?.(false)}
+    >
+      {/* Background gradient overlay on hover */}
+      <div
+        className={`absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 transition-opacity duration-500 ${
+          isHovered ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+
+      {/* Decorative quote icon */}
+      <div
+        className={`absolute top-6 right-6 transition-all duration-500 ${
+          isHovered ? 'opacity-100 scale-100 rotate-12' : 'opacity-0 scale-50'
+        }`}
+      >
+        <Quote size={48} className="text-blue-100" strokeWidth={1.5} />
+      </div>
+
+      <div className="relative z-10 flex flex-col h-full">
+        {/* Header with avatar and info */}
+        <div className="flex items-start gap-4 mb-6">
+          {/* Avatar */}
+          <div className="relative flex-shrink-0">
+            <div
+              className={`w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg transition-all duration-500 ${
+                isHovered ? 'scale-110 shadow-lg' : ''
+              }`}
+            >
+              {initials}
             </div>
-            <p className="text-sm text-[#717680] font-nunito">
-              {role} at {company}
+            {/* Icon badge */}
+            <div
+              className={`absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-md transition-all duration-500 ${
+                isHovered ? 'scale-110' : ''
+              }`}
+            >
+              <div className="text-blue-600">{icon}</div>
+            </div>
+          </div>
+
+          {/* User info */}
+          <div className="flex-1 min-w-0">
+            <h4 className="font-bold text-lg text-[#0F172A] truncate mb-1">
+              {name}
+            </h4>
+            <p className="text-sm text-gray-500 truncate">
+              {role} at{' '}
+              <span className="font-semibold text-gray-700">{company}</span>
             </p>
           </div>
         </div>
-        
-        <div className="flex items-center gap-1">
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              size={16}
-              className={`${
-                i < rating
-                  ? "fill-yellow-400 text-yellow-400"
-                  : "text-gray-300"
-              }`}
-            />
-          ))}
-          <span className="ml-2 text-sm text-[#717680] font-nunito">
-            {rating}/5
+
+        {/* Rating */}
+        <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-1">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                size={18}
+                className={`transition-all duration-300 ${
+                  i < rating
+                    ? 'fill-yellow-400 text-yellow-400'
+                    : 'text-gray-200'
+                }`}
+                style={{
+                  transitionDelay: `${i * 50}ms`,
+                }}
+              />
+            ))}
+          </div>
+          <span className="text-sm font-semibold text-gray-600">
+            {rating}.0
           </span>
         </div>
-      </CardHeader>
-      
-      <CardContent className="flex-1">
-        <p className="text-[#414651] font-nunito leading-relaxed">
-          &quot;{review}&quot;
-        </p>
-      </CardContent>
-      
-      <CardFooter>
-        <p className="text-sm text-[#717680] font-nunito">
-          {metadata}
-        </p>
-      </CardFooter>
-    </Card>
+
+        {/* Review text */}
+        <div className="flex-1 mb-5">
+          <p className="text-gray-700 leading-relaxed text-[15px]">
+            "{review}"
+          </p>
+        </div>
+
+        {/* Metadata footer */}
+        <div
+          className={`pt-4 border-t transition-colors duration-300 ${
+            isHovered ? 'border-blue-100' : 'border-gray-100'
+          }`}
+        >
+          <div className="flex items-center gap-2">
+            <div
+              className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                isHovered ? 'bg-blue-500' : 'bg-gray-300'
+              }`}
+            />
+            <p className="text-sm text-gray-500 font-medium">{metadata}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
 export default function ReviewSection() {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
   const reviews = [
     {
-      name: "Sarah Johnson",
-      role: "Marketing Director",
-      company: "TechCorp",
+      name: 'Sarah Johnson',
+      role: 'Marketing Director',
+      company: 'TechCorp',
       rating: 5,
-      review: "AnyTrans has revolutionized how we handle multilingual content. The document translation feature maintains perfect formatting, and the quality is outstanding.",
-      metadata: "Translated 50+ marketing documents",
-      icon: <FileText size={16} />
+      review:
+        'AnyTrans has revolutionized how we handle multilingual content. The document translation feature maintains perfect formatting, and the quality is outstanding.',
+      metadata: 'Translated 50+ marketing documents',
+      icon: <FileText size={14} strokeWidth={2.5} />,
     },
     {
-      name: "Miguel Rodriguez",
-      role: "Content Creator",
-      company: "MediaFlow",
+      name: 'Miguel Rodriguez',
+      role: 'Content Creator',
+      company: 'MediaFlow',
       rating: 5,
-      review: "The subtitle translation feature is a game-changer. Perfect timing synchronization and the interface is incredibly intuitive. Highly recommended!",
-      metadata: "Processed 30+ video projects",
-      icon: <Video size={16} />
+      review:
+        'The subtitle translation feature is a game-changer. Perfect timing synchronization and the interface is incredibly intuitive. Highly recommended!',
+      metadata: 'Processed 30+ video projects',
+      icon: <Video size={14} strokeWidth={2.5} />,
     },
     {
-      name: "Aisha Patel",
-      role: "Project Manager",
-      company: "GlobalReach",
+      name: 'Aisha Patel',
+      role: 'Project Manager',
+      company: 'GlobalReach',
       rating: 4,
-      review: "Excellent platform for our international projects. The speed and accuracy of translations have improved our workflow significantly.",
-      metadata: "Managed translations for 15+ languages",
-      icon: <Globe size={16} />
+      review:
+        'Excellent platform for our international projects. The speed and accuracy of translations have improved our workflow significantly.',
+      metadata: 'Managed translations for 15+ languages',
+      icon: <Globe size={14} strokeWidth={2.5} />,
     },
     {
-      name: "David Chen",
-      role: "Technical Writer",
-      company: "DevDocs",
+      name: 'David Chen',
+      role: 'Technical Writer',
+      company: 'DevDocs',
       rating: 5,
-      review: "As a technical writer, I need precise translations. AnyTrans delivers consistently high-quality results while preserving technical terminology.",
-      metadata: "Translated 100+ technical documents",
-      icon: <FileText size={16} />
+      review:
+        'As a technical writer, I need precise translations. AnyTrans delivers consistently high-quality results while preserving technical terminology.',
+      metadata: 'Translated 100+ technical documents',
+      icon: <FileText size={14} strokeWidth={2.5} />,
     },
     {
-      name: "Emma Thompson",
-      role: "E-learning Specialist",
-      company: "EduTech",
+      name: 'Emma Thompson',
+      role: 'E-learning Specialist',
+      company: 'EduTech',
       rating: 5,
-      review: "The platform makes it easy to localize our educational content. The user interface is clean and the results are always professional.",
-      metadata: "Localized 25+ courses",
-      icon: <Video size={16} />
+      review:
+        'The platform makes it easy to localize our educational content. The user interface is clean and the results are always professional.',
+      metadata: 'Localized 25+ courses',
+      icon: <Video size={14} strokeWidth={2.5} />,
     },
     {
-      name: "James Wilson",
-      role: "Marketing Coordinator",
-      company: "StartupHub",
+      name: 'James Wilson',
+      role: 'Marketing Coordinator',
+      company: 'StartupHub',
       rating: 4,
-      review: "Great value for money. The personal plan is perfect for our startup needs, and the translation quality exceeds expectations.",
-      metadata: "Translated content for 8+ markets",
-      icon: <Globe size={16} />
-    }
+      review:
+        'Great value for money. The personal plan is perfect for our startup needs, and the translation quality exceeds expectations.',
+      metadata: 'Translated content for 8+ markets',
+      icon: <Globe size={14} strokeWidth={2.5} />,
+    },
   ];
 
   return (
-    <section className="w-full py-16 bg-gray-50">
-      <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="font-bold text-3xl sm:text-4xl lg:text-[50px] leading-[1.3] text-[#142457] font-inter mb-4">
+    <section className="w-full py-20 bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/20 relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-blue-100/40 to-purple-100/40 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-purple-100/40 to-blue-100/40 rounded-full blur-3xl" />
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-block mb-4">
+            <div className="flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">
+              <Star size={16} className="fill-blue-700" />
+              <span>Testimonials</span>
+            </div>
+          </div>
+
+          <h2 className="font-bold text-4xl lg:text-6xl leading-tight text-[#0F172A] mb-6">
             What Our Users Say
           </h2>
-          <p className="text-base lg:text-lg text-[#717680] font-nunito max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust AnyTrans for their translation needs
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Join thousands of satisfied customers who trust AnyTrans for their
+            translation needs
           </p>
+
+          {/* Stats */}
+          <div className="flex items-center justify-center gap-12 mt-10">
+            <div className="text-center">
+              <div className="text-4xl font-bold text-blue-600 mb-1">4.9</div>
+              <div className="text-sm text-gray-500">Average Rating</div>
+            </div>
+            <div className="w-px h-12 bg-gray-200" />
+            <div className="text-center">
+              <div className="text-4xl font-bold text-blue-600 mb-1">5K+</div>
+              <div className="text-sm text-gray-500">Happy Users</div>
+            </div>
+            <div className="w-px h-12 bg-gray-200" />
+            <div className="text-center">
+              <div className="text-4xl font-bold text-blue-600 mb-1">50K+</div>
+              <div className="text-sm text-gray-500">Projects Completed</div>
+            </div>
+          </div>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+        {/* Review cards grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reviews.map((review, index) => (
-            <ReviewCard key={index} {...review} />
+            <ReviewCard
+              key={index}
+              {...review}
+              isHovered={hoveredCard === index}
+              onHover={(hovered) => setHoveredCard(hovered ? index : null)}
+            />
           ))}
         </div>
       </div>

@@ -1,91 +1,162 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { ChevronDown } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import React, { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 export default function Header() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState('home');
+
   return (
-    <header className="relative flex items-center justify-between w-full max-w-[1180px] mx-auto px-4 py-10">
-      <div className="flex items-center">
-        <h1 className="font-bold text-[50px] leading-[30px] text-[#19398f] font-['Hero_Light'] tracking-tight">
-          anytrans
-        </h1>
-      </div>
-      
-      <nav className="flex items-center gap-12">
-        <div className="flex items-center gap-2">
-          <Link 
-            href="/" 
-            className="px-4 py-2 rounded-md font-semibold text-base text-slate-900 hover:bg-gray-50 transition-colors"
+    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <div className="flex items-center justify-between w-full max-w-7xl mx-auto px-6 py-4">
+        {/* Logo */}
+        <div className="flex items-center">
+          <h1 className="font-bold text-4xl text-transparent bg-clip-text bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] tracking-tight">
+            anytrans
+          </h1>
+        </div>
+
+        {/* Navigation */}
+        <nav className="flex items-center gap-1">
+          <a
+            href="/"
+            onClick={() => setActiveLink('home')}
+            className={`relative px-5 py-2.5 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
+              activeLink === 'home'
+                ? 'text-[#4169E1]'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+            }`}
           >
             Home
-          </Link>
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 px-4 py-2 rounded-md font-semibold text-base text-[#717680] hover:bg-gray-50 transition-colors outline-none focus:bg-gray-50">
+            {activeLink === 'home' && (
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
+            )}
+          </a>
+
+          {/* Features Dropdown */}
+          <div className="relative">
+            <button
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)}
+              onClick={() => setActiveLink('features')}
+              className={`flex items-center gap-1.5 px-5 py-2.5 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
+                activeLink === 'features'
+                  ? 'text-[#4169E1]'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+              }`}
+            >
               Features
-              <ChevronDown className="h-4 w-4" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-56">
-              <DropdownMenuItem asChild>
-                <Link 
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-300 ${
+                  isDropdownOpen ? 'rotate-180' : ''
+                }`}
+              />
+              {activeLink === 'features' && (
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
+              )}
+            </button>
+
+            {/* Dropdown Menu */}
+            <div
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)}
+              className={`absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden transition-all duration-300 ${
+                isDropdownOpen
+                  ? 'opacity-100 visible translate-y-0'
+                  : 'opacity-0 invisible -translate-y-2'
+              }`}
+            >
+              <div className="p-2">
+                <a
                   href="/features/document-translation"
-                  className="w-full cursor-pointer"
+                  className="flex flex-col px-4 py-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 group"
                 >
-                  Document Translation
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link 
+                  <span className="font-semibold text-[15px] text-gray-900 group-hover:text-[#4169E1] transition-colors">
+                    Document Translation
+                  </span>
+                  <span className="text-sm text-gray-500 mt-0.5">
+                    Translate documents instantly
+                  </span>
+                </a>
+                <a
                   href="/features/subtitle-translation"
-                  className="w-full cursor-pointer"
+                  className="flex flex-col px-4 py-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 group"
                 >
-                  Subtitle Translation
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <Link 
-            href="/pricing" 
-            className="px-4 py-2 rounded-md font-semibold text-base text-[#717680] hover:bg-gray-50 transition-colors"
+                  <span className="font-semibold text-[15px] text-gray-900 group-hover:text-[#4169E1] transition-colors">
+                    Subtitle Translation
+                  </span>
+                  <span className="text-sm text-gray-500 mt-0.5">
+                    Perfect timing & sync
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <a
+            href="/pricing"
+            onClick={() => setActiveLink('pricing')}
+            className={`relative px-5 py-2.5 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
+              activeLink === 'pricing'
+                ? 'text-[#4169E1]'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+            }`}
           >
             Pricing
-          </Link>
-          <Link 
-            href="/about" 
-            className="px-4 py-2 rounded-md font-semibold text-base text-[#717680] hover:bg-gray-50 transition-colors"
+            {activeLink === 'pricing' && (
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
+            )}
+          </a>
+
+          <a
+            href="/about"
+            onClick={() => setActiveLink('about')}
+            className={`relative px-5 py-2.5 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
+              activeLink === 'about'
+                ? 'text-[#4169E1]'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+            }`}
           >
             About Us
-          </Link>
-          <Link 
-            href="/contact" 
-            className="px-4 py-2 rounded-md font-semibold text-base text-[#717680] hover:bg-gray-50 transition-colors"
+            {activeLink === 'about' && (
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
+            )}
+          </a>
+
+          <a
+            href="/contact"
+            onClick={() => setActiveLink('contact')}
+            className={`relative px-5 py-2.5 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
+              activeLink === 'contact'
+                ? 'text-[#4169E1]'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+            }`}
           >
             Contact Us
-          </Link>
-        </div>
-        
-        <div className="flex items-center gap-2">
-          <Link 
-            href="/login" 
-            className="px-4 py-2 rounded-md font-semibold text-base text-[#717680] hover:bg-gray-50 transition-colors"
+            {activeLink === 'contact' && (
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
+            )}
+          </a>
+        </nav>
+
+        {/* Auth Buttons */}
+        <div className="flex items-center gap-3">
+          <a
+            href="/login"
+            className="px-5 py-2.5 rounded-lg font-semibold text-[15px] text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-all duration-300"
           >
             Login
-          </Link>
-          <Link 
-            href="/signup" 
-            className="bg-[#19398f] text-white px-4 py-2 rounded-md font-semibold text-base hover:bg-[#142457] transition-colors"
+          </a>
+          <a
+            href="/signup"
+            className="relative px-6 py-2.5 rounded-lg font-semibold text-[15px] text-white bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:shadow-lg hover:scale-105 transition-all duration-300 overflow-hidden group"
           >
-            Sign up
-          </Link>
+            <span className="relative z-10">Sign up</span>
+            <span className="absolute inset-0 bg-gradient-to-r from-[#1e3a8a] to-[#4169E1] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </a>
         </div>
-      </nav>
+      </div>
     </header>
   );
 }

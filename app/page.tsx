@@ -1,4 +1,4 @@
-import Header from '@/src/components/common/Header';
+import Header from '@/src/components/Header';
 import Hero from '@/src/components/Hero';
 import Statistics from '@/src/components/Statistics';
 import FeatureGrid from '@/src/components/home/FeatureGrid';
