@@ -21,7 +21,7 @@ import {
   ArrowLeft,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sidebar } from '@/src/components/Sidebar';
+import { Sidebar } from '@/src/temp/Sidebar';
 
 interface SubtitleFile {
   id: string;

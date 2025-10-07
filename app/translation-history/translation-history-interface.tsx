@@ -16,7 +16,7 @@ import {
   ChevronDown,
   RefreshCw,
 } from 'lucide-react';
-import { Sidebar } from '@/src/components/Sidebar';
+import { Sidebar } from '@/src/temp/Sidebar';
 
 export default function TranslationHistoryInterface() {
   const [searchQuery, setSearchQuery] = useState<string>('');

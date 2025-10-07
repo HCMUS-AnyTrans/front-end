@@ -18,7 +18,7 @@ import {
   Clock,
   CheckCircle,
 } from 'lucide-react';
-import { Sidebar } from '@/src/components/Sidebar';
+import { Sidebar } from '@/src/temp/Sidebar';
 
 export default function SupportPage() {
   const [searchQuery, setSearchQuery] = useState('');

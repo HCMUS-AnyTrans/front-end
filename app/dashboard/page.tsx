@@ -18,7 +18,7 @@ import {
   Film,
   ChevronDown,
 } from 'lucide-react';
-import { Sidebar } from '@/src/components/Sidebar';
+import Sidebar from '@components/layout/sidebar/Sidebar';
 
 export default function DashboardPage() {
   const [showDropdown, setShowDropdown] = useState(false);

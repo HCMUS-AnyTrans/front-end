@@ -180,7 +180,7 @@ export default function AccountDialog({
 
           <div
             className="flex-none overflow-y-auto p-8"
-            style={{ width: '40vw', height: '60vh' }}
+            style={{ width: '30vw', height: '60vh' }}
           >
             {activeTab === 'profile' && (
               <div className="space-y-6">

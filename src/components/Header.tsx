@@ -2,10 +2,17 @@
 
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState('home');
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/' || pathname === '/dashboard';
+    if (href === '/features') return pathname.startsWith('/features');
+    return pathname === href;
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
@@ -21,15 +28,15 @@ export default function Header() {
         <nav className="flex items-center gap-1">
           <a
             href="/"
-            onClick={() => setActiveLink('home')}
             className={`relative px-5 py-2.5 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
-              activeLink === 'home'
+              isActive('/')
                 ? 'text-[#4169E1]'
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
+            aria-current={isActive('/') ? 'page' : undefined}
           >
             Home
-            {activeLink === 'home' && (
+            {isActive('/') && (
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
             )}
           </a>
@@ -39,12 +46,12 @@ export default function Header() {
             <button
               onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)}
-              onClick={() => setActiveLink('features')}
-              className={`flex items-center gap-1.5 px-5 py-2.5 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
-                activeLink === 'features'
+              className={`relative flex items-center gap-1.5 px-5 py-2.5 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
+                isActive('/features')
                   ? 'text-[#4169E1]'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
               }`}
+              aria-current={isActive('/features') ? 'page' : undefined}
             >
               Features
               <ChevronDown
@@ -52,7 +59,7 @@ export default function Header() {
                   isDropdownOpen ? 'rotate-180' : ''
                 }`}
               />
-              {activeLink === 'features' && (
+              {isActive('/features') && (
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
               )}
             </button>
@@ -70,7 +77,16 @@ export default function Header() {
               <div className="p-2">
                 <a
                   href="/features/document-translation"
-                  className="flex flex-col px-4 py-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 group"
+                  className={`flex flex-col px-4 py-3 rounded-lg transition-colors duration-200 group ${
+                    pathname === '/features/document-translation'
+                      ? 'bg-blue-50'
+                      : 'hover:bg-blue-50'
+                  }`}
+                  aria-current={
+                    pathname === '/features/document-translation'
+                      ? 'page'
+                      : undefined
+                  }
                 >
                   <span className="font-semibold text-[15px] text-gray-900 group-hover:text-[#4169E1] transition-colors">
                     Document Translation
@@ -81,7 +97,16 @@ export default function Header() {
                 </a>
                 <a
                   href="/features/subtitle-translation"
-                  className="flex flex-col px-4 py-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 group"
+                  className={`flex flex-col px-4 py-3 rounded-lg transition-colors duration-200 group ${
+                    pathname === '/features/subtitle-translation'
+                      ? 'bg-blue-50'
+                      : 'hover:bg-blue-50'
+                  }`}
+                  aria-current={
+                    pathname === '/features/subtitle-translation'
+                      ? 'page'
+                      : undefined
+                  }
                 >
                   <span className="font-semibold text-[15px] text-gray-900 group-hover:text-[#4169E1] transition-colors">
                     Subtitle Translation
@@ -96,45 +121,45 @@ export default function Header() {
 
           <a
             href="/pricing"
-            onClick={() => setActiveLink('pricing')}
             className={`relative px-5 py-2.5 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
-              activeLink === 'pricing'
+              isActive('/pricing')
                 ? 'text-[#4169E1]'
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
+            aria-current={isActive('/pricing') ? 'page' : undefined}
           >
             Pricing
-            {activeLink === 'pricing' && (
+            {isActive('/pricing') && (
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
             )}
           </a>
 
           <a
             href="/about"
-            onClick={() => setActiveLink('about')}
             className={`relative px-5 py-2.5 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
-              activeLink === 'about'
+              isActive('/about')
                 ? 'text-[#4169E1]'
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
+            aria-current={isActive('/about') ? 'page' : undefined}
           >
             About Us
-            {activeLink === 'about' && (
+            {isActive('/about') && (
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
             )}
           </a>
 
           <a
             href="/contact"
-            onClick={() => setActiveLink('contact')}
             className={`relative px-5 py-2.5 rounded-lg font-semibold text-[15px] transition-all duration-300 ${
-              activeLink === 'contact'
+              isActive('/contact')
                 ? 'text-[#4169E1]'
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
             }`}
+            aria-current={isActive('/contact') ? 'page' : undefined}
           >
             Contact Us
-            {activeLink === 'contact' && (
+            {isActive('/contact') && (
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
             )}
           </a>

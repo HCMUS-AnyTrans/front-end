@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Sidebar } from '@/src/components/Sidebar';
+import { Sidebar } from '@/src/temp/Sidebar';
 import {
   Upload,
   FileText,

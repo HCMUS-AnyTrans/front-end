@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Sidebar } from '@/src/components/Sidebar';
+import { Sidebar } from '@/src/temp/Sidebar';
 import {
   Search,
   Bell,
