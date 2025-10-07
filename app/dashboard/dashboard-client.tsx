@@ -16,9 +16,8 @@ import QuickStats from '@/src/components/Dashboard/QuickStats/QuickStats';
 import WeeklyActivityChart from '@/src/components/Dashboard/WeeklyActivityChart';
 import TopLanguagesCard from '@/src/components/Dashboard/TopLanguagesCard';
 import RecentActivityList from '@/src/components/Dashboard/RecentActivityList';
-import PromoUpgradeBanner from '@/src/components/Dashboard/QuickActions/PromoUpgradeBanner';
-import PromoReferralBanner from '@/src/components/Dashboard/QuickActions/PromoReferralBanner';
 import { DashboardClientProps } from '@/src/components/Dashboard/types';
+import PromoBanner from '@/src/components/Dashboard/QuickActions/PromoBanner';
 
 export default function DashboardClient({
   recentActivity,
@@ -90,8 +89,8 @@ export default function DashboardClient({
 
             {/* Quick Actions */}
             <div className="space-y-4">
-              <PromoUpgradeBanner />
-              <PromoReferralBanner />
+              <PromoBanner variant="upgrade" />
+              <PromoBanner variant="referral" />
             </div>
           </div>
         </div>

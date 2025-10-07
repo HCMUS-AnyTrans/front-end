@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default function SidebarLogo() {
   return (
     <div className="flex items-center justify-center gap-3 px-6 py-6">
-      <Link href="/" className="w-40 h-40">
+      <Link href="/">
         <img src="/logo-icon-mono.svg" alt="" className=" " />
       </Link>
     </div>

@@ -2,19 +2,23 @@
 
 import React from 'react';
 import { ArrowLeft, CheckCircle2 } from 'lucide-react';
-import { DTStep, StepDef } from '@/src/types/document-translation';
+import type { TranslationStep, StepDef } from '@/src/types/translation';
 
-type DTHeaderProps = {
-  currentStep: DTStep;
+type StepHeaderProps = {
+  currentStep: TranslationStep;
   steps: StepDef[];
   onBackToUpload: () => void;
+  title: string;
+  description: string;
 };
 
-export default function DTHeader({
+export default function StepHeader({
   currentStep,
   steps,
   onBackToUpload,
-}: DTHeaderProps) {
+  title,
+  description,
+}: StepHeaderProps) {
   const currentStepNumber =
     currentStep === 'upload' ? 1 : currentStep === 'configure' ? 2 : 3;
 
@@ -23,13 +27,8 @@ export default function DTHeader({
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Document Translator
-            </h1>
-            <p className="text-sm text-gray-600">
-              Professional translation with preserved formatting • Supports
-              DOCX, PDF, XLSX, PPTX
-            </p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">{title}</h1>
+            <p className="text-sm text-gray-600">{description}</p>
           </div>
 
           <div className="flex items-center gap-2 lg:gap-3">
@@ -75,16 +74,6 @@ export default function DTHeader({
               );
             })}
           </div>
-
-          {currentStep !== 'upload' && (
-            <button
-              onClick={onBackToUpload}
-              className="hidden lg:inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700 font-medium"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Change file
-            </button>
-          )}
         </div>
       </div>
     </div>

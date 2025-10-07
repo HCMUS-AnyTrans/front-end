@@ -17,20 +17,20 @@ import {
   FileText,
   Tag,
 } from 'lucide-react';
-import STHeader from '@/src/components/SubtitleTranslation/STHeader';
-import StepUpload from '@/src/components/SubtitleTranslation/StepUpload';
-import StepConfigure from '@/src/components/SubtitleTranslation/StepConfigure';
-import StepReview from '@/src/components/SubtitleTranslation/StepReview';
+import StepHeader from '@/src/components/Translation/StepHeader';
+import StepUpload from '@/src/components/Translation//StepUpload';
+import StepConfigure from '@/src/components/Translation/SubtitleTranslation/StepConfigure';
+import StepReview from '@/src/components/Translation/StepReview';
 import type {
-  STStep,
+  TranslationStep,
   StepDef,
   SubtitleFile,
   MovieContext,
   SubtitleEntry,
-} from '@/src/types/subtitle-translation';
+} from '@/src/types/translation';
 
 export default function SubtitleTranslationClient() {
-  const [currentStep, setCurrentStep] = useState<STStep>('upload'); // 'upload' | 'configure' | 'review'
+  const [currentStep, setCurrentStep] = useState<TranslationStep>('upload'); // 'upload' | 'configure' | 'review'
   const [uploadedFiles, setUploadedFiles] = useState<SubtitleFile[]>([]);
   const [selectedFile, setSelectedFile] = useState<SubtitleFile | null>(null);
   const [movieContext, setMovieContext] = useState<MovieContext | null>(null);
@@ -231,17 +231,56 @@ export default function SubtitleTranslationClient() {
     console.log('Exporting translated subtitles:', translatedSubtitles);
   };
 
+  const handleBackToUpload = () => {
+    setCurrentStep('upload');
+    setUploadedFiles([]);
+    setSelectedFile(null);
+    setMovieContext(null);
+    setOriginalSubtitles([]);
+    setTranslatedSubtitles([]);
+    setIsProcessing(false);
+  };
+
+  const handleTranslateAnother = () => {
+    setCurrentStep('upload');
+    setUploadedFiles([]);
+    setSelectedFile(null);
+    setMovieContext(null);
+    setOriginalSubtitles([]);
+    setTranslatedSubtitles([]);
+    setIsProcessing(false);
+    setSourceLanguage('English');
+    setTargetLanguage('Vietnamese');
+    setTranslationMode('context-aware');
+  };
+
+  const handleFileUpload = () => {
+    // This function will be called by the StepUpload component
+    // For demo purposes, we'll simulate file selection
+    const mockFile = new File([''], 'sample.srt', { type: 'text/plain' });
+
+    // Create a mock FileList using DataTransfer
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(mockFile);
+
+    handleUpload(dataTransfer.files);
+  };
+
   return (
     <div className="flex-1 flex flex-col overflow-hidden">
-      <STHeader
+      <StepHeader
         currentStep={currentStep}
         steps={steps}
-        onBackToUpload={() => setCurrentStep('upload')}
+        onBackToUpload={handleBackToUpload}
+        title="Subtitle Translator"
+        description="AI-powered context-aware translation for movies, TV shows, and video content"
       />
 
       <div className="flex-1 overflow-y-auto px-6 lg:px-8 py-6">
         <div className="max-w-7xl mx-auto">
-          {currentStep === 'upload' && <StepUpload onUpload={handleUpload} />}
+          {currentStep === 'upload' && (
+            <StepUpload variant="subtitle" onUpload={handleFileUpload} />
+          )}
 
           {currentStep === 'configure' && (
             <StepConfigure
@@ -262,17 +301,13 @@ export default function SubtitleTranslationClient() {
 
           {currentStep === 'review' && (
             <StepReview
+              variant="subtitle"
               sourceLanguage={sourceLanguage}
               targetLanguage={targetLanguage}
               originalSubtitles={originalSubtitles}
               translatedSubtitles={translatedSubtitles}
               onExport={handleExport}
-              onTranslateAnother={() => {
-                setCurrentStep('upload');
-                setSelectedFile(null);
-                setOriginalSubtitles([]);
-                setTranslatedSubtitles([]);
-              }}
+              onTranslateAnother={handleTranslateAnother}
             />
           )}
         </div>

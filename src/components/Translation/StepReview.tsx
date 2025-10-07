@@ -1,10 +1,23 @@
 'use client';
 
 import React from 'react';
-import { FileText, Download, Eye, CheckCircle, Languages } from 'lucide-react';
-import type { SubtitleEntry } from '@/src/types/subtitle-translation';
+import { FileText, Download, Languages } from 'lucide-react';
+import type { SubtitleEntry } from '@/src/types/translation';
 
-type StepReviewProps = {
+type ReviewVariant = 'document' | 'subtitle';
+
+type DocumentReviewProps = {
+  variant: 'document';
+  originalText: string;
+  translatedText: string;
+  sourceLanguage: string;
+  targetLanguage: string;
+  onDownload: () => void;
+  onTranslateAnother: () => void;
+};
+
+type SubtitleReviewProps = {
+  variant: 'subtitle';
   sourceLanguage: string;
   targetLanguage: string;
   originalSubtitles: SubtitleEntry[];
@@ -13,33 +26,31 @@ type StepReviewProps = {
   onTranslateAnother: () => void;
 };
 
-export default function StepReview({
-  sourceLanguage,
-  targetLanguage,
-  originalSubtitles,
-  translatedSubtitles,
-  onExport,
-  onTranslateAnother,
-}: StepReviewProps) {
+type StepReviewProps = DocumentReviewProps | SubtitleReviewProps;
+
+export default function StepReview(props: StepReviewProps) {
+  const isDocument = props.variant === 'document';
+
   return (
     <div className="space-y-6">
       <div className="bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl p-6 text-white shadow-lg">
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-            <CheckCircle className="w-8 h-8" />
+            <FileText className="w-8 h-8" />
           </div>
           <div className="flex-1">
             <h3 className="text-xl font-bold mb-1">Translation Complete!</h3>
             <p className="text-green-50">
-              Your subtitles have been translated and are ready for review.
+              Your {isDocument ? 'document' : 'subtitles'} have been
+              successfully translated and are ready for review.
             </p>
           </div>
           <button
-            onClick={onExport}
+            onClick={isDocument ? props.onDownload : props.onExport}
             className="bg-white hover:bg-green-50 text-green-700 px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-all shadow-lg"
           >
             <Download className="w-5 h-5" />
-            Export SRT
+            Export {isDocument ? 'DOCX' : 'SRT'}
           </button>
         </div>
       </div>
@@ -64,77 +75,70 @@ export default function StepReview({
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Original Content */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200">
           <div className="px-6 py-4 border-b border-gray-200 bg-gray-50 rounded-t-2xl">
             <div className="flex items-center gap-2">
               <FileText className="w-5 h-5 text-blue-600" />
               <h3 className="font-semibold text-gray-900">
-                Original ({sourceLanguage})
+                Original ({props.sourceLanguage})
               </h3>
             </div>
           </div>
           <div className="p-6">
             <div className="bg-gray-50 rounded-xl p-6 max-h-96 overflow-y-auto">
-              <div className="space-y-3">
-                {originalSubtitles.map((s) => (
-                  <div key={s.id} className="text-sm text-gray-800">
-                    <span className="text-gray-500 mr-2">
-                      {s.startTime} → {s.endTime}
-                    </span>
-                    {s.originalText}
-                  </div>
-                ))}
-              </div>
+              {isDocument ? (
+                <div className="text-sm text-gray-800 leading-relaxed whitespace-pre-line font-mono">
+                  {props.originalText}
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {props.originalSubtitles.map((s) => (
+                    <div key={s.id} className="text-sm text-gray-800">
+                      <span className="text-gray-500 mr-2">
+                        {s.startTime} → {s.endTime}
+                      </span>
+                      {s.originalText}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
 
+        {/* Translated Content */}
         <div className="bg-white rounded-2xl shadow-sm border-2 border-green-200">
           <div className="px-6 py-4 border-b border-green-200 bg-green-50 rounded-t-2xl">
             <div className="flex items-center gap-2">
               <Languages className="w-5 h-5 text-green-600" />
               <h3 className="font-semibold text-gray-900">
-                Translation ({targetLanguage})
+                Translation ({props.targetLanguage})
               </h3>
             </div>
           </div>
           <div className="p-6">
             <div className="bg-green-50 rounded-xl p-6 max-h-96 overflow-y-auto">
-              <div className="space-y-3">
-                {translatedSubtitles.map((s) => (
-                  <div key={s.id} className="text-sm text-gray-800">
-                    <span className="text-gray-500 mr-2">
-                      {s.startTime} → {s.endTime}
-                    </span>
-                    {s.translatedText}
-                  </div>
-                ))}
-              </div>
+              {isDocument ? (
+                <div className="text-sm text-gray-800 leading-relaxed whitespace-pre-line font-mono">
+                  {props.translatedText}
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {props.translatedSubtitles.map((s) => (
+                    <div key={s.id} className="text-sm text-gray-800">
+                      <span className="text-gray-500 mr-2">
+                        {s.startTime} → {s.endTime}
+                      </span>
+                      {s.translatedText}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
-}
-
-function ArrowLeftIcon() {
-  return (
-    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M10 19l-7-7 7-7"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M3 12h18"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

@@ -14,14 +14,17 @@ import {
   AlertCircle,
   Languages,
 } from 'lucide-react';
-import DTHeader from '@/src/components/DocumentTranslation/DTHeader';
-import StepUpload from '@/src/components/DocumentTranslation/StepUpload';
-import StepConfigure from '@/src/components/DocumentTranslation/StepConfigure';
-import StepReview from '@/src/components/DocumentTranslation/StepReview';
-import { DTStep } from '@/src/types/document-translation';
-
+import StepHeader from '@/src/components/Translation/StepHeader';
+import StepUpload from '@/src/components/Translation//StepUpload';
+import StepConfigure from '@/src/components/Translation/DocumentTranslation/StepConfigure';
+import StepReview from '@/src/components/Translation/StepReview';
+import type {
+  TranslationStep,
+  StepDef,
+  DocumentFile,
+} from '@/src/types/translation';
 export default function DocumentTranslatorClient() {
-  const [currentStep, setCurrentStep] = useState<DTStep>('upload');
+  const [currentStep, setCurrentStep] = useState<TranslationStep>('upload');
   const [hasDocument, setHasDocument] = useState(false);
   const [isTranslating, setIsTranslating] = useState(false);
   const [sourceLanguage, setSourceLanguage] = useState('English');
@@ -103,18 +106,35 @@ Chúng tôi dự đoán tăng 25% hiệu quả hoạt động và cải thiện 
     console.log('Downloading translated document...');
   };
 
+  const handleBackToUpload = () => {
+    setCurrentStep('upload');
+    setHasDocument(false);
+    setIsTranslating(false);
+  };
+
+  const handleTranslateAnother = () => {
+    setCurrentStep('upload');
+    setHasDocument(false);
+    setIsTranslating(false);
+    setSourceLanguage('English');
+    setTargetLanguage('Vietnamese');
+    setTranslationProcess('Professional Translation');
+  };
+
   return (
     <div className="flex-1 flex flex-col overflow-hidden">
-      <DTHeader
+      <StepHeader
         currentStep={currentStep}
         steps={steps}
-        onBackToUpload={() => setCurrentStep('upload')}
+        onBackToUpload={handleBackToUpload}
+        title="Document Translator"
+        description="Professional translation with preserved formatting • Supports DOCX, PDF, XLSX, PPTX"
       />
 
       <div className="flex-1 overflow-y-auto px-6 lg:px-8 py-6">
         <div className="max-w-7xl mx-auto">
           {currentStep === 'upload' && (
-            <StepUpload onUpload={handleFileUpload} />
+            <StepUpload variant="document" onUpload={handleFileUpload} />
           )}
 
           {currentStep === 'configure' && (
@@ -134,15 +154,13 @@ Chúng tôi dự đoán tăng 25% hiệu quả hoạt động và cải thiện 
 
           {currentStep === 'review' && (
             <StepReview
+              variant="document"
               originalText={originalText}
               translatedText={translatedText}
               sourceLanguage={sourceLanguage}
               targetLanguage={targetLanguage}
               onDownload={handleDownload}
-              onTranslateAnother={() => {
-                setCurrentStep('upload');
-                setHasDocument(false);
-              }}
+              onTranslateAnother={handleTranslateAnother}
             />
           )}
         </div>
