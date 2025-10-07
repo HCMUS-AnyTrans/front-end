@@ -12,27 +12,27 @@ import {
 } from '@/src/types/account';
 import BaseDialog, {
   BaseDialogContent,
-} from '@/src/components/common/BaseDialog';
-import AccountDialogHeader from '@/src/components/account/AccountDialogHeader';
+} from '@/src/components/Common/BaseDialog';
+import AccountDialogHeader from '@/src/components/Account/AccountDialogHeader';
 import AccountSidebarTabs, {
   AccountTabId,
-} from '@/src/components/account/AccountSidebarTabs';
+} from '@/src/components/Account/AccountSidebarTabs';
 
-import ProfilePictureSection from '@/src/components/account/profile/ProfilePictureSection';
-import PersonalInfoForm from '@/src/components/account/profile/PersonalInfoForm';
+import ProfilePictureSection from '@/src/components/Account/Profile/ProfilePictureSection';
+import PersonalInfoForm from '@/src/components/Account/Profile/PersonalInfoForm';
 import ChangePasswordSection, {
   ShowPasswords,
-} from '@/src/components/account/profile/ChangePasswordSection';
-import TwoFactorToggle from '@/src/components/account/profile/TwoFactorToggle';
-import ActiveSessionsList from '@/src/components/account/profile/ActiveSessionsList';
-import ProfileSaveBar from '@/src/components/account/profile/ProfileSaveBar';
+} from '@/src/components/Account/Profile/ChangePasswordSection';
+import TwoFactorToggle from '@/src/components/Account/Profile/TwoFactorToggle';
+import ActiveSessionsList from '@/src/components/Account/Profile/ActiveSessionsList';
+import ProfileSaveBar from '@/src/components/Account/Profile/ProfileSaveBar';
 
-import CurrentPlanCard from '@/src/components/account/billing/CurrentPlanCard';
-import PaymentMethodsList from '@/src/components/account/billing/PaymentMethodsList';
-import AddCardDialog from '@/src/components/account/billing/AddCardDialog';
-import BillingHistoryTable from '@/src/components/account/billing/BillingHistoryTable';
+import CurrentPlanCard from '@/src/components/Account/Billing/CurrentPlanCard';
+import PaymentMethodsList from '@/src/components/Account/Billing/PaymentMethodsList';
+import AddCardDialog from '@/src/components/Account/Billing/AddCardDialog';
+import BillingHistoryTable from '@/src/components/Account/Billing/BillingHistoryTable';
 
-import PreferencesSection from '@/src/components/account/settings/PreferencesSection';
+import PreferencesSection from '@/src/components/Account/Settings/PreferencesSection';
 
 type AccountDialogProps = {
   open?: boolean;

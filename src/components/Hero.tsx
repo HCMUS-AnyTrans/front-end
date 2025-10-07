@@ -3,7 +3,7 @@
 import React from 'react';
 import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import BackgroundDecorations from './common/BackgroundDecorations';
+import BackgroundDecorations from './Common/BackgroundDecorations';
 
 export default function Hero() {
   return (

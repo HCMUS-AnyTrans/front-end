@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { toast } from 'sonner';
 import { Mail, ArrowLeft } from 'lucide-react';
-import { AuthShell } from '@/src/components/auth/AuthShell';
+import { AuthShell } from '@/src/components/Auth/AuthShell';
 import { Button } from '@/components/ui/button';
 import { resendPasswordEmailAction } from '../../actions';
 

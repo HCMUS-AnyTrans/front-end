@@ -18,7 +18,7 @@ import {
   Coins,
   TrendingUp,
 } from 'lucide-react';
-import AccountDialog from '@/src/components/account/AccountDialog';
+import AccountDialog from '@/src/components/Account/AccountDialog';
 
 interface SidebarProps {
   className?: string;

@@ -11,7 +11,7 @@ import {
   Bell,
   Info,
 } from 'lucide-react';
-import AccountDialog from '@/src/components/account/AccountDialog';
+import AccountDialog from '@/src/components/Account/AccountDialog';
 import SidebarLogo from './SidebarLogo';
 import SidebarNav from './SidebarNav';
 import SecondaryNav from './SecondaryNav';

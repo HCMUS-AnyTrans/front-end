@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import AccountDialog from '@/src/components/account/AccountDialog';
+import AccountDialog from '@/src/components/Account/AccountDialog';
 
 type TabType = 'profile' | 'billing' | 'settings';
 
