@@ -1,12 +1,14 @@
-import type { Metadata } from 'next';
-import DocumentTranslatorInterface from './document-translator-interface';
+// FILE: app/features/document-translation/page.tsx
+import Sidebar from '@/src/components/Layout/Sidebar/Sidebar';
+import DocumentTranslatorClient from './document-translator-interface';
 
-export const metadata: Metadata = {
-  title: 'Document Translation',
-  description:
-    'Translate your documents with AnyTrans - support for DOCX, PDF, PPTX and more with perfect formatting preservation.',
-};
+export const dynamic = 'force-static';
 
-export default function DocumentTranslationPage() {
-  return <DocumentTranslatorInterface />;
+export default function Page() {
+  return (
+    <div className="flex h-screen bg-gray-50">
+      <Sidebar />
+      <DocumentTranslatorClient />
+    </div>
+  );
 }

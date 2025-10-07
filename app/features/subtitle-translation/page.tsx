@@ -1,12 +1,13 @@
-import type { Metadata } from 'next';
-import { SubtitleTranslationInterface } from './subtitle-translation-interface';
+import Sidebar from '@/src/components/Layout/Sidebar/Sidebar';
+import SubtitleTranslationClient from './subtitle-translation-interface';
 
-export const metadata: Metadata = {
-  title: 'Subtitle Translation - AnyTrans',
-  description:
-    'Translate video subtitles with AnyTrans - AI-powered context-aware translation for movies, TV shows, and video content with perfect timing synchronization.',
-};
+export const dynamic = 'force-static';
 
-export default function SubtitleTranslationPage() {
-  return <SubtitleTranslationInterface />;
+export default function Page() {
+  return (
+    <div className="flex h-screen bg-gray-50">
+      <Sidebar />
+      <SubtitleTranslationClient />
+    </div>
+  );
 }
