@@ -275,7 +275,7 @@ export default function SubtitleTranslationClient() {
         steps={steps}
         onBackToUpload={handleBackToUpload}
         title="Subtitle Translator"
-        description="AI-powered context-aware translation for movies, TV shows, and video content"
+        description="Professional translation with preserved formatting • Supports SRT, VTT, ASS, SSA, MP4"
       />
 
       <div className="flex-1 overflow-y-auto px-6 lg:px-8 py-6">

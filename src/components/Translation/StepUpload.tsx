@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Upload, FileText, Film } from 'lucide-react';
-import BaseFeatureCard from './BaseFeatureCard';
+import BaseFeatureCard from '@/src/components/Translation/BaseFeatureCard';
 
 type UploadVariant = 'document' | 'subtitle';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { FileText, Download, Languages } from 'lucide-react';
+import { FileText, Download, Languages, Clock } from 'lucide-react';
 import type { SubtitleEntry } from '@/src/types/translation';
 
 type ReviewVariant = 'document' | 'subtitle';
@@ -45,13 +45,22 @@ export default function StepReview(props: StepReviewProps) {
               successfully translated and are ready for review.
             </p>
           </div>
-          <button
-            onClick={isDocument ? props.onDownload : props.onExport}
-            className="bg-white hover:bg-green-50 text-green-700 px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-all shadow-lg"
-          >
-            <Download className="w-5 h-5" />
-            Export {isDocument ? 'DOCX' : 'SRT'}
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={isDocument ? props.onDownload : props.onExport}
+              className="bg-white hover:bg-green-50 text-green-700 px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-all shadow-lg"
+            >
+              <Download className="w-5 h-5" />
+              Download
+            </button>
+            <button
+              onClick={props.onTranslateAnother}
+              className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-all border border-white/30"
+            >
+              <FileText className="w-5 h-5" />
+              Translate Another
+            </button>
+          </div>
         </div>
       </div>
 
@@ -92,13 +101,19 @@ export default function StepReview(props: StepReviewProps) {
                   {props.originalText}
                 </div>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {props.originalSubtitles.map((s) => (
-                    <div key={s.id} className="text-sm text-gray-800">
-                      <span className="text-gray-500 mr-2">
-                        {s.startTime} → {s.endTime}
-                      </span>
-                      {s.originalText}
+                    <div
+                      key={s.id}
+                      className="p-3 border border-gray-200 rounded-lg bg-white"
+                    >
+                      <div className="flex items-center gap-2 text-xs text-gray-600 mb-1">
+                        <Clock className="w-3 h-3" />
+                        <span>
+                          {s.startTime} → {s.endTime}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-800">{s.originalText}</p>
                     </div>
                   ))}
                 </div>
@@ -124,13 +139,21 @@ export default function StepReview(props: StepReviewProps) {
                   {props.translatedText}
                 </div>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {props.translatedSubtitles.map((s) => (
-                    <div key={s.id} className="text-sm text-gray-800">
-                      <span className="text-gray-500 mr-2">
-                        {s.startTime} → {s.endTime}
-                      </span>
-                      {s.translatedText}
+                    <div
+                      key={s.id}
+                      className="p-3 border border-gray-200 rounded-lg bg-white"
+                    >
+                      <div className="flex items-center gap-2 text-xs text-gray-600 mb-1">
+                        <Clock className="w-3 h-3" />
+                        <span>
+                          {s.startTime} → {s.endTime}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-800">
+                        {s.translatedText}
+                      </p>
                     </div>
                   ))}
                 </div>

@@ -1,4 +1,3 @@
-export { default as BaseFeatureCard } from './BaseFeatureCard';
 export { default as StepHeader } from './StepHeader';
 export { default as StepReview } from './StepReview';
 export { default as StepUpload } from './StepUpload';

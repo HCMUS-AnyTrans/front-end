@@ -13,6 +13,7 @@ import {
   CheckCircle2,
   AlertCircle,
   Languages,
+  Settings,
 } from 'lucide-react';
 import {
   StepHeader,
@@ -87,7 +88,7 @@ Chúng tôi dự đoán tăng 25% hiệu quả hoạt động và cải thiện 
 
   const steps = [
     { number: 1, label: 'Upload', icon: Upload },
-    { number: 2, label: 'Configure', icon: Languages },
+    { number: 2, label: 'Configure', icon: Settings },
     { number: 3, label: 'Review', icon: Eye },
   ];
 

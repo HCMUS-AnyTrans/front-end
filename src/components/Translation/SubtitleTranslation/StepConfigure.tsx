@@ -183,7 +183,14 @@ export default function StepConfigure({
         </div>
       </div>
 
-      <div className="flex justify-end">
+      <div className="flex justify-end gap-3">
+        <button
+          onClick={onBack}
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all shadow-sm bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-700"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back
+        </button>
         <button
           onClick={onTranslate}
           disabled={!selectedFile || isProcessing}

@@ -442,7 +442,7 @@ export default function StepConfigure({
 
           {/* Upload Mode */}
           {glossaryMode === 'upload' && !glossaryFile && (
-            <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-purple-400 hover:bg-purple-50 transition-all">
+            <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-purple-400 hover:bg-purple-50 transition-all min-h-[200px] flex items-center justify-center">
               <input
                 type="file"
                 id="glossary-upload"
