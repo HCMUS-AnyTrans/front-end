@@ -7,8 +7,8 @@ export default function ContactInfo({ offices, reasons }: ContactInfoProps) {
       {/* Office Locations */}
       <div className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
-            <MapPin className="w-6 h-6 text-blue-600" />
+          <div className="w-12 h-12 bg-[#4169E1]/10 rounded-xl flex items-center justify-center">
+            <MapPin className="w-6 h-6 text-[#4169E1]" />
           </div>
           <div>
             <h3 className="text-xl font-bold text-gray-900">
@@ -39,8 +39,8 @@ export default function ContactInfo({ offices, reasons }: ContactInfoProps) {
       {/* Working Hours */}
       <div className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center">
-            <Clock className="w-6 h-6 text-purple-600" />
+          <div className="w-12 h-12 bg-[#1e3a8a]/10 rounded-xl flex items-center justify-center">
+            <Clock className="w-6 h-6 text-[#1e3a8a]" />
           </div>
           <div>
             <h3 className="text-xl font-bold text-gray-900">Working Hours</h3>
@@ -67,15 +67,15 @@ export default function ContactInfo({ offices, reasons }: ContactInfoProps) {
           </div>
         </div>
 
-        <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
-          <p className="text-sm text-blue-900">
+        <div className="mt-4 p-3 bg-[#4169E1]/10 rounded-lg border border-[#4169E1]/20">
+          <p className="text-sm text-[#1e3a8a]">
             <strong>24/7 Support:</strong> Live chat available anytime
           </p>
         </div>
       </div>
 
       {/* Why Contact Us */}
-      <div className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl p-6 text-white">
+      <div className="bg-gradient-to-r from-[#4169E1] via-[#1e3a8a] to-[#4169E1] rounded-2xl p-6 text-white">
         <h3 className="text-xl font-bold mb-4">Why Contact Us?</h3>
         <div className="space-y-3">
           {reasons.map((reason) => {

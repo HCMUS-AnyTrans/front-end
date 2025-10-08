@@ -1,0 +1,80 @@
+export const personalPlans = [
+  {
+    name: 'Starter',
+    tagline: 'Perfect for individuals getting started',
+    price: '9',
+    billing: '/month',
+    features: [
+      '10,000 credits/month',
+      'Basic translation',
+      'Email support',
+      'Standard quality',
+      '3 file formats',
+    ],
+    cta: 'Get Started',
+  },
+  {
+    name: 'Plus',
+    tagline: 'Ideal for freelancers and small projects',
+    price: '29',
+    billing: '/month',
+    features: [
+      '50,000 credits/month',
+      'Advanced translation',
+      'Priority support',
+      'High quality output',
+      'All file formats',
+      'API access',
+    ],
+    cta: 'Get Started',
+    recommended: true,
+  },
+];
+
+export const enterprisePlans = [
+  {
+    name: 'Enterprise Starter',
+    tagline: 'Have a go and test your superpowers',
+    price: '999',
+    billing: '/month',
+    features: [
+      '200,000 credits/month',
+      '5 user seats',
+      'Advanced analytics',
+      'Custom integrations',
+      '24/7 phone support',
+    ],
+    cta: 'Buy now',
+  },
+  {
+    name: 'Enterprise Growth',
+    tagline: 'Scale your translation operations',
+    price: '999',
+    billing: '/month',
+    features: [
+      '500,000 credits/month',
+      '15 user seats',
+      'Advanced analytics',
+      'Custom integrations',
+      '24/7 phone support',
+      'Dedicated account manager',
+    ],
+    cta: 'Buy now',
+    recommended: true,
+  },
+  {
+    name: 'Enterprise Custom',
+    tagline: 'Tailored solutions for your business',
+    price: '999',
+    billing: '/month',
+    features: [
+      'Unlimited credits',
+      'Unlimited user seats',
+      'Custom workflows',
+      'On-premise deployment',
+      'SLA guarantees',
+      'Custom training',
+    ],
+    cta: 'Buy now',
+  },
+];

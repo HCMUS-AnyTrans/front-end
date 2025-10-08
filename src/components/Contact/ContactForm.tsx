@@ -65,7 +65,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
               onChange={handleChange}
               required
               placeholder="John Doe"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
             />
           </div>
 
@@ -80,7 +80,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
               onChange={handleChange}
               required
               placeholder="john@example.com"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
             />
           </div>
 
@@ -93,7 +93,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
               value={formData.subject}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
             >
               <option value="">Select a subject</option>
               <option value="general">General Inquiry</option>
@@ -115,13 +115,13 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
               required
               rows={5}
               placeholder="Tell us how we can help you..."
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent resize-none"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-semibold transition-all shadow-lg"
+            className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:from-[#1e3a8a] hover:to-[#4169E1] text-white px-6 py-4 rounded-xl font-semibold transition-all shadow-lg"
           >
             <Send className="w-5 h-5" />
             Send Message
