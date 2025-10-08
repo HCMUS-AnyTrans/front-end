@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { MobileOverlayProps } from '@types/sidebar';
+import { MobileOverlayProps } from '@/src/types/sidebar';
 
 export default function MobileOverlay({ isOpen, onClose }: MobileOverlayProps) {
   if (!isOpen) return null;
