@@ -5,9 +5,6 @@ import {
   ArrowLeft,
   CheckCircle2,
   FileText,
-  RefreshCw,
-  Zap,
-  AlertCircle,
   Upload,
   X,
   FileJson,
@@ -15,6 +12,18 @@ import {
   Briefcase,
   Sparkles,
 } from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardContent } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { TranslationSettingsCard, ConfigureActionButtons } from './shared';
 
 type StepConfigureProps = {
   fileName: string;
@@ -27,113 +36,6 @@ type StepConfigureProps = {
   onBack: () => void;
   onTranslate: () => void;
   isTranslating: boolean;
-};
-
-// Shadcn-style components
-const Card = ({
-  children,
-  className = '',
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => (
-  <div
-    className={`bg-white rounded-xl shadow-sm border border-gray-200 ${className}`}
-  >
-    {children}
-  </div>
-);
-
-const CardHeader = ({ children }: { children: React.ReactNode }) => (
-  <div className="p-6 pb-4">{children}</div>
-);
-
-const CardContent = ({ children }: { children: React.ReactNode }) => (
-  <div className="px-6 pb-6">{children}</div>
-);
-
-const Label = ({
-  children,
-  htmlFor,
-}: {
-  children: React.ReactNode;
-  htmlFor?: string;
-}) => (
-  <label
-    htmlFor={htmlFor}
-    className="block text-sm font-semibold text-gray-900 mb-2"
-  >
-    {children}
-  </label>
-);
-
-const Select = ({
-  value,
-  onChange,
-  children,
-}: {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  children: React.ReactNode;
-}) => (
-  <select
-    value={value}
-    onChange={onChange}
-    className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-  >
-    {children}
-  </select>
-);
-
-const Textarea = ({
-  placeholder,
-  rows = 6,
-  value,
-  onChange,
-}: {
-  placeholder: string;
-  rows?: number;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-}) => (
-  <textarea
-    placeholder={placeholder}
-    rows={rows}
-    value={value}
-    onChange={onChange}
-    className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all"
-  />
-);
-
-const Button = ({
-  children,
-  onClick,
-  disabled = false,
-  variant = 'primary',
-  className = '',
-}: {
-  children: React.ReactNode;
-  onClick?: () => void;
-  disabled?: boolean;
-  variant?: 'primary' | 'outline';
-  className?: string;
-}) => {
-  const baseClasses =
-    'inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all shadow-sm';
-  const variantClasses =
-    variant === 'primary'
-      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white disabled:from-gray-400 disabled:to-gray-500'
-      : 'bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-700';
-
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={`${baseClasses} ${variantClasses} ${className}`}
-    >
-      {children}
-    </button>
-  );
 };
 
 export default function StepConfigure({
@@ -205,22 +107,24 @@ export default function StepConfigure({
   return (
     <div className="space-y-6">
       {/* Document Information */}
-      <Card>
-        <CardHeader>
+      <Card className="bg-white rounded-xl shadow-sm border border-gray-200">
+        <CardHeader className="p-6 pb-4">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold text-gray-900">
               Document Information
             </h3>
-            <button
+            <Button
               onClick={onBack}
-              className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1 transition-colors"
+              variant="ghost"
+              size="sm"
+              className="text-sm text-blue-600 hover:text-blue-700 font-medium"
             >
               <ArrowLeft className="w-4 h-4" />
               Change file
-            </button>
+            </Button>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-6 pb-6">
           <div className="flex items-start gap-4 p-4 bg-blue-50 rounded-xl border border-blue-100">
             <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
               <FileText className="w-6 h-6 text-white" />
@@ -245,78 +149,40 @@ export default function StepConfigure({
       </Card>
 
       {/* Translation Settings */}
-      <Card>
-        <CardHeader>
-          <h3 className="text-lg font-semibold text-gray-900">
-            Translation Settings
-          </h3>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div>
-              <Label htmlFor="source-lang">Source Language</Label>
-              <Select
-                value={sourceLanguage}
-                onChange={(e) => onChangeSource(e.target.value)}
-              >
-                <option>English</option>
-                <option>Spanish</option>
-                <option>French</option>
-                <option>German</option>
-                <option>Japanese</option>
-                <option>Chinese</option>
-                <option>Korean</option>
-                <option>Vietnamese</option>
-              </Select>
-            </div>
-
-            <div>
-              <Label htmlFor="target-lang">Target Language</Label>
-              <Select
-                value={targetLanguage}
-                onChange={(e) => onChangeTarget(e.target.value)}
-              >
-                <option>Vietnamese</option>
-                <option>Chinese</option>
-                <option>Korean</option>
-                <option>Thai</option>
-                <option>Indonesian</option>
-                <option>Japanese</option>
-                <option>English</option>
-              </Select>
-            </div>
-
-            <div>
-              <Label htmlFor="translation-mode">Translation Mode</Label>
-              <Select
-                value={translationProcess}
-                onChange={(e) => onChangeProcess(e.target.value)}
-              >
-                <option value="context-aware">
-                  Context-Aware (Recommended)
-                </option>
-                <option value="literal">Literal Translation</option>
-                <option value="creative">Creative Adaptation</option>
-                <option value="formal">Formal/Documentary</option>
-              </Select>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 p-4 bg-amber-50 rounded-xl border border-amber-200">
-            <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0" />
-            <p className="text-sm text-amber-800">
-              <strong>Note:</strong> Context-aware mode provides better accuracy
-              by understanding the document's context and terminology.
-            </p>
-          </div>
-        </CardContent>
-      </Card>
+      <TranslationSettingsCard
+        sourceLanguage={sourceLanguage}
+        targetLanguage={targetLanguage}
+        translationMode={translationProcess}
+        onChangeSource={onChangeSource}
+        onChangeTarget={onChangeTarget}
+        onChangeMode={onChangeProcess}
+        sourceLanguageOptions={[
+          'English',
+          'Spanish',
+          'French',
+          'German',
+          'Japanese',
+          'Chinese',
+          'Korean',
+          'Vietnamese',
+        ]}
+        targetLanguageOptions={[
+          'Vietnamese',
+          'Chinese',
+          'Korean',
+          'Thai',
+          'Indonesian',
+          'Japanese',
+          'English',
+        ]}
+        showNote={true}
+        noteText="Context-aware mode provides better accuracy by understanding the document's context and terminology."
+      />
 
       {/* Topic/Domain Selection */}
-      <Card>
-        <CardHeader>
+      <Card className="bg-white rounded-xl shadow-sm border border-gray-200">
+        <CardHeader className="p-6 pb-4">
           <div className="flex items-center gap-2">
-            <Briefcase className="w-5 h-5 text-gray-700" />
             <h3 className="text-lg font-semibold text-gray-900">
               Topic (Domain)
             </h3>
@@ -326,21 +192,26 @@ export default function StepConfigure({
             specialized terminology
           </p>
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-6 pb-6">
           <div className="space-y-3">
-            <Label htmlFor="topic">Content Domain</Label>
-            <select
-              id="topic"
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            <Label
+              htmlFor="topic"
+              className="block text-sm font-semibold text-gray-900 mb-2"
             >
-              {topics.map((t) => (
-                <option key={t.value} value={t.value}>
-                  {t.icon} {t.label}
-                </option>
-              ))}
-            </select>
+              Content Domain
+            </Label>
+            <Select value={topic} onValueChange={setTopic}>
+              <SelectTrigger className="w-full h-12">
+                <SelectValue placeholder="Select content domain" />
+              </SelectTrigger>
+              <SelectContent>
+                {topics.map((t) => (
+                  <SelectItem key={t.value} value={t.value}>
+                    {t.icon} {t.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
 
             {/* Domain Info */}
             {topic === 'auto-detect' && (
@@ -357,12 +228,11 @@ export default function StepConfigure({
       </Card>
 
       {/* Custom Glossary Section */}
-      <Card>
-        <CardHeader>
+      <Card className="bg-white rounded-xl shadow-sm border border-gray-200">
+        <CardHeader className="p-6 pb-4">
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center gap-2">
-                <FileJson className="w-5 h-5 text-gray-700" />
                 <h3 className="text-lg font-semibold text-gray-900">
                   Custom Glossary
                 </h3>
@@ -375,13 +245,15 @@ export default function StepConfigure({
                 translation
               </p>
             </div>
-            <button
+            <Button
               onClick={() => setShowGlossaryInfo(!showGlossaryInfo)}
-              className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1 transition-colors"
+              variant="ghost"
+              size="sm"
+              className="text-sm text-gray-500 hover:text-gray-700"
             >
               <Info className="w-4 h-4" />
               Help
-            </button>
+            </Button>
           </div>
 
           {showGlossaryInfo && (
@@ -413,31 +285,35 @@ export default function StepConfigure({
             </div>
           )}
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-6 pb-6">
           {/* Mode Toggle */}
           <div className="flex gap-2 mb-4">
-            <button
+            <Button
               onClick={() => setGlossaryMode('upload')}
-              className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              variant={glossaryMode === 'upload' ? 'default' : 'secondary'}
+              size="default"
+              className={`flex-1 rounded-lg ${
                 glossaryMode === 'upload'
-                  ? 'bg-purple-600 text-white'
+                  ? 'bg-purple-600 hover:bg-purple-700 text-white'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
-              <Upload className="w-4 h-4 inline mr-2" />
+              <Upload className="w-4 h-4 mr-2" />
               Upload File
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => setGlossaryMode('paste')}
-              className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              variant={glossaryMode === 'paste' ? 'default' : 'secondary'}
+              size="default"
+              className={`flex-1 rounded-lg ${
                 glossaryMode === 'paste'
-                  ? 'bg-purple-600 text-white'
+                  ? 'bg-purple-600 hover:bg-purple-700 text-white'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
-              <FileText className="w-4 h-4 inline mr-2" />
+              <FileText className="w-4 h-4 mr-2" />
               Paste Content
-            </button>
+            </Button>
           </div>
 
           {/* Upload Mode */}
@@ -483,12 +359,14 @@ export default function StepConfigure({
                   </p>
                 </div>
               </div>
-              <button
+              <Button
                 onClick={removeGlossary}
-                className="p-2 hover:bg-purple-100 rounded-lg transition-colors"
+                variant="ghost"
+                size="icon"
+                className="hover:bg-purple-100 rounded-lg"
               >
                 <X className="w-5 h-5 text-gray-500" />
-              </button>
+              </Button>
             </div>
           )}
 
@@ -500,6 +378,7 @@ export default function StepConfigure({
                 rows={8}
                 value={glossaryText}
                 onChange={(e) => setGlossaryText(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               {glossaryText && (
                 <div className="mt-2 flex items-center justify-between text-sm">
@@ -510,12 +389,14 @@ export default function StepConfigure({
                     }{' '}
                     terms detected
                   </span>
-                  <button
+                  <Button
                     onClick={removeGlossary}
+                    variant="ghost"
+                    size="sm"
                     className="text-red-600 hover:text-red-700 font-medium"
                   >
                     Clear
-                  </button>
+                  </Button>
                 </div>
               )}
             </div>
@@ -524,14 +405,14 @@ export default function StepConfigure({
       </Card>
 
       {/* Configuration Summary */}
-      <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
-        <CardHeader>
+      <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200 rounded-xl shadow-sm">
+        <CardHeader className="p-6 pb-4">
           <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-blue-600" />
             Ready to Translate
           </h3>
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-6 pb-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
             <div className="bg-white rounded-lg p-3 shadow-sm">
               <p className="text-xs text-gray-500 mb-1">Languages</p>
@@ -585,29 +466,14 @@ export default function StepConfigure({
       </Card>
 
       {/* Action Button */}
-      <div className="flex justify-end gap-3">
-        <Button variant="outline" onClick={onBack}>
-          <ArrowLeft className="w-4 h-4" />
-          Back
-        </Button>
-        <Button
-          onClick={onTranslate}
-          disabled={isTranslating}
-          className="px-8 py-4 text-lg"
-        >
-          {isTranslating ? (
-            <>
-              <RefreshCw className="w-5 h-5 animate-spin" />
-              Translating...
-            </>
-          ) : (
-            <>
-              <Zap className="w-5 h-5" />
-              Start Translation
-            </>
-          )}
-        </Button>
-      </div>
+      <ConfigureActionButtons
+        onBack={onBack}
+        onTranslate={onTranslate}
+        isProcessing={isTranslating}
+        disabled={false}
+        translateButtonText="Start Translation"
+        processingText="Translating..."
+      />
     </div>
   );
 }

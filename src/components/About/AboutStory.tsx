@@ -17,8 +17,8 @@ export default function AboutStory({ mission, vision }: AboutStoryProps) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="bg-white rounded-2xl border border-gray-200 p-8">
-          <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-4">
-            <MissionIcon className="w-7 h-7 text-blue-600" />
+          <div className="w-14 h-14 bg-[#4169E1]/10 rounded-xl flex items-center justify-center mb-4">
+            <MissionIcon className="w-7 h-7 text-[#4169E1]" />
           </div>
           <h3 className="text-xl font-bold text-gray-900 mb-3">
             {mission.title}
@@ -27,8 +27,8 @@ export default function AboutStory({ mission, vision }: AboutStoryProps) {
         </div>
 
         <div className="bg-white rounded-2xl border border-gray-200 p-8">
-          <div className="w-14 h-14 bg-purple-50 rounded-xl flex items-center justify-center mb-4">
-            <VisionIcon className="w-7 h-7 text-purple-600" />
+          <div className="w-14 h-14 bg-[#1e3a8a]/10 rounded-xl flex items-center justify-center mb-4">
+            <VisionIcon className="w-7 h-7 text-[#1e3a8a]" />
           </div>
           <h3 className="text-xl font-bold text-gray-900 mb-3">
             {vision.title}

@@ -64,7 +64,7 @@ export default function BaseCard({
       case 'pricing':
         return `bg-white rounded-2xl overflow-hidden transition-all ${
           popular
-            ? 'border-2 border-blue-600 shadow-2xl md:scale-105'
+            ? 'border-2 border-[#4169E1] shadow-2xl md:scale-105'
             : 'border border-gray-200 shadow-lg hover:shadow-xl'
         }`;
       case 'value':
@@ -98,7 +98,7 @@ export default function BaseCard({
   return (
     <div className={`${getCardClass()} ${className}`}>
       {variant === 'pricing' && popular && (
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center py-2 text-sm font-semibold">
+        <div className="bg-gradient-to-r from-[#4169E1] via-[#1e3a8a] to-[#4169E1] text-white text-center py-2 text-sm font-semibold">
           ⭐ Most Popular
         </div>
       )}
@@ -218,7 +218,7 @@ export default function BaseCard({
                 onClick={onCtaClick}
                 className={`w-full py-3.5 rounded-xl font-semibold transition-all mb-6 ${
                   popular
-                    ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg'
+                    ? 'bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:from-[#1e3a8a] hover:to-[#4169E1] text-white shadow-lg'
                     : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
                 }`}
               >

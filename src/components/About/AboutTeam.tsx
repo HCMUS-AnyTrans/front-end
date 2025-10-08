@@ -17,7 +17,7 @@ export default function AboutTeam({ team }: AboutTeamProps) {
             key={member.name}
             className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all"
           >
-            <div className="bg-gradient-to-br from-blue-500 to-purple-600 h-48 flex items-center justify-center">
+            <div className="bg-gradient-to-br from-[#4169E1] via-[#1e3a8a] to-[#4169E1] h-48 flex items-center justify-center">
               <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg">
                 <img
                   src={member.image}
@@ -30,19 +30,19 @@ export default function AboutTeam({ team }: AboutTeamProps) {
               <h3 className="text-lg font-bold text-gray-900 mb-1">
                 {member.name}
               </h3>
-              <p className="text-sm text-blue-600 font-medium mb-3">
+              <p className="text-sm text-[#4169E1] font-medium mb-3">
                 {member.role}
               </p>
               <p className="text-sm text-gray-600 mb-4">{member.bio}</p>
               <div className="flex items-center gap-2">
-                <button className="w-8 h-8 bg-gray-100 hover:bg-blue-50 rounded-lg flex items-center justify-center transition-all">
-                  <Linkedin className="w-4 h-4 text-gray-600" />
+                <button className="w-8 h-8 bg-gray-100 hover:bg-[#4169E1]/10 rounded-lg flex items-center justify-center transition-all group">
+                  <Linkedin className="w-4 h-4 text-gray-600 group-hover:text-[#4169E1]" />
                 </button>
-                <button className="w-8 h-8 bg-gray-100 hover:bg-blue-50 rounded-lg flex items-center justify-center transition-all">
-                  <Twitter className="w-4 h-4 text-gray-600" />
+                <button className="w-8 h-8 bg-gray-100 hover:bg-[#4169E1]/10 rounded-lg flex items-center justify-center transition-all group">
+                  <Twitter className="w-4 h-4 text-gray-600 group-hover:text-[#4169E1]" />
                 </button>
-                <button className="w-8 h-8 bg-gray-100 hover:bg-blue-50 rounded-lg flex items-center justify-center transition-all">
-                  <Mail className="w-4 h-4 text-gray-600" />
+                <button className="w-8 h-8 bg-gray-100 hover:bg-[#4169E1]/10 rounded-lg flex items-center justify-center transition-all group">
+                  <Mail className="w-4 h-4 text-gray-600 group-hover:text-[#4169E1]" />
                 </button>
               </div>
             </div>

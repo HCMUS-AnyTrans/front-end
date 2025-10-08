@@ -1,26 +1,127 @@
+'use client';
+
 import React from 'react';
 
 export default function BackgroundDecorations() {
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden">
-      {/* Hero section decorations */}
-      {/* <div className="absolute top-0 right-0 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] bg-gradient-to-br from-blue-100/30 to-purple-100/30 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] lg:w-[450px] lg:h-[450px] bg-gradient-to-tr from-purple-100/30 to-pink-100/30 rounded-full blur-3xl"></div> */}
+    <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+      {/* Animated gradient mesh background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/40" />
 
-      {/* Subtle grid overlay */}
+      {/* Large animated gradient orbs */}
+      <div
+        className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-30 blur-3xl animate-float-slow"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)',
+          animation: 'float-slow 20s ease-in-out infinite',
+        }}
+      />
+
+      <div
+        className="absolute top-1/3 -left-40 w-[500px] h-[500px] rounded-full opacity-25 blur-3xl"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%)',
+          animation: 'float-slow 25s ease-in-out infinite reverse',
+        }}
+      />
+
+      <div
+        className="absolute bottom-20 right-1/4 w-[400px] h-[400px] rounded-full opacity-20 blur-3xl"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)',
+          animation: 'float-slow 30s ease-in-out infinite',
+        }}
+      />
+
+      {/* Medium floating orbs */}
+      <div
+        className="absolute top-1/4 right-1/3 w-[300px] h-[300px] rounded-full opacity-20 blur-2xl"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%)',
+          animation: 'float-medium 15s ease-in-out infinite',
+        }}
+      />
+
+      <div
+        className="absolute bottom-1/3 left-1/4 w-[250px] h-[250px] rounded-full opacity-15 blur-2xl"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%)',
+          animation: 'float-medium 18s ease-in-out infinite reverse',
+        }}
+      />
+
+      {/* Subtle grid pattern overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.015]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px)
+          `,
+          backgroundSize: '50px 50px',
+        }}
+      />
+
+      {/* Diagonal lines pattern */}
       <div
         className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: `
-            radial-gradient(circle at 1px 1px, rgb(0 0 0 / 0.15) 1px, transparent 0)
-          `,
-          backgroundSize: '20px 20px',
+          backgroundImage: `repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 35px,
+            rgba(99, 102, 241, 0.05) 35px,
+            rgba(99, 102, 241, 0.05) 36px
+          )`,
         }}
-      ></div>
+      />
 
-      {/* Additional floating elements */}
-      <div className="absolute top-1/4 left-1/4 w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] bg-gradient-to-br from-blue-50/40 to-transparent rounded-full blur-2xl"></div>
-      <div className="absolute top-3/4 right-1/4 w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] bg-gradient-to-br from-purple-50/40 to-transparent rounded-full blur-2xl"></div>
+      {/* Radial gradient vignette */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, transparent 0%, rgba(255, 255, 255, 0.4) 100%)',
+        }}
+      />
+
+      {/* Noise texture overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.015] mix-blend-overlay"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        }}
+      />
+
+      <style jsx>{`
+        @keyframes float-slow {
+          0%,
+          100% {
+            transform: translate(0, 0) scale(1);
+          }
+          33% {
+            transform: translate(30px, -30px) scale(1.05);
+          }
+          66% {
+            transform: translate(-20px, 20px) scale(0.95);
+          }
+        }
+
+        @keyframes float-medium {
+          0%,
+          100% {
+            transform: translate(0, 0);
+          }
+          50% {
+            transform: translate(20px, -20px);
+          }
+        }
+      `}</style>
     </div>
   );
 }

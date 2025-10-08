@@ -35,26 +35,6 @@ export default function Hero() {
         {/* Left side - Content */}
         <div className="flex flex-col gap-6 sm:gap-7 max-w-[625px] relative z-10 text-center lg:text-left">
           <div className="relative">
-            {/* Decorative vector element - hidden on mobile */}
-            <div
-              className="hidden lg:block absolute -left-14 top-44 w-[530px] h-[106px] opacity-20 transition-all duration-1000 ease-out"
-              style={{
-                transform: isVisible ? 'translateX(0)' : 'translateX(-50px)',
-                opacity: isVisible ? 0.2 : 0,
-                transitionDelay: '400ms',
-              }}
-            >
-              <svg viewBox="0 0 530 106" className="w-full h-full">
-                <path
-                  d="M10 50 Q265 20 520 50"
-                  stroke="#19398f"
-                  strokeWidth="2"
-                  fill="none"
-                  opacity="0.3"
-                />
-              </svg>
-            </div>
-
             <h1
               className="font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-[80px] leading-tight sm:leading-tight lg:leading-[1.1] xl:leading-[90px] text-black font-inter transition-all duration-1000 ease-out"
               style={{
@@ -98,14 +78,14 @@ export default function Hero() {
               transitionDelay: '500ms',
             }}
           >
-            <button className="bg-[#19398f] text-white hover:bg-[#142457] rounded-[32px] h-[50px] w-[150px] font-semibold text-base font-nunito cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 hover:-translate-y-1">
+            <button className="bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] text-white hover:from-[#1e3a8a] hover:to-[#4169E1] rounded-xl h-[52px] w-[160px] font-semibold text-base cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-1">
               Free Trial
             </button>
 
-            <button className="border-2 border-[#19398f] text-[#19398f] hover:bg-[#19398f] hover:text-white rounded-[32px] h-[50px] w-[150px] font-semibold text-base font-nunito cursor-pointer transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105 hover:-translate-y-1 group">
+            <button className="border-2 border-[#4169E1] text-[#4169E1] hover:bg-gradient-to-r hover:from-[#4169E1] hover:to-[#1e3a8a] hover:border-transparent hover:text-white rounded-xl h-[52px] w-[160px] font-semibold text-base cursor-pointer transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-xl hover:scale-105 hover:-translate-y-1 group">
               <Play
                 size={20}
-                className="fill-current transition-transform duration-300 group-hover:scale-110"
+                className="transition-transform duration-300 group-hover:scale-110"
               />
               View Demo
             </button>

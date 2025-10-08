@@ -29,32 +29,22 @@ export default function BaseCTA({
   const getGradientClass = () => {
     switch (variant) {
       case 'pricing':
-        return 'bg-gradient-to-br from-blue-600 to-indigo-600';
+        return 'bg-gradient-to-r from-[#4169E1] via-[#1e3a8a] to-[#4169E1]';
       case 'about':
-        return 'bg-gradient-to-br from-blue-600 to-indigo-600';
+        return 'bg-gradient-to-r from-[#4169E1] via-[#1e3a8a] to-[#4169E1]';
       case 'contact':
-        return 'bg-gradient-to-br from-purple-600 to-pink-600';
+        return 'bg-gradient-to-r from-[#4169E1] via-[#1e3a8a] to-[#4169E1]';
       default:
-        return 'bg-gradient-to-br from-blue-600 to-indigo-600';
+        return 'bg-gradient-to-r from-[#4169E1] via-[#1e3a8a] to-[#4169E1]';
     }
   };
 
   const getTextColor = () => {
-    switch (variant) {
-      case 'contact':
-        return 'text-purple-100';
-      default:
-        return 'text-blue-100';
-    }
+    return 'text-blue-100';
   };
 
   const getButtonColor = () => {
-    switch (variant) {
-      case 'contact':
-        return 'text-purple-600';
-      default:
-        return 'text-blue-600';
-    }
+    return 'text-[#4169E1]';
   };
 
   const ButtonComponent = ({

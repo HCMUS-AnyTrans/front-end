@@ -203,7 +203,7 @@ export default function FeatureGrid() {
             <h2 className="font-bold text-5xl lg:text-6xl leading-tight text-[#0F172A] mb-6">
               Translation Tools That
               <br />
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-[#173fb6] inline-block transition-all duration-1000 ease-out">
                 Work For You
               </span>
             </h2>

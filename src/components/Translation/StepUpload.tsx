@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { Upload, FileText, Film } from 'lucide-react';
-import BaseFeatureCard from '@/src/components/Translation/BaseFeatureCard';
+import { Button } from '@/components/ui/button';
+import BaseFeatureCard from '@/src/components/Translation/shared/BaseFeatureCard';
 
 type UploadVariant = 'document' | 'subtitle';
 
@@ -87,13 +88,14 @@ export default function StepUpload({ variant, onUpload }: StepUploadProps) {
 
           <div className="border-2 border-dashed border-gray-300 hover:border-blue-400 rounded-xl p-12 text-center transition-all cursor-pointer bg-gray-50 hover:bg-blue-50">
             <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <button
+            <Button
               onClick={onUpload}
-              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all"
+              size="xl"
+              className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold"
             >
               <Upload className="w-5 h-5" />
               Choose File
-            </button>
+            </Button>
             <p className="text-sm text-gray-500 mt-4">
               Supported formats: {config.supportedFormats}
             </p>

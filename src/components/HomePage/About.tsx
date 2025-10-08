@@ -79,7 +79,11 @@ export default function About() {
               className="font-bold text-4xl lg:text-5xl xl:text-6xl leading-tight text-[#0F172A]"
               style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
             >
-              Everything You Need to Translate Better
+              Everything You
+              <br />
+              <span className="text-[#173fb6] inline-block transition-all duration-1000 ease-out">
+                Need to Translate Better
+              </span>
             </h2>
 
             <p
@@ -95,7 +99,7 @@ export default function About() {
             </p>
 
             <div className="flex justify-center lg:justify-start">
-              <button className="bg-[#19398f] text-white hover:bg-[#142457] font-semibold text-base px-8 py-3 rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105">
+              <button className="bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] cursor-pointer text-white hover:from-[#1e3a8a] hover:to-[#4169E1] font-semibold text-base h-[52px] w-[160px] rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-105">
                 Read More
               </button>
             </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Check, ArrowRight } from 'lucide-react';
 
 interface PricingCardProps {
@@ -28,6 +28,12 @@ function PricingCard({
   isHovered = false,
   onHover,
 }: PricingCardProps) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   const isHighlighted = recommended;
   const cardBg = isHighlighted
     ? 'bg-gradient-to-br from-[#4169E1] to-[#1e3a8a]'
@@ -47,23 +53,35 @@ function PricingCard({
 
   return (
     <div
-      className={`${cardBg} rounded-3xl w-full max-w-[380px] p-8 flex flex-col relative transition-all duration-500 ease-out border-2 ${
+      className={`${cardBg} rounded-3xl w-full max-w-[380px] p-8 flex flex-col relative border-2 ${
         isHighlighted
-          ? 'border-transparent shadow-2xl scale-105'
+          ? 'border-transparent shadow-2xl scale-105 animate-fade-in-up'
           : isHovered
             ? 'border-blue-200 shadow-xl scale-[1.02]'
             : 'border-gray-100 shadow-lg hover:border-blue-100'
-      }`}
+      } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-700 ease-out`}
       style={{
         height: isHighlighted ? '700px' : '660px',
+        ...(isHighlighted && {
+          animation:
+            'shimmer 3s ease-in-out infinite, float 6s ease-in-out infinite',
+        }),
       }}
       onMouseEnter={() => onHover?.(true)}
       onMouseLeave={() => onHover?.(false)}
     >
       {isHighlighted && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
-          Most Popular
-        </div>
+        <>
+          {/* Animated glow effect */}
+          <div
+            className=" absolute inset-0 rounded-3xl blur-xl opacity-30 animate-pulse-glow"
+            style={{
+              background: 'linear-gradient(45deg, #4169E1, #1e3a8a, #4169E1)',
+              backgroundSize: '200% 200%',
+              animation: 'gradient-shift 3s ease infinite',
+            }}
+          />
+        </>
       )}
 
       <div className="flex flex-col items-center gap-6 mb-8">
@@ -138,10 +156,14 @@ function PricingCard({
         </div>
 
         <button
-          className={`${buttonBg} rounded-xl h-14 w-full font-bold text-base transition-all duration-300 hover:scale-[1.02] hover:shadow-lg flex items-center justify-center gap-2`}
+          className={`${buttonBg} rounded-xl h-14 w-full font-bold text-base transition-all duration-300 hover:scale-[1.05] hover:shadow-xl flex items-center justify-center gap-2 group cursor-pointer`}
         >
           {cta}
-          <ArrowRight size={18} strokeWidth={2.5} />
+          <ArrowRight
+            size={18}
+            strokeWidth={2.5}
+            className="transition-transform duration-300 group-hover:translate-x-1"
+          />
         </button>
       </div>
     </div>
@@ -153,6 +175,11 @@ export default function PricingTabs() {
     'enterprise'
   );
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
 
   const personalPlans = [
     {
@@ -240,15 +267,111 @@ export default function PricingTabs() {
 
   return (
     <section className="w-full py-20 bg-gradient-to-br from-gray-50 to-blue-50/30 overflow-hidden">
+      <style jsx>{`
+        @keyframes gradient-shift {
+          0%,
+          100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+
+        @keyframes gradient-x {
+          0%,
+          100% {
+            background-position: 0% center;
+          }
+          50% {
+            background-position: 200% center;
+          }
+        }
+
+        @keyframes shimmer {
+          0% {
+            box-shadow:
+              0 0 20px rgba(65, 105, 225, 0.3),
+              0 0 40px rgba(65, 105, 225, 0.2);
+          }
+          50% {
+            box-shadow:
+              0 0 30px rgba(65, 105, 225, 0.5),
+              0 0 60px rgba(65, 105, 225, 0.3);
+          }
+          100% {
+            box-shadow:
+              0 0 20px rgba(65, 105, 225, 0.3),
+              0 0 40px rgba(65, 105, 225, 0.2);
+          }
+        }
+
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0px) scale(1.05);
+          }
+          50% {
+            transform: translateY(-10px) scale(1.05);
+          }
+        }
+
+        @keyframes bounce-subtle {
+          0%,
+          100% {
+            transform: translateX(-50%) translateY(0);
+          }
+          50% {
+            transform: translateX(-50%) translateY(-5px);
+          }
+        }
+
+        @keyframes pulse-glow {
+          0%,
+          100% {
+            opacity: 0.2;
+          }
+          50% {
+            opacity: 0.4;
+          }
+        }
+
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slide-in-left {
+          from {
+            opacity: 0;
+            transform: translateX(-30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+      `}</style>
+
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center gap-16">
+        <div className="flex flex-col items-center gap-24">
           {/* Header */}
-          <div className="flex flex-col items-center gap-8 text-center">
+          <div
+            className={`flex flex-col items-center gap-8 text-center transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
+          >
             <div className="flex flex-col gap-4">
               <h2 className="font-bold text-5xl lg:text-6xl leading-tight text-[#0F172A]">
                 Choose Plan
                 <br />
-                That's Right For You
+                <span className="text-[#173fb6] inline-block transition-all duration-1000 ease-out">
+                  That's Right For You
+                </span>
               </h2>
               <p className="text-lg text-gray-500 mt-2">
                 Choose plan that works best for you, feel free to contact us
@@ -256,23 +379,23 @@ export default function PricingTabs() {
             </div>
 
             {/* Tab selector */}
-            <div className="bg-white rounded-2xl shadow-md p-2 w-[360px] h-[72px] flex items-center gap-2">
+            <div className="bg-white rounded-2xl shadow-md p-2 w-[360px] h-[72px] flex items-center gap-2 transition-all duration-500 hover:shadow-xl">
               <button
                 onClick={() => setSelectedTab('personal')}
-                className={`flex-1 h-14 rounded-xl font-bold text-lg transition-all duration-300 ${
+                className={`cursor-pointer flex-1 h-14 rounded-xl font-bold text-lg transition-all duration-500 transform hover:scale-105 ${
                   selectedTab === 'personal'
-                    ? 'bg-gradient-to-r from-gray-100 to-gray-200 text-[#0F172A] shadow-sm'
-                    : 'bg-transparent text-gray-600 hover:text-gray-900'
+                    ? 'bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] text-white shadow-lg scale-[1.02]'
+                    : 'bg-transparent text-gray-600 hover:bg-gray-50'
                 }`}
               >
                 Personal
               </button>
               <button
                 onClick={() => setSelectedTab('enterprise')}
-                className={`flex-1 h-14 rounded-xl font-bold text-lg transition-all duration-300 ${
+                className={`cursor-pointer flex-1 h-14 rounded-xl font-bold text-lg transition-all duration-500 transform hover:scale-105 ${
                   selectedTab === 'enterprise'
-                    ? 'bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] text-white shadow-lg'
-                    : 'bg-transparent text-gray-600 hover:text-gray-900'
+                    ? 'bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] text-white shadow-lg scale-[1.02]'
+                    : 'bg-transparent text-gray-600 hover:bg-gray-50'
                 }`}
               >
                 Enterprise
@@ -283,14 +406,21 @@ export default function PricingTabs() {
           {/* Pricing cards */}
           <div className="flex flex-wrap items-center justify-center gap-8 w-full">
             {currentPlans.map((plan, index) => (
-              <PricingCard
+              <div
                 key={`${selectedTab}-${index}`}
-                {...plan}
-                isHovered={hoveredCard === `${selectedTab}-${index}`}
-                onHover={(hovered) =>
-                  setHoveredCard(hovered ? `${selectedTab}-${index}` : null)
-                }
-              />
+                className="transition-all duration-700"
+                style={{
+                  animation: `fade-in-up 0.8s ease-out ${index * 0.15}s both`,
+                }}
+              >
+                <PricingCard
+                  {...plan}
+                  isHovered={hoveredCard === `${selectedTab}-${index}`}
+                  onHover={(hovered) =>
+                    setHoveredCard(hovered ? `${selectedTab}-${index}` : null)
+                  }
+                />
+              </div>
             ))}
           </div>
         </div>

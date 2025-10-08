@@ -48,14 +48,14 @@ export default function StepReview(props: StepReviewProps) {
           <div className="flex gap-3">
             <button
               onClick={isDocument ? props.onDownload : props.onExport}
-              className="bg-white hover:bg-green-50 text-green-700 px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-all shadow-lg"
+              className="bg-white hover:bg-green-50 text-green-700 px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-all shadow-lg cursor-pointer"
             >
               <Download className="w-5 h-5" />
               Download
             </button>
             <button
               onClick={props.onTranslateAnother}
-              className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-all border border-white/30"
+              className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-all border border-white/30 cursor-pointer"
             >
               <FileText className="w-5 h-5" />
               Translate Another

@@ -1,15 +1,9 @@
 'use client';
 
 import React from 'react';
-import {
-  ArrowLeft,
-  CheckCircle2,
-  FileVideo,
-  Clock,
-  Sparkles,
-  Zap,
-  RefreshCw,
-} from 'lucide-react';
+import { ArrowLeft, FileVideo, Clock, Sparkles } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { TranslationSettingsCard, ConfigureActionButtons } from './shared';
 import type {
   SubtitleFile,
   MovieContext,
@@ -53,13 +47,15 @@ export default function StepConfigure({
             <h3 className="text-lg font-semibold text-gray-900">
               File Information
             </h3>
-            <button
+            <Button
               onClick={onBack}
-              className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
+              variant="ghost"
+              size="sm"
+              className="text-sm text-blue-600 hover:text-blue-700 font-medium"
             >
               <ArrowLeft className="w-4 h-4" />
               Change files
-            </button>
+            </Button>
           </div>
           <div className="flex items-start gap-4 p-4 bg-blue-50 rounded-xl border border-blue-100">
             <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -81,62 +77,32 @@ export default function StepConfigure({
         </div>
       )}
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-6">
-          Translation Settings
-        </h3>
+      <TranslationSettingsCard
+        sourceLanguage={sourceLanguage}
+        targetLanguage={targetLanguage}
+        translationMode={translationMode}
+        onChangeSource={onChangeSource}
+        onChangeTarget={onChangeTarget}
+        onChangeMode={onChangeMode}
+        sourceLanguageOptions={[
+          'English',
+          'Spanish',
+          'French',
+          'German',
+          'Japanese',
+        ]}
+        targetLanguageOptions={[
+          'Vietnamese',
+          'Chinese',
+          'Korean',
+          'Thai',
+          'Indonesian',
+        ]}
+        showNote={false}
+      />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div>
-            <label className="block text-sm font-semibold text-gray-900 mb-2">
-              Source language
-            </label>
-            <select
-              value={sourceLanguage}
-              onChange={(e) => onChangeSource(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option>English</option>
-              <option>Spanish</option>
-              <option>French</option>
-              <option>German</option>
-              <option>Japanese</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-900 mb-2">
-              Target language
-            </label>
-            <select
-              value={targetLanguage}
-              onChange={(e) => onChangeTarget(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option>Vietnamese</option>
-              <option>Chinese</option>
-              <option>Korean</option>
-              <option>Thai</option>
-              <option>Indonesian</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-900 mb-2">
-              Translation Mode
-            </label>
-            <select
-              value={translationMode}
-              onChange={(e) => onChangeMode(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="context-aware">Context-Aware (Recommended)</option>
-              <option value="literal">Literal Translation</option>
-              <option value="creative">Creative Adaptation</option>
-              <option value="formal">Formal/Documentary</option>
-            </select>
-          </div>
-        </div>
-
-        {movieContext && (
+      {movieContext && (
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
           <div className="flex items-center gap-3 p-4 bg-amber-50 rounded-xl border border-amber-200">
             <Sparkles className="w-5 h-5 text-amber-600" />
             <p className="text-sm text-amber-800">
@@ -144,8 +110,8 @@ export default function StepConfigure({
               {movieContext.year} • {movieContext.genre.join(', ')}
             </p>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-200">
         <div className="px-6 py-4 border-b border-gray-200">
@@ -183,32 +149,14 @@ export default function StepConfigure({
         </div>
       </div>
 
-      <div className="flex justify-end gap-3">
-        <button
-          onClick={onBack}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all shadow-sm bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-700"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back
-        </button>
-        <button
-          onClick={onTranslate}
-          disabled={!selectedFile || isProcessing}
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:from-gray-400 disabled:to-gray-500 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg transition-all"
-        >
-          {isProcessing ? (
-            <>
-              <RefreshCw className="w-5 h-5 animate-spin" />
-              Processing...
-            </>
-          ) : (
-            <>
-              <Zap className="w-5 h-5" />
-              Start Translation
-            </>
-          )}
-        </button>
-      </div>
+      <ConfigureActionButtons
+        onBack={onBack}
+        onTranslate={onTranslate}
+        isProcessing={isProcessing}
+        disabled={!selectedFile}
+        translateButtonText="Start Translation"
+        processingText="Processing..."
+      />
     </div>
   );
 }

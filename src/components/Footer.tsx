@@ -41,9 +41,29 @@ export default function Footer() {
             <div className="lg:col-span-5 flex flex-col gap-8">
               {/* Logo */}
               <div className="flex flex-col gap-4">
-                <h2 className="font-bold text-4xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                  anytrans
-                </h2>
+                <a
+                  href="/"
+                  className="group inline-flex items-center gap-3 w-fit transition-all duration-300 hover:opacity-80"
+                  aria-label="AnyTrans - Go to homepage"
+                >
+                  {/* Logo Icon */}
+                  <div className="relative flex-shrink-0">
+                    <div className="relative w-12 h-12 flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg group-hover:shadow-2xl group-hover:scale-105 transition-all duration-300">
+                      <img src="/logo.svg" alt="" className="w-7 h-7" />
+                    </div>
+                  </div>
+
+                  {/* Logo Text */}
+                  <div className="flex flex-col">
+                    <span className="text-2xl font-bold text-white tracking-tight">
+                      AnyTrans
+                    </span>
+                    <span className="text-xs font-medium text-gray-400 tracking-wider uppercase">
+                      Translation Services
+                    </span>
+                  </div>
+                </a>
+
                 <p className="text-gray-400 text-sm leading-relaxed max-w-md">
                   Professional translation services for documents, subtitles,
                   and more. Empowering global communication with cutting-edge

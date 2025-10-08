@@ -3,7 +3,7 @@ import { AboutHeroProps } from '@/src/types/about';
 
 export default function AboutHero({ stats }: AboutHeroProps) {
   return (
-    <div className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <div className="bg-gradient-to-br from-[#4169E1] via-[#1e3a8a] to-[#4169E1] text-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
       <div className="max-w-7xl mx-auto text-center">
         <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4 sm:mb-6">
           <Sparkles className="w-4 h-4" />

@@ -32,9 +32,7 @@ export default function DocumentTranslatorClient() {
   const [isTranslating, setIsTranslating] = useState(false);
   const [sourceLanguage, setSourceLanguage] = useState('English');
   const [targetLanguage, setTargetLanguage] = useState('Vietnamese');
-  const [translationProcess, setTranslationProcess] = useState(
-    'Professional Translation'
-  );
+  const [translationProcess, setTranslationProcess] = useState('context-aware');
 
   const originalText = `Business Proposal: Digital Transformation Initiative
 
@@ -121,7 +119,7 @@ Chúng tôi dự đoán tăng 25% hiệu quả hoạt động và cải thiện 
     setIsTranslating(false);
     setSourceLanguage('English');
     setTargetLanguage('Vietnamese');
-    setTranslationProcess('Professional Translation');
+    setTranslationProcess('context-aware');
   };
 
   return (

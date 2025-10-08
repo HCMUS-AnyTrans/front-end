@@ -56,9 +56,11 @@ export default function Header() {
         <div className="flex items-center justify-between w-full max-w-7xl mx-auto px-4 sm:px-6 py-3 lg:py-4">
           {/* Logo */}
           <a href="/" className="flex items-center" onClick={closeMobileMenu}>
-            <h1 className="font-bold text-xl sm:text-2xl lg:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] tracking-tight">
-              anytrans
-            </h1>
+            <img
+              src="/logo-icon-mono.svg"
+              alt="anytrans"
+              className="w-50 h-10"
+            />
           </a>
 
           {/* Desktop Navigation */}
