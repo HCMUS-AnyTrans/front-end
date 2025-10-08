@@ -1,12 +1,6 @@
-import type { Metadata } from 'next';
-import NotificationsInterface from './notifications-interface';
+import NotificationsClient from './notifications-client';
 
-export const metadata: Metadata = {
-  title: 'Notifications - AnyTrans',
-  description:
-    'Stay on top of translation events, system alerts, and billing updates.',
-};
-
-export default function NotificationsPage() {
-  return <NotificationsInterface />;
+export default function Page() {
+  // Server Component wrapper; all client state stays inside NotificationsClient
+  return <NotificationsClient />;
 }

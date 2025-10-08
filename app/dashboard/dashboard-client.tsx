@@ -16,7 +16,7 @@ import QuickStats from '@/src/components/Dashboard/QuickStats/QuickStats';
 import WeeklyActivityChart from '@/src/components/Dashboard/WeeklyActivityChart';
 import TopLanguagesCard from '@/src/components/Dashboard/TopLanguagesCard';
 import RecentActivityList from '@/src/components/Dashboard/RecentActivityList';
-import { DashboardClientProps } from '@/src/components/Dashboard/types';
+import { DashboardClientProps } from '@/src/types/dashboard';
 import PromoBanner from '@/src/components/Dashboard/QuickActions/PromoBanner';
 
 export default function DashboardClient({

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { MoreHorizontal } from 'lucide-react';
-import { UserProfileButtonProps } from '@types/sidebar';
+import { UserProfileButtonProps } from '@/src/types/sidebar';
 
 export default function UserProfileButton({
   planLabel,

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { SecondaryNavProps } from '@types/sidebar';
+import { SecondaryNavProps } from '@/src/types/sidebar';
 
 export default function SecondaryNav({ items, isActive }: SecondaryNavProps) {
   return (

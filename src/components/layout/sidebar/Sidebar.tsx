@@ -20,7 +20,7 @@ import UpgradeCard from './UpgradeCard';
 import UserProfileButton from './UserProfileButton';
 import MobileHeader from './MobileHeader';
 import MobileOverlay from './MobileOverlay';
-import type { NavItem, SidebarProps } from '@types/sidebar';
+import type { NavItem, SidebarProps } from '@/src/types/sidebar';
 
 const navigationItems: NavItem[] = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },

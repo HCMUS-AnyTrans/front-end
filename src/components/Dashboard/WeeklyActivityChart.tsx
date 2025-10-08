@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { WeeklyStat, WeeklySubStat } from './types';
+import { WeeklyStat, WeeklySubStat } from '@/src/types/dashboard';
 
 type WeeklyActivityChartProps = {
   weeklyStats: WeeklyStat[];

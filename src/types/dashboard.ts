@@ -20,6 +20,6 @@ export type WeeklySubStat = { day: string; subtitles: number };
 export type DashboardClientProps = {
   recentActivity: RecentActivityItem[];
   topLanguages: TopLanguageItem[];
-  weeklyStats: WeeklyStat[];
+  weeklyStatsDocuments: WeeklyStat[];
   weeklyStatsSubtitles: WeeklySubStat[];
 };
