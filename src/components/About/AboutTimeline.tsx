@@ -1,10 +1,23 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import { Calendar } from 'lucide-react';
 import { AboutTimelineProps } from '@/src/types/about';
 
 export default function AboutTimeline({ milestones }: AboutTimelineProps) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   return (
     <section>
-      <div className="text-center mb-10">
+      <div
+        className={`text-center mb-10 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
+        }`}
+      >
         <h2 className="text-3xl font-bold text-gray-900 mb-3">Our Journey</h2>
         <p className="text-lg text-gray-600">
           Key milestones in our growth story
@@ -18,12 +31,21 @@ export default function AboutTimeline({ milestones }: AboutTimelineProps) {
           {milestones.map((milestone, idx) => (
             <div
               key={milestone.year}
-              className={`flex items-center gap-8 ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
+              className={`flex items-center gap-8 ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} transition-all duration-700 ${
+                isVisible
+                  ? 'opacity-100 translate-x-0'
+                  : idx % 2 === 0
+                    ? 'opacity-0 -translate-x-12'
+                    : 'opacity-0 translate-x-12'
+              }`}
+              style={{
+                transitionDelay: `${idx * 200}ms`,
+              }}
             >
               <div
                 className={`flex-1 ${idx % 2 === 0 ? 'lg:text-right' : 'lg:text-left'}`}
               >
-                <div className="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-lg transition-all inline-block w-full lg:w-auto">
+                <div className="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-2xl hover:scale-105 transition-all duration-300 inline-block w-full lg:w-auto cursor-pointer shadow-lg">
                   <div className="flex items-center gap-3 mb-3">
                     <Calendar className="w-5 h-5 text-[#4169E1]" />
                     <span className="text-2xl font-bold text-[#4169E1]">
@@ -38,7 +60,7 @@ export default function AboutTimeline({ milestones }: AboutTimelineProps) {
               </div>
 
               <div className="hidden lg:block relative">
-                <div className="w-4 h-4 bg-[#4169E1] rounded-full border-4 border-gray-50"></div>
+                <div className="w-4 h-4 bg-[#4169E1] rounded-full border-4 border-gray-50 animate-pulse"></div>
               </div>
 
               <div className="flex-1"></div>

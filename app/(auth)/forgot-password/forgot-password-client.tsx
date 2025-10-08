@@ -58,14 +58,17 @@ export function ForgotPasswordClient() {
         backText="Back to login"
       >
         <div className="space-y-4 text-center">
-          <div className="p-4 border rounded-lg bg-muted/50">
-            <p className="text-sm text-muted-foreground">
+          <div className="p-4 border rounded-lg bg-blue-50/50 border-blue-100">
+            <p className="text-sm text-gray-600">
               If you don&apos;t see the email, check your spam folder or try
               again.
             </p>
           </div>
 
-          <Button asChild variant="outline" className="w-full">
+          <Button
+            asChild
+            className="w-full bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:from-[#1e3a8a] hover:to-[#4169E1] text-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
+          >
             <Link href="/login">Back to login</Link>
           </Button>
         </div>
@@ -105,7 +108,7 @@ export function ForgotPasswordClient() {
 
           <Button
             type="submit"
-            className="w-full bg-[#19398f] hover:bg-[#142457]"
+            className="w-full bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:from-[#1e3a8a] hover:to-[#4169E1] text-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
             disabled={isPending}
           >
             {isPending ? 'Sending...' : 'Send reset link'}
@@ -113,9 +116,12 @@ export function ForgotPasswordClient() {
         </form>
       </Form>
 
-      <div className="text-center text-sm text-muted-foreground mt-3">
+      <div className="text-center text-sm text-gray-600 mt-3">
         Remember your password?{' '}
-        <Link href="/login" className="text-primary hover:underline">
+        <Link
+          href="/login"
+          className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300"
+        >
           Sign in
         </Link>
       </div>

@@ -80,11 +80,18 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
           </div>
 
           <div className="space-y-2">
-            <Button asChild className="w-full bg-[#19398f] hover:bg-[#142457]">
+            <Button
+              asChild
+              className="w-full bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:from-[#1e3a8a] hover:to-[#4169E1] text-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
+            >
               <Link href="/forgot-password">Request new reset link</Link>
             </Button>
 
-            <Button asChild variant="outline" className="w-full">
+            <Button
+              asChild
+              variant="outline"
+              className="w-full hover:bg-gray-100 transition-all duration-300"
+            >
               <Link href="/login">Back to login</Link>
             </Button>
           </div>
@@ -149,7 +156,7 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
 
           <Button
             type="submit"
-            className="w-full bg-[#19398f] hover:bg-[#142457]"
+            className="w-full bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:from-[#1e3a8a] hover:to-[#4169E1] text-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
             disabled={isPending}
           >
             {isPending ? 'Resetting password...' : 'Reset password'}
@@ -157,10 +164,13 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
         </form>
       </Form>
 
-      <div className="space-y-2 text-center text-sm text-muted-foreground">
+      <div className="space-y-2 text-center text-sm text-gray-600">
         <p>
           Remember your password?{' '}
-          <Link href="/login" className="text-primary hover:underline">
+          <Link
+            href="/login"
+            className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300"
+          >
             Sign in
           </Link>
         </p>
@@ -169,7 +179,7 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
           Need a new reset link?{' '}
           <Link
             href="/forgot-password"
-            className="text-primary hover:underline"
+            className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300"
           >
             Request another one
           </Link>

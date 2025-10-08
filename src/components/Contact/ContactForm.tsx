@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Send, CheckCircle2 } from 'lucide-react';
 import { ContactFormData, ContactFormProps } from '@/src/types/contact';
 
@@ -12,6 +12,11 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +37,11 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8">
+    <div
+      className={`bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-700 ${
+        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
+      }`}
+    >
       <h2 className="text-2xl font-bold text-gray-900 mb-2">
         Send us a Message
       </h2>
@@ -41,15 +50,15 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
       </p>
 
       {submitted ? (
-        <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center animate-fade-in-scale">
+          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
             <CheckCircle2 className="w-8 h-8 text-green-600" />
           </div>
           <h3 className="text-xl font-bold text-gray-900 mb-2">
             Message Sent!
           </h3>
           <p className="text-gray-600">
-            Thank you for contacting us. We'll respond within 24 hours.
+            Thank you for contacting us. We&apos;ll respond within 24 hours.
           </p>
         </div>
       ) : (
@@ -121,13 +130,30 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
 
           <button
             type="submit"
-            className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:from-[#1e3a8a] hover:to-[#4169E1] text-white px-6 py-4 rounded-xl font-semibold transition-all shadow-lg"
+            className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:from-[#1e3a8a] hover:to-[#4169E1] text-white px-6 py-4 rounded-xl font-semibold transition-all duration-500 shadow-lg hover:shadow-2xl hover:scale-[1.02] cursor-pointer group"
           >
-            <Send className="w-5 h-5" />
+            <Send className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
             Send Message
           </button>
         </form>
       )}
+
+      <style jsx>{`
+        @keyframes fade-in-scale {
+          from {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        :global(.animate-fade-in-scale) {
+          animation: fade-in-scale 0.5s ease-out;
+        }
+      `}</style>
     </div>
   );
 }

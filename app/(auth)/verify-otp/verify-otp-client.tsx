@@ -148,7 +148,7 @@ export function VerifyOtpClient({
 
             <Button
               type="submit"
-              className="w-full bg-[#19398f] hover:bg-[#142457]"
+              className="w-full bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:from-[#1e3a8a] hover:to-[#4169E1] text-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
               disabled={isPending || form.watch('code').length !== 6}
             >
               {isPending ? 'Verifying...' : 'Verify'}
@@ -157,13 +157,13 @@ export function VerifyOtpClient({
         </Form>
 
         <div className="space-y-4 text-center">
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-gray-600">
             Didn&apos;t receive the code?{' '}
             <button
               type="button"
               onClick={handleResendCode}
               disabled={resendCooldown > 0 || isResending}
-              className="text-primary hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+              className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {resendCooldown > 0
                 ? `Resend in ${resendCooldown}s`
@@ -173,21 +173,23 @@ export function VerifyOtpClient({
             </button>
           </div>
 
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-gray-600">
             Wrong email?{' '}
             <button
               type="button"
               onClick={() => setShowChangeEmail(!showChangeEmail)}
-              className="text-primary hover:underline"
+              className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300"
             >
               Change email
             </button>
           </div>
 
           {showChangeEmail && (
-            <div className="space-y-3 p-4 border rounded-lg bg-muted/50">
+            <div className="space-y-3 p-4 border rounded-lg bg-blue-50/30 border-blue-100">
               <div className="flex flex-col gap-3">
-                <Label htmlFor="new-email">New email address</Label>
+                <Label htmlFor="new-email" className="text-gray-900">
+                  New email address
+                </Label>
                 <Input
                   id="new-email"
                   type="email"
@@ -195,6 +197,7 @@ export function VerifyOtpClient({
                   onChange={(e) => setNewEmail(e.target.value)}
                   placeholder="Enter new email"
                   disabled={isResending}
+                  className="border-gray-300"
                 />
               </div>
               <div className="flex gap-2">
@@ -204,6 +207,7 @@ export function VerifyOtpClient({
                   size="sm"
                   onClick={() => setShowChangeEmail(false)}
                   disabled={isResending}
+                  className="hover:bg-gray-100 transition-all duration-300"
                 >
                   Cancel
                 </Button>
@@ -212,7 +216,7 @@ export function VerifyOtpClient({
                   size="sm"
                   onClick={handleChangeEmail}
                   disabled={isResending || !newEmail}
-                  className="bg-[#19398f] hover:bg-[#142457]"
+                  className="bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:from-[#1e3a8a] hover:to-[#4169E1] text-white shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
                 >
                   {isResending ? 'Sending...' : 'Send code'}
                 </Button>

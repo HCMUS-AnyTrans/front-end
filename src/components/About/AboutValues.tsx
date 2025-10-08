@@ -1,10 +1,23 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import { BaseCard } from '@/src/components/Common';
 import { AboutValuesProps } from '@/src/types/about';
 
 export default function AboutValues({ values }: AboutValuesProps) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   return (
     <section>
-      <div className="text-center mb-8 sm:mb-10">
+      <div
+        className={`text-center mb-8 sm:mb-10 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
+        }`}
+      >
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
           Core Values
         </h2>
@@ -14,17 +27,28 @@ export default function AboutValues({ values }: AboutValuesProps) {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        {values.map((value) => {
+        {values.map((value, idx) => {
           const Icon = value.icon;
           return (
-            <BaseCard
+            <div
               key={value.title}
-              variant="value"
-              icon={<Icon className="w-6 h-6" />}
-              title={value.title}
-              description={value.description}
-              color={value.color}
-            />
+              className={`transition-all duration-700 ${
+                isVisible
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-12'
+              }`}
+              style={{
+                transitionDelay: `${idx * 150}ms`,
+              }}
+            >
+              <BaseCard
+                variant="value"
+                icon={<Icon className="w-6 h-6" />}
+                title={value.title}
+                description={value.description}
+                color={value.color}
+              />
+            </div>
           );
         })}
       </div>

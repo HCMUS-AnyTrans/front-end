@@ -126,7 +126,7 @@ export function LoginForm() {
 
               <Link
                 href="/forgot-password"
-                className="text-sm text-primary hover:underline"
+                className="text-sm text-[#4169E1] hover:text-[#1e3a8a] font-medium transition-colors duration-300"
               >
                 Forgot password?
               </Link>
@@ -134,7 +134,7 @@ export function LoginForm() {
 
             <Button
               type="submit"
-              className="w-full bg-[#19398f] hover:bg-[#142457]"
+              className="w-full bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:from-[#1e3a8a] hover:to-[#4169E1] text-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
               disabled={isPending}
             >
               {isPending ? 'Signing in...' : 'Sign in'}
@@ -143,11 +143,11 @@ export function LoginForm() {
         </Form>
 
         {/* Sign up link */}
-        <div className="text-center text-sm text-muted-foreground">
+        <div className="text-center text-sm text-gray-600">
           Don&apos;t have an account?{' '}
           <Link
             href="/signup"
-            className="font-medium text-primary hover:underline"
+            className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300"
           >
             Sign up
           </Link>

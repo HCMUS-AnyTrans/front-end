@@ -1,30 +1,68 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import { Sparkles } from 'lucide-react';
 import { AboutHeroProps } from '@/src/types/about';
 
 export default function AboutHero({ stats }: AboutHeroProps) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   return (
-    <div className="bg-gradient-to-br from-[#4169E1] via-[#1e3a8a] to-[#4169E1] text-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-      <div className="max-w-7xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4 sm:mb-6">
-          <Sparkles className="w-4 h-4" />
+    <div className="bg-gradient-to-br from-[#4169E1] via-[#1e3a8a] to-[#4169E1] text-white px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div
+        className="absolute top-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"
+        style={{ animation: 'float-slow 10s ease-in-out infinite' }}
+      />
+      <div
+        className="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"
+        style={{ animation: 'float-slow 12s ease-in-out infinite reverse' }}
+      />
+
+      <div className="max-w-7xl mx-auto text-center relative z-10">
+        <div
+          className={`inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4 sm:mb-6 transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
+          }`}
+        >
+          <Sparkles className="w-4 h-4 animate-pulse" />
           <span className="text-sm font-medium">About AnyTrans</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
+        <h1
+          className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 transition-all duration-700 delay-100 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           Breaking Language Barriers,
           <br />
           One Translation at a Time
         </h1>
-        <p className="text-lg sm:text-xl text-blue-100 max-w-3xl mx-auto mb-6 sm:mb-8">
-          We're on a mission to make professional translation accessible to
+        <p
+          className={`text-lg sm:text-xl text-blue-100 max-w-3xl mx-auto mb-6 sm:mb-8 transition-all duration-700 delay-200 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          We&apos;re on a mission to make professional translation accessible to
           everyone, empowering global communication through innovative AI
           technology.
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto mt-8 sm:mt-12">
-          {stats.map((stat) => (
+          {stats.map((stat, idx) => (
             <div
               key={stat.label}
-              className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/20"
+              className={`bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/20 hover:bg-white/20 hover:scale-105 transition-all duration-700 cursor-pointer ${
+                isVisible
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-12'
+              }`}
+              style={{
+                transitionDelay: `${300 + idx * 100}ms`,
+              }}
             >
               <p className="text-2xl sm:text-3xl font-bold mb-1">
                 {stat.number}
@@ -34,6 +72,18 @@ export default function AboutHero({ stats }: AboutHeroProps) {
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes float-slow {
+          0%,
+          100% {
+            transform: translate(0, 0);
+          }
+          50% {
+            transform: translate(30px, -30px);
+          }
+        }
+      `}</style>
     </div>
   );
 }

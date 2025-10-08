@@ -176,14 +176,14 @@ export function SignupForm() {
                       I agree to the{' '}
                       <Link
                         href="/terms"
-                        className="text-primary hover:underline"
+                        className="text-[#4169E1] hover:text-[#1e3a8a] font-medium transition-colors duration-300"
                       >
                         Terms of Service
                       </Link>{' '}
                       and{' '}
                       <Link
                         href="/privacy"
-                        className="text-primary hover:underline"
+                        className="text-[#4169E1] hover:text-[#1e3a8a] font-medium transition-colors duration-300"
                       >
                         Privacy Policy
                       </Link>
@@ -196,7 +196,7 @@ export function SignupForm() {
 
             <Button
               type="submit"
-              className="w-full bg-[#19398f] hover:bg-[#142457]"
+              className="w-full bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:from-[#1e3a8a] hover:to-[#4169E1] text-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
               disabled={isPending}
             >
               {isPending ? 'Creating account...' : 'Create account'}
@@ -205,11 +205,11 @@ export function SignupForm() {
         </Form>
 
         {/* Sign in link */}
-        <div className="text-center text-sm text-muted-foreground">
+        <div className="text-center text-sm text-gray-600">
           Already have an account?{' '}
           <Link
             href="/login"
-            className="font-medium text-primary hover:underline"
+            className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300"
           >
             Sign in
           </Link>
