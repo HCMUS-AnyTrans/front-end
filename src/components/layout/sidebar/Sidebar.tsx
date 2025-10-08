@@ -11,12 +11,11 @@ import {
   Bell,
   Info,
 } from 'lucide-react';
-import AccountDialog from '@/src/components/Account/AccountDialog';
+import { AccountDialog } from '@/src/components/Account';
 import SidebarLogo from './SidebarLogo';
 import SidebarNav from './SidebarNav';
 import SecondaryNav from './SecondaryNav';
 import CreditSection from './CreditSection';
-import UpgradeCard from './UpgradeCard';
 import UserProfileButton from './UserProfileButton';
 import MobileHeader from './MobileHeader';
 import MobileOverlay from './MobileOverlay';
@@ -84,8 +83,6 @@ export default function Sidebar({ className }: SidebarProps) {
       <SecondaryNav items={secondaryItems} isActive={isActive} />
 
       <CreditSection current={credits.current} total={credits.total} />
-
-      <UpgradeCard />
 
       <UserProfileButton
         planLabel={credits.plan}

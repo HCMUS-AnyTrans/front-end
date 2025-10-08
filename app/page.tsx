@@ -1,12 +1,8 @@
 import Header from '@/src/components/Header';
-import Hero from '@/src/components/Hero';
-import Statistics from '@/src/components/Statistics';
-import FeatureGrid from '@/src/components/Home/FeatureGrid';
-import About from '@/src/components/About';
-import PricingTabs from '@/src/components/Home/PricingTabs';
-import ReviewSection from '@/src/components/Home/ReviewSection';
 import Footer from '@/src/components/Footer';
-import BackgroundDecorations from '@/src/components/Common/BackgroundDecorations';
+import { BackgroundDecorations } from '@/src/components/Common';
+import { Hero, Statistics, About } from '@/src/components/HomePage';
+import { FeatureGrid, PricingTabs, ReviewSection } from '@/src/components/Home';
 
 export default function Home() {
   return (

@@ -1,17 +1,18 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import Sidebar from '@/src/components/Layout/Sidebar/Sidebar';
+import { Sidebar } from '@/src/components/Layout';
 import {
   NotificationItem,
   NotificationFilter,
   NotificationsStats,
 } from '@/src/types/notifications';
-import NotificationsHeader from '@/src/components/Notifications/NotificationsHeader';
-import NotificationsToolbar from '@/src/components/Notifications/NotificationsToolbar';
-import NotificationsList from '@/src/components/Notifications/NotificationsList';
-import NotificationsFilterPanel from '@/src/components/Notifications/NotificationsFilterPanel';
-import NotificationsBulkActionsBar from '@/src/components/Notifications/NotificationsBulkActionsBar';
+import {
+  NotificationsHeader,
+  NotificationsToolbar,
+  NotificationsList,
+  NotificationsBulkActionsBar,
+} from '@/src/components/Notifications';
 
 // Mock data moved from original file
 const mockNotifications: NotificationItem[] = [
@@ -111,6 +112,7 @@ export default function NotificationsClient() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState<boolean>(false);
+  const [filterType, setFilterType] = useState<string>('all');
 
   const stats: NotificationsStats = useMemo(() => {
     return {
@@ -136,10 +138,10 @@ export default function NotificationsClient() {
   const filteredNotifications: NotificationItem[] = useMemo(() => {
     let filtered = notifications;
 
-    if (activeFilter === 'unread') {
+    if (filterType === 'unread') {
       filtered = filtered.filter((n) => !n.isRead);
-    } else if (activeFilter !== 'all') {
-      filtered = filtered.filter((n) => n.category === activeFilter);
+    } else if (filterType !== 'all') {
+      filtered = filtered.filter((n) => n.category === filterType);
     }
 
     if (searchQuery) {
@@ -155,7 +157,7 @@ export default function NotificationsClient() {
       if (a.isPinned !== b.isPinned) return a.isPinned ? -1 : 1;
       return b.timestamp.getTime() - a.timestamp.getTime();
     });
-  }, [notifications, activeFilter, searchQuery]);
+  }, [notifications, filterType, searchQuery]);
 
   // Handlers (kept same behavior)
   const handleToggleRead = (id: string) => {
@@ -210,29 +212,26 @@ export default function NotificationsClient() {
               onMarkAllRead={handleMarkAllRead}
               showFilters={showFilters}
               onToggleFilters={() => setShowFilters((v) => !v)}
+              filterType={filterType}
+              onFilterTypeChange={setFilterType}
+              notificationCounts={{
+                all: stats.total,
+                unread: stats.unread,
+                translations: stats.translation,
+                billing: stats.billing,
+                system: stats.system,
+              }}
             />
 
             <NotificationsToolbar
               searchQuery={searchQuery}
               onSearchChange={setSearchQuery}
               filters={filters.slice(0, 3)}
-              activeFilter={activeFilter}
-              onSelectFilter={setActiveFilter}
+              activeFilter={filterType as any}
+              onSelectFilter={setFilterType}
             />
           </div>
         </div>
-
-        {showFilters && (
-          <NotificationsFilterPanel
-            filters={filters}
-            activeFilter={activeFilter}
-            onSelectFilter={(id) => {
-              setActiveFilter(id);
-              setShowFilters(false);
-            }}
-            onClose={() => setShowFilters(false)}
-          />
-        )}
 
         {selectedIds.length > 0 && (
           <NotificationsBulkActionsBar
@@ -247,14 +246,14 @@ export default function NotificationsClient() {
           <div className="max-w-7xl mx-auto">
             <NotificationsList
               notifications={filteredNotifications}
-              activeFilter={activeFilter}
+              activeFilter={filterType as any}
               searchQuery={searchQuery}
               selectedIds={selectedIds}
               onToggleSelect={handleToggleSelect}
               onToggleRead={handleToggleRead}
               onTogglePin={handleTogglePin}
               onDelete={handleDelete}
-              onResetFilterToAll={() => setActiveFilter('all')}
+              onResetFilterToAll={() => setFilterType('all')}
               formatTimestamp={formatTimestamp}
             />
           </div>

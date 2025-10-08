@@ -11,13 +11,15 @@ import {
   Zap,
   ArrowUpRight,
 } from 'lucide-react';
-import PageHeader from '@/src/components/Dashboard/PageHeader';
-import QuickStats from '@/src/components/Dashboard/QuickStats/QuickStats';
-import WeeklyActivityChart from '@/src/components/Dashboard/WeeklyActivityChart';
-import TopLanguagesCard from '@/src/components/Dashboard/TopLanguagesCard';
-import RecentActivityList from '@/src/components/Dashboard/RecentActivityList';
+import {
+  PageHeader,
+  QuickStats,
+  WeeklyActivityChart,
+  TopLanguagesCard,
+  RecentActivityList,
+  PromoBanner,
+} from '@/src/components/Dashboard';
 import { DashboardClientProps } from '@/src/types/dashboard';
-import PromoBanner from '@/src/components/Dashboard/QuickActions/PromoBanner';
 
 export default function DashboardClient({
   recentActivity,

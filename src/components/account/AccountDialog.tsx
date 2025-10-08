@@ -13,7 +13,7 @@ import {
 import BaseDialog, {
   BaseDialogContent,
 } from '@/src/components/Common/BaseDialog';
-import AccountDialogHeader from '@/src/components/Account/AccountDialogHeader';
+import { AccountDialogHeader } from '@/src/components/Account';
 import AccountSidebarTabs, {
   AccountTabId,
 } from '@/src/components/Account/AccountSidebarTabs';

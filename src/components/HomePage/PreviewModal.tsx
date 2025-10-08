@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Download } from "lucide-react";
+import React from 'react';
+import { Download } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -9,8 +9,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 
 interface PreviewModalProps {
   isOpen: boolean;
@@ -20,17 +20,17 @@ interface PreviewModalProps {
   onDownload?: () => void;
 }
 
-export function PreviewModal({
+export default function PreviewModal({
   isOpen,
   onClose,
-  originalText = "Loading original text...",
-  translatedText = "Loading translated text...",
+  originalText = 'Loading original text...',
+  translatedText = 'Loading translated text...',
   onDownload,
 }: PreviewModalProps) {
   const handleDownload = () => {
     onDownload?.();
     // In a real implementation, this would trigger a DOCX download
-    console.log("Downloading DOCX file...");
+    console.log('Downloading DOCX file...');
   };
 
   return (

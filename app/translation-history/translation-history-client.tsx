@@ -1,11 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
-import Sidebar from '@/src/components/Layout/Sidebar/Sidebar';
-import TranslationHistoryHeader from '@/src/components/TranslationHistory/TranslationHistoryHeader';
-import TranslationHistoryStats from '@/src/components/TranslationHistory/TranslationHistoryStats';
-import TranslationHistoryToolbar from '@/src/components/TranslationHistory/TranslationHistoryToolbar';
-import TranslationHistoryTable from '@/src/components/TranslationHistory/TranslationHistoryTable';
+import { Sidebar } from '@/src/components/Layout';
+import {
+  TranslationHistoryHeader,
+  TranslationHistoryStats,
+  TranslationHistoryToolbar,
+  TranslationHistoryTable,
+} from '@/src/components/TranslationHistory';
 import { TranslationItem } from '@/src/types/translation-history';
 
 export default function TranslationHistoryClient() {

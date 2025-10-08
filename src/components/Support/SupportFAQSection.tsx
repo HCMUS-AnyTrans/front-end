@@ -3,7 +3,7 @@
 import React from 'react';
 import { HelpCircle } from 'lucide-react';
 import { FAQ, Category } from '@/src/types/support';
-import SupportFAQItem from './SupportFAQItem';
+import { BaseFAQ } from '@/src/components/Common';
 
 interface SupportFAQSectionProps {
   title: string;
@@ -67,15 +67,7 @@ export default function SupportFAQSection({
       {/* FAQ List */}
       <div className="p-6">
         {searchedFaqs.length > 0 ? (
-          <div className="space-y-4">
-            {searchedFaqs.map((faq, index) => (
-              <SupportFAQItem
-                key={index}
-                question={faq.question}
-                answer={faq.answer}
-              />
-            ))}
-          </div>
+          <BaseFAQ variant="details" faqs={searchedFaqs} />
         ) : (
           <div className="text-center py-12">
             <HelpCircle className="w-12 h-12 text-gray-300 mx-auto mb-3" />

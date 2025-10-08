@@ -14,10 +14,12 @@ import {
   AlertCircle,
   Languages,
 } from 'lucide-react';
-import StepHeader from '@/src/components/Translation/StepHeader';
-import StepUpload from '@/src/components/Translation//StepUpload';
-import StepConfigure from '@/src/components/Translation/DocumentTranslation/StepConfigure';
-import StepReview from '@/src/components/Translation/StepReview';
+import {
+  StepHeader,
+  StepUpload,
+  StepReview,
+  DocumentStepConfigure,
+} from '@/src/components/Translation';
 import type {
   TranslationStep,
   StepDef,
@@ -138,7 +140,7 @@ Chúng tôi dự đoán tăng 25% hiệu quả hoạt động và cải thiện 
           )}
 
           {currentStep === 'configure' && (
-            <StepConfigure
+            <DocumentStepConfigure
               fileName="Business_Proposal_2024.docx"
               sourceLanguage={sourceLanguage}
               targetLanguage={targetLanguage}

@@ -17,10 +17,12 @@ import {
   FileText,
   Tag,
 } from 'lucide-react';
-import StepHeader from '@/src/components/Translation/StepHeader';
-import StepUpload from '@/src/components/Translation//StepUpload';
-import StepConfigure from '@/src/components/Translation/SubtitleTranslation/StepConfigure';
-import StepReview from '@/src/components/Translation/StepReview';
+import {
+  StepHeader,
+  StepUpload,
+  StepReview,
+  SubtitleStepConfigure,
+} from '@/src/components/Translation';
 import type {
   TranslationStep,
   StepDef,
@@ -283,7 +285,7 @@ export default function SubtitleTranslationClient() {
           )}
 
           {currentStep === 'configure' && (
-            <StepConfigure
+            <SubtitleStepConfigure
               selectedFile={selectedFile}
               movieContext={movieContext}
               sourceLanguage={sourceLanguage}

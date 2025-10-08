@@ -14,7 +14,7 @@ import type {
   SubtitleFile,
   MovieContext,
   SubtitleEntry,
-} from '@/src/types/subtitle-translation';
+} from '@/src/types/translation';
 
 type StepConfigureProps = {
   selectedFile: SubtitleFile | null;

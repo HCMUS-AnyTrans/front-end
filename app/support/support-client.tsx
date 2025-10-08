@@ -11,13 +11,15 @@ import {
   Settings,
   CheckCircle,
 } from 'lucide-react';
-import Sidebar from '@/src/components/Layout/Sidebar/Sidebar';
-import SupportHeader from '@/src/components/Support/SupportHeader';
-import SupportSearchBar from '@/src/components/Support/SupportSearchBar';
-import SupportQuickActions from '@/src/components/Support/SupportQuickActions';
-import SupportFAQSection from '@/src/components/Support/SupportFAQSection';
-import SupportContactForm from '@/src/components/Support/SupportContactForm';
-import SupportAdditionalResources from '@/src/components/Support/SupportAdditionalResources';
+import { Sidebar } from '@/src/components/Layout';
+import {
+  SupportHeader,
+  SupportSearchBar,
+  SupportQuickActions,
+  SupportFAQSection,
+  SupportContactForm,
+  SupportAdditionalResources,
+} from '@/src/components/Support';
 import {
   FAQ,
   Category,

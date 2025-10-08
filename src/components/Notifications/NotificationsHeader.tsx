@@ -1,13 +1,22 @@
 'use client';
 
 import React from 'react';
-import { CheckCheck, Filter } from 'lucide-react';
+import { CheckCheck, Filter, ChevronDown } from 'lucide-react';
 
 type Props = {
   unreadCount: number;
   onMarkAllRead: () => void;
   showFilters: boolean;
   onToggleFilters: () => void;
+  filterType: string;
+  onFilterTypeChange: (type: string) => void;
+  notificationCounts: {
+    all: number;
+    unread: number;
+    translations: number;
+    billing: number;
+    system: number;
+  };
 };
 
 export default function NotificationsHeader({
@@ -15,6 +24,15 @@ export default function NotificationsHeader({
   onMarkAllRead,
   showFilters,
   onToggleFilters,
+  filterType,
+  onFilterTypeChange,
+  notificationCounts = {
+    all: 0,
+    unread: 0,
+    translations: 0,
+    billing: 0,
+    system: 0,
+  },
 }: Props) {
   return (
     <div className="flex items-center justify-between mb-6">
@@ -36,14 +54,79 @@ export default function NotificationsHeader({
           </button>
         )}
 
-        <button
-          onClick={onToggleFilters}
-          aria-pressed={showFilters}
-          className="inline-flex items-center gap-2 px-4 py-2.5 border border-gray-300 hover:border-gray-400 text-gray-700 hover:bg-gray-50 rounded-xl font-medium transition-all"
-        >
-          <Filter className="w-4 h-4" />
-          Filters
-        </button>
+        <div className="relative">
+          <button
+            onClick={onToggleFilters}
+            className={`flex items-center gap-2 px-5 py-3 border rounded-xl font-medium transition-all ${
+              filterType !== 'all'
+                ? 'bg-blue-50 border-blue-200 text-blue-700'
+                : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <Filter className="w-4 h-4" />
+            <span>Filter</span>
+            {filterType !== 'all' && (
+              <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+            )}
+            <ChevronDown className="w-4 h-4" />
+          </button>
+
+          {showFilters && (
+            <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-10">
+              {[
+                {
+                  id: 'all',
+                  label: 'All Notifications',
+                  count: notificationCounts.all,
+                },
+                {
+                  id: 'unread',
+                  label: 'Unread',
+                  count: notificationCounts.unread,
+                },
+                {
+                  id: 'translations',
+                  label: 'Translations',
+                  count: notificationCounts.translations,
+                },
+                {
+                  id: 'billing',
+                  label: 'Billing',
+                  count: notificationCounts.billing,
+                },
+                {
+                  id: 'system',
+                  label: 'System',
+                  count: notificationCounts.system,
+                },
+              ].map((type) => (
+                <button
+                  key={type.id}
+                  onClick={() => {
+                    onFilterTypeChange(type.id);
+                    onToggleFilters();
+                  }}
+                  className={`w-full text-left px-4 py-2 text-sm transition-colors flex items-center justify-between ${
+                    filterType === type.id
+                      ? 'bg-blue-50 text-blue-700 font-medium'
+                      : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <span>{type.label}</span>
+                  <span
+                    className={`text-xs px-2 py-1 rounded-full ${
+                      filterType === type.id
+                        ? 'bg-blue-100 text-blue-700'
+                        : 'bg-gray-100 text-gray-600'
+                    }`}
+                  >
+                    {type.count}
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

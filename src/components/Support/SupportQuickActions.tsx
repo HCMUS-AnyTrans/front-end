@@ -1,6 +1,6 @@
 import React from 'react';
 import { MessageCircle, Mail, Book } from 'lucide-react';
-import SupportQuickActionCard from './SupportQuickActionCard';
+import { BaseActionCard } from '@/src/components/Common';
 
 interface SupportQuickActionsProps {
   onLiveChat: () => void;
@@ -52,7 +52,7 @@ export default function SupportQuickActions({
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       {actions.map((action, index) => (
-        <SupportQuickActionCard key={index} {...action} />
+        <BaseActionCard key={index} {...action} />
       ))}
     </div>
   );
