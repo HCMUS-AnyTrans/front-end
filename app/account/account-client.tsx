@@ -3,10 +3,10 @@
 import React, { useState } from 'react';
 import { User, CreditCard, Shield, Settings, Bell } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-import Header from '@/src/components/common/Header';
+import Header from '@/src/components/Header';
 import Footer from '@/src/components/Footer';
-import ProfileTab from '@/src/components/account/ProfileTab';
-import BillingTab from '@/src/components/account/BillingTab';
+import ProfileTab from '@/src/components/Account/Profile/ProfileTab';
+import BillingTab from '@/src/components/Account/Billing/BillingTab';
 
 interface SidebarItemProps {
   label: string;
