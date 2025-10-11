@@ -14,7 +14,7 @@ export default function CreditSection({ current, total }: CreditSectionProps) {
   const isLowCredit = creditPercentage < 30;
 
   return (
-    <div className="px-4 pb-4">
+    <div className="px-4 pb-4 pt-4">
       <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-4 border border-slate-200">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">

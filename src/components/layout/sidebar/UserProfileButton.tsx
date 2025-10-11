@@ -9,7 +9,7 @@ export default function UserProfileButton({
   onOpenAccount,
 }: UserProfileButtonProps) {
   return (
-    <div className="p-4">
+    <div className="p-2">
       <button
         onClick={onOpenAccount}
         className="w-full flex items-center gap-3 p-3 border-t border-gray-200 hover:bg-gray-50 rounded-lg text-left"

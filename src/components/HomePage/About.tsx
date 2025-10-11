@@ -8,7 +8,6 @@ interface FloatingCardProps {
   category: string;
   title: string;
   bgColor: string;
-  hoverBgColor: string;
   delay: number;
   isHovered: boolean;
   onHover: (hovered: boolean) => void;
@@ -19,7 +18,6 @@ function FloatingCard({
   category,
   title,
   bgColor,
-  hoverBgColor,
   delay,
   isHovered,
   onHover,
@@ -34,17 +32,13 @@ function FloatingCard({
       onMouseLeave={() => onHover(false)}
     >
       <div
-        className={`rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 transition-all duration-500 ${
-          isHovered ? hoverBgColor : bgColor
-        }`}
+        className={`rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 transition-all duration-500 ${bgColor}`}
       >
         <div className="text-white">{icon}</div>
       </div>
       <div className="flex flex-col flex-1 min-w-0">
         <div
-          className={`text-sm font-medium transition-colors duration-500 ${
-            isHovered ? 'text-[#5BA3FF]' : 'text-gray-500'
-          }`}
+          className={`text-sm font-medium transition-colors duration-500 text-gray-500`}
         >
           {category}
         </div>
@@ -124,7 +118,6 @@ export default function About() {
                   category="Translation"
                   title="Document Translation & Management"
                   bgColor="bg-[#80eac2]"
-                  hoverBgColor="bg-[#5BA3FF]"
                   delay={0}
                   isHovered={hoveredCard === 'document'}
                   onHover={(hovered) =>
@@ -146,7 +139,6 @@ export default function About() {
                   category="Media"
                   title="Subtitle & Video Translation"
                   bgColor="bg-[#7d87ff]"
-                  hoverBgColor="bg-[#5BA3FF]"
                   delay={200}
                   isHovered={hoveredCard === 'subtitle'}
                   onHover={(hovered) =>
@@ -168,7 +160,6 @@ export default function About() {
                   category="Productivity"
                   title="Glossary & Consistency Tools"
                   bgColor="bg-[#f3aa01]"
-                  hoverBgColor="bg-[#5BA3FF]"
                   delay={400}
                   isHovered={hoveredCard === 'glossary'}
                   onHover={(hovered) =>
