@@ -1,5 +1,5 @@
 import { Sparkles, Zap, Shield, Users, Crown } from 'lucide-react';
-import { PricingPlan, FAQItem } from '@/src/types/pricing';
+import { PricingPlan, FAQItem } from '@/types/pricing';
 
 export const personalPlans: PricingPlan[] = [
   {

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { UserData } from '@/src/types/account';
+import { UserData } from '@/types/account';
 
 type PersonalInfoFormProps = {
   user: UserData;

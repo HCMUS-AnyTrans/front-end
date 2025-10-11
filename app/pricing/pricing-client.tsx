@@ -1,14 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Header from '@/src/components/Header';
-import Footer from '@/src/components/Footer';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import {
   PricingTabSelector,
   PricingGrid,
   PricingAnimations,
-} from '@/src/components/Pricing';
-import { personalPlans, enterprisePlans } from '@/src/lib/pricing-plans';
+} from '@/components/Pricing';
+import { personalPlans, enterprisePlans } from '@/lib/pricing-plans';
 
 export default function PricingPageClient() {
   const [selectedTab, setSelectedTab] = useState<'personal' | 'enterprise'>(

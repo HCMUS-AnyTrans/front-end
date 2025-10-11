@@ -1,5 +1,6 @@
-export * from './about-data';
-export * from './contact-data';
-export * from './prefs';
-export * from './pricing-data';
-export * from './pricing-plans';
+// Commented out to avoid export conflicts during build
+// export * from './about-data';
+// export * from './contact-data';
+// export * from './prefs';
+// export * from './pricing-data';
+// export * from './pricing-plans';

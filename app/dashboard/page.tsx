@@ -1,4 +1,4 @@
-import Sidebar from '@/src/components/Layout/Sidebar/Sidebar';
+import Sidebar from '@/components/Layout/Sidebar/Sidebar';
 import DashboardClient from './dashboard-client';
 
 export const dynamic = 'force-static';

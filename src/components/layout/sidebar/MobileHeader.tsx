@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { X, Menu } from 'lucide-react';
-import { MobileHeaderProps } from '@/src/types/sidebar';
+import { MobileHeaderProps } from '@/types/sidebar';
 
 export default function MobileHeader({ isOpen, onToggle }: MobileHeaderProps) {
   return (

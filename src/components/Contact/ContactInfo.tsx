@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { MapPin, Clock } from 'lucide-react';
-import { ContactInfoProps } from '@/src/types/contact';
+import { ContactInfoProps } from '@/types/contact';
 
 export default function ContactInfo({ offices, reasons }: ContactInfoProps) {
   const [isVisible, setIsVisible] = useState(false);

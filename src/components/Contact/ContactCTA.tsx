@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { BaseCTA } from '@/src/components/Common';
+import { BaseCTA } from '@/components/Common';
 
 export default function ContactCTA() {
   const [isVisible, setIsVisible] = useState(false);

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ArrowLeft, CheckCircle2 } from 'lucide-react';
-import type { TranslationStep, StepDef } from '@/src/types/translation';
+import type { TranslationStep, StepDef } from '@/types/translation';
 
 type StepHeaderProps = {
   currentStep: TranslationStep;

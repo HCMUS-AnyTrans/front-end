@@ -1,18 +1,18 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { Sidebar } from '@/src/components/Layout';
+import { Sidebar } from '@/components/Layout';
 import {
   NotificationItem,
   NotificationFilter,
   NotificationsStats,
-} from '@/src/types/notifications';
+} from '@/types/notifications';
 import {
   NotificationsHeader,
   NotificationsToolbar,
   NotificationsList,
   NotificationsBulkActionsBar,
-} from '@/src/components/Notifications';
+} from '@/components/Notifications';
 
 // Mock data moved from original file
 const mockNotifications: NotificationItem[] = [

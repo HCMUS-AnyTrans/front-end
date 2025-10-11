@@ -13,7 +13,7 @@ import {
   Trash2,
   RefreshCw,
 } from 'lucide-react';
-import { TranslationItem, StatusConfig } from '@/src/types/translation-history';
+import { TranslationItem, StatusConfig } from '@/types/translation-history';
 
 interface TranslationHistoryRowProps {
   item: TranslationItem;

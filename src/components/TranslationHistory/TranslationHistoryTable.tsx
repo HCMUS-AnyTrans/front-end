@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { TranslationItem } from '@/src/types/translation-history';
+import { TranslationItem } from '@/types/translation-history';
 import TranslationHistoryRow from './TranslationHistoryRow';
 import TranslationHistoryEmpty from './TranslationHistoryEmpty';
 import TranslationHistoryPagination from './TranslationHistoryPagination';

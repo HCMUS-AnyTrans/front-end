@@ -22,14 +22,14 @@ import {
   StepUpload,
   StepReview,
   SubtitleStepConfigure,
-} from '@/src/components/Translation';
+} from '@/components/Translation';
 import type {
   TranslationStep,
   StepDef,
   SubtitleFile,
   MovieContext,
   SubtitleEntry,
-} from '@/src/types/translation';
+} from '@/types/translation';
 
 export default function SubtitleTranslationClient() {
   const [currentStep, setCurrentStep] = useState<TranslationStep>('upload'); // 'upload' | 'configure' | 'review'

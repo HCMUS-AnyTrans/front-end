@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Calendar, CheckCircle, Download } from 'lucide-react';
-import { Invoice } from '@/src/types/account';
+import { Invoice } from '@/types/account';
 
 type BillingHistoryTableProps = {
   invoices: Invoice[];

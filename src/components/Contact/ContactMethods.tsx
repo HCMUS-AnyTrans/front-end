@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { BaseCard } from '@/src/components/Common';
-import { ContactMethodsProps } from '@/src/types/contact';
+import { BaseCard } from '@/components/Common';
+import { ContactMethodsProps } from '@/types/contact';
 
 export default function ContactMethods({ methods }: ContactMethodsProps) {
   const [isVisible, setIsVisible] = useState(false);

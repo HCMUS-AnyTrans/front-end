@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseHeader } from '@/src/components/Common';
+import { BaseHeader } from '@/components/Common';
 
 interface SupportHeaderProps {
   title: string;

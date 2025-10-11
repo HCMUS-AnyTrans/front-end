@@ -1,6 +1,6 @@
-import Header from '@/src/components/Header';
-import Footer from '@/src/components/Footer';
-import { BackgroundDecorations } from '@/src/components/Common';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { BackgroundDecorations } from '@/components/Common';
 import {
   FeatureGrid,
   PricingTabs,
@@ -8,7 +8,7 @@ import {
   Hero,
   Statistics,
   About,
-} from '@/src/components/HomePage';
+} from '@/components/HomePage';
 
 export default function Home() {
   return (

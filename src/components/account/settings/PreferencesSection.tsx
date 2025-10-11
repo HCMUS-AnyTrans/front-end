@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Preferences } from '@/src/types/account';
+import { Preferences } from '@/types/account';
 import {
   Bell,
   Smartphone,

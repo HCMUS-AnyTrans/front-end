@@ -12,7 +12,7 @@ import {
   ChevronRight,
   CreditCard,
 } from 'lucide-react';
-import { NotificationItem } from '@/src/types/notifications';
+import { NotificationItem } from '@/types/notifications';
 
 type Props = {
   notification: NotificationItem;

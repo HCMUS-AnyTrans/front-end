@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Sparkles } from 'lucide-react';
-import { AboutHeroProps } from '@/src/types/about';
+import { AboutHeroProps } from '@/types/about';
 
 export default function AboutHero({ stats }: AboutHeroProps) {
   const [isVisible, setIsVisible] = useState(false);

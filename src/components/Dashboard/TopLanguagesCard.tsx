@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Globe } from 'lucide-react';
-import { TopLanguageItem } from '@/src/types/dashboard';
+import { TopLanguageItem } from '@/types/dashboard';
 
 type TopLanguagesCardProps = {
   topLanguages: TopLanguageItem[];

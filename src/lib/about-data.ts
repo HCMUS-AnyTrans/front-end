@@ -16,7 +16,7 @@ import {
   Milestone,
   TeamMember,
   SocialLink,
-} from '@/src/types/about';
+} from '@/types/about';
 
 export const stats: Stat[] = [
   { number: '100+', label: 'Languages Supported' },

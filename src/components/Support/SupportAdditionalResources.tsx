@@ -1,6 +1,6 @@
 import React from 'react';
 import { CheckCircle, Book, ChevronRight } from 'lucide-react';
-import { AdditionalResource } from '@/src/types/support';
+import { AdditionalResource } from '@/types/support';
 
 interface SupportAdditionalResourcesProps {
   resources: AdditionalResource[];

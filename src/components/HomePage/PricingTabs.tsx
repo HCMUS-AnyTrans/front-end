@@ -5,8 +5,8 @@ import {
   PricingTabSelector,
   PricingGrid,
   PricingAnimations,
-} from '@/src/components/Pricing';
-import { personalPlans, enterprisePlans } from '@/src/lib/pricing-plans';
+} from '@/components/Pricing';
+import { personalPlans, enterprisePlans } from '@/lib/pricing-plans';
 
 export default function PricingTabs() {
   const [selectedTab, setSelectedTab] = useState<'personal' | 'enterprise'>(

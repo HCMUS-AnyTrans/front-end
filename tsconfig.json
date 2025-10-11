@@ -18,8 +18,12 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
+      "@/*": ["./src/*"],
+      "@/app/*": ["./app/*"],
+      "@/components/ui/*": ["./components/ui/*"],
+      "@/lib/utils": ["./lib/utils"],
       "@types/*": ["./src/types/*"],
       "@components/*": ["./src/components/*"],
       "@hooks/*": ["./src/hooks/*"],

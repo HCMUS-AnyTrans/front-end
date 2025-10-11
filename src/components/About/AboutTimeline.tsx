@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Calendar } from 'lucide-react';
-import { AboutTimelineProps } from '@/src/types/about';
+import { AboutTimelineProps } from '@/types/about';
 
 export default function AboutTimeline({ milestones }: AboutTimelineProps) {
   const [isVisible, setIsVisible] = useState(false);

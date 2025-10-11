@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ContactSocialProps } from '@/src/types/contact';
+import { ContactSocialProps } from '@/types/contact';
 
 export default function ContactSocial({ socialLinks }: ContactSocialProps) {
   const [isVisible, setIsVisible] = useState(false);

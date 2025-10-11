@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import Header from '@/src/components/Header';
-import Footer from '@/src/components/Footer';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import {
   ContactHero,
   ContactMethods,
@@ -10,14 +10,14 @@ import {
   ContactInfo,
   ContactSocial,
   ContactCTA,
-} from '@/src/components/Contact';
+} from '@/components/Contact';
 import {
   contactMethods,
   offices,
   socialLinks,
   reasons,
-} from '@/src/lib/contact-data';
-import { ContactFormData } from '@/src/types/contact';
+} from '@/lib/contact-data';
+import { ContactFormData } from '@/types/contact';
 
 export default function ContactPageClient() {
   const handleFormSubmit = (formData: ContactFormData) => {

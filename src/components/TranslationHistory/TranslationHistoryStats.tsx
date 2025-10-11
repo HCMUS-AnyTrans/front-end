@@ -1,5 +1,5 @@
 import React from 'react';
-import { TranslationHistoryStats as Stats } from '@/src/types/translation-history';
+import { TranslationHistoryStats as Stats } from '@/types/translation-history';
 
 interface TranslationHistoryStatsProps {
   stats: Stats;

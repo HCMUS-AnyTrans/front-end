@@ -9,13 +9,13 @@ import {
   Invoice,
   Session,
   Preferences,
-} from '@/src/types/account';
-import { BaseDialog, BaseDialogContent } from '@/src/components/Common';
+} from '@/types/account';
+import { BaseDialog, BaseDialogContent } from '@/components/Common';
 import {
   AccountDialogHeader,
   AccountSidebarTabs,
-} from '@/src/components/Account';
-import type { AccountTabId } from '@/src/components/Account/AccountSidebarTabs';
+} from '@/components/Account';
+import type { AccountTabId } from '@/components/Account/AccountSidebarTabs';
 
 import {
   ProfilePictureSection,
@@ -24,18 +24,18 @@ import {
   TwoFactorToggle,
   ActiveSessionsList,
   ProfileSaveBar,
-} from '@/src/components/Account/Profile';
-import type { ShowPasswords } from '@/src/components/Account/Profile/ChangePasswordSection';
+} from '@/components/Account/Profile';
+import type { ShowPasswords } from '@/components/Account/Profile/ChangePasswordSection';
 
 import {
   CurrentPlanCard,
   PaymentMethodsList,
   AddCardDialog,
   BillingHistoryTable,
-} from '@/src/components/Account/Billing';
+} from '@/components/Account/Billing';
 
-import { PreferencesSection } from '@/src/components/Account/Settings';
-import { useMediaQuery } from '@/src/hooks';
+import { PreferencesSection } from '@/components/Account/Settings';
+import { useMediaQuery } from '@/hooks';
 
 type AccountDialogProps = {
   open?: boolean;

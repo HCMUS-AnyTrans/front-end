@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { BaseSearchBar } from '@/src/components/Common';
+import { BaseSearchBar } from '@/components/Common';
 
 interface SupportSearchBarProps {
   searchQuery: string;

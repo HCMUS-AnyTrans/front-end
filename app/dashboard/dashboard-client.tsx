@@ -18,8 +18,8 @@ import {
   TopLanguagesCard,
   RecentActivityList,
   PromoBanner,
-} from '@/src/components/Dashboard';
-import { DashboardClientProps } from '@/src/types/dashboard';
+} from '@/components/Dashboard';
+import { DashboardClientProps } from '@/types/dashboard';
 
 export default function DashboardClient({
   recentActivity,

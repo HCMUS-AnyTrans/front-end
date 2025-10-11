@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { FileText, Download, Languages, Clock } from 'lucide-react';
-import type { SubtitleEntry } from '@/src/types/translation';
+import type { SubtitleEntry } from '@/types/translation';
 
 type ReviewVariant = 'document' | 'subtitle';
 

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Search } from 'lucide-react';
-import { NotificationFilter } from '@/src/types/notifications';
+import { NotificationFilter } from '@/types/notifications';
 
 type Props = {
   searchQuery: string;

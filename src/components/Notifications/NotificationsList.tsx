@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Bell } from 'lucide-react';
-import { NotificationItem } from '@/src/types/notifications';
+import { NotificationItem } from '@/types/notifications';
 import NotificationCard from './NotificationCard';
 
 type Props = {
