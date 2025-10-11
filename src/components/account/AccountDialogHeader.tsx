@@ -12,7 +12,7 @@ export default function AccountDialogHeader({
   onClose,
 }: AccountDialogHeaderProps) {
   return (
-    <div className="flex items-center justify-between px-8 py-6 border-b border-gray-200">
+    <div className="flex items-center justify-between border-b border-gray-200">
       <BaseHeader
         title="Account Settings"
         description="Manage your profile, billing and preferences"
@@ -21,7 +21,8 @@ export default function AccountDialogHeader({
       />
       <button
         onClick={onClose}
-        className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
+        className="w-9 h-9 md:w-10 md:h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors flex-shrink-0"
+        aria-label="Close dialog"
       >
         <X className="w-5 h-5 text-gray-500" />
       </button>

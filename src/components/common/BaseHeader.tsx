@@ -36,11 +36,13 @@ export default function BaseHeader({
         >
           <div>
             <h1
-              className={`${variant === 'dialog' ? 'text-2xl' : 'text-3xl'} font-bold text-gray-900 mb-2`}
+              className={`${variant === 'dialog' ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'} font-bold text-gray-900 mb-1 md:mb-2`}
             >
               {title}
             </h1>
-            <p className="text-sm text-gray-600">{description}</p>
+            <p className="text-xs md:text-sm text-gray-600 line-clamp-1 md:line-clamp-none">
+              {description}
+            </p>
           </div>
           {stats && stats.length > 0 && (
             <div className="flex items-center gap-6 text-sm">
