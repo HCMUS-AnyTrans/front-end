@@ -25,13 +25,13 @@ export default function NotificationsBulkActionsBar({
         <div className="flex items-center gap-2">
           <button
             onClick={onMarkSelectedRead}
-            className="px-3 py-1.5 text-sm font-medium text-blue-700 hover:bg-blue-100 rounded-lg transition-all"
+            className="px-3 py-1.5 text-sm font-medium text-blue-700 hover:bg-blue-100 rounded-lg transition-all cursor-pointer"
           >
             Mark as read
           </button>
           <button
             onClick={onArchiveSelected}
-            className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-200 rounded-lg transition-all"
+            className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-200 rounded-lg transition-all cursor-pointer"
             aria-label="Archive selected"
             title="Archive"
           >
@@ -39,7 +39,7 @@ export default function NotificationsBulkActionsBar({
           </button>
           <button
             onClick={onDeleteSelected}
-            className="px-3 py-1.5 text-sm font-medium text-red-700 hover:bg-red-100 rounded-lg transition-all"
+            className="px-3 py-1.5 text-sm font-medium text-red-700 hover:bg-red-100 rounded-lg transition-all cursor-pointer"
             aria-label="Delete selected"
             title="Delete"
           >

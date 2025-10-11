@@ -54,7 +54,7 @@ export default function ActiveSessionsList({
             {!session.current && (
               <button
                 onClick={() => onRevoke(session.id)}
-                className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-all cursor-pointer"
               >
                 Revoke
               </button>
@@ -66,7 +66,7 @@ export default function ActiveSessionsList({
       <div className="mt-4 pt-4 border-t border-gray-200">
         <button
           onClick={onSignOutAllOthers}
-          className="text-sm text-red-600 hover:text-red-700 font-medium flex items-center gap-2"
+          className="text-sm text-red-600 hover:text-red-700 font-medium flex items-center gap-2 cursor-pointer"
         >
           <Lock className="w-4 h-4" />
           Sign out all other sessions

@@ -63,7 +63,7 @@ function MobileTabs({ activeTab, onChange }: MobileTabsProps) {
           <button
             key={tab.id}
             onClick={() => onChange(tab.id)}
-            className={`flex-1 flex flex-col items-center gap-1 px-4 py-3 text-xs font-medium transition-all relative ${
+            className={`flex-1 flex flex-col items-center gap-1 px-4 py-3 text-xs font-medium transition-all relative cursor-pointer ${
               activeTab === tab.id
                 ? 'text-blue-600'
                 : 'text-gray-500 hover:text-gray-700'

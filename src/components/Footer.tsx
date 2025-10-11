@@ -92,7 +92,7 @@ export default function Footer() {
                   />
                   <button
                     onClick={handleSubmit}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-500 to-purple-600 text-white p-2 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-500 to-purple-600 text-white p-2 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
                   >
                     <Send size={18} />
                   </button>
@@ -176,7 +176,7 @@ export default function Footer() {
                         key={social.name}
                         onMouseEnter={() => setHoveredSocial(social.name)}
                         onMouseLeave={() => setHoveredSocial(null)}
-                        className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/30 transition-all duration-300 hover:scale-110 hover:shadow-lg group relative overflow-hidden"
+                        className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/30 transition-all duration-300 hover:scale-110 hover:shadow-lg group relative overflow-hidden cursor-pointer"
                         style={{
                           backgroundColor:
                             hoveredSocial === social.name

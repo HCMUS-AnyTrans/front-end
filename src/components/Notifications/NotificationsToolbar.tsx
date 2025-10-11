@@ -37,7 +37,7 @@ export default function NotificationsToolbar({
           <button
             key={filter.id}
             onClick={() => onSelectFilter(filter.id)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer ${
               activeFilter === filter.id
                 ? 'bg-blue-100 text-blue-700'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'

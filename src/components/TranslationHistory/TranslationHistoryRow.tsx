@@ -151,7 +151,7 @@ export default function TranslationHistoryRow({
           <div className="relative">
             <button
               onClick={onToggleActionMenu}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
             >
               <MoreVertical className="w-5 h-5 text-gray-400" />
             </button>
@@ -160,21 +160,21 @@ export default function TranslationHistoryRow({
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-10">
                 <button
                   onClick={() => onViewDetails(item.id)}
-                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3"
+                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer"
                 >
                   <Eye className="w-4 h-4" />
                   View Details
                 </button>
                 <button
                   onClick={() => onDownload(item.id)}
-                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3"
+                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer"
                 >
                   <Download className="w-4 h-4" />
                   Download
                 </button>
                 <button
                   onClick={() => onDelete(item.id)}
-                  className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3"
+                  className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 cursor-pointer"
                 >
                   <Trash2 className="w-4 h-4" />
                   Delete

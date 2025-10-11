@@ -47,7 +47,7 @@ export default function NotificationsHeader({
         {unreadCount > 0 && (
           <button
             onClick={onMarkAllRead}
-            className="inline-flex items-center gap-2 px-4 py-2.5 border-2 border-blue-600 text-blue-700 hover:bg-blue-50 rounded-xl font-semibold transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2.5 border-2 border-blue-600 text-blue-700 hover:bg-blue-50 rounded-xl font-semibold transition-all cursor-pointer"
           >
             <CheckCheck className="w-4 h-4" />
             Mark all read
@@ -57,7 +57,7 @@ export default function NotificationsHeader({
         <div className="relative">
           <button
             onClick={onToggleFilters}
-            className={`flex items-center gap-2 px-5 py-3 border rounded-xl font-medium transition-all ${
+            className={`flex items-center gap-2 px-5 py-3 border rounded-xl font-medium transition-all cursor-pointer ${
               filterType !== 'all'
                 ? 'bg-blue-50 border-blue-200 text-blue-700'
                 : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -106,7 +106,7 @@ export default function NotificationsHeader({
                     onFilterTypeChange(type.id);
                     onToggleFilters();
                   }}
-                  className={`w-full text-left px-4 py-2 text-sm transition-colors flex items-center justify-between ${
+                  className={`w-full text-left px-4 py-2 text-sm transition-colors flex items-center justify-between cursor-pointer ${
                     filterType === type.id
                       ? 'bg-blue-50 text-blue-700 font-medium'
                       : 'text-gray-700 hover:bg-gray-50'

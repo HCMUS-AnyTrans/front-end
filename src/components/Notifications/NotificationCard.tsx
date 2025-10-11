@@ -112,7 +112,7 @@ export default function NotificationCard({
               <div className="flex items-center gap-1 flex-shrink-0">
                 <button
                   onClick={onTogglePin}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-all"
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-all cursor-pointer"
                   title={notification.isPinned ? 'Unpin' : 'Pin'}
                 >
                   <Pin
@@ -125,7 +125,7 @@ export default function NotificationCard({
                 </button>
                 <button
                   onClick={onToggleRead}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-all"
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-all cursor-pointer"
                   title={
                     notification.isRead ? 'Mark as unread' : 'Mark as read'
                   }
@@ -138,7 +138,7 @@ export default function NotificationCard({
                 </button>
                 <button
                   onClick={onDelete}
-                  className="p-2 hover:bg-red-50 rounded-lg transition-all"
+                  className="p-2 hover:bg-red-50 rounded-lg transition-all cursor-pointer"
                   title="Delete"
                 >
                   <Trash2 className="w-4 h-4 text-gray-400 hover:text-red-600" />
@@ -186,7 +186,7 @@ export default function NotificationCard({
                 <span className="capitalize">{notification.category}</span>
               </div>
               {notification.category === 'translation' && (
-                <button className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1">
+                <button className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1 cursor-pointer">
                   View details
                   <ChevronRight className="w-3.5 h-3.5" />
                 </button>

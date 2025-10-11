@@ -51,14 +51,14 @@ export default function CurrentPlanCard({
       <div className="flex gap-3 mt-6">
         <button
           onClick={onUpgrade}
-          className="flex-1 bg-white hover:bg-blue-50 text-blue-700 px-4 py-2.5 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2"
+          className="flex-1 bg-white hover:bg-blue-50 text-blue-700 px-4 py-2.5 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer"
         >
           <TrendingUp className="w-4 h-4" />
           Upgrade Plan
         </button>
         <button
           onClick={onCancelPlan}
-          className="px-4 py-2.5 bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded-lg font-semibold text-sm transition-all"
+          className="px-4 py-2.5 bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded-lg font-semibold text-sm transition-all cursor-pointer"
         >
           Cancel Plan
         </button>

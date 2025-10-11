@@ -26,7 +26,7 @@ export default function ProfilePictureSection({
               .map((n) => n[0])
               .join('')}
           </div>
-          <button className="absolute -bottom-2 -right-2 w-10 h-10 bg-white border-2 border-blue-600 text-blue-600 rounded-full flex items-center justify-center hover:bg-blue-50 transition-colors shadow-lg">
+          <button className="absolute -bottom-2 -right-2 w-10 h-10 bg-white border-2 border-blue-600 text-blue-600 rounded-full flex items-center justify-center hover:bg-blue-50 transition-colors shadow-lg cursor-pointer">
             <Camera className="w-5 h-5" />
           </button>
         </div>

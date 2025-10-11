@@ -32,7 +32,7 @@ export default function SupportContactForm({
       </div>
       <button
         type="submit"
-        className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-2.5 rounded-lg font-semibold shadow-lg transition-all"
+        className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-2.5 rounded-lg font-semibold shadow-lg transition-all cursor-pointer"
       >
         <Send className="w-4 h-4" />
         Send Message

@@ -10,7 +10,7 @@ export default function MobileHeader({ isOpen, onToggle }: MobileHeaderProps) {
       <div className="flex items-center justify-between">
         <button
           onClick={onToggle}
-          className="p-2 hover:bg-gray-100 rounded-lg"
+          className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
           aria-label="Toggle menu"
         >
           {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

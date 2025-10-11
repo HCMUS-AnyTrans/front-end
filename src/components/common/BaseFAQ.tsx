@@ -58,7 +58,7 @@ export default function BaseFAQ({
         >
           <button
             onClick={() => onToggle?.(openIndex === idx ? null : idx)}
-            className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+            className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors cursor-pointer"
           >
             <div className="flex items-center gap-3 flex-1 pr-4">
               <HelpCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />

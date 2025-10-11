@@ -24,7 +24,7 @@ export default function SupportAdditionalResources({
           <h3 className="font-semibold text-gray-900 mb-2">{resource.title}</h3>
           <p className="text-sm text-gray-600 mb-3">{resource.description}</p>
           <button
-            className={`text-sm ${resource.textColor} font-medium hover:${resource.hoverTextColor} flex items-center gap-1`}
+            className={`text-sm ${resource.textColor} font-medium hover:${resource.hoverTextColor} flex items-center gap-1 cursor-pointer`}
           >
             {resource.actionText}
             <ChevronRight className="w-4 h-4" />

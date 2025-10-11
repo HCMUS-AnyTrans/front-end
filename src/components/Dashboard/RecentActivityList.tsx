@@ -14,7 +14,7 @@ export default function RecentActivityList({ items }: RecentActivityListProps) {
       <div className="px-4 py-3 sm:px-6 sm:py-4 border-b border-gray-200">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-bold text-gray-900">Recent Activity</h3>
-          <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+          <button className="text-sm text-blue-600 hover:text-blue-700 font-medium cursor-pointer">
             View all
           </button>
         </div>

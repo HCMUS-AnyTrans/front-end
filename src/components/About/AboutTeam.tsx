@@ -55,13 +55,13 @@ export default function AboutTeam({ team }: AboutTeamProps) {
               </p>
               <p className="text-sm text-gray-600 mb-4">{member.bio}</p>
               <div className="flex items-center gap-2">
-                <button className="w-8 h-8 bg-gray-100 hover:bg-[#4169E1]/10 rounded-lg flex items-center justify-center transition-all group">
+                <button className="w-8 h-8 bg-gray-100 hover:bg-[#4169E1]/10 rounded-lg flex items-center justify-center transition-all group cursor-pointer">
                   <Linkedin className="w-4 h-4 text-gray-600 group-hover:text-[#4169E1]" />
                 </button>
-                <button className="w-8 h-8 bg-gray-100 hover:bg-[#4169E1]/10 rounded-lg flex items-center justify-center transition-all group">
+                <button className="w-8 h-8 bg-gray-100 hover:bg-[#4169E1]/10 rounded-lg flex items-center justify-center transition-all group cursor-pointer">
                   <Twitter className="w-4 h-4 text-gray-600 group-hover:text-[#4169E1]" />
                 </button>
-                <button className="w-8 h-8 bg-gray-100 hover:bg-[#4169E1]/10 rounded-lg flex items-center justify-center transition-all group">
+                <button className="w-8 h-8 bg-gray-100 hover:bg-[#4169E1]/10 rounded-lg flex items-center justify-center transition-all group cursor-pointer">
                   <Mail className="w-4 h-4 text-gray-600 group-hover:text-[#4169E1]" />
                 </button>
               </div>

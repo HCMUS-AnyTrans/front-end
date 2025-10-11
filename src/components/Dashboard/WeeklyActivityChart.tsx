@@ -76,7 +76,7 @@ export default function WeeklyActivityChart({
                   prev === 'document' ? 'all' : 'document'
                 )
               }
-              className={`px-3 py-1.5 rounded-lg border text-sm font-medium ${
+              className={`px-3 py-1.5 rounded-lg border text-sm font-medium cursor-pointer ${
                 weeklyFilter === 'document'
                   ? 'bg-blue-600 text-white border-blue-600'
                   : 'border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -90,7 +90,7 @@ export default function WeeklyActivityChart({
                   prev === 'subtitle' ? 'all' : 'subtitle'
                 )
               }
-              className={`px-3 py-1.5 rounded-lg border text-sm font-medium ${
+              className={`px-3 py-1.5 rounded-lg border text-sm font-medium cursor-pointer ${
                 weeklyFilter === 'subtitle'
                   ? 'bg-blue-600 text-white border-blue-600'
                   : 'border-gray-300 text-gray-700 hover:bg-gray-50'

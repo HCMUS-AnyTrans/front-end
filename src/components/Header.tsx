@@ -85,7 +85,7 @@ export default function Header() {
               <button
                 onMouseEnter={() => setIsDropdownOpen(true)}
                 onMouseLeave={() => setIsDropdownOpen(false)}
-                className={`relative flex items-center gap-1.5 px-3 xl:px-5 py-2.5 rounded-lg font-semibold text-sm xl:text-[15px] transition-all duration-300 ${
+                className={`relative flex items-center gap-1.5 px-3 xl:px-5 py-2.5 rounded-lg font-semibold text-sm xl:text-[15px] transition-all duration-300 cursor-pointer ${
                   isActive('/features')
                     ? 'text-[#4169E1]'
                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
@@ -214,7 +214,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-all duration-300 active:scale-95"
+            className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-all duration-300 active:scale-95 cursor-pointer"
             aria-label="Toggle mobile menu"
             aria-expanded={isMobileMenuOpen}
           >
@@ -247,7 +247,7 @@ export default function Header() {
           <h2 className="font-bold text-xl text-white">Menu</h2>
           <button
             onClick={closeMobileMenu}
-            className="p-2 rounded-lg text-white hover:bg-white/20 transition-all duration-300 active:scale-95"
+            className="p-2 rounded-lg text-white hover:bg-white/20 transition-all duration-300 active:scale-95 cursor-pointer"
             aria-label="Close menu"
           >
             <X className="w-6 h-6" />
@@ -276,7 +276,7 @@ export default function Header() {
             <div>
               <button
                 onClick={() => setIsMobileFeaturesOpen(!isMobileFeaturesOpen)}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer ${
                   isActive('/features')
                     ? 'bg-gradient-to-r from-blue-50 to-indigo-50 text-[#4169E1] shadow-sm'
                     : 'text-gray-700 hover:bg-gray-50 active:scale-98'

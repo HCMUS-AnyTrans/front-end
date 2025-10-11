@@ -218,7 +218,7 @@ export default function BaseCard({
             {cta && (
               <button
                 onClick={onCtaClick}
-                className={`w-full py-3.5 rounded-xl font-semibold transition-all mb-6 ${
+                className={`w-full py-3.5 rounded-xl font-semibold transition-all mb-6 cursor-pointer ${
                   popular
                     ? 'bg-gradient-to-r from-gradient-from to-gradient-to hover:from-gradient-to hover:to-gradient-from text-primary-foreground shadow-lg'
                     : 'bg-muted hover:bg-accent text-foreground'

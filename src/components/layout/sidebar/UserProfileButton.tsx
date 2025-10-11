@@ -12,7 +12,7 @@ export default function UserProfileButton({
     <div className="p-2">
       <button
         onClick={onOpenAccount}
-        className="w-full flex items-center gap-3 p-3 border-t border-gray-200 hover:bg-gray-50 rounded-lg text-left"
+        className="w-full flex items-center gap-3 p-3 border-t border-gray-200 hover:bg-gray-50 rounded-lg text-left cursor-pointer"
         aria-label="Open account settings"
       >
         <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-pink-500 rounded-full flex items-center justify-center">

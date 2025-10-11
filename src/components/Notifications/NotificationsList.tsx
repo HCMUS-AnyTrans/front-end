@@ -47,7 +47,7 @@ export default function NotificationsList({
         {activeFilter !== 'all' && (
           <button
             onClick={onResetFilterToAll}
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all"
+            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all cursor-pointer"
           >
             View all notifications
           </button>

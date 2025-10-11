@@ -38,7 +38,7 @@ export default function ChangePasswordSection({
               />
               <button
                 onClick={() => onToggle('current')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer"
               >
                 {show.current ? (
                   <EyeOff className="w-5 h-5" />
@@ -61,7 +61,7 @@ export default function ChangePasswordSection({
                 />
                 <button
                   onClick={() => onToggle('new')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer"
                 >
                   {show.new ? (
                     <EyeOff className="w-5 h-5" />
@@ -83,7 +83,7 @@ export default function ChangePasswordSection({
                 />
                 <button
                   onClick={() => onToggle('confirm')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer"
                 >
                   {show.confirm ? (
                     <EyeOff className="w-5 h-5" />

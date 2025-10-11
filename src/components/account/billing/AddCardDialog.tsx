@@ -36,7 +36,7 @@ export default function AddCardDialog({
           </h3>
           <button
             onClick={() => onOpenChange(false)}
-            className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center"
+            className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer"
           >
             <X className="w-5 h-5 text-gray-500" />
           </button>
@@ -122,7 +122,7 @@ export default function AddCardDialog({
           <div className="flex gap-3 pt-4">
             <button
               onClick={() => onOpenChange(false)}
-              className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all"
+              className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all cursor-pointer"
             >
               Cancel
             </button>
@@ -131,7 +131,7 @@ export default function AddCardDialog({
                 onSubmit({ cardNumber, month, year, cvc, cardholder });
                 onOpenChange(false);
               }}
-              className="flex-1 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-sm font-semibold transition-all"
+              className="flex-1 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-sm font-semibold transition-all cursor-pointer"
             >
               Add Card
             </button>

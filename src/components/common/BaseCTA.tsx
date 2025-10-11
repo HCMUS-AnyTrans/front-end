@@ -74,7 +74,10 @@ export default function BaseCTA({
     }
 
     return (
-      <button onClick={button.onClick} className={baseClass}>
+      <button
+        onClick={button.onClick}
+        className={`${baseClass} cursor-pointer`}
+      >
         {content}
       </button>
     );
