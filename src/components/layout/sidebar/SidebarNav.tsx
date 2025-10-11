@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { SidebarNavProps } from '@/src/types/sidebar';
+import { SidebarNavProps } from '@/types/sidebar';
 
 export default function SidebarNav({ items, isActive }: SidebarNavProps) {
   return (

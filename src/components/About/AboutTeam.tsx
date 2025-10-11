@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Linkedin, Twitter, Mail } from 'lucide-react';
-import { AboutTeamProps } from '@/src/types/about';
+import { AboutTeamProps } from '@/types/about';
 
 export default function AboutTeam({ team }: AboutTeamProps) {
   const [isVisible, setIsVisible] = useState(false);

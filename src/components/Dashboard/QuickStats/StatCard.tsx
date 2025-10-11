@@ -1,7 +1,7 @@
 'use client';
 
 import React, { ReactNode } from 'react';
-import { BaseCard } from '@/src/components/Common';
+import { BaseCard } from '@/components/Common';
 
 export type StatCardProps = {
   icon: ReactNode;

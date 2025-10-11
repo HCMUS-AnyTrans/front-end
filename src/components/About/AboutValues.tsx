@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { BaseCard } from '@/src/components/Common';
-import { AboutValuesProps } from '@/src/types/about';
+import { BaseCard } from '@/components/Common';
+import { AboutValuesProps } from '@/types/about';
 
 export default function AboutValues({ values }: AboutValuesProps) {
   const [isVisible, setIsVisible] = useState(false);

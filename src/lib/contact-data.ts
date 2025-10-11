@@ -14,7 +14,7 @@ import {
   Github,
   Youtube,
 } from 'lucide-react';
-import { ContactMethod, Office, SocialLink, Reason } from '@/src/types/contact';
+import { ContactMethod, Office, SocialLink, Reason } from '@/types/contact';
 
 export const contactMethods: ContactMethod[] = [
   {

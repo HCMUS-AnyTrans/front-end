@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { X } from 'lucide-react';
-import { BaseDialog, BaseDialogContent } from '@/src/components/Common';
+import { BaseDialog, BaseDialogContent } from '@/components/Common';
 
 type AddCardDialogProps = {
   open: boolean;

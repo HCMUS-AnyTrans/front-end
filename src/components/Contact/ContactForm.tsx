@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Send, CheckCircle2 } from 'lucide-react';
-import { ContactFormData, ContactFormProps } from '@/src/types/contact';
+import { ContactFormData, ContactFormProps } from '@/types/contact';
 
 export default function ContactForm({ onSubmit }: ContactFormProps) {
   const [formData, setFormData] = useState<ContactFormData>({

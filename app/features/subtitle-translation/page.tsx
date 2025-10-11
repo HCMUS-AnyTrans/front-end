@@ -1,4 +1,4 @@
-import Sidebar from '@/src/components/Layout/Sidebar/Sidebar';
+import Sidebar from '@/components/Layout/Sidebar/Sidebar';
 import SubtitleTranslationClient from './subtitle-translation-interface';
 
 export const dynamic = 'force-static';

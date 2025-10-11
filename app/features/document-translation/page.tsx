@@ -1,5 +1,5 @@
 // FILE: app/features/document-translation/page.tsx
-import Sidebar from '@/src/components/Layout/Sidebar/Sidebar';
+import Sidebar from '@/components/Layout/Sidebar/Sidebar';
 import DocumentTranslatorClient from './document-translator-interface';
 
 export const dynamic = 'force-static';

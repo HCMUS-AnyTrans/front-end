@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import Header from '@/src/components/Header';
-import Footer from '@/src/components/Footer';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import {
   AboutHero,
   AboutStory,
@@ -11,14 +11,14 @@ import {
   AboutTeam,
   AboutCTA,
   AboutSocial,
-} from '@/src/components/About';
+} from '@/components/About';
 import {
   stats,
   coreValues,
   milestones,
   team,
   socialLinks,
-} from '@/src/lib/about-data';
+} from '@/lib/about-data';
 import { Target, Globe } from 'lucide-react';
 
 export default function AboutPageClient() {

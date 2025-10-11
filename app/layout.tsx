@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Nunito } from 'next/font/google';
 import './globals.css';
-import { AccountDialogProvider } from '@/src/contexts/AccountDialogContext';
+import { AccountDialogProvider } from '@/contexts/AccountDialogContext';
 import { Toaster } from 'sonner';
 
 const inter = Inter({

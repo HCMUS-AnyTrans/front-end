@@ -1,11 +1,14 @@
 import { CheckEmailClient } from './check-email-client';
 
 interface CheckEmailPageProps {
-  searchParams: {
+  searchParams: Promise<{
     email?: string;
-  };
+  }>;
 }
 
-export default function CheckEmailPage({ searchParams }: CheckEmailPageProps) {
-  return <CheckEmailClient email={searchParams.email} />;
+export default async function CheckEmailPage({
+  searchParams,
+}: CheckEmailPageProps) {
+  const params = await searchParams;
+  return <CheckEmailClient email={params.email} />;
 }

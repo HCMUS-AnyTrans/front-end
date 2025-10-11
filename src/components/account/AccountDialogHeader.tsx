@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { X } from 'lucide-react';
-import { BaseHeader } from '@/src/components/Common';
+import { BaseHeader } from '@/components/Common';
 
 type AccountDialogHeaderProps = {
   onClose: () => void;

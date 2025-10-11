@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { HelpCircle } from 'lucide-react';
-import { FAQ, Category } from '@/src/types/support';
-import { BaseFAQ } from '@/src/components/Common';
+import { FAQ, Category } from '@/types/support';
+import { BaseFAQ } from '@/components/Common';
 
 interface SupportFAQSectionProps {
   title: string;

@@ -11,7 +11,7 @@ import {
   Settings,
   CheckCircle,
 } from 'lucide-react';
-import { Sidebar } from '@/src/components/Layout';
+import { Sidebar } from '@/components/Layout';
 import {
   SupportHeader,
   SupportSearchBar,
@@ -19,13 +19,13 @@ import {
   SupportFAQSection,
   SupportContactForm,
   SupportAdditionalResources,
-} from '@/src/components/Support';
+} from '@/components/Support';
 import {
   FAQ,
   Category,
   ContactForm,
   AdditionalResource,
-} from '@/src/types/support';
+} from '@/types/support';
 
 export default function SupportClient() {
   const [searchQuery, setSearchQuery] = useState('');

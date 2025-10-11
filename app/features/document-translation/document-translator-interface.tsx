@@ -20,12 +20,12 @@ import {
   StepUpload,
   StepReview,
   DocumentStepConfigure,
-} from '@/src/components/Translation';
+} from '@/components/Translation';
 import type {
   TranslationStep,
   StepDef,
   DocumentFile,
-} from '@/src/types/translation';
+} from '@/types/translation';
 export default function DocumentTranslatorClient() {
   const [currentStep, setCurrentStep] = useState<TranslationStep>('upload');
   const [hasDocument, setHasDocument] = useState(false);

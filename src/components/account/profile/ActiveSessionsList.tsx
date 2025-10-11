@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Smartphone, Lock } from 'lucide-react';
-import { Session } from '@/src/types/account';
+import { Session } from '@/types/account';
 
 type ActiveSessionsListProps = {
   sessions: Session[];

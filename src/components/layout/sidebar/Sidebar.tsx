@@ -11,7 +11,7 @@ import {
   Bell,
   Info,
 } from 'lucide-react';
-import { AccountDialog } from '@/src/components/Account';
+import { AccountDialog } from '@/components/Account';
 import {
   SidebarLogo,
   SidebarNav,
@@ -20,8 +20,8 @@ import {
   UserProfileButton,
   MobileHeader,
   MobileOverlay,
-} from '@/src/components/Layout/Sidebar';
-import type { NavItem, SidebarProps } from '@/src/types/sidebar';
+} from '@/components/Layout/Sidebar';
+import type { NavItem, SidebarProps } from '@/types/sidebar';
 
 const navigationItems: NavItem[] = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },

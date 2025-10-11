@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { Send, Clock } from 'lucide-react';
-import { BaseForm } from '@/src/components/Common';
-import { ContactForm } from '@/src/types/support';
+import { BaseForm } from '@/components/Common';
+import { ContactForm } from '@/types/support';
 
 interface SupportContactFormProps {
   title: string;

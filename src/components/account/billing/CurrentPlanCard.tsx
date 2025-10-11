@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { TrendingUp } from 'lucide-react';
-import { Plan } from '@/src/types/account';
+import { Plan } from '@/types/account';
 
 type CurrentPlanCardProps = {
   plan: Plan;

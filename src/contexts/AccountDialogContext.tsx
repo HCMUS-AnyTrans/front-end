@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import AccountDialog from '@/src/components/Account/AccountDialog';
+import AccountDialog from '@/components/Account/AccountDialog';
 
 type TabType = 'profile' | 'billing' | 'settings';
 
@@ -62,12 +62,7 @@ export const AccountDialogProvider = ({
   return (
     <AccountDialogContext.Provider value={value}>
       {children}
-      <AccountDialog
-        open={isOpen}
-        onOpenChange={setIsOpen}
-        defaultTab={defaultTab}
-        userData={userData}
-      />
+      <AccountDialog open={isOpen} onOpenChange={setIsOpen} />
     </AccountDialogContext.Provider>
   );
 };

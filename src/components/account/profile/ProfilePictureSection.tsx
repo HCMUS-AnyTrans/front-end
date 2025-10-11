@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Camera, Upload } from 'lucide-react';
-import { UserData } from '@/src/types/account';
+import { UserData } from '@/types/account';
 
 type ProfilePictureSectionProps = {
   user: UserData;

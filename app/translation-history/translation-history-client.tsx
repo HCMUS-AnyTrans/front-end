@@ -1,14 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Sidebar } from '@/src/components/Layout';
+import { Sidebar } from '@/components/Layout';
 import {
   TranslationHistoryHeader,
   TranslationHistoryStats,
   TranslationHistoryToolbar,
   TranslationHistoryTable,
-} from '@/src/components/TranslationHistory';
-import { TranslationItem } from '@/src/types/translation-history';
+} from '@/components/TranslationHistory';
+import { TranslationItem } from '@/types/translation-history';
 
 export default function TranslationHistoryClient() {
   const [searchQuery, setSearchQuery] = useState<string>('');

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { CreditCard, Star, MoreHorizontal } from 'lucide-react';
-import { PaymentMethod } from '@/src/types/account';
+import { PaymentMethod } from '@/types/account';
 
 type PaymentMethodsListProps = {
   methods: PaymentMethod[];

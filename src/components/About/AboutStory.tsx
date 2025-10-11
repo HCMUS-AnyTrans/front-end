@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Target, Globe } from 'lucide-react';
-import { AboutStoryProps } from '@/src/types/about';
+import { AboutStoryProps } from '@/types/about';
 
 export default function AboutStory({ mission, vision }: AboutStoryProps) {
   const MissionIcon = mission.icon;

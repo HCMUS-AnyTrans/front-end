@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { FileText, Languages, Clock, CheckCircle2 } from 'lucide-react';
-import { RecentActivityItem } from './types';
+import { RecentActivityItem } from '@/types/dashboard';
 
 type RecentActivityListProps = {
   items: RecentActivityItem[];

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MessageCircle, Mail, Book } from 'lucide-react';
-import { BaseActionCard } from '@/src/components/Common';
+import { BaseActionCard } from '@/components/Common';
 
 interface SupportQuickActionsProps {
   onLiveChat: () => void;

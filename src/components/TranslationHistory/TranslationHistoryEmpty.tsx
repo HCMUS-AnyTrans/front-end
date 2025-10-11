@@ -1,7 +1,7 @@
 // FILE: components/translation-history/TranslationHistoryEmpty.tsx
 import React from 'react';
 import { FileText } from 'lucide-react';
-import { BaseEmptyState } from '@/src/components/Common';
+import { BaseEmptyState } from '@/components/Common';
 
 interface TranslationHistoryEmptyProps {
   searchQuery: string;

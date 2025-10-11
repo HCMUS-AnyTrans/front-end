@@ -3,7 +3,7 @@
 import React from 'react';
 import { Upload, FileText, Film } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import BaseFeatureCard from '@/src/components/Translation/shared/BaseFeatureCard';
+import BaseFeatureCard from '@/components/Translation/shared/BaseFeatureCard';
 
 type UploadVariant = 'document' | 'subtitle';
 
