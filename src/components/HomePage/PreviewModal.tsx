@@ -37,10 +37,10 @@ export default function PreviewModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-6xl w-[90vw] h-[80vh] max-h-[800px] p-0">
         <DialogHeader className="px-6 py-4 border-b">
-          <DialogTitle className="text-xl font-semibold text-[#19398f] font-nunito">
+          <DialogTitle className="text-xl font-semibold text-brand-primary-dark font-nunito">
             Preview Translation
           </DialogTitle>
-          <DialogDescription className="text-sm text-[#717680] font-nunito">
+          <DialogDescription className="text-sm text-muted-foreground font-nunito">
             Compare your original document with the translated version
           </DialogDescription>
         </DialogHeader>
@@ -48,15 +48,15 @@ export default function PreviewModal({
         {/* Split view content */}
         <div className="flex-1 flex flex-col lg:flex-row min-h-0">
           {/* Original text panel */}
-          <div className="flex-1 flex flex-col lg:border-r border-gray-200 min-h-0 lg:min-h-[400px]">
-            <div className="px-4 py-3 bg-gray-50 border-b">
-              <h3 className="font-semibold text-sm text-[#414651] font-nunito">
+          <div className="flex-1 flex flex-col lg:border-r border-border min-h-0 lg:min-h-[400px]">
+            <div className="px-4 py-3 bg-muted border-b">
+              <h3 className="font-semibold text-sm text-muted-foreground font-nunito">
                 Original
               </h3>
             </div>
             <div className="flex-1 p-4 overflow-auto min-h-[200px] lg:min-h-0">
               <div className="prose prose-sm max-w-none">
-                <div className="whitespace-pre-wrap text-sm leading-relaxed text-gray-800 font-nunito">
+                <div className="whitespace-pre-wrap text-sm leading-relaxed text-foreground font-nunito">
                   {originalText}
                 </div>
               </div>
@@ -64,15 +64,15 @@ export default function PreviewModal({
           </div>
 
           {/* Translated text panel */}
-          <div className="flex-1 flex flex-col min-h-0 lg:min-h-[400px] border-t lg:border-t-0 lg:border-l border-gray-200">
-            <div className="px-4 py-3 bg-gray-50 border-b">
-              <h3 className="font-semibold text-sm text-[#414651] font-nunito">
+          <div className="flex-1 flex flex-col min-h-0 lg:min-h-[400px] border-t lg:border-t-0 lg:border-l border-border">
+            <div className="px-4 py-3 bg-muted border-b">
+              <h3 className="font-semibold text-sm text-muted-foreground font-nunito">
                 Translated
               </h3>
             </div>
             <div className="flex-1 p-4 overflow-auto min-h-[200px] lg:min-h-0">
               <div className="prose prose-sm max-w-none">
-                <div className="whitespace-pre-wrap text-sm leading-relaxed text-gray-800 font-nunito">
+                <div className="whitespace-pre-wrap text-sm leading-relaxed text-foreground font-nunito">
                   {translatedText}
                 </div>
               </div>
@@ -81,7 +81,7 @@ export default function PreviewModal({
         </div>
 
         {/* Footer with action buttons */}
-        <DialogFooter className="px-6 py-4 border-t bg-gray-50">
+        <DialogFooter className="px-6 py-4 border-t bg-muted">
           <div className="flex gap-3 w-full justify-end">
             <Button
               variant="outline"
@@ -92,7 +92,7 @@ export default function PreviewModal({
             </Button>
             <Button
               onClick={handleDownload}
-              className="bg-[#19398f] hover:bg-[#142457] text-white font-semibold font-nunito flex items-center gap-2"
+              className="bg-brand-primary-dark hover:bg-brand-primary text-primary-foreground font-semibold font-nunito flex items-center gap-2"
             >
               <Download className="h-4 w-4" />
               Download as DOCX

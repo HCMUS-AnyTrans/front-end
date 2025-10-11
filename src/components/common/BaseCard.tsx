@@ -34,7 +34,7 @@ interface BaseCardProps {
 
 export default function BaseCard({
   icon,
-  iconWrapperClass = 'bg-blue-100',
+  iconWrapperClass = 'bg-brand-100',
   title,
   content,
   variant = 'default',
@@ -56,30 +56,30 @@ export default function BaseCard({
   const getCardClass = () => {
     switch (variant) {
       case 'stat':
-        return 'bg-white rounded-xl p-6 border border-gray-200';
+        return 'bg-card rounded-xl p-6 border border-border';
       case 'feature':
-        return 'bg-white rounded-xl p-6 border border-gray-200';
+        return 'bg-card rounded-xl p-6 border border-border';
       case 'language':
-        return 'bg-white rounded-2xl border border-gray-200 p-6';
+        return 'bg-card rounded-2xl border border-border p-6';
       case 'pricing':
-        return `bg-white rounded-2xl overflow-hidden transition-all ${
+        return `bg-card rounded-2xl overflow-hidden transition-all ${
           popular
-            ? 'border-2 border-[#4169E1] shadow-2xl md:scale-105'
-            : 'border border-gray-200 shadow-lg hover:shadow-xl'
+            ? 'border-2 border-brand-primary-light shadow-2xl md:scale-105'
+            : 'border border-border shadow-lg hover:shadow-xl'
         }`;
       case 'value':
       case 'contact':
-        return 'bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-lg transition-all';
+        return 'bg-card rounded-2xl border border-border p-6 hover:shadow-lg transition-all';
       default:
-        return 'bg-white rounded-xl border border-gray-200';
+        return 'bg-card rounded-xl border border-border';
     }
   };
 
   const getColorClasses = () => {
     const colorMap: Record<string, string> = {
-      blue: 'bg-blue-50 text-blue-600',
+      blue: 'bg-brand-50 text-brand-primary',
       green: 'bg-green-50 text-green-600',
-      purple: 'bg-purple-50 text-purple-600',
+      purple: 'bg-accent/50 text-accent-foreground',
       pink: 'bg-pink-50 text-pink-600',
     };
     return colorMap[color] || colorMap.blue;
@@ -98,7 +98,7 @@ export default function BaseCard({
   return (
     <div className={`${getCardClass()} ${className}`}>
       {variant === 'pricing' && popular && (
-        <div className="bg-gradient-to-r from-[#4169E1] via-[#1e3a8a] to-[#4169E1] text-white text-center py-2 text-sm font-semibold">
+        <div className="bg-gradient-to-r from-gradient-from via-gradient-to to-gradient-from text-primary-foreground text-center py-2 text-sm font-semibold">
           ⭐ Most Popular
         </div>
       )}
@@ -142,8 +142,10 @@ export default function BaseCard({
         {variant === 'language' && (
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-1">{title}</h3>
-              <p className="text-sm text-gray-600">{description}</p>
+              <h3 className="text-lg font-bold text-foreground mb-1">
+                {title}
+              </h3>
+              <p className="text-sm text-muted-foreground">{description}</p>
             </div>
             {icon}
           </div>
@@ -159,25 +161,25 @@ export default function BaseCard({
 
         {variant === 'stat' && (
           <>
-            <p className="text-sm text-gray-600 mb-1">{title}</p>
-            <p className="text-2xl font-bold text-gray-900">{value}</p>
+            <p className="text-sm text-muted-foreground mb-1">{title}</p>
+            <p className="text-2xl font-bold text-foreground">{value}</p>
             {subtitle && (
-              <p className="text-xs text-gray-500 mt-2">{subtitle}</p>
+              <p className="text-xs text-muted-foreground mt-2">{subtitle}</p>
             )}
           </>
         )}
 
         {variant === 'feature' && (
           <>
-            <h3 className="font-semibold text-gray-900 mb-2">{title}</h3>
-            <p className="text-sm text-gray-600">{description}</p>
+            <h3 className="font-semibold text-foreground mb-2">{title}</h3>
+            <p className="text-sm text-muted-foreground">{description}</p>
           </>
         )}
 
         {variant === 'value' && (
           <>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <h3 className="text-lg font-bold text-foreground mb-2">{title}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
               {description}
             </p>
           </>
@@ -185,29 +187,29 @@ export default function BaseCard({
 
         {variant === 'contact' && (
           <>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
-            <p className="text-sm text-gray-600 mb-3">{description}</p>
-            <p className="text-base font-semibold text-gray-900">{contact}</p>
+            <h3 className="text-xl font-bold text-foreground mb-2">{title}</h3>
+            <p className="text-sm text-muted-foreground mb-3">{description}</p>
+            <p className="text-base font-semibold text-foreground">{contact}</p>
           </>
         )}
 
         {variant === 'pricing' && (
           <>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">{title}</h3>
-            <p className="text-sm text-gray-600 mb-6">{description}</p>
+            <h3 className="text-2xl font-bold text-foreground mb-2">{title}</h3>
+            <p className="text-sm text-muted-foreground mb-6">{description}</p>
 
             <div className="mb-6">
               {price !== null ? (
                 <div>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl sm:text-5xl font-bold text-gray-900">
+                    <span className="text-4xl sm:text-5xl font-bold text-foreground">
                       ${price}
                     </span>
-                    <span className="text-gray-600">{priceLabel}</span>
+                    <span className="text-muted-foreground">{priceLabel}</span>
                   </div>
                 </div>
               ) : (
-                <div className="text-3xl sm:text-4xl font-bold text-gray-900">
+                <div className="text-3xl sm:text-4xl font-bold text-foreground">
                   Contact us
                 </div>
               )}
@@ -218,8 +220,8 @@ export default function BaseCard({
                 onClick={onCtaClick}
                 className={`w-full py-3.5 rounded-xl font-semibold transition-all mb-6 ${
                   popular
-                    ? 'bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:from-[#1e3a8a] hover:to-[#4169E1] text-white shadow-lg'
-                    : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
+                    ? 'bg-gradient-to-r from-gradient-from to-gradient-to hover:from-gradient-to hover:to-gradient-from text-primary-foreground shadow-lg'
+                    : 'bg-muted hover:bg-accent text-foreground'
                 }`}
               >
                 {cta}
@@ -228,7 +230,7 @@ export default function BaseCard({
 
             {features && (
               <div className="space-y-3">
-                <p className="text-sm font-semibold text-gray-900 mb-4">
+                <p className="text-sm font-semibold text-foreground mb-4">
                   What's included:
                 </p>
                 {features.map((feature, idx) => (
@@ -236,10 +238,10 @@ export default function BaseCard({
                     {feature.included ? (
                       <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                     ) : (
-                      <X className="w-5 h-5 text-gray-300 flex-shrink-0 mt-0.5" />
+                      <X className="w-5 h-5 text-border flex-shrink-0 mt-0.5" />
                     )}
                     <span
-                      className={`text-sm ${feature.included ? 'text-gray-700' : 'text-gray-400'}`}
+                      className={`text-sm ${feature.included ? 'text-foreground' : 'text-muted-foreground'}`}
                     >
                       {feature.text}
                     </span>

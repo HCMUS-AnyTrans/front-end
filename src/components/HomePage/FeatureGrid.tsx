@@ -24,10 +24,10 @@ function FeatureCard({
 }: FeatureCardProps) {
   return (
     <div
-      className={`relative h-[560px] w-full max-w-[520px] rounded-3xl overflow-hidden bg-white cursor-pointer transition-all duration-700 ease-out border ${
+      className={`relative h-[560px] w-full max-w-[520px] rounded-3xl overflow-hidden bg-card cursor-pointer transition-all duration-700 ease-out border ${
         isHovered
           ? 'border-transparent shadow-2xl scale-[1.03]'
-          : 'border-gray-200 shadow-lg'
+          : 'border-border shadow-lg'
       }`}
       onMouseEnter={() => onHover?.(true)}
       onMouseLeave={() => onHover?.(false)}
@@ -65,7 +65,7 @@ function FeatureCard({
           >
             <div
               className={`transition-all duration-700 ${
-                isHovered ? 'text-white scale-110' : 'text-gray-700'
+                isHovered ? 'text-white scale-110' : 'text-foreground'
               }`}
             >
               {icon}
@@ -77,7 +77,7 @@ function FeatureCard({
             className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-700 ${
               isHovered
                 ? 'bg-white shadow-lg scale-110 rotate-45'
-                : 'bg-gray-100 scale-100'
+                : 'bg-muted scale-100'
             }`}
           >
             <ArrowRight
@@ -85,7 +85,9 @@ function FeatureCard({
               className={`transition-all duration-700 ${
                 isHovered ? '-rotate-45' : ''
               }`}
-              style={{ color: isHovered ? color : '#6B7280' }}
+              style={{
+                color: isHovered ? color : 'hsl(var(--muted-foreground))',
+              }}
               strokeWidth={2.5}
             />
           </div>
@@ -101,7 +103,7 @@ function FeatureCard({
           >
             {title}
           </h3>
-          <p className="text-gray-600 text-base leading-relaxed mb-8">
+          <p className="text-muted-foreground text-base leading-relaxed mb-8">
             {description}
           </p>
 
@@ -131,12 +133,12 @@ function FeatureCard({
                   <Check
                     size={14}
                     className={`transition-colors duration-500 ${
-                      isHovered ? 'text-white' : 'text-gray-600'
+                      isHovered ? 'text-white' : 'text-muted-foreground'
                     }`}
                     strokeWidth={3}
                   />
                 </div>
-                <span className="text-gray-700 text-[15px] font-medium leading-relaxed">
+                <span className="text-foreground text-[15px] font-medium leading-relaxed">
                   {feature}
                 </span>
               </div>
@@ -191,23 +193,23 @@ export default function FeatureGrid() {
   ];
 
   return (
-    <section className="w-full bg-gradient-to-br from-white via-gray-50 to-blue-50/30 py-24 relative overflow-hidden">
+    <section className="w-full bg-gradient-to-br from-background via-muted to-accent/30 py-24 relative overflow-hidden">
       {/* Decorative background elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-72 h-72 bg-purple-200/20 rounded-full blur-3xl" />
+      <div className="absolute top-20 left-10 w-72 h-72 bg-brand-200/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 right-10 w-72 h-72 bg-accent/40 rounded-full blur-3xl" />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center gap-16">
           {/* Header */}
           <div className="text-center max-w-3xl">
-            <h2 className="font-bold text-5xl lg:text-6xl leading-tight text-[#0F172A] mb-6">
+            <h2 className="font-bold text-5xl lg:text-6xl leading-tight text-foreground mb-6">
               Translation Tools That
               <br />
-              <span className="text-[#173fb6] inline-block transition-all duration-1000 ease-out">
+              <span className="text-brand-primary inline-block transition-all duration-1000 ease-out">
                 Work For You
               </span>
             </h2>
-            <p className="text-lg text-gray-600 leading-relaxed">
+            <p className="text-lg text-muted-foreground leading-relaxed">
               Experience the next generation of translation technology with our
               advanced AI-powered features
             </p>

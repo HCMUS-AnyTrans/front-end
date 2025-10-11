@@ -29,22 +29,22 @@ export default function BaseCTA({
   const getGradientClass = () => {
     switch (variant) {
       case 'pricing':
-        return 'bg-gradient-to-r from-[#4169E1] via-[#1e3a8a] to-[#4169E1]';
+        return 'bg-gradient-to-r from-gradient-from via-gradient-to to-gradient-from';
       case 'about':
-        return 'bg-gradient-to-r from-[#4169E1] via-[#1e3a8a] to-[#4169E1]';
+        return 'bg-gradient-to-r from-gradient-from via-gradient-to to-gradient-from';
       case 'contact':
-        return 'bg-gradient-to-r from-[#4169E1] via-[#1e3a8a] to-[#4169E1]';
+        return 'bg-gradient-to-r from-gradient-from via-gradient-to to-gradient-from';
       default:
-        return 'bg-gradient-to-r from-[#4169E1] via-[#1e3a8a] to-[#4169E1]';
+        return 'bg-gradient-to-r from-gradient-from via-gradient-to to-gradient-from';
     }
   };
 
   const getTextColor = () => {
-    return 'text-blue-100';
+    return 'text-brand-100';
   };
 
   const getButtonColor = () => {
-    return 'text-[#4169E1]';
+    return 'text-brand-primary-light';
   };
 
   const ButtonComponent = ({
@@ -55,8 +55,8 @@ export default function BaseCTA({
     isSecondary?: boolean;
   }) => {
     const baseClass = isSecondary
-      ? 'inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border-2 border-white/30 px-8 py-4 rounded-xl font-semibold transition-all'
-      : `inline-flex items-center gap-2 bg-white hover:bg-gray-100 ${getButtonColor()} px-8 py-4 rounded-xl font-semibold transition-all shadow-lg`;
+      ? 'inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-primary-foreground border-2 border-white/30 px-8 py-4 rounded-xl font-semibold transition-all'
+      : `inline-flex items-center gap-2 bg-card hover:bg-muted ${getButtonColor()} px-8 py-4 rounded-xl font-semibold transition-all shadow-lg`;
 
     const content = (
       <>
@@ -83,7 +83,7 @@ export default function BaseCTA({
   return (
     <section className={variant === 'pricing' ? 'mt-16' : ''}>
       <div
-        className={`${getGradientClass()} rounded-3xl p-8 sm:p-12 text-center text-white ${className}`}
+        className={`${getGradientClass()} rounded-3xl p-8 sm:p-12 text-center text-primary-foreground ${className}`}
       >
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold mb-4">{title}</h2>

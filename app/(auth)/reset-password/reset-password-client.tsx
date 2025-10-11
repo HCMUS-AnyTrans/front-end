@@ -5,9 +5,11 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { AuthShell } from '@/src/components/Auth/AuthShell';
-import { PasswordField } from '@/src/components/Auth/PasswordField';
-import { PasswordStrength } from '@/src/components/Auth/PasswordStrength';
+import {
+  AuthShell,
+  PasswordField,
+  PasswordStrength,
+} from '@/src/components/Auth';
 import { Button } from '@/components/ui/button';
 import {
   Form,

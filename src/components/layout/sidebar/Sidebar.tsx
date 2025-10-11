@@ -12,13 +12,15 @@ import {
   Info,
 } from 'lucide-react';
 import { AccountDialog } from '@/src/components/Account';
-import SidebarLogo from './SidebarLogo';
-import SidebarNav from './SidebarNav';
-import SecondaryNav from './SecondaryNav';
-import CreditSection from './CreditSection';
-import UserProfileButton from './UserProfileButton';
-import MobileHeader from './MobileHeader';
-import MobileOverlay from './MobileOverlay';
+import {
+  SidebarLogo,
+  SidebarNav,
+  SecondaryNav,
+  CreditSection,
+  UserProfileButton,
+  MobileHeader,
+  MobileOverlay,
+} from '@/src/components/Layout/Sidebar';
 import type { NavItem, SidebarProps } from '@/src/types/sidebar';
 
 const navigationItems: NavItem[] = [

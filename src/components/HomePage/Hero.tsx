@@ -15,14 +15,14 @@ export default function Hero() {
       {/* Background Decorations with animation */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
-          className="absolute top-20 right-10 w-64 h-64 bg-blue-200/20 rounded-full blur-3xl transition-all duration-1000 ease-out"
+          className="absolute top-20 right-10 w-64 h-64 bg-brand-200/20 rounded-full blur-3xl transition-all duration-1000 ease-out"
           style={{
             transform: isVisible ? 'scale(1)' : 'scale(0)',
             opacity: isVisible ? 1 : 0,
           }}
         />
         <div
-          className="absolute bottom-10 left-10 w-64 h-64 bg-purple-200/20 rounded-full blur-3xl transition-all duration-1000 ease-out"
+          className="absolute bottom-10 left-10 w-64 h-64 bg-accent/30 rounded-full blur-3xl transition-all duration-1000 ease-out"
           style={{
             transform: isVisible ? 'scale(1)' : 'scale(0)',
             opacity: isVisible ? 1 : 0,
@@ -46,7 +46,7 @@ export default function Hero() {
               <br />
               enhance your{' '}
               <span
-                className="text-[#173fb6] inline-block transition-all duration-1000 ease-out"
+                className="text-brand-primary inline-block transition-all duration-1000 ease-out"
                 style={{
                   transform: isVisible ? 'scale(1)' : 'scale(0.9)',
                   opacity: isVisible ? 1 : 0,
@@ -59,7 +59,7 @@ export default function Hero() {
           </div>
 
           <p
-            className="font-semibold text-base sm:text-lg leading-6 sm:leading-7 text-[#414651] max-w-[448px] font-nunito mx-auto lg:mx-0 transition-all duration-1000 ease-out"
+            className="font-semibold text-base sm:text-lg leading-6 sm:leading-7 text-muted-foreground max-w-[448px] font-nunito mx-auto lg:mx-0 transition-all duration-1000 ease-out"
             style={{
               transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
               opacity: isVisible ? 1 : 0,
@@ -78,11 +78,11 @@ export default function Hero() {
               transitionDelay: '500ms',
             }}
           >
-            <button className="bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] text-white hover:from-[#1e3a8a] hover:to-[#4169E1] rounded-xl h-[52px] w-[160px] font-semibold text-base cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-1">
+            <button className="bg-gradient-to-r from-gradient-from to-gradient-to text-primary-foreground hover:from-gradient-to hover:to-gradient-from rounded-xl h-[52px] w-[160px] font-semibold text-base cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-1">
               Free Trial
             </button>
 
-            <button className="border-2 border-[#4169E1] text-[#4169E1] hover:bg-gradient-to-r hover:from-[#4169E1] hover:to-[#1e3a8a] hover:border-transparent hover:text-white rounded-xl h-[52px] w-[160px] font-semibold text-base cursor-pointer transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-xl hover:scale-105 hover:-translate-y-1 group">
+            <button className="border-2 border-brand-primary-light text-brand-primary-light hover:bg-gradient-to-r hover:from-gradient-from hover:to-gradient-to hover:border-transparent hover:text-primary-foreground rounded-xl h-[52px] w-[160px] font-semibold text-base cursor-pointer transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-xl hover:scale-105 hover:-translate-y-1 group">
               <Play
                 size={20}
                 className="transition-transform duration-300 group-hover:scale-110"

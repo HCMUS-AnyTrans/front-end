@@ -10,29 +10,31 @@ import {
   Session,
   Preferences,
 } from '@/src/types/account';
-import BaseDialog, {
-  BaseDialogContent,
-} from '@/src/components/Common/BaseDialog';
-import { AccountDialogHeader } from '@/src/components/Account';
-import AccountSidebarTabs, {
-  AccountTabId,
-} from '@/src/components/Account/AccountSidebarTabs';
+import { BaseDialog, BaseDialogContent } from '@/src/components/Common';
+import {
+  AccountDialogHeader,
+  AccountSidebarTabs,
+} from '@/src/components/Account';
+import type { AccountTabId } from '@/src/components/Account/AccountSidebarTabs';
 
-import ProfilePictureSection from '@/src/components/Account/Profile/ProfilePictureSection';
-import PersonalInfoForm from '@/src/components/Account/Profile/PersonalInfoForm';
-import ChangePasswordSection, {
-  ShowPasswords,
-} from '@/src/components/Account/Profile/ChangePasswordSection';
-import TwoFactorToggle from '@/src/components/Account/Profile/TwoFactorToggle';
-import ActiveSessionsList from '@/src/components/Account/Profile/ActiveSessionsList';
-import ProfileSaveBar from '@/src/components/Account/Profile/ProfileSaveBar';
+import {
+  ProfilePictureSection,
+  PersonalInfoForm,
+  ChangePasswordSection,
+  TwoFactorToggle,
+  ActiveSessionsList,
+  ProfileSaveBar,
+} from '@/src/components/Account/Profile';
+import type { ShowPasswords } from '@/src/components/Account/Profile/ChangePasswordSection';
 
-import CurrentPlanCard from '@/src/components/Account/Billing/CurrentPlanCard';
-import PaymentMethodsList from '@/src/components/Account/Billing/PaymentMethodsList';
-import AddCardDialog from '@/src/components/Account/Billing/AddCardDialog';
-import BillingHistoryTable from '@/src/components/Account/Billing/BillingHistoryTable';
+import {
+  CurrentPlanCard,
+  PaymentMethodsList,
+  AddCardDialog,
+  BillingHistoryTable,
+} from '@/src/components/Account/Billing';
 
-import PreferencesSection from '@/src/components/Account/Settings/PreferencesSection';
+import { PreferencesSection } from '@/src/components/Account/Settings';
 
 type AccountDialogProps = {
   open?: boolean;

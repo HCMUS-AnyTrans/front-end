@@ -38,13 +38,13 @@ function FloatingCard({
       </div>
       <div className="flex flex-col flex-1 min-w-0">
         <div
-          className={`text-sm font-medium transition-colors duration-500 text-gray-500`}
+          className={`text-sm font-medium transition-colors duration-500 text-muted-foreground`}
         >
           {category}
         </div>
         <div
           className={`font-bold text-[15px] leading-tight transition-colors duration-500 ${
-            isHovered ? 'text-[#142457]' : 'text-[#142457]'
+            isHovered ? 'text-foreground' : 'text-foreground'
           }`}
         >
           {title}
@@ -60,28 +60,28 @@ export default function About() {
   return (
     <section className="w-full py-20 overflow-hidden relative">
       {/* Background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white via-[#F0F7FF] to-[#DDEBFF]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-brand-50 to-brand-100" />
 
       {/* Large circle decoration */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-[#E3F2FF]/40 to-[#C5E3FF]/60 blur-3xl" />
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-brand-100/40 to-brand-200/60 blur-3xl" />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
           {/* Left content */}
           <div className="flex flex-col gap-8 text-center lg:text-left w-full lg:max-w-xl">
             <h2
-              className="font-bold text-4xl lg:text-5xl xl:text-6xl leading-tight text-[#0F172A]"
+              className="font-bold text-4xl lg:text-5xl xl:text-6xl leading-tight text-foreground"
               style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
             >
               Everything You
               <br />
-              <span className="text-[#173fb6] inline-block transition-all duration-1000 ease-out">
+              <span className="text-brand-primary inline-block transition-all duration-1000 ease-out">
                 Need to Translate Better
               </span>
             </h2>
 
             <p
-              className="text-lg leading-relaxed text-gray-600"
+              className="text-lg leading-relaxed text-muted-foreground"
               style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
             >
               Our platform empowers you to translate documents, subtitles, and
@@ -93,7 +93,7 @@ export default function About() {
             </p>
 
             <div className="flex justify-center lg:justify-start">
-              <button className="bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] cursor-pointer text-white hover:from-[#1e3a8a] hover:to-[#4169E1] font-semibold text-base h-[52px] w-[160px] rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-105">
+              <button className="bg-gradient-to-r from-gradient-from to-gradient-to cursor-pointer text-primary-foreground hover:from-gradient-to hover:to-gradient-from font-semibold text-base h-[52px] w-[160px] rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-105">
                 Read More
               </button>
             </div>
@@ -103,7 +103,7 @@ export default function About() {
           <div className="relative w-full lg:w-auto flex items-center justify-center">
             <div className="relative w-full max-w-md lg:w-[450px] h-[500px]">
               {/* Decorative circle behind cards */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-gradient-to-br from-[#B8DBFF]/30 to-[#E8F4FF]/50 blur-2xl" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-gradient-to-br from-brand-200/30 to-brand-50/50 blur-2xl" />
 
               {/* Card 1 - Top */}
               <div

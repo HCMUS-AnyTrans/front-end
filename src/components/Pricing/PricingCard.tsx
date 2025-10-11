@@ -36,20 +36,26 @@ export default function PricingCard({
 
   const isHighlighted = recommended;
   const cardBg = isHighlighted
-    ? 'bg-gradient-to-br from-[#4169E1] to-[#1e3a8a]'
-    : 'bg-white';
-  const titleColor = isHighlighted ? 'text-white' : 'text-[#0F172A]';
-  const taglineColor = isHighlighted ? 'text-white/80' : 'text-gray-400';
-  const priceColor = isHighlighted ? 'text-white' : 'text-[#0F172A]';
-  const featureBg = isHighlighted
-    ? 'bg-white/10 backdrop-blur-sm'
-    : 'bg-gray-50';
-  const featureTextColor = isHighlighted ? 'text-white' : 'text-[#0F172A]';
-  const checkBgColor = isHighlighted ? 'bg-white/20' : 'bg-blue-50';
-  const checkColor = isHighlighted ? 'text-white' : 'text-blue-600';
+    ? 'bg-gradient-to-br from-gradient-from to-gradient-to'
+    : 'bg-card';
+  const titleColor = isHighlighted
+    ? 'text-primary-foreground'
+    : 'text-foreground';
+  const taglineColor = isHighlighted
+    ? 'text-primary-foreground/80'
+    : 'text-muted-foreground';
+  const priceColor = isHighlighted
+    ? 'text-primary-foreground'
+    : 'text-foreground';
+  const featureBg = isHighlighted ? 'bg-white/10 backdrop-blur-sm' : 'bg-muted';
+  const featureTextColor = isHighlighted
+    ? 'text-primary-foreground'
+    : 'text-foreground';
+  const checkBgColor = isHighlighted ? 'bg-white/20' : 'bg-brand-50';
+  const checkColor = isHighlighted ? 'text-primary-foreground' : 'text-primary';
   const buttonBg = isHighlighted
-    ? 'bg-white text-[#4169E1] hover:bg-gray-50'
-    : 'bg-[#4169E1] text-white hover:bg-[#1e3a8a]';
+    ? 'bg-card text-brand-primary-light hover:bg-muted'
+    : 'bg-brand-primary-light text-primary-foreground hover:bg-brand-primary-dark';
 
   return (
     <div
@@ -57,8 +63,8 @@ export default function PricingCard({
         isHighlighted
           ? 'border-transparent shadow-2xl scale-105 animate-fade-in-up'
           : isHovered
-            ? 'border-blue-200 shadow-xl scale-[1.02]'
-            : 'border-gray-100 shadow-lg hover:border-blue-100'
+            ? 'border-brand-200 shadow-xl scale-[1.02]'
+            : 'border-border shadow-lg hover:border-brand-100'
       } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-700 ease-out`}
       style={{
         height: isHighlighted ? '700px' : '660px',
@@ -76,7 +82,8 @@ export default function PricingCard({
           <div
             className="absolute inset-0 rounded-3xl blur-xl opacity-30 animate-pulse-glow"
             style={{
-              background: 'linear-gradient(45deg, #4169E1, #1e3a8a, #4169E1)',
+              background:
+                'linear-gradient(45deg, hsl(var(--gradient-from)), hsl(var(--gradient-to)), hsl(var(--gradient-from)))',
               backgroundSize: '200% 200%',
               animation: 'gradient-shift 3s ease infinite',
             }}

@@ -6,14 +6,14 @@ export default function BackgroundDecorations() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
       {/* Animated gradient mesh background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/40" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-accent/30 to-brand-50/40" />
 
       {/* Large animated gradient orbs */}
       <div
         className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-30 blur-3xl animate-float-slow"
         style={{
           background:
-            'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)',
+            'radial-gradient(circle, hsl(var(--brand-primary) / 0.15) 0%, transparent 70%)',
           animation: 'float-slow 20s ease-in-out infinite',
         }}
       />
@@ -22,7 +22,7 @@ export default function BackgroundDecorations() {
         className="absolute top-1/3 -left-40 w-[500px] h-[500px] rounded-full opacity-25 blur-3xl"
         style={{
           background:
-            'radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%)',
+            'radial-gradient(circle, hsl(var(--accent) / 0.12) 0%, transparent 70%)',
           animation: 'float-slow 25s ease-in-out infinite reverse',
         }}
       />
@@ -31,7 +31,7 @@ export default function BackgroundDecorations() {
         className="absolute bottom-20 right-1/4 w-[400px] h-[400px] rounded-full opacity-20 blur-3xl"
         style={{
           background:
-            'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)',
+            'radial-gradient(circle, hsl(var(--brand-primary-light) / 0.15) 0%, transparent 70%)',
           animation: 'float-slow 30s ease-in-out infinite',
         }}
       />
@@ -41,7 +41,7 @@ export default function BackgroundDecorations() {
         className="absolute top-1/4 right-1/3 w-[300px] h-[300px] rounded-full opacity-20 blur-2xl"
         style={{
           background:
-            'radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%)',
+            'radial-gradient(circle, hsl(var(--brand-primary) / 0.1) 0%, transparent 70%)',
           animation: 'float-medium 15s ease-in-out infinite',
         }}
       />
@@ -50,7 +50,7 @@ export default function BackgroundDecorations() {
         className="absolute bottom-1/3 left-1/4 w-[250px] h-[250px] rounded-full opacity-15 blur-2xl"
         style={{
           background:
-            'radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%)',
+            'radial-gradient(circle, hsl(var(--accent) / 0.1) 0%, transparent 70%)',
           animation: 'float-medium 18s ease-in-out infinite reverse',
         }}
       />
@@ -60,8 +60,8 @@ export default function BackgroundDecorations() {
         className="absolute inset-0 opacity-[0.015]"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px)
+            linear-gradient(hsl(var(--brand-primary) / 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(var(--brand-primary) / 0.03) 1px, transparent 1px)
           `,
           backgroundSize: '50px 50px',
         }}
@@ -75,8 +75,8 @@ export default function BackgroundDecorations() {
             45deg,
             transparent,
             transparent 35px,
-            rgba(99, 102, 241, 0.05) 35px,
-            rgba(99, 102, 241, 0.05) 36px
+            hsl(var(--brand-primary) / 0.05) 35px,
+            hsl(var(--brand-primary) / 0.05) 36px
           )`,
         }}
       />

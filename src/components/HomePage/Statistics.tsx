@@ -83,10 +83,10 @@ export function StatItem({
       </div>
 
       <div className="flex flex-col gap-3 lg:gap-6 w-full lg:w-[165px]">
-        <div className="font-semibold text-2xl lg:text-[40px] leading-[1.3] text-[#142457] font-inter capitalize">
+        <div className="font-semibold text-2xl lg:text-[40px] leading-[1.3] text-foreground font-inter capitalize">
           {count}+
         </div>
-        <div className="font-bold text-sm lg:text-base leading-6 text-[#535862] font-nunito">
+        <div className="font-bold text-sm lg:text-base leading-6 text-muted-foreground font-nunito">
           {label}
         </div>
       </div>
