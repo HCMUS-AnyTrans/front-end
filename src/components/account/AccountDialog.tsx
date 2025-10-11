@@ -103,6 +103,13 @@ export default function AccountDialog({
     emailNotifications: true,
     pushNotifications: true,
     translationAlerts: false,
+    dateFormat: 'MM/DD/YYYY',
+    timeFormat: '12h',
+    timezone: 'UTC',
+    defaultSourceLanguage: 'en',
+    defaultTargetLanguage: 'vi',
+    autoSaveDrafts: true,
+    showTooltips: true,
   });
 
   // Mock data
@@ -279,6 +286,13 @@ export default function AccountDialog({
                 emailNotifications: true,
                 pushNotifications: true,
                 translationAlerts: false,
+                dateFormat: 'MM/DD/YYYY',
+                timeFormat: '12h',
+                timezone: 'UTC',
+                defaultSourceLanguage: 'en',
+                defaultTargetLanguage: 'vi',
+                autoSaveDrafts: true,
+                showTooltips: true,
               })
             }
             onSave={() => {}}
@@ -306,7 +320,7 @@ export default function AccountDialog({
       >
         {/* Header - responsive padding */}
         <div
-          className={`${isMobile ? 'px-4 py-4' : 'px-6 py-5 lg:px-8 lg:py-6'}`}
+          className={`${isMobile ? 'px-4 py-4' : 'px-6 py-5 lg:px-8 lg:pt-6 lg:pb-0'}`}
         >
           <AccountDialogHeader onClose={() => setOpen(false)} />
         </div>

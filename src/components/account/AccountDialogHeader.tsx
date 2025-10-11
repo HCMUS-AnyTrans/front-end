@@ -12,7 +12,7 @@ export default function AccountDialogHeader({
   onClose,
 }: AccountDialogHeaderProps) {
   return (
-    <div className="flex items-center justify-between border-b border-gray-200">
+    <div className="flex items-center justify-between border-b pb-6 border-gray-200">
       <BaseHeader
         title="Account Settings"
         description="Manage your profile, billing and preferences"

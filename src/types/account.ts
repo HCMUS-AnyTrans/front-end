@@ -45,4 +45,11 @@ export type Preferences = {
   emailNotifications: boolean;
   pushNotifications: boolean;
   translationAlerts: boolean;
+  dateFormat: 'MM/DD/YYYY' | 'DD/MM/YYYY' | 'YYYY-MM-DD';
+  timeFormat: '12h' | '24h';
+  timezone: string;
+  defaultSourceLanguage: string;
+  defaultTargetLanguage: string;
+  autoSaveDrafts: boolean;
+  showTooltips: boolean;
 };
