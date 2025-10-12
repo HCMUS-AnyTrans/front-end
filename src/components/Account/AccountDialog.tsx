@@ -11,10 +11,7 @@ import {
   Preferences,
 } from '@/types/account';
 import { BaseDialog, BaseDialogContent } from '@/components/Common';
-import {
-  AccountDialogHeader,
-  AccountSidebarTabs,
-} from '@/components/Account';
+import { AccountDialogHeader, AccountSidebarTabs } from '@/components/Account';
 import type { AccountTabId } from '@/components/Account/AccountSidebarTabs';
 
 import {
