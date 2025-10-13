@@ -131,15 +131,18 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             <label className="block text-sm font-semibold text-gray-900 mb-2">
               Message
             </label>
-            <Textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-              rows={5}
-              placeholder="Tell us how we can help you..."
-              className="px-4 py-3 focus-visible:ring-[#4169E1]"
-            />
+
+            <div className="rounded-md w-full overflow-hidden shadow-sm ">
+              <Textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={10}
+                placeholder="Tell us how we can help you..."
+                className=" px-4 py-3 focus-visible:ring-[#4169E1]"
+              />
+            </div>
           </div>
 
           <Button
@@ -153,7 +156,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
           </Button>
 
           {/* Contact Illustration */}
-          <div className="mt-8 flex justify-center">
+          <div className="mt-4 flex justify-center">
             <img
               src="/contact-illustration.jpg"
               alt="Contact Support Illustration"

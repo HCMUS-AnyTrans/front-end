@@ -107,7 +107,7 @@ export default function Hero() {
           <img
             src="/Banner-Homepage.svg"
             alt="AnyTrans Translation Services Banner"
-            className="w-full h-auto object-contain"
+            className="w-full h-auto object-contain hover:scale-105 transition-all duration-300"
           />
         </div>
       </div>
