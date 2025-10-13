@@ -37,10 +37,10 @@ export default function PreviewModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-6xl w-[90vw] h-[80vh] max-h-[800px] p-0">
         <DialogHeader className="px-6 py-4 border-b">
-          <DialogTitle className="text-xl font-semibold text-brand-primary-dark font-nunito">
+          <DialogTitle className="text-xl font-semibold text-brand-primary-dark font-rubik">
             Preview Translation
           </DialogTitle>
-          <DialogDescription className="text-sm text-muted-foreground font-nunito">
+          <DialogDescription className="text-sm text-muted-foreground font-rubik">
             Compare your original document with the translated version
           </DialogDescription>
         </DialogHeader>
@@ -50,13 +50,13 @@ export default function PreviewModal({
           {/* Original text panel */}
           <div className="flex-1 flex flex-col lg:border-r border-border min-h-0 lg:min-h-[400px]">
             <div className="px-4 py-3 bg-muted border-b">
-              <h3 className="font-semibold text-sm text-muted-foreground font-nunito">
+              <h3 className="font-semibold text-sm text-muted-foreground font-rubik">
                 Original
               </h3>
             </div>
             <div className="flex-1 p-4 overflow-auto min-h-[200px] lg:min-h-0">
               <div className="prose prose-sm max-w-none">
-                <div className="whitespace-pre-wrap text-sm leading-relaxed text-foreground font-nunito">
+                <div className="whitespace-pre-wrap text-sm leading-relaxed text-foreground font-rubik">
                   {originalText}
                 </div>
               </div>
@@ -66,13 +66,13 @@ export default function PreviewModal({
           {/* Translated text panel */}
           <div className="flex-1 flex flex-col min-h-0 lg:min-h-[400px] border-t lg:border-t-0 lg:border-l border-border">
             <div className="px-4 py-3 bg-muted border-b">
-              <h3 className="font-semibold text-sm text-muted-foreground font-nunito">
+              <h3 className="font-semibold text-sm text-muted-foreground font-rubik">
                 Translated
               </h3>
             </div>
             <div className="flex-1 p-4 overflow-auto min-h-[200px] lg:min-h-0">
               <div className="prose prose-sm max-w-none">
-                <div className="whitespace-pre-wrap text-sm leading-relaxed text-foreground font-nunito">
+                <div className="whitespace-pre-wrap text-sm leading-relaxed text-foreground font-rubik">
                   {translatedText}
                 </div>
               </div>
@@ -86,13 +86,13 @@ export default function PreviewModal({
             <Button
               variant="outline"
               onClick={onClose}
-              className="font-semibold font-nunito"
+              className="font-semibold font-rubik"
             >
               Close
             </Button>
             <Button
               onClick={handleDownload}
-              className="bg-brand-primary-dark hover:bg-brand-primary text-primary-foreground font-semibold font-nunito flex items-center gap-2"
+              className="bg-brand-primary-dark hover:bg-brand-primary text-primary-foreground font-semibold flex items-center gap-2"
             >
               <Download className="h-4 w-4" />
               Download as DOCX

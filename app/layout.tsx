@@ -1,17 +1,11 @@
 import type { Metadata } from 'next';
-import { Inter, Nunito } from 'next/font/google';
+import { Rubik } from 'next/font/google';
 import './globals.css';
 import { AccountDialogProvider } from '@/contexts/AccountDialogContext';
 import { Toaster } from 'sonner';
 
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-const nunito = Nunito({
-  variable: '--font-nunito',
+const rubik = Rubik({
+  variable: '--font-rubik',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -30,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${nunito.variable} antialiased min-h-screen flex flex-col`}
+        className={`${rubik.variable} antialiased min-h-screen font-rubik flex flex-col`}
       >
         {children}
       </body>
