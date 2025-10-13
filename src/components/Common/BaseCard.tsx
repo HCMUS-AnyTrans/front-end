@@ -179,7 +179,7 @@ export default function BaseCard({
         {variant === 'value' && (
           <>
             <h3 className="text-lg font-bold text-foreground mb-2">{title}</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-sm text-muted-foreground leading-relaxed flex-1">
               {description}
             </p>
           </>

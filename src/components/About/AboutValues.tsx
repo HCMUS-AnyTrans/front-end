@@ -32,7 +32,7 @@ export default function AboutValues({ values }: AboutValuesProps) {
           return (
             <div
               key={value.title}
-              className={`transition-all duration-700 ${
+              className={`h-full transition-all duration-700 ${
                 isVisible
                   ? 'opacity-100 translate-y-0'
                   : 'opacity-0 translate-y-12'
@@ -47,6 +47,7 @@ export default function AboutValues({ values }: AboutValuesProps) {
                 title={value.title}
                 description={value.description}
                 color={value.color}
+                className="h-full flex flex-col"
               />
             </div>
           );

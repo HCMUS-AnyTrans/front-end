@@ -12,7 +12,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="relative bg-gradient-to-b from-white via-slate-50/50 to-white flex flex-col min-h-screen overflow-hidden">
+    <div className="relative bg-gradient-to-b from-white via-slate-50/50 to-white flex flex-col min-h-screen">
       <BackgroundDecorations />
 
       {/* Main content */}

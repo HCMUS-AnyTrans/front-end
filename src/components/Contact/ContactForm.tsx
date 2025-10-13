@@ -3,6 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import { Send, CheckCircle2 } from 'lucide-react';
 import { ContactFormData, ContactFormProps } from '@/types/contact';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 export default function ContactForm({ onSubmit }: ContactFormProps) {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -67,14 +77,14 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             <label className="block text-sm font-semibold text-gray-900 mb-2">
               Full Name
             </label>
-            <input
+            <Input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
               required
               placeholder="John Doe"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
+              className="h-11 px-4 focus-visible:ring-[#4169E1]"
             />
           </div>
 
@@ -82,14 +92,14 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             <label className="block text-sm font-semibold text-gray-900 mb-2">
               Email Address
             </label>
-            <input
+            <Input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
               required
               placeholder="john@example.com"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
+              className="h-11 px-4 focus-visible:ring-[#4169E1]"
             />
           </div>
 
@@ -97,44 +107,59 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             <label className="block text-sm font-semibold text-gray-900 mb-2">
               Subject
             </label>
-            <select
-              name="subject"
+            <Select
               value={formData.subject}
-              onChange={handleChange}
+              onValueChange={(value) =>
+                setFormData({ ...formData, subject: value })
+              }
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
             >
-              <option value="">Select a subject</option>
-              <option value="general">General Inquiry</option>
-              <option value="support">Technical Support</option>
-              <option value="sales">Sales Question</option>
-              <option value="partnership">Partnership</option>
-              <option value="feedback">Feedback</option>
-            </select>
+              <SelectTrigger className="w-full h-16 px-4 py-5 focus:ring-[#4169E1]">
+                <SelectValue placeholder="Select a subject" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="general">General Inquiry</SelectItem>
+                <SelectItem value="support">Technical Support</SelectItem>
+                <SelectItem value="sales">Sales Question</SelectItem>
+                <SelectItem value="partnership">Partnership</SelectItem>
+                <SelectItem value="feedback">Feedback</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           <div>
             <label className="block text-sm font-semibold text-gray-900 mb-2">
               Message
             </label>
-            <textarea
+            <Textarea
               name="message"
               value={formData.message}
               onChange={handleChange}
               required
               rows={5}
               placeholder="Tell us how we can help you..."
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent resize-none"
+              className="px-4 py-3 focus-visible:ring-[#4169E1]"
             />
           </div>
 
-          <button
+          <Button
             type="submit"
-            className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] hover:from-[#1e3a8a] hover:to-[#4169E1] text-white px-6 py-4 rounded-xl font-semibold transition-all duration-500 shadow-lg hover:shadow-2xl hover:scale-[1.02] cursor-pointer group"
+            variant="gradient-primary"
+            size="lg"
+            className="w-full py-6 rounded-md "
           >
-            <Send className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+            <Send className="w-5 h-5" />
             Send Message
-          </button>
+          </Button>
+
+          {/* Contact Illustration */}
+          <div className="mt-8 flex justify-center">
+            <img
+              src="/contact-illustration.jpg"
+              alt="Contact Support Illustration"
+              className="w-full max-w-md h-auto rounded-2xl opacity-90 hover:opacity-100 transition-opacity duration-300"
+            />
+          </div>
         </form>
       )}
 

@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
@@ -21,6 +21,10 @@ const buttonVariants = cva(
         link: 'text-primary underline-offset-4 hover:underline',
         gradient:
           'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:from-gray-400 disabled:to-gray-500 text-white shadow-lg rounded-xl font-semibold',
+        'gradient-primary':
+          'bg-gradient-to-r from-gradient-from via-gradient-to to-gradient-from text-primary-foreground rounded-xl font-semibold hover:shadow-xl bg-[length:200%_100%] bg-[position:0%_0%] hover:bg-[position:100%_0%] transition-[background-position,box-shadow] duration-700 ease-in-out',
+        'outline-gradient':
+          'border-2 border-brand-primary-light text-brand-primary-light hover:bg-brand-primary-light hover:text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-500 ease-in-out',
       },
       size: {
         default: 'h-9 px-4 py-2',
@@ -28,6 +32,7 @@ const buttonVariants = cva(
         lg: 'h-10 rounded-md px-8',
         xl: 'h-12 px-8 py-3 text-base',
         '2xl': 'h-14 px-8 py-4 text-lg',
+        hero: 'h-[52px] w-[160px] text-base',
         icon: 'h-9 w-9',
       },
     },

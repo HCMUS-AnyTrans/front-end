@@ -86,15 +86,15 @@ export const milestones: Milestone[] = [
 export const team: TeamMember[] = [
   {
     name: 'Minh Nguyen',
-    role: 'CEO & Founder',
+    role: 'Developer',
     image: '/MinhNguyen01.jpg',
-    bio: 'Former Google Translate engineer with 10+ years in NLP',
+    bio: 'Developer',
   },
   {
     name: 'Trong Nhan',
-    role: 'CTO',
+    role: 'Developer',
     image: '/TrongNhan01.jpg',
-    bio: 'AI researcher specializing in machine translation systems',
+    bio: 'Developer',
   },
 ];
 

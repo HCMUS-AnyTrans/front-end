@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Search, Filter, Download, Trash2, ChevronDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface TranslationHistoryToolbarProps {
   searchQuery: string;
@@ -31,32 +32,32 @@ export default function TranslationHistoryToolbar({
   onBulkDelete,
 }: TranslationHistoryToolbarProps) {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
-      <div className="flex flex-col md:flex-row gap-3 items-center">
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-3 sm:p-4">
+      <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
         <div className="relative flex-1 w-full">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
           <input
             type="text"
             placeholder="Search by filename, language..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full pl-10 sm:pl-11 pr-4 py-2.5 sm:py-3 border border-gray-300 rounded-xl text-sm sm:text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
           />
         </div>
 
-        <div className="relative">
+        <div className="relative w-full sm:w-auto">
           <button
             onClick={onToggleFilterMenu}
-            className={`flex items-center gap-2 px-5 py-3 border rounded-xl font-medium transition-all cursor-pointer ${
+            className={`w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 border rounded-xl font-medium transition-all cursor-pointer ${
               filterStatus !== 'all' || filterCategory !== 'all'
-                ? 'bg-blue-50 border-blue-200 text-blue-700'
+                ? 'bg-blue-50 border-blue-200 text-[#1e3a8a]'
                 : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
             }`}
           >
             <Filter className="w-4 h-4" />
             <span>Filter</span>
             {(filterStatus !== 'all' || filterCategory !== 'all') && (
-              <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+              <span className="w-2 h-2 rounded-full bg-[#4169E1]"></span>
             )}
             <ChevronDown className="w-4 h-4" />
           </button>
@@ -72,7 +73,7 @@ export default function TranslationHistoryToolbar({
                   }}
                   className={`w-full text-left px-4 py-2 text-sm transition-colors cursor-pointer ${
                     filterStatus === status
-                      ? 'bg-blue-50 text-blue-700 font-medium'
+                      ? 'bg-blue-50 text-[#1e3a8a] font-medium'
                       : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
@@ -93,7 +94,7 @@ export default function TranslationHistoryToolbar({
                   }}
                   className={`w-full text-left px-4 py-2 text-sm transition-colors cursor-pointer ${
                     filterCategory === c.id
-                      ? 'bg-blue-50 text-blue-700 font-medium'
+                      ? 'bg-blue-50 text-[#1e3a8a] font-medium'
                       : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
@@ -105,24 +106,29 @@ export default function TranslationHistoryToolbar({
         </div>
 
         {selectedItems.length > 0 && (
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-600 font-medium">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
+            <span className="text-xs sm:text-sm text-gray-600 font-medium text-center sm:text-left">
               {selectedItems.length} selected
             </span>
-            <button
-              onClick={onBulkDownload}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all cursor-pointer"
-            >
-              <Download className="w-4 h-4" />
-              Download
-            </button>
-            <button
-              onClick={onBulkDelete}
-              className="flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg font-medium transition-all cursor-pointer"
-            >
-              <Trash2 className="w-4 h-4" />
-              Delete
-            </button>
+            <div className="flex gap-2">
+              <Button
+                onClick={onBulkDownload}
+                size="sm"
+                className="flex-1 sm:flex-initial rounded-lg px-3 sm:px-4 py-2"
+              >
+                <Download className="w-4 h-4" />
+                <span className="hidden sm:inline">Download</span>
+              </Button>
+              <Button
+                onClick={onBulkDelete}
+                variant="destructive"
+                size="sm"
+                className="flex-1 sm:flex-initial bg-red-50 hover:bg-red-100 text-red-600 rounded-lg px-3 sm:px-4 py-2 shadow-none"
+              >
+                <Trash2 className="w-4 h-4" />
+                <span className="hidden sm:inline">Delete</span>
+              </Button>
+            </div>
           </div>
         )}
       </div>

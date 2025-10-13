@@ -9,6 +9,7 @@ export * from './Auth';
 export * from './Common';
 export * from './Contact';
 export * from './Dashboard';
+export * from './Features';
 export * from './HomePage';
 export * from './Layout';
 export * from './Notifications';

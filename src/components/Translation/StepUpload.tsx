@@ -32,7 +32,7 @@ const uploadConfig = {
         iconBgClass: 'bg-green-100',
       },
       {
-        icon: <FileText className="w-5 h-5 text-blue-600" />,
+        icon: <FileText className="w-5 h-5 text-[#4169E1]" />,
         title: '100+ Languages',
         description: 'Translate between any language pair',
         iconBgClass: 'bg-blue-100',
@@ -78,7 +78,7 @@ export default function StepUpload({ variant, onUpload }: StepUploadProps) {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-6">
             <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <IconComponent className="w-8 h-8 text-blue-600" />
+              <IconComponent className="w-8 h-8 text-[#4169E1]" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
               {config.title}
@@ -86,12 +86,12 @@ export default function StepUpload({ variant, onUpload }: StepUploadProps) {
             <p className="text-gray-600">{config.description}</p>
           </div>
 
-          <div className="border-2 border-dashed border-gray-300 hover:border-blue-400 rounded-xl p-12 text-center transition-all cursor-pointer bg-gray-50 hover:bg-blue-50">
+          <div className="border-2 border-dashed border-gray-300 hover:border-[#4169E1] rounded-xl p-12 text-center transition-all cursor-pointer bg-gray-50 hover:bg-blue-50">
             <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
             <Button
               onClick={onUpload}
               size="xl"
-              className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold"
+              className="text-white rounded-xl font-semibold"
             >
               <Upload className="w-5 h-5" />
               Choose File

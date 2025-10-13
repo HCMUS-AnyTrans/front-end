@@ -72,7 +72,7 @@ export function StatItem({
     >
       <div className="flex items-center gap-9">
         <div
-          className={`${bgColor} rounded-[40px] w-24 h-24 lg:w-32 lg:h-32 flex items-center justify-center relative transition-all duration-500 hover:scale-110 hover:rotate-6 hover:shadow-xl`}
+          className={`${bgColor} rounded-[40px] w-24 h-24 lg:w-32 lg:h-32 flex items-center justify-center relative transition-all duration-500`}
           style={{
             transform: isVisible ? 'rotate(0deg)' : 'rotate(-180deg)',
             transitionDelay: `${delay + 200}ms`,

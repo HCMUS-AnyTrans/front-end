@@ -59,7 +59,7 @@ export default function WeeklyActivityChart({
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2 text-sm">
             <div className="flex items-center gap-1">
-              <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
+              <div className="w-3 h-3 bg-[#4169E1] rounded-full"></div>
               <span className="text-gray-600">
                 {weeklyFilter === 'subtitle'
                   ? 'Subtitles'
@@ -78,7 +78,7 @@ export default function WeeklyActivityChart({
               }
               className={`px-3 py-1.5 rounded-lg border text-sm font-medium cursor-pointer ${
                 weeklyFilter === 'document'
-                  ? 'bg-blue-600 text-white border-blue-600'
+                  ? 'bg-[#4169E1] text-white border-[#4169E1]'
                   : 'border-gray-300 text-gray-700 hover:bg-gray-50'
               }`}
             >
@@ -92,7 +92,7 @@ export default function WeeklyActivityChart({
               }
               className={`px-3 py-1.5 rounded-lg border text-sm font-medium cursor-pointer ${
                 weeklyFilter === 'subtitle'
-                  ? 'bg-blue-600 text-white border-blue-600'
+                  ? 'bg-[#4169E1] text-white border-[#4169E1]'
                   : 'border-gray-300 text-gray-700 hover:bg-gray-50'
               }`}
             >
@@ -117,7 +117,7 @@ export default function WeeklyActivityChart({
               </span>
               <div className="flex-1 bg-gray-100 rounded-full h-8 overflow-hidden">
                 <div
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 h-full rounded-full flex items-center justify-end pr-3 transition-all"
+                  className="bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] h-full rounded-full flex items-center justify-end pr-3 transition-all duration-500 ease-in-out"
                   style={{ width: `${(value / (maxValue || 1)) * 100}%` }}
                 >
                   {value > 0 && (

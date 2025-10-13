@@ -35,38 +35,41 @@ export default function NotificationsHeader({
   },
 }: Props) {
   return (
-    <div className="flex items-center justify-between mb-6">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-4">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Notifications</h1>
-        <p className="text-sm text-gray-600">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">
+          Notifications
+        </h1>
+        <p className="text-xs sm:text-sm text-gray-600">
           Stay updated on translations, system alerts, and account activity
         </p>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
         {unreadCount > 0 && (
           <button
             onClick={onMarkAllRead}
-            className="inline-flex items-center gap-2 px-4 py-2.5 border-2 border-blue-600 text-blue-700 hover:bg-blue-50 rounded-xl font-semibold transition-all cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 border-2 border-[#4169E1] text-[#1e3a8a] hover:bg-blue-50 rounded-xl text-sm font-semibold transition-all cursor-pointer"
           >
             <CheckCheck className="w-4 h-4" />
-            Mark all read
+            <span className="hidden sm:inline">Mark all read</span>
+            <span className="sm:hidden">Mark read</span>
           </button>
         )}
 
-        <div className="relative">
+        <div className="relative flex-1 sm:flex-initial">
           <button
             onClick={onToggleFilters}
-            className={`flex items-center gap-2 px-5 py-3 border rounded-xl font-medium transition-all cursor-pointer ${
+            className={`w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 border rounded-xl text-sm font-medium transition-all cursor-pointer ${
               filterType !== 'all'
-                ? 'bg-blue-50 border-blue-200 text-blue-700'
+                ? 'bg-blue-50 border-blue-200 text-[#1e3a8a]'
                 : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
             }`}
           >
             <Filter className="w-4 h-4" />
             <span>Filter</span>
             {filterType !== 'all' && (
-              <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+              <span className="w-2 h-2 rounded-full bg-[#4169E1]"></span>
             )}
             <ChevronDown className="w-4 h-4" />
           </button>
@@ -108,7 +111,7 @@ export default function NotificationsHeader({
                   }}
                   className={`w-full text-left px-4 py-2 text-sm transition-colors flex items-center justify-between cursor-pointer ${
                     filterType === type.id
-                      ? 'bg-blue-50 text-blue-700 font-medium'
+                      ? 'bg-blue-50 text-[#1e3a8a] font-medium'
                       : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
@@ -116,7 +119,7 @@ export default function NotificationsHeader({
                   <span
                     className={`text-xs px-2 py-1 rounded-full ${
                       filterType === type.id
-                        ? 'bg-blue-100 text-blue-700'
+                        ? 'bg-blue-100 text-[#1e3a8a]'
                         : 'bg-gray-100 text-gray-600'
                     }`}
                   >

@@ -78,11 +78,12 @@ export function AuthShell({
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
           }`}
         >
-          <div className="relative inline-flex items-center gap-3">
-            {/* Logo Text */}
-            <h1 className="font-bold text-3xl bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] bg-clip-text text-transparent">
-              AnyTrans
-            </h1>
+          <div className="flex items-center justify-center">
+            <img
+              src="/logo-icon-mono.svg"
+              alt="AnyTrans"
+              className="w-40 h-10 transition-transform duration-300"
+            />
           </div>
         </Link>
 
