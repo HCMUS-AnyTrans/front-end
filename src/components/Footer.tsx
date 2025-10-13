@@ -16,9 +16,9 @@ export default function Footer() {
     <footer className="relative overflow-hidden bg-gradient-to-br from-[#0F172A] via-[#1e293b] to-[#0F172A]">
       {/* Animated background decoration */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-blue-500 to-purple-600 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-pulse" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-[#4169E1] to-[#1e3a8a] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-pulse" />
         <div
-          className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-purple-500 to-blue-600 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-pulse"
+          className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-[#1e3a8a] to-[#4169E1] rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-pulse"
           style={{ animationDelay: '1s' }}
         />
       </div>
@@ -48,8 +48,8 @@ export default function Footer() {
                 >
                   {/* Logo Icon */}
                   <div className="relative flex-shrink-0">
-                    <div className="relative w-12 h-12 flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg group-hover:shadow-2xl group-hover:scale-105 transition-all duration-300">
-                      <img src="/logo.svg" alt="" className="w-7 h-7" />
+                    <div className="relative w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4169E1] to-[#1e3a8a] rounded-xl shadow-lg group-hover:shadow-2xl group-hover:scale-105 transition-all duration-300">
+                      <img src="./logo.svg" alt="" className="w-7 h-7" />
                     </div>
                   </div>
 
@@ -88,11 +88,11 @@ export default function Footer() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-5 py-3.5 pr-12 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300"
+                    className="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-5 py-3.5 pr-12 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4169E1]/50 focus:border-[#4169E1]/50 transition-all duration-300"
                   />
                   <button
                     onClick={handleSubmit}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-500 to-purple-600 text-white p-2 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] text-white p-2 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
                   >
                     <Send size={18} />
                   </button>
@@ -106,7 +106,7 @@ export default function Footer() {
               <div className="flex flex-col gap-6">
                 <h3 className="font-bold text-lg text-white relative inline-block">
                   Quick Links
-                  <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full" />
+                  <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
                 </h3>
                 <div className="flex flex-col gap-4">
                   {['Home', 'Features', 'Pricing', 'About Us'].map(
@@ -120,7 +120,7 @@ export default function Footer() {
                         }
                         className="text-gray-400 hover:text-white transition-all duration-300 hover:translate-x-2 text-[15px] font-medium group flex items-center gap-2"
                       >
-                        <span className="w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 group-hover:w-4 transition-all duration-300 rounded-full" />
+                        <span className="w-0 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] group-hover:w-4 transition-all duration-300 rounded-full" />
                         {link}
                       </a>
                     )
@@ -132,7 +132,7 @@ export default function Footer() {
               <div className="flex flex-col gap-6">
                 <h3 className="font-bold text-lg text-white relative inline-block">
                   Services
-                  <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full" />
+                  <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
                 </h3>
                 <div className="flex flex-col gap-4">
                   {[
@@ -150,7 +150,7 @@ export default function Footer() {
                       href={service.href}
                       className="text-gray-400 hover:text-white transition-all duration-300 hover:translate-x-2 text-[15px] font-medium group flex items-center gap-2"
                     >
-                      <span className="w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 group-hover:w-4 transition-all duration-300 rounded-full" />
+                      <span className="w-0 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] group-hover:w-4 transition-all duration-300 rounded-full" />
                       {service.name}
                     </a>
                   ))}
@@ -161,7 +161,7 @@ export default function Footer() {
               <div className="flex flex-col gap-6">
                 <h3 className="font-bold text-lg text-white relative inline-block">
                   Connect
-                  <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full" />
+                  <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
                 </h3>
                 <div className="flex items-center gap-3">
                   {[

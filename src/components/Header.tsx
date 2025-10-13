@@ -7,11 +7,36 @@ export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileFeaturesOpen, setIsMobileFeaturesOpen] = useState(false);
-  const [pathname, setPathname] = useState('/');
+  const [pathname, setPathname] = useState('');
 
-  // Simulate usePathname
+  // Track pathname changes
   useEffect(() => {
+    // Set initial pathname
     setPathname(window.location.pathname);
+
+    // Update pathname on navigation
+    const handleLocationChange = () => {
+      setPathname(window.location.pathname);
+    };
+
+    // Listen for popstate (back/forward button)
+    window.addEventListener('popstate', handleLocationChange);
+
+    // Listen for click events on links
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a');
+      if (link && link.href.startsWith(window.location.origin)) {
+        setTimeout(handleLocationChange, 0);
+      }
+    };
+
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      document.removeEventListener('click', handleClick);
+    };
   }, []);
 
   // Close mobile menu on resize to desktop
@@ -75,9 +100,13 @@ export default function Header() {
               aria-current={isActive('/') ? 'page' : undefined}
             >
               Home
-              {isActive('/') && (
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
-              )}
+              <span
+                className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full transition-all duration-300 ${
+                  isActive('/')
+                    ? 'opacity-100 scale-x-100'
+                    : 'opacity-0 scale-x-0'
+                }`}
+              />
             </a>
 
             {/* Features Dropdown */}
@@ -98,9 +127,13 @@ export default function Header() {
                     isDropdownOpen ? 'rotate-180' : ''
                   }`}
                 />
-                {isActive('/features') && (
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
-                )}
+                <span
+                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full transition-all duration-300 ${
+                    isActive('/features')
+                      ? 'opacity-100 scale-x-100'
+                      : 'opacity-0 scale-x-0'
+                  }`}
+                />
               </button>
 
               {/* Dropdown Menu */}
@@ -158,9 +191,13 @@ export default function Header() {
               aria-current={isActive('/pricing') ? 'page' : undefined}
             >
               Pricing
-              {isActive('/pricing') && (
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
-              )}
+              <span
+                className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full transition-all duration-300 ${
+                  isActive('/pricing')
+                    ? 'opacity-100 scale-x-100'
+                    : 'opacity-0 scale-x-0'
+                }`}
+              />
             </a>
 
             <a
@@ -173,9 +210,13 @@ export default function Header() {
               aria-current={isActive('/about') ? 'page' : undefined}
             >
               About
-              {isActive('/about') && (
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
-              )}
+              <span
+                className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full transition-all duration-300 ${
+                  isActive('/about')
+                    ? 'opacity-100 scale-x-100'
+                    : 'opacity-0 scale-x-0'
+                }`}
+              />
             </a>
 
             <a
@@ -188,9 +229,13 @@ export default function Header() {
               aria-current={isActive('/contact') ? 'page' : undefined}
             >
               Contact
-              {isActive('/contact') && (
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
-              )}
+              <span
+                className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full transition-all duration-300 ${
+                  isActive('/contact')
+                    ? 'opacity-100 scale-x-100'
+                    : 'opacity-0 scale-x-0'
+                }`}
+              />
             </a>
           </nav>
 
@@ -267,9 +312,11 @@ export default function Header() {
               onClick={closeMobileMenu}
             >
               <span>Home</span>
-              {isActive('/') && (
-                <div className="w-2 h-2 bg-[#4169E1] rounded-full" />
-              )}
+              <div
+                className={`w-2 h-2 bg-[#4169E1] rounded-full transition-all duration-300 ${
+                  isActive('/') ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+                }`}
+              />
             </a>
 
             {/* Features Collapsible */}
@@ -347,9 +394,13 @@ export default function Header() {
               onClick={closeMobileMenu}
             >
               <span>Pricing</span>
-              {isActive('/pricing') && (
-                <div className="w-2 h-2 bg-[#4169E1] rounded-full" />
-              )}
+              <div
+                className={`w-2 h-2 bg-[#4169E1] rounded-full transition-all duration-300 ${
+                  isActive('/pricing')
+                    ? 'opacity-100 scale-100'
+                    : 'opacity-0 scale-0'
+                }`}
+              />
             </a>
 
             <a
@@ -362,9 +413,13 @@ export default function Header() {
               onClick={closeMobileMenu}
             >
               <span>About</span>
-              {isActive('/about') && (
-                <div className="w-2 h-2 bg-[#4169E1] rounded-full" />
-              )}
+              <div
+                className={`w-2 h-2 bg-[#4169E1] rounded-full transition-all duration-300 ${
+                  isActive('/about')
+                    ? 'opacity-100 scale-100'
+                    : 'opacity-0 scale-0'
+                }`}
+              />
             </a>
 
             <a
@@ -377,9 +432,13 @@ export default function Header() {
               onClick={closeMobileMenu}
             >
               <span>Contact</span>
-              {isActive('/contact') && (
-                <div className="w-2 h-2 bg-[#4169E1] rounded-full" />
-              )}
+              <div
+                className={`w-2 h-2 bg-[#4169E1] rounded-full transition-all duration-300 ${
+                  isActive('/contact')
+                    ? 'opacity-100 scale-100'
+                    : 'opacity-0 scale-0'
+                }`}
+              />
             </a>
           </nav>
 

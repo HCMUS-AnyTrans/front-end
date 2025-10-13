@@ -32,14 +32,14 @@ export default function NotificationsList({
 }: Props) {
   if (notifications.length === 0) {
     return (
-      <div className="text-center py-16">
-        <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Bell className="w-10 h-10 text-gray-300" />
+      <div className="text-center py-12 sm:py-16">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+          <Bell className="w-8 h-8 sm:w-10 sm:h-10 text-gray-300" />
         </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-2">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
           No notifications found
         </h3>
-        <p className="text-gray-600 mb-6">
+        <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
           {searchQuery
             ? 'Try adjusting your search or filters'
             : "You're all caught up!"}
@@ -47,7 +47,7 @@ export default function NotificationsList({
         {activeFilter !== 'all' && (
           <button
             onClick={onResetFilterToAll}
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all cursor-pointer"
+            className="px-5 sm:px-6 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm sm:text-base font-semibold transition-all cursor-pointer"
           >
             View all notifications
           </button>
@@ -57,7 +57,7 @@ export default function NotificationsList({
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2 sm:space-y-3">
       {notifications.map((n) => (
         <NotificationCard
           key={n.id}

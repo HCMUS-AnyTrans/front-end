@@ -35,29 +35,32 @@ export default function NotificationsHeader({
   },
 }: Props) {
   return (
-    <div className="flex items-center justify-between mb-6">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-4">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Notifications</h1>
-        <p className="text-sm text-gray-600">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">
+          Notifications
+        </h1>
+        <p className="text-xs sm:text-sm text-gray-600">
           Stay updated on translations, system alerts, and account activity
         </p>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
         {unreadCount > 0 && (
           <button
             onClick={onMarkAllRead}
-            className="inline-flex items-center gap-2 px-4 py-2.5 border-2 border-blue-600 text-blue-700 hover:bg-blue-50 rounded-xl font-semibold transition-all cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 border-2 border-blue-600 text-blue-700 hover:bg-blue-50 rounded-xl text-sm font-semibold transition-all cursor-pointer"
           >
             <CheckCheck className="w-4 h-4" />
-            Mark all read
+            <span className="hidden sm:inline">Mark all read</span>
+            <span className="sm:hidden">Mark read</span>
           </button>
         )}
 
-        <div className="relative">
+        <div className="relative flex-1 sm:flex-initial">
           <button
             onClick={onToggleFilters}
-            className={`flex items-center gap-2 px-5 py-3 border rounded-xl font-medium transition-all cursor-pointer ${
+            className={`w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 border rounded-xl text-sm font-medium transition-all cursor-pointer ${
               filterType !== 'all'
                 ? 'bg-blue-50 border-blue-200 text-blue-700'
                 : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'

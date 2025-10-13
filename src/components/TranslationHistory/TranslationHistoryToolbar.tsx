@@ -31,23 +31,23 @@ export default function TranslationHistoryToolbar({
   onBulkDelete,
 }: TranslationHistoryToolbarProps) {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
-      <div className="flex flex-col md:flex-row gap-3 items-center">
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-3 sm:p-4">
+      <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
         <div className="relative flex-1 w-full">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
           <input
             type="text"
             placeholder="Search by filename, language..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full pl-10 sm:pl-11 pr-4 py-2.5 sm:py-3 border border-gray-300 rounded-xl text-sm sm:text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
 
-        <div className="relative">
+        <div className="relative w-full sm:w-auto">
           <button
             onClick={onToggleFilterMenu}
-            className={`flex items-center gap-2 px-5 py-3 border rounded-xl font-medium transition-all cursor-pointer ${
+            className={`w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 border rounded-xl font-medium transition-all cursor-pointer ${
               filterStatus !== 'all' || filterCategory !== 'all'
                 ? 'bg-blue-50 border-blue-200 text-blue-700'
                 : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -105,24 +105,26 @@ export default function TranslationHistoryToolbar({
         </div>
 
         {selectedItems.length > 0 && (
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-600 font-medium">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
+            <span className="text-xs sm:text-sm text-gray-600 font-medium text-center sm:text-left">
               {selectedItems.length} selected
             </span>
-            <button
-              onClick={onBulkDownload}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all cursor-pointer"
-            >
-              <Download className="w-4 h-4" />
-              Download
-            </button>
-            <button
-              onClick={onBulkDelete}
-              className="flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg font-medium transition-all cursor-pointer"
-            >
-              <Trash2 className="w-4 h-4" />
-              Delete
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={onBulkDownload}
+                className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-all cursor-pointer"
+              >
+                <Download className="w-4 h-4" />
+                <span className="hidden sm:inline">Download</span>
+              </button>
+              <button
+                onClick={onBulkDelete}
+                className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg text-sm font-medium transition-all cursor-pointer"
+              >
+                <Trash2 className="w-4 h-4" />
+                <span className="hidden sm:inline">Delete</span>
+              </button>
+            </div>
           </div>
         )}
       </div>

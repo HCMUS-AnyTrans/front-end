@@ -135,6 +135,15 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             <Send className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
             Send Message
           </button>
+
+          {/* Contact Illustration */}
+          <div className="mt-8 flex justify-center">
+            <img
+              src="/contact-illustration.jpg"
+              alt="Contact Support Illustration"
+              className="w-full max-w-md h-auto rounded-2xl opacity-90 hover:opacity-100 transition-opacity duration-300"
+            />
+          </div>
         </form>
       )}
 

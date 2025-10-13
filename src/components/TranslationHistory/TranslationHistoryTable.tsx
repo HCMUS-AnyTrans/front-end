@@ -31,7 +31,7 @@ export default function TranslationHistoryTable({
 }: TranslationHistoryTableProps) {
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-      <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
+      <div className="hidden md:block px-4 sm:px-6 py-3 sm:py-4 bg-gray-50 border-b border-gray-200">
         <div className="grid grid-cols-12 gap-4 items-center text-sm font-semibold text-gray-600">
           <div className="col-span-5">Document</div>
           <div className="col-span-2">Languages</div>
@@ -64,7 +64,7 @@ export default function TranslationHistoryTable({
       )}
 
       {items.length > 0 && (
-        <div className="px-6 py-4 border-t border-gray-200">
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-200">
           <TranslationHistoryPagination
             currentCount={items.length}
             totalCount={items.length}

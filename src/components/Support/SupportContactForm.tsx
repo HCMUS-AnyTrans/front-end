@@ -25,14 +25,14 @@ export default function SupportContactForm({
   };
 
   const submitButton = (
-    <div className="flex items-center justify-between pt-4">
-      <div className="flex items-center gap-2 text-sm text-gray-600">
-        <Clock className="w-4 h-4" />
+    <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-0 pt-4">
+      <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm text-gray-600">
+        <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         <span>Typical response time: 24 hours</span>
       </div>
       <button
         type="submit"
-        className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-2.5 rounded-lg font-semibold shadow-lg transition-all cursor-pointer"
+        className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-5 sm:px-6 py-2.5 rounded-lg text-sm sm:text-base font-semibold shadow-lg transition-all cursor-pointer"
       >
         <Send className="w-4 h-4" />
         Send Message

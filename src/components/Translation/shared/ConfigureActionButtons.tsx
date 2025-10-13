@@ -19,7 +19,7 @@ export default function ConfigureActionButtons({
         onClick={onBack}
         variant="outline"
         size="xl"
-        className="border-2 border-gray-300 hover:border-gray-400 rounded-xl shadow-sm"
+        className="border-2 border-gray-300 hover:border-gray-400 rounded-xl shadow-sm h-14"
       >
         <ArrowLeft className="w-4 h-4" />
         Back
@@ -29,6 +29,7 @@ export default function ConfigureActionButtons({
         disabled={disabled || isProcessing}
         variant="gradient"
         size="2xl"
+        className="h-14"
       >
         {isProcessing ? (
           <>
