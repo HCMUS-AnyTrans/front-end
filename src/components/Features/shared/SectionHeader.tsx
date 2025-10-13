@@ -8,8 +8,8 @@ interface FeatureSectionHeaderProps {
   className?: string;
 }
 
-title,
 export default function FeatureSectionHeader({
+  title,
   description,
   align = 'center',
   className = '',
