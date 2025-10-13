@@ -37,7 +37,7 @@ export default function Hero() {
         <div className="flex flex-col gap-6 sm:gap-7 max-w-[625px] relative z-10 text-center lg:text-left">
           <div className="relative">
             <h1
-              className="font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-[80px] leading-tight sm:leading-tight lg:leading-[1.1] xl:leading-[90px] text-black font-inter transition-all duration-1000 ease-out"
+              className="font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-[80px] leading-tight sm:leading-tight lg:leading-[1.1] xl:leading-[90px] text-blacktransition-all duration-1000 ease-out"
               style={{
                 transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
                 opacity: isVisible ? 1 : 0,
@@ -60,7 +60,7 @@ export default function Hero() {
           </div>
 
           <p
-            className="font-semibold text-base sm:text-lg leading-6 sm:leading-7 text-muted-foreground max-w-[448px] font-nunito mx-auto lg:mx-0 transition-all duration-1000 ease-out"
+            className="font-semibold text-base sm:text-lg leading-6 sm:leading-7 text-muted-foreground max-w-[448px] mx-auto lg:mx-0 transition-all duration-1000 ease-out"
             style={{
               transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
               opacity: isVisible ? 1 : 0,
@@ -107,7 +107,7 @@ export default function Hero() {
           <img
             src="/Banner-Homepage.svg"
             alt="AnyTrans Translation Services Banner"
-            className="w-full h-auto object-contain"
+            className="w-full h-auto object-contain hover:scale-105 transition-all duration-300"
           />
         </div>
       </div>

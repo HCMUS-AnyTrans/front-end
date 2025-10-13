@@ -15,11 +15,11 @@ export default function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div className={`${centered ? 'text-center' : ''} ${className}`}>
-      <h2 className="text-3xl sm:text-4xl lg:text-[50px] font-bold text-foreground font-inter leading-[1.3] mb-4">
+      <h2 className="text-3xl sm:text-4xl lg:text-[50px] font-bold text-foreground  leading-[1.3] mb-4">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-base lg:text-lg text-muted-foreground font-nunito max-w-2xl mx-auto">
+        <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto">
           {subtitle}
         </p>
       )}

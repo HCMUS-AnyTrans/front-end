@@ -44,7 +44,7 @@ function FloatingCard({
           {category}
         </div>
         <div
-          className={`font-bold text-[15px] leading-tight transition-colors duration-500 ${
+          className={`font-medium text-[15px] leading-tight transition-colors duration-500 ${
             isHovered ? 'text-foreground' : 'text-foreground'
           }`}
         >
@@ -70,10 +70,7 @@ export default function About() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
           {/* Left content */}
           <div className="flex flex-col gap-8 text-center lg:text-left w-full lg:max-w-xl">
-            <h2
-              className="font-bold text-4xl lg:text-5xl xl:text-6xl leading-tight text-foreground"
-              style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
-            >
+            <h2 className="font-bold text-4xl lg:text-5xl xl:text-6xl leading-tight text-foreground">
               Everything You
               <br />
               <span className="text-brand-primary inline-block transition-all duration-1000 ease-out">
@@ -81,10 +78,7 @@ export default function About() {
               </span>
             </h2>
 
-            <p
-              className="text-lg leading-relaxed text-muted-foreground"
-              style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
-            >
+            <p className="text-lg leading-relaxed text-muted-foreground">
               Our platform empowers you to translate documents, subtitles, and
               videos effortlessly. Upload DOCX, PDF, or PPTX files and get
               instant Vietnamese translations without losing formatting.

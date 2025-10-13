@@ -56,8 +56,8 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /* Fonts */
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-rubik);
+  --font-mono: var(--font-rubik);
 
   /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
@@ -176,12 +176,8 @@
     @apply bg-background text-foreground;
   }
 
-  .font-inter {
-    font-family: var(--font-inter), Inter, sans-serif;
-  }
-
-  .font-nunito {
-    font-family: var(--font-nunito), Nunito, sans-serif;
+  .font-rubik {
+    font-family: var(--font-rubik), Rubik, sans-serif;
   }
 
   /* Custom font family for the logo */
