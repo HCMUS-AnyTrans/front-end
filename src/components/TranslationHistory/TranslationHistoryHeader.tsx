@@ -24,7 +24,7 @@ export default function TranslationHistoryHeader({
         {
           label: 'Words',
           value: totalWords.toLocaleString(),
-          color: 'bg-blue-500',
+          color: 'bg-[#4169E1]',
         },
       ]}
     />

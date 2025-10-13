@@ -15,7 +15,7 @@ export default function PricingTabSelector({
 }: PricingTabSelectorProps) {
   return (
     <div
-      className={`bg-white rounded-2xl shadow-md p-2 w-[360px] h-[72px] flex items-center gap-2 transition-all duration-500 hover:shadow-xl ${
+      className={`bg-white rounded-2xl shadow-md p-2 w-[360px] h-[72px] flex items-center gap-6 transition-all duration-500 hover:shadow-xl ${
         isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
       }`}
     >

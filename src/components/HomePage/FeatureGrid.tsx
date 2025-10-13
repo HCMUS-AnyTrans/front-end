@@ -1,233 +1,100 @@
 'use client';
 
-import React, { useState } from 'react';
-import { ArrowRight, FileText, Subtitles, Check } from 'lucide-react';
-
-interface FeatureCardProps {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  features: string[];
-  color: string;
-  isHovered?: boolean;
-  onHover?: (hovered: boolean) => void;
-}
-
-function FeatureCard({
-  title,
-  description,
-  icon,
-  features,
-  color,
-  isHovered = false,
-  onHover,
-}: FeatureCardProps) {
-  return (
-    <div
-      className={`relative h-[560px] w-full max-w-[520px] rounded-3xl overflow-hidden bg-card cursor-pointer transition-all duration-700 ease-out border ${
-        isHovered
-          ? 'border-transparent shadow-2xl scale-[1.03]'
-          : 'border-border shadow-lg'
-      }`}
-      onMouseEnter={() => onHover?.(true)}
-      onMouseLeave={() => onHover?.(false)}
-    >
-      {/* Animated background gradient */}
-      <div
-        className={`absolute inset-0 transition-opacity duration-700 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{
-          background: `linear-gradient(135deg, ${color}10 0%, ${color}05 100%)`,
-        }}
-      />
-
-      {/* Decorative blob */}
-      <div
-        className={`absolute -top-20 -right-20 w-60 h-60 rounded-full blur-3xl transition-all duration-700 ${
-          isHovered ? 'opacity-30 scale-150' : 'opacity-0 scale-100'
-        }`}
-        style={{ backgroundColor: color }}
-      />
-
-      <div className="relative z-10 h-full flex flex-col p-10">
-        {/* Icon section with floating effect */}
-        <div className="flex items-start justify-between mb-8">
-          <div
-            className={`relative w-20 h-20 rounded-2xl flex items-center justify-center transition-all duration-700 ${
-              isHovered ? 'shadow-2xl rotate-6 scale-110' : 'shadow-md'
-            }`}
-            style={{
-              background: isHovered
-                ? `linear-gradient(135deg, ${color}, ${color}dd)`
-                : `${color}15`,
-            }}
-          >
-            <div
-              className={`transition-all duration-700 ${
-                isHovered ? 'text-white scale-110' : 'text-foreground'
-              }`}
-            >
-              {icon}
-            </div>
-          </div>
-
-          {/* Floating arrow indicator */}
-          <div
-            className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-700 ${
-              isHovered
-                ? 'bg-white shadow-lg scale-110 rotate-45'
-                : 'bg-muted scale-100'
-            }`}
-          >
-            <ArrowRight
-              size={20}
-              className={`transition-all duration-700 ${
-                isHovered ? '-rotate-45' : ''
-              }`}
-              style={{
-                color: isHovered ? color : 'hsl(var(--muted-foreground))',
-              }}
-              strokeWidth={2.5}
-            />
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="flex flex-col flex-grow">
-          <h3
-            className={`font-bold text-3xl mb-4 transition-all duration-700 ${
-              isHovered ? 'translate-x-2' : ''
-            }`}
-            style={{ color: isHovered ? color : '#0F172A' }}
-          >
-            {title}
-          </h3>
-          <p className="text-muted-foreground text-base leading-relaxed mb-8">
-            {description}
-          </p>
-
-          {/* Features list with stagger animation */}
-          <div className="flex flex-col gap-4 mb-8">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className={`flex items-start gap-3 transition-all duration-500 ${
-                  isHovered
-                    ? 'translate-x-2 opacity-100'
-                    : 'translate-x-0 opacity-80'
-                }`}
-                style={{
-                  transitionDelay: `${index * 100}ms`,
-                }}
-              >
-                <div
-                  className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 transition-all duration-500 ${
-                    isHovered ? 'shadow-md scale-110' : 'scale-100'
-                  }`}
-                  style={{
-                    background: isHovered ? color : `${color}20`,
-                    transitionDelay: `${index * 100}ms`,
-                  }}
-                >
-                  <Check
-                    size={14}
-                    className={`transition-colors duration-500 ${
-                      isHovered ? 'text-white' : 'text-muted-foreground'
-                    }`}
-                    strokeWidth={3}
-                  />
-                </div>
-                <span className="text-foreground text-[15px] font-medium leading-relaxed">
-                  {feature}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom decorative line */}
-      <div
-        className={`absolute bottom-0 left-0 h-1 transition-all duration-700 ${
-          isHovered ? 'w-full' : 'w-0'
-        }`}
-        style={{ background: `linear-gradient(90deg, ${color}, ${color}80)` }}
-      />
-    </div>
-  );
-}
+import React from 'react';
+import { Film, Check, Zap, Shield, Globe } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  FeatureDetailSection,
+  FeatureSectionHeader,
+  BackgroundPattern,
+  Benefit,
+} from '@/components/Features/shared';
 
 export default function FeatureGrid() {
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-
   const features = [
     {
-      id: 'document',
       title: 'Document Translation',
       description:
-        'Translate your documents instantly while preserving formatting, layout, and structure. Support for DOCX, PDF, and PPTX files with enterprise-grade accuracy.',
-      icon: <FileText size={40} strokeWidth={1.8} />,
-      color: '#3B82F6',
+        'Transform your business documents, reports, and presentations into any language while maintaining perfect formatting, layout, and professional quality. Powered by advanced AI technology.',
       features: [
+        'Support for DOCX, PDF, XLSX, PPTX formats',
         'Preserve original formatting and layout',
-        'Support for 50+ file formats',
-        'Batch processing up to 100 files',
-        'AI-powered context understanding',
+        'Batch processing for multiple files',
+        'AI-powered contextual translation',
       ],
+      benefits: [
+        { icon: Zap, text: 'Fast Processing' },
+        { icon: Shield, text: 'Secure & Private' },
+        { icon: Globe, text: '100+ Languages' },
+      ] as Benefit[],
+      imagePosition: 'right' as const,
+      gradient: 'from-blue-500 to-indigo-600',
+      ctaText: 'Try Document Translation',
+      ctaHref: '/features/document-translation',
     },
     {
-      id: 'subtitle',
       title: 'Subtitle Translation',
       description:
-        'Perfect timing and synchronization for your video subtitles. Support for SRT, VTT, and direct MP4 video translation with accurate timing preservation.',
-      icon: <Subtitles size={40} strokeWidth={1.8} />,
-      color: '#8B5CF6',
+        'Translate video subtitles with perfect timing synchronization. Support for all major subtitle formats with intelligent context-aware translation that preserves meaning and timing.',
       features: [
+        'Support for SRT, VTT, ASS, SSA formats',
         'Perfect timing synchronization',
-        'Multiple subtitle formats supported',
-        'Direct video file translation',
+        'Real-time preview and editing',
         'Context-aware subtitle adaptation',
       ],
+      benefits: [
+        { icon: Film, text: 'Video Ready' },
+        { icon: Zap, text: 'Auto Sync' },
+        { icon: Check, text: 'Quality Check' },
+      ] as Benefit[],
+      imagePosition: 'left' as const,
+      gradient: 'from-purple-500 to-pink-600',
+      ctaText: 'Try Subtitle Translation',
+      ctaHref: '/features/subtitle-translation',
     },
   ];
 
   return (
-    <section className="w-full bg-gradient-to-br from-background via-muted to-accent/30 py-24 relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-brand-200/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-72 h-72 bg-accent/40 rounded-full blur-3xl" />
+    <section className="w-full py-20 lg:py-28 bg-white relative overflow-hidden">
+      {/* Background Pattern */}
+      <BackgroundPattern variant="dots" opacity={0.02} />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center gap-16">
-          {/* Header */}
-          <div className="text-center max-w-3xl">
-            <h2 className="font-bold text-5xl lg:text-6xl leading-tight text-foreground mb-6">
-              Translation Tools That
+        {/* Section Header */}
+        <FeatureSectionHeader
+          title={
+            <>
+              Professional Tools for
               <br />
-              <span className="text-brand-primary inline-block transition-all duration-1000 ease-out">
-                Work For You
+              <span className="bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] bg-clip-text text-transparent">
+                Every Translation Need
               </span>
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Experience the next generation of translation technology with our
-              advanced AI-powered features
-            </p>
-          </div>
+            </>
+          }
+          description="Choose the right tool for your project. Both powered by state-of-the-art AI technology for professional results."
+          align="center"
+          className="mb-16 lg:mb-20"
+        />
 
-          {/* Feature cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full max-w-6xl">
-            {features.map((feature) => (
-              <FeatureCard
-                key={feature.id}
-                {...feature}
-                isHovered={hoveredCard === feature.id}
-                onHover={(hovered) =>
-                  setHoveredCard(hovered ? feature.id : null)
-                }
-              />
-            ))}
-          </div>
+        {/* Features */}
+        <div className="space-y-12 lg:space-y-20">
+          {features.map((feature, index) => (
+            <FeatureDetailSection key={index} {...feature} index={index} />
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-20 text-center bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8 lg:p-12">
+          <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
+            Ready to get started?
+          </h3>
+          <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
+            Join thousands of users who trust AnyTrans for their translation
+            needs. Start your free trial today.
+          </p>
+          <Button variant="gradient-primary" size="hero" asChild>
+            <a href="/signup">Start Free Trial</a>
+          </Button>
         </div>
       </div>
     </section>

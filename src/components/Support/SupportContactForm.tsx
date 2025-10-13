@@ -4,6 +4,7 @@ import React from 'react';
 import { Send, Clock } from 'lucide-react';
 import { BaseForm } from '@/components/Common';
 import { ContactForm } from '@/types/support';
+import { Button } from '@/components/ui/button';
 
 interface SupportContactFormProps {
   title: string;
@@ -30,13 +31,15 @@ export default function SupportContactForm({
         <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         <span>Typical response time: 24 hours</span>
       </div>
-      <button
+      <Button
         type="submit"
-        className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-5 sm:px-6 py-2.5 rounded-lg text-sm sm:text-base font-semibold shadow-lg transition-all cursor-pointer"
+        variant="gradient-primary"
+        size="default"
+        className="rounded-lg p-6 shadow-lg hover:scale-100 hover:translate-y-0 text-sm sm:text-base"
       >
         <Send className="w-4 h-4" />
         Send Message
-      </button>
+      </Button>
     </div>
   );
 
@@ -58,7 +61,7 @@ export default function SupportContactForm({
             onChange={(e) => handleInputChange('name', e.target.value)}
             placeholder="John Doe"
             required
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
           />
         </div>
 
@@ -72,7 +75,7 @@ export default function SupportContactForm({
             onChange={(e) => handleInputChange('email', e.target.value)}
             placeholder="john@example.com"
             required
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
           />
         </div>
       </div>
@@ -87,7 +90,7 @@ export default function SupportContactForm({
           onChange={(e) => handleInputChange('subject', e.target.value)}
           placeholder="What do you need help with?"
           required
-          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
         />
       </div>
 
@@ -101,7 +104,7 @@ export default function SupportContactForm({
           placeholder="Describe your issue in detail..."
           required
           rows={6}
-          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent resize-none"
         />
       </div>
     </BaseForm>

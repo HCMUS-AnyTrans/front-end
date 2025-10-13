@@ -4,6 +4,7 @@ import React from 'react';
 import { Bell } from 'lucide-react';
 import { NotificationItem } from '@/types/notifications';
 import NotificationCard from './NotificationCard';
+import { Button } from '@/components/ui/button';
 
 type Props = {
   notifications: NotificationItem[];
@@ -45,12 +46,14 @@ export default function NotificationsList({
             : "You're all caught up!"}
         </p>
         {activeFilter !== 'all' && (
-          <button
+          <Button
             onClick={onResetFilterToAll}
-            className="px-5 sm:px-6 py-2.5 sm:py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm sm:text-base font-semibold transition-all cursor-pointer"
+            variant="gradient-primary"
+            size="default"
+            className="px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base"
           >
             View all notifications
-          </button>
+          </Button>
         )}
       </div>
     );

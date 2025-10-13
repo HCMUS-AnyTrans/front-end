@@ -28,7 +28,7 @@ export default function NotificationsBulkActionsBar({
         <div className="flex items-center gap-1.5 sm:gap-2">
           <button
             onClick={onMarkSelectedRead}
-            className="px-2.5 sm:px-3 py-1.5 text-[10px] sm:text-xs md:text-sm font-medium text-blue-700 hover:bg-blue-100 rounded-lg transition-all cursor-pointer whitespace-nowrap"
+            className="px-2.5 sm:px-3 py-1.5 text-[10px] sm:text-xs md:text-sm font-medium text-[#1e3a8a] hover:bg-blue-100 rounded-lg transition-all cursor-pointer whitespace-nowrap"
           >
             <span className="hidden sm:inline">Mark as read</span>
             <span className="sm:hidden">Read</span>

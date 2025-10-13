@@ -48,7 +48,7 @@ function getNotificationColor(type: NotificationItem['type']) {
     case 'warning':
       return 'from-amber-500 to-orange-500';
     case 'info':
-      return 'from-blue-500 to-indigo-500';
+      return 'from-[#4169E1] to-[#1e3a8a]';
     default:
       return 'from-gray-500 to-slate-500';
   }
@@ -75,7 +75,7 @@ export default function NotificationCard({
             type="checkbox"
             checked={isSelected}
             onChange={onToggleSelect}
-            className="mt-0.5 sm:mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+            className="mt-0.5 sm:mt-1 w-4 h-4 text-[#4169E1] border-gray-300 rounded focus:ring-[#4169E1]"
           />
 
           <div
@@ -103,7 +103,7 @@ export default function NotificationCard({
                     {notification.title}
                   </h3>
                   {!notification.isRead && (
-                    <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-600 rounded-full flex-shrink-0"></span>
+                    <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#4169E1] rounded-full flex-shrink-0"></span>
                   )}
                 </div>
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
@@ -192,7 +192,7 @@ export default function NotificationCard({
                 <span className="capitalize">{notification.category}</span>
               </div>
               {notification.category === 'translation' && (
-                <button className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1 cursor-pointer whitespace-nowrap">
+                <button className="text-[#4169E1] hover:text-[#1e3a8a] font-medium flex items-center gap-1 cursor-pointer whitespace-nowrap">
                   View details
                   <ChevronRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 </button>

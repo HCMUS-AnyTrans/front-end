@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Search, Filter, Download, Trash2, ChevronDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface TranslationHistoryToolbarProps {
   searchQuery: string;
@@ -40,7 +41,7 @@ export default function TranslationHistoryToolbar({
             placeholder="Search by filename, language..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full pl-10 sm:pl-11 pr-4 py-2.5 sm:py-3 border border-gray-300 rounded-xl text-sm sm:text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full pl-10 sm:pl-11 pr-4 py-2.5 sm:py-3 border border-gray-300 rounded-xl text-sm sm:text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
           />
         </div>
 
@@ -49,14 +50,14 @@ export default function TranslationHistoryToolbar({
             onClick={onToggleFilterMenu}
             className={`w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 border rounded-xl font-medium transition-all cursor-pointer ${
               filterStatus !== 'all' || filterCategory !== 'all'
-                ? 'bg-blue-50 border-blue-200 text-blue-700'
+                ? 'bg-blue-50 border-blue-200 text-[#1e3a8a]'
                 : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
             }`}
           >
             <Filter className="w-4 h-4" />
             <span>Filter</span>
             {(filterStatus !== 'all' || filterCategory !== 'all') && (
-              <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+              <span className="w-2 h-2 rounded-full bg-[#4169E1]"></span>
             )}
             <ChevronDown className="w-4 h-4" />
           </button>
@@ -72,7 +73,7 @@ export default function TranslationHistoryToolbar({
                   }}
                   className={`w-full text-left px-4 py-2 text-sm transition-colors cursor-pointer ${
                     filterStatus === status
-                      ? 'bg-blue-50 text-blue-700 font-medium'
+                      ? 'bg-blue-50 text-[#1e3a8a] font-medium'
                       : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
@@ -93,7 +94,7 @@ export default function TranslationHistoryToolbar({
                   }}
                   className={`w-full text-left px-4 py-2 text-sm transition-colors cursor-pointer ${
                     filterCategory === c.id
-                      ? 'bg-blue-50 text-blue-700 font-medium'
+                      ? 'bg-blue-50 text-[#1e3a8a] font-medium'
                       : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
@@ -110,20 +111,23 @@ export default function TranslationHistoryToolbar({
               {selectedItems.length} selected
             </span>
             <div className="flex gap-2">
-              <button
+              <Button
                 onClick={onBulkDownload}
-                className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-all cursor-pointer"
+                size="sm"
+                className="flex-1 sm:flex-initial rounded-lg px-3 sm:px-4 py-2"
               >
                 <Download className="w-4 h-4" />
                 <span className="hidden sm:inline">Download</span>
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={onBulkDelete}
-                className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg text-sm font-medium transition-all cursor-pointer"
+                variant="destructive"
+                size="sm"
+                className="flex-1 sm:flex-initial bg-red-50 hover:bg-red-100 text-red-600 rounded-lg px-3 sm:px-4 py-2 shadow-none"
               >
                 <Trash2 className="w-4 h-4" />
                 <span className="hidden sm:inline">Delete</span>
-              </button>
+              </Button>
             </div>
           </div>
         )}

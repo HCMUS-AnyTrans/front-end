@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Play } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
@@ -78,17 +79,17 @@ export default function Hero() {
               transitionDelay: '500ms',
             }}
           >
-            <button className="bg-gradient-to-r from-gradient-from to-gradient-to text-primary-foreground hover:from-gradient-to hover:to-gradient-from rounded-xl h-[52px] w-[160px] font-semibold text-base cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-1">
+            <Button variant="gradient-primary" size="hero">
               Free Trial
-            </button>
+            </Button>
 
-            <button className="border-2 border-brand-primary-light text-brand-primary-light hover:bg-gradient-to-r hover:from-gradient-from hover:to-gradient-to hover:border-transparent hover:text-primary-foreground rounded-xl h-[52px] w-[160px] font-semibold text-base cursor-pointer transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-xl hover:scale-105 hover:-translate-y-1 group">
+            <Button variant="outline-gradient" size="hero" className="group">
               <Play
                 size={20}
                 className="transition-transform duration-300 group-hover:scale-110"
               />
               View Demo
-            </button>
+            </Button>
           </div>
         </div>
 

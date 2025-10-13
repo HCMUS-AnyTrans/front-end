@@ -7,8 +7,10 @@ import {
   PricingTabSelector,
   PricingGrid,
   PricingAnimations,
+  PricingFAQSection,
 } from '@/components/Pricing';
 import { personalPlans, enterprisePlans } from '@/lib/pricing-plans';
+import { faqs } from '@/lib/pricing-data';
 
 export default function PricingPageClient() {
   const [selectedTab, setSelectedTab] = useState<'personal' | 'enterprise'>(
@@ -66,6 +68,9 @@ export default function PricingPageClient() {
           </div>
         </div>
       </div>
+
+      {/* FAQ Section */}
+      <PricingFAQSection faqs={faqs} />
 
       {/* Footer */}
       <Footer />

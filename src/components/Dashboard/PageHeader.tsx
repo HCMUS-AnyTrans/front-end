@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Upload, ChevronDown, FileText, Film } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function PageHeader() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -32,14 +33,16 @@ export default function PageHeader() {
           </div>
 
           <div className="relative" ref={dropdownRef}>
-            <button
+            <Button
               onClick={() => setShowDropdown(!showDropdown)}
-              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all shadow-sm cursor-pointer"
+              variant="gradient-primary"
+              size="default"
+              className="px-7 py-7 rounded-xl text-md"
             >
-              <Upload className="w-5 h-5" />
+              <Upload className="w-5 h-5 " />
               New Translation
               <ChevronDown className="w-4 h-4" />
-            </button>
+            </Button>
 
             {showDropdown && (
               <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
@@ -48,7 +51,7 @@ export default function PageHeader() {
                   className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
                 >
                   <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
-                    <FileText className="w-5 h-5 text-blue-600" />
+                    <FileText className="w-5 h-5 text-[#4169E1]" />
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">

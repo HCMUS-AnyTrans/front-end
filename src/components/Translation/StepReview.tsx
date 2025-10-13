@@ -92,7 +92,7 @@ export default function StepReview(props: StepReviewProps) {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200">
           <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 bg-gray-50 rounded-t-2xl">
             <div className="flex items-center gap-2">
-              <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+              <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-[#4169E1]" />
               <h3 className="text-sm sm:text-base font-semibold text-gray-900">
                 Original ({props.sourceLanguage})
               </h3>

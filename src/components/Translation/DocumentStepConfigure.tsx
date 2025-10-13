@@ -117,7 +117,7 @@ export default function StepConfigure({
               onClick={onBack}
               variant="ghost"
               size="sm"
-              className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+              className="text-sm text-[#4169E1] hover:text-[#1e3a8a] font-medium"
             >
               <ArrowLeft className="w-4 h-4" />
               Change file
@@ -126,7 +126,7 @@ export default function StepConfigure({
         </CardHeader>
         <CardContent className="px-6 pb-6">
           <div className="flex items-start gap-4 p-4 bg-blue-50 rounded-xl border border-blue-100">
-            <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 bg-[#4169E1] rounded-lg flex items-center justify-center flex-shrink-0">
               <FileText className="w-6 h-6 text-white" />
             </div>
             <div className="flex-1 min-w-0">
@@ -216,8 +216,8 @@ export default function StepConfigure({
             {/* Domain Info */}
             {topic === 'auto-detect' && (
               <div className="flex items-start gap-2 p-3 bg-blue-50 rounded-lg border border-blue-100">
-                <Sparkles className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-blue-800">
+                <Sparkles className="w-4 h-4 text-[#4169E1] mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-[#1e3a8a]">
                   AI will automatically detect the content domain based on your
                   document's terminology and context.
                 </p>
@@ -378,7 +378,7 @@ export default function StepConfigure({
                 rows={8}
                 value={glossaryText}
                 onChange={(e) => setGlossaryText(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
               />
               {glossaryText && (
                 <div className="mt-2 flex items-center justify-between text-sm">
@@ -408,7 +408,7 @@ export default function StepConfigure({
       <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200 rounded-xl shadow-sm">
         <CardHeader className="p-6 pb-4">
           <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-blue-600" />
+            <CheckCircle2 className="w-5 h-5 text-[#4169E1]" />
             Ready to Translate
           </h3>
         </CardHeader>
@@ -458,7 +458,7 @@ export default function StepConfigure({
               </p>
             </div>
             <div className="text-right">
-              <p className="text-2xl font-bold text-blue-600">28</p>
+              <p className="text-2xl font-bold text-[#4169E1]">28</p>
               <p className="text-xs text-gray-600">credits</p>
             </div>
           </div>

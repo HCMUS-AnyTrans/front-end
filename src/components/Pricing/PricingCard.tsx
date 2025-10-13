@@ -61,11 +61,13 @@ export default function PricingCard({
     <div
       className={`${cardBg} rounded-3xl w-full max-w-[380px] p-8 flex flex-col relative border-2 ${
         isHighlighted
-          ? 'border-transparent shadow-2xl scale-105 animate-fade-in-up'
+          ? isHovered
+            ? 'border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.6)] scale-110 -translate-y-2'
+            : 'border-transparent shadow-2xl scale-105 animate-fade-in-up hover:border-yellow-400/50'
           : isHovered
-            ? 'border-brand-200 shadow-xl scale-[1.02]'
-            : 'border-border shadow-lg hover:border-brand-100'
-      } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-700 ease-out`}
+            ? 'border-[#4169E1] shadow-2xl scale-[1.05] -translate-y-2'
+            : 'border-border shadow-lg hover:border-[#4169E1]/50 hover:shadow-xl'
+      } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-500 ease-out`}
       style={{
         height: isHighlighted ? '700px' : '660px',
         ...(isHighlighted && {
@@ -80,7 +82,9 @@ export default function PricingCard({
         <>
           {/* Animated glow effect */}
           <div
-            className="absolute inset-0 rounded-3xl blur-xl opacity-30 animate-pulse-glow"
+            className={`absolute inset-0 rounded-3xl blur-xl transition-opacity duration-500 ${
+              isHovered ? 'opacity-50' : 'opacity-30'
+            } animate-pulse-glow`}
             style={{
               background:
                 'linear-gradient(45deg, hsl(var(--gradient-from)), hsl(var(--gradient-to)), hsl(var(--gradient-from)))',
@@ -91,7 +95,9 @@ export default function PricingCard({
 
           {/* Most Popular Badge with enhanced animation */}
           <div
-            className="absolute -top-4 inset-x-0 mx-auto w-max bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg z-10"
+            className={`absolute -top-4 inset-x-0 mx-auto w-max bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg z-10 transition-all duration-500 ${
+              isHovered ? 'scale-110 shadow-2xl' : ''
+            }`}
             style={{
               backgroundSize: '200% auto',
               animation:

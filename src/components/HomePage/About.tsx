@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { FileText, Video, BookOpen, Users } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface FloatingCardProps {
   icon: React.ReactNode;
@@ -93,9 +94,9 @@ export default function About() {
             </p>
 
             <div className="flex justify-center lg:justify-start">
-              <button className="bg-gradient-to-r from-gradient-from to-gradient-to cursor-pointer text-primary-foreground hover:from-gradient-to hover:to-gradient-from font-semibold text-base h-[52px] w-[160px] rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-105">
+              <Button variant="gradient-primary" size="hero">
                 Read More
-              </button>
+              </Button>
             </div>
           </div>
 

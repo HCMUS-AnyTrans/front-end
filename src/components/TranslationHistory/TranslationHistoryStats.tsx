@@ -30,7 +30,7 @@ export default function TranslationHistoryStats({
       </div>
       <div className="bg-white rounded-xl p-4 sm:p-5 border border-gray-200">
         <p className="text-xs sm:text-sm text-gray-600 mb-1">Credits Used</p>
-        <p className="text-xl sm:text-2xl font-bold text-blue-600">
+        <p className="text-xl sm:text-2xl font-bold text-[#4169E1]">
           {stats.totalCredits}
         </p>
       </div>

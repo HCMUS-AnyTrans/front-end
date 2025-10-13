@@ -45,7 +45,7 @@ export default function StepHeader({
                         isCompleted
                           ? 'bg-green-100 text-green-700'
                           : isActive
-                            ? 'bg-blue-600 text-white'
+                            ? 'bg-[#4169E1] text-white'
                             : 'bg-gray-100 text-gray-400'
                       }`}
                     >
@@ -56,7 +56,7 @@ export default function StepHeader({
                       )}
                     </div>
                     <span
-                      className={`text-xs font-medium ${isActive ? 'text-blue-700' : 'text-gray-500'}`}
+                      className={`text-xs font-medium ${isActive ? 'text-[#1e3a8a]' : 'text-gray-500'}`}
                     >
                       {step.label}
                     </span>

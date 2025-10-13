@@ -1,2 +1,4 @@
-// Re-export all Sidebar components
+// Re-export all Layout components
 export * from './Sidebar';
+export * from './Header';
+export * from './Footer';

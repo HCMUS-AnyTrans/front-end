@@ -11,3 +11,6 @@ export { default as BaseHeader } from './BaseHeader';
 export { default as BaseSearchBar } from './BaseSearchBar';
 export { default as ContentContainer } from './ContentContainer';
 export { default as SectionHeader } from './SectionHeader';
+
+// Feature Components
+export * from '../Features/shared';
