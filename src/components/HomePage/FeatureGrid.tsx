@@ -89,7 +89,7 @@ export default function FeatureGrid() {
             Ready to get started?
           </h3>
           <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
-            Join thousands of users who trust AnyTrans for their translation
+            Join thousands of users who trust Anytrans for their translation
             needs. Start your free trial today.
           </p>
           <Button variant="gradient-primary" size="hero" asChild>

@@ -6,7 +6,7 @@ export default function FooterLogo() {
       <a
         href="/"
         className="group inline-flex items-center gap-3 w-fit transition-all duration-300 hover:shadow-2xl hover:scale-102"
-        aria-label="AnyTrans - Go to homepage"
+        aria-label="Anytrans - Go to homepage"
       >
         {/* Logo Icon */}
         <div className="relative flex-shrink-0">

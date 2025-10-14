@@ -20,7 +20,7 @@ export default function AboutTeam({ team }: AboutTeamProps) {
       >
         <h2 className="text-3xl font-bold text-gray-900 mb-3">Meet Our Team</h2>
         <p className="text-lg text-gray-600">
-          The passionate people behind AnyTrans
+          The passionate people behind Anytrans
         </p>
       </div>
 

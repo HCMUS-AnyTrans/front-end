@@ -67,7 +67,7 @@ export default function Hero() {
               transitionDelay: isVisible ? '0ms' : '300ms',
             }}
           >
-            Dịch thông minh hơn, không khó hơn. AnyTrans mang đến cho bạn tốc
+            Dịch thông minh hơn, không khó hơn. Anytrans mang đến cho bạn tốc
             độ, độ chính xác và các tính năng mới nhất để quản lý mọi nội dung
             một cách đơn giản
           </p>
@@ -107,7 +107,7 @@ export default function Hero() {
         >
           <img
             src="/Banner-Homepage.svg"
-            alt="AnyTrans Translation Services Banner"
+            alt="Anytrans Translation Services Banner"
             className="w-full h-auto object-contain"
           />
         </div>

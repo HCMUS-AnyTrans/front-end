@@ -21,7 +21,7 @@ export default function FeaturesCTA() {
               Ready to Get Started?
             </h2>
             <p className="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto mb-8">
-              Join thousands of users who trust AnyTrans for their translation
+              Join thousands of users who trust Anytrans for their translation
               needs. Start your free trial today—no credit card required.
             </p>
 

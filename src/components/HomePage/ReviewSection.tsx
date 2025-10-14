@@ -126,7 +126,7 @@ export default function ReviewSection() {
       company: 'TechCorp',
       rating: 5,
       review:
-        'AnyTrans has revolutionized how we handle multilingual content. The document translation feature maintains perfect formatting, and the quality is outstanding.',
+        'Anytrans has revolutionized how we handle multilingual content. The document translation feature maintains perfect formatting, and the quality is outstanding.',
       metadata: 'Translated 50+ marketing documents',
       icon: <FileText size={14} strokeWidth={2.5} />,
     },
@@ -156,7 +156,7 @@ export default function ReviewSection() {
       company: 'DevDocs',
       rating: 5,
       review:
-        'As a technical writer, I need precise translations. AnyTrans delivers consistently high-quality results while preserving technical terminology.',
+        'As a technical writer, I need precise translations. Anytrans delivers consistently high-quality results while preserving technical terminology.',
       metadata: 'Translated 100+ technical documents',
       icon: <FileText size={14} strokeWidth={2.5} />,
     },
@@ -195,7 +195,7 @@ export default function ReviewSection() {
             What Our Users Say
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust AnyTrans for their
+            Join thousands of satisfied customers who trust Anytrans for their
             translation needs
           </p>
 

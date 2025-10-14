@@ -21,7 +21,7 @@ export default function AboutCTA() {
       <BaseCTA
         variant="about"
         title="Ready to Break Language Barriers?"
-        description="Join thousands of users who trust AnyTrans for their translation needs. Start translating documents today."
+        description="Join thousands of users who trust Anytrans for their translation needs. Start translating documents today."
         primaryButton={{
           text: 'Get Started Free',
           href: '/signup',

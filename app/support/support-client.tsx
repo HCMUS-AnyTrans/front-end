@@ -114,7 +114,7 @@ export default function SupportClient() {
     {
       id: 'api',
       title: 'API Documentation',
-      description: 'Integrate AnyTrans into your applications',
+      description: 'Integrate Anytrans into your applications',
       icon: Book,
       bgGradient: 'bg-gradient-to-br from-green-50 to-emerald-50',
       borderColor: 'border-green-100',

@@ -4,7 +4,7 @@ import { PricingPlan, FAQItem } from '@/types/pricing';
 export const personalPlans: PricingPlan[] = [
   {
     name: 'Free',
-    tagline: 'Perfect for trying out AnyTrans',
+    tagline: 'Perfect for trying out Anytrans',
     price: 0,
     icon: Sparkles,
     iconColor: 'text-gray-600',

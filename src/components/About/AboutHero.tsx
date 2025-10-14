@@ -30,7 +30,7 @@ export default function AboutHero({ stats }: AboutHeroProps) {
           }`}
         >
           <Sparkles className="w-4 h-4 animate-pulse" />
-          <span className="text-sm font-medium">About AnyTrans</span>
+          <span className="text-sm font-medium">About Anytrans</span>
         </div>
         <h1
           className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 transition-all duration-700 delay-100 ${

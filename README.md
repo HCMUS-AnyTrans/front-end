@@ -1,6 +1,6 @@
-# AnyTrans Frontend
+# Anytrans Frontend
 
-> Translate smarter, not harder. AnyTrans gives you speed, accuracy, and the latest features to manage all your content with ease.
+> Translate smarter, not harder. Anytrans gives you speed, accuracy, and the latest features to manage all your content with ease.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15.5.4-black)
 ![React](https://img.shields.io/badge/React-19.1.0-blue)
@@ -22,7 +22,7 @@
 
 ## 🎯 Overview
 
-AnyTrans is a modern, AI-powered translation platform that enables users to translate documents and subtitles with high accuracy and speed. Built with Next.js 15 and React 19, it provides a seamless user experience with enterprise-grade security and performance.
+Anytrans is a modern, AI-powered translation platform that enables users to translate documents and subtitles with high accuracy and speed. Built with Next.js 15 and React 19, it provides a seamless user experience with enterprise-grade security and performance.
 
 ### Key Highlights
 
@@ -445,4 +445,4 @@ For support and questions:
 
 ---
 
-**Built with ❤️ by the AnyTrans Team**
+**Built with ❤️ by the Anytrans Team**

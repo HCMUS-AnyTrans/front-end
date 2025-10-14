@@ -21,9 +21,9 @@ const rubik = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'AnyTrans - Translation Made Simple',
+  title: 'Anytrans - Translation Made Simple',
   description:
-    'Translate smarter, not harder. AnyTrans gives you speed, accuracy, and the latest features to manage all your content with ease.',
+    'Translate smarter, not harder. Anytrans gives you speed, accuracy, and the latest features to manage all your content with ease.',
 };
 
 export default function RootLayout({

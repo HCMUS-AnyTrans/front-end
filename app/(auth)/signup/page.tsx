@@ -3,7 +3,7 @@ import { SignupForm } from "./signup-form";
 
 export const metadata: Metadata = {
   title: "Sign Up",
-  description: "Create your AnyTrans account to start translating documents, subtitles, and more.",
+  description: "Create your Anytrans account to start translating documents, subtitles, and more.",
 };
 
 export default function SignupPage() {
