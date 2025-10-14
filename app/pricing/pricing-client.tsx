@@ -16,7 +16,6 @@ export default function PricingPageClient() {
   const [selectedTab, setSelectedTab] = useState<'personal' | 'enterprise'>(
     'enterprise'
   );
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -62,8 +61,6 @@ export default function PricingPageClient() {
             <PricingGrid
               plans={currentPlans}
               selectedTab={selectedTab}
-              hoveredCard={hoveredCard}
-              onCardHover={setHoveredCard}
             />
           </div>
         </div>

@@ -21,7 +21,7 @@ export default function PricingTabSelector({
     >
       <button
         onClick={() => onTabChange('personal')}
-        className={`cursor-pointer flex-1 h-14 rounded-xl font-bold text-lg transition-all duration-500 transform hover:scale-105 ${
+        className={`cursor-pointer flex-1 h-14 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 ${
           selectedTab === 'personal'
             ? 'bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] text-white shadow-lg scale-[1.02]'
             : 'bg-transparent text-gray-600 hover:bg-gray-50'
@@ -31,7 +31,7 @@ export default function PricingTabSelector({
       </button>
       <button
         onClick={() => onTabChange('enterprise')}
-        className={`cursor-pointer flex-1 h-14 rounded-xl font-bold text-lg transition-all duration-500 transform hover:scale-105 ${
+        className={`cursor-pointer flex-1 h-14 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 ${
           selectedTab === 'enterprise'
             ? 'bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] text-white shadow-lg scale-[1.02]'
             : 'bg-transparent text-gray-600 hover:bg-gray-50'

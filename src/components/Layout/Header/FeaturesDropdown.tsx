@@ -37,7 +37,7 @@ export default function FeaturesDropdown({
         className={`relative flex items-center gap-1.5 px-3 xl:px-5 py-2.5 rounded-lg font-medium text-sm xl:text-[15px] transition-all duration-300 cursor-pointer ${
           isActive
             ? 'text-[#4169E1]'
-            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-500/10'
         }`}
         aria-current={isActive ? 'page' : undefined}
       >

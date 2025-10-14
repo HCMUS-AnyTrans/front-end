@@ -25,7 +25,7 @@ export default function ContactMethods({ methods }: ContactMethodsProps) {
                   : 'opacity-0 translate-y-12'
               }`}
               style={{
-                transitionDelay: `${index * 150}ms`,
+                transitionDelay: isVisible ? '0ms' : `${index * 150}ms`,
               }}
             >
               <BaseCard
@@ -35,6 +35,7 @@ export default function ContactMethods({ methods }: ContactMethodsProps) {
                 description={method.description}
                 contact={method.contact}
                 color={method.color}
+                className="transition-all duration-500"
               />
             </div>
           );

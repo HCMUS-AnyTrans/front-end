@@ -40,7 +40,7 @@ export const AccountDialogProvider = ({
     fullName: 'John Doe',
     email: 'john.doe@example.com',
     phone: '+84 123 456 789',
-    company: 'AnyTrans Inc.',
+    company: 'Anytrans Inc.',
     avatar: undefined,
   };
 

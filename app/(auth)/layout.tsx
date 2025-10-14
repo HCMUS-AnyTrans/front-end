@@ -3,11 +3,11 @@ import { AuthBackground } from '@/components/Auth';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | AnyTrans',
-    default: 'Authentication | AnyTrans',
+    template: '%s | Anytrans',
+    default: 'Authentication | Anytrans',
   },
   description:
-    'Sign in to your AnyTrans account or create a new one to start translating.',
+    'Sign in to your Anytrans account or create a new one to start translating.',
 };
 
 export default function AuthLayout({

@@ -20,7 +20,7 @@ export default function AboutTeam({ team }: AboutTeamProps) {
       >
         <h2 className="text-3xl font-bold text-gray-900 mb-3">Meet Our Team</h2>
         <p className="text-lg text-gray-600">
-          The passionate people behind AnyTrans
+          The passionate people behind Anytrans
         </p>
       </div>
 
@@ -28,14 +28,11 @@ export default function AboutTeam({ team }: AboutTeamProps) {
         {team.map((member, idx) => (
           <div
             key={member.name}
-            className={`bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-700 shadow-lg ${
+            className={`bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-300 shadow-lg ${
               isVisible
                 ? 'opacity-100 translate-y-0'
                 : 'opacity-0 translate-y-12'
             }`}
-            style={{
-              transitionDelay: `${idx * 200}ms`,
-            }}
           >
             <div className="bg-gradient-to-br from-[#4169E1] via-[#1e3a8a] to-[#4169E1] h-48 flex items-center justify-center">
               <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg">

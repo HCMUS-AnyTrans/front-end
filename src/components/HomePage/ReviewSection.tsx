@@ -12,8 +12,6 @@ interface ReviewCardProps {
   review: string;
   metadata: string;
   icon: React.ReactNode;
-  isHovered?: boolean;
-  onHover?: (hovered: boolean) => void;
 }
 
 function ReviewCard({
@@ -25,8 +23,6 @@ function ReviewCard({
   review,
   metadata,
   icon,
-  isHovered = false,
-  onHover,
 }: ReviewCardProps) {
   const initials = name
     .split(' ')
@@ -35,26 +31,16 @@ function ReviewCard({
 
   return (
     <div
-      className={`bg-card rounded-2xl p-6 h-full flex flex-col relative overflow-hidden transition-all duration-500 ease-out border ${
-        isHovered
-          ? 'border-brand-300 shadow-2xl -translate-y-2 scale-[1.02]'
-          : 'border-border shadow-lg hover:shadow-xl'
-      }`}
-      onMouseEnter={() => onHover?.(true)}
-      onMouseLeave={() => onHover?.(false)}
+      className="group bg-card rounded-2xl p-6 h-full flex flex-col relative overflow-hidden transition-all duration-300 ease-out border border-border shadow-lg hover:shadow-2xl hover:border-brand-300 hover:-translate-y-2 hover:scale-[1.02] will-change-transform"
     >
       {/* Background gradient overlay on hover */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br from-brand-50/50 to-accent/50 transition-opacity duration-500 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
-        }`}
+        className="absolute inset-0 bg-gradient-to-br from-brand-50/50 to-accent/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
       />
 
       {/* Decorative quote icon */}
       <div
-        className={`absolute top-6 right-6 transition-all duration-500 ${
-          isHovered ? 'opacity-100 scale-100 rotate-12' : 'opacity-0 scale-50'
-        }`}
+        className="absolute top-6 right-6 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 group-hover:rotate-12 transition-all duration-300"
       >
         <Quote size={48} className="text-brand-100" strokeWidth={1.5} />
       </div>
@@ -65,17 +51,13 @@ function ReviewCard({
           {/* Avatar */}
           <div className="relative flex-shrink-0">
             <div
-              className={`w-14 h-14 rounded-full bg-gradient-to-br from-brand-primary-light to-brand-primary-dark flex items-center justify-center text-white font-bold text-lg transition-all duration-500 ${
-                isHovered ? 'scale-110 shadow-lg' : ''
-              }`}
+              className="w-14 h-14 rounded-full bg-gradient-to-br from-brand-primary-light to-brand-primary-dark flex items-center justify-center text-white font-bold text-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
             >
               {initials}
             </div>
             {/* Icon badge */}
             <div
-              className={`absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-card flex items-center justify-center shadow-md transition-all duration-500 ${
-                isHovered ? 'scale-110' : ''
-              }`}
+              className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-card flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-110"
             >
               <div className="text-primary">{icon}</div>
             </div>
@@ -103,9 +85,6 @@ function ReviewCard({
                 className={`transition-all duration-300 ${
                   i < rating ? 'fill-yellow-400 text-yellow-400' : 'text-border'
                 }`}
-                style={{
-                  transitionDelay: `${i * 50}ms`,
-                }}
               />
             ))}
           </div>
@@ -123,15 +102,11 @@ function ReviewCard({
 
         {/* Metadata footer */}
         <div
-          className={`pt-4 border-t transition-colors duration-300 ${
-            isHovered ? 'border-brand-100' : 'border-border'
-          }`}
+          className="pt-4 border-t border-border group-hover:border-brand-100 transition-colors duration-300"
         >
           <div className="flex items-center gap-2">
             <div
-              className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                isHovered ? 'bg-primary' : 'bg-muted-foreground'
-              }`}
+              className="w-2 h-2 rounded-full bg-muted-foreground group-hover:bg-primary transition-colors duration-300"
             />
             <p className="text-sm text-muted-foreground font-medium">
               {metadata}
@@ -144,8 +119,6 @@ function ReviewCard({
 }
 
 export default function ReviewSection() {
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-
   const reviews = [
     {
       name: 'Sarah Johnson',
@@ -153,7 +126,7 @@ export default function ReviewSection() {
       company: 'TechCorp',
       rating: 5,
       review:
-        'AnyTrans has revolutionized how we handle multilingual content. The document translation feature maintains perfect formatting, and the quality is outstanding.',
+        'Anytrans has revolutionized how we handle multilingual content. The document translation feature maintains perfect formatting, and the quality is outstanding.',
       metadata: 'Translated 50+ marketing documents',
       icon: <FileText size={14} strokeWidth={2.5} />,
     },
@@ -183,7 +156,7 @@ export default function ReviewSection() {
       company: 'DevDocs',
       rating: 5,
       review:
-        'As a technical writer, I need precise translations. AnyTrans delivers consistently high-quality results while preserving technical terminology.',
+        'As a technical writer, I need precise translations. Anytrans delivers consistently high-quality results while preserving technical terminology.',
       metadata: 'Translated 100+ technical documents',
       icon: <FileText size={14} strokeWidth={2.5} />,
     },
@@ -222,7 +195,7 @@ export default function ReviewSection() {
             What Our Users Say
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust AnyTrans for their
+            Join thousands of satisfied customers who trust Anytrans for their
             translation needs
           </p>
 
@@ -255,8 +228,6 @@ export default function ReviewSection() {
             <ReviewCard
               key={index}
               {...review}
-              isHovered={hoveredCard === index}
-              onHover={(hovered) => setHoveredCard(hovered ? index : null)}
             />
           ))}
         </div>

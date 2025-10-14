@@ -30,7 +30,7 @@ export default function AboutHero({ stats }: AboutHeroProps) {
           }`}
         >
           <Sparkles className="w-4 h-4 animate-pulse" />
-          <span className="text-sm font-medium">About AnyTrans</span>
+          <span className="text-sm font-medium">About Anytrans</span>
         </div>
         <h1
           className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 transition-all duration-700 delay-100 ${
@@ -55,13 +55,13 @@ export default function AboutHero({ stats }: AboutHeroProps) {
           {stats.map((stat, idx) => (
             <div
               key={stat.label}
-              className={`bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/20 hover:bg-white/20 hover:scale-105 transition-all duration-700 cursor-pointer ${
+              className={`bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/20 transition-all duration-500 hover:shadow-lg hover:scale-102 hover:bg-white/20 ${
                 isVisible
                   ? 'opacity-100 translate-y-0'
                   : 'opacity-0 translate-y-12'
               }`}
               style={{
-                transitionDelay: `${300 + idx * 100}ms`,
+                transitionDelay: isVisible ? '0ms' : `${300 + idx * 100}ms`,
               }}
             >
               <p className="text-2xl sm:text-3xl font-bold mb-1">

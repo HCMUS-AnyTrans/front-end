@@ -42,7 +42,7 @@ export default function FeaturesHero() {
             style={{
               transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
               opacity: isVisible ? 1 : 0,
-              transitionDelay: '100ms',
+              transitionDelay: isVisible ? '0ms' : '100ms',
             }}
           >
             Two Powerful Tools.
@@ -55,7 +55,7 @@ export default function FeaturesHero() {
             style={{
               transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
               opacity: isVisible ? 1 : 0,
-              transitionDelay: '200ms',
+              transitionDelay: isVisible ? '0ms' : '200ms',
             }}
           >
             Professional-grade document and subtitle translation powered by
@@ -68,7 +68,7 @@ export default function FeaturesHero() {
             style={{
               transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
               opacity: isVisible ? 1 : 0,
-              transitionDelay: '300ms',
+              transitionDelay: isVisible ? '0ms' : '300ms',
             }}
           >
             {stats.map((stat, index) => {
