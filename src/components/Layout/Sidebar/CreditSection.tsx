@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 import { Coins, TrendingUp } from 'lucide-react';
 
 type CreditSectionProps = {
@@ -10,6 +11,7 @@ type CreditSectionProps = {
 };
 
 export default function CreditSection({ current, total }: CreditSectionProps) {
+  const t = useTranslations('sidebar.credits');
   const creditPercentage = (current / total) * 100;
   const isLowCredit = creditPercentage < 30;
 
@@ -28,16 +30,14 @@ export default function CreditSection({ current, total }: CreditSectionProps) {
               <Coins className="w-4 h-4 text-white" />
             </div>
             <div>
-              <p className="text-xs font-medium text-gray-500">
-                Translation Credits
-              </p>
+              <p className="text-xs font-medium text-gray-500">{t('title')}</p>
             </div>
           </div>
           <Link
             href="/credits"
             className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors"
           >
-            View Details
+            {t('viewDetails')}
           </Link>
         </div>
 
@@ -50,7 +50,9 @@ export default function CreditSection({ current, total }: CreditSectionProps) {
             >
               {current}
             </span>
-            <span className="text-sm text-gray-500">/ {total} credits</span>
+            <span className="text-sm text-gray-500">
+              / {total} {t('creditsLabel')}
+            </span>
           </div>
 
           <div className="relative w-full h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -70,7 +72,7 @@ export default function CreditSection({ current, total }: CreditSectionProps) {
             <div className="flex items-start gap-2">
               <TrendingUp className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
               <p className="text-xs text-amber-800 leading-relaxed">
-                Credits are running low! Upgrade to get unlimited translations.
+                {t('lowCreditWarning')}
               </p>
             </div>
           </div>
@@ -81,13 +83,13 @@ export default function CreditSection({ current, total }: CreditSectionProps) {
             href="/buy-credits"
             className="text-center text-xs font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 py-2 rounded-lg transition-colors"
           >
-            Buy Credits
+            {t('buyCredits')}
           </Link>
           <Link
             href="/pricing"
             className="text-center text-xs font-semibold text-gray-700 bg-white hover:bg-gray-50 py-2 rounded-lg transition-colors border border-gray-200"
           >
-            View Plans
+            {t('viewPlans')}
           </Link>
         </div>
       </div>

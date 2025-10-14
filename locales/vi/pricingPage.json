@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "title": {
+      "part1": "Chọn gói",
+      "highlight": "Phù hợp với bạn"
+    },
+    "description": "Chọn gói phù hợp nhất với bạn, hãy thoải mái liên hệ với chúng tôi"
+  },
+  "faqs": [
+    {
+      "question": "Tôi có thể thay đổi gói bất cứ lúc nào không?",
+      "answer": "Có, bạn có thể nâng cấp hoặc hạ cấp gói của mình bất cứ lúc nào. Thay đổi sẽ được áp dụng trong chu kỳ thanh toán tiếp theo. Nếu bạn nâng cấp giữa chu kỳ, bạn sẽ được tính phí theo tỷ lệ."
+    },
+    {
+      "question": "Có dùng thử miễn phí không?",
+      "answer": "Có! Chúng tôi cung cấp bản dùng thử miễn phí 14 ngày cho tất cả các gói trả phí. Không cần thẻ tín dụng. Bạn có thể hủy bất cứ lúc nào trong thời gian dùng thử."
+    },
+    {
+      "question": "Bạn chấp nhận phương thức thanh toán nào?",
+      "answer": "Chúng tôi chấp nhận tất cả các thẻ tín dụng chính (Visa, MasterCard, American Express), PayPal và chuyển khoản ngân hàng cho đăng ký hàng năm. Khách hàng doanh nghiệp cũng có thể thanh toán qua hóa đơn."
+    },
+    {
+      "question": "Độ chính xác của bản dịch như thế nào?",
+      "answer": "Công cụ dịch thuật AI của chúng tôi đạt độ chính xác 95%+ cho các cặp ngôn ngữ chính. Đối với nội dung chuyên môn, chúng tôi khuyến nghị các gói Business hoặc Enterprise bao gồm bảng thuật ngữ tùy chỉnh và tùy chọn xem xét của con người."
+    },
+    {
+      "question": "Bạn hỗ trợ định dạng tệp nào?",
+      "answer": "Chúng tôi hỗ trợ tất cả các định dạng tài liệu chính bao gồm PDF, DOCX, XLSX, PPTX, TXT, HTML và nhiều hơn nữa. Định dạng phụ đề bao gồm SRT, VTT, ASS và SSA."
+    },
+    {
+      "question": "Dữ liệu của tôi có an toàn không?",
+      "answer": "Hoàn toàn. Chúng tôi sử dụng mã hóa cấp doanh nghiệp, trung tâm dữ liệu an toàn và tuân thủ GDPR, CCPA và các quy định bảo mật khác. Tài liệu của bạn được xử lý an toàn và xóa sau khi dịch."
+    }
+  ]
+}

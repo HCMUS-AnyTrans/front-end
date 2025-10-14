@@ -27,7 +27,7 @@ const buttonVariants = cva(
           'border-2 border-brand-primary-light text-brand-primary-light hover:bg-brand-primary-light hover:text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-500 ease-in-out',
       },
       size: {
-        default: 'h-9 px-4 py-2',
+        default: 'rounded-sm h-9 px-4 py-2',
         sm: 'h-8 rounded-md px-3 text-xs',
         lg: 'h-10 rounded-md px-8',
         xl: 'h-12 px-8 py-3 text-base',

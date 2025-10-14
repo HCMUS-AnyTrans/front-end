@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { FileText, Languages, Clock, CheckCircle2 } from 'lucide-react';
 import { RecentActivityItem } from '@/types/dashboard';
 
@@ -9,13 +10,15 @@ type RecentActivityListProps = {
 };
 
 export default function RecentActivityList({ items }: RecentActivityListProps) {
+  const t = useTranslations('dashboard.recentActivity');
+
   return (
     <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-200">
       <div className="px-4 py-3 sm:px-6 sm:py-4 border-b border-gray-200">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-bold text-gray-900">Recent Activity</h3>
+          <h3 className="text-lg font-bold text-gray-900">{t('title')}</h3>
           <button className="text-sm text-[#4169E1] hover:text-[#1e3a8a] font-medium cursor-pointer">
-            View all
+            {t('viewAll')}
           </button>
         </div>
       </div>
@@ -45,7 +48,9 @@ export default function RecentActivityList({ items }: RecentActivityListProps) {
                     {item.time}
                   </div>
                   <span className="hidden sm:inline">•</span>
-                  <span>{item.wordCount.toLocaleString()} words</span>
+                  <span>
+                    {item.wordCount.toLocaleString()} {t('words')}
+                  </span>
                 </div>
               </div>
               <div className="sm:ml-auto mt-2 sm:mt-0">
@@ -53,14 +58,14 @@ export default function RecentActivityList({ items }: RecentActivityListProps) {
                   <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-50 border border-green-200 rounded-full">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600" />
                     <span className="text-xs font-medium text-green-600">
-                      Completed
+                      {t('status.completed')}
                     </span>
                   </div>
                 ) : (
                   <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-full">
                     <Clock className="w-3.5 h-3.5 text-[#4169E1]" />
                     <span className="text-xs font-medium text-[#4169E1]">
-                      Processing
+                      {t('status.processing')}
                     </span>
                   </div>
                 )}

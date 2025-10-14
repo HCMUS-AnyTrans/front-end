@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { TranslationItem } from '@/types/translation-history';
 import TranslationHistoryRow from './TranslationHistoryRow';
 import TranslationHistoryEmpty from './TranslationHistoryEmpty';
@@ -29,15 +30,17 @@ export default function TranslationHistoryTable({
   onDelete,
   searchQuery,
 }: TranslationHistoryTableProps) {
+  const t = useTranslations('translationHistory.table');
+
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
       <div className="hidden md:block px-4 sm:px-6 py-3 sm:py-4 bg-gray-50 border-b border-gray-200">
         <div className="grid grid-cols-12 gap-4 items-center text-sm font-semibold text-gray-600">
-          <div className="col-span-5">Document</div>
-          <div className="col-span-2">Languages</div>
-          <div className="col-span-2">Status</div>
-          <div className="col-span-2">Date</div>
-          <div className="col-span-1 text-right">Actions</div>
+          <div className="col-span-5">{t('headers.document')}</div>
+          <div className="col-span-2">{t('headers.languages')}</div>
+          <div className="col-span-2">{t('headers.status')}</div>
+          <div className="col-span-2">{t('headers.date')}</div>
+          <div className="col-span-1 text-right">{t('headers.actions')}</div>
         </div>
       </div>
 

@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { Calendar } from 'lucide-react';
 import { AboutTimelineProps } from '@/types/about';
 
 export default function AboutTimeline({ milestones }: AboutTimelineProps) {
+  const t = useTranslations('about.sections.timeline');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -19,11 +21,9 @@ export default function AboutTimeline({ milestones }: AboutTimelineProps) {
         }`}
       >
         <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
-          Our Journey
+          {t('title')}
         </h2>
-        <p className="text-base sm:text-lg text-gray-600">
-          Key milestones in our growth story
-        </p>
+        <p className="text-base sm:text-lg text-gray-600">{t('subtitle')}</p>
       </div>
 
       <div className="relative">

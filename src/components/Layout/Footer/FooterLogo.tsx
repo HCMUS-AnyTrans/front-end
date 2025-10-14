@@ -1,9 +1,13 @@
 import React from 'react';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 
 export default function FooterLogo() {
+  const t = useTranslations('footer.logo');
+
   return (
     <div className="flex flex-col gap-4">
-      <a
+      <Link
         href="/"
         className="group inline-flex items-center gap-3 w-fit transition-all duration-300 hover:opacity-80"
         aria-label="AnyTrans - Go to homepage"
@@ -18,17 +22,16 @@ export default function FooterLogo() {
         {/* Logo Text */}
         <div className="flex flex-col">
           <span className="text-2xl font-bold text-white tracking-tight">
-            AnyTrans
+            {t('companyName')}
           </span>
           <span className="text-xs font-medium text-gray-400 tracking-wider uppercase">
-            Translation Services
+            {t('tagline')}
           </span>
         </div>
-      </a>
+      </Link>
 
       <p className="text-gray-400 text-sm leading-relaxed max-w-md">
-        Professional translation services for documents, subtitles, and more.
-        Empowering global communication with cutting-edge technology.
+        {t('description')}
       </p>
     </div>
   );

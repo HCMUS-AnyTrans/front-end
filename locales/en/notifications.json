@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "title": "Notifications - AnyTrans",
+    "description": "Stay updated with all your translation activities and system updates"
+  },
+  "header": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "filters": {
+      "all": "All",
+      "unread": "Unread",
+      "translations": "Translations",
+      "billing": "Billing",
+      "system": "System"
+    }
+  },
+  "toolbar": {
+    "searchPlaceholder": "Search notifications...",
+    "filters": {
+      "all": "All Notifications",
+      "unread": "Unread",
+      "translations": "Translations",
+      "billing": "Billing",
+      "system": "System"
+    }
+  },
+  "bulkActions": {
+    "selected": "{count} selected",
+    "markRead": "Mark as Read",
+    "archive": "Archive",
+    "delete": "Delete"
+  },
+  "card": {
+    "actions": {
+      "markRead": "Mark as read",
+      "markUnread": "Mark as unread",
+      "pin": "Pin",
+      "unpin": "Unpin",
+      "delete": "Delete"
+    },
+    "metadata": {
+      "fileName": "File",
+      "wordsTranslated": "words translated",
+      "creditsUsed": "credits used",
+      "creditsRemaining": "credits remaining",
+      "totalCredits": "total credits"
+    }
+  },
+  "list": {
+    "empty": {
+      "title": "No notifications",
+      "description": "You're all caught up! Check back later for updates.",
+      "noResults": "No notifications found",
+      "tryAdjusting": "Try adjusting your search or filters"
+    },
+    "loadMore": "Load More"
+  },
+  "time": {
+    "minutesAgo": "{minutes}m ago",
+    "hoursAgo": "{hours}h ago",
+    "daysAgo": "{days}d ago",
+    "weeksAgo": "{weeks}w ago"
+  }
+}

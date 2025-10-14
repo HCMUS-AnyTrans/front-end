@@ -1,0 +1,24 @@
+{
+  "navigation": {
+    "dashboard": "Bảng điều khiển",
+    "documentTranslator": "Dịch tài liệu",
+    "subtitleTranslator": "Dịch phụ đề",
+    "translationHistory": "Lịch sử dịch"
+  },
+  "secondary": {
+    "notification": "Thông báo",
+    "support": "Hỗ trợ"
+  },
+  "credits": {
+    "title": "Tín dụng dịch thuật",
+    "viewDetails": "Xem chi tiết",
+    "creditsLabel": "tín dụng",
+    "lowCreditWarning": "Tín dụng sắp hết! Nâng cấp để nhận dịch không giới hạn.",
+    "buyCredits": "Mua tín dụng",
+    "viewPlans": "Xem gói"
+  },
+  "userProfile": {
+    "plan": "Gói {plan}",
+    "manage": "Quản lý"
+  }
+}

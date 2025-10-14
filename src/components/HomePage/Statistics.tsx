@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface StatItemProps {
   iconSrc: string;
@@ -95,6 +96,8 @@ export function StatItem({
 }
 
 export default function Statistics() {
+  const t = useTranslations('home.statistics');
+
   return (
     <section className="w-full py-12 lg:py-16 bg-white flex items-center justify-center overflow-hidden">
       <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -102,7 +105,7 @@ export default function Statistics() {
           <StatItem
             iconSrc="/user-icon.svg"
             number="100"
-            label="Active user"
+            label={t('activeUser')}
             bgColor="bg-[#ecdffc]"
             delay={0}
           />
@@ -110,7 +113,7 @@ export default function Statistics() {
           <StatItem
             iconSrc="/download-icon.svg"
             number="100"
-            label="File translation"
+            label={t('fileTranslation')}
             bgColor="bg-[#f9ecca]"
             delay={200}
           />
@@ -118,7 +121,7 @@ export default function Statistics() {
           <StatItem
             iconSrc="/film-icon.svg"
             number="100"
-            label="Subtitle Translation"
+            label={t('subtitleTranslation')}
             bgColor="bg-[#d5f3f1]"
             delay={400}
           />

@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "title": "Bảng giá - AnyTrans",
+    "description": "Chọn gói dịch thuật phù hợp với nhu cầu của bạn. Giá cả linh hoạt cho cá nhân và doanh nghiệp."
+  },
+  "header": {
+    "title": {
+      "part1": "Chọn gói",
+      "highlight": "Phù hợp với bạn"
+    },
+    "description": "Chọn gói phù hợp nhất với bạn, hãy thoải mái liên hệ với chúng tôi"
+  },
+  "tabs": {
+    "personal": "Cá nhân",
+    "enterprise": "Doanh nghiệp"
+  },
+  "personalPlans": {
+    "starter": {
+      "name": "Starter",
+      "tagline": "Hoàn hảo cho cá nhân mới bắt đầu",
+      "price": "9",
+      "billing": "/tháng",
+      "features": [
+        "10,000 credits/tháng",
+        "Dịch thuật cơ bản",
+        "Hỗ trợ qua email",
+        "Chất lượng tiêu chuẩn",
+        "3 định dạng tệp"
+      ],
+      "cta": "Bắt đầu"
+    },
+    "plus": {
+      "name": "Plus",
+      "tagline": "Lý tưởng cho freelancer và dự án nhỏ",
+      "price": "29",
+      "billing": "/tháng",
+      "features": [
+        "50,000 credits/tháng",
+        "Dịch thuật nâng cao",
+        "Hỗ trợ ưu tiên",
+        "Chất lượng đầu ra cao",
+        "Tất cả định dạng tệp",
+        "Truy cập API"
+      ],
+      "cta": "Bắt đầu"
+    }
+  },
+  "enterprisePlans": {
+    "starter": {
+      "name": "Enterprise Starter",
+      "tagline": "Thử nghiệm sức mạnh của bạn",
+      "price": "999",
+      "billing": "/tháng",
+      "features": [
+        "200,000 credits/tháng",
+        "5 tài khoản người dùng",
+        "Phân tích nâng cao",
+        "Tích hợp tùy chỉnh",
+        "Hỗ trợ điện thoại 24/7"
+      ],
+      "cta": "Mua ngay"
+    },
+    "growth": {
+      "name": "Enterprise Growth",
+      "tagline": "Mở rộng quy mô dịch thuật của bạn",
+      "price": "999",
+      "billing": "/tháng",
+      "features": [
+        "500,000 credits/tháng",
+        "15 tài khoản người dùng",
+        "Phân tích nâng cao",
+        "Tích hợp tùy chỉnh",
+        "Hỗ trợ điện thoại 24/7",
+        "Quản lý tài khoản chuyên trách"
+      ],
+      "cta": "Mua ngay"
+    },
+    "custom": {
+      "name": "Enterprise Custom",
+      "tagline": "Giải pháp tùy chỉnh cho doanh nghiệp",
+      "price": "999",
+      "billing": "/tháng",
+      "features": [
+        "Credits không giới hạn",
+        "Tài khoản người dùng không giới hạn",
+        "Quy trình làm việc tùy chỉnh",
+        "Triển khai tại chỗ",
+        "Cam kết SLA",
+        "Đào tạo tùy chỉnh"
+      ],
+      "cta": "Mua ngay"
+    }
+  }
+}

@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { BaseHeader } from '@/components/Common';
 
 interface TranslationHistoryHeaderProps {
@@ -10,19 +13,21 @@ export default function TranslationHistoryHeader({
   totalCompleted,
   totalWords,
 }: TranslationHistoryHeaderProps) {
+  const t = useTranslations('translationHistory.header');
+
   return (
     <BaseHeader
-      title="Translation History"
-      description="View and manage all your translation projects"
+      title={t('title')}
+      description={t('description')}
       variant="page"
       stats={[
         {
-          label: 'Completed',
+          label: t('stats.completed'),
           value: totalCompleted,
           color: 'bg-green-500',
         },
         {
-          label: 'Words',
+          label: t('stats.words'),
           value: totalWords.toLocaleString(),
           color: 'bg-[#4169E1]',
         },

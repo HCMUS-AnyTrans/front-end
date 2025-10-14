@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { ArrowUpRight, Zap } from 'lucide-react';
 
 type PromoBannerVariant = 'upgrade' | 'referral';
@@ -9,37 +10,37 @@ type PromoBannerProps = {
   variant: PromoBannerVariant;
 };
 
-const bannerConfig = {
-  upgrade: {
-    title: 'Boost your productivity',
-    description:
-      'Upgrade to Pro for higher limits, faster processing and premium features.',
-    buttonText: 'Explore Plans',
-    buttonHref: '/pricing',
-    headerTextColor: 'text-white',
-    icon: Zap,
-    className:
-      'bg-gradient-to-br from-[#4169E1] to-[#1e3a8a] rounded-2xl p-6 text-white',
-    buttonClassName:
-      'w-full inline-flex items-center justify-center bg-white hover:bg-gray-100 text-[#4169E1] px-4 py-2.5 rounded-xl font-semibold transition-all',
-    descriptionClassName: 'text-sm text-blue-100 mb-4',
-  },
-  referral: {
-    title: 'Invite friends, get credits',
-    description:
-      'Share Anytrans with your teammates and earn bonus translation credits for every signup.',
-    buttonText: 'Invite Now',
-    buttonHref: '/referrals',
-    headerTextColor: 'text-gray-900',
-    icon: ArrowUpRight,
-    className: 'bg-white rounded-2xl border border-gray-200 p-6',
-    buttonClassName:
-      'w-full inline-flex items-center justify-center border-2 border-gray-200 hover:border-[#4169E1] hover:bg-blue-50 text-gray-700 hover:text-[#4169E1] px-4 py-2.5 rounded-xl font-semibold transition-all',
-    descriptionClassName: 'text-sm text-gray-600 mb-4',
-  },
-};
-
 export default function PromoBanner({ variant }: PromoBannerProps) {
+  const t = useTranslations('dashboard.promoBanner');
+
+  const bannerConfig = {
+    upgrade: {
+      title: t('upgrade.title'),
+      description: t('upgrade.description'),
+      buttonText: t('upgrade.button'),
+      buttonHref: '/pricing',
+      headerTextColor: 'text-white',
+      icon: Zap,
+      className:
+        'bg-gradient-to-br from-[#4169E1] to-[#1e3a8a] rounded-2xl p-6 text-white',
+      buttonClassName:
+        'w-full inline-flex items-center justify-center bg-white hover:bg-gray-100 text-[#4169E1] px-4 py-2.5 rounded-xl font-semibold transition-all',
+      descriptionClassName: 'text-sm text-blue-100 mb-4',
+    },
+    referral: {
+      title: t('referral.title'),
+      description: t('referral.description'),
+      buttonText: t('referral.button'),
+      buttonHref: '/referrals',
+      headerTextColor: 'text-gray-900',
+      icon: ArrowUpRight,
+      className: 'bg-white rounded-2xl border border-gray-200 p-6',
+      buttonClassName:
+        'w-full inline-flex items-center justify-center border-2 border-gray-200 hover:border-[#4169E1] hover:bg-blue-50 text-gray-700 hover:text-[#4169E1] px-4 py-2.5 rounded-xl font-semibold transition-all',
+      descriptionClassName: 'text-sm text-gray-600 mb-4',
+    },
+  };
+
   const config = bannerConfig[variant];
   const IconComponent = config.icon;
 

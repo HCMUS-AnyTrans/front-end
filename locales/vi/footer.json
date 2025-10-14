@@ -1,0 +1,32 @@
+{
+  "logo": {
+    "companyName": "AnyTrans",
+    "tagline": "Dịch vụ Dịch thuật",
+    "description": "Dịch vụ dịch thuật chuyên nghiệp cho tài liệu, phụ đề và nhiều hơn nữa. Trao quyền giao tiếp toàn cầu với công nghệ tiên tiến."
+  },
+  "newsletter": {
+    "title": "Cập nhật thông tin",
+    "description": "Đăng ký nhận bản tin để cập nhật thông tin mới nhất",
+    "placeholder": "Nhập email của bạn"
+  },
+  "quickLinks": {
+    "title": "Liên kết nhanh",
+    "home": "Trang chủ",
+    "features": "Tính năng",
+    "pricing": "Bảng giá",
+    "about": "Giới thiệu"
+  },
+  "services": {
+    "title": "Dịch vụ",
+    "documentTranslation": "Dịch Tài liệu",
+    "subtitleTranslation": "Dịch Phụ đề"
+  },
+  "social": {
+    "title": "Kết nối"
+  },
+  "bottom": {
+    "copyright": "© 2025 AnyTrans Inc. Đã đăng ký bản quyền",
+    "terms": "Điều khoản & Điều kiện",
+    "privacy": "Chính sách Bảo mật"
+  }
+}

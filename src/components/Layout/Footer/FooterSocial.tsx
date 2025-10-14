@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 const socialLinks = [
@@ -11,12 +12,13 @@ const socialLinks = [
 ];
 
 export default function FooterSocial() {
+  const t = useTranslations('footer.social');
   const [hoveredSocial, setHoveredSocial] = useState<string | null>(null);
 
   return (
     <div className="flex flex-col gap-6">
       <h3 className="font-bold text-lg text-white relative inline-block">
-        Connect
+        {t('title')}
         <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] rounded-full" />
       </h3>
       <div className="flex items-center gap-3">

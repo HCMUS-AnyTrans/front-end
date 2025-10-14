@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { Globe } from 'lucide-react';
 import { TopLanguageItem } from '@/types/dashboard';
 
@@ -11,14 +12,14 @@ type TopLanguagesCardProps = {
 export default function TopLanguagesCard({
   topLanguages,
 }: TopLanguagesCardProps) {
+  const t = useTranslations('dashboard.topLanguages');
+
   return (
     <div className="bg-white rounded-2xl border border-gray-200 p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-lg font-bold text-gray-900 mb-1">
-            Top Languages
-          </h3>
-          <p className="text-sm text-gray-600">Most translated to</p>
+          <h3 className="text-lg font-bold text-gray-900 mb-1">{t('title')}</h3>
+          <p className="text-sm text-gray-600">{t('subtitle')}</p>
         </div>
         <Globe className="w-5 h-5 text-gray-400" />
       </div>

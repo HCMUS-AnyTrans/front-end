@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { MoreHorizontal } from 'lucide-react';
 import { UserProfileButtonProps } from '@/types/sidebar';
 
@@ -8,6 +9,8 @@ export default function UserProfileButton({
   planLabel,
   onOpenAccount,
 }: UserProfileButtonProps) {
+  const t = useTranslations('sidebar.userProfile');
+
   return (
     <div className="p-2">
       <button
@@ -22,7 +25,9 @@ export default function UserProfileButton({
           <p className="text-sm font-semibold text-gray-900 truncate">
             Johnathan
           </p>
-          <p className="text-xs text-gray-500">{planLabel} Plan • Manage</p>
+          <p className="text-xs text-gray-500">
+            {t('plan', { plan: planLabel })} • {t('manage')}
+          </p>
         </div>
         <span className="p-1 rounded-lg text-gray-400">
           <MoreHorizontal className="w-5 h-5" />

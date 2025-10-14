@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { Upload, FileText, Film } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BaseFeatureCard from '@/components/Translation/shared/BaseFeatureCard';
@@ -12,63 +13,60 @@ type StepUploadProps = {
   onUpload: () => void;
 };
 
-const uploadConfig = {
-  document: {
-    title: 'Upload Your Document',
-    description: 'Drag and drop your file or click to browse',
-    icon: FileText,
-    supportedFormats: 'DOCX, PDF, XLSX, PPTX, TXT',
-    features: [
-      {
-        icon: <Upload className="w-5 h-5 text-purple-600" />,
-        title: 'Fast Translation',
-        description: 'Get results in seconds with AI-powered translation',
-        iconBgClass: 'bg-purple-100',
-      },
-      {
-        icon: <FileText className="w-5 h-5 text-green-600" />,
-        title: 'Format Preserved',
-        description: 'Maintain original layout, fonts, and styling',
-        iconBgClass: 'bg-green-100',
-      },
-      {
-        icon: <FileText className="w-5 h-5 text-[#4169E1]" />,
-        title: '100+ Languages',
-        description: 'Translate between any language pair',
-        iconBgClass: 'bg-blue-100',
-      },
-    ],
-  },
-  subtitle: {
-    title: 'Upload Your Subtitle Files',
-    description: 'Drag and drop your files or click to browse',
-    icon: Film,
-    supportedFormats: 'SRT, VTT, ASS, SSA, MP4',
-    features: [
-      {
-        icon: <Upload className="w-5 h-5 text-amber-600" />,
-        title: 'Context-Aware Translation',
-        description:
-          'Automatic movie/TV show context detection for more accurate, natural translations',
-        iconBgClass: 'bg-amber-100',
-      },
-      {
-        icon: <Film className="w-5 h-5 text-indigo-600" />,
-        title: 'Multi-Format Support',
-        description: 'SRT, VTT, ASS, SSA, and MP4 subtitle formats',
-        iconBgClass: 'bg-indigo-100',
-      },
-      {
-        icon: <FileText className="w-5 h-5 text-rose-600" />,
-        title: 'Speaker Detection',
-        description: 'Identify and preserve speaker names and dialogue context',
-        iconBgClass: 'bg-rose-100',
-      },
-    ],
-  },
-};
-
 export default function StepUpload({ variant, onUpload }: StepUploadProps) {
+  const namespace =
+    variant === 'document' ? 'documentTranslation' : 'subtitleTranslation';
+  const t = useTranslations(`${namespace}.upload`);
+
+  const uploadConfig = {
+    document: {
+      icon: FileText,
+      features: [
+        {
+          icon: <Upload className="w-5 h-5 text-purple-600" />,
+          title: t('features.fast.title'),
+          description: t('features.fast.description'),
+          iconBgClass: 'bg-purple-100',
+        },
+        {
+          icon: <FileText className="w-5 h-5 text-green-600" />,
+          title: t('features.formatPreserved.title'),
+          description: t('features.formatPreserved.description'),
+          iconBgClass: 'bg-green-100',
+        },
+        {
+          icon: <FileText className="w-5 h-5 text-[#4169E1]" />,
+          title: t('features.languages.title'),
+          description: t('features.languages.description'),
+          iconBgClass: 'bg-blue-100',
+        },
+      ],
+    },
+    subtitle: {
+      icon: Film,
+      features: [
+        {
+          icon: <Upload className="w-5 h-5 text-amber-600" />,
+          title: t('features.contextAware.title'),
+          description: t('features.contextAware.description'),
+          iconBgClass: 'bg-amber-100',
+        },
+        {
+          icon: <Film className="w-5 h-5 text-indigo-600" />,
+          title: t('features.multiFormat.title'),
+          description: t('features.multiFormat.description'),
+          iconBgClass: 'bg-indigo-100',
+        },
+        {
+          icon: <FileText className="w-5 h-5 text-rose-600" />,
+          title: t('features.speakerDetection.title'),
+          description: t('features.speakerDetection.description'),
+          iconBgClass: 'bg-rose-100',
+        },
+      ],
+    },
+  };
+
   const config = uploadConfig[variant];
   const IconComponent = config.icon;
 
@@ -81,9 +79,9 @@ export default function StepUpload({ variant, onUpload }: StepUploadProps) {
               <IconComponent className="w-8 h-8 text-[#4169E1]" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              {config.title}
+              {t('title')}
             </h2>
-            <p className="text-gray-600">{config.description}</p>
+            <p className="text-gray-600">{t('description')}</p>
           </div>
 
           <div className="border-2 border-dashed border-gray-300 hover:border-[#4169E1] rounded-xl p-12 text-center transition-all cursor-pointer bg-gray-50 hover:bg-blue-50">
@@ -94,14 +92,12 @@ export default function StepUpload({ variant, onUpload }: StepUploadProps) {
               className="text-white rounded-xl font-semibold"
             >
               <Upload className="w-5 h-5" />
-              Choose File
+              {t('chooseFile')}
             </Button>
             <p className="text-sm text-gray-500 mt-4">
-              Supported formats: {config.supportedFormats}
+              {t('supportedFormats')}
             </p>
-            <p className="text-xs text-gray-400 mt-2">
-              Maximum file size: 50MB
-            </p>
+            <p className="text-xs text-gray-400 mt-2">{t('maxFileSize')}</p>
           </div>
         </div>
       </div>

@@ -1,0 +1,139 @@
+{
+  "meta": {
+    "title": "Document Translation - AnyTrans",
+    "description": "Professional document translation with preserved formatting"
+  },
+  "header": {
+    "title": "Document Translator",
+    "description": "Professional translation with preserved formatting • Supports DOCX, PDF, XLSX, PPTX"
+  },
+  "steps": {
+    "upload": "Upload",
+    "configure": "Configure",
+    "review": "Review"
+  },
+  "upload": {
+    "title": "Upload Your Document",
+    "description": "Drag and drop your file or click to browse",
+    "chooseFile": "Choose File",
+    "supportedFormats": "Supported formats: DOCX, PDF, XLSX, PPTX, TXT",
+    "maxFileSize": "Maximum file size: 50MB",
+    "features": {
+      "fast": {
+        "title": "Fast Translation",
+        "description": "Get results in seconds with AI-powered translation"
+      },
+      "formatPreserved": {
+        "title": "Format Preserved",
+        "description": "Maintain original layout, fonts, and styling"
+      },
+      "languages": {
+        "title": "100+ Languages",
+        "description": "Translate between any language pair"
+      },
+      "contextAware": {
+        "title": "Context-Aware Translation",
+        "description": "AI understands document context for accurate terminology"
+      },
+      "multiFormat": {
+        "title": "Multi-Format Support",
+        "description": "DOCX, PDF, XLSX, PPTX, and TXT formats"
+      },
+      "speakerDetection": {
+        "title": "Batch Processing",
+        "description": "Translate multiple documents at once efficiently"
+      }
+    }
+  },
+  "configure": {
+    "documentInfo": {
+      "title": "Document Information",
+      "changeFile": "Change file",
+      "words": "words",
+      "pages": "pages"
+    },
+    "translationSettings": {
+      "title": "Translation Settings",
+      "sourceLanguage": "Source Language",
+      "targetLanguage": "Target Language",
+      "translationMode": "Translation Mode",
+      "modes": {
+        "contextAware": "Context-Aware",
+        "fast": "Fast",
+        "accurate": "Accurate"
+      },
+      "note": "Context-aware mode provides better accuracy by understanding the document's context and terminology."
+    },
+    "topic": {
+      "title": "Topic (Domain)",
+      "description": "Select the content domain to improve translation accuracy with specialized terminology",
+      "label": "Content Domain",
+      "placeholder": "Select content domain",
+      "autoDetect": "Auto Detect",
+      "autoDetectInfo": "AI will automatically detect the content domain based on your document's terminology and context.",
+      "domains": {
+        "autoDetect": "Auto Detect",
+        "informationTechnology": "Information Technology",
+        "medical": "Medical & Healthcare",
+        "marketing": "Marketing & Advertising",
+        "legal": "Legal & Compliance",
+        "education": "Education & Academic",
+        "finance": "Finance & Banking",
+        "engineering": "Engineering & Technical",
+        "science": "Science & Research"
+      }
+    },
+    "glossary": {
+      "title": "Custom Glossary",
+      "optional": "Optional",
+      "description": "Attach a glossary to ensure consistent terminology during translation",
+      "help": "Help",
+      "uploadFile": "Upload File",
+      "pasteContent": "Paste Content",
+      "whatIsGlossary": "What is a glossary?",
+      "glossaryInfo": "A glossary is a list of terms and their preferred translations. Upload your glossary to ensure consistent translation of industry-specific terminology, brand names, or technical terms.",
+      "supportedFormats": "Supported formats:",
+      "exampleFormat": "Example CSV format:",
+      "uploadPrompt": "Click to upload or drag and drop",
+      "uploadFormatHint": "CSV, TXT, Excel (Max 5MB)",
+      "pastePrompt": "Paste your glossary here... (e.g., one term per line: source term | target term)",
+      "termsDetected": "terms detected",
+      "clear": "Clear",
+      "alerts": {
+        "invalidFile": "Please upload a valid glossary file (CSV, TXT, or Excel)",
+        "fileTooLarge": "Glossary file must be smaller than 5MB"
+      }
+    },
+    "summary": {
+      "title": "Ready to Translate",
+      "languages": "Languages",
+      "mode": "Mode",
+      "domain": "Domain",
+      "glossary": "Glossary",
+      "added": "✓ Added",
+      "notAdded": "Not added",
+      "estimatedCredits": "Estimated Credits",
+      "basedOn": "Based on document size and settings",
+      "credits": "credits"
+    },
+    "actions": {
+      "back": "Back",
+      "startTranslation": "Start Translation",
+      "translating": "Translating..."
+    }
+  },
+  "review": {
+    "complete": "Translation Complete!",
+    "description": "Your document have been successfully translated and are ready for review.",
+    "download": "Download",
+    "translateAnother": "Translate Another",
+    "stats": {
+      "wordsTranslated": "Words Translated",
+      "timeTaken": "Time Taken",
+      "accuracy": "Accuracy",
+      "creditsUsed": "Credits Used"
+    },
+    "original": "Original",
+    "translation": "Translation"
+  }
+}

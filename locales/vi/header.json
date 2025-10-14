@@ -1,0 +1,23 @@
+{
+  "navigation": {
+    "home": "Trang chủ",
+    "features": "Tính năng",
+    "pricing": "Bảng giá",
+    "about": "Giới thiệu",
+    "contact": "Liên hệ"
+  },
+  "featuresDropdown": {
+    "documentTranslation": {
+      "title": "Dịch Tài liệu",
+      "description": "Dịch tài liệu tức thì"
+    },
+    "subtitleTranslation": {
+      "title": "Dịch Phụ đề",
+      "description": "Đồng bộ thời gian hoàn hảo"
+    }
+  },
+  "auth": {
+    "login": "Đăng nhập",
+    "signup": "Đăng ký"
+  }
+}

@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { MessageSquare } from 'lucide-react';
 
 export default function ContactHero() {
+  const t = useTranslations('contact.hero');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -29,22 +31,21 @@ export default function ContactHero() {
           }`}
         >
           <MessageSquare className="w-4 h-4 animate-pulse" />
-          <span className="text-sm font-medium">Get in Touch</span>
+          <span className="text-sm font-medium">{t('badge')}</span>
         </div>
         <h1
           className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 transition-all duration-700 delay-100 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          We&apos;d Love to Hear From You
+          {t('title')}
         </h1>
         <p
           className={`text-lg sm:text-xl text-blue-100 max-w-3xl mx-auto transition-all duration-700 delay-200 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          Have questions about our translation services? Our team is here to
-          help you succeed.
+          {t('description')}
         </p>
       </div>
 

@@ -1,0 +1,24 @@
+{
+  "navigation": {
+    "dashboard": "Dashboard",
+    "documentTranslator": "Document Translator",
+    "subtitleTranslator": "Subtitle Translator",
+    "translationHistory": "Translation History"
+  },
+  "secondary": {
+    "notification": "Notification",
+    "support": "Support"
+  },
+  "credits": {
+    "title": "Translation Credits",
+    "viewDetails": "View Details",
+    "creditsLabel": "credits",
+    "lowCreditWarning": "Credits are running low! Upgrade to get unlimited translations.",
+    "buyCredits": "Buy Credits",
+    "viewPlans": "View Plans"
+  },
+  "userProfile": {
+    "plan": "{plan} Plan",
+    "manage": "Manage"
+  }
+}

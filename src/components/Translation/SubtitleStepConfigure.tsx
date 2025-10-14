@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { ArrowLeft, FileVideo, Clock, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TranslationSettingsCard, ConfigureActionButtons } from './shared';
@@ -39,13 +40,15 @@ export default function StepConfigure({
   onTranslate,
   isProcessing,
 }: StepConfigureProps) {
+  const t = useTranslations('subtitleTranslation.configure');
+
   return (
     <div className="space-y-6">
       {selectedFile && (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-900">
-              File Information
+              {t('fileInfo.title')}
             </h3>
             <Button
               onClick={onBack}
@@ -54,7 +57,7 @@ export default function StepConfigure({
               className="text-sm text-[#4169E1] hover:text-[#1e3a8a] font-medium"
             >
               <ArrowLeft className="w-4 h-4" />
-              Change files
+              {t('fileInfo.changeFiles')}
             </Button>
           </div>
           <div className="flex items-start gap-4 p-4 bg-blue-50 rounded-xl border border-blue-100">
@@ -70,7 +73,9 @@ export default function StepConfigure({
                 <span>•</span>
                 <span>{selectedFile.fileSize}</span>
                 <span>•</span>
-                <span>{selectedFile.subtitleCount} subtitles</span>
+                <span>
+                  {selectedFile.subtitleCount} {t('fileInfo.subtitles')}
+                </span>
               </div>
             </div>
           </div>
@@ -106,7 +111,7 @@ export default function StepConfigure({
           <div className="flex items-center gap-3 p-4 bg-amber-50 rounded-xl border border-amber-200">
             <Sparkles className="w-5 h-5 text-amber-600" />
             <p className="text-sm text-amber-800">
-              <strong>Detected context:</strong> {movieContext.title} •{' '}
+              <strong>{t('contextDetected')}</strong> {movieContext.title} •{' '}
               {movieContext.year} • {movieContext.genre.join(', ')}
             </p>
           </div>
@@ -116,7 +121,7 @@ export default function StepConfigure({
       <div className="bg-white rounded-2xl shadow-sm border border-gray-200">
         <div className="px-6 py-4 border-b border-gray-200">
           <h3 className="text-lg font-semibold text-gray-900">
-            Subtitle Preview
+            {t('subtitlePreview.title')}
           </h3>
         </div>
         <div className="p-6">
@@ -142,7 +147,7 @@ export default function StepConfigure({
               </div>
             ) : (
               <div className="text-center text-sm text-gray-600">
-                No subtitles loaded yet.
+                {t('subtitlePreview.noSubtitles')}
               </div>
             )}
           </div>
@@ -154,8 +159,8 @@ export default function StepConfigure({
         onTranslate={onTranslate}
         isProcessing={isProcessing}
         disabled={!selectedFile}
-        translateButtonText="Start Translation"
-        processingText="Processing..."
+        translateButtonText={t('actions.startTranslation')}
+        processingText={t('actions.processing')}
       />
     </div>
   );

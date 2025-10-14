@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import {
   ArrowLeft,
   CheckCircle2,
@@ -50,6 +51,7 @@ export default function StepConfigure({
   onTranslate,
   isTranslating,
 }: StepConfigureProps) {
+  const t = useTranslations('documentTranslation.configure');
   const [topic, setTopic] = useState('auto-detect');
   const [glossaryMode, setGlossaryMode] = useState<'upload' | 'paste'>(
     'upload'
@@ -60,19 +62,19 @@ export default function StepConfigure({
 
   // Topic/Domain options
   const topics = [
-    { value: 'auto-detect', label: 'Auto Detect', icon: '🤖' },
+    { value: 'auto-detect', label: t('topic.domains.autoDetect'), icon: '🤖' },
     {
       value: 'information-technology',
-      label: 'Information Technology',
+      label: t('topic.domains.informationTechnology'),
       icon: '💻',
     },
-    { value: 'medical', label: 'Medical & Healthcare', icon: '⚕️' },
-    { value: 'marketing', label: 'Marketing & Advertising', icon: '📢' },
-    { value: 'legal', label: 'Legal & Compliance', icon: '⚖️' },
-    { value: 'education', label: 'Education & Academic', icon: '🎓' },
-    { value: 'finance', label: 'Finance & Banking', icon: '💰' },
-    { value: 'engineering', label: 'Engineering & Technical', icon: '⚙️' },
-    { value: 'science', label: 'Science & Research', icon: '🔬' },
+    { value: 'medical', label: t('topic.domains.medical'), icon: '⚕️' },
+    { value: 'marketing', label: t('topic.domains.marketing'), icon: '📢' },
+    { value: 'legal', label: t('topic.domains.legal'), icon: '⚖️' },
+    { value: 'education', label: t('topic.domains.education'), icon: '🎓' },
+    { value: 'finance', label: t('topic.domains.finance'), icon: '💰' },
+    { value: 'engineering', label: t('topic.domains.engineering'), icon: '⚙️' },
+    { value: 'science', label: t('topic.domains.science'), icon: '🔬' },
   ];
 
   const handleGlossaryUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,13 +87,13 @@ export default function StepConfigure({
         .toLowerCase();
 
       if (!validTypes.some((type) => fileExtension === type)) {
-        alert('Please upload a valid glossary file (CSV, TXT, or Excel)');
+        alert(t('glossary.alerts.invalidFile'));
         return;
       }
 
       // Validate file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
-        alert('Glossary file must be smaller than 5MB');
+        alert(t('glossary.alerts.fileTooLarge'));
         return;
       }
 
@@ -111,7 +113,7 @@ export default function StepConfigure({
         <CardHeader className="p-6 pb-4">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold text-gray-900">
-              Document Information
+              {t('documentInfo.title')}
             </h3>
             <Button
               onClick={onBack}
@@ -120,7 +122,7 @@ export default function StepConfigure({
               className="text-sm text-[#4169E1] hover:text-[#1e3a8a] font-medium"
             >
               <ArrowLeft className="w-4 h-4" />
-              Change file
+              {t('documentInfo.changeFile')}
             </Button>
           </div>
         </CardHeader>
@@ -134,14 +136,14 @@ export default function StepConfigure({
               <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
                 <span className="flex items-center gap-1">
                   <CheckCircle2 className="w-4 h-4 text-green-600" />
-                  2,847 words
+                  2,847 {t('documentInfo.words')}
                 </span>
                 <span>•</span>
                 <span>DOCX</span>
                 <span>•</span>
                 <span>245 KB</span>
                 <span>•</span>
-                <span>8 pages</span>
+                <span>8 {t('documentInfo.pages')}</span>
               </div>
             </div>
           </div>
@@ -176,7 +178,7 @@ export default function StepConfigure({
           'English',
         ]}
         showNote={true}
-        noteText="Context-aware mode provides better accuracy by understanding the document's context and terminology."
+        noteText={t('translationSettings.note')}
       />
 
       {/* Topic/Domain Selection */}
@@ -184,13 +186,10 @@ export default function StepConfigure({
         <CardHeader className="p-6 pb-4">
           <div className="flex items-center gap-2">
             <h3 className="text-lg font-semibold text-gray-900">
-              Topic (Domain)
+              {t('topic.title')}
             </h3>
           </div>
-          <p className="text-sm text-gray-600 mt-2">
-            Select the content domain to improve translation accuracy with
-            specialized terminology
-          </p>
+          <p className="text-sm text-gray-600 mt-2">{t('topic.description')}</p>
         </CardHeader>
         <CardContent className="px-6 pb-6">
           <div className="space-y-3">
@@ -198,11 +197,11 @@ export default function StepConfigure({
               htmlFor="topic"
               className="block text-sm font-semibold text-gray-900 mb-2"
             >
-              Content Domain
+              {t('topic.label')}
             </Label>
             <Select value={topic} onValueChange={setTopic}>
               <SelectTrigger className="w-full h-12">
-                <SelectValue placeholder="Select content domain" />
+                <SelectValue placeholder={t('topic.placeholder')} />
               </SelectTrigger>
               <SelectContent>
                 {topics.map((t) => (
@@ -218,8 +217,7 @@ export default function StepConfigure({
               <div className="flex items-start gap-2 p-3 bg-blue-50 rounded-lg border border-blue-100">
                 <Sparkles className="w-4 h-4 text-[#4169E1] mt-0.5 flex-shrink-0" />
                 <p className="text-sm text-[#1e3a8a]">
-                  AI will automatically detect the content domain based on your
-                  document's terminology and context.
+                  {t('topic.autoDetectInfo')}
                 </p>
               </div>
             )}
@@ -234,15 +232,14 @@ export default function StepConfigure({
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="text-lg font-semibold text-gray-900">
-                  Custom Glossary
+                  {t('glossary.title')}
                 </h3>
                 <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full font-medium">
-                  Optional
+                  {t('glossary.optional')}
                 </span>
               </div>
               <p className="text-sm text-gray-600 mt-2">
-                Attach a glossary to ensure consistent terminology during
-                translation
+                {t('glossary.description')}
               </p>
             </div>
             <Button
@@ -252,27 +249,25 @@ export default function StepConfigure({
               className="text-sm text-gray-500 hover:text-gray-700"
             >
               <Info className="w-4 h-4" />
-              Help
+              {t('glossary.help')}
             </Button>
           </div>
 
           {showGlossaryInfo && (
             <div className="mt-4 p-4 bg-purple-50 rounded-xl border border-purple-200">
               <p className="text-sm text-purple-900 font-semibold mb-2">
-                What is a glossary?
+                {t('glossary.whatIsGlossary')}
               </p>
               <p className="text-sm text-purple-700 mb-3">
-                A glossary is a list of terms and their preferred translations.
-                Upload your glossary to ensure consistent translation of
-                industry-specific terminology, brand names, or technical terms.
+                {t('glossary.glossaryInfo')}
               </p>
               <div className="space-y-1">
                 <p className="text-xs text-purple-600">
-                  <strong>Supported formats:</strong> CSV, TXT, Excel (.xlsx,
-                  .xls)
+                  <strong>{t('glossary.supportedFormats')}</strong> CSV, TXT,
+                  Excel (.xlsx, .xls)
                 </p>
                 <p className="text-xs text-purple-600">
-                  <strong>Example CSV format:</strong>
+                  <strong>{t('glossary.exampleFormat')}</strong>
                 </p>
                 <code className="block text-xs bg-purple-100 text-purple-800 p-2 rounded mt-1">
                   source_term,target_term
@@ -299,7 +294,7 @@ export default function StepConfigure({
               }`}
             >
               <Upload className="w-4 h-4 mr-2" />
-              Upload File
+              {t('glossary.uploadFile')}
             </Button>
             <Button
               onClick={() => setGlossaryMode('paste')}
@@ -312,7 +307,7 @@ export default function StepConfigure({
               }`}
             >
               <FileText className="w-4 h-4 mr-2" />
-              Paste Content
+              {t('glossary.pasteContent')}
             </Button>
           </div>
 
@@ -334,10 +329,10 @@ export default function StepConfigure({
                   <Upload className="w-7 h-7 text-purple-600" />
                 </div>
                 <p className="text-sm font-semibold text-gray-900 mb-1">
-                  Click to upload or drag and drop
+                  {t('glossary.uploadPrompt')}
                 </p>
                 <p className="text-xs text-gray-500">
-                  CSV, TXT, Excel (Max 5MB)
+                  {t('glossary.uploadFormatHint')}
                 </p>
               </label>
             </div>
@@ -374,7 +369,7 @@ export default function StepConfigure({
           {glossaryMode === 'paste' && (
             <div>
               <Textarea
-                placeholder="Paste your glossary here... (e.g., one term per line: source term | target term)"
+                placeholder={t('glossary.pastePrompt')}
                 rows={8}
                 value={glossaryText}
                 onChange={(e) => setGlossaryText(e.target.value)}
@@ -387,7 +382,7 @@ export default function StepConfigure({
                       glossaryText.split('\n').filter((line) => line.trim())
                         .length
                     }{' '}
-                    terms detected
+                    {t('glossary.termsDetected')}
                   </span>
                   <Button
                     onClick={removeGlossary}
@@ -395,7 +390,7 @@ export default function StepConfigure({
                     size="sm"
                     className="text-red-600 hover:text-red-700 font-medium"
                   >
-                    Clear
+                    {t('glossary.clear')}
                   </Button>
                 </div>
               )}
@@ -409,39 +404,45 @@ export default function StepConfigure({
         <CardHeader className="p-6 pb-4">
           <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-[#4169E1]" />
-            Ready to Translate
+            {t('summary.title')}
           </h3>
         </CardHeader>
         <CardContent className="px-6 pb-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
             <div className="bg-white rounded-lg p-3 shadow-sm">
-              <p className="text-xs text-gray-500 mb-1">Languages</p>
+              <p className="text-xs text-gray-500 mb-1">
+                {t('summary.languages')}
+              </p>
               <p className="font-semibold text-gray-900 text-sm">
                 {sourceLanguage} → {targetLanguage}
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-3 shadow-sm">
-              <p className="text-xs text-gray-500 mb-1">Mode</p>
+              <p className="text-xs text-gray-500 mb-1">{t('summary.mode')}</p>
               <p className="font-semibold text-gray-900 text-sm capitalize">
                 {translationProcess.replace('-', ' ')}
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-3 shadow-sm">
-              <p className="text-xs text-gray-500 mb-1">Domain</p>
+              <p className="text-xs text-gray-500 mb-1">
+                {t('summary.domain')}
+              </p>
               <p className="font-semibold text-gray-900 text-sm">
                 {topics.find((t) => t.value === topic)?.label}
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-3 shadow-sm">
-              <p className="text-xs text-gray-500 mb-1">Glossary</p>
+              <p className="text-xs text-gray-500 mb-1">
+                {t('summary.glossary')}
+              </p>
               <p className="font-semibold text-gray-900 text-sm">
                 {glossaryFile || glossaryText ? (
-                  <span className="text-purple-600">✓ Added</span>
+                  <span className="text-purple-600">{t('summary.added')}</span>
                 ) : (
-                  <span className="text-gray-400">Not added</span>
+                  <span className="text-gray-400">{t('summary.notAdded')}</span>
                 )}
               </p>
             </div>
@@ -451,15 +452,13 @@ export default function StepConfigure({
           <div className="mt-4 pt-4 border-t border-blue-200 flex items-center justify-between">
             <div>
               <p className="text-sm font-semibold text-gray-900">
-                Estimated Credits
+                {t('summary.estimatedCredits')}
               </p>
-              <p className="text-xs text-gray-600">
-                Based on document size and settings
-              </p>
+              <p className="text-xs text-gray-600">{t('summary.basedOn')}</p>
             </div>
             <div className="text-right">
               <p className="text-2xl font-bold text-[#4169E1]">28</p>
-              <p className="text-xs text-gray-600">credits</p>
+              <p className="text-xs text-gray-600">{t('summary.credits')}</p>
             </div>
           </div>
         </CardContent>
@@ -471,8 +470,8 @@ export default function StepConfigure({
         onTranslate={onTranslate}
         isProcessing={isTranslating}
         disabled={false}
-        translateButtonText="Start Translation"
-        processingText="Translating..."
+        translateButtonText={t('actions.startTranslation')}
+        processingText={t('actions.translating')}
       />
     </div>
   );

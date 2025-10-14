@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "title": "Dịch phụ đề - AnyTrans",
+    "description": "Dịch phụ đề chuyên nghiệp với đồng bộ thời gian"
+  },
+  "header": {
+    "title": "Dịch phụ đề",
+    "description": "Dịch chuyên nghiệp với đồng bộ thời gian • Hỗ trợ SRT, VTT, ASS, SSA"
+  },
+  "steps": {
+    "upload": "Tải lên",
+    "configure": "Cấu hình",
+    "review": "Xem lại"
+  },
+  "upload": {
+    "title": "Tải lên file phụ đề của bạn",
+    "description": "Kéo và thả file hoặc nhấp để duyệt",
+    "chooseFile": "Chọn file",
+    "supportedFormats": "Định dạng được hỗ trợ: SRT, VTT, ASS, SSA, MP4",
+    "maxFileSize": "Kích thước file tối đa: 50MB",
+    "features": {
+      "fast": {
+        "title": "Dịch nhanh",
+        "description": "Dịch phụ đề nhanh chóng với bảo toàn thời gian"
+      },
+      "formatPreserved": {
+        "title": "Giữ nguyên định dạng",
+        "description": "Duy trì định dạng phụ đề gốc và đồng bộ thời gian"
+      },
+      "languages": {
+        "title": "Hơn 100 ngôn ngữ",
+        "description": "Dịch phụ đề giữa bất kỳ cặp ngôn ngữ nào"
+      },
+      "contextAware": {
+        "title": "Dịch nhận thức ngữ cảnh",
+        "description": "Tự động phát hiện ngữ cảnh phim/chương trình TV để dịch chính xác và tự nhiên hơn"
+      },
+      "multiFormat": {
+        "title": "Hỗ trợ đa định dạng",
+        "description": "Các định dạng phụ đề SRT, VTT, ASS, SSA và MP4"
+      },
+      "speakerDetection": {
+        "title": "Phát hiện người nói",
+        "description": "Nhận diện và giữ nguyên tên người nói và ngữ cảnh đối thoại"
+      }
+    }
+  },
+  "configure": {
+    "fileInfo": {
+      "title": "Thông tin file",
+      "changeFiles": "Đổi file",
+      "subtitles": "phụ đề"
+    },
+    "contextDetected": "Đã phát hiện ngữ cảnh:",
+    "subtitlePreview": {
+      "title": "Xem trước phụ đề",
+      "noSubtitles": "Chưa tải phụ đề nào."
+    },
+    "actions": {
+      "back": "Quay lại",
+      "startTranslation": "Bắt đầu dịch",
+      "processing": "Đang xử lý..."
+    }
+  }
+}

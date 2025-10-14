@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { BaseSearchBar } from '@/components/Common';
 
 interface SupportSearchBarProps {
@@ -12,13 +13,15 @@ interface SupportSearchBarProps {
 export default function SupportSearchBar({
   searchQuery,
   onSearchChange,
-  placeholder = 'Search for help articles, FAQs, and guides...',
+  placeholder,
 }: SupportSearchBarProps) {
+  const t = useTranslations('support.search');
+
   return (
     <BaseSearchBar
       searchQuery={searchQuery}
       onSearchChange={onSearchChange}
-      placeholder={placeholder}
+      placeholder={placeholder || t('placeholder')}
     />
   );
 }

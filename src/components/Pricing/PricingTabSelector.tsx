@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 interface PricingTabSelectorProps {
   selectedTab: 'personal' | 'enterprise';
@@ -13,6 +14,8 @@ export default function PricingTabSelector({
   onTabChange,
   isLoaded,
 }: PricingTabSelectorProps) {
+  const t = useTranslations('pricing.tabs');
+
   return (
     <div
       className={`bg-white rounded-2xl shadow-md p-2 w-[360px] h-[72px] flex items-center gap-6 transition-all duration-500 hover:shadow-xl ${
@@ -27,7 +30,7 @@ export default function PricingTabSelector({
             : 'bg-transparent text-gray-600 hover:bg-gray-50'
         }`}
       >
-        Personal
+        {t('personal')}
       </button>
       <button
         onClick={() => onTabChange('enterprise')}
@@ -37,7 +40,7 @@ export default function PricingTabSelector({
             : 'bg-transparent text-gray-600 hover:bg-gray-50'
         }`}
       >
-        Enterprise
+        {t('enterprise')}
       </button>
     </div>
   );

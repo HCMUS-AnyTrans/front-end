@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "title": "Translation History - AnyTrans",
+    "description": "View and manage all your translation projects"
+  },
+  "header": {
+    "title": "Translation History",
+    "description": "View and manage all your translation projects",
+    "stats": {
+      "completed": "Completed",
+      "words": "Words"
+    }
+  },
+  "stats": {
+    "totalProjects": "Total Projects",
+    "completed": "Completed",
+    "totalWords": "Total Words",
+    "creditsUsed": "Credits Used"
+  },
+  "toolbar": {
+    "searchPlaceholder": "Search by filename, language...",
+    "filter": "Filter",
+    "selected": "selected",
+    "download": "Download",
+    "delete": "Delete",
+    "filters": {
+      "status": {
+        "all": "All",
+        "completed": "Completed",
+        "processing": "Processing",
+        "failed": "Failed"
+      },
+      "category": {
+        "all": "All Types",
+        "document": "Document",
+        "subtitle": "Subtitle"
+      }
+    }
+  },
+  "table": {
+    "headers": {
+      "document": "Document",
+      "languages": "Languages",
+      "status": "Status",
+      "date": "Date",
+      "actions": "Actions"
+    },
+    "status": {
+      "completed": "Completed",
+      "processing": "Processing",
+      "failed": "Failed",
+      "unknown": "Unknown"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "download": "Download",
+      "delete": "Delete"
+    },
+    "words": "words",
+    "credits": "credits",
+    "time": {
+      "justNow": "Just now",
+      "hoursAgo": "{hours}h ago",
+      "yesterday": "Yesterday"
+    }
+  },
+  "empty": {
+    "title": "No translations found",
+    "description": "Start translating documents to see your history here"
+  },
+  "pagination": {
+    "showing": "Showing {current} of {total} translations"
+  }
+}

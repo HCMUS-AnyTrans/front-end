@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function Hero() {
+  const t = useTranslations('home.hero');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -43,9 +45,9 @@ export default function Hero() {
                 opacity: isVisible ? 1 : 0,
               }}
             >
-              We&apos;re here to
+              {t('title.part1')}
               <br />
-              enhance your{' '}
+              {t('title.part2')}{' '}
               <span
                 className="text-brand-primary inline-block transition-all duration-1000 ease-out"
                 style={{
@@ -54,7 +56,7 @@ export default function Hero() {
                   transitionDelay: '200ms',
                 }}
               >
-                Translation
+                {t('title.highlight')}
               </span>
             </h1>
           </div>
@@ -67,9 +69,7 @@ export default function Hero() {
               transitionDelay: '300ms',
             }}
           >
-            Dịch thông minh hơn, không khó hơn. AnyTrans mang đến cho bạn tốc
-            độ, độ chính xác và các tính năng mới nhất để quản lý mọi nội dung
-            một cách đơn giản
+            {t('description')}
           </p>
 
           <div
@@ -81,7 +81,7 @@ export default function Hero() {
             }}
           >
             <Button variant="gradient-primary" size="hero">
-              Free Trial
+              {t('buttons.freeTrial')}
             </Button>
 
             <Button variant="outline-gradient" size="hero" className="group">
@@ -89,7 +89,7 @@ export default function Hero() {
                 size={20}
                 className="transition-transform duration-300 group-hover:scale-110"
               />
-              View Demo
+              {t('buttons.viewDemo')}
             </Button>
           </div>
         </div>
@@ -107,7 +107,7 @@ export default function Hero() {
         >
           <img
             src="/Banner-Homepage.svg"
-            alt="AnyTrans Translation Services Banner"
+            alt={t('imageAlt')}
             className="w-full h-auto object-contain hover:scale-105 transition-all duration-300"
           />
         </div>

@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { MessageCircle, Mail, Book } from 'lucide-react';
 import { BaseActionCard } from '@/components/Common';
 
@@ -13,38 +16,40 @@ export default function SupportQuickActions({
   onEmailSupport,
   onDocumentation,
 }: SupportQuickActionsProps) {
+  const t = useTranslations('support.quickActions');
+
   const actions = [
     {
-      title: 'Live Chat',
-      description: 'Get instant help from our support team',
+      title: t('liveChat.title'),
+      description: t('liveChat.description'),
       icon: <MessageCircle className="w-6 h-6" />,
       color: 'blue',
       bgColor: 'bg-blue-100',
       hoverBgColor: 'bg-blue-600',
       textColor: 'text-blue-600',
-      actionText: 'Start chat',
+      actionText: t('liveChat.action'),
       onClick: onLiveChat,
     },
     {
-      title: 'Email Support',
-      description: 'Response within 24 hours',
+      title: t('emailSupport.title'),
+      description: t('emailSupport.description'),
       icon: <Mail className="w-6 h-6" />,
       color: 'green',
       bgColor: 'bg-green-100',
       hoverBgColor: 'bg-green-600',
       textColor: 'text-green-600',
-      actionText: 'Send email',
+      actionText: t('emailSupport.action'),
       onClick: onEmailSupport,
     },
     {
-      title: 'Documentation',
-      description: 'Guides and tutorials',
+      title: t('documentation.title'),
+      description: t('documentation.description'),
       icon: <Book className="w-6 h-6" />,
       color: 'purple',
       bgColor: 'bg-purple-100',
       hoverBgColor: 'bg-purple-600',
       textColor: 'text-purple-600',
-      actionText: 'View docs',
+      actionText: t('documentation.action'),
       onClick: onDocumentation,
     },
   ];

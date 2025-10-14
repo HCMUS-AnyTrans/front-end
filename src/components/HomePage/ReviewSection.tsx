@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Star, FileText, Video, Globe, Quote } from 'lucide-react';
 
 interface ReviewCardProps {
@@ -144,67 +145,62 @@ function ReviewCard({
 }
 
 export default function ReviewSection() {
+  const t = useTranslations('home.reviews');
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const reviews = [
     {
-      name: 'Sarah Johnson',
-      role: 'Marketing Director',
-      company: 'TechCorp',
+      name: t('testimonials.sarah.name'),
+      role: t('testimonials.sarah.role'),
+      company: t('testimonials.sarah.company'),
       rating: 5,
-      review:
-        'AnyTrans has revolutionized how we handle multilingual content. The document translation feature maintains perfect formatting, and the quality is outstanding.',
-      metadata: 'Translated 50+ marketing documents',
+      review: t('testimonials.sarah.review'),
+      metadata: t('testimonials.sarah.metadata'),
       icon: <FileText size={14} strokeWidth={2.5} />,
     },
     {
-      name: 'Miguel Rodriguez',
-      role: 'Content Creator',
-      company: 'MediaFlow',
+      name: t('testimonials.miguel.name'),
+      role: t('testimonials.miguel.role'),
+      company: t('testimonials.miguel.company'),
       rating: 5,
-      review:
-        'The subtitle translation feature is a game-changer. Perfect timing synchronization and the interface is incredibly intuitive. Highly recommended!',
-      metadata: 'Processed 30+ video projects',
+      review: t('testimonials.miguel.review'),
+      metadata: t('testimonials.miguel.metadata'),
       icon: <Video size={14} strokeWidth={2.5} />,
     },
     {
-      name: 'Aisha Patel',
-      role: 'Project Manager',
-      company: 'GlobalReach',
+      name: t('testimonials.aisha.name'),
+      role: t('testimonials.aisha.role'),
+      company: t('testimonials.aisha.company'),
       rating: 4,
-      review:
-        'Excellent platform for our international projects. The speed and accuracy of translations have improved our workflow significantly.',
-      metadata: 'Managed translations for 15+ languages',
+      review: t('testimonials.aisha.review'),
+      metadata: t('testimonials.aisha.metadata'),
       icon: <Globe size={14} strokeWidth={2.5} />,
     },
     {
-      name: 'David Chen',
-      role: 'Technical Writer',
-      company: 'DevDocs',
+      name: t('testimonials.david.name'),
+      role: t('testimonials.david.role'),
+      company: t('testimonials.david.company'),
       rating: 5,
-      review:
-        'As a technical writer, I need precise translations. AnyTrans delivers consistently high-quality results while preserving technical terminology.',
-      metadata: 'Translated 100+ technical documents',
+      review: t('testimonials.david.review'),
+      metadata: t('testimonials.david.metadata'),
       icon: <FileText size={14} strokeWidth={2.5} />,
     },
     {
-      name: 'Emma Thompson',
-      role: 'E-learning Specialist',
-      company: 'EduTech',
+      name: t('testimonials.emma.name'),
+      role: t('testimonials.emma.role'),
+      company: t('testimonials.emma.company'),
       rating: 5,
-      review:
-        'The platform makes it easy to localize our educational content. The user interface is clean and the results are always professional.',
-      metadata: 'Localized 25+ courses',
+      review: t('testimonials.emma.review'),
+      metadata: t('testimonials.emma.metadata'),
       icon: <Video size={14} strokeWidth={2.5} />,
     },
     {
-      name: 'James Wilson',
-      role: 'Marketing Coordinator',
-      company: 'StartupHub',
+      name: t('testimonials.james.name'),
+      role: t('testimonials.james.role'),
+      company: t('testimonials.james.company'),
       rating: 4,
-      review:
-        'Great value for money. The personal plan is perfect for our startup needs, and the translation quality exceeds expectations.',
-      metadata: 'Translated content for 8+ markets',
+      review: t('testimonials.james.review'),
+      metadata: t('testimonials.james.metadata'),
       icon: <Globe size={14} strokeWidth={2.5} />,
     },
   ];
@@ -219,31 +215,38 @@ export default function ReviewSection() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="font-bold text-4xl lg:text-6xl leading-tight text-foreground mb-6">
-            What Our Users Say
+            {t('header.title')}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust AnyTrans for their
-            translation needs
+            {t('header.description')}
           </p>
 
           {/* Stats */}
           <div className="flex items-center justify-center gap-12 mt-10">
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-1">4.9</div>
+              <div className="text-4xl font-bold text-primary mb-1">
+                {t('stats.rating.value')}
+              </div>
               <div className="text-sm text-muted-foreground">
-                Average Rating
+                {t('stats.rating.label')}
               </div>
             </div>
             <div className="w-px h-12 bg-border" />
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-1">5K+</div>
-              <div className="text-sm text-muted-foreground">Happy Users</div>
+              <div className="text-4xl font-bold text-primary mb-1">
+                {t('stats.users.value')}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                {t('stats.users.label')}
+              </div>
             </div>
             <div className="w-px h-12 bg-border" />
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-1">50K+</div>
+              <div className="text-4xl font-bold text-primary mb-1">
+                {t('stats.projects.value')}
+              </div>
               <div className="text-sm text-muted-foreground">
-                Projects Completed
+                {t('stats.projects.label')}
               </div>
             </div>
           </div>

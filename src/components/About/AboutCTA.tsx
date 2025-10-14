@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { BaseCTA } from '@/components/Common';
 
 export default function AboutCTA() {
+  const t = useTranslations('about.cta');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -20,14 +22,14 @@ export default function AboutCTA() {
     >
       <BaseCTA
         variant="about"
-        title="Ready to Break Language Barriers?"
-        description="Join thousands of users who trust AnyTrans for their translation needs. Start translating documents today."
+        title={t('title')}
+        description={t('description')}
         primaryButton={{
-          text: 'Get Started Free',
+          text: t('primaryButton'),
           href: '/signup',
         }}
         secondaryButton={{
-          text: 'Contact Sales',
+          text: t('secondaryButton'),
           href: '/contact',
         }}
       />
