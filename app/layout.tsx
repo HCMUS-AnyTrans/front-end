@@ -1,12 +1,22 @@
 import type { Metadata } from 'next';
-import { Rubik } from 'next/font/google';
+// import { Rubik } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 import { AccountDialogProvider } from '@/contexts/AccountDialogContext';
 import { Toaster } from 'sonner';
 
-const rubik = Rubik({
+// Google Font (commented out)
+// const rubik = Rubik({
+//   variable: '--font-rubik',
+//   subsets: ['latin'],
+//   display: 'swap',
+// });
+
+// Local Font - SVN Rubik Bold
+const rubik = localFont({
+  src: '../public/fonts/DVN-Rubik/DVN - Rubik-Bold.ttf',
   variable: '--font-rubik',
-  subsets: ['latin'],
+  weight: '700',
   display: 'swap',
 });
 

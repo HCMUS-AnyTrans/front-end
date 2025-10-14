@@ -132,17 +132,15 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
               Message
             </label>
 
-            <div className="rounded-md w-full overflow-hidden shadow-sm ">
-              <Textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={10}
-                placeholder="Tell us how we can help you..."
-                className=" px-4 py-3 focus-visible:ring-[#4169E1]"
-              />
-            </div>
+            <Textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              required
+              rows={10}
+              placeholder="Tell us how we can help you..."
+              className=" px-4 py-3 focus-visible:ring-[#4169E1]"
+            />
           </div>
 
           <Button

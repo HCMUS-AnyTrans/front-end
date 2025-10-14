@@ -93,7 +93,7 @@ export default function ContactInfo({ offices, reasons }: ContactInfoProps) {
 
       {/* Why Contact Us */}
       <div
-        className={`bg-gradient-to-r from-[#4169E1] via-[#1e3a8a] to-[#4169E1] rounded-2xl p-6 text-white shadow-lg hover:shadow-2xl transition-all duration-700 delay-200 ${
+        className={`bg-gradient-to-br from-[#1e3a8a]  to-[#173FB6] rounded-2xl p-6 text-white shadow-lg hover:shadow-2xl transition-all duration-700 delay-200 ${
           isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
         }`}
       >

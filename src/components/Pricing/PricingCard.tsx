@@ -172,7 +172,7 @@ export default function PricingCard({
                 />
               </div>
               <span
-                className={`font-semibold text-sm ${featureTextColor} transition-colors duration-300`}
+                className={`font-medium text-sm ${featureTextColor} transition-colors duration-300`}
               >
                 {feature}
               </span>

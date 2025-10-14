@@ -60,15 +60,16 @@ export default function Hero() {
           </div>
 
           <p
-            className="font-semibold text-base sm:text-lg leading-6 sm:leading-7 text-muted-foreground max-w-[448px] mx-auto lg:mx-0 transition-all duration-1000 ease-out"
+            className=" text-base sm:text-lg leading-6 sm:leading-7 text-muted-foreground max-w-[448px] mx-auto lg:mx-0 transition-all duration-1000 ease-out"
             style={{
               transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
               opacity: isVisible ? 1 : 0,
               transitionDelay: '300ms',
             }}
           >
-            Translate smarter, not harder. AnyTrans gives you speed, accuracy,
-            and the latest features to manage all your content with ease.
+            Dịch thông minh hơn, không khó hơn. AnyTrans mang đến cho bạn tốc
+            độ, độ chính xác và các tính năng mới nhất để quản lý mọi nội dung
+            một cách đơn giản
           </p>
 
           <div
