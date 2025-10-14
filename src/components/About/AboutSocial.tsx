@@ -41,7 +41,7 @@ export default function AboutSocial({ socialLinks }: AboutSocialProps) {
                     : 'opacity-0 translate-y-8'
                 }`}
                 style={{
-                  transitionDelay: `${200 + idx * 100}ms`,
+                  transitionDelay: isVisible ? '0ms' : `${200 + idx * 100}ms`,
                 }}
               >
                 <Icon className="w-5 h-5 transition-transform duration-300 group-hover:rotate-12" />

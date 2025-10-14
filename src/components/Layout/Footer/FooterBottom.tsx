@@ -15,7 +15,7 @@ export default function FooterBottom() {
       <div className="flex flex-col md:flex-row items-center justify-between gap-6">
         <p className="text-gray-400 text-sm">
           © 2025{' '}
-          <span className="text-white font-semibold">AnyTrans Inc.</span> All
+          <span className="text-white font-semibold">Anytrans Inc.</span> All
           rights reserved
         </p>
 

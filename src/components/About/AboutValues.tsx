@@ -32,13 +32,13 @@ export default function AboutValues({ values }: AboutValuesProps) {
           return (
             <div
               key={value.title}
-              className={`h-full transition-all duration-700 ${
+              className={`h-full transition-all duration-500 ${
                 isVisible
                   ? 'opacity-100 translate-y-0'
                   : 'opacity-0 translate-y-12'
               }`}
               style={{
-                transitionDelay: `${idx * 150}ms`,
+                transitionDelay: isVisible ? '0ms' : `${idx * 150}ms`,
               }}
             >
               <BaseCard
@@ -47,7 +47,7 @@ export default function AboutValues({ values }: AboutValuesProps) {
                 title={value.title}
                 description={value.description}
                 color={value.color}
-                className="h-full flex flex-col"
+                className="h-full flex flex-col transition-all duration-500"
               />
             </div>
           );

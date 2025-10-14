@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { FileText, Video, BookOpen, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -10,8 +10,6 @@ interface FloatingCardProps {
   title: string;
   bgColor: string;
   delay: number;
-  isHovered: boolean;
-  onHover: (hovered: boolean) => void;
 }
 
 function FloatingCard({
@@ -20,34 +18,24 @@ function FloatingCard({
   title,
   bgColor,
   delay,
-  isHovered,
-  onHover,
 }: FloatingCardProps) {
   return (
     <div
-      className={`bg-white rounded-2xl shadow-lg p-4 flex items-center gap-4 cursor-pointer transition-all duration-500 ease-out hover:shadow-2xl hover:scale-105`}
+      className="bg-white rounded-2xl shadow-lg p-4 flex items-center gap-4 cursor-pointer transition-all duration-300 ease-out hover:shadow-2xl hover:scale-105 will-change-transform"
       style={{
         animationDelay: `${delay}ms`,
       }}
-      onMouseEnter={() => onHover(true)}
-      onMouseLeave={() => onHover(false)}
     >
       <div
-        className={`rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 transition-all duration-500 ${bgColor}`}
+        className={`rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 ${bgColor}`}
       >
         <div className="text-white">{icon}</div>
       </div>
       <div className="flex flex-col flex-1 min-w-0">
-        <div
-          className={`text-sm font-medium transition-colors duration-500 text-muted-foreground`}
-        >
+        <div className="text-sm font-medium text-muted-foreground">
           {category}
         </div>
-        <div
-          className={`font-medium text-[15px] leading-tight transition-colors duration-500 ${
-            isHovered ? 'text-foreground' : 'text-foreground'
-          }`}
-        >
+        <div className="font-medium text-[15px] leading-tight text-foreground">
           {title}
         </div>
       </div>
@@ -56,7 +44,6 @@ function FloatingCard({
 }
 
 export default function About() {
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   return (
     <section className="w-full py-20 overflow-hidden relative">
@@ -114,10 +101,6 @@ export default function About() {
                   title="Document Translation & Management"
                   bgColor="bg-[#80eac2]"
                   delay={0}
-                  isHovered={hoveredCard === 'document'}
-                  onHover={(hovered) =>
-                    setHoveredCard(hovered ? 'document' : null)
-                  }
                 />
               </div>
 
@@ -135,10 +118,6 @@ export default function About() {
                   title="Subtitle & Video Translation"
                   bgColor="bg-[#7d87ff]"
                   delay={200}
-                  isHovered={hoveredCard === 'subtitle'}
-                  onHover={(hovered) =>
-                    setHoveredCard(hovered ? 'subtitle' : null)
-                  }
                 />
               </div>
 
@@ -156,10 +135,6 @@ export default function About() {
                   title="Glossary & Consistency Tools"
                   bgColor="bg-[#f3aa01]"
                   delay={400}
-                  isHovered={hoveredCard === 'glossary'}
-                  onHover={(hovered) =>
-                    setHoveredCard(hovered ? 'glossary' : null)
-                  }
                 />
               </div>
             </div>

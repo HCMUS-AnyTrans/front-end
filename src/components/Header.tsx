@@ -79,10 +79,10 @@ export default function Header() {
 
   return (
     <>
-      <header className="font-medium sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+      <header className="font-medium sticky top-0 z-50 w-full bg-white/70 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         <div className="flex items-center justify-between w-full max-w-7xl mx-auto px-4 sm:px-6 py-3 lg:py-4">
           {/* Logo */}
-          <a href="/" className="flex items-center" onClick={closeMobileMenu}>
+          <a href="/" className="flex items-center hover:scale-102 transition-all duration-300 delay-0" onClick={closeMobileMenu}>
             <img
               src="/logo-icon-mono.svg"
               alt="anytrans"

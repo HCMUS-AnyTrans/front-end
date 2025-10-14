@@ -84,7 +84,11 @@ export default function ContactInfo({ offices, reasons }: ContactInfoProps) {
           </div>
         </div>
 
-        <div className="mt-4 p-3 bg-[#4169E1]/10 rounded-lg border border-[#4169E1]/20 hover:bg-[#4169E1]/15 transition-all duration-300 animate-pulse">
+        <div className="relative mt-4 p-3 bg-[#4169E1]/10 rounded-lg border border-[#4169E1]/20 hover:bg-[#4169E1]/15 transition-all duration-300">
+          <span className="absolute flex size-3 -top-1 -right-1">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+            <span className="relative inline-flex size-3 rounded-full bg-sky-500"></span>
+          </span>
           <p className="text-sm text-[#1e3a8a]">
             <strong>24/7 Support:</strong> Live chat available anytime
           </p>
