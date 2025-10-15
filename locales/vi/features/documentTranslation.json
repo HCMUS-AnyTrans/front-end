@@ -57,10 +57,16 @@
       "sourceLanguage": "Ngôn ngữ nguồn",
       "targetLanguage": "Ngôn ngữ đích",
       "translationMode": "Chế độ dịch",
+      "selectSourceLanguage": "Chọn ngôn ngữ nguồn",
+      "selectTargetLanguage": "Chọn ngôn ngữ đích",
+      "selectTranslationMode": "Chọn chế độ dịch",
       "modes": {
         "contextAware": "Nhận thức ngữ cảnh",
         "fast": "Nhanh",
-        "accurate": "Chính xác"
+        "accurate": "Chính xác",
+        "literal": "Dịch theo nghĩa đen",
+        "creative": "Sáng tạo",
+        "formal": "Trang trọng/Tài liệu"
       },
       "note": "Chế độ nhận thức ngữ cảnh cung cấp độ chính xác tốt hơn bằng cách hiểu ngữ cảnh và thuật ngữ của tài liệu."
     },
@@ -125,6 +131,8 @@
   "review": {
     "complete": "Hoàn thành dịch!",
     "description": "Tài liệu của bạn đã được dịch thành công và sẵn sàng để xem lại.",
+    "descriptionDocument": "Tài liệu của bạn đã được dịch thành công và sẵn sàng để xem lại.",
+    "descriptionSubtitle": "Phụ đề của bạn đã được dịch thành công và sẵn sàng để xem lại.",
     "download": "Tải xuống",
     "translateAnother": "Dịch tài liệu khác",
     "stats": {
