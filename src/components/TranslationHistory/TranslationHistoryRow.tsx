@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations, useLocale } from 'next-intl';
 import {
   FileText,
   Languages,
@@ -36,6 +37,9 @@ export default function TranslationHistoryRow({
   onDownload,
   onDelete,
 }: TranslationHistoryRowProps) {
+  const t = useTranslations('translationHistory.table');
+  const locale = useLocale();
+
   const getStatusConfig = (status: string): StatusConfig => {
     switch (status) {
       case 'completed':
@@ -44,7 +48,7 @@ export default function TranslationHistoryRow({
           color: 'text-green-600',
           bg: 'bg-green-50',
           border: 'border-green-200',
-          label: 'Completed',
+          label: t('status.completed'),
         };
       case 'processing':
         return {
@@ -52,7 +56,7 @@ export default function TranslationHistoryRow({
           color: 'text-[#4169E1]',
           bg: 'bg-blue-50',
           border: 'border-blue-200',
-          label: 'Processing',
+          label: t('status.processing'),
         };
       case 'failed':
         return {
@@ -60,7 +64,7 @@ export default function TranslationHistoryRow({
           color: 'text-red-600',
           bg: 'bg-red-50',
           border: 'border-red-200',
-          label: 'Failed',
+          label: t('status.failed'),
         };
       default:
         return {
@@ -68,7 +72,7 @@ export default function TranslationHistoryRow({
           color: 'text-gray-600',
           bg: 'bg-gray-50',
           border: 'border-gray-200',
-          label: 'Unknown',
+          label: t('status.unknown'),
         };
     }
   };
@@ -80,10 +84,10 @@ export default function TranslationHistoryRow({
       (now.getTime() - date.getTime()) / (1000 * 60 * 60)
     );
 
-    if (diffInHours < 1) return 'Just now';
-    if (diffInHours < 24) return `${diffInHours}h ago`;
-    if (diffInHours < 48) return 'Yesterday';
-    return date.toLocaleDateString('en-US', {
+    if (diffInHours < 1) return t('time.justNow');
+    if (diffInHours < 24) return t('time.hoursAgo', { hours: diffInHours });
+    if (diffInHours < 48) return t('time.yesterday');
+    return date.toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', {
       month: 'short',
       day: 'numeric',
       year: 'numeric',
@@ -114,7 +118,9 @@ export default function TranslationHistoryRow({
                   {item.fileName}
                 </p>
                 <div className="flex items-center gap-2 text-[10px] text-gray-500 mt-0.5">
-                  <span>{item.wordCount.toLocaleString()} words</span>
+                  <span>
+                    {item.wordCount.toLocaleString()} {t('words')}
+                  </span>
                   <span>•</span>
                   <span>{item.fileSize}</span>
                 </div>
@@ -168,21 +174,21 @@ export default function TranslationHistoryRow({
                   className="w-full text-left px-3 py-2 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2 cursor-pointer"
                 >
                   <Eye className="w-3.5 h-3.5" />
-                  View Details
+                  {t('actions.viewDetails')}
                 </button>
                 <button
                   onClick={() => onDownload(item.id)}
                   className="w-full text-left px-3 py-2 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2 cursor-pointer"
                 >
                   <Download className="w-3.5 h-3.5" />
-                  Download
+                  {t('actions.download')}
                 </button>
                 <button
                   onClick={() => onDelete(item.id)}
                   className="w-full text-left px-3 py-2 text-xs text-red-600 hover:bg-red-50 flex items-center gap-2 cursor-pointer"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
-                  Delete
+                  {t('actions.delete')}
                 </button>
               </div>
             )}
@@ -207,7 +213,9 @@ export default function TranslationHistoryRow({
               {item.fileName}
             </p>
             <div className="flex items-center gap-2 text-xs text-gray-500">
-              <span>{item.wordCount.toLocaleString()} words</span>
+              <span>
+                {item.wordCount.toLocaleString()} {t('words')}
+              </span>
               <span>•</span>
               <span>{item.fileSize}</span>
             </div>
@@ -259,21 +267,21 @@ export default function TranslationHistoryRow({
                   className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer"
                 >
                   <Eye className="w-4 h-4" />
-                  View Details
+                  {t('actions.viewDetails')}
                 </button>
                 <button
                   onClick={() => onDownload(item.id)}
                   className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer"
                 >
                   <Download className="w-4 h-4" />
-                  Download
+                  {t('actions.download')}
                 </button>
                 <button
                   onClick={() => onDelete(item.id)}
                   className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 cursor-pointer"
                 >
                   <Trash2 className="w-4 h-4" />
-                  Delete
+                  {t('actions.delete')}
                 </button>
               </div>
             )}

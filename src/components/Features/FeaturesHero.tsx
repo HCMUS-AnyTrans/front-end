@@ -1,17 +1,19 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { Zap, Shield, Globe } from 'lucide-react';
 import { BackgroundPattern } from '@/components/Features/shared';
 
-const stats = [
-  { label: 'Languages', value: '100+', icon: Globe },
-  { label: 'Processing Speed', value: '<5s', icon: Zap },
-  { label: 'Security', value: '100%', icon: Shield },
-];
-
 export default function FeaturesHero() {
+  const t = useTranslations('features.hero');
   const [isVisible, setIsVisible] = useState(false);
+
+  const stats = [
+    { label: t('stats.languages'), value: '100+', icon: Globe },
+    { label: t('stats.processingSpeed'), value: '<5s', icon: Zap },
+    { label: t('stats.security'), value: '100%', icon: Shield },
+  ];
 
   useEffect(() => {
     setIsVisible(true);
@@ -33,7 +35,7 @@ export default function FeaturesHero() {
             }}
           >
             <span className="text-sm font-bold tracking-wider uppercase text-[#4169E1]">
-              Translation Platform
+              {t('badge')}
             </span>
           </div>
 
@@ -42,12 +44,12 @@ export default function FeaturesHero() {
             style={{
               transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
               opacity: isVisible ? 1 : 0,
-              transitionDelay: '100ms',
+              transitionDelay: isVisible ? '0ms' : '100ms',
             }}
           >
-            Two Powerful Tools.
+            {t('title.part1')}
             <br />
-            <span className="text-[#4169E1]">Infinite Possibilities.</span>
+            <span className="text-[#4169E1]">{t('title.highlight')}</span>
           </h1>
 
           <p
@@ -55,11 +57,10 @@ export default function FeaturesHero() {
             style={{
               transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
               opacity: isVisible ? 1 : 0,
-              transitionDelay: '200ms',
+              transitionDelay: isVisible ? '0ms' : '200ms',
             }}
           >
-            Professional-grade document and subtitle translation powered by
-            cutting-edge AI technology.
+            {t('description')}
           </p>
 
           {/* Stats */}
@@ -68,7 +69,7 @@ export default function FeaturesHero() {
             style={{
               transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
               opacity: isVisible ? 1 : 0,
-              transitionDelay: '300ms',
+              transitionDelay: isVisible ? '0ms' : '300ms',
             }}
           >
             {stats.map((stat, index) => {

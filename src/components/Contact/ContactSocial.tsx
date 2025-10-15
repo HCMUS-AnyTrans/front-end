@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { ContactSocialProps } from '@/types/contact';
 
 export default function ContactSocial({ socialLinks }: ContactSocialProps) {
+  const t = useTranslations('contact.social');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -23,11 +25,9 @@ export default function ContactSocial({ socialLinks }: ContactSocialProps) {
           }`}
         >
           <h3 className="text-2xl font-bold text-gray-900 mb-2">
-            Connect With Us
+            {t('title')}
           </h3>
-          <p className="text-gray-600">
-            Follow us on social media for updates and translation tips
-          </p>
+          <p className="text-gray-600">{t('subtitle')}</p>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-4">
           {socialLinks.map((social, idx) => {
@@ -41,7 +41,7 @@ export default function ContactSocial({ socialLinks }: ContactSocialProps) {
                     : 'opacity-0 translate-y-8'
                 }`}
                 style={{
-                  transitionDelay: `${200 + idx * 100}ms`,
+                  transitionDelay: isVisible ? '0ms' : `${200 + idx * 100}ms`,
                 }}
               >
                 <Icon

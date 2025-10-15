@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { FileText, Video, BookOpen, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -10,8 +11,6 @@ interface FloatingCardProps {
   title: string;
   bgColor: string;
   delay: number;
-  isHovered: boolean;
-  onHover: (hovered: boolean) => void;
 }
 
 function FloatingCard({
@@ -20,34 +19,24 @@ function FloatingCard({
   title,
   bgColor,
   delay,
-  isHovered,
-  onHover,
 }: FloatingCardProps) {
   return (
     <div
-      className={`bg-white rounded-2xl shadow-lg p-4 flex items-center gap-4 cursor-pointer transition-all duration-500 ease-out hover:shadow-2xl hover:scale-105`}
+      className="bg-white rounded-2xl shadow-lg p-4 flex items-center gap-4 cursor-pointer transition-all duration-300 ease-out hover:shadow-2xl hover:scale-105 will-change-transform"
       style={{
         animationDelay: `${delay}ms`,
       }}
-      onMouseEnter={() => onHover(true)}
-      onMouseLeave={() => onHover(false)}
     >
       <div
-        className={`rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 transition-all duration-500 ${bgColor}`}
+        className={`rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0 ${bgColor}`}
       >
         <div className="text-white">{icon}</div>
       </div>
       <div className="flex flex-col flex-1 min-w-0">
-        <div
-          className={`text-sm font-medium transition-colors duration-500 text-muted-foreground`}
-        >
+        <div className="text-sm font-medium text-muted-foreground">
           {category}
         </div>
-        <div
-          className={`font-medium text-[15px] leading-tight transition-colors duration-500 ${
-            isHovered ? 'text-foreground' : 'text-foreground'
-          }`}
-        >
+        <div className="font-medium text-[15px] leading-tight text-foreground">
           {title}
         </div>
       </div>
@@ -56,6 +45,7 @@ function FloatingCard({
 }
 
 export default function About() {
+  const t = useTranslations('home.about');
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   return (
@@ -71,25 +61,20 @@ export default function About() {
           {/* Left content */}
           <div className="flex flex-col gap-8 text-center lg:text-left w-full lg:max-w-xl">
             <h2 className="font-bold text-4xl lg:text-5xl xl:text-6xl leading-tight text-foreground">
-              Everything You
+              {t('title.part1')}
               <br />
               <span className="text-brand-primary inline-block transition-all duration-1000 ease-out">
-                Need to Translate Better
+                {t('title.highlight')}
               </span>
             </h2>
 
             <p className="text-lg leading-relaxed text-muted-foreground">
-              Our platform empowers you to translate documents, subtitles, and
-              videos effortlessly. Upload DOCX, PDF, or PPTX files and get
-              instant Vietnamese translations without losing formatting.
-              Translate SRT, VTT, or MP4 content with perfectly synchronized
-              timing, and manage your own terminology glossary to keep every
-              translation accurate and consistent.
+              {t('description')}
             </p>
 
             <div className="flex justify-center lg:justify-start">
               <Button variant="gradient-primary" size="hero">
-                Read More
+                {t('button')}
               </Button>
             </div>
           </div>
@@ -110,14 +95,10 @@ export default function About() {
               >
                 <FloatingCard
                   icon={<Users size={28} strokeWidth={2} />}
-                  category="Translation"
-                  title="Document Translation & Management"
+                  category={t('cards.document.category')}
+                  title={t('cards.document.title')}
                   bgColor="bg-[#80eac2]"
                   delay={0}
-                  isHovered={hoveredCard === 'document'}
-                  onHover={(hovered) =>
-                    setHoveredCard(hovered ? 'document' : null)
-                  }
                 />
               </div>
 
@@ -131,14 +112,10 @@ export default function About() {
               >
                 <FloatingCard
                   icon={<Users size={28} strokeWidth={2} />}
-                  category="Media"
-                  title="Subtitle & Video Translation"
+                  category={t('cards.subtitle.category')}
+                  title={t('cards.subtitle.title')}
                   bgColor="bg-[#7d87ff]"
                   delay={200}
-                  isHovered={hoveredCard === 'subtitle'}
-                  onHover={(hovered) =>
-                    setHoveredCard(hovered ? 'subtitle' : null)
-                  }
                 />
               </div>
 
@@ -152,14 +129,10 @@ export default function About() {
               >
                 <FloatingCard
                   icon={<Users size={28} strokeWidth={2} />}
-                  category="Productivity"
-                  title="Glossary & Consistency Tools"
+                  category={t('cards.glossary.category')}
+                  title={t('cards.glossary.title')}
                   bgColor="bg-[#f3aa01]"
                   delay={400}
-                  isHovered={hoveredCard === 'glossary'}
-                  onHover={(hovered) =>
-                    setHoveredCard(hovered ? 'glossary' : null)
-                  }
                 />
               </div>
             </div>

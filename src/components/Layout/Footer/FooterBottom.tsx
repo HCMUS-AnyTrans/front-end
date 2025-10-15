@@ -1,11 +1,15 @@
 import React from 'react';
-
-const legalLinks = [
-  { name: 'Terms & Conditions', href: '/terms' },
-  { name: 'Privacy Policy', href: '/privacy' },
-];
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 
 export default function FooterBottom() {
+  const t = useTranslations('footer.bottom');
+
+  const legalLinks = [
+    { name: t('terms'), href: '/terms' },
+    { name: t('privacy'), href: '/privacy' },
+  ];
+
   return (
     <>
       {/* Divider */}
@@ -13,11 +17,10 @@ export default function FooterBottom() {
 
       {/* Bottom section */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-        <p className="text-gray-400 text-sm">
-          © 2025{' '}
-          <span className="text-white font-semibold">AnyTrans Inc.</span> All
-          rights reserved
-        </p>
+        <p
+          className="text-gray-400 text-sm"
+          dangerouslySetInnerHTML={{ __html: t.raw('copyright') }}
+        />
 
         <div className="flex items-center gap-6">
           {legalLinks.map((link, index) => (
@@ -25,12 +28,12 @@ export default function FooterBottom() {
               {index > 0 && (
                 <div className="w-1 h-1 bg-gray-600 rounded-full" />
               )}
-              <a
+              <Link
                 href={link.href}
                 className="text-gray-400 hover:text-white transition-colors text-sm font-medium"
               >
                 {link.name}
-              </a>
+              </Link>
             </React.Fragment>
           ))}
         </div>

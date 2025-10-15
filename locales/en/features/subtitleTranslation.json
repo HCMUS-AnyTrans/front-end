@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "title": "Subtitle Translation - AnyTrans",
+    "description": "Professional subtitle translation with timing synchronization"
+  },
+  "header": {
+    "title": "Subtitle Translator",
+    "description": "Professional translation with timing sync • Supports SRT, VTT, ASS, SSA"
+  },
+  "steps": {
+    "upload": "Upload",
+    "configure": "Configure",
+    "review": "Review"
+  },
+  "upload": {
+    "title": "Upload Your Subtitle Files",
+    "description": "Drag and drop your files or click to browse",
+    "chooseFile": "Choose File",
+    "supportedFormats": "Supported formats: SRT, VTT, ASS, SSA, MP4",
+    "maxFileSize": "Maximum file size: 50MB",
+    "features": {
+      "fast": {
+        "title": "Fast Translation",
+        "description": "Quick subtitle translation with timing preservation"
+      },
+      "formatPreserved": {
+        "title": "Format Preserved",
+        "description": "Maintain original subtitle format and timing synchronization"
+      },
+      "languages": {
+        "title": "100+ Languages",
+        "description": "Translate subtitles between any language pair"
+      },
+      "contextAware": {
+        "title": "Context-Aware Translation",
+        "description": "Automatic movie/TV show context detection for more accurate, natural translations"
+      },
+      "multiFormat": {
+        "title": "Multi-Format Support",
+        "description": "SRT, VTT, ASS, SSA, and MP4 subtitle formats"
+      },
+      "speakerDetection": {
+        "title": "Speaker Detection",
+        "description": "Identify and preserve speaker names and dialogue context"
+      }
+    }
+  },
+  "configure": {
+    "fileInfo": {
+      "title": "File Information",
+      "changeFiles": "Change files",
+      "subtitles": "subtitles"
+    },
+    "contextDetected": "Detected context:",
+    "subtitlePreview": {
+      "title": "Subtitle Preview",
+      "noSubtitles": "No subtitles loaded yet."
+    },
+    "actions": {
+      "back": "Back",
+      "startTranslation": "Start Translation",
+      "processing": "Processing..."
+    }
+  }
+}

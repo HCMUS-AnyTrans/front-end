@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { SecondaryNavProps } from '@/types/sidebar';
 
 export default function SecondaryNav({ items, isActive }: SecondaryNavProps) {

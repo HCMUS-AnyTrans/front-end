@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Smartphone, Lock } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Session } from '@/types/account';
 
 type ActiveSessionsListProps = {
@@ -15,14 +16,12 @@ export default function ActiveSessionsList({
   onRevoke,
   onSignOutAllOthers,
 }: ActiveSessionsListProps) {
+  const t = useTranslations('common.profile.activeSessions');
+
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">
-        Active Sessions
-      </h3>
-      <p className="text-sm text-gray-600 mb-4">
-        Manage and monitor where you're logged in
-      </p>
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('title')}</h3>
+      <p className="text-sm text-gray-600 mb-4">{t('description')}</p>
 
       <div className="space-y-3">
         {sessions.map((session) => (
@@ -41,13 +40,13 @@ export default function ActiveSessionsList({
                   </p>
                   {session.current && (
                     <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-medium rounded-full">
-                      Current
+                      {t('current')}
                     </span>
                   )}
                 </div>
                 <p className="text-sm text-gray-600">{session.location}</p>
                 <p className="text-xs text-gray-500 mt-0.5">
-                  Last active: {session.lastActive}
+                  {t('lastActive')}: {session.lastActive}
                 </p>
               </div>
             </div>
@@ -56,7 +55,7 @@ export default function ActiveSessionsList({
                 onClick={() => onRevoke(session.id)}
                 className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-all cursor-pointer"
               >
-                Revoke
+                {t('revoke')}
               </button>
             )}
           </div>
@@ -69,7 +68,7 @@ export default function ActiveSessionsList({
           className="text-sm text-red-600 hover:text-red-700 font-medium flex items-center gap-2 cursor-pointer"
         >
           <Lock className="w-4 h-4" />
-          Sign out all other sessions
+          {t('signOutAllOthers')}
         </button>
       </div>
     </div>

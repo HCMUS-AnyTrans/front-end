@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { FileText, Download, Languages, Clock } from 'lucide-react';
 import type { SubtitleEntry } from '@/types/translation';
 
@@ -14,6 +15,7 @@ type DocumentReviewProps = {
   targetLanguage: string;
   onDownload: () => void;
   onTranslateAnother: () => void;
+  translationNamespace?: 'documentTranslation' | 'subtitleTranslation';
 };
 
 type SubtitleReviewProps = {
@@ -24,12 +26,17 @@ type SubtitleReviewProps = {
   translatedSubtitles: SubtitleEntry[];
   onExport: () => void;
   onTranslateAnother: () => void;
+  translationNamespace?: 'documentTranslation' | 'subtitleTranslation';
 };
 
 type StepReviewProps = DocumentReviewProps | SubtitleReviewProps;
 
 export default function StepReview(props: StepReviewProps) {
   const isDocument = props.variant === 'document';
+  const namespace =
+    props.translationNamespace ||
+    (isDocument ? 'documentTranslation' : 'subtitleTranslation');
+  const t = useTranslations(`${namespace}.review`);
 
   return (
     <div className="space-y-4 sm:space-y-6">
@@ -40,11 +47,10 @@ export default function StepReview(props: StepReviewProps) {
           </div>
           <div className="flex-1">
             <h3 className="text-lg sm:text-xl font-bold mb-1">
-              Translation Complete!
+              {t('complete')}
             </h3>
             <p className="text-sm sm:text-base text-green-50">
-              Your {isDocument ? 'document' : 'subtitles'} have been
-              successfully translated and are ready for review.
+              {isDocument ? t('descriptionDocument') : t('descriptionSubtitle')}
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
@@ -53,14 +59,14 @@ export default function StepReview(props: StepReviewProps) {
               className="bg-white hover:bg-green-50 text-green-700 px-4 sm:px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all shadow-lg cursor-pointer"
             >
               <Download className="w-5 h-5" />
-              Download
+              {isDocument ? t('download') : t('export')}
             </button>
             <button
               onClick={props.onTranslateAnother}
               className="bg-white/20 hover:bg-white/30 text-white px-4 sm:px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all border border-white/30 cursor-pointer"
             >
               <FileText className="w-5 h-5" />
-              Translate Another
+              {t('translateAnother')}
             </button>
           </div>
         </div>
@@ -69,20 +75,26 @@ export default function StepReview(props: StepReviewProps) {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
         <div className="bg-white rounded-xl p-4 sm:p-5 border border-gray-200">
           <p className="text-xs sm:text-sm text-gray-600 mb-1">
-            Words Translated
+            {t('stats.wordsTranslated')}
           </p>
           <p className="text-xl sm:text-2xl font-bold text-gray-900">2,847</p>
         </div>
         <div className="bg-white rounded-xl p-4 sm:p-5 border border-gray-200">
-          <p className="text-xs sm:text-sm text-gray-600 mb-1">Time Taken</p>
+          <p className="text-xs sm:text-sm text-gray-600 mb-1">
+            {t('stats.timeTaken')}
+          </p>
           <p className="text-xl sm:text-2xl font-bold text-gray-900">3.2s</p>
         </div>
         <div className="bg-white rounded-xl p-4 sm:p-5 border border-gray-200">
-          <p className="text-xs sm:text-sm text-gray-600 mb-1">Accuracy</p>
+          <p className="text-xs sm:text-sm text-gray-600 mb-1">
+            {t('stats.accuracy')}
+          </p>
           <p className="text-xl sm:text-2xl font-bold text-gray-900">98%</p>
         </div>
         <div className="bg-white rounded-xl p-4 sm:p-5 border border-gray-200">
-          <p className="text-xs sm:text-sm text-gray-600 mb-1">Credits Used</p>
+          <p className="text-xs sm:text-sm text-gray-600 mb-1">
+            {t('stats.creditsUsed')}
+          </p>
           <p className="text-xl sm:text-2xl font-bold text-gray-900">28</p>
         </div>
       </div>
@@ -94,7 +106,7 @@ export default function StepReview(props: StepReviewProps) {
             <div className="flex items-center gap-2">
               <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-[#4169E1]" />
               <h3 className="text-sm sm:text-base font-semibold text-gray-900">
-                Original ({props.sourceLanguage})
+                {t('original')} ({props.sourceLanguage})
               </h3>
             </div>
           </div>
@@ -134,7 +146,7 @@ export default function StepReview(props: StepReviewProps) {
             <div className="flex items-center gap-2">
               <Languages className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
               <h3 className="text-sm sm:text-base font-semibold text-gray-900">
-                Translation ({props.targetLanguage})
+                {t('translation')} ({props.targetLanguage})
               </h3>
             </div>
           </div>

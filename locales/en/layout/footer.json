@@ -1,0 +1,32 @@
+{
+  "logo": {
+    "companyName": "AnyTrans",
+    "tagline": "Translation Services",
+    "description": "Professional translation services for documents, subtitles, and more. Empowering global communication with cutting-edge technology."
+  },
+  "newsletter": {
+    "title": "Stay Updated",
+    "description": "Subscribe to our newsletter for latest updates",
+    "placeholder": "Enter your email"
+  },
+  "quickLinks": {
+    "title": "Quick Links",
+    "home": "Home",
+    "features": "Features",
+    "pricing": "Pricing",
+    "about": "About"
+  },
+  "services": {
+    "title": "Services",
+    "documentTranslation": "Document Translation",
+    "subtitleTranslation": "Subtitle Translation"
+  },
+  "social": {
+    "title": "Connect"
+  },
+  "bottom": {
+    "copyright": "© 2025 AnyTrans Inc. All rights reserved",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy"
+  }
+}

@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { usePathname } from '@/i18n/routing';
 import {
   LayoutDashboard,
   FileText,
@@ -23,32 +23,41 @@ import {
 } from '@/components/Layout/Sidebar';
 import type { NavItem, SidebarProps } from '@/types/sidebar';
 
-const navigationItems: NavItem[] = [
-  { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-  {
-    label: 'Document Translator',
-    href: '/features/document-translation',
-    icon: FileText,
-  },
-  {
-    label: 'Subtitle Translator',
-    href: '/features/subtitle-translation',
-    icon: Film,
-  },
-  { label: 'Translation History', href: '/translation-history', icon: History },
-];
-
-const secondaryItems: NavItem[] = [
-  { label: 'Notification', href: '/notifications', icon: Bell },
-  { label: 'Support', href: '/support', icon: Info },
-];
-
 export default function Sidebar({ className }: SidebarProps) {
+  const t = useTranslations('sidebar');
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
 
   const [credits] = useState({ current: 45, total: 100, plan: 'Free' });
+
+  const navigationItems: NavItem[] = [
+    {
+      label: t('navigation.dashboard'),
+      href: '/dashboard',
+      icon: LayoutDashboard,
+    },
+    {
+      label: t('navigation.documentTranslator'),
+      href: '/features/document-translation',
+      icon: FileText,
+    },
+    {
+      label: t('navigation.subtitleTranslator'),
+      href: '/features/subtitle-translation',
+      icon: Film,
+    },
+    {
+      label: t('navigation.translationHistory'),
+      href: '/translation-history',
+      icon: History,
+    },
+  ];
+
+  const secondaryItems: NavItem[] = [
+    { label: t('secondary.notification'), href: '/notifications', icon: Bell },
+    { label: t('secondary.support'), href: '/support', icon: Info },
+  ];
 
   useEffect(() => {
     setIsMobileMenuOpen(false);

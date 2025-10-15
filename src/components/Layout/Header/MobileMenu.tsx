@@ -12,7 +12,6 @@ interface MobileMenuProps {
 }
 
 const navItems = [
-  { href: '/', label: 'Home' },
   { href: '/pricing', label: 'Pricing' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
@@ -102,9 +101,7 @@ export default function MobileMenu({
               {/* Submenu */}
               <div
                 className={`mt-1 ml-4 space-y-1 overflow-hidden transition-all duration-300 ${
-                  isFeaturesOpen
-                    ? 'max-h-40 opacity-100'
-                    : 'max-h-0 opacity-0'
+                  isFeaturesOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
                 }`}
               >
                 {featureItems.map((item) => (
@@ -154,10 +151,13 @@ export default function MobileMenu({
           </nav>
 
           {/* Auth Buttons */}
-          <AuthButtons variant="mobile" onSignupClick={onClose} onLoginClick={onClose} />
+          <AuthButtons
+            variant="mobile"
+            onSignupClick={onClose}
+            onLoginClick={onClose}
+          />
         </div>
       </div>
     </>
   );
 }
-

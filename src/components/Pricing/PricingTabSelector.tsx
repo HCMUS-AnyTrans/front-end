@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 interface PricingTabSelectorProps {
   selectedTab: 'personal' | 'enterprise';
@@ -13,6 +14,8 @@ export default function PricingTabSelector({
   onTabChange,
   isLoaded,
 }: PricingTabSelectorProps) {
+  const t = useTranslations('pricing.tabs');
+
   return (
     <div
       className={`bg-white rounded-2xl shadow-md p-2 w-[360px] h-[72px] flex items-center gap-6 transition-all duration-500 hover:shadow-xl ${
@@ -21,23 +24,23 @@ export default function PricingTabSelector({
     >
       <button
         onClick={() => onTabChange('personal')}
-        className={`cursor-pointer flex-1 h-14 rounded-xl font-bold text-lg transition-all duration-500 transform hover:scale-105 ${
+        className={`cursor-pointer flex-1 h-14 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 ${
           selectedTab === 'personal'
             ? 'bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] text-white shadow-lg scale-[1.02]'
             : 'bg-transparent text-gray-600 hover:bg-gray-50'
         }`}
       >
-        Personal
+        {t('personal')}
       </button>
       <button
         onClick={() => onTabChange('enterprise')}
-        className={`cursor-pointer flex-1 h-14 rounded-xl font-bold text-lg transition-all duration-500 transform hover:scale-105 ${
+        className={`cursor-pointer flex-1 h-14 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 ${
           selectedTab === 'enterprise'
             ? 'bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] text-white shadow-lg scale-[1.02]'
             : 'bg-transparent text-gray-600 hover:bg-gray-50'
         }`}
       >
-        Enterprise
+        {t('enterprise')}
       </button>
     </div>
   );

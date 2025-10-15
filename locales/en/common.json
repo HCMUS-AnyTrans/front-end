@@ -1,0 +1,182 @@
+{
+  "locale": {
+    "en": "English",
+    "vi": "Tiếng Việt"
+  },
+  "meta": {
+    "title": "AnyTrans - Translation Made Simple",
+    "description": "Translate smarter, not harder. AnyTrans gives you speed, accuracy, and the latest features to manage all your content with ease."
+  },
+  "account": {
+    "title": "Account Settings",
+    "description": "Manage your profile, billing and preferences",
+    "closeDialog": "Close dialog"
+  },
+  "sidebar": {
+    "profile": "Profile",
+    "billing": "Billing",
+    "settings": "Settings"
+  },
+  "profile": {
+    "personalInfo": {
+      "title": "Personal Information",
+      "fullName": "Full Name",
+      "emailAddress": "Email Address",
+      "phoneNumber": "Phone Number",
+      "company": "Company"
+    },
+    "changePassword": {
+      "title": "Security",
+      "changePassword": "Change Password",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password"
+    },
+    "profilePicture": {
+      "title": "Profile Picture",
+      "uploadDescription": "Upload a profile picture (JPG, PNG or GIF, max 5MB)",
+      "uploadNewPhoto": "Upload New Photo"
+    },
+    "twoFactor": {
+      "title": "Two-Factor Authentication",
+      "description": "Add extra security to your account"
+    },
+    "activeSessions": {
+      "title": "Active Sessions",
+      "description": "Manage and monitor where you're logged in",
+      "current": "Current",
+      "lastActive": "Last active",
+      "revoke": "Revoke",
+      "signOutAllOthers": "Sign out all other sessions"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "saveChanges": "Save Changes"
+    }
+  },
+  "settings": {
+    "preferences": {
+      "title": "Preferences",
+      "theme": {
+        "label": "Theme",
+        "description": "Choose your preferred theme",
+        "light": "Light",
+        "dark": "Dark",
+        "auto": "Auto"
+      },
+      "language": {
+        "label": "Language",
+        "description": "Select your preferred language",
+        "english": "English",
+        "vietnamese": "Vietnamese",
+        "spanish": "Spanish",
+        "french": "French"
+      },
+      "dateFormat": {
+        "label": "Date Format",
+        "description": "Choose how dates are displayed"
+      },
+      "timeFormat": {
+        "label": "Time Format",
+        "description": "12-hour or 24-hour format",
+        "12hour": "12 Hour",
+        "24hour": "24 Hour"
+      },
+      "defaultSourceLanguage": {
+        "label": "Default Source Language",
+        "description": "Default language to translate from",
+        "english": "English",
+        "vietnamese": "Vietnamese",
+        "spanish": "Spanish",
+        "french": "French",
+        "german": "German",
+        "japanese": "Japanese",
+        "korean": "Korean",
+        "chinese": "Chinese"
+      },
+      "defaultTargetLanguage": {
+        "label": "Default Target Language",
+        "description": "Default language to translate to",
+        "english": "English",
+        "vietnamese": "Vietnamese",
+        "spanish": "Spanish",
+        "french": "French",
+        "german": "German",
+        "japanese": "Japanese",
+        "korean": "Korean",
+        "chinese": "Chinese"
+      },
+      "emailNotifications": {
+        "label": "Email Notifications",
+        "description": "Receive updates via email"
+      },
+      "pushNotifications": {
+        "label": "Push Notifications",
+        "description": "Receive push notifications"
+      },
+      "translationAlerts": {
+        "label": "Translation Alerts",
+        "description": "Get notified when translations complete"
+      },
+      "autoSaveDrafts": {
+        "label": "Auto-Save Drafts",
+        "description": "Automatically save translation drafts"
+      },
+      "showTooltips": {
+        "label": "Show Tooltips",
+        "description": "Display helpful tooltips and hints"
+      }
+    },
+    "actions": {
+      "resetToDefaults": "Reset to Defaults",
+      "saveSettings": "Save Settings"
+    }
+  },
+  "billing": {
+    "paymentMethods": {
+      "title": "Payment Methods",
+      "addCard": "+ Add Card",
+      "default": "Default",
+      "setDefault": "Set Default",
+      "expires": "Expires"
+    },
+    "billingHistory": {
+      "title": "Billing History",
+      "date": "Date",
+      "amount": "Amount",
+      "status": "Status",
+      "actions": "Actions",
+      "paid": "Paid",
+      "download": "Download"
+    },
+    "billingTab": {
+      "title": "Billing Information",
+      "currentPlan": "Current Plan",
+      "paymentMethod": "Payment Method",
+      "active": "Active",
+      "updatePaymentMethod": "Update Payment Method",
+      "viewBillingHistory": "View Billing History"
+    },
+    "currentPlan": {
+      "title": "Current Plan",
+      "active": "Active",
+      "creditsUsage": "Credits Usage",
+      "renewsOn": "Renews on",
+      "upgradePlan": "Upgrade Plan",
+      "cancelPlan": "Cancel Plan"
+    },
+    "addCard": {
+      "title": "Add Payment Method",
+      "cardNumber": "Card Number",
+      "cardNumberPlaceholder": "1234 5678 9012 3456",
+      "month": "Month",
+      "year": "Year",
+      "cvc": "CVC",
+      "cvcPlaceholder": "123",
+      "cardholderName": "Cardholder Name",
+      "cardholderPlaceholder": "John Doe",
+      "cancel": "Cancel",
+      "addCard": "Add Card"
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "title": "Features | Anytrans",
+    "description": "Explore Anytrans powerful translation features - document translation, subtitle translation, and more professional tools for global content."
+  },
+  "hero": {
+    "badge": "Translation Platform",
+    "title": {
+      "part1": "Two Powerful Tools.",
+      "highlight": "Infinite Possibilities."
+    },
+    "description": "Professional-grade document and subtitle translation powered by cutting-edge AI technology.",
+    "stats": {
+      "languages": "Languages",
+      "processingSpeed": "Processing Speed",
+      "security": "Security"
+    }
+  },
+  "showcase": {
+    "documentTranslation": {
+      "title": "Document Translation",
+      "description": "Transform your business documents, reports, and presentations into any language while maintaining perfect formatting, layout, and professional quality.",
+      "features": [
+        "DOCX, PDF, XLSX, PPTX",
+        "Layout Preservation",
+        "Batch Processing",
+        "Instant Download",
+        "Table & Chart Support",
+        "Custom Glossary"
+      ],
+      "benefits": [
+        "Business reports and presentations",
+        "Legal and financial documents",
+        "Academic papers and research",
+        "Marketing materials and brochures",
+        "Technical documentation"
+      ],
+      "cta": "Try Document Translation"
+    },
+    "subtitleTranslation": {
+      "title": "Subtitle Translation",
+      "description": "Translate video subtitles with perfect timing synchronization. Support for all major subtitle formats with real-time preview and quality control.",
+      "features": [
+        "SRT, VTT, ASS, SSA",
+        "Timing Sync",
+        "Real-time Preview",
+        "Bulk Processing",
+        "Quality Check",
+        "Multiple Exports"
+      ],
+      "benefits": [
+        "YouTube and online videos",
+        "Movies and TV shows",
+        "Educational content",
+        "Corporate training videos",
+        "Social media content"
+      ],
+      "cta": "Try Subtitle Translation"
+    }
+  },
+  "comparison": {
+    "title": "Feature Comparison",
+    "description": "Choose the right tool for your translation needs",
+    "columns": {
+      "features": "Features",
+      "documentTranslation": "Document Translation",
+      "subtitleTranslation": "Subtitle Translation"
+    },
+    "categories": {
+      "fileFormats": "File Formats",
+      "features": "Features",
+      "output": "Output"
+    },
+    "items": {
+      "docxPdfXlsxPptx": "DOCX, PDF, XLSX, PPTX",
+      "srtVttAssSsa": "SRT, VTT, ASS, SSA",
+      "batchProcessing": "Batch Processing",
+      "formatPreservation": "Format Preservation",
+      "realtimePreview": "Real-time Preview",
+      "layoutPreservation": "Layout Preservation",
+      "timingSync": "Timing Sync",
+      "customGlossary": "Custom Glossary",
+      "instantDownload": "Instant Download",
+      "multipleFormats": "Multiple Formats",
+      "qualityOptions": "Quality Options"
+    },
+    "note": "Both tools support 100+ languages with professional-grade AI translation"
+  },
+  "cta": {
+    "title": "Ready to Get Started?",
+    "description": "Join thousands of users who trust Anytrans for their translation needs. Start your free trial today—no credit card required.",
+    "buttons": {
+      "startFreeTrial": "Start Free Trial",
+      "contactSales": "Contact Sales"
+    },
+    "trustBadges": {
+      "freeTrial": "14-day free trial",
+      "noCreditCard": "No credit card required",
+      "cancelAnytime": "Cancel anytime"
+    }
+  }
+}

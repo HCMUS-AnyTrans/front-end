@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "title": "Contact Us - AnyTrans",
+    "description": "Get in touch with the AnyTrans team. Send us a message, find our contact information, or connect with us on social media."
+  },
+  "hero": {
+    "badge": "Get in Touch",
+    "title": "We'd Love to Hear From You",
+    "description": "Have questions about our translation services? Our team is here to help you succeed."
+  },
+  "methods": {
+    "email": {
+      "title": "Email Us",
+      "description": "Our team will respond within 24 hours",
+      "contact": "support@anytrans.com"
+    },
+    "phone": {
+      "title": "Call Us",
+      "description": "Mon-Fri from 9am to 6pm",
+      "contact": "+1 (555) 123-4567"
+    },
+    "chat": {
+      "title": "Live Chat",
+      "description": "Available 24/7 for instant support",
+      "contact": "Start Chat"
+    }
+  },
+  "form": {
+    "title": "Send us a Message",
+    "subtitle": "Fill out the form below and we'll get back to you shortly.",
+    "fields": {
+      "name": {
+        "label": "Full Name",
+        "placeholder": "John Doe"
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "john@example.com"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "Select a subject",
+        "options": {
+          "general": "General Inquiry",
+          "support": "Technical Support",
+          "sales": "Sales Question",
+          "partnership": "Partnership",
+          "feedback": "Feedback"
+        }
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Tell us how we can help you..."
+      }
+    },
+    "submitButton": "Send Message",
+    "successMessage": {
+      "title": "Message Sent!",
+      "description": "Thank you for contacting us. We'll respond within 24 hours."
+    }
+  },
+  "info": {
+    "officeLocations": {
+      "title": "Office Locations",
+      "subtitle": "Visit us at our offices worldwide"
+    },
+    "offices": {
+      "sanFrancisco": {
+        "city": "San Francisco",
+        "country": "USA",
+        "address": "123 Market Street, Suite 500",
+        "zipcode": "CA 94103"
+      },
+      "london": {
+        "city": "London",
+        "country": "UK",
+        "address": "45 Kings Road, Chelsea",
+        "zipcode": "SW3 4ND"
+      },
+      "singapore": {
+        "city": "Singapore",
+        "country": "Singapore",
+        "address": "1 Marina Boulevard #28-00",
+        "zipcode": "018989"
+      }
+    },
+    "workingHours": {
+      "title": "Working Hours",
+      "subtitle": "When you can reach us",
+      "schedule": {
+        "weekdays": {
+          "label": "Monday - Friday",
+          "hours": "9:00 AM - 6:00 PM"
+        },
+        "saturday": {
+          "label": "Saturday",
+          "hours": "10:00 AM - 4:00 PM"
+        },
+        "sunday": {
+          "label": "Sunday",
+          "hours": "Closed"
+        }
+      },
+      "support247": "24/7 Support: Live chat available anytime"
+    },
+    "whyContactUs": {
+      "title": "Why Contact Us?"
+    },
+    "reasons": {
+      "support": {
+        "title": "24/7 Support",
+        "description": "Round-the-clock assistance"
+      },
+      "team": {
+        "title": "Expert Team",
+        "description": "Multilingual support staff"
+      },
+      "reach": {
+        "title": "Global Reach",
+        "description": "Offices in 3 continents"
+      }
+    }
+  },
+  "social": {
+    "title": "Connect With Us",
+    "subtitle": "Follow us on social media for updates and translation tips"
+  },
+  "cta": {
+    "title": "Have a Question?",
+    "description": "Check out our FAQ section for quick answers to common questions about our translation services.",
+    "button": "Visit FAQ"
+  }
+}

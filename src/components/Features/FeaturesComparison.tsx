@@ -1,46 +1,84 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { Check, X } from 'lucide-react';
 import { FeatureSectionHeader } from '@/components/Features/shared';
 
-const features = [
-  {
-    category: 'File Formats',
-    items: [
-      { feature: 'DOCX, PDF, XLSX, PPTX', document: true, subtitle: false },
-      { feature: 'SRT, VTT, ASS, SSA', document: false, subtitle: true },
-      { feature: 'Batch Processing', document: true, subtitle: true },
-      { feature: 'Format Preservation', document: true, subtitle: true },
-    ],
-  },
-  {
-    category: 'Features',
-    items: [
-      { feature: 'Real-time Preview', document: false, subtitle: true },
-      { feature: 'Layout Preservation', document: true, subtitle: false },
-      { feature: 'Timing Sync', document: false, subtitle: true },
-      { feature: 'Custom Glossary', document: true, subtitle: true },
-    ],
-  },
-  {
-    category: 'Output',
-    items: [
-      { feature: 'Instant Download', document: true, subtitle: true },
-      { feature: 'Multiple Formats', document: true, subtitle: true },
-      { feature: 'Quality Options', document: true, subtitle: true },
-    ],
-  },
-];
-
 export default function FeaturesComparison() {
+  const t = useTranslations('features.comparison');
+
+  const features = [
+    {
+      category: t('categories.fileFormats'),
+      items: [
+        {
+          feature: t('items.docxPdfXlsxPptx'),
+          document: true,
+          subtitle: false,
+        },
+        { feature: t('items.srtVttAssSsa'), document: false, subtitle: true },
+        {
+          feature: t('items.batchProcessing'),
+          document: true,
+          subtitle: true,
+        },
+        {
+          feature: t('items.formatPreservation'),
+          document: true,
+          subtitle: true,
+        },
+      ],
+    },
+    {
+      category: t('categories.features'),
+      items: [
+        {
+          feature: t('items.realtimePreview'),
+          document: false,
+          subtitle: true,
+        },
+        {
+          feature: t('items.layoutPreservation'),
+          document: true,
+          subtitle: false,
+        },
+        { feature: t('items.timingSync'), document: false, subtitle: true },
+        {
+          feature: t('items.customGlossary'),
+          document: true,
+          subtitle: true,
+        },
+      ],
+    },
+    {
+      category: t('categories.output'),
+      items: [
+        {
+          feature: t('items.instantDownload'),
+          document: true,
+          subtitle: true,
+        },
+        {
+          feature: t('items.multipleFormats'),
+          document: true,
+          subtitle: true,
+        },
+        {
+          feature: t('items.qualityOptions'),
+          document: true,
+          subtitle: true,
+        },
+      ],
+    },
+  ];
   return (
     <section className="w-full py-16 sm:py-20 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <FeatureSectionHeader
-          title="Feature Comparison"
-          description="Choose the right tool for your translation needs"
+          title={t('title')}
+          description={t('description')}
           align="center"
           className="mb-12"
         />
@@ -49,12 +87,14 @@ export default function FeaturesComparison() {
         <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
           {/* Table Header */}
           <div className="grid grid-cols-3 gap-4 p-6 bg-gray-50 border-b border-gray-200">
-            <div className="font-bold text-gray-900">Features</div>
+            <div className="font-bold text-gray-900">
+              {t('columns.features')}
+            </div>
             <div className="text-center font-bold text-blue-600">
-              Document Translation
+              {t('columns.documentTranslation')}
             </div>
             <div className="text-center font-bold text-purple-600">
-              Subtitle Translation
+              {t('columns.subtitleTranslation')}
             </div>
           </div>
 
@@ -112,10 +152,7 @@ export default function FeaturesComparison() {
         </div>
 
         {/* Note */}
-        <p className="text-center text-sm text-gray-500 mt-6">
-          Both tools support 100+ languages with professional-grade AI
-          translation
-        </p>
+        <p className="text-center text-sm text-gray-500 mt-6">{t('note')}</p>
       </div>
     </section>
   );

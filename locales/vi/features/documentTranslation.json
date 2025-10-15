@@ -1,0 +1,139 @@
+{
+  "meta": {
+    "title": "Dịch tài liệu - AnyTrans",
+    "description": "Dịch tài liệu chuyên nghiệp với định dạng được giữ nguyên"
+  },
+  "header": {
+    "title": "Dịch tài liệu",
+    "description": "Dịch chuyên nghiệp với định dạng được giữ nguyên • Hỗ trợ DOCX, PDF, XLSX, PPTX"
+  },
+  "steps": {
+    "upload": "Tải lên",
+    "configure": "Cấu hình",
+    "review": "Xem lại"
+  },
+  "upload": {
+    "title": "Tải lên tài liệu của bạn",
+    "description": "Kéo và thả file hoặc nhấp để duyệt",
+    "chooseFile": "Chọn file",
+    "supportedFormats": "Định dạng được hỗ trợ: DOCX, PDF, XLSX, PPTX, TXT",
+    "maxFileSize": "Kích thước file tối đa: 50MB",
+    "features": {
+      "fast": {
+        "title": "Dịch nhanh",
+        "description": "Nhận kết quả trong vài giây với dịch thuật AI"
+      },
+      "formatPreserved": {
+        "title": "Giữ nguyên định dạng",
+        "description": "Duy trì bố cục, phông chữ và kiểu dáng gốc"
+      },
+      "languages": {
+        "title": "Hơn 100 ngôn ngữ",
+        "description": "Dịch giữa bất kỳ cặp ngôn ngữ nào"
+      },
+      "contextAware": {
+        "title": "Dịch nhận thức ngữ cảnh",
+        "description": "AI hiểu ngữ cảnh tài liệu để dịch thuật ngữ chính xác"
+      },
+      "multiFormat": {
+        "title": "Hỗ trợ đa định dạng",
+        "description": "Các định dạng DOCX, PDF, XLSX, PPTX và TXT"
+      },
+      "speakerDetection": {
+        "title": "Xử lý hàng loạt",
+        "description": "Dịch nhiều tài liệu cùng lúc một cách hiệu quả"
+      }
+    }
+  },
+  "configure": {
+    "documentInfo": {
+      "title": "Thông tin tài liệu",
+      "changeFile": "Đổi file",
+      "words": "từ",
+      "pages": "trang"
+    },
+    "translationSettings": {
+      "title": "Cài đặt dịch thuật",
+      "sourceLanguage": "Ngôn ngữ nguồn",
+      "targetLanguage": "Ngôn ngữ đích",
+      "translationMode": "Chế độ dịch",
+      "modes": {
+        "contextAware": "Nhận thức ngữ cảnh",
+        "fast": "Nhanh",
+        "accurate": "Chính xác"
+      },
+      "note": "Chế độ nhận thức ngữ cảnh cung cấp độ chính xác tốt hơn bằng cách hiểu ngữ cảnh và thuật ngữ của tài liệu."
+    },
+    "topic": {
+      "title": "Chủ đề (Lĩnh vực)",
+      "description": "Chọn lĩnh vực nội dung để cải thiện độ chính xác dịch thuật với thuật ngữ chuyên ngành",
+      "label": "Lĩnh vực nội dung",
+      "placeholder": "Chọn lĩnh vực nội dung",
+      "autoDetect": "Tự động phát hiện",
+      "autoDetectInfo": "AI sẽ tự động phát hiện lĩnh vực nội dung dựa trên thuật ngữ và ngữ cảnh của tài liệu.",
+      "domains": {
+        "autoDetect": "Tự động phát hiện",
+        "informationTechnology": "Công nghệ thông tin",
+        "medical": "Y tế & Chăm sóc sức khỏe",
+        "marketing": "Tiếp thị & Quảng cáo",
+        "legal": "Pháp lý & Tuân thủ",
+        "education": "Giáo dục & Học thuật",
+        "finance": "Tài chính & Ngân hàng",
+        "engineering": "Kỹ thuật & Công nghệ",
+        "science": "Khoa học & Nghiên cứu"
+      }
+    },
+    "glossary": {
+      "title": "Từ điển tùy chỉnh",
+      "optional": "Tùy chọn",
+      "description": "Đính kèm từ điển để đảm bảo thuật ngữ nhất quán trong quá trình dịch",
+      "help": "Trợ giúp",
+      "uploadFile": "Tải file lên",
+      "pasteContent": "Dán nội dung",
+      "whatIsGlossary": "Từ điển là gì?",
+      "glossaryInfo": "Từ điển là danh sách các thuật ngữ và bản dịch ưa thích của chúng. Tải lên từ điển của bạn để đảm bảo dịch nhất quán các thuật ngữ chuyên ngành, tên thương hiệu hoặc thuật ngữ kỹ thuật.",
+      "supportedFormats": "Định dạng được hỗ trợ:",
+      "exampleFormat": "Định dạng CSV mẫu:",
+      "uploadPrompt": "Nhấp để tải lên hoặc kéo và thả",
+      "uploadFormatHint": "CSV, TXT, Excel (Tối đa 5MB)",
+      "pastePrompt": "Dán từ điển của bạn vào đây... (ví dụ: một thuật ngữ mỗi dòng: thuật ngữ nguồn | thuật ngữ đích)",
+      "termsDetected": "thuật ngữ được phát hiện",
+      "clear": "Xóa",
+      "alerts": {
+        "invalidFile": "Vui lòng tải lên file từ điển hợp lệ (CSV, TXT hoặc Excel)",
+        "fileTooLarge": "File từ điển phải nhỏ hơn 5MB"
+      }
+    },
+    "summary": {
+      "title": "Sẵn sàng dịch",
+      "languages": "Ngôn ngữ",
+      "mode": "Chế độ",
+      "domain": "Lĩnh vực",
+      "glossary": "Từ điển",
+      "added": "✓ Đã thêm",
+      "notAdded": "Chưa thêm",
+      "estimatedCredits": "Tín dụng ước tính",
+      "basedOn": "Dựa trên kích thước tài liệu và cài đặt",
+      "credits": "tín dụng"
+    },
+    "actions": {
+      "back": "Quay lại",
+      "startTranslation": "Bắt đầu dịch",
+      "translating": "Đang dịch..."
+    }
+  },
+  "review": {
+    "complete": "Hoàn thành dịch!",
+    "description": "Tài liệu của bạn đã được dịch thành công và sẵn sàng để xem lại.",
+    "download": "Tải xuống",
+    "translateAnother": "Dịch tài liệu khác",
+    "stats": {
+      "wordsTranslated": "Từ đã dịch",
+      "timeTaken": "Thời gian",
+      "accuracy": "Độ chính xác",
+      "creditsUsed": "Tín dụng đã dùng"
+    },
+    "original": "Bản gốc",
+    "translation": "Bản dịch"
+  }
+}

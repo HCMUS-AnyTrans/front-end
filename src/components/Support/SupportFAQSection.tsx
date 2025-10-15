@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { HelpCircle } from 'lucide-react';
 import { FAQ, Category } from '@/types/support';
 import { BaseFAQ } from '@/components/Common';
@@ -22,6 +23,8 @@ export default function SupportFAQSection({
   onCategoryChange,
   searchQuery,
 }: SupportFAQSectionProps) {
+  const t = useTranslations('support.search');
+
   const filteredFaqs =
     selectedCategory === 'all'
       ? faqs
@@ -75,10 +78,10 @@ export default function SupportFAQSection({
           <div className="text-center py-8 sm:py-12">
             <HelpCircle className="w-10 h-10 sm:w-12 sm:h-12 text-gray-300 mx-auto mb-2 sm:mb-3" />
             <p className="text-sm sm:text-base text-gray-600">
-              No results found for "{searchQuery}"
+              {t('noResults')} "{searchQuery}"
             </p>
             <p className="text-xs sm:text-sm text-gray-500 mt-1">
-              Try different keywords or contact support
+              {t('tryDifferent')}
             </p>
           </div>
         )}

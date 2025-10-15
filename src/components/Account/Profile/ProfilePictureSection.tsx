@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Camera, Upload } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { UserData } from '@/types/account';
 
 type ProfilePictureSectionProps = {
@@ -13,11 +14,11 @@ export default function ProfilePictureSection({
   user,
   onUploadClick,
 }: ProfilePictureSectionProps) {
+  const t = useTranslations('common.profile.profilePicture');
+
   return (
     <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">
-        Profile Picture
-      </h3>
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('title')}</h3>
       <div className="flex items-center gap-6">
         <div className="relative">
           <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white text-2xl font-bold">
@@ -31,15 +32,13 @@ export default function ProfilePictureSection({
           </button>
         </div>
         <div className="flex-1">
-          <p className="text-sm text-gray-600 mb-3">
-            Upload a profile picture (JPG, PNG or GIF, max 5MB)
-          </p>
+          <p className="text-sm text-gray-600 mb-3">{t('uploadDescription')}</p>
           <button
             onClick={onUploadClick}
             className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-all"
           >
             <Upload className="w-4 h-4" />
-            Upload New Photo
+            {t('uploadNewPhoto')}
           </button>
         </div>
       </div>

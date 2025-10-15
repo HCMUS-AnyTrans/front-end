@@ -12,8 +12,6 @@ interface PricingCardProps {
   cta: string;
   recommended?: boolean;
   contact?: boolean;
-  isHovered?: boolean;
-  onHover?: (hovered: boolean) => void;
 }
 
 export default function PricingCard({
@@ -25,8 +23,6 @@ export default function PricingCard({
   cta,
   recommended = false,
   contact = false,
-  isHovered = false,
-  onHover,
 }: PricingCardProps) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -59,15 +55,11 @@ export default function PricingCard({
 
   return (
     <div
-      className={`${cardBg} rounded-3xl w-full max-w-[380px] p-8 flex flex-col relative border-2 ${
+      className={`group ${cardBg} rounded-3xl w-full max-w-[380px] p-8 flex flex-col relative border-2 transition-all duration-300 ease-out will-change-transform ${
         isHighlighted
-          ? isHovered
-            ? 'border-yellow-300 shadow-[0_0_60px_rgba(250,204,21,0.6)] scale-110 -translate-y-2'
-            : 'border-transparent shadow-2xl scale-105 animate-fade-in-up hover:border-yellow-400/50'
-          : isHovered
-            ? 'border-[#4169E1] shadow-2xl scale-[1.05] -translate-y-2'
-            : 'border-border shadow-lg hover:border-[#4169E1]/50 hover:shadow-xl'
-      } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} transition-all duration-500 ease-out`}
+          ? 'border-transparent shadow-2xl animate-fade-in-up hover:border-yellow-400/50 hover:shadow-[0_0_40px_rgba(250,204,21,0.4)] hover:scale-[1.02] hover:-translate-y-2'
+          : 'border-border shadow-lg hover:border-[#4169E1]/50 hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-2'
+      } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
       style={{
         height: isHighlighted ? '700px' : '660px',
         ...(isHighlighted && {
@@ -75,16 +67,12 @@ export default function PricingCard({
             'shimmer 3s ease-in-out infinite, float 6s ease-in-out infinite',
         }),
       }}
-      onMouseEnter={() => onHover?.(true)}
-      onMouseLeave={() => onHover?.(false)}
     >
       {isHighlighted && (
         <>
           {/* Animated glow effect */}
           <div
-            className={`absolute inset-0 rounded-3xl blur-xl transition-opacity duration-500 ${
-              isHovered ? 'opacity-50' : 'opacity-30'
-            } animate-pulse-glow`}
+            className="absolute inset-0 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300 animate-pulse-glow"
             style={{
               background:
                 'linear-gradient(45deg, hsl(var(--gradient-from)), hsl(var(--gradient-to)), hsl(var(--gradient-from)))',
@@ -95,9 +83,7 @@ export default function PricingCard({
 
           {/* Most Popular Badge with enhanced animation */}
           <div
-            className={`absolute -top-4 inset-x-0 mx-auto w-max bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg z-10 transition-all duration-500 ${
-              isHovered ? 'scale-110 shadow-2xl' : ''
-            }`}
+            className="absolute -top-4 inset-x-0 mx-auto w-max bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg z-10 transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl"
             style={{
               backgroundSize: '200% auto',
               animation:
@@ -158,9 +144,6 @@ export default function PricingCard({
             <div
               key={index}
               className="flex items-start gap-3 transition-all duration-300"
-              style={{
-                transitionDelay: `${index * 50}ms`,
-              }}
             >
               <div
                 className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${checkBgColor}`}
@@ -172,7 +155,7 @@ export default function PricingCard({
                 />
               </div>
               <span
-                className={`font-semibold text-sm ${featureTextColor} transition-colors duration-300`}
+                className={`font-medium text-sm ${featureTextColor} transition-colors duration-300`}
               >
                 {feature}
               </span>

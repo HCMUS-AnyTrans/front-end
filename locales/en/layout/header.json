@@ -1,0 +1,23 @@
+{
+  "navigation": {
+    "home": "Home",
+    "features": "Features",
+    "pricing": "Pricing",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "featuresDropdown": {
+    "documentTranslation": {
+      "title": "Document Translation",
+      "description": "Translate documents instantly"
+    },
+    "subtitleTranslation": {
+      "title": "Subtitle Translation",
+      "description": "Perfect timing & sync"
+    }
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign up"
+  }
+}

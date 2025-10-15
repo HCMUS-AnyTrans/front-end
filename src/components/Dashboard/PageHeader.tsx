@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { Upload, ChevronDown, FileText, Film } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function PageHeader() {
+  const t = useTranslations('dashboard.header');
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -26,10 +28,10 @@ export default function PageHeader() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Dashboard</h1>
-            <p className="text-sm text-gray-600">
-              Welcome back! Here's an overview of your translation activity.
-            </p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              {t('title')}
+            </h1>
+            <p className="text-sm text-gray-600">{t('subtitle')}</p>
           </div>
 
           <div className="relative" ref={dropdownRef}>
@@ -40,7 +42,7 @@ export default function PageHeader() {
               className="px-7 py-7 rounded-xl text-md"
             >
               <Upload className="w-5 h-5 " />
-              New Translation
+              {t('newTranslation')}
               <ChevronDown className="w-4 h-4" />
             </Button>
 
@@ -55,10 +57,10 @@ export default function PageHeader() {
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">
-                      Document Translation
+                      {t('dropdown.document.title')}
                     </p>
                     <p className="text-sm text-gray-600">
-                      Translate DOCX, PDF, XLSX, PPTX
+                      {t('dropdown.document.description')}
                     </p>
                   </div>
                 </a>
@@ -71,10 +73,10 @@ export default function PageHeader() {
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900">
-                      Subtitle Translation
+                      {t('dropdown.subtitle.title')}
                     </p>
                     <p className="text-sm text-gray-600">
-                      Translate SRT, VTT, ASS, SSA
+                      {t('dropdown.subtitle.description')}
                     </p>
                   </div>
                 </a>

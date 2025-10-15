@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "title": "Trung tâm hỗ trợ - AnyTrans",
+    "description": "Nhận trợ giúp về các dự án dịch thuật và tìm câu trả lời cho các câu hỏi thường gặp"
+  },
+  "header": {
+    "title": "Trung tâm hỗ trợ",
+    "description": "Nhận trợ giúp về các dự án dịch thuật và tìm câu trả lời cho các câu hỏi thường gặp"
+  },
+  "search": {
+    "placeholder": "Tìm kiếm bài viết trợ giúp, FAQ, hướng dẫn...",
+    "noResults": "Không tìm thấy kết quả cho",
+    "tryDifferent": "Thử từ khóa khác hoặc duyệt danh mục bên dưới"
+  },
+  "quickActions": {
+    "title": "Hành động nhanh",
+    "liveChat": {
+      "title": "Trò chuyện trực tuyến",
+      "description": "Trò chuyện với đội hỗ trợ",
+      "action": "Bắt đầu trò chuyện"
+    },
+    "emailSupport": {
+      "title": "Hỗ trợ qua Email",
+      "description": "Nhận trợ giúp qua email",
+      "action": "Gửi Email"
+    },
+    "documentation": {
+      "title": "Tài liệu",
+      "description": "Xem hướng dẫn của chúng tôi",
+      "action": "Xem tài liệu"
+    }
+  },
+  "categories": {
+    "all": "Tất cả chủ đề",
+    "gettingStarted": "Bắt đầu",
+    "translation": "Dịch thuật",
+    "billing": "Thanh toán",
+    "account": "Tài khoản",
+    "security": "Bảo mật"
+  },
+  "faq": {
+    "title": "Câu hỏi thường gặp",
+    "showingResults": "Hiển thị {count} kết quả",
+    "questions": {
+      "howToUpload": {
+        "question": "Làm thế nào để tải lên tài liệu để dịch?",
+        "answer": "Điều hướng đến trang Dịch tài liệu, nhấp \"Chọn File\" hoặc kéo và thả tài liệu của bạn. Chúng tôi hỗ trợ các định dạng DOCX, PDF, XLSX, PPTX và TXT lên đến 50MB."
+      },
+      "supportedLanguages": {
+        "question": "Những ngôn ngữ nào được hỗ trợ?",
+        "answer": "Chúng tôi hỗ trợ hơn 100 ngôn ngữ bao gồm tiếng Anh, tiếng Việt, tiếng Trung, tiếng Nhật, tiếng Hàn, tiếng Tây Ban Nha, tiếng Pháp, tiếng Đức và nhiều ngôn ngữ khác."
+      },
+      "translationAccuracy": {
+        "question": "Độ chính xác của bản dịch như thế nào?",
+        "answer": "Công cụ dịch thuật AI của chúng tôi cung cấp độ chính xác 95%+. Với chế độ dịch chuyên nghiệp, chúng tôi đạt độ chính xác 98%+ với dịch nhận thức ngữ cảnh."
+      },
+      "creditSystem": {
+        "question": "Hệ thống tín dụng hoạt động như thế nào?",
+        "answer": "Mỗi từ được dịch tốn 1 tín dụng. Người dùng miễn phí nhận 1.000 tín dụng mỗi tháng. Người dùng Pro nhận dịch không giới hạn với các tính năng nâng cao."
+      },
+      "refundPolicy": {
+        "question": "Tôi có thể được hoàn tiền không?",
+        "answer": "Có, chúng tôi cung cấp đảm bảo hoàn tiền trong 30 ngày cho gói đăng ký Pro. Liên hệ đội hỗ trợ để xử lý hoàn tiền của bạn."
+      },
+      "accountSettings": {
+        "question": "Làm thế nào để thay đổi cài đặt tài khoản?",
+        "answer": "Nhấp vào hồ sơ của bạn trong thanh bên, sau đó chọn \"Cài đặt\" để quản lý tùy chọn tài khoản, mật khẩu và thông báo."
+      },
+      "dataSecurity": {
+        "question": "Dữ liệu của tôi có an toàn không?",
+        "answer": "Có, chúng tôi sử dụng mã hóa cấp ngân hàng (AES-256) cho tất cả dữ liệu. Tài liệu tự động bị xóa sau 24 giờ trừ khi bạn lưu chúng."
+      },
+      "fileFormats": {
+        "question": "Những định dạng file nào được hỗ trợ?",
+        "answer": "Chúng tôi hỗ trợ DOCX, PDF, XLSX, PPTX, TXT và SRT (cho phụ đề). Kích thước file tối đa là 50MB mỗi tài liệu."
+      }
+    }
+  },
+  "contactForm": {
+    "title": "Vẫn cần trợ giúp?",
+    "description": "Gửi tin nhắn cho chúng tôi và chúng tôi sẽ phản hồi trong vòng 24 giờ",
+    "fields": {
+      "name": {
+        "label": "Họ và tên",
+        "placeholder": "Nguyễn Văn A"
+      },
+      "email": {
+        "label": "Địa chỉ Email",
+        "placeholder": "nguyenvana@example.com"
+      },
+      "subject": {
+        "label": "Chủ đề",
+        "placeholder": "Chúng tôi có thể giúp gì?"
+      },
+      "message": {
+        "label": "Tin nhắn",
+        "placeholder": "Mô tả vấn đề hoặc câu hỏi của bạn..."
+      }
+    },
+    "submit": "Gửi tin nhắn",
+    "submitting": "Đang gửi..."
+  },
+  "additionalResources": {
+    "title": "Tài nguyên bổ sung",
+    "statusPage": {
+      "title": "Trang trạng thái",
+      "description": "Kiểm tra trạng thái hiện tại của dịch vụ",
+      "action": "Xem trạng thái"
+    },
+    "apiDocs": {
+      "title": "Tài liệu API",
+      "description": "Tích hợp AnyTrans vào ứng dụng của bạn",
+      "action": "Xem tài liệu API"
+    }
+  }
+}

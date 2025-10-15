@@ -61,7 +61,7 @@ export const milestones: Milestone[] = [
     year: '2021',
     title: 'Company Founded',
     description:
-      'AnyTrans was born from a vision to make translation accessible to everyone.',
+      'Anytrans was born from a vision to make translation accessible to everyone.',
   },
   {
     year: '2022',
@@ -87,13 +87,13 @@ export const team: TeamMember[] = [
   {
     name: 'Minh Nguyen',
     role: 'Developer',
-    image: '/MinhNguyen01.jpg',
+    image: 'minhnguyen.jpg',
     bio: 'Developer',
   },
   {
     name: 'Trong Nhan',
     role: 'Developer',
-    image: '/TrongNhan01.jpg',
+    image: 'trongnhan.jpg',
     bio: 'Developer',
   },
 ];

@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "title": "Về chúng tôi - AnyTrans",
+    "description": "Tìm hiểu về AnyTrans - sứ mệnh, giá trị, đội ngũ và hành trình làm cho dịch thuật trở nên dễ dàng tiếp cận với mọi người."
+  },
+  "sections": {
+    "story": {
+      "title": "Câu chuyện của chúng tôi",
+      "subtitle": "Từ một đội ngũ nhỏ với tầm nhìn lớn đến một nền tảng toàn cầu được hàng ngàn người tin tưởng"
+    },
+    "values": {
+      "title": "Giá trị cốt lõi",
+      "subtitle": "Những nguyên tắc định hướng mọi việc chúng tôi làm"
+    },
+    "timeline": {
+      "title": "Hành trình của chúng tôi",
+      "subtitle": "Những cột mốc quan trọng trong câu chuyện phát triển"
+    },
+    "team": {
+      "title": "Gặp gỡ đội ngũ của chúng tôi",
+      "subtitle": "Những con người nhiệt huyết đằng sau AnyTrans"
+    },
+    "social": {
+      "title": "Kết nối với chúng tôi",
+      "subtitle": "Theo dõi chúng tôi trên mạng xã hội để nhận cập nhật và mẹo hay"
+    }
+  },
+  "hero": {
+    "badge": "Về AnyTrans",
+    "title": {
+      "part1": "Phá vỡ rào cản ngôn ngữ,",
+      "part2": "Từng bản dịch một"
+    },
+    "description": "Chúng tôi có sứ mệnh làm cho dịch vụ dịch thuật chuyên nghiệp trở nên dễ tiếp cận với mọi người, trao quyền cho giao tiếp toàn cầu thông qua công nghệ AI sáng tạo.",
+    "stats": {
+      "languages": {
+        "number": "100+",
+        "label": "Ngôn ngữ được hỗ trợ"
+      },
+      "users": {
+        "number": "50K+",
+        "label": "Người dùng hoạt động"
+      },
+      "documents": {
+        "number": "1M+",
+        "label": "Tài liệu đã dịch"
+      },
+      "accuracy": {
+        "number": "98%",
+        "label": "Tỷ lệ chính xác"
+      }
+    }
+  },
+  "mission": {
+    "title": "Sứ mệnh của chúng tôi",
+    "description": "Dân chủ hóa dịch vụ dịch thuật chuyên nghiệp bằng cách tận dụng công nghệ AI tiên tiến, làm cho nó nhanh chóng, chính xác và dễ tiếp cận với doanh nghiệp và cá nhân trên toàn thế giới. Chúng tôi tin rằng ngôn ngữ không bao giờ nên là rào cản đối với cơ hội, kiến thức hoặc kết nối."
+  },
+  "vision": {
+    "title": "Tầm nhìn của chúng tôi",
+    "description": "Tạo ra một thế giới nơi sự khác biệt ngôn ngữ không giới hạn tiềm năng con người. Chúng tôi hình dung một tương lai nơi mọi người có thể giao tiếp liền mạch qua các biên giới, nền văn hóa và ngôn ngữ, thúc đẩy sự hợp tác và hiểu biết toàn cầu thông qua công nghệ dịch thuật sáng tạo."
+  },
+  "values": {
+    "precision": {
+      "title": "Chính xác",
+      "description": "Chúng tôi cung cấp bản dịch chính xác bảo tồn ý nghĩa và ngữ cảnh qua các ngôn ngữ."
+    },
+    "speed": {
+      "title": "Tốc độ",
+      "description": "Dịch thuật nhanh như chớp mà không làm giảm chất lượng, được hỗ trợ bởi AI tiên tiến."
+    },
+    "security": {
+      "title": "Bảo mật",
+      "description": "Tài liệu của bạn được bảo vệ bằng mã hóa cấp doanh nghiệp và quyền riêng tư."
+    },
+    "userCentric": {
+      "title": "Lấy người dùng làm trung tâm",
+      "description": "Được xây dựng với sự đơn giản và trải nghiệm người dùng là trọng tâm của mọi tính năng."
+    }
+  },
+  "timeline": {
+    "2021": {
+      "title": "Thành lập công ty",
+      "description": "AnyTrans được sinh ra từ tầm nhìn làm cho dịch thuật trở nên dễ tiếp cận với mọi người."
+    },
+    "2022": {
+      "title": "10K+ Người dùng",
+      "description": "Đạt được cột mốc quan trọng đầu tiên với người dùng từ hơn 50 quốc gia."
+    },
+    "2023": {
+      "title": "Tích hợp AI",
+      "description": "Ra mắt công cụ dịch thuật AI tiên tiến với độ chính xác 98%."
+    },
+    "2024": {
+      "title": "Mở rộng toàn cầu",
+      "description": "Mở rộng hỗ trợ hơn 100 ngôn ngữ và mở văn phòng tại 3 châu lục."
+    }
+  },
+  "team": {
+    "minhNguyen": {
+      "name": "Minh Nguyễn",
+      "role": "Nhà phát triển",
+      "bio": "Nhà phát triển"
+    },
+    "trongNhan": {
+      "name": "Trọng Nhân",
+      "role": "Nhà phát triển",
+      "bio": "Nhà phát triển"
+    }
+  },
+  "cta": {
+    "title": "Sẵn sàng phá vỡ rào cản ngôn ngữ?",
+    "description": "Tham gia cùng hàng ngàn người dùng tin tưởng AnyTrans cho nhu cầu dịch thuật của họ. Bắt đầu dịch tài liệu ngay hôm nay.",
+    "primaryButton": "Bắt đầu miễn phí",
+    "secondaryButton": "Liên hệ bán hàng"
+  }
+}

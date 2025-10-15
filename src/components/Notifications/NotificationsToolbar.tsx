@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Search } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { NotificationFilter } from '@/types/notifications';
 
 type Props = {
@@ -19,13 +20,15 @@ export default function NotificationsToolbar({
   activeFilter,
   onSelectFilter,
 }: Props) {
+  const t = useTranslations('notifications.toolbar');
+
   return (
     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
       <div className="relative flex-1 w-full sm:max-w-md">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
         <input
           type="text"
-          placeholder="Search notifications..."
+          placeholder={t('searchPlaceholder')}
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           className="w-full pl-9 sm:pl-10 pr-4 py-2.5 sm:py-3 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"

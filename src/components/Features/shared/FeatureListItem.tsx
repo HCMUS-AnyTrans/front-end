@@ -14,9 +14,9 @@ export default function FeatureListItem({
 }: FeatureListItemProps) {
   if (variant === 'compact') {
     return (
-      <div className="flex items-center gap-2 text-gray-700">
+      <div className="flex items-center gap-2 text-gray-700 group">
         <div
-          className={`w-5 h-5 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center flex-shrink-0`}
+          className={`w-5 h-5 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center flex-shrink-0 shadow-md transition-all duration-300 group-hover:scale-120`}
         >
           <Check className="w-3 h-3 text-white" strokeWidth={3} />
         </div>
@@ -26,9 +26,9 @@ export default function FeatureListItem({
   }
 
   return (
-    <div className="flex items-start gap-3">
+    <div className="flex items-center gap-3 group">
       <div
-        className={`w-6 h-6 rounded-lg bg-gradient-to-br ${gradient} flex items-center justify-center flex-shrink-0 mt-0.5`}
+        className={`w-6 h-6 rounded-lg bg-gradient-to-br ${gradient} flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-120 shadow-md transition-all duration-300`}
       >
         <Check className="w-4 h-4 text-white" strokeWidth={3} />
       </div>

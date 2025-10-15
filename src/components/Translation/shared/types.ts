@@ -36,4 +36,5 @@ export interface ConfigureActionButtonsProps {
   disabled?: boolean;
   translateButtonText?: string;
   processingText?: string;
+  backButtonText?: string;
 }
