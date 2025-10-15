@@ -63,7 +63,7 @@ export default function MobileMenu({
         <div className="flex items-center justify-between p-3 border-b border-gray-200 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a]">
           <h2 className="font-bold text-xl text-white">{t('mobileMenu.title')}</h2>
           <div className="flex items-center gap-2">
-            <div className="[&_button]:!text-white [&_button]:hover:!bg-white/20 [&_svg]:!text-white [&_button]:hover:!text-white [&_button:hover_svg]:!text-white">
+            <div className="[&_button]:text-white hover:bg-white/20 rounded-xl [&_button]:hover:text-white transition-all duration-300">
               <LocaleSwitcher />
             </div>
             <button
