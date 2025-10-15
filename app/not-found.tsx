@@ -31,7 +31,7 @@ const translations = {
     liveChat: 'Live Chat',
     liveChatDesc: 'Chat with our team',
     emailSupport: 'Email Support',
-    emailSupportDesc: 'support@anytrans.com',
+    emailSupportDesc: 'support@anytrans.me',
   },
   vi: {
     title: '404',
@@ -49,7 +49,7 @@ const translations = {
     liveChat: 'Trò chuyện trực tuyến',
     liveChatDesc: 'Trò chuyện với đội của chúng tôi',
     emailSupport: 'Hỗ trợ qua Email',
-    emailSupportDesc: 'support@anytrans.com',
+    emailSupportDesc: 'support@anytrans.me',
   },
 };
 

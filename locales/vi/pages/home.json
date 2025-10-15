@@ -1,16 +1,16 @@
 {
   "hero": {
     "title": {
-      "part1": "Chúng tôi ở đây để",
-      "part2": "nâng cao trải nghiệm",
-      "highlight": "Dịch thuật"
+      "part1": "Nâng tầm",
+      "part2": "trải nghiệm",
+      "highlight": "dịch thuật"
     },
-    "description": "Dịch thông minh hơn, không khó hơn. AnyTrans mang đến cho bạn tốc độ, độ chính xác và các tính năng mới nhất để quản lý mọi nội dung một cách đơn giản",
+    "description": "Dịch thông minh hơn, không khó hơn. Anytrans mang đến cho bạn tốc độ, độ chính xác và các tính năng mới nhất để quản lý mọi nội dung một cách đơn giản",
     "buttons": {
       "freeTrial": "Dùng thử miễn phí",
       "viewDemo": "Xem Demo"
     },
-    "imageAlt": "Banner Dịch vụ Dịch thuật AnyTrans"
+    "imageAlt": "Banner Dịch vụ Dịch thuật Anytrans"
   },
   "statistics": {
     "activeUser": "Người dùng tích cực",
@@ -59,7 +59,7 @@
     },
     "bottomCTA": {
       "title": "Sẵn sàng bắt đầu?",
-      "description": "Tham gia cùng hàng nghìn người dùng tin tưởng AnyTrans cho nhu cầu dịch thuật của họ. Bắt đầu dùng thử miễn phí ngay hôm nay.",
+      "description": "Tham gia cùng hàng nghìn người dùng tin tưởng Anytrans cho nhu cầu dịch thuật của họ. Bắt đầu dùng thử miễn phí ngay hôm nay.",
       "button": "Dùng thử miễn phí"
     }
   },
@@ -101,7 +101,7 @@
   "reviews": {
     "header": {
       "title": "Người dùng nói gì về chúng tôi",
-      "description": "Tham gia cùng hàng nghìn khách hàng hài lòng tin tưởng AnyTrans cho nhu cầu dịch thuật của họ"
+      "description": "Tham gia cùng hàng nghìn khách hàng hài lòng tin tưởng Anytrans cho nhu cầu dịch thuật của họ"
     },
     "stats": {
       "rating": {
@@ -122,7 +122,7 @@
         "name": "Sarah Johnson",
         "role": "Giám đốc Marketing",
         "company": "TechCorp",
-        "review": "AnyTrans đã cách mạng hóa cách chúng tôi xử lý nội dung đa ngôn ngữ. Tính năng dịch tài liệu duy trì định dạng hoàn hảo và chất lượng xuất sắc.",
+        "review": "Anytrans đã cách mạng hóa cách chúng tôi xử lý nội dung đa ngôn ngữ. Tính năng dịch tài liệu duy trì định dạng hoàn hảo và chất lượng xuất sắc.",
         "metadata": "Đã dịch hơn 50 tài liệu marketing"
       },
       "miguel": {
@@ -143,7 +143,7 @@
         "name": "David Chen",
         "role": "Biên tập viên Kỹ thuật",
         "company": "DevDocs",
-        "review": "Là một biên tập viên kỹ thuật, tôi cần bản dịch chính xác. AnyTrans mang lại kết quả chất lượng cao nhất quán trong khi vẫn giữ nguyên thuật ngữ kỹ thuật.",
+        "review": "Là một biên tập viên kỹ thuật, tôi cần bản dịch chính xác. Anytrans mang lại kết quả chất lượng cao nhất quán trong khi vẫn giữ nguyên thuật ngữ kỹ thuật.",
         "metadata": "Đã dịch hơn 100 tài liệu kỹ thuật"
       },
       "emma": {

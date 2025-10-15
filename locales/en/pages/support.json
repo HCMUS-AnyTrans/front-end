@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Support Center - AnyTrans",
+    "title": "Support Center - Anytrans",
     "description": "Get help with your translation projects and find answers to common questions"
   },
   "header": {
@@ -109,7 +109,7 @@
     },
     "apiDocs": {
       "title": "API Documentation",
-      "description": "Integrate AnyTrans into your applications",
+      "description": "Integrate Anytrans into your applications",
       "action": "View API docs"
     }
   }

@@ -32,7 +32,7 @@ export default function PricingGrid({
       {plans.map((plan, index) => (
         <div
           key={`${selectedTab}-${index}`}
-          className="transition-all duration-500"
+          className="transition-all duration-500 w-full max-w-[380px]"
           style={{
             animation: `fade-in-up 0.6s ease-out ${index * 0.1}s both`,
           }}

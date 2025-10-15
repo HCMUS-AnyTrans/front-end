@@ -31,7 +31,7 @@ export default function FeatureMockup({
           </div>
           <div className="flex-1 flex justify-center">
             <div className="bg-white rounded px-3 py-1 text-xs text-gray-500 font-mono">
-              {title.toLowerCase().replace(/\s+/g, '-')}.anytrans.com
+              {title.toLowerCase().replace(/\s+/g, '-')}.anytrans.me
             </div>
           </div>
         </div>

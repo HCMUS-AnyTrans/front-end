@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Contact Us - AnyTrans",
-    "description": "Get in touch with the AnyTrans team. Send us a message, find our contact information, or connect with us on social media."
+    "title": "Contact Us - Anytrans",
+    "description": "Get in touch with the Anytrans team. Send us a message, find our contact information, or connect with us on social media."
   },
   "hero": {
     "badge": "Get in Touch",
@@ -12,7 +12,7 @@
     "email": {
       "title": "Email Us",
       "description": "Our team will respond within 24 hours",
-      "contact": "support@anytrans.com"
+      "contact": "support@anytrans.me"
     },
     "phone": {
       "title": "Call Us",

@@ -13,7 +13,7 @@ export async function generateMetadata({
 
   return {
     title: {
-      template: '%s | AnyTrans',
+      template: '%s | Anytrans',
       default: t('authentication'),
     },
     description: t('authDescription'),
