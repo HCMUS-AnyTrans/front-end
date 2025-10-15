@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Trung tâm hỗ trợ - AnyTrans",
+    "title": "Trung tâm hỗ trợ - Anytrans",
     "description": "Nhận trợ giúp về các dự án dịch thuật và tìm câu trả lời cho các câu hỏi thường gặp"
   },
   "header": {
@@ -109,7 +109,7 @@
     },
     "apiDocs": {
       "title": "Tài liệu API",
-      "description": "Tích hợp AnyTrans vào ứng dụng của bạn",
+      "description": "Tích hợp Anytrans vào ứng dụng của bạn",
       "action": "Xem tài liệu API"
     }
   }

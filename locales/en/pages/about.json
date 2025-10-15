@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "About Us - AnyTrans",
-    "description": "Learn about AnyTrans - our mission, values, team, and journey in making translation accessible to everyone."
+    "title": "About Us - Anytrans",
+    "description": "Learn about Anytrans - our mission, values, team, and journey in making translation accessible to everyone."
   },
   "sections": {
     "story": {
@@ -18,7 +18,7 @@
     },
     "team": {
       "title": "Meet Our Team",
-      "subtitle": "The passionate people behind AnyTrans"
+      "subtitle": "The passionate people behind Anytrans"
     },
     "social": {
       "title": "Connect With Us",
@@ -26,7 +26,7 @@
     }
   },
   "hero": {
-    "badge": "About AnyTrans",
+    "badge": "About Anytrans",
     "title": {
       "part1": "Breaking Language Barriers,",
       "part2": "One Translation at a Time"
@@ -80,7 +80,7 @@
   "timeline": {
     "2021": {
       "title": "Company Founded",
-      "description": "AnyTrans was born from a vision to make translation accessible to everyone."
+      "description": "Anytrans was born from a vision to make translation accessible to everyone."
     },
     "2022": {
       "title": "10K+ Users",
@@ -109,7 +109,7 @@
   },
   "cta": {
     "title": "Ready to Break Language Barriers?",
-    "description": "Join thousands of users who trust AnyTrans for their translation needs. Start translating documents today.",
+    "description": "Join thousands of users who trust Anytrans for their translation needs. Start translating documents today.",
     "primaryButton": "Get Started Free",
     "secondaryButton": "Contact Sales"
   }

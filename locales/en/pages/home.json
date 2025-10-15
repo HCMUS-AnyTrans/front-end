@@ -3,14 +3,14 @@
     "title": {
       "part1": "We're here to",
       "part2": "enhance your",
-      "highlight": "Translation"
+      "highlight": "translation"
     },
-    "description": "Translate smarter, not harder. AnyTrans brings you speed, accuracy, and cutting-edge features to manage all your content with ease",
+    "description": "Translate smarter, not harder. Anytrans brings you speed, accuracy, and cutting-edge features to manage all your content with ease",
     "buttons": {
       "freeTrial": "Free Trial",
       "viewDemo": "View Demo"
     },
-    "imageAlt": "AnyTrans Translation Services Banner"
+    "imageAlt": "Anytrans Translation Services Banner"
   },
   "statistics": {
     "activeUser": "Active user",
@@ -59,7 +59,7 @@
     },
     "bottomCTA": {
       "title": "Ready to get started?",
-      "description": "Join thousands of users who trust AnyTrans for their translation needs. Start your free trial today.",
+      "description": "Join thousands of users who trust Anytrans for their translation needs. Start your free trial today.",
       "button": "Start Free Trial"
     }
   },
@@ -101,7 +101,7 @@
   "reviews": {
     "header": {
       "title": "What Our Users Say",
-      "description": "Join thousands of satisfied customers who trust AnyTrans for their translation needs"
+      "description": "Join thousands of satisfied customers who trust Anytrans for their translation needs"
     },
     "stats": {
       "rating": {
@@ -122,7 +122,7 @@
         "name": "Sarah Johnson",
         "role": "Marketing Director",
         "company": "TechCorp",
-        "review": "AnyTrans has revolutionized how we handle multilingual content. The document translation feature maintains perfect formatting, and the quality is outstanding.",
+        "review": "Anytrans has revolutionized how we handle multilingual content. The document translation feature maintains perfect formatting, and the quality is outstanding.",
         "metadata": "Translated 50+ marketing documents"
       },
       "miguel": {
@@ -143,7 +143,7 @@
         "name": "David Chen",
         "role": "Technical Writer",
         "company": "DevDocs",
-        "review": "As a technical writer, I need precise translations. AnyTrans delivers consistently high-quality results while preserving technical terminology.",
+        "review": "As a technical writer, I need precise translations. Anytrans delivers consistently high-quality results while preserving technical terminology.",
         "metadata": "Translated 100+ technical documents"
       },
       "emma": {
