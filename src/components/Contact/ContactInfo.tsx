@@ -14,7 +14,7 @@ export default function ContactInfo({ offices, reasons }: ContactInfoProps) {
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="gap-8 flex flex-col justify-between">
       {/* Office Locations */}
       <div
         className={`bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-700 ${

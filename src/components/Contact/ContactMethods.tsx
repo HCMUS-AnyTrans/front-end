@@ -13,7 +13,7 @@ export default function ContactMethods({ methods }: ContactMethodsProps) {
 
   return (
     <section>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
         {methods.map((method, index) => {
           const Icon = method.icon;
           return (
@@ -35,7 +35,7 @@ export default function ContactMethods({ methods }: ContactMethodsProps) {
                 description={method.description}
                 contact={method.contact}
                 color={method.color}
-                className="transition-all duration-500"
+                className="transition-all duration-500 h-full"
               />
             </div>
           );
