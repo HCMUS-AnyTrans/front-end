@@ -40,6 +40,7 @@ Anytrans is a modern, AI-powered translation platform that enables users to tran
   - Batch processing capabilities
   - Real-time translation progress tracking
   - Word and page count analysis
+  - Layout preservation and formatting
 
 - **Subtitle Translation**
   - Movie and TV show subtitle support
@@ -47,6 +48,13 @@ Anytrans is a modern, AI-powered translation platform that enables users to tran
   - Timeline preservation
   - Speaker identification
   - Multiple subtitle format support (SRT, VTT, etc.)
+  - Real-time preview and quality control
+
+- **Features Overview**
+  - Comprehensive feature showcase page
+  - Side-by-side feature comparison
+  - Interactive demonstrations
+  - Professional-grade presentation
 
 - **Dashboard**
   - Real-time activity monitoring
@@ -78,6 +86,12 @@ Anytrans is a modern, AI-powered translation platform that enables users to tran
   - Account settings and preferences
 
 ### Additional Features
+
+- **Multi-language Support**
+  - Full internationalization (i18n) support
+  - English and Vietnamese languages
+  - Automatic locale detection
+  - Localized content and UI
 
 - **Pricing Plans**
   - Personal plans (Starter, Plus)
@@ -131,6 +145,11 @@ Anytrans is a modern, AI-powered translation platform that enables users to tran
 - **Prettier 3.6** - Code formatting
 - **PostCSS** - CSS processing
 
+### Internationalization
+
+- **next-intl** - Internationalization for Next.js
+- **Middleware** - Automatic locale detection and routing
+
 ### Additional Libraries
 
 - **Sonner** - Toast notifications
@@ -142,26 +161,32 @@ Anytrans is a modern, AI-powered translation platform that enables users to tran
 ```
 anytrans-frontend/
 ├── app/                          # Next.js App Router
-│   ├── (auth)/                   # Authentication routes
-│   │   ├── login/               # Login page
-│   │   ├── signup/              # Signup page
-│   │   ├── verify-otp/          # OTP verification
-│   │   ├── forgot-password/     # Password recovery
-│   │   ├── reset-password/      # Password reset
-│   │   ├── actions.ts           # Server actions
-│   │   └── schemas.ts           # Validation schemas
-│   ├── dashboard/               # User dashboard
-│   ├── features/                # Feature pages
-│   │   ├── document-translation/
-│   │   └── subtitle-translation/
-│   ├── translation-history/     # Translation records
-│   ├── pricing/                 # Pricing plans
-│   ├── about/                   # About page
-│   ├── contact/                 # Contact page
-│   ├── support/                 # Support center
-│   ├── notifications/           # Notification center
+│   ├── [locale]/                # Internationalized routes
+│   │   ├── (auth)/              # Authentication routes
+│   │   │   ├── login/           # Login page
+│   │   │   ├── signup/          # Signup page
+│   │   │   ├── verify-otp/      # OTP verification
+│   │   │   ├── forgot-password/ # Password recovery
+│   │   │   ├── reset-password/  # Password reset
+│   │   │   ├── actions.ts       # Server actions
+│   │   │   ├── schemas.ts       # Validation schemas
+│   │   │   └── layout.tsx       # Auth layout
+│   │   ├── dashboard/           # User dashboard
+│   │   ├── features/            # Feature pages
+│   │   │   ├── document-translation/
+│   │   │   ├── subtitle-translation/
+│   │   │   ├── page.tsx         # Features overview page
+│   │   │   └── features-client.tsx
+│   │   ├── translation-history/ # Translation records
+│   │   ├── pricing/             # Pricing plans
+│   │   ├── about/               # About page
+│   │   ├── contact/             # Contact page
+│   │   ├── support/             # Support center
+│   │   ├── notifications/       # Notification center
+│   │   ├── layout.tsx           # Locale layout
+│   │   └── page.tsx             # Homepage
 │   ├── layout.tsx               # Root layout
-│   ├── page.tsx                 # Homepage
+│   ├── not-found.tsx            # 404 page
 │   └── globals.css              # Global styles
 │
 ├── src/
@@ -172,9 +197,15 @@ anytrans-frontend/
 │   │   │   ├── Billing/       # Billing & payments
 │   │   │   └── Settings/      # Account settings
 │   │   ├── Auth/               # Auth components
-│   │   ├── Common/             # Shared components
+│   │   ├── Common/             # Shared components (BaseCTA, etc.)
 │   │   ├── Contact/            # Contact components
 │   │   ├── Dashboard/          # Dashboard components
+│   │   ├── Features/           # Features page components
+│   │   │   ├── FeaturesHero.tsx
+│   │   │   ├── FeatureShowcase.tsx
+│   │   │   ├── FeaturesComparison.tsx
+│   │   │   ├── FeaturesCTA.tsx
+│   │   │   └── shared/         # Shared feature components
 │   │   ├── HomePage/           # Homepage sections
 │   │   ├── Layout/             # Layout components
 │   │   ├── Notifications/      # Notification components
@@ -183,7 +214,8 @@ anytrans-frontend/
 │   │   ├── Translation/        # Translation features
 │   │   ├── TranslationHistory/ # History components
 │   │   ├── Header.tsx          # Global header
-│   │   └── Footer.tsx          # Global footer
+│   │   ├── Footer.tsx          # Global footer
+│   │   └── LocaleSwitcher.tsx  # Language switcher
 │   │
 │   ├── contexts/               # React contexts
 │   │   └── AccountDialogContext.tsx
@@ -197,6 +229,10 @@ anytrans-frontend/
 │   │   ├── pricing-data.ts    # Pricing data
 │   │   ├── pricing-plans.ts   # Plan configurations
 │   │   └── prefs.ts           # User preferences
+│   │
+│   ├── i18n/                   # Internationalization
+│   │   ├── request.ts         # i18n configuration
+│   │   └── routing.ts         # Locale routing
 │   │
 │   └── types/                  # TypeScript types
 │       ├── about.ts
@@ -228,6 +264,25 @@ anytrans-frontend/
 │   ├── Banner-Homepage.svg
 │   └── ... (more assets)
 │
+├── locales/                  # Internationalization files
+│   ├── en/                   # English translations
+│   │   ├── common.json       # Common strings
+│   │   ├── pages/            # Page-specific translations
+│   │   │   ├── home.json
+│   │   │   ├── features.json
+│   │   │   ├── about.json
+│   │   │   └── ...
+│   │   ├── features/         # Feature-specific translations
+│   │   │   ├── auth.json
+│   │   │   ├── dashboard.json
+│   │   │   └── ...
+│   │   └── layout/           # Layout translations
+│   │       ├── header.json
+│   │       ├── footer.json
+│   │       └── sidebar.json
+│   └── vi/                   # Vietnamese translations
+│       └── ... (same structure)
+├── middleware.ts             # Next.js middleware for i18n
 ├── components.json            # shadcn/ui config
 ├── next.config.ts            # Next.js configuration
 ├── tsconfig.json             # TypeScript configuration
@@ -311,6 +366,7 @@ The project uses TypeScript path aliases for cleaner imports:
 @contexts/*      → src/contexts/*
 @pages/*         → src/pages/*
 @styles/*        → src/styles/*
+@i18n/*          → src/i18n/*
 ```
 
 ### Component Structure
@@ -321,6 +377,7 @@ Components follow a modular structure with:
 - Index files for clean exports
 - TypeScript interfaces in dedicated type files
 - Reusable base components in `Common/`
+- Internationalization support with `useTranslations` hook
 
 ### Styling Guidelines
 
@@ -407,6 +464,8 @@ TypeScript is configured with strict mode for maximum type safety. All component
 - Handle loading states appropriately
 - Optimize performance with React.memo when needed
 - Follow the Single Responsibility Principle
+- Use `useTranslations` hook for internationalization
+- Implement proper TypeScript types for all props
 
 ### Commit Message Format
 
