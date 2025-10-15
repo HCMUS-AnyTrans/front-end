@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "title": "Tính năng | Anytrans",
+    "description": "Khám phá các tính năng dịch thuật mạnh mẽ của Anytrans - dịch tài liệu, dịch phụ đề và nhiều công cụ chuyên nghiệp cho nội dung toàn cầu."
+  },
+  "hero": {
+    "badge": "Nền tảng Dịch thuật",
+    "title": {
+      "part1": "Hai công cụ mạnh mẽ.",
+      "highlight": "Vô vàn khả năng."
+    },
+    "description": "Dịch tài liệu và phụ đề chất lượng chuyên nghiệp được hỗ trợ bởi công nghệ AI tiên tiến.",
+    "stats": {
+      "languages": "Ngôn ngữ",
+      "processingSpeed": "Tốc độ xử lý",
+      "security": "Bảo mật"
+    }
+  },
+  "showcase": {
+    "documentTranslation": {
+      "title": "Dịch Tài liệu",
+      "description": "Chuyển đổi tài liệu kinh doanh, báo cáo và bài thuyết trình sang bất kỳ ngôn ngữ nào trong khi vẫn duy trì định dạng, bố cục và chất lượng chuyên nghiệp hoàn hảo.",
+      "features": [
+        "DOCX, PDF, XLSX, PPTX",
+        "Bảo toàn bố cục",
+        "Xử lý hàng loạt",
+        "Tải xuống ngay",
+        "Hỗ trợ bảng & biểu đồ",
+        "Từ điển tùy chỉnh"
+      ],
+      "benefits": [
+        "Báo cáo và bài thuyết trình kinh doanh",
+        "Tài liệu pháp lý và tài chính",
+        "Bài báo học thuật và nghiên cứu",
+        "Tài liệu marketing và brochure",
+        "Tài liệu kỹ thuật"
+      ],
+      "cta": "Dùng thử Dịch Tài liệu"
+    },
+    "subtitleTranslation": {
+      "title": "Dịch Phụ đề",
+      "description": "Dịch phụ đề video với đồng bộ thời gian hoàn hảo. Hỗ trợ tất cả các định dạng phụ đề chính với xem trước theo thời gian thực và kiểm soát chất lượng.",
+      "features": [
+        "SRT, VTT, ASS, SSA",
+        "Đồng bộ thời gian",
+        "Xem trước theo thời gian thực",
+        "Xử lý hàng loạt",
+        "Kiểm tra chất lượng",
+        "Xuất đa dạng"
+      ],
+      "benefits": [
+        "Video YouTube và trực tuyến",
+        "Phim và chương trình truyền hình",
+        "Nội dung giáo dục",
+        "Video đào tạo doanh nghiệp",
+        "Nội dung mạng xã hội"
+      ],
+      "cta": "Dùng thử Dịch Phụ đề"
+    }
+  },
+  "comparison": {
+    "title": "So sánh tính năng",
+    "description": "Chọn công cụ phù hợp cho nhu cầu dịch thuật của bạn",
+    "columns": {
+      "features": "Tính năng",
+      "documentTranslation": "Dịch Tài liệu",
+      "subtitleTranslation": "Dịch Phụ đề"
+    },
+    "categories": {
+      "fileFormats": "Định dạng File",
+      "features": "Tính năng",
+      "output": "Đầu ra"
+    },
+    "items": {
+      "docxPdfXlsxPptx": "DOCX, PDF, XLSX, PPTX",
+      "srtVttAssSsa": "SRT, VTT, ASS, SSA",
+      "batchProcessing": "Xử lý hàng loạt",
+      "formatPreservation": "Bảo toàn định dạng",
+      "realtimePreview": "Xem trước theo thời gian thực",
+      "layoutPreservation": "Bảo toàn bố cục",
+      "timingSync": "Đồng bộ thời gian",
+      "customGlossary": "Từ điển tùy chỉnh",
+      "instantDownload": "Tải xuống ngay",
+      "multipleFormats": "Đa định dạng",
+      "qualityOptions": "Tùy chọn chất lượng"
+    },
+    "note": "Cả hai công cụ đều hỗ trợ hơn 100 ngôn ngữ với dịch thuật AI chất lượng chuyên nghiệp"
+  },
+  "cta": {
+    "title": "Sẵn sàng bắt đầu?",
+    "description": "Tham gia cùng hàng nghìn người dùng tin tưởng Anytrans cho nhu cầu dịch thuật của họ. Bắt đầu dùng thử miễn phí ngay hôm nay—không cần thẻ tín dụng.",
+    "buttons": {
+      "startFreeTrial": "Dùng thử miễn phí",
+      "contactSales": "Liên hệ bán hàng"
+    },
+    "trustBadges": {
+      "freeTrial": "Dùng thử miễn phí 14 ngày",
+      "noCreditCard": "Không cần thẻ tín dụng",
+      "cancelAnytime": "Hủy bất cứ lúc nào"
+    }
+  }
+}

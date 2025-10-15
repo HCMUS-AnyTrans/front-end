@@ -18,6 +18,7 @@ interface FeatureShowcaseProps {
   gradient: string;
   imagePosition: 'left' | 'right';
   index: number;
+  cta: string;
 }
 
 export default function FeatureShowcase({
@@ -30,6 +31,7 @@ export default function FeatureShowcase({
   gradient,
   imagePosition,
   index,
+  cta,
 }: FeatureShowcaseProps) {
   // Convert string[] benefits to Benefit[] format
   // For now, we'll use generic icons or map to proper ones
@@ -46,7 +48,7 @@ export default function FeatureShowcase({
     imagePosition,
     gradient,
     index,
-    ctaText: `Try ${title}`,
+    ctaText: cta,
     ctaHref: href,
     icon,
     showIcon: true,
