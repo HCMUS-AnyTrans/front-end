@@ -8,7 +8,7 @@ import NavigationLink from './Layout/Header/NavigationLink';
 import FeaturesDropdown from './Layout/Header/FeaturesDropdown';
 import AuthButtons from './Layout/Header/AuthButtons';
 import MobileMenu from './Layout/Header/MobileMenu';
-import LocaleSwitcher from './LocaleSwitcher';
+import LocaleSwitcher from './Layout/Header/LocaleSwitcher';
 
 export default function Header() {
   const t = useTranslations('header');

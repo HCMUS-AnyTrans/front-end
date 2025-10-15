@@ -19,5 +19,9 @@
   "auth": {
     "login": "Đăng nhập",
     "signup": "Đăng ký"
+  },
+  "mobileMenu": {
+    "title": "Menu",
+    "closeMenu": "Đóng menu"
   }
 }

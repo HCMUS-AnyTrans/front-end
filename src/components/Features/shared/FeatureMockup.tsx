@@ -6,12 +6,14 @@ interface FeatureMockupProps {
   title: string;
   gradient: string;
   showBrowserChrome?: boolean;
+  subDomain: string;
 }
 
 export default function FeatureMockup({
   title,
   gradient,
   showBrowserChrome = true,
+  subDomain
 }: FeatureMockupProps) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -31,7 +33,7 @@ export default function FeatureMockup({
           </div>
           <div className="flex-1 flex justify-center">
             <div className="bg-white rounded px-3 py-1 text-xs text-gray-500 font-mono">
-              {title.toLowerCase().replace(/\s+/g, '-')}.anytrans.me
+              {subDomain}.anytrans.me
             </div>
           </div>
         </div>

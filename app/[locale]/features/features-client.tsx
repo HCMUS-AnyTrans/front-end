@@ -39,6 +39,7 @@ export default function FeaturesClient() {
         t('documentTranslation.benefits.4'),
       ],
       cta: t('documentTranslation.cta'),
+      mockupSubDomain: t('documentTranslation.mockupSubDomain')
     },
     {
       title: t('subtitleTranslation.title'),
@@ -63,6 +64,7 @@ export default function FeaturesClient() {
         t('subtitleTranslation.benefits.4'),
       ],
       cta: t('subtitleTranslation.cta'),
+      mockupSubDomain: t('subtitleTranslation.mockupSubDomain')
     },
   ];
 

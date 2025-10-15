@@ -19,6 +19,7 @@ interface FeatureShowcaseProps {
   imagePosition: 'left' | 'right';
   index: number;
   cta: string;
+  mockupSubDomain: string;
 }
 
 export default function FeatureShowcase({
@@ -32,6 +33,7 @@ export default function FeatureShowcase({
   imagePosition,
   index,
   cta,
+  mockupSubDomain
 }: FeatureShowcaseProps) {
   // Convert string[] benefits to Benefit[] format
   // For now, we'll use generic icons or map to proper ones
@@ -53,6 +55,7 @@ export default function FeatureShowcase({
     icon,
     showIcon: true,
     variant: 'compact',
+    mockupSubDomain
   };
 
   return (

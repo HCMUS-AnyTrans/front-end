@@ -34,6 +34,7 @@ export default function FeatureGrid() {
       gradient: 'from-blue-500 to-indigo-600',
       ctaText: t('documentTranslation.cta'),
       ctaHref: '/features/document-translation',
+      mockupSubDomain: t('documentTranslation.mockupSubDomain'),
     },
     {
       title: t('subtitleTranslation.title'),
@@ -53,6 +54,7 @@ export default function FeatureGrid() {
       gradient: 'from-purple-500 to-pink-600',
       ctaText: t('subtitleTranslation.cta'),
       ctaHref: '/features/subtitle-translation',
+      mockupSubDomain: t('subtitleTranslation.mockupSubDomain'),
     },
   ];
 

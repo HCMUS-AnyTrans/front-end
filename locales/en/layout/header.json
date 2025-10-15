@@ -19,5 +19,9 @@
   "auth": {
     "login": "Login",
     "signup": "Sign up"
+  },
+  "mobileMenu": {
+    "title": "Menu",
+    "closeMenu": "Close menu"
   }
 }
