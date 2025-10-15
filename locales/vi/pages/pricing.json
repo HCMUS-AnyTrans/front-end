@@ -98,6 +98,14 @@
       "cta": "Mua ngay"
     }
   },
+  "faqSection": {
+    "title": "Câu hỏi thường gặp",
+    "description": "Có thắc mắc? Chúng tôi có câu trả lời. Nếu bạn không tìm thấy thông tin cần thiết, hãy liên hệ với đội ngũ hỗ trợ của chúng tôi.",
+    "cta": {
+      "text": "Vẫn còn thắc mắc?",
+      "button": "Liên hệ hỗ trợ"
+    }
+  },
   "faqs": [
     {
       "question": "Tôi có thể thay đổi gói bất cứ lúc nào không?",

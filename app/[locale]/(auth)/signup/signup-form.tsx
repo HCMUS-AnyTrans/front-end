@@ -169,7 +169,7 @@ export function SignupForm() {
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel className="text-sm font-normal">
+                    <div className="text-sm font-normal">
                       {t.rich('terms', {
                         termsLink: (chunks) => (
                           <Link
@@ -188,7 +188,7 @@ export function SignupForm() {
                           </Link>
                         ),
                       })}
-                    </FormLabel>
+                    </div>
                     <FormMessage />
                   </div>
                 </FormItem>

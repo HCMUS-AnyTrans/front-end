@@ -98,6 +98,14 @@
       "cta": "Buy now"
     }
   },
+  "faqSection": {
+    "title": "Frequently Asked Questions",
+    "description": "Got questions? We've got answers. If you can't find what you're looking for, feel free to contact our support team.",
+    "cta": {
+      "text": "Still have questions?",
+      "button": "Contact Support"
+    }
+  },
   "faqs": [
     {
       "question": "Can I change my plan at any time?",

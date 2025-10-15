@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { HelpCircle } from 'lucide-react';
 import { BaseFAQ } from '@/components/Common';
 import { Button } from '@/components/ui/button';
@@ -15,6 +16,7 @@ interface PricingFAQSectionProps {
 }
 
 export default function PricingFAQSection({ faqs }: PricingFAQSectionProps) {
+  const t = useTranslations('pricing.faqSection');
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
@@ -28,11 +30,10 @@ export default function PricingFAQSection({ faqs }: PricingFAQSectionProps) {
             </div>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
-            Frequently Asked Questions
+            {t('title')}
           </h2>
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-            Got questions? We've got answers. If you can't find what you're
-            looking for, feel free to contact our support team.
+            {t('description')}
           </p>
         </div>
 
@@ -46,9 +47,9 @@ export default function PricingFAQSection({ faqs }: PricingFAQSectionProps) {
 
         {/* CTA */}
         <div className="mt-10 sm:mt-12 text-center">
-          <p className="text-gray-600 mb-4">Still have questions?</p>
+          <p className="text-gray-600 mb-4">{t('cta.text')}</p>
           <Button variant="gradient-primary" size="hero" asChild>
-            <a href="/contact">Contact Support</a>
+            <a href="/contact">{t('cta.button')}</a>
           </Button>
         </div>
       </div>
