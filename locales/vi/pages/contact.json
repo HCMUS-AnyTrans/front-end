@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Liên hệ - AnyTrans",
-    "description": "Liên hệ với đội ngũ AnyTrans. Gửi tin nhắn cho chúng tôi, tìm thông tin liên hệ hoặc kết nối qua mạng xã hội."
+    "title": "Liên hệ - Anytrans",
+    "description": "Liên hệ với đội ngũ Anytrans. Gửi tin nhắn cho chúng tôi, tìm thông tin liên hệ hoặc kết nối qua mạng xã hội."
   },
   "hero": {
     "badge": "Liên hệ",
@@ -12,7 +12,7 @@
     "email": {
       "title": "Gửi Email",
       "description": "Đội ngũ của chúng tôi sẽ phản hồi trong vòng 24 giờ",
-      "contact": "support@anytrans.com"
+      "contact": "support@anytrans.me"
     },
     "phone": {
       "title": "Gọi điện",

@@ -21,7 +21,7 @@ export const contactMethods: ContactMethod[] = [
     icon: Mail,
     title: 'Email Us',
     description: 'Our team will respond within 24 hours',
-    contact: 'support@anytrans.com',
+    contact: 'support@anytrans.me',
     color: 'blue',
   },
   {

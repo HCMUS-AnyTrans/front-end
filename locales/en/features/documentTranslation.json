@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Document Translation - AnyTrans",
+    "title": "Document Translation - Anytrans",
     "description": "Professional document translation with preserved formatting"
   },
   "header": {
@@ -57,10 +57,16 @@
       "sourceLanguage": "Source Language",
       "targetLanguage": "Target Language",
       "translationMode": "Translation Mode",
+      "selectSourceLanguage": "Select source language",
+      "selectTargetLanguage": "Select target language",
+      "selectTranslationMode": "Select translation mode",
       "modes": {
         "contextAware": "Context-Aware",
         "fast": "Fast",
-        "accurate": "Accurate"
+        "accurate": "Accurate",
+        "literal": "Literal Translation",
+        "creative": "Creative Adaptation",
+        "formal": "Formal/Documentary"
       },
       "note": "Context-aware mode provides better accuracy by understanding the document's context and terminology."
     },
@@ -125,6 +131,8 @@
   "review": {
     "complete": "Translation Complete!",
     "description": "Your document have been successfully translated and are ready for review.",
+    "descriptionDocument": "Your document have been successfully translated and are ready for review.",
+    "descriptionSubtitle": "Your subtitles have been successfully translated and are ready for review.",
     "download": "Download",
     "translateAnother": "Translate Another",
     "stats": {

@@ -485,8 +485,8 @@ This project is private and proprietary.
 
 ## 👥 Team
 
-- **Minh Nguyen** - CEO & Founder
-- **Trong Nhan** - CTO
+- **Minh Nguyen** - Developer
+- **Trong Nhan** - Developer
 
 ## 🌐 Links
 
@@ -498,7 +498,7 @@ This project is private and proprietary.
 
 For support and questions:
 
-- Email: support@anytrans.com
+- Email: support@anytrans.me
 - Phone: +1 (555) 123-4567
 - Live Chat: Available 24/7
 
