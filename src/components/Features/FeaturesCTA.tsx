@@ -34,7 +34,7 @@ export default function FeaturesCTA() {
           />
 
           {/* Trust Badge */}
-          <p className="text-sm text-blue-100 mt-8">
+          <p className="text-sm text-gray-500 mt-8">
             ✓ {t('trustBadges.freeTrial')} &nbsp;•&nbsp; ✓{' '}
             {t('trustBadges.noCreditCard')} &nbsp;•&nbsp; ✓{' '}
             {t('trustBadges.cancelAnytime')}
