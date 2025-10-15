@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { UserData } from '@/types/account';
 
 type PersonalInfoFormProps = {
@@ -12,15 +13,15 @@ export default function PersonalInfoForm({
   user,
   onChange,
 }: PersonalInfoFormProps) {
+  const t = useTranslations('common.profile.personalInfo');
+
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">
-        Personal Information
-      </h3>
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('title')}</h3>
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-semibold text-gray-900 mb-2">
-            Full Name
+            {t('fullName')}
           </label>
           <input
             type="text"
@@ -31,7 +32,7 @@ export default function PersonalInfoForm({
         </div>
         <div>
           <label className="block text-sm font-semibold text-gray-900 mb-2">
-            Email Address
+            {t('emailAddress')}
           </label>
           <input
             type="email"
@@ -42,7 +43,7 @@ export default function PersonalInfoForm({
         </div>
         <div>
           <label className="block text-sm font-semibold text-gray-900 mb-2">
-            Phone Number
+            {t('phoneNumber')}
           </label>
           <input
             type="tel"
@@ -53,7 +54,7 @@ export default function PersonalInfoForm({
         </div>
         <div>
           <label className="block text-sm font-semibold text-gray-900 mb-2">
-            Company
+            {t('company')}
           </label>
           <input
             type="text"

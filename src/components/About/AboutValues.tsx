@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { BaseCard } from '@/components/Common';
 import { AboutValuesProps } from '@/types/about';
 
 export default function AboutValues({ values }: AboutValuesProps) {
+  const t = useTranslations('about.sections.values');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -19,11 +21,9 @@ export default function AboutValues({ values }: AboutValuesProps) {
         }`}
       >
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
-          Core Values
+          {t('title')}
         </h2>
-        <p className="text-base sm:text-lg text-gray-600">
-          The principles that guide everything we do
-        </p>
+        <p className="text-base sm:text-lg text-gray-600">{t('subtitle')}</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">

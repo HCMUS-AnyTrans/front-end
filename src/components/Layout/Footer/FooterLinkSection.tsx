@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '@/i18n/routing';
 
 interface FooterLink {
   name: string;
@@ -22,14 +23,14 @@ export default function FooterLinkSection({
       </h3>
       <div className="flex flex-col gap-4">
         {links.map((link, index) => (
-          <a
+          <Link
             key={index}
             href={link.href}
             className="text-gray-400 hover:text-white transition-all duration-300 hover:translate-x-2 text-[15px] font-medium group flex items-center gap-2"
           >
             <span className="w-0 h-0.5 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] group-hover:w-4 transition-all duration-300 rounded-full" />
             {link.name}
-          </a>
+          </Link>
         ))}
       </div>
     </div>

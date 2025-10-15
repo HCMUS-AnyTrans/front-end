@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "title": "Liên hệ - AnyTrans",
+    "description": "Liên hệ với đội ngũ AnyTrans. Gửi tin nhắn cho chúng tôi, tìm thông tin liên hệ hoặc kết nối qua mạng xã hội."
+  },
+  "hero": {
+    "badge": "Liên hệ",
+    "title": "Chúng tôi rất muốn nghe từ bạn",
+    "description": "Có câu hỏi về dịch vụ dịch thuật của chúng tôi? Đội ngũ của chúng tôi sẵn sàng hỗ trợ bạn thành công."
+  },
+  "methods": {
+    "email": {
+      "title": "Gửi Email",
+      "description": "Đội ngũ của chúng tôi sẽ phản hồi trong vòng 24 giờ",
+      "contact": "support@anytrans.com"
+    },
+    "phone": {
+      "title": "Gọi điện",
+      "description": "Thứ 2-Thứ 6 từ 9 giờ sáng đến 6 giờ chiều",
+      "contact": "+1 (555) 123-4567"
+    },
+    "chat": {
+      "title": "Chat trực tuyến",
+      "description": "Có sẵn 24/7 để hỗ trợ ngay lập tức",
+      "contact": "Bắt đầu trò chuyện"
+    }
+  },
+  "form": {
+    "title": "Gửi tin nhắn cho chúng tôi",
+    "subtitle": "Điền vào biểu mẫu dưới đây và chúng tôi sẽ liên hệ lại với bạn sớm.",
+    "fields": {
+      "name": {
+        "label": "Họ và tên",
+        "placeholder": "Nguyễn Văn A"
+      },
+      "email": {
+        "label": "Địa chỉ Email",
+        "placeholder": "nguyenvana@example.com"
+      },
+      "subject": {
+        "label": "Chủ đề",
+        "placeholder": "Chọn một chủ đề",
+        "options": {
+          "general": "Yêu cầu chung",
+          "support": "Hỗ trợ kỹ thuật",
+          "sales": "Câu hỏi bán hàng",
+          "partnership": "Hợp tác",
+          "feedback": "Phản hồi"
+        }
+      },
+      "message": {
+        "label": "Tin nhắn",
+        "placeholder": "Cho chúng tôi biết chúng tôi có thể giúp bạn như thế nào..."
+      }
+    },
+    "submitButton": "Gửi tin nhắn",
+    "successMessage": {
+      "title": "Đã gửi tin nhắn!",
+      "description": "Cảm ơn bạn đã liên hệ với chúng tôi. Chúng tôi sẽ phản hồi trong vòng 24 giờ."
+    }
+  },
+  "info": {
+    "officeLocations": {
+      "title": "Địa điểm văn phòng",
+      "subtitle": "Ghé thăm chúng tôi tại các văn phòng trên toàn thế giới"
+    },
+    "offices": {
+      "sanFrancisco": {
+        "city": "San Francisco",
+        "country": "Hoa Kỳ",
+        "address": "123 Market Street, Suite 500",
+        "zipcode": "CA 94103"
+      },
+      "london": {
+        "city": "London",
+        "country": "Vương quốc Anh",
+        "address": "45 Kings Road, Chelsea",
+        "zipcode": "SW3 4ND"
+      },
+      "singapore": {
+        "city": "Singapore",
+        "country": "Singapore",
+        "address": "1 Marina Boulevard #28-00",
+        "zipcode": "018989"
+      }
+    },
+    "workingHours": {
+      "title": "Giờ làm việc",
+      "subtitle": "Khi bạn có thể liên hệ với chúng tôi",
+      "schedule": {
+        "weekdays": {
+          "label": "Thứ Hai - Thứ Sáu",
+          "hours": "9:00 sáng - 6:00 chiều"
+        },
+        "saturday": {
+          "label": "Thứ Bảy",
+          "hours": "10:00 sáng - 4:00 chiều"
+        },
+        "sunday": {
+          "label": "Chủ Nhật",
+          "hours": "Đóng cửa"
+        }
+      },
+      "support247": "Hỗ trợ 24/7: Chat trực tuyến luôn sẵn sàng"
+    },
+    "whyContactUs": {
+      "title": "Tại sao nên liên hệ với chúng tôi?"
+    },
+    "reasons": {
+      "support": {
+        "title": "Hỗ trợ 24/7",
+        "description": "Hỗ trợ liên tục suốt ngày đêm"
+      },
+      "team": {
+        "title": "Đội ngũ chuyên gia",
+        "description": "Nhân viên hỗ trợ đa ngôn ngữ"
+      },
+      "reach": {
+        "title": "Phạm vi toàn cầu",
+        "description": "Văn phòng tại 3 châu lục"
+      }
+    }
+  },
+  "social": {
+    "title": "Kết nối với chúng tôi",
+    "subtitle": "Theo dõi chúng tôi trên mạng xã hội để nhận cập nhật và mẹo dịch thuật"
+  },
+  "cta": {
+    "title": "Có câu hỏi?",
+    "description": "Xem phần câu hỏi thường gặp để có câu trả lời nhanh cho các câu hỏi phổ biến về dịch vụ dịch thuật của chúng tôi.",
+    "button": "Xem câu hỏi thường gặp"
+  }
+}

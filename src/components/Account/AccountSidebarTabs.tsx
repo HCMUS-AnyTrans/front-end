@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { User, CreditCard, Settings } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export type AccountTabId = 'profile' | 'billing' | 'settings';
 
@@ -11,10 +12,10 @@ type Tab = {
   icon: React.ComponentType<{ className?: string }>;
 };
 
-const tabs: Tab[] = [
-  { id: 'profile', label: 'Profile', icon: User },
-  { id: 'billing', label: 'Billing', icon: CreditCard },
-  { id: 'settings', label: 'Settings', icon: Settings },
+const getTabs = (t: any): Tab[] => [
+  { id: 'profile', label: t('profile'), icon: User },
+  { id: 'billing', label: t('billing'), icon: CreditCard },
+  { id: 'settings', label: t('settings'), icon: Settings },
 ];
 
 type AccountSidebarTabsProps = {
@@ -26,6 +27,9 @@ export default function AccountSidebarTabs({
   activeTab,
   onChange,
 }: AccountSidebarTabsProps) {
+  const t = useTranslations('common.sidebar');
+  const tabs = getTabs(t);
+
   return (
     <div className="w-48 lg:w-56 border-r border-gray-200 p-3 lg:p-4 space-y-1 flex-shrink-0">
       {tabs.map((tab) => {

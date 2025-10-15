@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { Target, Globe } from 'lucide-react';
 import { AboutStoryProps } from '@/types/about';
 
 export default function AboutStory({ mission, vision }: AboutStoryProps) {
+  const t = useTranslations('about.sections.story');
   const MissionIcon = mission.icon;
   const VisionIcon = vision.icon;
   const [isVisible, setIsVisible] = useState(false);
@@ -20,10 +22,9 @@ export default function AboutStory({ mission, vision }: AboutStoryProps) {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
         }`}
       >
-        <h2 className="text-3xl font-bold text-gray-900 mb-3">Our Story</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-3">{t('title')}</h2>
         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-          From a small team with a big vision to a global platform trusted by
-          thousands
+          {t('subtitle')}
         </p>
       </div>
 

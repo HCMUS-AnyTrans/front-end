@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '@/i18n/routing';
 
 interface NavigationLinkProps {
   href: string;
@@ -14,7 +15,7 @@ export default function NavigationLink({
   onClick,
 }: NavigationLinkProps) {
   return (
-    <a
+    <Link
       href={href}
       className={`relative px-3 xl:px-5 py-2.5 rounded-lg text-sm xl:text-[15px] transition-all duration-300 ${
         isActive
@@ -30,6 +31,6 @@ export default function NavigationLink({
           isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
         }`}
       />
-    </a>
+    </Link>
   );
 }

@@ -80,8 +80,8 @@ export function AuthShell({
         >
           <div className="flex items-center justify-center">
             <img
-              src="/logo-icon-mono.svg"
-              alt="Anytrans"
+              src="/logo/logo-name-mono.svg"
+              alt="AnyTrans"
               className="w-40 h-10 transition-transform duration-300"
             />
           </div>

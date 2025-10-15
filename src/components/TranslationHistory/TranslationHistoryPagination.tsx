@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 interface TranslationHistoryPaginationProps {
   currentCount: number;
@@ -9,13 +12,12 @@ export default function TranslationHistoryPagination({
   currentCount,
   totalCount,
 }: TranslationHistoryPaginationProps) {
+  const t = useTranslations('translationHistory.pagination');
+
   return (
     <div className="flex items-center justify-between">
       <p className="text-sm text-gray-600">
-        Showing{' '}
-        <span className="font-semibold text-gray-900">{currentCount}</span> of{' '}
-        <span className="font-semibold text-gray-900">{totalCount}</span>{' '}
-        translations
+        {t('showing', { current: currentCount, total: totalCount })}
       </p>
       <div className="flex gap-2">
         <button

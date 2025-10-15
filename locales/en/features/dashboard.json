@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "title": "Dashboard - AnyTrans",
+    "description": "Manage your translations and track your activity"
+  },
+  "header": {
+    "title": "Dashboard",
+    "subtitle": "Welcome back! Here's an overview of your translation activity.",
+    "newTranslation": "New Translation",
+    "dropdown": {
+      "document": {
+        "title": "Document Translation",
+        "description": "Translate DOCX, PDF, XLSX, PPTX"
+      },
+      "subtitle": {
+        "title": "Subtitle Translation",
+        "description": "Translate SRT, VTT, ASS, SSA"
+      }
+    }
+  },
+  "stats": {
+    "documentsTranslated": {
+      "title": "Documents Translated",
+      "subtitle": "+{count} this week"
+    },
+    "subtitlesTranslated": {
+      "title": "Subtitle Translated",
+      "subtitle": "{count} new this month"
+    },
+    "totalWords": {
+      "title": "Total Words",
+      "subtitle": "{count} this week"
+    },
+    "creditsRemaining": {
+      "title": "Credits Remaining",
+      "subtitle": "{count} used this week"
+    }
+  },
+  "weeklyActivity": {
+    "title": "Weekly Activity",
+    "subtitle": {
+      "all": "All translations this week",
+      "documents": "Documents translated this week",
+      "subtitles": "Subtitles translated this week"
+    },
+    "legend": {
+      "all": "All",
+      "documents": "Documents",
+      "subtitles": "Subtitles"
+    },
+    "filters": {
+      "doc": "Doc",
+      "sub": "Sub"
+    },
+    "days": {
+      "Mon": "Mon",
+      "Tue": "Tue",
+      "Wed": "Wed",
+      "Thu": "Thu",
+      "Fri": "Fri",
+      "Sat": "Sat",
+      "Sun": "Sun"
+    }
+  },
+  "topLanguages": {
+    "title": "Top Languages",
+    "subtitle": "Most translated to"
+  },
+  "recentActivity": {
+    "title": "Recent Activity",
+    "viewAll": "View all",
+    "words": "words",
+    "status": {
+      "completed": "Completed",
+      "processing": "Processing"
+    }
+  },
+  "promoBanner": {
+    "upgrade": {
+      "title": "Boost your productivity",
+      "description": "Upgrade to Pro for higher limits, faster processing and premium features.",
+      "button": "Explore Plans"
+    },
+    "referral": {
+      "title": "Invite friends, get credits",
+      "description": "Share Anytrans with your teammates and earn bonus translation credits for every signup.",
+      "button": "Invite Now"
+    }
+  }
+}

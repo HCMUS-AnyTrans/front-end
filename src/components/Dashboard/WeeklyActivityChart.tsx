@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { WeeklyStat, WeeklySubStat } from '@/types/dashboard';
 
 type WeeklyActivityChartProps = {
@@ -12,6 +13,7 @@ export default function WeeklyActivityChart({
   weeklyStats,
   weeklyStatsSubtitles,
 }: WeeklyActivityChartProps) {
+  const t = useTranslations('dashboard.weeklyActivity');
   const [weeklyFilter, setWeeklyFilter] = useState<
     'all' | 'document' | 'subtitle'
   >('all');
@@ -45,15 +47,13 @@ export default function WeeklyActivityChart({
     <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-200 p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-lg font-bold text-gray-900 mb-1">
-            Weekly Activity
-          </h3>
+          <h3 className="text-lg font-bold text-gray-900 mb-1">{t('title')}</h3>
           <p className="text-sm text-gray-600">
             {weeklyFilter === 'subtitle'
-              ? 'Subtitles translated this week'
+              ? t('subtitle.subtitles')
               : weeklyFilter === 'document'
-                ? 'Documents translated this week'
-                : 'All translations this week'}
+                ? t('subtitle.documents')
+                : t('subtitle.all')}
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -62,10 +62,10 @@ export default function WeeklyActivityChart({
               <div className="w-3 h-3 bg-[#4169E1] rounded-full"></div>
               <span className="text-gray-600">
                 {weeklyFilter === 'subtitle'
-                  ? 'Subtitles'
+                  ? t('legend.subtitles')
                   : weeklyFilter === 'document'
-                    ? 'Documents'
-                    : 'All'}
+                    ? t('legend.documents')
+                    : t('legend.all')}
               </span>
             </div>
           </div>
@@ -82,7 +82,7 @@ export default function WeeklyActivityChart({
                   : 'border-gray-300 text-gray-700 hover:bg-gray-50'
               }`}
             >
-              Doc
+              {t('filters.doc')}
             </button>
             <button
               onClick={() =>
@@ -96,7 +96,7 @@ export default function WeeklyActivityChart({
                   : 'border-gray-300 text-gray-700 hover:bg-gray-50'
               }`}
             >
-              Sub
+              {t('filters.sub')}
             </button>
           </div>
         </div>
@@ -113,7 +113,7 @@ export default function WeeklyActivityChart({
           return (
             <div key={row.day} className="flex items-center gap-3">
               <span className="text-sm font-medium text-gray-600 w-8">
-                {row.day}
+                {t(`days.${row.day}`)}
               </span>
               <div className="flex-1 bg-gray-100 rounded-full h-8 overflow-hidden">
                 <div

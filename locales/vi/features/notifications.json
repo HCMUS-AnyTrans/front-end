@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "title": "Thông báo - AnyTrans",
+    "description": "Cập nhật tất cả hoạt động dịch thuật và thông báo hệ thống"
+  },
+  "header": {
+    "title": "Thông báo",
+    "subtitle": "Cập nhật tất cả hoạt động dịch thuật của bạn",
+    "markAllRead": "Đánh dấu tất cả đã đọc",
+    "filter": "Lọc",
+    "filters": {
+      "all": "Tất cả",
+      "unread": "Chưa đọc",
+      "translations": "Dịch thuật",
+      "billing": "Thanh toán",
+      "system": "Hệ thống"
+    }
+  },
+  "toolbar": {
+    "searchPlaceholder": "Tìm kiếm thông báo...",
+    "filters": {
+      "all": "Tất cả thông báo",
+      "unread": "Chưa đọc",
+      "translations": "Dịch thuật",
+      "billing": "Thanh toán",
+      "system": "Hệ thống"
+    }
+  },
+  "bulkActions": {
+    "selected": "{count} đã chọn",
+    "markRead": "Đánh dấu đã đọc",
+    "archive": "Lưu trữ",
+    "delete": "Xóa"
+  },
+  "card": {
+    "viewDetails": "Xem chi tiết",
+    "actions": {
+      "markRead": "Đánh dấu đã đọc",
+      "markUnread": "Đánh dấu chưa đọc",
+      "pin": "Ghim",
+      "unpin": "Bỏ ghim",
+      "delete": "Xóa"
+    },
+    "metadata": {
+      "fileName": "File",
+      "wordsTranslated": "từ đã dịch",
+      "creditsUsed": "tín dụng đã dùng",
+      "creditsRemaining": "tín dụng còn lại",
+      "totalCredits": "tổng tín dụng"
+    }
+  },
+  "list": {
+    "empty": {
+      "title": "Không có thông báo",
+      "description": "Bạn đã xem hết! Quay lại sau để cập nhật.",
+      "noResults": "Không tìm thấy thông báo nào",
+      "tryAdjusting": "Thử điều chỉnh tìm kiếm hoặc bộ lọc"
+    },
+    "loadMore": "Tải thêm"
+  },
+  "time": {
+    "minutesAgo": "{minutes} phút trước",
+    "hoursAgo": "{hours} giờ trước",
+    "daysAgo": "{days} ngày trước",
+    "weeksAgo": "{weeks} tuần trước"
+  }
+}

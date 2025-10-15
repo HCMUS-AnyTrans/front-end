@@ -1,16 +1,21 @@
+'use client';
+
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 export default function BillingTab() {
+  const t = useTranslations('common.billing.billingTab');
+
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-xl border border-gray-200 p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          Billing Information
+          {t('title')}
         </h3>
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Current Plan
+              {t('currentPlan')}
             </label>
             <div className="bg-gray-50 rounded-lg p-4">
               <div className="flex items-center justify-between">
@@ -19,7 +24,7 @@ export default function BillingTab() {
                   <p className="text-sm text-gray-600">$29/month</p>
                 </div>
                 <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm font-medium">
-                  Active
+                  {t('active')}
                 </span>
               </div>
             </div>
@@ -27,7 +32,7 @@ export default function BillingTab() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Payment Method
+              {t('paymentMethod')}
             </label>
             <div className="bg-gray-50 rounded-lg p-4">
               <div className="flex items-center gap-3">
@@ -46,10 +51,10 @@ export default function BillingTab() {
 
           <div className="flex gap-3">
             <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors cursor-pointer">
-              Update Payment Method
+              {t('updatePaymentMethod')}
             </button>
             <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors cursor-pointer">
-              View Billing History
+              {t('viewBillingHistory')}
             </button>
           </div>
         </div>

@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { BaseCTA } from '@/components/Common';
 
 export default function ContactCTA() {
+  const t = useTranslations('contact.cta');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -20,10 +22,10 @@ export default function ContactCTA() {
     >
       <BaseCTA
         variant="contact"
-        title="Have a Question?"
-        description="Check out our FAQ section for quick answers to common questions about our translation services."
+        title={t('title')}
+        description={t('description')}
         primaryButton={{
-          text: 'Visit FAQ',
+          text: t('button'),
           href: '/support',
         }}
       />

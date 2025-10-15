@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "title": "About Us - AnyTrans",
+    "description": "Learn about AnyTrans - our mission, values, team, and journey in making translation accessible to everyone."
+  },
+  "sections": {
+    "story": {
+      "title": "Our Story",
+      "subtitle": "From a small team with a big vision to a global platform trusted by thousands"
+    },
+    "values": {
+      "title": "Core Values",
+      "subtitle": "The principles that guide everything we do"
+    },
+    "timeline": {
+      "title": "Our Journey",
+      "subtitle": "Key milestones in our growth story"
+    },
+    "team": {
+      "title": "Meet Our Team",
+      "subtitle": "The passionate people behind AnyTrans"
+    },
+    "social": {
+      "title": "Connect With Us",
+      "subtitle": "Follow us on social media for updates and tips"
+    }
+  },
+  "hero": {
+    "badge": "About AnyTrans",
+    "title": {
+      "part1": "Breaking Language Barriers,",
+      "part2": "One Translation at a Time"
+    },
+    "description": "We're on a mission to make professional translation accessible to everyone, empowering global communication through innovative AI technology.",
+    "stats": {
+      "languages": {
+        "number": "100+",
+        "label": "Languages Supported"
+      },
+      "users": {
+        "number": "50K+",
+        "label": "Active Users"
+      },
+      "documents": {
+        "number": "1M+",
+        "label": "Documents Translated"
+      },
+      "accuracy": {
+        "number": "98%",
+        "label": "Accuracy Rate"
+      }
+    }
+  },
+  "mission": {
+    "title": "Our Mission",
+    "description": "To democratize professional translation services by leveraging cutting-edge AI technology, making it fast, accurate, and accessible to businesses and individuals worldwide. We believe that language should never be a barrier to opportunity, knowledge, or connection."
+  },
+  "vision": {
+    "title": "Our Vision",
+    "description": "To create a world where language differences don't limit human potential. We envision a future where everyone can communicate seamlessly across borders, cultures, and languages, fostering global collaboration and understanding through innovative translation technology."
+  },
+  "values": {
+    "precision": {
+      "title": "Precision",
+      "description": "We deliver accurate translations that preserve meaning and context across languages."
+    },
+    "speed": {
+      "title": "Speed",
+      "description": "Lightning-fast translation without compromising quality, powered by advanced AI."
+    },
+    "security": {
+      "title": "Security",
+      "description": "Your documents are protected with enterprise-grade encryption and privacy."
+    },
+    "userCentric": {
+      "title": "User-Centric",
+      "description": "Built with simplicity and user experience at the heart of every feature."
+    }
+  },
+  "timeline": {
+    "2021": {
+      "title": "Company Founded",
+      "description": "AnyTrans was born from a vision to make translation accessible to everyone."
+    },
+    "2022": {
+      "title": "10K+ Users",
+      "description": "Reached our first major milestone with users from 50+ countries."
+    },
+    "2023": {
+      "title": "AI Integration",
+      "description": "Launched advanced AI-powered translation engine with 98% accuracy."
+    },
+    "2024": {
+      "title": "Global Expansion",
+      "description": "Expanded to support 100+ languages and opened offices in 3 continents."
+    }
+  },
+  "team": {
+    "minhNguyen": {
+      "name": "Minh Nguyen",
+      "role": "Developer",
+      "bio": "Developer"
+    },
+    "trongNhan": {
+      "name": "Trong Nhan",
+      "role": "Developer",
+      "bio": "Developer"
+    }
+  },
+  "cta": {
+    "title": "Ready to Break Language Barriers?",
+    "description": "Join thousands of users who trust AnyTrans for their translation needs. Start translating documents today.",
+    "primaryButton": "Get Started Free",
+    "secondaryButton": "Contact Sales"
+  }
+}

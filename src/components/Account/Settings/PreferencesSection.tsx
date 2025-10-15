@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { Preferences } from '@/types/account';
 import {
   Bell,
@@ -33,20 +34,23 @@ export default function PreferencesSection({
   onReset,
   onSave,
 }: PreferencesSectionProps) {
+  const t = useTranslations('common.settings.preferences');
+  const tActions = useTranslations('common.settings.actions');
+
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-xl border border-gray-200 p-6 ">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          Preferences
+          {t('title')}
         </h3>
 
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-semibold text-gray-900 text-sm">Theme</p>
-              <p className="text-xs text-gray-600">
-                Choose your preferred theme
+              <p className="font-semibold text-gray-900 text-sm">
+                {t('theme.label')}
               </p>
+              <p className="text-xs text-gray-600">{t('theme.description')}</p>
             </div>
             <Select
               value={preferences.theme}
@@ -58,18 +62,20 @@ export default function PreferencesSection({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="light">Light</SelectItem>
-                <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="auto">Auto</SelectItem>
+                <SelectItem value="light">{t('theme.light')}</SelectItem>
+                <SelectItem value="dark">{t('theme.dark')}</SelectItem>
+                <SelectItem value="auto">{t('theme.auto')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-semibold text-gray-900 text-sm">Language</p>
+              <p className="font-semibold text-gray-900 text-sm">
+                {t('language.label')}
+              </p>
               <p className="text-xs text-gray-600">
-                Select your preferred language
+                {t('language.description')}
               </p>
             </div>
             <Select
@@ -82,10 +88,10 @@ export default function PreferencesSection({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="en">English</SelectItem>
-                <SelectItem value="vi">Vietnamese</SelectItem>
-                <SelectItem value="es">Spanish</SelectItem>
-                <SelectItem value="fr">French</SelectItem>
+                <SelectItem value="en">{t('language.english')}</SelectItem>
+                <SelectItem value="vi">{t('language.vietnamese')}</SelectItem>
+                <SelectItem value="es">{t('language.spanish')}</SelectItem>
+                <SelectItem value="fr">{t('language.french')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -97,10 +103,10 @@ export default function PreferencesSection({
               </div>
               <div>
                 <p className="font-semibold text-gray-900 text-sm">
-                  Date Format
+                  {t('dateFormat.label')}
                 </p>
                 <p className="text-xs text-gray-600">
-                  Choose how dates are displayed
+                  {t('dateFormat.description')}
                 </p>
               </div>
             </div>
@@ -128,10 +134,10 @@ export default function PreferencesSection({
               </div>
               <div>
                 <p className="font-semibold text-gray-900 text-sm">
-                  Time Format
+                  {t('timeFormat.label')}
                 </p>
                 <p className="text-xs text-gray-600">
-                  12-hour or 24-hour format
+                  {t('timeFormat.description')}
                 </p>
               </div>
             </div>
@@ -145,8 +151,8 @@ export default function PreferencesSection({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="12h">12 Hour</SelectItem>
-                <SelectItem value="24h">24 Hour</SelectItem>
+                <SelectItem value="12h">{t('timeFormat.12hour')}</SelectItem>
+                <SelectItem value="24h">{t('timeFormat.24hour')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -158,10 +164,10 @@ export default function PreferencesSection({
               </div>
               <div>
                 <p className="font-semibold text-gray-900 text-sm">
-                  Default Source Language
+                  {t('defaultSourceLanguage.label')}
                 </p>
                 <p className="text-xs text-gray-600">
-                  Default language to translate from
+                  {t('defaultSourceLanguage.description')}
                 </p>
               </div>
             </div>
@@ -175,14 +181,30 @@ export default function PreferencesSection({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="en">English</SelectItem>
-                <SelectItem value="vi">Vietnamese</SelectItem>
-                <SelectItem value="es">Spanish</SelectItem>
-                <SelectItem value="fr">French</SelectItem>
-                <SelectItem value="de">German</SelectItem>
-                <SelectItem value="ja">Japanese</SelectItem>
-                <SelectItem value="ko">Korean</SelectItem>
-                <SelectItem value="zh">Chinese</SelectItem>
+                <SelectItem value="en">
+                  {t('defaultSourceLanguage.english')}
+                </SelectItem>
+                <SelectItem value="vi">
+                  {t('defaultSourceLanguage.vietnamese')}
+                </SelectItem>
+                <SelectItem value="es">
+                  {t('defaultSourceLanguage.spanish')}
+                </SelectItem>
+                <SelectItem value="fr">
+                  {t('defaultSourceLanguage.french')}
+                </SelectItem>
+                <SelectItem value="de">
+                  {t('defaultSourceLanguage.german')}
+                </SelectItem>
+                <SelectItem value="ja">
+                  {t('defaultSourceLanguage.japanese')}
+                </SelectItem>
+                <SelectItem value="ko">
+                  {t('defaultSourceLanguage.korean')}
+                </SelectItem>
+                <SelectItem value="zh">
+                  {t('defaultSourceLanguage.chinese')}
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -194,10 +216,10 @@ export default function PreferencesSection({
               </div>
               <div>
                 <p className="font-semibold text-gray-900 text-sm">
-                  Default Target Language
+                  {t('defaultTargetLanguage.label')}
                 </p>
                 <p className="text-xs text-gray-600">
-                  Default language to translate to
+                  {t('defaultTargetLanguage.description')}
                 </p>
               </div>
             </div>
@@ -211,14 +233,30 @@ export default function PreferencesSection({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="en">English</SelectItem>
-                <SelectItem value="vi">Vietnamese</SelectItem>
-                <SelectItem value="es">Spanish</SelectItem>
-                <SelectItem value="fr">French</SelectItem>
-                <SelectItem value="de">German</SelectItem>
-                <SelectItem value="ja">Japanese</SelectItem>
-                <SelectItem value="ko">Korean</SelectItem>
-                <SelectItem value="zh">Chinese</SelectItem>
+                <SelectItem value="en">
+                  {t('defaultTargetLanguage.english')}
+                </SelectItem>
+                <SelectItem value="vi">
+                  {t('defaultTargetLanguage.vietnamese')}
+                </SelectItem>
+                <SelectItem value="es">
+                  {t('defaultTargetLanguage.spanish')}
+                </SelectItem>
+                <SelectItem value="fr">
+                  {t('defaultTargetLanguage.french')}
+                </SelectItem>
+                <SelectItem value="de">
+                  {t('defaultTargetLanguage.german')}
+                </SelectItem>
+                <SelectItem value="ja">
+                  {t('defaultTargetLanguage.japanese')}
+                </SelectItem>
+                <SelectItem value="ko">
+                  {t('defaultTargetLanguage.korean')}
+                </SelectItem>
+                <SelectItem value="zh">
+                  {t('defaultTargetLanguage.chinese')}
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -230,10 +268,10 @@ export default function PreferencesSection({
               </div>
               <div>
                 <p className="font-semibold text-gray-900 text-sm">
-                  Email Notifications
+                  {t('emailNotifications.label')}
                 </p>
                 <p className="text-xs text-gray-600">
-                  Receive updates via email
+                  {t('emailNotifications.description')}
                 </p>
               </div>
             </div>
@@ -257,10 +295,10 @@ export default function PreferencesSection({
               </div>
               <div>
                 <p className="font-semibold text-gray-900 text-sm">
-                  Push Notifications
+                  {t('pushNotifications.label')}
                 </p>
                 <p className="text-xs text-gray-600">
-                  Receive push notifications
+                  {t('pushNotifications.description')}
                 </p>
               </div>
             </div>
@@ -284,10 +322,10 @@ export default function PreferencesSection({
               </div>
               <div>
                 <p className="font-semibold text-gray-900 text-sm">
-                  Translation Alerts
+                  {t('translationAlerts.label')}
                 </p>
                 <p className="text-xs text-gray-600">
-                  Get notified when translations complete
+                  {t('translationAlerts.description')}
                 </p>
               </div>
             </div>
@@ -311,10 +349,10 @@ export default function PreferencesSection({
               </div>
               <div>
                 <p className="font-semibold text-gray-900 text-sm">
-                  Auto-Save Drafts
+                  {t('autoSaveDrafts.label')}
                 </p>
                 <p className="text-xs text-gray-600">
-                  Automatically save translation drafts
+                  {t('autoSaveDrafts.description')}
                 </p>
               </div>
             </div>
@@ -336,10 +374,10 @@ export default function PreferencesSection({
               </div>
               <div>
                 <p className="font-semibold text-gray-900 text-sm">
-                  Show Tooltips
+                  {t('showTooltips.label')}
                 </p>
                 <p className="text-xs text-gray-600">
-                  Display helpful tooltips and hints
+                  {t('showTooltips.description')}
                 </p>
               </div>
             </div>
@@ -361,13 +399,13 @@ export default function PreferencesSection({
           onClick={onReset}
           className="px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all cursor-pointer"
         >
-          Reset to Defaults
+          {tActions('resetToDefaults')}
         </button>
         <button
           onClick={onSave}
           className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-sm font-semibold shadow-lg transition-all cursor-pointer"
         >
-          Save Settings
+          {tActions('saveSettings')}
         </button>
       </div>
     </div>

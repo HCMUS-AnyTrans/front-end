@@ -1,0 +1,182 @@
+{
+  "locale": {
+    "en": "English",
+    "vi": "Tiếng Việt"
+  },
+  "meta": {
+    "title": "AnyTrans - Dịch thuật Đơn giản",
+    "description": "Dịch thông minh hơn, không khó hơn. AnyTrans mang đến cho bạn tốc độ, độ chính xác và các tính năng mới nhất để quản lý mọi nội dung một cách đơn giản."
+  },
+  "account": {
+    "title": "Cài đặt tài khoản",
+    "description": "Quản lý hồ sơ, thanh toán và tùy chọn của bạn",
+    "closeDialog": "Đóng hộp thoại"
+  },
+  "sidebar": {
+    "profile": "Hồ sơ",
+    "billing": "Thanh toán",
+    "settings": "Cài đặt"
+  },
+  "profile": {
+    "personalInfo": {
+      "title": "Thông tin cá nhân",
+      "fullName": "Họ và tên",
+      "emailAddress": "Địa chỉ email",
+      "phoneNumber": "Số điện thoại",
+      "company": "Công ty"
+    },
+    "changePassword": {
+      "title": "Bảo mật",
+      "changePassword": "Đổi mật khẩu",
+      "currentPassword": "Mật khẩu hiện tại",
+      "newPassword": "Mật khẩu mới",
+      "confirmPassword": "Xác nhận mật khẩu"
+    },
+    "profilePicture": {
+      "title": "Ảnh đại diện",
+      "uploadDescription": "Tải lên ảnh đại diện (JPG, PNG hoặc GIF, tối đa 5MB)",
+      "uploadNewPhoto": "Tải lên ảnh mới"
+    },
+    "twoFactor": {
+      "title": "Xác thực hai yếu tố",
+      "description": "Thêm bảo mật bổ sung cho tài khoản của bạn"
+    },
+    "activeSessions": {
+      "title": "Phiên đăng nhập hoạt động",
+      "description": "Quản lý và theo dõi nơi bạn đã đăng nhập",
+      "current": "Hiện tại",
+      "lastActive": "Hoạt động lần cuối",
+      "revoke": "Thu hồi",
+      "signOutAllOthers": "Đăng xuất tất cả phiên khác"
+    },
+    "actions": {
+      "cancel": "Hủy",
+      "saveChanges": "Lưu thay đổi"
+    }
+  },
+  "settings": {
+    "preferences": {
+      "title": "Tùy chọn",
+      "theme": {
+        "label": "Giao diện",
+        "description": "Chọn giao diện yêu thích của bạn",
+        "light": "Sáng",
+        "dark": "Tối",
+        "auto": "Tự động"
+      },
+      "language": {
+        "label": "Ngôn ngữ",
+        "description": "Chọn ngôn ngữ ưa thích của bạn",
+        "english": "Tiếng Anh",
+        "vietnamese": "Tiếng Việt",
+        "spanish": "Tiếng Tây Ban Nha",
+        "french": "Tiếng Pháp"
+      },
+      "dateFormat": {
+        "label": "Định dạng ngày",
+        "description": "Chọn cách hiển thị ngày tháng"
+      },
+      "timeFormat": {
+        "label": "Định dạng giờ",
+        "description": "Định dạng 12 giờ hoặc 24 giờ",
+        "12hour": "12 Giờ",
+        "24hour": "24 Giờ"
+      },
+      "defaultSourceLanguage": {
+        "label": "Ngôn ngữ nguồn mặc định",
+        "description": "Ngôn ngữ mặc định để dịch từ",
+        "english": "Tiếng Anh",
+        "vietnamese": "Tiếng Việt",
+        "spanish": "Tiếng Tây Ban Nha",
+        "french": "Tiếng Pháp",
+        "german": "Tiếng Đức",
+        "japanese": "Tiếng Nhật",
+        "korean": "Tiếng Hàn",
+        "chinese": "Tiếng Trung"
+      },
+      "defaultTargetLanguage": {
+        "label": "Ngôn ngữ đích mặc định",
+        "description": "Ngôn ngữ mặc định để dịch sang",
+        "english": "Tiếng Anh",
+        "vietnamese": "Tiếng Việt",
+        "spanish": "Tiếng Tây Ban Nha",
+        "french": "Tiếng Pháp",
+        "german": "Tiếng Đức",
+        "japanese": "Tiếng Nhật",
+        "korean": "Tiếng Hàn",
+        "chinese": "Tiếng Trung"
+      },
+      "emailNotifications": {
+        "label": "Thông báo email",
+        "description": "Nhận cập nhật qua email"
+      },
+      "pushNotifications": {
+        "label": "Thông báo đẩy",
+        "description": "Nhận thông báo đẩy"
+      },
+      "translationAlerts": {
+        "label": "Cảnh báo dịch thuật",
+        "description": "Nhận thông báo khi dịch hoàn thành"
+      },
+      "autoSaveDrafts": {
+        "label": "Tự động lưu bản nháp",
+        "description": "Tự động lưu bản nháp dịch thuật"
+      },
+      "showTooltips": {
+        "label": "Hiển thị gợi ý",
+        "description": "Hiển thị gợi ý và mẹo hữu ích"
+      }
+    },
+    "actions": {
+      "resetToDefaults": "Đặt lại mặc định",
+      "saveSettings": "Lưu cài đặt"
+    }
+  },
+  "billing": {
+    "paymentMethods": {
+      "title": "Phương thức thanh toán",
+      "addCard": "+ Thêm thẻ",
+      "default": "Mặc định",
+      "setDefault": "Đặt làm mặc định",
+      "expires": "Hết hạn"
+    },
+    "billingHistory": {
+      "title": "Lịch sử thanh toán",
+      "date": "Ngày",
+      "amount": "Số tiền",
+      "status": "Trạng thái",
+      "actions": "Hành động",
+      "paid": "Đã thanh toán",
+      "download": "Tải xuống"
+    },
+    "billingTab": {
+      "title": "Thông tin thanh toán",
+      "currentPlan": "Gói hiện tại",
+      "paymentMethod": "Phương thức thanh toán",
+      "active": "Đang hoạt động",
+      "updatePaymentMethod": "Cập nhật phương thức thanh toán",
+      "viewBillingHistory": "Xem lịch sử thanh toán"
+    },
+    "currentPlan": {
+      "title": "Gói hiện tại",
+      "active": "Đang hoạt động",
+      "creditsUsage": "Sử dụng tín dụng",
+      "renewsOn": "Gia hạn vào",
+      "upgradePlan": "Nâng cấp gói",
+      "cancelPlan": "Hủy gói"
+    },
+    "addCard": {
+      "title": "Thêm phương thức thanh toán",
+      "cardNumber": "Số thẻ",
+      "cardNumberPlaceholder": "1234 5678 9012 3456",
+      "month": "Tháng",
+      "year": "Năm",
+      "cvc": "CVC",
+      "cvcPlaceholder": "123",
+      "cardholderName": "Tên chủ thẻ",
+      "cardholderPlaceholder": "Nguyễn Văn A",
+      "cancel": "Hủy",
+      "addCard": "Thêm thẻ"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "title": "Lịch sử dịch thuật - AnyTrans",
+    "description": "Xem và quản lý tất cả các dự án dịch thuật của bạn"
+  },
+  "header": {
+    "title": "Lịch sử dịch thuật",
+    "description": "Xem và quản lý tất cả các dự án dịch thuật của bạn",
+    "stats": {
+      "completed": "Đã hoàn thành",
+      "words": "Từ"
+    }
+  },
+  "stats": {
+    "totalProjects": "Tổng dự án",
+    "completed": "Đã hoàn thành",
+    "totalWords": "Tổng từ",
+    "creditsUsed": "Tín dụng đã dùng"
+  },
+  "toolbar": {
+    "searchPlaceholder": "Tìm kiếm theo tên file, ngôn ngữ...",
+    "filter": "Lọc",
+    "selected": "đã chọn",
+    "download": "Tải xuống",
+    "delete": "Xóa",
+    "filters": {
+      "status": {
+        "all": "Tất cả",
+        "completed": "Đã hoàn thành",
+        "processing": "Đang xử lý",
+        "failed": "Thất bại"
+      },
+      "category": {
+        "all": "Tất cả loại",
+        "document": "Tài liệu",
+        "subtitle": "Phụ đề"
+      }
+    }
+  },
+  "table": {
+    "headers": {
+      "document": "Tài liệu",
+      "languages": "Ngôn ngữ",
+      "status": "Trạng thái",
+      "date": "Ngày",
+      "actions": "Hành động"
+    },
+    "status": {
+      "completed": "Đã hoàn thành",
+      "processing": "Đang xử lý",
+      "failed": "Thất bại",
+      "unknown": "Không xác định"
+    },
+    "actions": {
+      "viewDetails": "Xem chi tiết",
+      "download": "Tải xuống",
+      "delete": "Xóa"
+    },
+    "words": "từ",
+    "credits": "tín dụng",
+    "time": {
+      "justNow": "Vừa xong",
+      "hoursAgo": "{hours} giờ trước",
+      "yesterday": "Hôm qua"
+    }
+  },
+  "empty": {
+    "title": "Không tìm thấy bản dịch nào",
+    "description": "Bắt đầu dịch tài liệu để xem lịch sử tại đây"
+  },
+  "pagination": {
+    "showing": "Hiển thị {current} trong {total} bản dịch"
+  }
+}

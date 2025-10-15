@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import {
   FooterLogo,
   FooterNewsletter,
@@ -9,19 +10,27 @@ import {
   FooterBottom,
 } from './Layout/Footer';
 
-const quickLinks = [
-  { name: 'Home', href: '/' },
-  { name: 'Features', href: '/features' },
-  { name: 'Pricing', href: '/pricing' },
-  { name: 'About', href: '/about' },
-];
-
-const services = [
-  { name: 'Document Translation', href: '/features/document-translation' },
-  { name: 'Subtitle Translation', href: '/features/subtitle-translation' },
-];
-
 export default function Footer() {
+  const t = useTranslations('footer');
+
+  const quickLinks = [
+    { name: t('quickLinks.home'), href: '/' },
+    { name: t('quickLinks.features'), href: '/features' },
+    { name: t('quickLinks.pricing'), href: '/pricing' },
+    { name: t('quickLinks.about'), href: '/about' },
+  ];
+
+  const services = [
+    {
+      name: t('services.documentTranslation'),
+      href: '/features/document-translation',
+    },
+    {
+      name: t('services.subtitleTranslation'),
+      href: '/features/subtitle-translation',
+    },
+  ];
+
   return (
     <footer className="relative overflow-hidden bg-gradient-to-br from-[#0F172A] via-[#1e293b] to-[#0F172A]">
       {/* Animated background decoration */}
@@ -55,8 +64,11 @@ export default function Footer() {
 
             {/* Right section - Links */}
             <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-8">
-              <FooterLinkSection title="Quick Links" links={quickLinks} />
-              <FooterLinkSection title="Services" links={services} />
+              <FooterLinkSection
+                title={t('quickLinks.title')}
+                links={quickLinks}
+              />
+              <FooterLinkSection title={t('services.title')} links={services} />
               <FooterSocial />
             </div>
           </div>

@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "title": "Support Center - AnyTrans",
+    "description": "Get help with your translation projects and find answers to common questions"
+  },
+  "header": {
+    "title": "Support Center",
+    "description": "Get help with your translation projects and find answers to common questions"
+  },
+  "search": {
+    "placeholder": "Search for help articles, FAQs, guides...",
+    "noResults": "No results found for",
+    "tryDifferent": "Try different keywords or browse categories below"
+  },
+  "quickActions": {
+    "title": "Quick Actions",
+    "liveChat": {
+      "title": "Live Chat",
+      "description": "Chat with our support team",
+      "action": "Start Chat"
+    },
+    "emailSupport": {
+      "title": "Email Support",
+      "description": "Get help via email",
+      "action": "Send Email"
+    },
+    "documentation": {
+      "title": "Documentation",
+      "description": "Browse our guides",
+      "action": "View Docs"
+    }
+  },
+  "categories": {
+    "all": "All Topics",
+    "gettingStarted": "Getting Started",
+    "translation": "Translation",
+    "billing": "Billing",
+    "account": "Account",
+    "security": "Security"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "showingResults": "Showing {count} results",
+    "questions": {
+      "howToUpload": {
+        "question": "How do I upload a document for translation?",
+        "answer": "Navigate to the Document Translator page, click \"Choose File\" or drag and drop your document. We support DOCX, PDF, XLSX, PPTX, and TXT formats up to 50MB."
+      },
+      "supportedLanguages": {
+        "question": "What languages are supported?",
+        "answer": "We support over 100 languages including English, Vietnamese, Chinese, Japanese, Korean, Spanish, French, German, and many more."
+      },
+      "translationAccuracy": {
+        "question": "How accurate are the translations?",
+        "answer": "Our AI-powered translation engine provides 95%+ accuracy. For professional translation mode, we achieve 98%+ accuracy with context-aware translation."
+      },
+      "creditSystem": {
+        "question": "How does the credit system work?",
+        "answer": "Each word translated costs 1 credit. Free users get 1,000 credits per month. Pro users get unlimited translations with advanced features."
+      },
+      "refundPolicy": {
+        "question": "Can I get a refund?",
+        "answer": "Yes, we offer a 30-day money-back guarantee for Pro subscriptions. Contact our support team to process your refund."
+      },
+      "accountSettings": {
+        "question": "How do I change my account settings?",
+        "answer": "Click on your profile in the sidebar, then select \"Settings\" to manage your account preferences, password, and notifications."
+      },
+      "dataSecurity": {
+        "question": "Is my data secure?",
+        "answer": "Yes, we use bank-level encryption (AES-256) for all data. Documents are automatically deleted after 24 hours unless you save them."
+      },
+      "fileFormats": {
+        "question": "What file formats are supported?",
+        "answer": "We support DOCX, PDF, XLSX, PPTX, TXT, and SRT (for subtitles). Maximum file size is 50MB per document."
+      }
+    }
+  },
+  "contactForm": {
+    "title": "Still need help?",
+    "description": "Send us a message and we'll get back to you within 24 hours",
+    "fields": {
+      "name": {
+        "label": "Full Name",
+        "placeholder": "John Doe"
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "john@example.com"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "How can we help?"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Describe your issue or question..."
+      }
+    },
+    "submit": "Send Message",
+    "submitting": "Sending..."
+  },
+  "additionalResources": {
+    "title": "Additional Resources",
+    "statusPage": {
+      "title": "Status Page",
+      "description": "Check the current status of our services",
+      "action": "View status"
+    },
+    "apiDocs": {
+      "title": "API Documentation",
+      "description": "Integrate AnyTrans into your applications",
+      "action": "View API docs"
+    }
+  }
+}

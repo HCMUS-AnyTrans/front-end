@@ -1,0 +1,27 @@
+{
+  "title": "404",
+  "heading": "Rất tiếc! Không tìm thấy trang",
+  "description": "Trang bạn đang tìm kiếm dường như đã đi lạc vào vũ trụ dịch thuật. Đừng lo lắng, chúng tôi sẽ giúp bạn tìm đường về!",
+  "actions": {
+    "backToHome": "Về trang chủ",
+    "goBack": "Quay lại"
+  },
+  "quickLinks": {
+    "title": "Liên kết nhanh",
+    "home": "Trang chủ",
+    "documentTranslation": "Dịch tài liệu",
+    "subtitleTranslation": "Dịch phụ đề"
+  },
+  "support": {
+    "title": "Cần trợ giúp?",
+    "description": "Đội hỗ trợ của chúng tôi luôn sẵn sàng hỗ trợ bạn",
+    "liveChat": {
+      "label": "Trò chuyện trực tuyến",
+      "desc": "Trò chuyện với đội của chúng tôi"
+    },
+    "emailSupport": {
+      "label": "Hỗ trợ qua Email",
+      "desc": "support@anytrans.com"
+    }
+  }
+}

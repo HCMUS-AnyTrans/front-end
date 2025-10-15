@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 interface UserData {
   fullName: string;
@@ -13,16 +14,19 @@ interface ProfileTabProps {
 }
 
 export default function ProfileTab({ userData }: ProfileTabProps) {
+  const t = useTranslations('common.profile.personalInfo');
+  const tActions = useTranslations('common.profile.actions');
+
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-xl border border-gray-200 p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          Personal Information
+          {t('title')}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Full Name
+              {t('fullName')}
             </label>
             <input
               type="text"
@@ -32,7 +36,7 @@ export default function ProfileTab({ userData }: ProfileTabProps) {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Email
+              {t('emailAddress')}
             </label>
             <input
               type="email"
@@ -42,7 +46,7 @@ export default function ProfileTab({ userData }: ProfileTabProps) {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Phone
+              {t('phoneNumber')}
             </label>
             <input
               type="tel"
@@ -52,7 +56,7 @@ export default function ProfileTab({ userData }: ProfileTabProps) {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Company
+              {t('company')}
             </label>
             <input
               type="text"
@@ -63,7 +67,7 @@ export default function ProfileTab({ userData }: ProfileTabProps) {
         </div>
         <div className="mt-6">
           <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors cursor-pointer">
-            Save Changes
+            {tActions('saveChanges')}
           </button>
         </div>
       </div>

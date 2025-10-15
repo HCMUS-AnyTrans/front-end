@@ -12,6 +12,7 @@ import {
   ChevronRight,
   CreditCard,
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { NotificationItem } from '@/types/notifications';
 
 type Props = {
@@ -63,6 +64,8 @@ export default function NotificationCard({
   onDelete,
   formatTimestamp,
 }: Props) {
+  const t = useTranslations('notifications.card');
+
   return (
     <div
       className={`bg-white rounded-xl sm:rounded-2xl border-2 transition-all hover:shadow-md ${
@@ -115,7 +118,11 @@ export default function NotificationCard({
                 <button
                   onClick={onTogglePin}
                   className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg transition-all cursor-pointer"
-                  title={notification.isPinned ? 'Unpin' : 'Pin'}
+                  title={
+                    notification.isPinned
+                      ? t('actions.unpin')
+                      : t('actions.pin')
+                  }
                 >
                   <Pin
                     className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${
@@ -129,7 +136,9 @@ export default function NotificationCard({
                   onClick={onToggleRead}
                   className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg transition-all cursor-pointer"
                   title={
-                    notification.isRead ? 'Mark as unread' : 'Mark as read'
+                    notification.isRead
+                      ? t('actions.markUnread')
+                      : t('actions.markRead')
                   }
                 >
                   <CheckCheck
@@ -141,7 +150,7 @@ export default function NotificationCard({
                 <button
                   onClick={onDelete}
                   className="p-1.5 sm:p-2 hover:bg-red-50 rounded-lg transition-all cursor-pointer"
-                  title="Delete"
+                  title={t('actions.delete')}
                 >
                   <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 hover:text-red-600" />
                 </button>
@@ -162,20 +171,22 @@ export default function NotificationCard({
                   {notification.metadata.wordsTranslated !== undefined && (
                     <span className="whitespace-nowrap">
                       {notification.metadata.wordsTranslated.toLocaleString()}{' '}
-                      words
+                      {t('metadata.wordsTranslated')}
                     </span>
                   )}
                   {notification.metadata.creditsUsed !== undefined && (
                     <span className="flex items-center gap-1 whitespace-nowrap">
                       <CreditCard className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                      {notification.metadata.creditsUsed} credits
+                      {notification.metadata.creditsUsed}{' '}
+                      {t('metadata.creditsUsed')}
                     </span>
                   )}
                   {notification.metadata.creditsRemaining !== undefined &&
                     notification.metadata.totalCredits !== undefined && (
                       <span className="font-medium text-amber-600 whitespace-nowrap">
                         {notification.metadata.creditsRemaining}/
-                        {notification.metadata.totalCredits} credits remaining
+                        {notification.metadata.totalCredits}{' '}
+                        {t('metadata.creditsRemaining')}
                       </span>
                     )}
                 </div>
@@ -193,7 +204,7 @@ export default function NotificationCard({
               </div>
               {notification.category === 'translation' && (
                 <button className="text-[#4169E1] hover:text-[#1e3a8a] font-medium flex items-center gap-1 cursor-pointer whitespace-nowrap">
-                  View details
+                  {t('viewDetails')}
                   <ChevronRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 </button>
               )}

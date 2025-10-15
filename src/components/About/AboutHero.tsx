@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { Sparkles } from 'lucide-react';
 import { AboutHeroProps } from '@/types/about';
 
 export default function AboutHero({ stats }: AboutHeroProps) {
+  const t = useTranslations('about.hero');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -30,25 +32,23 @@ export default function AboutHero({ stats }: AboutHeroProps) {
           }`}
         >
           <Sparkles className="w-4 h-4 animate-pulse" />
-          <span className="text-sm font-medium">About Anytrans</span>
+          <span className="text-sm font-medium">{t('badge')}</span>
         </div>
         <h1
           className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 transition-all duration-700 delay-100 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          Breaking Language Barriers,
+          {t('title.part1')}
           <br />
-          One Translation at a Time
+          {t('title.part2')}
         </h1>
         <p
           className={`text-lg sm:text-xl text-blue-100 max-w-3xl mx-auto mb-6 sm:mb-8 transition-all duration-700 delay-200 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          We&apos;re on a mission to make professional translation accessible to
-          everyone, empowering global communication through innovative AI
-          technology.
+          {t('description')}
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto mt-8 sm:mt-12">

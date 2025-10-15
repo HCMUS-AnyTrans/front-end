@@ -17,11 +17,15 @@ interface Plan {
 interface PricingGridProps {
   plans: Plan[];
   selectedTab: string;
+  hoveredCard?: string | null;
+  onCardHover?: (cardId: string | null) => void;
 }
 
 export default function PricingGrid({
   plans,
   selectedTab,
+  hoveredCard,
+  onCardHover,
 }: PricingGridProps) {
   return (
     <div className="flex flex-wrap items-center justify-center gap-20 md:gap-8 w-full">

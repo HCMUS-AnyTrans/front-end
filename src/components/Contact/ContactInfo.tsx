@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { MapPin, Clock } from 'lucide-react';
 import { ContactInfoProps } from '@/types/contact';
 
 export default function ContactInfo({ offices, reasons }: ContactInfoProps) {
+  const t = useTranslations('contact.info');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -25,10 +27,10 @@ export default function ContactInfo({ offices, reasons }: ContactInfoProps) {
           </div>
           <div>
             <h3 className="text-xl font-bold text-gray-900">
-              Office Locations
+              {t('officeLocations.title')}
             </h3>
             <p className="text-sm text-gray-600">
-              Visit us at our offices worldwide
+              {t('officeLocations.subtitle')}
             </p>
           </div>
         </div>
@@ -60,27 +62,39 @@ export default function ContactInfo({ offices, reasons }: ContactInfoProps) {
             <Clock className="w-6 h-6 text-[#1e3a8a]" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-gray-900">Working Hours</h3>
-            <p className="text-sm text-gray-600">When you can reach us</p>
+            <h3 className="text-xl font-bold text-gray-900">
+              {t('workingHours.title')}
+            </h3>
+            <p className="text-sm text-gray-600">
+              {t('workingHours.subtitle')}
+            </p>
           </div>
         </div>
 
         <div className="space-y-3">
           <div className="flex justify-between items-center p-2 rounded-lg hover:bg-gray-50 transition-all duration-300">
-            <span className="text-gray-600">Monday - Friday</span>
+            <span className="text-gray-600">
+              {t('workingHours.schedule.weekdays.label')}
+            </span>
             <span className="font-semibold text-gray-900">
-              9:00 AM - 6:00 PM
+              {t('workingHours.schedule.weekdays.hours')}
             </span>
           </div>
           <div className="flex justify-between items-center p-2 rounded-lg hover:bg-gray-50 transition-all duration-300">
-            <span className="text-gray-600">Saturday</span>
+            <span className="text-gray-600">
+              {t('workingHours.schedule.saturday.label')}
+            </span>
             <span className="font-semibold text-gray-900">
-              10:00 AM - 4:00 PM
+              {t('workingHours.schedule.saturday.hours')}
             </span>
           </div>
           <div className="flex justify-between items-center p-2 rounded-lg hover:bg-gray-50 transition-all duration-300">
-            <span className="text-gray-600">Sunday</span>
-            <span className="font-semibold text-gray-900">Closed</span>
+            <span className="text-gray-600">
+              {t('workingHours.schedule.sunday.label')}
+            </span>
+            <span className="font-semibold text-gray-900">
+              {t('workingHours.schedule.sunday.hours')}
+            </span>
           </div>
         </div>
 
@@ -90,7 +104,7 @@ export default function ContactInfo({ offices, reasons }: ContactInfoProps) {
             <span className="relative inline-flex size-3 rounded-full bg-sky-500"></span>
           </span>
           <p className="text-sm text-[#1e3a8a]">
-            <strong>24/7 Support:</strong> Live chat available anytime
+            {t('workingHours.support247')}
           </p>
         </div>
       </div>
@@ -101,7 +115,7 @@ export default function ContactInfo({ offices, reasons }: ContactInfoProps) {
           isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
         }`}
       >
-        <h3 className="text-xl font-bold mb-4">Why Contact Us?</h3>
+        <h3 className="text-xl font-bold mb-4">{t('whyContactUs.title')}</h3>
         <div className="space-y-3">
           {reasons.map((reason, idx) => {
             const Icon = reason.icon;

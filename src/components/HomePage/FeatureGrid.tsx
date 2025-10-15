@@ -1,7 +1,9 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { Film, Check, Zap, Shield, Globe } from 'lucide-react';
+import { Link } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
 import {
   FeatureDetailSection,
@@ -11,45 +13,45 @@ import {
 } from '@/components/Features/shared';
 
 export default function FeatureGrid() {
+  const t = useTranslations('home.featureGrid');
+
   const features = [
     {
-      title: 'Document Translation',
-      description:
-        'Transform your business documents, reports, and presentations into any language while maintaining perfect formatting, layout, and professional quality. Powered by advanced AI technology.',
+      title: t('documentTranslation.title'),
+      description: t('documentTranslation.description'),
       features: [
-        'Support for DOCX, PDF, XLSX, PPTX formats',
-        'Preserve original formatting and layout',
-        'Batch processing for multiple files',
-        'AI-powered contextual translation',
+        t('documentTranslation.features.format'),
+        t('documentTranslation.features.formatting'),
+        t('documentTranslation.features.batch'),
+        t('documentTranslation.features.ai'),
       ],
       benefits: [
-        { icon: Zap, text: 'Fast Processing' },
-        { icon: Shield, text: 'Secure & Private' },
-        { icon: Globe, text: '100+ Languages' },
+        { icon: Zap, text: t('documentTranslation.benefits.fastProcessing') },
+        { icon: Shield, text: t('documentTranslation.benefits.secure') },
+        { icon: Globe, text: t('documentTranslation.benefits.languages') },
       ] as Benefit[],
       imagePosition: 'right' as const,
       gradient: 'from-blue-500 to-indigo-600',
-      ctaText: 'Try Document Translation',
+      ctaText: t('documentTranslation.cta'),
       ctaHref: '/features/document-translation',
     },
     {
-      title: 'Subtitle Translation',
-      description:
-        'Translate video subtitles with perfect timing synchronization. Support for all major subtitle formats with intelligent context-aware translation that preserves meaning and timing.',
+      title: t('subtitleTranslation.title'),
+      description: t('subtitleTranslation.description'),
       features: [
-        'Support for SRT, VTT, ASS, SSA formats',
-        'Perfect timing synchronization',
-        'Real-time preview and editing',
-        'Context-aware subtitle adaptation',
+        t('subtitleTranslation.features.format'),
+        t('subtitleTranslation.features.timing'),
+        t('subtitleTranslation.features.preview'),
+        t('subtitleTranslation.features.contextAware'),
       ],
       benefits: [
-        { icon: Film, text: 'Video Ready' },
-        { icon: Zap, text: 'Auto Sync' },
-        { icon: Check, text: 'Quality Check' },
+        { icon: Film, text: t('subtitleTranslation.benefits.videoReady') },
+        { icon: Zap, text: t('subtitleTranslation.benefits.autoSync') },
+        { icon: Check, text: t('subtitleTranslation.benefits.qualityCheck') },
       ] as Benefit[],
       imagePosition: 'left' as const,
       gradient: 'from-purple-500 to-pink-600',
-      ctaText: 'Try Subtitle Translation',
+      ctaText: t('subtitleTranslation.cta'),
       ctaHref: '/features/subtitle-translation',
     },
   ];
@@ -64,14 +66,14 @@ export default function FeatureGrid() {
         <FeatureSectionHeader
           title={
             <>
-              Professional Tools for
+              {t('header.title.part1')}
               <br />
               <span className="bg-gradient-to-r from-[#4169E1] to-[#1e3a8a] bg-clip-text text-transparent">
-                Every Translation Need
+                {t('header.title.highlight')}
               </span>
             </>
           }
-          description="Choose the right tool for your project. Both powered by state-of-the-art AI technology for professional results."
+          description={t('header.description')}
           align="center"
           className="mb-16 lg:mb-20"
         />
@@ -86,14 +88,13 @@ export default function FeatureGrid() {
         {/* Bottom CTA */}
         <div className="mt-20 text-center bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8 lg:p-12">
           <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
-            Ready to get started?
+            {t('bottomCTA.title')}
           </h3>
           <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
-            Join thousands of users who trust Anytrans for their translation
-            needs. Start your free trial today.
+            {t('bottomCTA.description')}
           </p>
           <Button variant="gradient-primary" size="hero" asChild>
-            <a href="/signup">Start Free Trial</a>
+            <Link href="/signup">{t('bottomCTA.button')}</Link>
           </Button>
         </div>
       </div>

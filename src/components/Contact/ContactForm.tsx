@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { Send, CheckCircle2 } from 'lucide-react';
 import { ContactFormData, ContactFormProps } from '@/types/contact';
 import { Input } from '@/components/ui/input';
@@ -15,6 +16,7 @@ import {
 } from '@/components/ui/select';
 
 export default function ContactForm({ onSubmit }: ContactFormProps) {
+  const t = useTranslations('contact.form');
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
@@ -52,12 +54,8 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
         isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
       }`}
     >
-      <h2 className="text-2xl font-bold text-gray-900 mb-2">
-        Send us a Message
-      </h2>
-      <p className="text-gray-600 mb-6">
-        Fill out the form below and we'll get back to you shortly.
-      </p>
+      <h2 className="text-2xl font-bold text-gray-900 mb-2">{t('title')}</h2>
+      <p className="text-gray-600 mb-6">{t('subtitle')}</p>
 
       {submitted ? (
         <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center animate-fade-in-scale">
@@ -65,17 +63,15 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             <CheckCircle2 className="w-8 h-8 text-green-600" />
           </div>
           <h3 className="text-xl font-bold text-gray-900 mb-2">
-            Message Sent!
+            {t('successMessage.title')}
           </h3>
-          <p className="text-gray-600">
-            Thank you for contacting us. We&apos;ll respond within 24 hours.
-          </p>
+          <p className="text-gray-600">{t('successMessage.description')}</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-semibold text-gray-900 mb-2">
-              Full Name
+              {t('fields.name.label')}
             </label>
             <Input
               type="text"
@@ -83,14 +79,14 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
               value={formData.name}
               onChange={handleChange}
               required
-              placeholder="John Doe"
+              placeholder={t('fields.name.placeholder')}
               className="h-11 px-4 focus-visible:ring-[#4169E1]"
             />
           </div>
 
           <div>
             <label className="block text-sm font-semibold text-gray-900 mb-2">
-              Email Address
+              {t('fields.email.label')}
             </label>
             <Input
               type="email"
@@ -98,14 +94,14 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
               value={formData.email}
               onChange={handleChange}
               required
-              placeholder="john@example.com"
+              placeholder={t('fields.email.placeholder')}
               className="h-11 px-4 focus-visible:ring-[#4169E1]"
             />
           </div>
 
           <div>
             <label className="block text-sm font-semibold text-gray-900 mb-2">
-              Subject
+              {t('fields.subject.label')}
             </label>
             <Select
               value={formData.subject}
@@ -115,21 +111,31 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
               required
             >
               <SelectTrigger className="w-full h-16 px-4 py-5 focus:ring-[#4169E1]">
-                <SelectValue placeholder="Select a subject" />
+                <SelectValue placeholder={t('fields.subject.placeholder')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="general">General Inquiry</SelectItem>
-                <SelectItem value="support">Technical Support</SelectItem>
-                <SelectItem value="sales">Sales Question</SelectItem>
-                <SelectItem value="partnership">Partnership</SelectItem>
-                <SelectItem value="feedback">Feedback</SelectItem>
+                <SelectItem value="general">
+                  {t('fields.subject.options.general')}
+                </SelectItem>
+                <SelectItem value="support">
+                  {t('fields.subject.options.support')}
+                </SelectItem>
+                <SelectItem value="sales">
+                  {t('fields.subject.options.sales')}
+                </SelectItem>
+                <SelectItem value="partnership">
+                  {t('fields.subject.options.partnership')}
+                </SelectItem>
+                <SelectItem value="feedback">
+                  {t('fields.subject.options.feedback')}
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div>
             <label className="block text-sm font-semibold text-gray-900 mb-2">
-              Message
+              {t('fields.message.label')}
             </label>
 
             <Textarea
@@ -138,7 +144,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
               onChange={handleChange}
               required
               rows={10}
-              placeholder="Tell us how we can help you..."
+              placeholder={t('fields.message.placeholder')}
               className=" px-4 py-3 focus-visible:ring-[#4169E1]"
             />
           </div>
@@ -150,13 +156,13 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             className="w-full py-6 rounded-md "
           >
             <Send className="w-5 h-5" />
-            Send Message
+            {t('submitButton')}
           </Button>
 
           {/* Contact Illustration */}
           <div className="mt-4 flex justify-center">
             <img
-              src="/contact-illustration.jpg"
+              src="/banner/contact-illustration.jpg"
               alt="Contact Support Illustration"
               className="w-full max-w-md h-auto rounded-2xl opacity-90 hover:opacity-100 transition-opacity duration-300"
             />

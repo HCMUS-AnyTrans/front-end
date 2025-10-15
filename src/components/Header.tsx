@@ -2,48 +2,20 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { usePathname, Link } from '@/i18n/routing';
 import NavigationLink from './Layout/Header/NavigationLink';
 import FeaturesDropdown from './Layout/Header/FeaturesDropdown';
 import AuthButtons from './Layout/Header/AuthButtons';
 import MobileMenu from './Layout/Header/MobileMenu';
-
-const navLinks = [
-  { href: '/pricing', label: 'Pricing' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
-];
+import LocaleSwitcher from './LocaleSwitcher';
 
 export default function Header() {
+  const t = useTranslations('header');
+  const pathname = usePathname();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileFeaturesOpen, setIsMobileFeaturesOpen] = useState(false);
-  const [pathname, setPathname] = useState('');
-
-  // Track pathname changes
-  useEffect(() => {
-    setPathname(window.location.pathname);
-
-    const handleLocationChange = () => {
-      setPathname(window.location.pathname);
-    };
-
-    window.addEventListener('popstate', handleLocationChange);
-
-    const handleClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const link = target.closest('a');
-      if (link && link.href.startsWith(window.location.origin)) {
-        setTimeout(handleLocationChange, 0);
-      }
-    };
-
-    document.addEventListener('click', handleClick);
-
-    return () => {
-      window.removeEventListener('popstate', handleLocationChange);
-      document.removeEventListener('click', handleClick);
-    };
-  }, []);
 
   // Close mobile menu on resize to desktop
   useEffect(() => {
@@ -67,10 +39,16 @@ export default function Header() {
   }, [isMobileMenuOpen]);
 
   const isActive = (href: string) => {
-    if (href === '/') return pathname === '/' || pathname === '/dashboard';
+    if (href === '/') return pathname === '/';
     if (href === '/features') return pathname.startsWith('/features');
     return pathname === href;
   };
+
+  const navLinks = [
+    { href: '/pricing', label: t('navigation.pricing') },
+    { href: '/about', label: t('navigation.about') },
+    { href: '/contact', label: t('navigation.contact') },
+  ];
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
@@ -82,9 +60,13 @@ export default function Header() {
       <header className="font-medium sticky top-0 z-50 w-full bg-white/70 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         <div className="flex items-center justify-between w-full max-w-7xl mx-auto px-4 sm:px-6 py-3 lg:py-4">
           {/* Logo */}
-          <a href="/" className="flex items-center hover:scale-102 transition-all duration-300 delay-0" onClick={closeMobileMenu}>
+          <a
+            href="/"
+            className="flex items-center hover:scale-102 transition-all duration-300 delay-0"
+            onClick={closeMobileMenu}
+          >
             <img
-              src="/logo-icon-mono.svg"
+              src="/logo/logo-name-mono.svg"
               alt="anytrans"
               className="w-50 h-10"
             />
@@ -92,7 +74,11 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
-            <NavigationLink href="/" label="Home" isActive={isActive('/')} />
+            <NavigationLink
+              href="/"
+              label={t('navigation.home')}
+              isActive={isActive('/')}
+            />
 
             <FeaturesDropdown
               isActive={isActive('/features')}
@@ -112,8 +98,11 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Desktop Auth Buttons */}
-          <AuthButtons variant="desktop" />
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center gap-2">
+            <LocaleSwitcher />
+            <AuthButtons variant="desktop" />
+          </div>
 
           {/* Mobile Menu Button */}
           <button

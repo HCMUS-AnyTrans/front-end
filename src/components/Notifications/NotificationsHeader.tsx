@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { CheckCheck, Filter, ChevronDown } from 'lucide-react';
 
 type Props = {
@@ -34,15 +35,43 @@ export default function NotificationsHeader({
     system: 0,
   },
 }: Props) {
+  const t = useTranslations('notifications.header');
+
+  const filterOptions = [
+    {
+      id: 'all',
+      label: t('filters.all'),
+      count: notificationCounts.all,
+    },
+    {
+      id: 'unread',
+      label: t('filters.unread'),
+      count: notificationCounts.unread,
+    },
+    {
+      id: 'translations',
+      label: t('filters.translations'),
+      count: notificationCounts.translations,
+    },
+    {
+      id: 'billing',
+      label: t('filters.billing'),
+      count: notificationCounts.billing,
+    },
+    {
+      id: 'system',
+      label: t('filters.system'),
+      count: notificationCounts.system,
+    },
+  ];
+
   return (
     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-4">
       <div>
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">
-          Notifications
+          {t('title')}
         </h1>
-        <p className="text-xs sm:text-sm text-gray-600">
-          Stay updated on translations, system alerts, and account activity
-        </p>
+        <p className="text-xs sm:text-sm text-gray-600">{t('subtitle')}</p>
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
@@ -52,8 +81,8 @@ export default function NotificationsHeader({
             className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 border-2 border-[#4169E1] text-[#1e3a8a] hover:bg-blue-50 rounded-xl text-sm font-semibold transition-all cursor-pointer"
           >
             <CheckCheck className="w-4 h-4" />
-            <span className="hidden sm:inline">Mark all read</span>
-            <span className="sm:hidden">Mark read</span>
+            <span className="hidden sm:inline">{t('markAllRead')}</span>
+            <span className="sm:hidden">{t('markAllRead')}</span>
           </button>
         )}
 
@@ -67,7 +96,7 @@ export default function NotificationsHeader({
             }`}
           >
             <Filter className="w-4 h-4" />
-            <span>Filter</span>
+            <span>{t('filter')}</span>
             {filterType !== 'all' && (
               <span className="w-2 h-2 rounded-full bg-[#4169E1]"></span>
             )}
@@ -76,54 +105,28 @@ export default function NotificationsHeader({
 
           {showFilters && (
             <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-10">
-              {[
-                {
-                  id: 'all',
-                  label: 'All Notifications',
-                  count: notificationCounts.all,
-                },
-                {
-                  id: 'unread',
-                  label: 'Unread',
-                  count: notificationCounts.unread,
-                },
-                {
-                  id: 'translations',
-                  label: 'Translations',
-                  count: notificationCounts.translations,
-                },
-                {
-                  id: 'billing',
-                  label: 'Billing',
-                  count: notificationCounts.billing,
-                },
-                {
-                  id: 'system',
-                  label: 'System',
-                  count: notificationCounts.system,
-                },
-              ].map((type) => (
+              {filterOptions.map((filter) => (
                 <button
-                  key={type.id}
+                  key={filter.id}
                   onClick={() => {
-                    onFilterTypeChange(type.id);
+                    onFilterTypeChange(filter.id);
                     onToggleFilters();
                   }}
                   className={`w-full text-left px-4 py-2 text-sm transition-colors flex items-center justify-between cursor-pointer ${
-                    filterType === type.id
+                    filterType === filter.id
                       ? 'bg-blue-50 text-[#1e3a8a] font-medium'
                       : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
-                  <span>{type.label}</span>
+                  <span>{filter.label}</span>
                   <span
                     className={`text-xs px-2 py-1 rounded-full ${
-                      filterType === type.id
+                      filterType === filter.id
                         ? 'bg-blue-100 text-[#1e3a8a]'
                         : 'bg-gray-100 text-gray-600'
                     }`}
                   >
-                    {type.count}
+                    {filter.count}
                   </span>
                 </button>
               ))}

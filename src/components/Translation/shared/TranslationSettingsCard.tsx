@@ -34,9 +34,26 @@ const DEFAULT_TARGET_LANGUAGES: LanguageCode[] = [
   'English',
 ];
 
+interface TranslationSettingsTexts {
+  title?: string;
+  sourceLanguageLabel?: string;
+  targetLanguageLabel?: string;
+  translationModeLabel?: string;
+  sourceLanguagePlaceholder?: string;
+  targetLanguagePlaceholder?: string;
+  translationModePlaceholder?: string;
+  modeLabels?: {
+    contextAware?: string;
+    literal?: string;
+    creative?: string;
+    formal?: string;
+  };
+}
+
 interface ExtendedTranslationSettingsProps extends TranslationSettingsProps {
   showNote?: boolean;
   noteText?: string;
+  texts?: TranslationSettingsTexts;
 }
 
 export default function TranslationSettingsCard({
@@ -50,13 +67,29 @@ export default function TranslationSettingsCard({
   targetLanguageOptions = DEFAULT_TARGET_LANGUAGES,
   showNote = true,
   noteText = "Context-aware mode provides better accuracy by understanding the document's context and terminology.",
+  texts = {},
 }: ExtendedTranslationSettingsProps) {
+  // Default texts (fallback)
+  const {
+    title = 'Translation Settings',
+    sourceLanguageLabel = 'Source Language',
+    targetLanguageLabel = 'Target Language',
+    translationModeLabel = 'Translation Mode',
+    sourceLanguagePlaceholder = 'Select source language',
+    targetLanguagePlaceholder = 'Select target language',
+    translationModePlaceholder = 'Select translation mode',
+    modeLabels = {
+      contextAware: 'Context-Aware (Recommended)',
+      literal: 'Literal Translation',
+      creative: 'Creative Adaptation',
+      formal: 'Formal/Documentary',
+    },
+  } = texts;
+
   return (
     <Card className="bg-white rounded-xl shadow-sm border border-gray-200">
       <CardHeader className="p-6 pb-4">
-        <h3 className="text-lg font-semibold text-gray-900">
-          Translation Settings
-        </h3>
+        <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
       </CardHeader>
       <CardContent className="px-6 pb-6   ">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -65,11 +98,11 @@ export default function TranslationSettingsCard({
               htmlFor="source-lang"
               className="block text-sm font-semibold text-gray-900 mb-2"
             >
-              Source Language
+              {sourceLanguageLabel}
             </Label>
             <Select value={sourceLanguage} onValueChange={onChangeSource}>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select source language" />
+                <SelectValue placeholder={sourceLanguagePlaceholder} />
               </SelectTrigger>
               <SelectContent>
                 {sourceLanguageOptions.map((lang) => (
@@ -86,11 +119,11 @@ export default function TranslationSettingsCard({
               htmlFor="target-lang"
               className="block text-sm font-semibold text-gray-900 mb-2"
             >
-              Target Language
+              {targetLanguageLabel}
             </Label>
             <Select value={targetLanguage} onValueChange={onChangeTarget}>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select target language" />
+                <SelectValue placeholder={targetLanguagePlaceholder} />
               </SelectTrigger>
               <SelectContent>
                 {targetLanguageOptions.map((lang) => (
@@ -107,19 +140,19 @@ export default function TranslationSettingsCard({
               htmlFor="translation-mode"
               className="block text-sm font-semibold text-gray-900 mb-2"
             >
-              Translation Mode
+              {translationModeLabel}
             </Label>
             <Select value={translationMode} onValueChange={onChangeMode}>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select translation mode" />
+                <SelectValue placeholder={translationModePlaceholder} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="context-aware">
-                  Context-Aware (Recommended)
+                  {modeLabels.contextAware}
                 </SelectItem>
-                <SelectItem value="literal">Literal Translation</SelectItem>
-                <SelectItem value="creative">Creative Adaptation</SelectItem>
-                <SelectItem value="formal">Formal/Documentary</SelectItem>
+                <SelectItem value="literal">{modeLabels.literal}</SelectItem>
+                <SelectItem value="creative">{modeLabels.creative}</SelectItem>
+                <SelectItem value="formal">{modeLabels.formal}</SelectItem>
               </SelectContent>
             </Select>
           </div>

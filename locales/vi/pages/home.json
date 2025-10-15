@@ -1,0 +1,165 @@
+{
+  "hero": {
+    "title": {
+      "part1": "Chúng tôi ở đây để",
+      "part2": "nâng cao trải nghiệm",
+      "highlight": "Dịch thuật"
+    },
+    "description": "Dịch thông minh hơn, không khó hơn. AnyTrans mang đến cho bạn tốc độ, độ chính xác và các tính năng mới nhất để quản lý mọi nội dung một cách đơn giản",
+    "buttons": {
+      "freeTrial": "Dùng thử miễn phí",
+      "viewDemo": "Xem Demo"
+    },
+    "imageAlt": "Banner Dịch vụ Dịch thuật AnyTrans"
+  },
+  "statistics": {
+    "activeUser": "Người dùng tích cực",
+    "fileTranslation": "Dịch tệp tin",
+    "subtitleTranslation": "Dịch phụ đề"
+  },
+  "featureGrid": {
+    "header": {
+      "title": {
+        "part1": "Công cụ chuyên nghiệp cho",
+        "highlight": "Mọi nhu cầu dịch thuật"
+      },
+      "description": "Chọn công cụ phù hợp cho dự án của bạn. Cả hai đều được hỗ trợ bởi công nghệ AI tiên tiến để đạt kết quả chuyên nghiệp."
+    },
+    "documentTranslation": {
+      "title": "Dịch Tài liệu",
+      "description": "Chuyển đổi tài liệu kinh doanh, báo cáo và bài thuyết trình sang bất kỳ ngôn ngữ nào trong khi vẫn duy trì định dạng, bố cục và chất lượng chuyên nghiệp hoàn hảo. Được hỗ trợ bởi công nghệ AI tiên tiến.",
+      "features": {
+        "format": "Hỗ trợ định dạng DOCX, PDF, XLSX, PPTX",
+        "formatting": "Giữ nguyên định dạng và bố cục gốc",
+        "batch": "Xử lý hàng loạt cho nhiều tệp",
+        "ai": "Dịch theo ngữ cảnh được hỗ trợ bởi AI"
+      },
+      "benefits": {
+        "fastProcessing": "Xử lý nhanh",
+        "secure": "Bảo mật & Riêng tư",
+        "languages": "100+ Ngôn ngữ"
+      },
+      "cta": "Dùng thử Dịch Tài liệu"
+    },
+    "subtitleTranslation": {
+      "title": "Dịch Phụ đề",
+      "description": "Dịch phụ đề video với đồng bộ thời gian hoàn hảo. Hỗ trợ tất cả các định dạng phụ đề chính với dịch thuật nhận biết ngữ cảnh thông minh, bảo toàn ý nghĩa và thời gian.",
+      "features": {
+        "format": "Hỗ trợ định dạng SRT, VTT, ASS, SSA",
+        "timing": "Đồng bộ thời gian hoàn hảo",
+        "preview": "Xem trước và chỉnh sửa theo thời gian thực",
+        "contextAware": "Điều chỉnh phụ đề theo ngữ cảnh"
+      },
+      "benefits": {
+        "videoReady": "Sẵn sàng cho Video",
+        "autoSync": "Tự động đồng bộ",
+        "qualityCheck": "Kiểm tra chất lượng"
+      },
+      "cta": "Dùng thử Dịch Phụ đề"
+    },
+    "bottomCTA": {
+      "title": "Sẵn sàng bắt đầu?",
+      "description": "Tham gia cùng hàng nghìn người dùng tin tưởng AnyTrans cho nhu cầu dịch thuật của họ. Bắt đầu dùng thử miễn phí ngay hôm nay.",
+      "button": "Dùng thử miễn phí"
+    }
+  },
+  "about": {
+    "title": {
+      "part1": "Mọi thứ bạn",
+      "highlight": "Cần để Dịch tốt hơn"
+    },
+    "description": "Nền tảng của chúng tôi giúp bạn dịch tài liệu, phụ đề và video một cách dễ dàng. Tải lên tệp DOCX, PDF hoặc PPTX và nhận bản dịch tiếng Việt ngay lập tức mà không làm mất định dạng. Dịch nội dung SRT, VTT hoặc MP4 với thời gian đồng bộ hoàn hảo, và quản lý bảng thuật ngữ của riêng bạn để giữ mọi bản dịch chính xác và nhất quán.",
+    "button": "Đọc thêm",
+    "cards": {
+      "document": {
+        "category": "Dịch thuật",
+        "title": "Dịch & Quản lý Tài liệu"
+      },
+      "subtitle": {
+        "category": "Đa phương tiện",
+        "title": "Dịch Phụ đề & Video"
+      },
+      "glossary": {
+        "category": "Năng suất",
+        "title": "Công cụ Bảng thuật ngữ & Nhất quán"
+      }
+    }
+  },
+  "pricingTabs": {
+    "header": {
+      "title": {
+        "part1": "Chọn gói",
+        "highlight": "Phù hợp với bạn"
+      },
+      "description": "Chọn gói phù hợp nhất với bạn, hãy thoải mái liên hệ với chúng tôi"
+    },
+    "tabs": {
+      "personal": "Cá nhân",
+      "enterprise": "Doanh nghiệp"
+    }
+  },
+  "reviews": {
+    "header": {
+      "title": "Người dùng nói gì về chúng tôi",
+      "description": "Tham gia cùng hàng nghìn khách hàng hài lòng tin tưởng AnyTrans cho nhu cầu dịch thuật của họ"
+    },
+    "stats": {
+      "rating": {
+        "value": "4.9",
+        "label": "Đánh giá trung bình"
+      },
+      "users": {
+        "value": "5K+",
+        "label": "Người dùng hài lòng"
+      },
+      "projects": {
+        "value": "50K+",
+        "label": "Dự án hoàn thành"
+      }
+    },
+    "testimonials": {
+      "sarah": {
+        "name": "Sarah Johnson",
+        "role": "Giám đốc Marketing",
+        "company": "TechCorp",
+        "review": "AnyTrans đã cách mạng hóa cách chúng tôi xử lý nội dung đa ngôn ngữ. Tính năng dịch tài liệu duy trì định dạng hoàn hảo và chất lượng xuất sắc.",
+        "metadata": "Đã dịch hơn 50 tài liệu marketing"
+      },
+      "miguel": {
+        "name": "Miguel Rodriguez",
+        "role": "Nhà sáng tạo nội dung",
+        "company": "MediaFlow",
+        "review": "Tính năng dịch phụ đề là một bước ngoặt. Đồng bộ thời gian hoàn hảo và giao diện cực kỳ trực quan. Rất khuyến nghị!",
+        "metadata": "Đã xử lý hơn 30 dự án video"
+      },
+      "aisha": {
+        "name": "Aisha Patel",
+        "role": "Quản lý Dự án",
+        "company": "GlobalReach",
+        "review": "Nền tảng xuất sắc cho các dự án quốc tế của chúng tôi. Tốc độ và độ chính xác của bản dịch đã cải thiện đáng kể quy trình làm việc của chúng tôi.",
+        "metadata": "Quản lý dịch thuật cho hơn 15 ngôn ngữ"
+      },
+      "david": {
+        "name": "David Chen",
+        "role": "Biên tập viên Kỹ thuật",
+        "company": "DevDocs",
+        "review": "Là một biên tập viên kỹ thuật, tôi cần bản dịch chính xác. AnyTrans mang lại kết quả chất lượng cao nhất quán trong khi vẫn giữ nguyên thuật ngữ kỹ thuật.",
+        "metadata": "Đã dịch hơn 100 tài liệu kỹ thuật"
+      },
+      "emma": {
+        "name": "Emma Thompson",
+        "role": "Chuyên viên E-learning",
+        "company": "EduTech",
+        "review": "Nền tảng giúp bản địa hóa nội dung giáo dục của chúng tôi dễ dàng. Giao diện người dùng sạch sẽ và kết quả luôn chuyên nghiệp.",
+        "metadata": "Đã bản địa hóa hơn 25 khóa học"
+      },
+      "james": {
+        "name": "James Wilson",
+        "role": "Điều phối viên Marketing",
+        "company": "StartupHub",
+        "review": "Giá trị tuyệt vời cho số tiền bỏ ra. Gói cá nhân hoàn hảo cho nhu cầu startup của chúng tôi, và chất lượng dịch thuật vượt mong đợi.",
+        "metadata": "Đã dịch nội dung cho hơn 8 thị trường"
+      }
+    }
+  }
+}

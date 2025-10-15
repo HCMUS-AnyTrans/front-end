@@ -87,13 +87,13 @@ export const team: TeamMember[] = [
   {
     name: 'Minh Nguyen',
     role: 'Developer',
-    image: '/MinhNguyen01.jpg',
+    image: 'minhnguyen.jpg',
     bio: 'Developer',
   },
   {
     name: 'Trong Nhan',
     role: 'Developer',
-    image: '/TrongNhan01.jpg',
+    image: 'trongnhan.jpg',
     bio: 'Developer',
   },
 ];

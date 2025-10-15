@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "title": "Bảng điều khiển - AnyTrans",
+    "description": "Quản lý bản dịch và theo dõi hoạt động của bạn"
+  },
+  "header": {
+    "title": "Bảng điều khiển",
+    "subtitle": "Chào mừng trở lại! Đây là tổng quan về hoạt động dịch thuật của bạn.",
+    "newTranslation": "Dịch mới",
+    "dropdown": {
+      "document": {
+        "title": "Dịch tài liệu",
+        "description": "Dịch DOCX, PDF, XLSX, PPTX"
+      },
+      "subtitle": {
+        "title": "Dịch phụ đề",
+        "description": "Dịch SRT, VTT, ASS, SSA"
+      }
+    }
+  },
+  "stats": {
+    "documentsTranslated": {
+      "title": "Tài liệu đã dịch",
+      "subtitle": "+{count} tuần này"
+    },
+    "subtitlesTranslated": {
+      "title": "Phụ đề đã dịch",
+      "subtitle": "{count} mới tháng này"
+    },
+    "totalWords": {
+      "title": "Tổng số từ",
+      "subtitle": "{count} tuần này"
+    },
+    "creditsRemaining": {
+      "title": "Tín dụng còn lại",
+      "subtitle": "{count} đã dùng tuần này"
+    }
+  },
+  "weeklyActivity": {
+    "title": "Hoạt động trong tuần",
+    "subtitle": {
+      "all": "Tất cả bản dịch tuần này",
+      "documents": "Tài liệu đã dịch tuần này",
+      "subtitles": "Phụ đề đã dịch tuần này"
+    },
+    "legend": {
+      "all": "Tất cả",
+      "documents": "Tài liệu",
+      "subtitles": "Phụ đề"
+    },
+    "filters": {
+      "doc": "Tài liệu",
+      "sub": "Phụ đề"
+    },
+    "days": {
+      "Mon": "T2",
+      "Tue": "T3",
+      "Wed": "T4",
+      "Thu": "T5",
+      "Fri": "T6",
+      "Sat": "T7",
+      "Sun": "CN"
+    }
+  },
+  "topLanguages": {
+    "title": "Ngôn ngữ hàng đầu",
+    "subtitle": "Được dịch nhiều nhất"
+  },
+  "recentActivity": {
+    "title": "Hoạt động gần đây",
+    "viewAll": "Xem tất cả",
+    "words": "từ",
+    "status": {
+      "completed": "Hoàn thành",
+      "processing": "Đang xử lý"
+    }
+  },
+  "promoBanner": {
+    "upgrade": {
+      "title": "Tăng năng suất của bạn",
+      "description": "Nâng cấp lên Pro để có giới hạn cao hơn, xử lý nhanh hơn và các tính năng cao cấp.",
+      "button": "Khám phá gói"
+    },
+    "referral": {
+      "title": "Mời bạn bè, nhận tín dụng",
+      "description": "Chia sẻ Anytrans với đồng đội của bạn và kiếm thêm tín dụng dịch thuật cho mỗi lần đăng ký.",
+      "button": "Mời ngay"
+    }
+  }
+}
