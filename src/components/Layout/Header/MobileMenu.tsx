@@ -1,6 +1,10 @@
+'use client';
+
 import React from 'react';
 import { ChevronRight, X } from 'lucide-react';
 import AuthButtons from './AuthButtons';
+import LocaleSwitcher from './LocaleSwitcher';
+import { useTranslations } from 'next-intl';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -11,17 +15,6 @@ interface MobileMenuProps {
   isActive: (href: string) => boolean;
 }
 
-const navItems = [
-  { href: '/pricing', label: 'Pricing' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
-];
-
-const featureItems = [
-  { href: '/features/document-translation', label: 'Document Translation' },
-  { href: '/features/subtitle-translation', label: 'Subtitle Translation' },
-];
-
 export default function MobileMenu({
   isOpen,
   pathname,
@@ -30,6 +23,25 @@ export default function MobileMenu({
   onToggleFeatures,
   isActive,
 }: MobileMenuProps) {
+  const t = useTranslations('header');
+
+  const navItems = [
+    { href: '/pricing', label: t('navigation.pricing') },
+    { href: '/about', label: t('navigation.about') },
+    { href: '/contact', label: t('navigation.contact') },
+  ];
+
+  const featureItems = [
+    {
+      href: '/features/document-translation',
+      label: t('featuresDropdown.documentTranslation.title'),
+    },
+    {
+      href: '/features/subtitle-translation',
+      label: t('featuresDropdown.subtitleTranslation.title'),
+    },
+  ];
+
   return (
     <>
       {/* Overlay */}
@@ -48,15 +60,20 @@ export default function MobileMenu({
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a]">
-          <h2 className="font-bold text-xl text-white">Menu</h2>
-          <button
-            onClick={onClose}
-            className="p-2 rounded-lg text-white hover:bg-white/20 transition-all duration-300 active:scale-95 cursor-pointer"
-            aria-label="Close menu"
-          >
-            <X className="w-6 h-6" />
-          </button>
+        <div className="flex items-center justify-between p-3 border-b border-gray-200 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a]">
+          <h2 className="font-bold text-xl text-white">{t('mobileMenu.title')}</h2>
+          <div className="flex items-center gap-2">
+            <div className="[&_button]:!text-white [&_button]:hover:!bg-white/20 [&_svg]:!text-white [&_button]:hover:!text-white [&_button:hover_svg]:!text-white">
+              <LocaleSwitcher />
+            </div>
+            <button
+              onClick={onClose}
+              className="p-2 rounded-lg text-white hover:bg-white/20 transition-all duration-300 active:scale-95 cursor-pointer"
+              aria-label={t('mobileMenu.closeMenu')}
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
         </div>
 
         {/* Content */}
@@ -72,7 +89,7 @@ export default function MobileMenu({
               }`}
               onClick={onClose}
             >
-              <span>Home</span>
+              <span>{t('navigation.home')}</span>
               <div
                 className={`w-2 h-2 bg-[#4169E1] rounded-full transition-all duration-300 ${
                   isActive('/') ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
@@ -90,7 +107,7 @@ export default function MobileMenu({
                     : 'text-gray-700 hover:bg-gray-50 active:scale-98'
                 }`}
               >
-                <span>Features</span>
+                <span>{t('navigation.features')}</span>
                 <ChevronRight
                   className={`w-5 h-5 transition-transform duration-300 ${
                     isFeaturesOpen ? 'rotate-90' : ''

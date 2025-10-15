@@ -35,7 +35,8 @@
         "Tài liệu marketing và brochure",
         "Tài liệu kỹ thuật"
       ],
-      "cta": "Dùng thử Dịch Tài liệu"
+      "cta": "Dùng thử Dịch Tài liệu",
+      "mockupSubDomain": "doc-trans"
     },
     "subtitleTranslation": {
       "title": "Dịch Phụ đề",
@@ -55,7 +56,8 @@
         "Video đào tạo doanh nghiệp",
         "Nội dung mạng xã hội"
       ],
-      "cta": "Dùng thử Dịch Phụ đề"
+      "cta": "Dùng thử Dịch Phụ đề",
+      "mockupSubDomain": "sub-trans"
     }
   },
   "comparison": {

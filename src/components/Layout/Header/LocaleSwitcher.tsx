@@ -39,7 +39,7 @@ export default function LocaleSwitcher() {
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
         disabled={isPending}
-        className="relative flex items-center gap-1.5 px-3 xl:px-5 py-2.5 rounded-lg font-medium text-sm xl:text-[15px] transition-all duration-300 cursor-pointer text-gray-600 hover:text-gray-900 hover:bg-gray-50 disabled:opacity-50"
+        className="relative flex items-center gap-1.5 px-3 xl:px-5 py-2.5 rounded-lg font-medium text-sm xl:text-[15px] transition-all duration-300 cursor-pointer text-gray-600 hover:text-gray-900 hover:bg-gray-500/10 disabled:opacity-50"
         aria-label="Change language"
       >
         <Globe className="w-4 h-4" />

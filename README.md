@@ -129,9 +129,9 @@ Anytrans is a modern, AI-powered translation platform that enables users to tran
 
 ### Form & Validation
 
-- **React Hook Form 7.63** - Performant form management
+- **React Hook Form 7.63.0** - Performant form management
 - **Zod 4.1.11** - TypeScript-first schema validation
-- **@hookform/resolvers** - Form validation resolvers
+- **@hookform/resolvers 5.2.2** - Form validation resolvers
 
 ### State Management
 
@@ -140,21 +140,25 @@ Anytrans is a modern, AI-powered translation platform that enables users to tran
 
 ### Development Tools
 
-- **Turbopack** - Fast bundler for Next.js
-- **ESLint 9** - Code linting
-- **Prettier 3.6** - Code formatting
+- **Turbopack** - Fast bundler for Next.js (dev mode)
+- **ESLint 9** - Code linting with next config
+- **Prettier 3.6.2** - Code formatting
 - **PostCSS** - CSS processing
+- **TypeScript 5.x** - Static type checking
 
 ### Internationalization
 
-- **next-intl** - Internationalization for Next.js
+- **next-intl 4.3.12** - Internationalization for Next.js
 - **Middleware** - Automatic locale detection and routing
+- **Supports** - English (en) and Vietnamese (vi)
 
 ### Additional Libraries
 
-- **Sonner** - Toast notifications
-- **Class Variance Authority** - CSS class management
-- **clsx & tailwind-merge** - Conditional styling
+- **Sonner 2.0.7** - Toast notifications
+- **Class Variance Authority 0.7.1** - CSS class management
+- **clsx 2.1.1 & tailwind-merge 3.3.1** - Conditional styling
+- **tailwindcss-animate 1.0.7** - Animation utilities
+- **@radix-ui/react-icons 1.3.2** - Icon library
 
 ## 📁 Project Structure
 
@@ -208,61 +212,89 @@ anytrans-frontend/
 │   │   │   └── shared/         # Shared feature components
 │   │   ├── HomePage/           # Homepage sections
 │   │   ├── Layout/             # Layout components
+│   │   │   ├── Header/         # Header components
+│   │   │   │   ├── AuthButtons.tsx
+│   │   │   │   ├── FeaturesDropdown.tsx
+│   │   │   │   ├── LocaleSwitcher.tsx
+│   │   │   │   ├── MobileMenu.tsx
+│   │   │   │   ├── NavigationLink.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── Footer/         # Footer components
+│   │   │   ├── Sidebar/        # Sidebar components
+│   │   │   └── index.ts
 │   │   ├── Notifications/      # Notification components
 │   │   ├── Pricing/            # Pricing components
 │   │   ├── Support/            # Support components
 │   │   ├── Translation/        # Translation features
 │   │   ├── TranslationHistory/ # History components
-│   │   ├── Header.tsx          # Global header
-│   │   ├── Footer.tsx          # Global footer
-│   │   └── LocaleSwitcher.tsx  # Language switcher
+│   │   ├── Header.tsx          # Global header component
+│   │   ├── Footer.tsx          # Global footer component
+│   │   └── index.ts            # Component exports
 │   │
 │   ├── contexts/               # React contexts
-│   │   └── AccountDialogContext.tsx
+│   │   ├── AccountDialogContext.tsx
+│   │   └── index.ts
 │   │
 │   ├── hooks/                  # Custom React hooks
-│   │   └── use-media-query.ts
+│   │   ├── use-media-query.ts
+│   │   └── index.ts
 │   │
-│   ├── lib/                    # Utility libraries
+│   ├── lib/                    # Utility libraries & data
 │   │   ├── about-data.ts      # About page data
 │   │   ├── contact-data.ts    # Contact info
 │   │   ├── pricing-data.ts    # Pricing data
 │   │   ├── pricing-plans.ts   # Plan configurations
-│   │   └── prefs.ts           # User preferences
+│   │   ├── prefs.ts           # User preferences
+│   │   └── index.ts           # Library exports
 │   │
 │   ├── i18n/                   # Internationalization
 │   │   ├── request.ts         # i18n configuration
 │   │   └── routing.ts         # Locale routing
 │   │
-│   └── types/                  # TypeScript types
-│       ├── about.ts
-│       ├── account.ts
-│       ├── contact.ts
-│       ├── dashboard.ts
-│       ├── notifications.ts
-│       ├── pricing.ts
-│       ├── sidebar.ts
-│       ├── support.ts
-│       ├── translation-history.ts
-│       └── translation.ts
+│   ├── types/                  # TypeScript types
+│   │   ├── about.ts
+│   │   ├── account.ts
+│   │   ├── contact.ts
+│   │   ├── dashboard.ts
+│   │   ├── notifications.ts
+│   │   ├── pricing.ts
+│   │   ├── sidebar.ts
+│   │   ├── support.ts
+│   │   ├── translation-history.ts
+│   │   ├── translation.ts
+│   │   └── index.ts
+│   │
+│   └── index.ts                # Main exports
 │
 ├── components/                 # shadcn/ui components
 │   └── ui/
+│       ├── accordion.tsx
+│       ├── avatar.tsx
 │       ├── button.tsx
 │       ├── card.tsx
+│       ├── checkbox.tsx
 │       ├── dialog.tsx
+│       ├── dropdown-menu.tsx
 │       ├── form.tsx
 │       ├── input.tsx
-│       └── ... (more UI components)
+│       ├── label.tsx
+│       ├── progress.tsx
+│       ├── radio-group.tsx
+│       ├── select.tsx
+│       ├── separator.tsx
+│       ├── sheet.tsx
+│       ├── switch.tsx
+│       ├── tabs.tsx
+│       └── textarea.tsx
 │
 ├── lib/
-│   └── utils.ts               # Utility functions
+│   └── utils.ts               # Utility functions (cn, etc.)
 │
 ├── public/                    # Static assets
-│   ├── Logo.svg
-│   ├── LogoName.svg
-│   ├── Banner-Homepage.svg
-│   └── ... (more assets)
+│   ├── banner/                # Banner images
+│   ├── icons/                 # Icon files
+│   ├── logo/                  # Logo files
+│   └── personal/              # Personal/user images
 │
 ├── locales/                  # Internationalization files
 │   ├── en/                   # English translations
@@ -271,20 +303,26 @@ anytrans-frontend/
 │   │   │   ├── home.json
 │   │   │   ├── features.json
 │   │   │   ├── about.json
-│   │   │   └── ...
+│   │   │   ├── contact.json
+│   │   │   ├── pricing.json
+│   │   │   └── support.json
 │   │   ├── features/         # Feature-specific translations
 │   │   │   ├── auth.json
 │   │   │   ├── dashboard.json
-│   │   │   └── ...
+│   │   │   ├── documentTranslation.json
+│   │   │   ├── subtitleTranslation.json
+│   │   │   └── notifications.json
 │   │   └── layout/           # Layout translations
 │   │       ├── header.json
 │   │       ├── footer.json
 │   │       └── sidebar.json
 │   └── vi/                   # Vietnamese translations
 │       └── ... (same structure)
+│
 ├── middleware.ts             # Next.js middleware for i18n
 ├── components.json            # shadcn/ui config
 ├── next.config.ts            # Next.js configuration
+├── next-env.d.ts             # Next.js TypeScript declarations
 ├── tsconfig.json             # TypeScript configuration
 ├── eslint.config.mjs         # ESLint configuration
 ├── postcss.config.mjs        # PostCSS configuration
@@ -357,16 +395,15 @@ Navigate to [http://localhost:3000](http://localhost:3000) to see the applicatio
 The project uses TypeScript path aliases for cleaner imports:
 
 ```typescript
-@/*              → Root directory
-@types/*         → src/types/*
-@components/*    → src/components/*
-@hooks/*         → src/hooks/*
-@lib/*           → src/lib/*
-@utils/*         → src/utils/*
-@contexts/*      → src/contexts/*
-@pages/*         → src/pages/*
-@styles/*        → src/styles/*
-@i18n/*          → src/i18n/*
+@/components/ui/*  → components/ui/*      (shadcn/ui components)
+@/lib/utils        → lib/utils            (utility functions)
+@/app/*            → app/*                (Next.js app directory)
+@/components/*     → src/components/*     (React components)
+@/contexts/*       → src/contexts/*       (React contexts)
+@/hooks/*          → src/hooks/*          (Custom hooks)
+@/lib/*            → src/lib/*            (Data & utilities)
+@/types/*          → src/types/*          (TypeScript types)
+@/i18n/*           → src/i18n/*           (i18n configuration)
 ```
 
 ### Component Structure
@@ -395,7 +432,7 @@ Components follow a modular structure with:
 npm run build
 ```
 
-This creates an optimized production build using Turbopack.
+This creates an optimized production build in the `.next` directory.
 
 ### Start Production Server
 
