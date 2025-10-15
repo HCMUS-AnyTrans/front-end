@@ -45,7 +45,7 @@ export default function AboutTimeline({ milestones }: AboutTimelineProps) {
                     : 'opacity-0 translate-x-12'
               }`}
               style={{
-                transitionDelay: `${idx * 200}ms`,
+                transitionDelay: isVisible ? '0ms' : `${idx * 200}ms`,
               }}
             >
               {/* Mobile timeline dot */}

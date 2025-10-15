@@ -61,7 +61,7 @@ export const milestones: Milestone[] = [
     year: '2021',
     title: 'Company Founded',
     description:
-      'AnyTrans was born from a vision to make translation accessible to everyone.',
+      'Anytrans was born from a vision to make translation accessible to everyone.',
   },
   {
     year: '2022',

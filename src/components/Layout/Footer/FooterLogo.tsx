@@ -9,13 +9,17 @@ export default function FooterLogo() {
     <div className="flex flex-col gap-4">
       <Link
         href="/"
-        className="group inline-flex items-center gap-3 w-fit transition-all duration-300 hover:opacity-80"
-        aria-label="AnyTrans - Go to homepage"
+        className="group inline-flex items-center gap-3 w-fit transition-all duration-300 hover:shadow-2xl hover:scale-102"
+        aria-label="Anytrans - Go to homepage"
       >
         {/* Logo Icon */}
         <div className="relative flex-shrink-0">
-          <div className="relative w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4169E1] to-[#1e3a8a] rounded-xl shadow-lg group-hover:shadow-2xl group-hover:scale-105 transition-all duration-300">
-            <img src="/logo/logo.svg" alt="" className="w-7 h-7" />
+          <div className="relative w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4169E1] to-[#1e3a8a] rounded-xl shadow-lg group-hover:rotate-45 transition-all duration-300">
+            <img
+              src="/logo/logo.svg"
+              alt=""
+              className="w-7 h-7 group-hover:-rotate-45 transition-all duration-300"
+            />
           </div>
         </div>
 

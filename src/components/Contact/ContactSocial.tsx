@@ -41,7 +41,7 @@ export default function ContactSocial({ socialLinks }: ContactSocialProps) {
                     : 'opacity-0 translate-y-8'
                 }`}
                 style={{
-                  transitionDelay: `${200 + idx * 100}ms`,
+                  transitionDelay: isVisible ? '0ms' : `${200 + idx * 100}ms`,
                 }}
               >
                 <Icon

@@ -44,7 +44,7 @@ export default function AuthButtons({
     <div className="flex items-center gap-3">
       <Link
         href="/login"
-        className="px-4 xl:px-5 py-2.5 rounded-lg font-semibold text-sm xl:text-[15px] text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-all duration-300"
+        className="px-4 xl:px-5 py-2.5 rounded-lg font-semibold text-sm xl:text-[15px] text-gray-600 hover:text-gray-900 hover:bg-gray-500/10 transition-all duration-300"
       >
         {t('login')}
       </Link>

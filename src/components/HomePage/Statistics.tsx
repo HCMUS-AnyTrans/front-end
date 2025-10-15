@@ -62,32 +62,32 @@ export function StatItem({
   return (
     <div
       id={`stat-${label}`}
-      className="flex flex-col lg:flex-row items-center gap-6 lg:gap-9 text-center lg:text-left transition-all duration-700 ease-out"
+      className="flex flex-col lg:flex-row items-center gap-6 lg:gap-9 text-center lg:text-left transition-all duration-500 ease-out will-change-transform group"
       style={{
         transform: isVisible
-          ? 'translateY(0) scale(1)'
-          : 'translateY(30px) scale(0.95)',
+          ? 'translate3d(0, 0, 0) scale(1)'
+          : 'translate3d(0, 30px, 0) scale(0.95)',
         opacity: isVisible ? 1 : 0,
-        transitionDelay: `${delay}ms`,
+        transitionDelay: isVisible ? '0ms' : `${delay}ms`,
       }}
     >
       <div className="flex items-center gap-9">
         <div
-          className={`${bgColor} rounded-[40px] w-24 h-24 lg:w-32 lg:h-32 flex items-center justify-center relative transition-all duration-500`}
+          className={`${bgColor} rounded-[40px] w-24 h-24 lg:w-32 lg:h-32 flex items-center justify-center relative transition-transform duration-300 will-change-transform group-hover:rotate-45`}
           style={{
-            transform: isVisible ? 'rotate(0deg)' : 'rotate(-180deg)',
-            transitionDelay: `${delay + 200}ms`,
+            transform: isVisible ? 'rotate(0deg)' : 'rotate(-90deg)',
+            transitionDelay: isVisible ? '0ms' : `${delay + 100}ms`,
           }}
         >
-          <img src={iconSrc} alt={label} className="w-8 h-8 lg:w-12 lg:h-12" />
+          <img src={iconSrc} alt={label} className="w-8 h-8 lg:w-12 lg:h-12 group-hover:-rotate-45 transition-transform duration-300" />
         </div>
       </div>
 
       <div className="flex flex-col gap-3 lg:gap-6 w-full lg:w-[165px]">
-        <div className="font-semibold text-2xl lg:text-[40px] leading-[1.3] text-foreground capitalize">
+        <div className="font-semibold text-2xl lg:text-[40px] leading-[1.3] text-foreground capitalize group-hover:scale-110 transition-transform duration-300">
           {count}+
         </div>
-        <div className="font-bold text-sm lg:text-base leading-6 text-muted-foreground font-rubik">
+        <div className="font-bold text-sm lg:text-base leading-6 text-muted-foreground font-rubik group-hover:scale-105 transition-transform duration-300">
           {label}
         </div>
       </div>

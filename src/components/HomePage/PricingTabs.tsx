@@ -13,7 +13,6 @@ export default function PricingTabs() {
   const [selectedTab, setSelectedTab] = useState<'personal' | 'enterprise'>(
     'enterprise'
   );
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -112,13 +111,13 @@ export default function PricingTabs() {
         <div className="flex flex-col items-center gap-24">
           {/* Header */}
           <div
-            className={`flex flex-col items-center gap-8 text-center transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
+            className={`flex flex-col items-center gap-8 text-center transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
           >
             <div className="flex flex-col gap-4">
               <h2 className="font-bold text-5xl lg:text-6xl leading-tight text-foreground">
                 {t('header.title.part1')}
                 <br />
-                <span className="text-brand-primary inline-block transition-all duration-1000 ease-out">
+                <span className="text-brand-primary inline-block">
                   {t('header.title.highlight')}
                 </span>
               </h2>
@@ -136,12 +135,7 @@ export default function PricingTabs() {
           </div>
 
           {/* Pricing cards */}
-          <PricingGrid
-            plans={currentPlans}
-            selectedTab={selectedTab}
-            hoveredCard={hoveredCard}
-            onCardHover={setHoveredCard}
-          />
+          <PricingGrid plans={currentPlans} selectedTab={selectedTab} />
         </div>
       </div>
     </section>
