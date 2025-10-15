@@ -28,7 +28,7 @@ export default function PricingGrid({
   onCardHover,
 }: PricingGridProps) {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-20 md:gap-8 w-full">
+    <div className="flex flex-wrap items-center justify-center md:gap-8 gap-12 w-full">
       {plans.map((plan, index) => (
         <div
           key={`${selectedTab}-${index}`}
