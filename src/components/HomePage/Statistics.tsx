@@ -103,7 +103,7 @@ export default function Statistics() {
       <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-0 lg:flex lg:items-center lg:justify-between">
           <StatItem
-            iconSrc="/user-icon.svg"
+            iconSrc="/icons/user-icon.svg"
             number="100"
             label={t('activeUser')}
             bgColor="bg-[#ecdffc]"
@@ -111,7 +111,7 @@ export default function Statistics() {
           />
 
           <StatItem
-            iconSrc="/download-icon.svg"
+            iconSrc="/icons/download-icon.svg"
             number="100"
             label={t('fileTranslation')}
             bgColor="bg-[#f9ecca]"
@@ -119,7 +119,7 @@ export default function Statistics() {
           />
 
           <StatItem
-            iconSrc="/film-icon.svg"
+            iconSrc="/icons/film-icon.svg"
             number="100"
             label={t('subtitleTranslation')}
             bgColor="bg-[#d5f3f1]"

@@ -66,7 +66,7 @@ export default function Header() {
             onClick={closeMobileMenu}
           >
             <img
-              src="/logo-icon-mono.svg"
+              src="/logo/logo-name-mono.svg"
               alt="anytrans"
               className="w-50 h-10"
             />

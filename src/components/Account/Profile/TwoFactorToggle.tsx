@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Shield } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 type TwoFactorToggleProps = {
   enabled: boolean;
@@ -12,6 +13,8 @@ export default function TwoFactorToggle({
   enabled,
   onToggle,
 }: TwoFactorToggleProps) {
+  const t = useTranslations('common.profile.twoFactor');
+
   return (
     <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
       <div className="flex items-center gap-3">
@@ -19,12 +22,8 @@ export default function TwoFactorToggle({
           <Shield className="w-5 h-5 text-green-600" />
         </div>
         <div>
-          <p className="font-semibold text-gray-900 text-sm">
-            Two-Factor Authentication
-          </p>
-          <p className="text-xs text-gray-600">
-            Add extra security to your account
-          </p>
+          <p className="font-semibold text-gray-900 text-sm">{t('title')}</p>
+          <p className="text-xs text-gray-600">{t('description')}</p>
         </div>
       </div>
       <label className="relative inline-flex items-center cursor-pointer">

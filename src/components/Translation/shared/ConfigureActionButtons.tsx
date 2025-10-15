@@ -12,6 +12,7 @@ export default function ConfigureActionButtons({
   disabled = false,
   translateButtonText = 'Start Translation',
   processingText = 'Processing...',
+  backButtonText = 'Back',
 }: ConfigureActionButtonsProps) {
   return (
     <div className="flex justify-end gap-3">
@@ -22,7 +23,7 @@ export default function ConfigureActionButtons({
         className="border-2 border-gray-300 hover:border-gray-400 rounded-xl shadow-sm h-14"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back
+        {backButtonText}
       </Button>
       <Button
         onClick={onTranslate}

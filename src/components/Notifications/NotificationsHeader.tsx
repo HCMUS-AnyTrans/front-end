@@ -71,9 +71,7 @@ export default function NotificationsHeader({
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">
           {t('title')}
         </h1>
-        <p className="text-xs sm:text-sm text-gray-600">
-          Stay updated on translations, system alerts, and account activity
-        </p>
+        <p className="text-xs sm:text-sm text-gray-600">{t('subtitle')}</p>
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
@@ -98,7 +96,7 @@ export default function NotificationsHeader({
             }`}
           >
             <Filter className="w-4 h-4" />
-            <span>Filter</span>
+            <span>{t('filter')}</span>
             {filterType !== 'all' && (
               <span className="w-2 h-2 rounded-full bg-[#4169E1]"></span>
             )}

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export type ShowPasswords = {
   current: boolean;
@@ -18,18 +19,20 @@ export default function ChangePasswordSection({
   show,
   onToggle,
 }: ChangePasswordSectionProps) {
+  const t = useTranslations('common.profile.changePassword');
+
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Security</h3>
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('title')}</h3>
 
       <div className="mb-6">
         <h4 className="text-sm font-semibold text-gray-900 mb-3">
-          Change Password
+          {t('changePassword')}
         </h4>
         <div className="space-y-3">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1.5">
-              Current Password
+              {t('currentPassword')}
             </label>
             <div className="relative">
               <input
@@ -52,7 +55,7 @@ export default function ChangePasswordSection({
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                New Password
+                {t('newPassword')}
               </label>
               <div className="relative">
                 <input
@@ -74,7 +77,7 @@ export default function ChangePasswordSection({
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                Confirm Password
+                {t('confirmPassword')}
               </label>
               <div className="relative">
                 <input

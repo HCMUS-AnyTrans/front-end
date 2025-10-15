@@ -10,6 +10,13 @@
     },
     "description": "Choose plan that works best for you, feel free to contact us"
   },
+  "hero": {
+    "title": {
+      "part1": "Choose Plan",
+      "highlight": "That's Right For You"
+    },
+    "description": "Choose plan that works best for you, feel free to contact us"
+  },
   "tabs": {
     "personal": "Personal",
     "enterprise": "Enterprise"
@@ -90,5 +97,31 @@
       ],
       "cta": "Buy now"
     }
-  }
+  },
+  "faqs": [
+    {
+      "question": "Can I change my plan at any time?",
+      "answer": "Yes, you can upgrade or downgrade your plan at any time. Changes will be reflected in your next billing cycle. If you upgrade mid-cycle, you'll be charged a prorated amount."
+    },
+    {
+      "question": "Is there a free trial available?",
+      "answer": "Yes! We offer a 14-day free trial for all paid plans. No credit card required. You can cancel anytime during the trial period."
+    },
+    {
+      "question": "What payment methods do you accept?",
+      "answer": "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for annual subscriptions. Enterprise customers can also pay via invoice."
+    },
+    {
+      "question": "How accurate are the translations?",
+      "answer": "Our AI-powered translation engine achieves 95%+ accuracy for major language pairs. For specialized content, we recommend our Business or Enterprise plans which include custom glossaries and human review options."
+    },
+    {
+      "question": "What file formats do you support?",
+      "answer": "We support all major document formats including PDF, DOCX, XLSX, PPTX, TXT, HTML, and more. Subtitle formats include SRT, VTT, ASS, and SSA."
+    },
+    {
+      "question": "Is my data secure?",
+      "answer": "Absolutely. We use enterprise-grade encryption, secure data centers, and comply with GDPR, CCPA, and other privacy regulations. Your documents are processed securely and deleted after translation."
+    }
+  ]
 }

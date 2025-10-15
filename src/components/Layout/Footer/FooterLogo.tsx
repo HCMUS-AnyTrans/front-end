@@ -15,7 +15,7 @@ export default function FooterLogo() {
         {/* Logo Icon */}
         <div className="relative flex-shrink-0">
           <div className="relative w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4169E1] to-[#1e3a8a] rounded-xl shadow-lg group-hover:shadow-2xl group-hover:scale-105 transition-all duration-300">
-            <img src="./Logo.svg" alt="" className="w-7 h-7" />
+            <img src="/logo/logo.svg" alt="" className="w-7 h-7" />
           </div>
         </div>
 

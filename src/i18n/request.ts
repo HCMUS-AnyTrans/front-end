@@ -14,32 +14,44 @@ export default getRequestConfig(async ({ requestLocale }) => {
     locale,
     messages: {
       common: (await import(`../../locales/${locale}/common.json`)).default,
-      header: (await import(`../../locales/${locale}/header.json`)).default,
-      footer: (await import(`../../locales/${locale}/footer.json`)).default,
-      home: (await import(`../../locales/${locale}/home.json`)).default,
-      pricing: (await import(`../../locales/${locale}/pricing.json`)).default,
-      pricingPage: (await import(`../../locales/${locale}/pricingPage.json`))
+      header: (await import(`../../locales/${locale}/layout/header.json`))
         .default,
-      about: (await import(`../../locales/${locale}/about.json`)).default,
-      contact: (await import(`../../locales/${locale}/contact.json`)).default,
-      dashboard: (await import(`../../locales/${locale}/dashboard.json`))
+      footer: (await import(`../../locales/${locale}/layout/footer.json`))
         .default,
+      home: (await import(`../../locales/${locale}/pages/home.json`)).default,
+      pricing: (await import(`../../locales/${locale}/pages/pricing.json`))
+        .default,
+
+      about: (await import(`../../locales/${locale}/pages/about.json`)).default,
+      contact: (await import(`../../locales/${locale}/pages/contact.json`))
+        .default,
+      dashboard: (
+        await import(`../../locales/${locale}/features/dashboard.json`)
+      ).default,
       documentTranslation: (
-        await import(`../../locales/${locale}/documentTranslation.json`)
+        await import(
+          `../../locales/${locale}/features/documentTranslation.json`
+        )
       ).default,
       subtitleTranslation: (
-        await import(`../../locales/${locale}/subtitleTranslation.json`)
+        await import(
+          `../../locales/${locale}/features/subtitleTranslation.json`
+        )
       ).default,
       translationHistory: (
-        await import(`../../locales/${locale}/translationHistory.json`)
+        await import(`../../locales/${locale}/features/translationHistory.json`)
       ).default,
       notifications: (
-        await import(`../../locales/${locale}/notifications.json`)
+        await import(`../../locales/${locale}/features/notifications.json`)
       ).default,
-      support: (await import(`../../locales/${locale}/support.json`)).default,
-      sidebar: (await import(`../../locales/${locale}/sidebar.json`)).default,
-      notFound: (await import(`../../locales/${locale}/notFound.json`)).default,
-      auth: (await import(`../../locales/${locale}/auth.json`)).default,
+      support: (await import(`../../locales/${locale}/pages/support.json`))
+        .default,
+      sidebar: (await import(`../../locales/${locale}/layout/sidebar.json`))
+        .default,
+      notFound: (await import(`../../locales/${locale}/pages/notFound.json`))
+        .default,
+      auth: (await import(`../../locales/${locale}/features/auth.json`))
+        .default,
     },
   };
 });

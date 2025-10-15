@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { CreditCard, Star, MoreHorizontal } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { PaymentMethod } from '@/types/account';
 
 type PaymentMethodsListProps = {
@@ -17,16 +18,17 @@ export default function PaymentMethodsList({
   onSetDefault,
   onMoreAction,
 }: PaymentMethodsListProps) {
+  const t = useTranslations('common.billing.paymentMethods');
+
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">Payment Methods</h3>
+        <h3 className="text-lg font-semibold text-gray-900">{t('title')}</h3>
         <button
           onClick={onAddCard}
           className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-all cursor-pointer"
         >
-          {/* Plus icon replaced with text; AddCardDialog provides button elsewhere if needed */}
-          + Add Card
+          {t('addCard')}
         </button>
       </div>
 
@@ -49,12 +51,13 @@ export default function PaymentMethodsList({
                   {method.isDefault && (
                     <span className="flex items-center gap-1 text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
                       <Star className="w-3 h-3 fill-current" />
-                      Default
+                      {t('default')}
                     </span>
                   )}
                 </div>
                 <p className="text-sm text-gray-600">
-                  Expires {method.expiryMonth.toString().padStart(2, '0')}/
+                  {t('expires')}{' '}
+                  {method.expiryMonth.toString().padStart(2, '0')}/
                   {method.expiryYear}
                 </p>
               </div>
@@ -65,7 +68,7 @@ export default function PaymentMethodsList({
                   onClick={() => onSetDefault(method.id)}
                   className="px-3 py-1.5 text-sm text-blue-600 hover:bg-blue-50 rounded-lg transition-all cursor-pointer"
                 >
-                  Set Default
+                  {t('setDefault')}
                 </button>
               )}
               <button

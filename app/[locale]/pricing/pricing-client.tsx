@@ -13,7 +13,6 @@ import {
 
 export default function PricingPageClient() {
   const t = useTranslations('pricing');
-  const tPage = useTranslations('pricingPage');
   const [selectedTab, setSelectedTab] = useState<'personal' | 'enterprise'>(
     'enterprise'
   );
@@ -107,28 +106,28 @@ export default function PricingPageClient() {
 
   const faqs = [
     {
-      question: tPage('faqs.0.question'),
-      answer: tPage('faqs.0.answer'),
+      question: t('faqs.0.question'),
+      answer: t('faqs.0.answer'),
     },
     {
-      question: tPage('faqs.1.question'),
-      answer: tPage('faqs.1.answer'),
+      question: t('faqs.1.question'),
+      answer: t('faqs.1.answer'),
     },
     {
-      question: tPage('faqs.2.question'),
-      answer: tPage('faqs.2.answer'),
+      question: t('faqs.2.question'),
+      answer: t('faqs.2.answer'),
     },
     {
-      question: tPage('faqs.3.question'),
-      answer: tPage('faqs.3.answer'),
+      question: t('faqs.3.question'),
+      answer: t('faqs.3.answer'),
     },
     {
-      question: tPage('faqs.4.question'),
-      answer: tPage('faqs.4.answer'),
+      question: t('faqs.4.question'),
+      answer: t('faqs.4.answer'),
     },
     {
-      question: tPage('faqs.5.question'),
-      answer: tPage('faqs.5.answer'),
+      question: t('faqs.5.question'),
+      answer: t('faqs.5.answer'),
     },
   ];
 
@@ -146,14 +145,12 @@ export default function PricingPageClient() {
       <div className="bg-gradient-to-r from-[#4169E1] via-[#1e3a8a] to-[#4169E1] text-white px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-            {tPage('hero.title.part1')}
+            {t('hero.title.part1')}
             <br />
-            <span className="inline-block">
-              {tPage('hero.title.highlight')}
-            </span>
+            <span className="inline-block">{t('hero.title.highlight')}</span>
           </h1>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-            {tPage('hero.description')}
+            {t('hero.description')}
           </p>
         </div>
       </div>

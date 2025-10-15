@@ -179,6 +179,27 @@ export default function StepConfigure({
         ]}
         showNote={true}
         noteText={t('translationSettings.note')}
+        texts={{
+          title: t('translationSettings.title'),
+          sourceLanguageLabel: t('translationSettings.sourceLanguage'),
+          targetLanguageLabel: t('translationSettings.targetLanguage'),
+          translationModeLabel: t('translationSettings.translationMode'),
+          sourceLanguagePlaceholder: t(
+            'translationSettings.selectSourceLanguage'
+          ),
+          targetLanguagePlaceholder: t(
+            'translationSettings.selectTargetLanguage'
+          ),
+          translationModePlaceholder: t(
+            'translationSettings.selectTranslationMode'
+          ),
+          modeLabels: {
+            contextAware: t('translationSettings.modes.contextAware'),
+            literal: t('translationSettings.modes.literal'),
+            creative: t('translationSettings.modes.creative'),
+            formal: t('translationSettings.modes.formal'),
+          },
+        }}
       />
 
       {/* Topic/Domain Selection */}
@@ -470,6 +491,7 @@ export default function StepConfigure({
         onTranslate={onTranslate}
         isProcessing={isTranslating}
         disabled={false}
+        backButtonText={t('actions.back')}
         translateButtonText={t('actions.startTranslation')}
         processingText={t('actions.translating')}
       />

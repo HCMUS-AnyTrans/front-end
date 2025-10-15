@@ -7,7 +7,11 @@ export default function SidebarLogo() {
   return (
     <div className="flex items-center justify-center gap-3 px-6 py-6">
       <Link href="/" className="flex items-center">
-        <img src="/logo-icon-mono.svg" alt="anytrans" className="w-40 h-10" />
+        <img
+          src="/logo/logo-name-mono.svg"
+          alt="anytrans"
+          className="w-40 h-10"
+        />
       </Link>
     </div>
   );

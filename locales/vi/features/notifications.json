@@ -5,7 +5,9 @@
   },
   "header": {
     "title": "Thông báo",
+    "subtitle": "Cập nhật tất cả hoạt động dịch thuật của bạn",
     "markAllRead": "Đánh dấu tất cả đã đọc",
+    "filter": "Lọc",
     "filters": {
       "all": "Tất cả",
       "unread": "Chưa đọc",
@@ -31,6 +33,7 @@
     "delete": "Xóa"
   },
   "card": {
+    "viewDetails": "Xem chi tiết",
     "actions": {
       "markRead": "Đánh dấu đã đọc",
       "markUnread": "Đánh dấu chưa đọc",

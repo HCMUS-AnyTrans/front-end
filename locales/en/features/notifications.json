@@ -5,7 +5,9 @@
   },
   "header": {
     "title": "Notifications",
+    "subtitle": "Stay updated with all your translation activities",
     "markAllRead": "Mark all as read",
+    "filter": "Filter",
     "filters": {
       "all": "All",
       "unread": "Unread",
@@ -31,6 +33,7 @@
     "delete": "Delete"
   },
   "card": {
+    "viewDetails": "View Details",
     "actions": {
       "markRead": "Mark as read",
       "markUnread": "Mark as unread",

@@ -104,6 +104,27 @@ export default function StepConfigure({
           'Indonesian',
         ]}
         showNote={false}
+        texts={{
+          title: t('translationSettings.title'),
+          sourceLanguageLabel: t('translationSettings.sourceLanguage'),
+          targetLanguageLabel: t('translationSettings.targetLanguage'),
+          translationModeLabel: t('translationSettings.translationMode'),
+          sourceLanguagePlaceholder: t(
+            'translationSettings.selectSourceLanguage'
+          ),
+          targetLanguagePlaceholder: t(
+            'translationSettings.selectTargetLanguage'
+          ),
+          translationModePlaceholder: t(
+            'translationSettings.selectTranslationMode'
+          ),
+          modeLabels: {
+            contextAware: t('translationSettings.modes.contextAware'),
+            literal: t('translationSettings.modes.literal'),
+            creative: t('translationSettings.modes.creative'),
+            formal: t('translationSettings.modes.formal'),
+          },
+        }}
       />
 
       {movieContext && (
@@ -159,6 +180,7 @@ export default function StepConfigure({
         onTranslate={onTranslate}
         isProcessing={isProcessing}
         disabled={!selectedFile}
+        backButtonText={t('actions.back')}
         translateButtonText={t('actions.startTranslation')}
         processingText={t('actions.processing')}
       />

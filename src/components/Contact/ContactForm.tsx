@@ -162,7 +162,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
           {/* Contact Illustration */}
           <div className="mt-4 flex justify-center">
             <img
-              src="/contact-illustration.jpg"
+              src="/banner/contact-illustration.jpg"
               alt="Contact Support Illustration"
               className="w-full max-w-md h-auto rounded-2xl opacity-90 hover:opacity-100 transition-opacity duration-300"
             />

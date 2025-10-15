@@ -39,7 +39,7 @@ export function SignupForm() {
 
   const onSubmit = (data: SignupFormData) => {
     setError(null);
-    redirect('/verify-otp');
+    redirect({ href: '/verify-otp', locale: 'en' });
     // startTransition(async () => {
     //   try {
     //     const result = await signupAction(data);
@@ -176,7 +176,7 @@ export function SignupForm() {
                             href="/terms"
                             className="text-[#4169E1] hover:text-[#1e3a8a] font-medium transition-colors duration-300"
                           >
-                            {t('termsOfService')}
+                            {chunks}
                           </Link>
                         ),
                         privacyLink: (chunks) => (
@@ -184,7 +184,7 @@ export function SignupForm() {
                             href="/privacy"
                             className="text-[#4169E1] hover:text-[#1e3a8a] font-medium transition-colors duration-300"
                           >
-                            {t('privacyPolicy')}
+                            {chunks}
                           </Link>
                         ),
                       })}

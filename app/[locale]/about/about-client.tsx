@@ -104,13 +104,13 @@ export default function AboutPageClient() {
     {
       name: t('team.minhNguyen.name'),
       role: t('team.minhNguyen.role'),
-      image: '/MinhNguyen01.jpg',
+      image: '/personal/minhnguyen.jpg',
       bio: t('team.minhNguyen.bio'),
     },
     {
       name: t('team.trongNhan.name'),
       role: t('team.trongNhan.role'),
-      image: '/TrongNhan01.jpg',
+      image: '/personal/trongnhan.jpg',
       bio: t('team.trongNhan.bio'),
     },
   ];

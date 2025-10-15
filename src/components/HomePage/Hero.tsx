@@ -106,7 +106,7 @@ export default function Hero() {
           }}
         >
           <img
-            src="/Banner-Homepage.svg"
+            src="/banner/banner-homepage.svg"
             alt={t('imageAlt')}
             className="w-full h-auto object-contain hover:scale-105 transition-all duration-300"
           />
