@@ -35,7 +35,8 @@
         "Marketing materials and brochures",
         "Technical documentation"
       ],
-      "cta": "Try Document Translation"
+      "cta": "Try Document Translation",
+      "mockupSubDomain": "doc-trans"
     },
     "subtitleTranslation": {
       "title": "Subtitle Translation",
@@ -55,7 +56,8 @@
         "Corporate training videos",
         "Social media content"
       ],
-      "cta": "Try Subtitle Translation"
+      "cta": "Try Subtitle Translation",
+      "mockupSubDomain": "sub-trans"
     }
   },
   "comparison": {

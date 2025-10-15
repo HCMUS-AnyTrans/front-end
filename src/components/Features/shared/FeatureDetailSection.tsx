@@ -20,6 +20,7 @@ export interface FeatureDetailSectionProps {
   icon?: LucideIcon;
   showIcon?: boolean;
   variant?: 'default' | 'compact';
+  mockupSubDomain: string;
 }
 
 export default function FeatureDetailSection({
@@ -35,6 +36,7 @@ export default function FeatureDetailSection({
   icon: Icon,
   showIcon = false,
   variant = 'default',
+  mockupSubDomain
 }: FeatureDetailSectionProps) {
   const bgClass = index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50';
 
@@ -104,7 +106,7 @@ export default function FeatureDetailSection({
       <div
         className={`relative ${imagePosition === 'right' ? 'lg:order-2' : 'lg:order-1'}`}
       >
-        <FeatureMockup title={title} gradient={gradient} />
+        <FeatureMockup title={title} gradient={gradient} subDomain={mockupSubDomain} />
       </div>
     </div>
   );

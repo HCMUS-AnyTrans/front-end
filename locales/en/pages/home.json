@@ -39,7 +39,8 @@
         "secure": "Secure & Private",
         "languages": "100+ Languages"
       },
-      "cta": "Try Document Translation"
+      "cta": "Try Document Translation",
+      "mockupSubDomain": "doc-trans"
     },
     "subtitleTranslation": {
       "title": "Subtitle Translation",
@@ -55,7 +56,8 @@
         "autoSync": "Auto Sync",
         "qualityCheck": "Quality Check"
       },
-      "cta": "Try Subtitle Translation"
+      "cta": "Try Subtitle Translation",
+      "mockupSubDomain": "sub-trans"
     },
     "bottomCTA": {
       "title": "Ready to get started?",

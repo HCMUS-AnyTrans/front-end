@@ -39,7 +39,8 @@
         "secure": "Bảo mật & Riêng tư",
         "languages": "100+ Ngôn ngữ"
       },
-      "cta": "Dùng thử Dịch Tài liệu"
+      "cta": "Dùng thử Dịch Tài liệu",
+      "mockupSubDomain": "doc-trans"
     },
     "subtitleTranslation": {
       "title": "Dịch Phụ đề",
@@ -55,7 +56,8 @@
         "autoSync": "Tự động đồng bộ",
         "qualityCheck": "Kiểm tra chất lượng"
       },
-      "cta": "Dùng thử Dịch Phụ đề"
+      "cta": "Dùng thử Dịch Phụ đề",
+      "mockupSubDomain": "sub-trans"
     },
     "bottomCTA": {
       "title": "Sẵn sàng bắt đầu?",
