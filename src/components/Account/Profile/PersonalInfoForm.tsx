@@ -16,9 +16,9 @@ export default function PersonalInfoForm({
   const t = useTranslations('common.profile.personalInfo');
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6">
+    <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('title')}</h3>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-semibold text-gray-900 mb-2">
             {t('fullName')}

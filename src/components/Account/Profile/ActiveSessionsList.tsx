@@ -19,7 +19,7 @@ export default function ActiveSessionsList({
   const t = useTranslations('common.profile.activeSessions');
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6">
+    <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('title')}</h3>
       <p className="text-sm text-gray-600 mb-4">{t('description')}</p>
 
@@ -27,14 +27,14 @@ export default function ActiveSessionsList({
         {sessions.map((session) => (
           <div
             key={session.id}
-            className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-blue-300 transition-all"
+            className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 border border-gray-200 rounded-lg hover:border-blue-300 transition-all"
           >
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 shrink-0 bg-blue-50 rounded-lg flex items-center justify-center">
                 <Smartphone className="w-6 h-6 text-blue-600" />
               </div>
               <div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <p className="font-semibold text-gray-900 text-sm">
                     {session.device}
                   </p>
@@ -53,7 +53,7 @@ export default function ActiveSessionsList({
             {!session.current && (
               <button
                 onClick={() => onRevoke(session.id)}
-                className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-all cursor-pointer"
+                className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-all cursor-pointer self-start sm:self-center"
               >
                 {t('revoke')}
               </button>

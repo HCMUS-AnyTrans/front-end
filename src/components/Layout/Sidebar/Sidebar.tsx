@@ -124,7 +124,7 @@ export default function Sidebar({ className }: SidebarProps) {
       </div>
 
       <div
-        className={`lg:hidden fixed top-0 left-0 z-50 bg-white w-[80vw] sm:w-[300px] h-screen flex flex-col border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${
+        className={`lg:hidden fixed top-0 left-0 z-50 bg-white w-[70vw] sm:w-[65vw] md:w-[60vw] h-screen flex flex-col border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         role="dialog"
