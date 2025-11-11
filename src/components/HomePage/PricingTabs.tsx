@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, memo } from 'react';
 import { useTranslations } from 'next-intl';
 import {
   PricingTabSelector,
@@ -8,16 +8,11 @@ import {
   PricingAnimations,
 } from '@/components/Pricing';
 
-export default function PricingTabs() {
+const PricingTabs = memo(function PricingTabs() {
   const t = useTranslations('pricing');
   const [selectedTab, setSelectedTab] = useState<'personal' | 'enterprise'>(
     'enterprise'
   );
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   const personalPlans = [
     {
@@ -110,9 +105,7 @@ export default function PricingTabs() {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center gap-24">
           {/* Header */}
-          <div
-            className={`flex flex-col items-center gap-8 text-center transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}
-          >
+          <div className="flex flex-col items-center gap-8 text-center animate-fade-in-up">
             <div className="flex flex-col gap-4">
               <h2 className="font-bold text-5xl lg:text-6xl leading-tight text-foreground">
                 {t('header.title.part1')}
@@ -127,11 +120,12 @@ export default function PricingTabs() {
             </div>
 
             {/* Tab selector */}
-            <PricingTabSelector
-              selectedTab={selectedTab}
-              onTabChange={setSelectedTab}
-              isLoaded={isLoaded}
-            />
+            <div className="animate-fade-in-up-delay-300">
+              <PricingTabSelector
+                selectedTab={selectedTab}
+                onTabChange={setSelectedTab}
+              />
+            </div>
           </div>
 
           {/* Pricing cards */}
@@ -140,4 +134,6 @@ export default function PricingTabs() {
       </div>
     </section>
   );
-}
+});
+
+export default PricingTabs;

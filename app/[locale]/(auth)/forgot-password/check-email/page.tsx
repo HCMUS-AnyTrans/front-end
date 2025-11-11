@@ -1,4 +1,9 @@
+import { routing } from '@/i18n/routing';
 import { CheckEmailClient } from './check-email-client';
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 interface CheckEmailPageProps {
   searchParams: Promise<{

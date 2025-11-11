@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
+import { routing } from "@/i18n/routing";
 import { SignupForm } from "./signup-form";
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export const metadata: Metadata = {
   title: "Sign Up",

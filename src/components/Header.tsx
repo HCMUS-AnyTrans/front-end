@@ -1,16 +1,28 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
+import dynamic from 'next/dynamic';
 import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { usePathname, Link } from '@/i18n/routing';
+import Image from 'next/image';
 import NavigationLink from './Layout/Header/NavigationLink';
-import FeaturesDropdown from './Layout/Header/FeaturesDropdown';
-import AuthButtons from './Layout/Header/AuthButtons';
-import MobileMenu from './Layout/Header/MobileMenu';
-import LocaleSwitcher from './Layout/Header/LocaleSwitcher';
 
-export default function Header() {
+// Dynamic imports for components that are not always visible
+const FeaturesDropdown = dynamic(() => import('./Layout/Header/FeaturesDropdown'), {
+  ssr: true,
+});
+const AuthButtons = dynamic(() => import('./Layout/Header/AuthButtons'), {
+  ssr: true,
+});
+const MobileMenu = dynamic(() => import('./Layout/Header/MobileMenu'), {
+  ssr: false,
+});
+const LocaleSwitcher = dynamic(() => import('./Layout/Header/LocaleSwitcher'), {
+  ssr: true,
+});
+
+const Header = memo(function Header() {
   const t = useTranslations('header');
   const pathname = usePathname();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -38,39 +50,47 @@ export default function Header() {
     };
   }, [isMobileMenuOpen]);
 
-  const isActive = (href: string) => {
+  const isActive = useCallback((href: string) => {
     if (href === '/') return pathname === '/';
     if (href === '/features') return pathname.startsWith('/features');
     return pathname === href;
-  };
+  }, [pathname]);
 
-  const navLinks = [
+  const navLinks = useMemo(() => [
     { href: '/pricing', label: t('navigation.pricing') },
     { href: '/about', label: t('navigation.about') },
     { href: '/contact', label: t('navigation.contact') },
-  ];
+  ], [t]);
 
-  const closeMobileMenu = () => {
+  const closeMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(false);
     setIsMobileFeaturesOpen(false);
-  };
+  }, []);
+
+  const handleDropdownEnter = useCallback(() => setIsDropdownOpen(true), []);
+  const handleDropdownLeave = useCallback(() => setIsDropdownOpen(false), []);
+  const toggleMobileMenu = useCallback(() => setIsMobileMenuOpen(prev => !prev), []);
+  const toggleMobileFeatures = useCallback(() => setIsMobileFeaturesOpen(prev => !prev), []);
 
   return (
     <>
       <header className="font-medium sticky top-0 z-50 w-full bg-white/70 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         <div className="flex items-center justify-between w-full max-w-7xl mx-auto px-4 sm:px-6 py-3 lg:py-4">
           {/* Logo */}
-          <a
+          <Link
             href="/"
             className="flex items-center hover:scale-102 transition-all duration-300 delay-0"
             onClick={closeMobileMenu}
           >
-            <img
+            <Image
               src="/logo/logo-name-mono.svg"
               alt="anytrans"
+              width={200}
+              height={40}
+              priority
               className="w-50 h-10"
             />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
@@ -84,8 +104,8 @@ export default function Header() {
               isActive={isActive('/features')}
               isOpen={isDropdownOpen}
               pathname={pathname}
-              onMouseEnter={() => setIsDropdownOpen(true)}
-              onMouseLeave={() => setIsDropdownOpen(false)}
+              onMouseEnter={handleDropdownEnter}
+              onMouseLeave={handleDropdownLeave}
             />
 
             {navLinks.map((link) => (
@@ -106,7 +126,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={toggleMobileMenu}
             className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-all duration-300 active:scale-95 cursor-pointer"
             aria-label="Toggle mobile menu"
             aria-expanded={isMobileMenuOpen}
@@ -126,9 +146,11 @@ export default function Header() {
         pathname={pathname}
         isFeaturesOpen={isMobileFeaturesOpen}
         onClose={closeMobileMenu}
-        onToggleFeatures={() => setIsMobileFeaturesOpen(!isMobileFeaturesOpen)}
+        onToggleFeatures={toggleMobileFeatures}
         isActive={isActive}
       />
     </>
   );
-}
+});
+
+export default Header;
