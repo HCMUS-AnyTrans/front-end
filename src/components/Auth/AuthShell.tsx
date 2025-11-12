@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import Image from 'next/image';
 
 interface AuthShellProps {
   title: string;
@@ -79,10 +80,12 @@ export function AuthShell({
           }`}
         >
           <div className="flex items-center justify-center">
-            <img
+            <Image
               src="/logo/logo-name-mono.svg"
               alt="Anytrans"
-              className="w-40 h-10 transition-transform duration-300"
+              className="transition-transform duration-300"
+              width={160}
+              height={40}
             />
           </div>
         </Link>
