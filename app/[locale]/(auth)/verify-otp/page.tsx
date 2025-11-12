@@ -5,6 +5,15 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export default function VerifyOtpPage() {
-  return <VerifyOtpClient />;
+interface VerifyOtpPageProps {
+  searchParams: Promise<{
+    email?: string;
+  }>;
+}
+
+export default async function VerifyOtpPage({
+  searchParams,
+}: VerifyOtpPageProps) {
+  const params = await searchParams;
+  return <VerifyOtpClient email={params.email} />;
 }

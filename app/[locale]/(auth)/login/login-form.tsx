@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useState, useTransition } from 'react';
+import React, { useState, useTransition, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
+import { useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 import { AuthShell, PasswordField, OAuthButtons } from '@/components/Auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,8 +24,24 @@ import { loginSchema, type LoginFormData } from '../schemas';
 
 export function LoginForm() {
   const t = useTranslations('auth.login');
+  const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const hasShownToast = useRef(false);
+
+  // Show success messages from URL params (only once)
+  useEffect(() => {
+    if (hasShownToast.current) return;
+    
+    const message = searchParams.get('message');
+    if (message === 'account_created') {
+      toast.success('Account created successfully! Please sign in.');
+      hasShownToast.current = true;
+    } else if (message === 'password_reset') {
+      toast.success('Password reset successfully! Please sign in with your new password.');
+      hasShownToast.current = true;
+    }
+  }, [searchParams]);
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),

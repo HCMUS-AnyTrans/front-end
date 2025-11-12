@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from '@/i18n/routing';
 import { toast } from 'sonner';
-import { Mail, ArrowLeft } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { AuthShell } from '@/components/Auth';
 import { Button } from '@/components/ui/button';
 import { resendPasswordEmailAction } from '../../actions';

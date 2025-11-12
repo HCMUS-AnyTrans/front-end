@@ -163,7 +163,7 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
         </form>
       </Form>
 
-      <div className="space-y-2 text-center text-sm text-gray-600">
+      <div className="space-y-2 text-center text-sm text-gray-600 mt-4">
         <p>
           Remember your password?{' '}
           <Link
