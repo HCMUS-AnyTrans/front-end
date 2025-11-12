@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
+import Image from 'next/image';
 
 export default function FooterLogo() {
   const t = useTranslations('footer.logo');
@@ -15,9 +16,11 @@ export default function FooterLogo() {
         {/* Logo Icon */}
         <div className="relative flex-shrink-0">
           <div className="relative w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#4169E1] to-[#1e3a8a] rounded-xl shadow-lg group-hover:rotate-45 transition-all duration-300">
-            <img
+            <Image
               src="/logo/logo.svg"
               alt=""
+              width={28}
+              height={28}
               className="w-7 h-7 group-hover:-rotate-45 transition-all duration-300"
             />
           </div>

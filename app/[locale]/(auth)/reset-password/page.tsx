@@ -1,4 +1,9 @@
+import { routing } from '@/i18n/routing';
 import { ResetPasswordClient } from './reset-password-client';
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 interface ResetPasswordPageProps {
   searchParams: Promise<{

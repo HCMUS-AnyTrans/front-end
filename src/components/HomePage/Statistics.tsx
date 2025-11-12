@@ -1,7 +1,9 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import { useIntersectionObserver } from '@/hooks';
 
 interface StatItemProps {
   iconSrc: string;
@@ -11,31 +13,15 @@ interface StatItemProps {
   delay: number;
 }
 
-export function StatItem({
+export const StatItem = memo(function StatItem({
   iconSrc,
   number,
   label,
   bgColor,
   delay,
 }: StatItemProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [elementRef, isVisible] = useIntersectionObserver({ threshold: 0.2 });
   const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    const element = document.getElementById(`stat-${label}`);
-    if (element) observer.observe(element);
-
-    return () => observer.disconnect();
-  }, [label]);
 
   useEffect(() => {
     if (isVisible) {
@@ -61,25 +47,17 @@ export function StatItem({
 
   return (
     <div
-      id={`stat-${label}`}
-      className="flex flex-col lg:flex-row items-center gap-6 lg:gap-9 text-center lg:text-left transition-all duration-500 ease-out will-change-transform group"
+      ref={elementRef}
+      className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-9 text-center lg:text-left animate-on-scroll-scale group ${isVisible ? 'is-visible' : ''}`}
       style={{
-        transform: isVisible
-          ? 'translate3d(0, 0, 0) scale(1)'
-          : 'translate3d(0, 30px, 0) scale(0.95)',
-        opacity: isVisible ? 1 : 0,
-        transitionDelay: isVisible ? '0ms' : `${delay}ms`,
+        transitionDelay: `${delay}ms`,
       }}
     >
       <div className="flex items-center gap-9">
         <div
           className={`${bgColor} rounded-[40px] w-24 h-24 lg:w-32 lg:h-32 flex items-center justify-center relative transition-transform duration-300 will-change-transform group-hover:rotate-45`}
-          style={{
-            transform: isVisible ? 'rotate(0deg)' : 'rotate(-90deg)',
-            transitionDelay: isVisible ? '0ms' : `${delay + 100}ms`,
-          }}
         >
-          <img src={iconSrc} alt={label} className="w-8 h-8 lg:w-12 lg:h-12 group-hover:-rotate-45 transition-transform duration-300" />
+          <Image src={iconSrc} alt={label} width={48} height={48} className="w-8 h-8 lg:w-12 lg:h-12 group-hover:-rotate-45 transition-transform duration-300" />
         </div>
       </div>
 
@@ -93,9 +71,9 @@ export function StatItem({
       </div>
     </div>
   );
-}
+});
 
-export default function Statistics() {
+const Statistics = memo(function Statistics() {
   const t = useTranslations('home.statistics');
 
   return (
@@ -129,4 +107,6 @@ export default function Statistics() {
       </div>
     </section>
   );
-}
+});
+
+export default Statistics;

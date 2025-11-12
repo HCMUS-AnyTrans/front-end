@@ -9,20 +9,34 @@ import { Toaster } from 'sonner';
 import '../globals.css';
 
 // Primary Font - Nunito (Universal font for all languages)
+// Optimized: Only loading essential weights to reduce bundle size
 const nunito = Nunito({
   variable: '--font-nunito',
   subsets: ['latin', 'vietnamese'],
-  weight: ['300', '400', '500', '600', '700', '800'],
+  weight: ['400', '600', '700'],
   display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 // Backup Font - Inter
+// Optimized: Only loading essential weights to reduce bundle size
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin', 'vietnamese'],
-  weight: ['300', '400', '500', '600', '700', '800'],
+  weight: ['400', '600', '700'],
   display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'sans-serif'],
 });
+
+export function generateViewport() {
+  return {
+    width: 'device-width',
+    initialScale: 1,
+    themeColor: '#173FB6',
+  };
+}
 
 export async function generateMetadata({
   params,
@@ -35,6 +49,15 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
+    robots: 'index, follow',
+    authors: [{ name: 'Anytrans' }],
+    keywords: 'translation, document translation, subtitle translation',
+    openGraph: {
+      type: 'website',
+      locale: locale,
+      title: t('title'),
+      description: t('description'),
+    },
   };
 }
 

@@ -1,23 +1,18 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { memo } from 'react';
 import { useTranslations } from 'next-intl';
 import { Zap, Shield, Globe } from 'lucide-react';
 import { BackgroundPattern } from '@/components/Features/shared';
 
-export default function FeaturesHero() {
+const FeaturesHero = memo(function FeaturesHero() {
   const t = useTranslations('features.hero');
-  const [isVisible, setIsVisible] = useState(false);
 
   const stats = [
     { label: t('stats.languages'), value: '100+', icon: Globe },
     { label: t('stats.processingSpeed'), value: '<5s', icon: Zap },
     { label: t('stats.security'), value: '100%', icon: Shield },
   ];
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
 
   return (
     <section className="relative w-full bg-white border-b border-gray-200 py-20 sm:py-24 overflow-hidden">
@@ -27,51 +22,24 @@ export default function FeaturesHero() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Content */}
         <div className="max-w-4xl mx-auto text-center">
-          <div
-            className="inline-block mb-6 transition-all duration-700"
-            style={{
-              transform: isVisible ? 'translateY(0)' : 'translateY(-20px)',
-              opacity: isVisible ? 1 : 0,
-            }}
-          >
+          <div className="inline-block mb-6 animate-fade-in-scale">
             <span className="text-sm font-bold tracking-wider uppercase text-[#4169E1]">
               {t('badge')}
             </span>
           </div>
 
-          <h1
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight transition-all duration-700"
-            style={{
-              transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-              opacity: isVisible ? 1 : 0,
-              transitionDelay: isVisible ? '0ms' : '100ms',
-            }}
-          >
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight animate-fade-in-up">
             {t('title.part1')}
             <br />
             <span className="text-[#4169E1]">{t('title.highlight')}</span>
           </h1>
 
-          <p
-            className="text-xl text-gray-600 max-w-2xl mx-auto mb-12 transition-all duration-700"
-            style={{
-              transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-              opacity: isVisible ? 1 : 0,
-              transitionDelay: isVisible ? '0ms' : '200ms',
-            }}
-          >
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-12 animate-fade-in-up-delay-300">
             {t('description')}
           </p>
 
           {/* Stats */}
-          <div
-            className="grid grid-cols-3 gap-8 max-w-2xl mx-auto transition-all duration-700"
-            style={{
-              transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-              opacity: isVisible ? 1 : 0,
-              transitionDelay: isVisible ? '0ms' : '300ms',
-            }}
-          >
+          <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto animate-fade-in-up-delay-500">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               return (
@@ -91,4 +59,6 @@ export default function FeaturesHero() {
       </div>
     </section>
   );
-}
+});
+
+export default FeaturesHero;

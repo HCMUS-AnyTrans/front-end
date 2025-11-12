@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -17,11 +17,6 @@ export default function PricingPageClient() {
     'enterprise'
   );
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   const personalPlans = [
     {
@@ -160,11 +155,12 @@ export default function PricingPageClient() {
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center gap-24 mb-16">
             {/* Tab selector */}
-            <PricingTabSelector
-              selectedTab={selectedTab}
-              onTabChange={setSelectedTab}
-              isLoaded={isLoaded}
-            />
+            <div className="animate-fade-in-up">
+              <PricingTabSelector
+                selectedTab={selectedTab}
+                onTabChange={setSelectedTab}
+              />
+            </div>
 
             {/* Pricing cards */}
             <PricingGrid

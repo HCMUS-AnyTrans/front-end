@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { memo } from 'react';
 import { Check, ArrowRight } from 'lucide-react';
 
 interface PricingCardProps {
@@ -14,7 +14,7 @@ interface PricingCardProps {
   contact?: boolean;
 }
 
-export default function PricingCard({
+const PricingCard = memo(function PricingCard({
   name,
   tagline,
   price,
@@ -24,11 +24,6 @@ export default function PricingCard({
   recommended = false,
   contact = false,
 }: PricingCardProps) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
 
   const isHighlighted = recommended;
   const cardBg = isHighlighted
@@ -57,14 +52,13 @@ export default function PricingCard({
     <div
       className={`group ${cardBg} rounded-3xl w-full p-8 flex flex-col relative border-2 transition-all duration-300 ease-out will-change-transform ${
         isHighlighted
-          ? 'border-transparent shadow-2xl animate-fade-in-up hover:border-yellow-400/50 hover:shadow-[0_0_40px_rgba(250,204,21,0.4)] hover:scale-[1.02] hover:-translate-y-2'
+          ? 'border-transparent shadow-2xl hover:border-yellow-400/50 hover:shadow-[0_0_40px_rgba(250,204,21,0.4)] hover:scale-[1.02] hover:-translate-y-2'
           : 'border-border shadow-lg hover:border-[#4169E1]/50 hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-2'
-      } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+      }`}
       style={{
         height: isHighlighted ? '700px' : '660px',
         ...(isHighlighted && {
-          animation:
-            'shimmer 3s ease-in-out infinite, float 6s ease-in-out infinite',
+          animation:  'shimmer 3s ease-in-out infinite, float 6s ease-in-out infinite',
         }),
       }}
     >
@@ -176,4 +170,6 @@ export default function PricingCard({
       </div>
     </div>
   );
-}
+});
+
+export default PricingCard;
