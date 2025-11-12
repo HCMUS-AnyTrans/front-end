@@ -28,12 +28,12 @@ export default function BaseDialog({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center md:p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center lg:p-4">
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
         onClick={() => onOpenChange(false)}
       />
-      <div className="relative z-50 w-full h-full md:w-auto md:h-auto flex items-center justify-center">
+      <div className="relative z-50 w-full h-full lg:w-auto lg:h-auto flex items-center justify-center">
         {children}
       </div>
     </div>

@@ -15,16 +15,16 @@ export default function ProfileSaveBar({
   const t = useTranslations('common.profile.actions');
 
   return (
-    <div className="flex justify-end gap-3">
+    <div className="flex flex-col sm:flex-row justify-end gap-3">
       <button
         onClick={onCancel}
-        className="px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all cursor-pointer"
+        className="w-full sm:w-auto px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all cursor-pointer"
       >
         {t('cancel')}
       </button>
       <button
         onClick={onSave}
-        className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-sm font-semibold shadow-lg transition-all cursor-pointer"
+        className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-sm font-semibold shadow-lg transition-all cursor-pointer"
       >
         {t('saveChanges')}
       </button>

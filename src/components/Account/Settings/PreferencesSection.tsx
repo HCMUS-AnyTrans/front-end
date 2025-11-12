@@ -39,14 +39,14 @@ export default function PreferencesSection({
 
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-xl border border-gray-200 p-6 ">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 ">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
           {t('title')}
         </h3>
 
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex-1 min-w-0">
               <p className="font-semibold text-gray-900 text-sm">
                 {t('theme.label')}
               </p>
@@ -58,7 +58,7 @@ export default function PreferencesSection({
                 onChange({ theme: value as Preferences['theme'] })
               }
             >
-              <SelectTrigger className="w-[140px]">
+              <SelectTrigger className="w-full sm:w-[140px]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -69,8 +69,8 @@ export default function PreferencesSection({
             </Select>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex-1 min-w-0">
               <p className="font-semibold text-gray-900 text-sm">
                 {t('language.label')}
               </p>
@@ -84,7 +84,7 @@ export default function PreferencesSection({
                 onChange({ language: value as Preferences['language'] })
               }
             >
-              <SelectTrigger className="w-[140px]">
+              <SelectTrigger className="w-full sm:w-[140px]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -96,12 +96,12 @@ export default function PreferencesSection({
             </Select>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="w-10 h-10 shrink-0 bg-purple-100 rounded-lg flex items-center justify-center">
                 <Calendar className="w-5 h-5 text-purple-600" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="font-semibold text-gray-900 text-sm">
                   {t('dateFormat.label')}
                 </p>
@@ -116,7 +116,7 @@ export default function PreferencesSection({
                 onChange({ dateFormat: value as Preferences['dateFormat'] })
               }
             >
-              <SelectTrigger className="w-[160px]">
+              <SelectTrigger className="w-full sm:w-[160px]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -127,12 +127,12 @@ export default function PreferencesSection({
             </Select>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="w-10 h-10 shrink-0 bg-pink-100 rounded-lg flex items-center justify-center">
                 <Clock className="w-5 h-5 text-pink-600" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="font-semibold text-gray-900 text-sm">
                   {t('timeFormat.label')}
                 </p>
@@ -147,7 +147,7 @@ export default function PreferencesSection({
                 onChange({ timeFormat: value as Preferences['timeFormat'] })
               }
             >
-              <SelectTrigger className="w-[140px]">
+              <SelectTrigger className="w-full sm:w-[140px]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -157,12 +157,12 @@ export default function PreferencesSection({
             </Select>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="w-10 h-10 shrink-0 bg-cyan-100 rounded-lg flex items-center justify-center">
                 <Languages className="w-5 h-5 text-cyan-600" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="font-semibold text-gray-900 text-sm">
                   {t('defaultSourceLanguage.label')}
                 </p>
@@ -177,7 +177,7 @@ export default function PreferencesSection({
                 onChange({ defaultSourceLanguage: value })
               }
             >
-              <SelectTrigger className="w-[140px]">
+              <SelectTrigger className="w-full sm:w-[140px]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -209,12 +209,12 @@ export default function PreferencesSection({
             </Select>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="w-10 h-10 shrink-0 bg-teal-100 rounded-lg flex items-center justify-center">
                 <Languages className="w-5 h-5 text-teal-600" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="font-semibold text-gray-900 text-sm">
                   {t('defaultTargetLanguage.label')}
                 </p>
@@ -229,7 +229,7 @@ export default function PreferencesSection({
                 onChange({ defaultTargetLanguage: value })
               }
             >
-              <SelectTrigger className="w-[140px]">
+              <SelectTrigger className="w-full sm:w-[140px]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -261,12 +261,12 @@ export default function PreferencesSection({
             </Select>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="w-10 h-10 shrink-0 bg-blue-100 rounded-lg flex items-center justify-center">
                 <Bell className="w-5 h-5 text-blue-600" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="font-semibold text-gray-900 text-sm">
                   {t('emailNotifications.label')}
                 </p>
@@ -275,7 +275,7 @@ export default function PreferencesSection({
                 </p>
               </div>
             </div>
-            <label className="relative inline-flex items-center cursor-pointer">
+            <label className="relative inline-flex items-center cursor-pointer shrink-0">
               <input
                 type="checkbox"
                 checked={preferences.emailNotifications}
@@ -288,12 +288,12 @@ export default function PreferencesSection({
             </label>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="w-10 h-10 shrink-0 bg-green-100 rounded-lg flex items-center justify-center">
                 <Smartphone className="w-5 h-5 text-green-600" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="font-semibold text-gray-900 text-sm">
                   {t('pushNotifications.label')}
                 </p>
@@ -302,7 +302,7 @@ export default function PreferencesSection({
                 </p>
               </div>
             </div>
-            <label className="relative inline-flex items-center cursor-pointer">
+            <label className="relative inline-flex items-center cursor-pointer shrink-0">
               <input
                 type="checkbox"
                 checked={preferences.pushNotifications}
@@ -315,12 +315,12 @@ export default function PreferencesSection({
             </label>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="w-10 h-10 shrink-0 bg-orange-100 rounded-lg flex items-center justify-center">
                 <Globe className="w-5 h-5 text-orange-600" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="font-semibold text-gray-900 text-sm">
                   {t('translationAlerts.label')}
                 </p>
@@ -329,7 +329,7 @@ export default function PreferencesSection({
                 </p>
               </div>
             </div>
-            <label className="relative inline-flex items-center cursor-pointer">
+            <label className="relative inline-flex items-center cursor-pointer shrink-0">
               <input
                 type="checkbox"
                 checked={preferences.translationAlerts}
@@ -342,12 +342,12 @@ export default function PreferencesSection({
             </label>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="w-10 h-10 shrink-0 bg-indigo-100 rounded-lg flex items-center justify-center">
                 <Save className="w-5 h-5 text-indigo-600" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="font-semibold text-gray-900 text-sm">
                   {t('autoSaveDrafts.label')}
                 </p>
@@ -356,7 +356,7 @@ export default function PreferencesSection({
                 </p>
               </div>
             </div>
-            <label className="relative inline-flex items-center cursor-pointer">
+            <label className="relative inline-flex items-center cursor-pointer shrink-0">
               <input
                 type="checkbox"
                 checked={preferences.autoSaveDrafts}
@@ -367,12 +367,12 @@ export default function PreferencesSection({
             </label>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="w-10 h-10 shrink-0 bg-amber-100 rounded-lg flex items-center justify-center">
                 <Info className="w-5 h-5 text-amber-600" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="font-semibold text-gray-900 text-sm">
                   {t('showTooltips.label')}
                 </p>
@@ -381,7 +381,7 @@ export default function PreferencesSection({
                 </p>
               </div>
             </div>
-            <label className="relative inline-flex items-center cursor-pointer">
+            <label className="relative inline-flex items-center cursor-pointer shrink-0">
               <input
                 type="checkbox"
                 checked={preferences.showTooltips}
@@ -394,16 +394,16 @@ export default function PreferencesSection({
         </div>
       </div>
 
-      <div className="flex justify-end gap-3 pt-2">
+      <div className="flex flex-col sm:flex-row justify-end gap-3 pt-2">
         <button
           onClick={onReset}
-          className="px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all cursor-pointer"
+          className="w-full sm:w-auto px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all cursor-pointer"
         >
           {tActions('resetToDefaults')}
         </button>
         <button
           onClick={onSave}
-          className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-sm font-semibold shadow-lg transition-all cursor-pointer"
+          className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-sm font-semibold shadow-lg transition-all cursor-pointer"
         >
           {tActions('saveSettings')}
         </button>
