@@ -17,14 +17,17 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { requestPasswordResetAction } from '../actions';
-import { forgotPasswordSchema, type ForgotPasswordFormData } from '../schemas';
+import { createClientSchemas, type ForgotPasswordFormData } from '../schemas';
 
 export function ForgotPasswordClient() {
   const t = useTranslations('auth.forgotPassword');
+  const tErrors = useTranslations('auth.errors');
   const [isPending, startTransition] = useTransition();
 
+  const schemas = createClientSchemas(tErrors);
+
   const form = useForm<ForgotPasswordFormData>({
-    resolver: zodResolver(forgotPasswordSchema),
+    resolver: zodResolver(schemas.forgotPasswordSchema),
     defaultValues: {
       email: '',
     },

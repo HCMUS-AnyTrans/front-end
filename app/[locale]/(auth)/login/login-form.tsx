@@ -20,10 +20,11 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { loginAction } from '../actions';
-import { loginSchema, type LoginFormData } from '../schemas';
+import { createClientSchemas, type LoginFormData } from '../schemas';
 
 export function LoginForm() {
   const t = useTranslations('auth.login');
+  const tErrors = useTranslations('auth.errors');
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
@@ -35,16 +36,18 @@ export function LoginForm() {
     
     const message = searchParams.get('message');
     if (message === 'account_created') {
-      toast.success('Account created successfully! Please sign in.');
+      toast.success(t('accountCreatedSuccess'));
       hasShownToast.current = true;
     } else if (message === 'password_reset') {
-      toast.success('Password reset successfully! Please sign in with your new password.');
+      toast.success(t('passwordResetSuccess'));
       hasShownToast.current = true;
     }
-  }, [searchParams]);
+  }, [searchParams, t]);
+
+  const schemas = createClientSchemas(tErrors);
 
   const form = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(schemas.loginSchema),
     defaultValues: {
       email: '',
       password: '',

@@ -18,15 +18,18 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { signupAction } from '../actions';
-import { signupSchema, type SignupFormData } from '../schemas';
+import { createClientSchemas, type SignupFormData } from '../schemas';
 
 export function SignupForm() {
   const t = useTranslations('auth.signup');
+  const tErrors = useTranslations('auth.errors');
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
 
+  const schemas = createClientSchemas(tErrors);
+
   const form = useForm<SignupFormData>({
-    resolver: zodResolver(signupSchema),
+    resolver: zodResolver(schemas.signupSchema),
     defaultValues: {
       name: '',
       email: '',

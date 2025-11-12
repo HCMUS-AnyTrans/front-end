@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useTransition, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
@@ -15,7 +16,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { verifyOtpAction, resendOtpAction } from '../actions';
-import { otpSchema, type OtpFormData } from '../schemas';
+import { createClientSchemas, type OtpFormData } from '../schemas';
 
 interface VerifyOtpClientProps {
   email?: string;
@@ -24,12 +25,16 @@ interface VerifyOtpClientProps {
 export function VerifyOtpClient({
   email = 'user@example.com',
 }: VerifyOtpClientProps) {
+  const t = useTranslations('auth.verifyOtp');
+  const tErrors = useTranslations('auth.errors');
   const [isPending, startTransition] = useTransition();
   const [isResending, setIsResending] = useState(false);
   const [resendCooldown, setResendCooldown] = useState(0);
 
+  const schemas = createClientSchemas(tErrors);
+
   const form = useForm<OtpFormData>({
-    resolver: zodResolver(otpSchema),
+    resolver: zodResolver(schemas.otpSchema),
     defaultValues: {
       code: '',
     },
@@ -64,11 +69,11 @@ export function VerifyOtpClient({
       if (result?.error) {
         toast.error(result.error);
       } else {
-        toast.success(result?.message || 'Verification code sent successfully');
+        toast.success(result?.message || t('resendSuccess'));
         setResendCooldown(60); // 60 seconds cooldown
       }
     } catch {
-      toast.error('Failed to resend verification code');
+      toast.error(t('resendError'));
     } finally {
       setIsResending(false);
     }
@@ -76,11 +81,11 @@ export function VerifyOtpClient({
 
   return (
     <AuthShell
-      title="Verify your email"
-      description={`Enter the 6-digit code sent to ${email}`}
+      title={t('title')}
+      description={`${t('subtitle')} ${email}`}
       showBackButton
       backHref="/login"
-      backText="Back to login"
+      backText={t('backToLogin')}
     >
       <div className="space-y-6">
         <Form {...form}>
@@ -90,7 +95,7 @@ export function VerifyOtpClient({
               name="code"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="sr-only">Verification code</FormLabel>
+                  <FormLabel className="sr-only">{t('codeLabel')}</FormLabel>
                   <FormControl>
                     <OTPInput
                       value={field.value}
@@ -110,14 +115,14 @@ export function VerifyOtpClient({
               className="w-full"
               disabled={isPending || form.watch('code').length !== 6}
             >
-              {isPending ? 'Verifying...' : 'Verify'}
+              {isPending ? t('submitting') : t('submit')}
             </Button>
           </form>
         </Form>
 
         <div className="text-center">
           <div className="text-sm text-gray-600">
-            Didn&apos;t receive the code?{' '}
+            {t('didntReceive')}{' '}
             <button
               type="button"
               onClick={handleResendCode}
@@ -125,10 +130,10 @@ export function VerifyOtpClient({
               className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {resendCooldown > 0
-                ? `Resend in ${resendCooldown}s`
+                ? t('resendIn', { seconds: resendCooldown })
                 : isResending
-                  ? 'Sending...'
-                  : 'Resend code'}
+                  ? t('resending')
+                  : t('resendCode')}
             </button>
           </div>
         </div>

@@ -2,13 +2,9 @@
 
 import { z } from 'zod';
 import { redirect as nextRedirect } from 'next/navigation';
-import { getLocale } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import {
-  loginSchema,
-  signupSchema,
-  otpSchema,
-  forgotPasswordSchema,
-  resetPasswordSchema,
+  createSchemas,
   type LoginFormData,
   type SignupFormData,
   type OtpFormData,
@@ -18,13 +14,16 @@ import {
 
 // Server actions
 export async function loginAction(formData: LoginFormData) {
+  const t = await getTranslations('auth.errors');
+  const schemas = await createSchemas();
+  
   // Validate the form data
-  const result = loginSchema.safeParse(formData);
+  const result = schemas.loginSchema.safeParse(formData);
   
   if (!result.success) {
     const errors = z.flattenError(result.error);
     return {
-      error: 'Validation failed',
+      error: t('validationFailed'),
       fieldErrors: errors.fieldErrors,
     };
   }
@@ -48,19 +47,22 @@ export async function loginAction(formData: LoginFormData) {
     nextRedirect(`/${locale}/dashboard`);
   } else {
     return {
-      error: 'Invalid email or password',
+      error: t('invalidCredentials'),
     };
   }
 }
 
 export async function signupAction(formData: SignupFormData) {
+  const t = await getTranslations('auth.errors');
+  const schemas = await createSchemas();
+  
   // Validate the form data
-  const result = signupSchema.safeParse(formData);
+  const result = schemas.signupSchema.safeParse(formData);
   
   if (!result.success) {
     const errors = z.flattenError(result.error);
     return {
-      error: 'Validation failed',
+      error: t('validationFailed'),
       fieldErrors: errors.fieldErrors,
     };
   }
@@ -91,13 +93,16 @@ export async function signupAction(formData: SignupFormData) {
 
 // OTP verification action
 export async function verifyOtpAction(formData: OtpFormData) {
+  const t = await getTranslations('auth.errors');
+  const schemas = await createSchemas();
+  
   // Validate the form data
-  const result = otpSchema.safeParse(formData);
+  const result = schemas.otpSchema.safeParse(formData);
   
   if (!result.success) {
     const errors = z.flattenError(result.error);
     return {
-      error: 'Invalid verification code format',
+      error: t('invalidVerificationCodeFormat'),
       fieldErrors: errors.fieldErrors,
     };
   }
@@ -124,13 +129,15 @@ export async function verifyOtpAction(formData: OtpFormData) {
     nextRedirect(`/${locale}/login?message=account_created`);
   } else {
     return {
-      error: 'Invalid verification code',
+      error: t('invalidVerificationCode'),
     };
   }
 }
 
 // Resend OTP action
 export async function resendOtpAction(email: string) {
+  const t = await getTranslations('auth.errors');
+  
   try {
     // Validate email
     const validatedEmail = z.email().parse(email);
@@ -149,11 +156,11 @@ export async function resendOtpAction(email: string) {
 
     return {
       success: true,
-      message: 'Verification code sent successfully',
+      message: t('verificationCodeSentSuccess'),
     };
   } catch {
     return {
-      error: 'Failed to resend verification code. Please try again.',
+      error: t('resendVerificationFailed'),
     };
   }
 }
@@ -162,13 +169,16 @@ export async function resendOtpAction(email: string) {
 export async function requestPasswordResetAction(
   formData: ForgotPasswordFormData
 ) {
+  const t = await getTranslations('auth.errors');
+  const schemas = await createSchemas();
+  
   // Validate the form data
-  const result = forgotPasswordSchema.safeParse(formData);
+  const result = schemas.forgotPasswordSchema.safeParse(formData);
   
   if (!result.success) {
     const errors = z.flattenError(result.error);
     return {
-      error: 'Please enter a valid email address',
+      error: t('invalidEmailAddress'),
       fieldErrors: errors.fieldErrors,
     };
   }
@@ -196,6 +206,8 @@ export async function requestPasswordResetAction(
 
 // Resend password reset email action
 export async function resendPasswordEmailAction(email: string) {
+  const t = await getTranslations('auth.errors');
+  
   try {
     // Validate email
     const validatedEmail = z.email().parse(email);
@@ -209,11 +221,11 @@ export async function resendPasswordEmailAction(email: string) {
     // For demo purposes, always succeed
     return {
       success: true,
-      message: 'Reset email sent successfully',
+      message: t('resetEmailSentSuccess'),
     };
   } catch {
     return {
-      error: 'Failed to resend reset email. Please try again.',
+      error: t('resendResetEmailFailed'),
     };
   }
 }
@@ -222,20 +234,23 @@ export async function resendPasswordEmailAction(email: string) {
 export async function resetPasswordAction(
   formData: ResetPasswordFormData & { token: string }
 ) {
+  const t = await getTranslations('auth.errors');
+  const schemas = await createSchemas();
+  
   // Validate token first
   if (!formData.token || formData.token.length < 10) {
     return {
-      error: 'Invalid or expired reset token',
+      error: t('invalidOrExpiredToken'),
     };
   }
 
   // Validate the form data
-  const result = resetPasswordSchema.safeParse(formData);
+  const result = schemas.resetPasswordSchema.safeParse(formData);
   
   if (!result.success) {
     const errors = z.flattenError(result.error);
     return {
-      error: 'Validation failed',
+      error: t('validationFailed'),
       fieldErrors: errors.fieldErrors,
     };
   }
