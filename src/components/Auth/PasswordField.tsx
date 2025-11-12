@@ -17,7 +17,7 @@ export function PasswordField({ className, ...props }: PasswordFieldProps) {
       <Input
         {...props}
         type={showPassword ? "text" : "password"}
-        className={className}
+        className={`${className} [&::-ms-reveal]:hidden [&::-ms-clear]:hidden [&::-webkit-credentials-auto-fill-button]:hidden [&::-webkit-strong-password-auto-fill-button]:hidden`}
       />
       {props.value && (
         <Button
