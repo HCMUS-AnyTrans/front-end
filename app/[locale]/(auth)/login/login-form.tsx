@@ -34,17 +34,14 @@ export function LoginForm() {
     },
   });
 
-  const onSubmit = (data: LoginFormData) => {
+  const onSubmit = async (data: LoginFormData) => {
     setError(null);
     startTransition(async () => {
-      try {
-        const result = await loginAction(data);
-        if (result?.error) {
-          setError(result.error);
-        }
-      } catch {
-        setError('An unexpected error occurred. Please try again.');
+      const result = await loginAction(data);
+      if (result?.error) {
+        setError(result.error);
       }
+      // If no result returned, redirect happened successfully
     });
   };
 

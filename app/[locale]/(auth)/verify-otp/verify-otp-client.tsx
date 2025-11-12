@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useTransition, useEffect } from 'react';
-import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
@@ -19,7 +18,6 @@ import {
 } from '@/components/ui/form';
 import { verifyOtpAction, resendOtpAction } from '../actions';
 import { otpSchema, type OtpFormData } from '../schemas';
-import { redirect } from 'next/navigation';
 
 interface VerifyOtpClientProps {
   email?: string;
@@ -51,18 +49,14 @@ export function VerifyOtpClient({
     }
   }, [resendCooldown]);
 
-  const onSubmit = (data: OtpFormData) => {
-    redirect('/login');
-    // startTransition(async () => {
-    //   try {
-    //     const result = await verifyOtpAction(data);
-    //     if (result?.error) {
-    //       toast.error(result.error);
-    //     }
-    //   } catch {
-    //     toast.error('Verification failed. Please try again.');
-    //   }
-    // });
+  const onSubmit = async (data: OtpFormData) => {
+    startTransition(async () => {
+      const result = await verifyOtpAction(data);
+      if (result?.error) {
+        toast.error(result.error);
+      }
+      // If no result returned, redirect happened successfully
+    });
   };
 
   const handleResendCode = async () => {

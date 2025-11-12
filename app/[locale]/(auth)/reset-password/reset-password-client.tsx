@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useTransition } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
@@ -41,21 +41,18 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
     }
   }, [token]);
 
-  const onSubmit = (data: ResetPasswordFormData) => {
+  const onSubmit = async (data: ResetPasswordFormData) => {
     if (!token) {
       toast.error('Invalid reset token');
       return;
     }
 
     startTransition(async () => {
-      try {
-        const result = await resetPasswordAction({ ...data, token });
-        if (result?.error) {
-          toast.error(result.error);
-        }
-      } catch {
-        toast.error('Password reset failed. Please try again.');
+      const result = await resetPasswordAction({ ...data, token });
+      if (result?.error) {
+        toast.error(result.error);
       }
+      // If no result returned, redirect happened successfully
     });
   };
 
