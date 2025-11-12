@@ -10,6 +10,7 @@ import {
   History,
   Bell,
   Info,
+  X,
 } from 'lucide-react';
 import { AccountDialog } from '@/components/Account';
 import {
@@ -87,7 +88,20 @@ export default function Sidebar({ className }: SidebarProps) {
 
   const SidebarContent = () => (
     <>
-      <SidebarLogo />
+      <div className="lg:hidden flex items-center justify-between px-4 py-2 mb-4 border-b border-gray-200">
+        <SidebarLogo />
+        <button
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
+          aria-label="Close menu"
+        >
+          <X className="w-5 h-5" />
+        </button>
+      </div>
+
+      <div className="hidden lg:block">
+        <SidebarLogo />
+      </div>
 
       <SidebarNav items={navigationItems} isActive={isActive} />
 
@@ -112,10 +126,10 @@ export default function Sidebar({ className }: SidebarProps) {
         isOpen={isMobileMenuOpen}
         onToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
       />
-      <MobileOverlay
+      {/* <MobileOverlay
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
-      />
+      /> */}
 
       <div
         className={`hidden lg:flex bg-white w-[260px] xl:w-[300px] h-screen flex-col border-r border-gray-200 ${className || ''}`}
@@ -124,7 +138,7 @@ export default function Sidebar({ className }: SidebarProps) {
       </div>
 
       <div
-        className={`lg:hidden fixed top-0 left-0 z-50 bg-white w-[80vw] sm:w-[300px] h-screen flex flex-col border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${
+        className={`lg:hidden fixed top-0 left-0 z-50 bg-white w-full h-screen flex flex-col transform transition-transform duration-300 ease-in-out ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         role="dialog"

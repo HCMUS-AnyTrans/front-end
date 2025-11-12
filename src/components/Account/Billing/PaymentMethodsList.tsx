@@ -21,12 +21,12 @@ export default function PaymentMethodsList({
   const t = useTranslations('common.billing.paymentMethods');
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6">
-      <div className="flex items-center justify-between mb-4">
+    <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <h3 className="text-lg font-semibold text-gray-900">{t('title')}</h3>
         <button
           onClick={onAddCard}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-all cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold transition-all cursor-pointer"
         >
           {t('addCard')}
         </button>
@@ -36,15 +36,15 @@ export default function PaymentMethodsList({
         {methods.map((method) => (
           <div
             key={method.id}
-            className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-blue-300 transition-all"
+            className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 border border-gray-200 rounded-lg hover:border-blue-300 transition-all"
           >
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="w-12 h-12 shrink-0 bg-blue-50 rounded-lg flex items-center justify-center">
                 <CreditCard className="w-6 h-6 text-blue-600" />
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-gray-900">
+              <div className="min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="font-semibold text-gray-900 text-sm">
                     {method.type === 'visa' ? 'Visa' : 'Mastercard'} ••••{' '}
                     {method.last4}
                   </span>
@@ -62,7 +62,7 @@ export default function PaymentMethodsList({
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 self-start sm:self-center">
               {!method.isDefault && (
                 <button
                   onClick={() => onSetDefault(method.id)}

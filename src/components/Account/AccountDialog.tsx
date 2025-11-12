@@ -60,7 +60,7 @@ function MobileTabs({ activeTab, onChange }: MobileTabsProps) {
           <button
             key={tab.id}
             onClick={() => onChange(tab.id)}
-            className={`flex-1 flex flex-col items-center gap-1 px-4 py-3 text-xs font-medium transition-all relative cursor-pointer ${
+            className={`flex-1 flex flex-col items-center gap-1 px-4 py-2 text-xs font-medium transition-all relative cursor-pointer ${
               activeTab === tab.id
                 ? 'text-blue-600'
                 : 'text-gray-500 hover:text-gray-700'
@@ -217,8 +217,7 @@ export default function AccountDialog({
   };
 
   // Responsive breakpoints
-  const isMobile = useMediaQuery('(max-width: 767px)');
-  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
+  const isMobile = useMediaQuery('(max-width: 1023px)');
   const isDesktop = useMediaQuery('(min-width: 1024px)');
 
   // Render content based on active tab
@@ -309,9 +308,7 @@ export default function AccountDialog({
           ${
             isMobile
               ? 'w-screen h-screen max-w-none max-h-none rounded-none'
-              : isTablet
-                ? 'w-[95vw] max-w-3xl max-h-[90vh] rounded-2xl'
-                : 'w-[90vw] max-w-6xl max-h-[90vh] rounded-2xl'
+              : 'w-[90vw] max-w-6xl max-h-[90vh] rounded-2xl'
           }
         `}
       >
@@ -323,7 +320,7 @@ export default function AccountDialog({
         </div>
 
         {/* Tabs Navigation - Changes based on screen size */}
-        {(isMobile || isTablet) && (
+        {isMobile && (
           <MobileTabs activeTab={activeTab} onChange={setActiveTab} />
         )}
 
@@ -338,7 +335,7 @@ export default function AccountDialog({
           <div
             className={`
               flex-1 overflow-y-auto
-              ${isMobile ? 'p-4' : isTablet ? 'p-6' : 'p-8'}
+              ${isMobile ? 'p-4' : 'p-8'}
             `}
           >
             {renderTabContent()}

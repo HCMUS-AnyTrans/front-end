@@ -20,14 +20,14 @@ export default function CurrentPlanCard({
   const usagePercentage = (plan.credits.used / plan.credits.total) * 100;
 
   return (
-    <div className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl p-6 text-white">
+    <div className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl p-4 sm:p-6 text-white">
       <div className="flex items-start justify-between mb-4">
         <div>
           <p className="text-blue-100 text-sm mb-1">{t('title')}</p>
           <h3 className="text-2xl font-bold">{plan.name}</h3>
           <p className="text-3xl font-bold mt-2">${plan.price}/month</p>
         </div>
-        <span className="px-3 py-1 bg-white/20 rounded-full text-sm font-semibold">
+        <span className="px-3 py-1 bg-white/20 rounded-full text-sm font-semibold shrink-0">
           {t('active')}
         </span>
       </div>
@@ -50,7 +50,7 @@ export default function CurrentPlanCard({
         </p>
       </div>
 
-      <div className="flex gap-3 mt-6">
+      <div className="flex flex-col sm:flex-row gap-3 mt-6">
         <button
           onClick={onUpgrade}
           className="flex-1 bg-white hover:bg-blue-50 text-blue-700 px-4 py-2.5 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer"

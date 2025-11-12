@@ -17,10 +17,10 @@ export default function ProfilePictureSection({
   const t = useTranslations('common.profile.profilePicture');
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
+    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 sm:p-6 border border-blue-100">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('title')}</h3>
-      <div className="flex items-center gap-6">
-        <div className="relative">
+      <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+        <div className="relative shrink-0">
           <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white text-2xl font-bold">
             {user.fullName
               .split(' ')
@@ -31,7 +31,7 @@ export default function ProfilePictureSection({
             <Camera className="w-5 h-5" />
           </button>
         </div>
-        <div className="flex-1">
+        <div className="flex-1 text-center sm:text-left">
           <p className="text-sm text-gray-600 mb-3">{t('uploadDescription')}</p>
           <button
             onClick={onUploadClick}

@@ -16,17 +16,17 @@ export default function TwoFactorToggle({
   const t = useTranslations('common.profile.twoFactor');
 
   return (
-    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+    <div className="flex items-center justify-between gap-3 p-4 bg-gray-50 rounded-lg">
+      <div className="flex items-center gap-3 flex-1 min-w-0">
+        <div className="w-10 h-10 shrink-0 bg-green-100 rounded-lg flex items-center justify-center">
           <Shield className="w-5 h-5 text-green-600" />
         </div>
-        <div>
+        <div className="min-w-0">
           <p className="font-semibold text-gray-900 text-sm">{t('title')}</p>
-          <p className="text-xs text-gray-600">{t('description')}</p>
+          <p className="text-xs text-gray-600 truncate">{t('description')}</p>
         </div>
       </div>
-      <label className="relative inline-flex items-center cursor-pointer">
+      <label className="relative inline-flex items-center cursor-pointer shrink-0">
         <input
           type="checkbox"
           checked={enabled}

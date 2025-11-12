@@ -22,7 +22,7 @@ export default function ChangePasswordSection({
   const t = useTranslations('common.profile.changePassword');
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6">
+    <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('title')}</h3>
 
       <div className="mb-6">
@@ -52,7 +52,7 @@ export default function ChangePasswordSection({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">
                 {t('newPassword')}
