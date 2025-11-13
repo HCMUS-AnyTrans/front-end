@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useTransition } from 'react';
+import React, { useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { useForm } from 'react-hook-form';
@@ -17,67 +17,28 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { requestPasswordResetAction } from '../actions';
-import { forgotPasswordSchema, type ForgotPasswordFormData } from '../schemas';
+import { createClientSchemas, type ForgotPasswordFormData } from '../schemas';
 
 export function ForgotPasswordClient() {
   const t = useTranslations('auth.forgotPassword');
+  const tErrors = useTranslations('auth.errors');
   const [isPending, startTransition] = useTransition();
-  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const schemas = createClientSchemas(tErrors);
 
   const form = useForm<ForgotPasswordFormData>({
-    resolver: zodResolver(forgotPasswordSchema),
+    resolver: zodResolver(schemas.forgotPasswordSchema),
     defaultValues: {
       email: '',
     },
   });
 
-  const onSubmit = (data: ForgotPasswordFormData) => {
-    // TODO: Implement actual password reset request logic
-    console.log('Password reset request:', data);
-    setIsSubmitted(true);
-    // startTransition(async () => {
-    //   try {
-    //     const result = await requestPasswordResetAction(data);
-    //     if (result?.error) {
-    //       // Error will be handled by the server action redirect or error return
-    //       console.error(result.error);
-    //     } else {
-    //       setIsSubmitted(true);
-    //     }
-    //   } catch {
-    //     console.error('Password reset request failed');
-    //   }
-    // });
+  const onSubmit = async (data: ForgotPasswordFormData) => {
+    startTransition(async () => {
+      await requestPasswordResetAction(data);
+      // Action redirects to check-email page on success
+    });
   };
-
-  if (isSubmitted) {
-    return (
-      <AuthShell
-        title={t('checkEmail.title')}
-        description={t('checkEmail.subtitle')}
-        showBackButton
-        backHref="/login"
-        backText={t('checkEmail.backToLogin')}
-      >
-        <div className="space-y-4 text-center">
-          <div className="p-4 border rounded-lg bg-blue-50/50 border-blue-100">
-            <p className="text-sm text-gray-600">
-              {t('checkEmail.description')}
-            </p>
-          </div>
-
-          <Button
-            asChild
-            variant="gradient-primary"
-            size="default"
-            className="w-full"
-          >
-            <Link href="/login">{t('checkEmail.backToLogin')}</Link>
-          </Button>
-        </div>
-      </AuthShell>
-    );
-  }
 
   return (
     <AuthShell

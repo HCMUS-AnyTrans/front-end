@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 import { toast } from 'sonner';
-import { Mail, ArrowLeft } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { AuthShell } from '@/components/Auth';
 import { Button } from '@/components/ui/button';
 import { resendPasswordEmailAction } from '../../actions';
@@ -15,6 +16,7 @@ interface CheckEmailClientProps {
 export function CheckEmailClient({
   email = 'user@example.com',
 }: CheckEmailClientProps) {
+  const t = useTranslations('auth.forgotPassword.checkEmail');
   const [isResending, setIsResending] = useState(false);
   const [resendCooldown, setResendCooldown] = useState(0);
 
@@ -37,11 +39,11 @@ export function CheckEmailClient({
       if (result?.error) {
         toast.error(result.error);
       } else {
-        toast.success(result?.message || 'Reset email sent successfully');
+        toast.success(result?.message || t('resendSuccess'));
         setResendCooldown(60); // 60 seconds cooldown
       }
     } catch {
-      toast.error('Failed to resend reset email');
+      toast.error(t('resendError'));
     } finally {
       setIsResending(false);
     }
@@ -55,11 +57,11 @@ export function CheckEmailClient({
 
   return (
     <AuthShell
-      title="Check your email"
-      description={`We&apos;ve sent a password reset link to ${email}`}
+      title={t('title')}
+      description={`${t('subtitle')} ${email}`}
       showBackButton
       backHref="/login"
-      backText="Back to login"
+      backText={t('backToLogin')}
     >
       <div className="space-y-6">
         {/* Email Icon */}
@@ -72,14 +74,12 @@ export function CheckEmailClient({
         {/* Instructions */}
         <div className="space-y-3 text-center">
           <p className="text-sm text-muted-foreground">
-            We&apos;ve sent a password reset link to your email address. Click
-            the link in the email to reset your password.
+            {t('instructions')}
           </p>
 
           <div className="p-3 border rounded-lg bg-muted/50">
             <p className="text-xs text-muted-foreground">
-              <strong>Tip:</strong> Check your spam folder if you don&apos;t see
-              the email in your inbox.
+              <strong>{t('tipLabel')}</strong> {t('tipText')}
             </p>
           </div>
         </div>
@@ -92,7 +92,7 @@ export function CheckEmailClient({
             variant="outline"
           >
             <Mail className="h-4 w-4 mr-2" />
-            Open email app
+            {t('openEmailApp')}
           </Button>
 
           <Button
@@ -102,29 +102,29 @@ export function CheckEmailClient({
             variant="ghost"
           >
             {resendCooldown > 0
-              ? `Resend in ${resendCooldown}s`
+              ? t('resendIn', { seconds: resendCooldown })
               : isResending
-                ? 'Sending...'
-                : 'Resend email'}
+                ? t('resending')
+                : t('resendEmail')}
           </Button>
         </div>
 
         {/* Additional Help */}
         <div className="space-y-2 text-center text-sm text-muted-foreground">
           <p>
-            Still having trouble?{' '}
+            {t('stillTrouble')}{' '}
             <Link
               href="/forgot-password"
               className="text-primary hover:underline"
             >
-              Try a different email
+              {t('tryDifferentEmail')}
             </Link>
           </p>
 
           <p>
-            Remember your password?{' '}
+            {t('rememberPassword')}{' '}
             <Link href="/login" className="text-primary hover:underline">
-              Sign in
+              {t('signIn')}
             </Link>
           </p>
         </div>

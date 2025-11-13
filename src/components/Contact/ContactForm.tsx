@@ -7,6 +7,7 @@ import { ContactFormData, ContactFormProps } from '@/types/contact';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 import {
   Select,
   SelectContent,
@@ -160,11 +161,13 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
           </Button>
 
           {/* Contact Illustration */}
-          <div className="mt-4 flex justify-center">
-            <img
+          <div className="mt-4 flex justify-center relative items-stretch">
+            <Image
               src="/banner/contact-illustration.jpg"
               alt="Contact Support Illustration"
               className="w-full max-w-md h-auto rounded-2xl opacity-90 hover:opacity-100 transition-opacity duration-300"
+              width={400}
+              height={300}
             />
           </div>
         </form>

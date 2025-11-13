@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Linkedin, Twitter, Mail } from 'lucide-react';
 import { AboutTeamProps } from '@/types/about';
+import Image from 'next/image';
 
 export default function AboutTeam({ team }: AboutTeamProps) {
   const t = useTranslations('about.sections.team');
@@ -35,11 +36,12 @@ export default function AboutTeam({ team }: AboutTeamProps) {
             }`}
           >
             <div className="bg-gradient-to-br from-[#4169E1] via-[#1e3a8a] to-[#4169E1] h-48 flex items-center justify-center">
-              <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                <img
+              <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg relative">
+                <Image
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-full object-cover"
+                  className="object-cover"
+                  fill
                 />
               </div>
             </div>

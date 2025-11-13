@@ -2,7 +2,7 @@
 
 import React, { useState, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
-import { Link, redirect } from '@/i18n/routing';
+import { Link } from '@/i18n/routing';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AuthShell, PasswordField, OAuthButtons } from '@/components/Auth';
@@ -18,16 +18,18 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { signupAction } from '../actions';
-import { signupSchema, type SignupFormData } from '../schemas';
+import { createClientSchemas, type SignupFormData } from '../schemas';
 
 export function SignupForm() {
   const t = useTranslations('auth.signup');
-  const tOAuth = useTranslations('auth.oauth');
+  const tErrors = useTranslations('auth.errors');
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
 
+  const schemas = createClientSchemas(tErrors);
+
   const form = useForm<SignupFormData>({
-    resolver: zodResolver(signupSchema),
+    resolver: zodResolver(schemas.signupSchema),
     defaultValues: {
       name: '',
       email: '',
@@ -37,19 +39,15 @@ export function SignupForm() {
     },
   });
 
-  const onSubmit = (data: SignupFormData) => {
+  const onSubmit = async (data: SignupFormData) => {
     setError(null);
-    redirect({ href: '/verify-otp', locale: 'en' });
-    // startTransition(async () => {
-    //   try {
-    //     const result = await signupAction(data);
-    //     if (result?.error) {
-    //       setError(result.error);
-    //     }
-    //   } catch {
-    //     setError('An unexpected error occurred. Please try again.');
-    //   }
-    // });
+    startTransition(async () => {
+      const result = await signupAction(data);
+      if (result?.error) {
+        setError(result.error);
+      }
+      // If no result returned, redirect happened successfully
+    });
   };
 
   return (
@@ -169,7 +167,7 @@ export function SignupForm() {
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <div className="text-sm font-normal">
+                    <FormLabel className="text-sm font-normal">
                       {t.rich('terms', {
                         termsLink: (chunks) => (
                           <Link
@@ -188,7 +186,7 @@ export function SignupForm() {
                           </Link>
                         ),
                       })}
-                    </div>
+                    </FormLabel>
                     <FormMessage />
                   </div>
                 </FormItem>
