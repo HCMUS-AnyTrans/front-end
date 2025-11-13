@@ -1,14 +1,12 @@
 'use client';
 
 import React, { useState, useTransition, useEffect } from 'react';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { AuthShell, OTPInput } from '@/components/Auth';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
   Form,
   FormControl,
@@ -18,8 +16,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { verifyOtpAction, resendOtpAction } from '../actions';
-import { otpSchema, type OtpFormData } from '../schemas';
-import { redirect } from 'next/navigation';
+import { createClientSchemas, type OtpFormData } from '../schemas';
 
 interface VerifyOtpClientProps {
   email?: string;
@@ -28,14 +25,16 @@ interface VerifyOtpClientProps {
 export function VerifyOtpClient({
   email = 'user@example.com',
 }: VerifyOtpClientProps) {
+  const t = useTranslations('auth.verifyOtp');
+  const tErrors = useTranslations('auth.errors');
   const [isPending, startTransition] = useTransition();
   const [isResending, setIsResending] = useState(false);
   const [resendCooldown, setResendCooldown] = useState(0);
-  const [newEmail, setNewEmail] = useState(email);
-  const [showChangeEmail, setShowChangeEmail] = useState(false);
+
+  const schemas = createClientSchemas(tErrors);
 
   const form = useForm<OtpFormData>({
-    resolver: zodResolver(otpSchema),
+    resolver: zodResolver(schemas.otpSchema),
     defaultValues: {
       code: '',
     },
@@ -51,18 +50,14 @@ export function VerifyOtpClient({
     }
   }, [resendCooldown]);
 
-  const onSubmit = (data: OtpFormData) => {
-    redirect('/login');
-    // startTransition(async () => {
-    //   try {
-    //     const result = await verifyOtpAction(data);
-    //     if (result?.error) {
-    //       toast.error(result.error);
-    //     }
-    //   } catch {
-    //     toast.error('Verification failed. Please try again.');
-    //   }
-    // });
+  const onSubmit = async (data: OtpFormData) => {
+    startTransition(async () => {
+      const result = await verifyOtpAction(data);
+      if (result?.error) {
+        toast.error(result.error);
+      }
+      // If no result returned, redirect happened successfully
+    });
   };
 
   const handleResendCode = async () => {
@@ -70,59 +65,27 @@ export function VerifyOtpClient({
 
     setIsResending(true);
     try {
-      const result = await resendOtpAction(newEmail);
+      const result = await resendOtpAction(email);
       if (result?.error) {
         toast.error(result.error);
       } else {
-        toast.success(result?.message || 'Verification code sent successfully');
+        toast.success(result?.message || t('resendSuccess'));
         setResendCooldown(60); // 60 seconds cooldown
       }
     } catch {
-      toast.error('Failed to resend verification code');
+      toast.error(t('resendError'));
     } finally {
       setIsResending(false);
     }
-  };
-
-  const handleChangeEmail = async () => {
-    if (!newEmail || newEmail === email) {
-      setShowChangeEmail(false);
-      return;
-    }
-
-    setIsResending(true);
-    try {
-      const result = await resendOtpAction(newEmail);
-      if (result?.error) {
-        toast.error(result.error);
-      } else {
-        toast.success('Verification code sent to new email');
-        // Email will be updated in the next render
-        setShowChangeEmail(false);
-        setResendCooldown(60);
-      }
-    } catch {
-      toast.error('Failed to send verification code to new email');
-    } finally {
-      setIsResending(false);
-    }
-  };
-
-  const maskEmail = (email: string) => {
-    const [username, domain] = email.split('@');
-    if (username.length <= 2) {
-      return `${username[0]}***@${domain}`;
-    }
-    return `${username[0]}${'*'.repeat(Math.min(3, username.length - 2))}${username.slice(-1)}@${domain}`;
   };
 
   return (
     <AuthShell
-      title="Verify your email"
-      description={`Enter the 6-digit code sent to ${maskEmail(newEmail)}`}
+      title={t('title')}
+      description={`${t('subtitle')} ${email}`}
       showBackButton
       backHref="/login"
-      backText="Back to login"
+      backText={t('backToLogin')}
     >
       <div className="space-y-6">
         <Form {...form}>
@@ -132,7 +95,7 @@ export function VerifyOtpClient({
               name="code"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="sr-only">Verification code</FormLabel>
+                  <FormLabel className="sr-only">{t('codeLabel')}</FormLabel>
                   <FormControl>
                     <OTPInput
                       value={field.value}
@@ -152,14 +115,14 @@ export function VerifyOtpClient({
               className="w-full"
               disabled={isPending || form.watch('code').length !== 6}
             >
-              {isPending ? 'Verifying...' : 'Verify'}
+              {isPending ? t('submitting') : t('submit')}
             </Button>
           </form>
         </Form>
 
-        <div className="space-y-4 text-center">
+        <div className="text-center">
           <div className="text-sm text-gray-600">
-            Didn&apos;t receive the code?{' '}
+            {t('didntReceive')}{' '}
             <button
               type="button"
               onClick={handleResendCode}
@@ -167,63 +130,12 @@ export function VerifyOtpClient({
               className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {resendCooldown > 0
-                ? `Resend in ${resendCooldown}s`
+                ? t('resendIn', { seconds: resendCooldown })
                 : isResending
-                  ? 'Sending...'
-                  : 'Resend code'}
+                  ? t('resending')
+                  : t('resendCode')}
             </button>
           </div>
-
-          <div className="text-sm text-gray-600">
-            Wrong email?{' '}
-            <button
-              type="button"
-              onClick={() => setShowChangeEmail(!showChangeEmail)}
-              className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300"
-            >
-              Change email
-            </button>
-          </div>
-
-          {showChangeEmail && (
-            <div className="space-y-3 p-4 border rounded-lg bg-blue-50/30 border-blue-100">
-              <div className="flex flex-col gap-3">
-                <Label htmlFor="new-email" className="text-gray-900">
-                  New email address
-                </Label>
-                <Input
-                  id="new-email"
-                  type="email"
-                  value={newEmail}
-                  onChange={(e) => setNewEmail(e.target.value)}
-                  placeholder="Enter new email"
-                  disabled={isResending}
-                  className="border-gray-300"
-                />
-              </div>
-              <div className="flex gap-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setShowChangeEmail(false)}
-                  disabled={isResending}
-                  className="hover:bg-gray-100 transition-all duration-300"
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="button"
-                  variant="gradient-primary"
-                  size="sm"
-                  onClick={handleChangeEmail}
-                  disabled={isResending || !newEmail}
-                >
-                  {isResending ? 'Sending...' : 'Send code'}
-                </Button>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </AuthShell>

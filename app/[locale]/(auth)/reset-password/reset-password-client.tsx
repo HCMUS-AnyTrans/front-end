@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useTransition } from 'react';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
@@ -16,18 +17,22 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { resetPasswordAction } from '../actions';
-import { resetPasswordSchema, type ResetPasswordFormData } from '../schemas';
+import { createClientSchemas, type ResetPasswordFormData } from '../schemas';
 
 interface ResetPasswordClientProps {
   token?: string;
 }
 
 export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
+  const t = useTranslations('auth.resetPassword');
+  const tErrors = useTranslations('auth.errors');
   const [isPending, startTransition] = useTransition();
   const [isValidToken, setIsValidToken] = useState(true);
 
+  const schemas = createClientSchemas(tErrors);
+
   const form = useForm<ResetPasswordFormData>({
-    resolver: zodResolver(resetPasswordSchema),
+    resolver: zodResolver(schemas.resetPasswordSchema),
     defaultValues: {
       password: '',
       confirmPassword: '',
@@ -41,21 +46,18 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
     }
   }, [token]);
 
-  const onSubmit = (data: ResetPasswordFormData) => {
+  const onSubmit = async (data: ResetPasswordFormData) => {
     if (!token) {
-      toast.error('Invalid reset token');
+      toast.error(t('invalidToken'));
       return;
     }
 
     startTransition(async () => {
-      try {
-        const result = await resetPasswordAction({ ...data, token });
-        if (result?.error) {
-          toast.error(result.error);
-        }
-      } catch {
-        toast.error('Password reset failed. Please try again.');
+      const result = await resetPasswordAction({ ...data, token });
+      if (result?.error) {
+        toast.error(result.error);
       }
+      // If no result returned, redirect happened successfully
     });
   };
 
@@ -63,17 +65,16 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
   if (!isValidToken) {
     return (
       <AuthShell
-        title="Invalid reset link"
-        description="This password reset link is invalid or has expired."
+        title={t('invalidLink.title')}
+        description={t('invalidLink.description')}
         showBackButton
         backHref="/forgot-password"
-        backText="Request new reset link"
+        backText={t('invalidLink.requestNewLink')}
       >
         <div className="space-y-4 text-center">
           <div className="p-4 border rounded-lg bg-destructive/15 border-destructive/20">
             <p className="text-sm text-destructive">
-              This password reset link is invalid or has expired. Please request
-              a new reset link.
+              {t('invalidLink.message')}
             </p>
           </div>
 
@@ -84,7 +85,7 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
               size="default"
               className="w-full"
             >
-              <Link href="/forgot-password">Request new reset link</Link>
+              <Link href="/forgot-password">{t('invalidLink.requestNewLink')}</Link>
             </Button>
 
             <Button
@@ -92,7 +93,7 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
               variant="outline"
               className="w-full hover:bg-gray-100 transition-all duration-300"
             >
-              <Link href="/login">Back to login</Link>
+              <Link href="/login">{t('invalidLink.backToLogin')}</Link>
             </Button>
           </div>
         </div>
@@ -102,11 +103,11 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
 
   return (
     <AuthShell
-      title="Reset your password"
-      description="Enter your new password below."
+      title={t('title')}
+      description={t('subtitle')}
       showBackButton
       backHref="/login"
-      backText="Back to login"
+      backText={t('backToLogin')}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -115,11 +116,11 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
             name="password"
             render={({ field }) => (
               <FormItem className="flex flex-col gap-0.5">
-                <FormLabel>New password</FormLabel>
+                <FormLabel>{t('newPassword.label')}</FormLabel>
                 <FormControl>
                   <PasswordField
                     {...field}
-                    placeholder="Enter your new password"
+                    placeholder={t('newPassword.placeholder')}
                     autoComplete="new-password"
                     disabled={isPending}
                   />
@@ -140,11 +141,11 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
             name="confirmPassword"
             render={({ field }) => (
               <FormItem className="flex flex-col gap-0.5">
-                <FormLabel>Confirm new password</FormLabel>
+                <FormLabel>{t('confirmPassword.label')}</FormLabel>
                 <FormControl>
                   <PasswordField
                     {...field}
-                    placeholder="Confirm your new password"
+                    placeholder={t('confirmPassword.placeholder')}
                     autoComplete="new-password"
                     disabled={isPending}
                   />
@@ -161,29 +162,29 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
             className="w-full"
             disabled={isPending}
           >
-            {isPending ? 'Resetting password...' : 'Reset password'}
+            {isPending ? t('submitting') : t('submit')}
           </Button>
         </form>
       </Form>
 
-      <div className="space-y-2 text-center text-sm text-gray-600">
+      <div className="space-y-2 text-center text-sm text-gray-600 mt-4">
         <p>
-          Remember your password?{' '}
+          {t('rememberPassword')}{' '}
           <Link
             href="/login"
             className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300"
           >
-            Sign in
+            {t('signIn')}
           </Link>
         </p>
 
         <p>
-          Need a new reset link?{' '}
+          {t('needNewLink')}{' '}
           <Link
             href="/forgot-password"
             className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300"
           >
-            Request another one
+            {t('requestAnother')}
           </Link>
         </p>
       </div>

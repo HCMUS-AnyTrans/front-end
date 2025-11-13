@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useState, useTransition } from 'react';
+import React, { useState, useTransition, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
+import { useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 import { AuthShell, PasswordField, OAuthButtons } from '@/components/Auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,15 +20,34 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { loginAction } from '../actions';
-import { loginSchema, type LoginFormData } from '../schemas';
+import { createClientSchemas, type LoginFormData } from '../schemas';
 
 export function LoginForm() {
   const t = useTranslations('auth.login');
+  const tErrors = useTranslations('auth.errors');
+  const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const hasShownToast = useRef(false);
+
+  // Show success messages from URL params (only once)
+  useEffect(() => {
+    if (hasShownToast.current) return;
+    
+    const message = searchParams.get('message');
+    if (message === 'account_created') {
+      toast.success(t('accountCreatedSuccess'));
+      hasShownToast.current = true;
+    } else if (message === 'password_reset') {
+      toast.success(t('passwordResetSuccess'));
+      hasShownToast.current = true;
+    }
+  }, [searchParams, t]);
+
+  const schemas = createClientSchemas(tErrors);
 
   const form = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(schemas.loginSchema),
     defaultValues: {
       email: '',
       password: '',
@@ -34,17 +55,14 @@ export function LoginForm() {
     },
   });
 
-  const onSubmit = (data: LoginFormData) => {
+  const onSubmit = async (data: LoginFormData) => {
     setError(null);
     startTransition(async () => {
-      try {
-        const result = await loginAction(data);
-        if (result?.error) {
-          setError(result.error);
-        }
-      } catch {
-        setError('An unexpected error occurred. Please try again.');
+      const result = await loginAction(data);
+      if (result?.error) {
+        setError(result.error);
       }
+      // If no result returned, redirect happened successfully
     });
   };
 

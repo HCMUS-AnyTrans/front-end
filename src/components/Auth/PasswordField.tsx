@@ -17,22 +17,24 @@ export function PasswordField({ className, ...props }: PasswordFieldProps) {
       <Input
         {...props}
         type={showPassword ? "text" : "password"}
-        className={className}
+        className={`${className} [&::-ms-reveal]:hidden [&::-ms-clear]:hidden [&::-webkit-credentials-auto-fill-button]:hidden [&::-webkit-strong-password-auto-fill-button]:hidden`}
       />
-      <Button
-        type="button"
-        variant="ghost"
-        size="sm"
-        className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-        onClick={() => setShowPassword(!showPassword)}
-        aria-label={showPassword ? "Hide password" : "Show password"}
-      >
-        {showPassword ? (
-          <EyeOff className="h-4 w-4" />
-        ) : (
-          <Eye className="h-4 w-4" />
-        )}
-      </Button>
+      {props.value && (
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+          onClick={() => setShowPassword(!showPassword)}
+          aria-label={showPassword ? "Hide password" : "Show password"}
+        >
+          {showPassword ? (
+            <EyeOff className="h-4 w-4" />
+          ) : (
+            <Eye className="h-4 w-4" />
+          )}
+        </Button>
+      )}
     </div>
   );
 }
