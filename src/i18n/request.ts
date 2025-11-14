@@ -47,6 +47,10 @@ export default getRequestConfig(async ({ requestLocale }) => {
       ).default,
       support: (await import(`../../locales/${locale}/pages/support.json`))
         .default,
+      terms: (await import(`../../locales/${locale}/pages/terms.json`))
+        .default,
+      privacy: (await import(`../../locales/${locale}/pages/privacy.json`))
+        .default,
       sidebar: (await import(`../../locales/${locale}/layout/sidebar.json`))
         .default,
       notFound: (await import(`../../locales/${locale}/pages/notFound.json`))
