@@ -6,7 +6,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   let locale = await requestLocale;
 
   // Ensure that a valid locale is used
-  if (!locale || !routing.locales.includes(locale as any)) {
+  if (!locale || !routing.locales.includes(locale as typeof routing.locales[number])) {
     locale = routing.defaultLocale;
   }
 
@@ -46,6 +46,10 @@ export default getRequestConfig(async ({ requestLocale }) => {
         await import(`../../locales/${locale}/features/notifications.json`)
       ).default,
       support: (await import(`../../locales/${locale}/pages/support.json`))
+        .default,
+      terms: (await import(`../../locales/${locale}/pages/terms.json`))
+        .default,
+      privacy: (await import(`../../locales/${locale}/pages/privacy.json`))
         .default,
       sidebar: (await import(`../../locales/${locale}/layout/sidebar.json`))
         .default,

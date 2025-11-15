@@ -46,7 +46,6 @@ function FloatingCard({
 
 export default function About() {
   const t = useTranslations('home.about');
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   return (
     <section className="w-full py-20 overflow-hidden relative">

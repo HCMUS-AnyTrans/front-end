@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 
 const intlMiddleware = createMiddleware(routing);
 
-export default function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const response = intlMiddleware(request);
 
   // Add performance headers

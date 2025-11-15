@@ -78,7 +78,7 @@ export default function SupportFAQSection({
           <div className="text-center py-8 sm:py-12">
             <HelpCircle className="w-10 h-10 sm:w-12 sm:h-12 text-gray-300 mx-auto mb-2 sm:mb-3" />
             <p className="text-sm sm:text-base text-gray-600">
-              {t('noResults')} "{searchQuery}"
+              {t('noResults')} &quot;{searchQuery}&quot;
             </p>
             <p className="text-xs sm:text-sm text-gray-500 mt-1">
               {t('tryDifferent')}

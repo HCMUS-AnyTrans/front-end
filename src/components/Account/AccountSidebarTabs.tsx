@@ -12,7 +12,7 @@ type Tab = {
   icon: React.ComponentType<{ className?: string }>;
 };
 
-const getTabs = (t: any): Tab[] => [
+const getTabs = (t: (key: string) => string): Tab[] => [
   { id: 'profile', label: t('profile'), icon: User },
   { id: 'billing', label: t('billing'), icon: CreditCard },
   { id: 'settings', label: t('settings'), icon: Settings },

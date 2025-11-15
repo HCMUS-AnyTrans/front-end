@@ -5,6 +5,7 @@ import { ChevronRight, X } from 'lucide-react';
 import AuthButtons from './AuthButtons';
 import LocaleSwitcher from './LocaleSwitcher';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -80,7 +81,7 @@ export default function MobileMenu({
         <div className="overflow-y-auto h-[calc(100%-80px)]">
           <nav className="p-4 space-y-1">
             {/* Home */}
-            <a
+            <Link
               href="/"
               className={`flex items-center justify-between px-4 py-3 rounded-xl font-semibold transition-all duration-300 ${
                 isActive('/')
@@ -95,7 +96,7 @@ export default function MobileMenu({
                   isActive('/') ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
                 }`}
               />
-            </a>
+            </Link>
 
             {/* Features Collapsible */}
             <div>
@@ -122,7 +123,7 @@ export default function MobileMenu({
                 }`}
               >
                 {featureItems.map((item) => (
-                  <a
+                  <Link
                     key={item.href}
                     href={item.href}
                     className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-all duration-300 ${
@@ -138,14 +139,14 @@ export default function MobileMenu({
                       }`}
                     />
                     <span>{item.label}</span>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
 
             {/* Other Nav Items */}
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 className={`flex items-center justify-between px-4 py-3 rounded-xl font-semibold transition-all duration-300 ${
@@ -163,7 +164,7 @@ export default function MobileMenu({
                       : 'opacity-0 scale-0'
                   }`}
                 />
-              </a>
+              </Link>
             ))}
           </nav>
 

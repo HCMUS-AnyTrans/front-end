@@ -173,6 +173,8 @@ export function SignupForm() {
                           <Link
                             href="/terms"
                             className="text-[#4169E1] hover:text-[#1e3a8a] font-medium transition-colors duration-300"
+                            rel="noopener noreferrer"
+                            target="_blank"
                           >
                             {chunks}
                           </Link>
@@ -181,6 +183,8 @@ export function SignupForm() {
                           <Link
                             href="/privacy"
                             className="text-[#4169E1] hover:text-[#1e3a8a] font-medium transition-colors duration-300"
+                            rel="noopener noreferrer"
+                            target="_blank"
                           >
                             {chunks}
                           </Link>
