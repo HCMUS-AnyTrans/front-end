@@ -101,7 +101,7 @@ export default function NotificationsClient() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState<boolean>(false);
-  const [filterType, setFilterType] = useState<string>('all');
+  const [filterType, setFilterType] = useState<NotificationFilter['id']>('all');
 
   const formatTimestamp = (date: Date): string => {
     const now = Date.now();
@@ -223,7 +223,7 @@ export default function NotificationsClient() {
               showFilters={showFilters}
               onToggleFilters={() => setShowFilters((v) => !v)}
               filterType={filterType}
-              onFilterTypeChange={setFilterType}
+              onFilterTypeChange={(type) => setFilterType(type as NotificationFilter['id'])}
               notificationCounts={{
                 all: stats.total,
                 unread: stats.unread,
@@ -237,7 +237,7 @@ export default function NotificationsClient() {
               searchQuery={searchQuery}
               onSearchChange={setSearchQuery}
               filters={filters.slice(0, 3)}
-              activeFilter={filterType as string}
+              activeFilter={filterType}
               onSelectFilter={setFilterType}
             />
           </div>
@@ -256,7 +256,7 @@ export default function NotificationsClient() {
           <div className="max-w-7xl mx-auto">
             <NotificationsList
               notifications={filteredNotifications}
-              activeFilter={filterType as string}
+              activeFilter={filterType}
               searchQuery={searchQuery}
               selectedIds={selectedIds}
               onToggleSelect={handleToggleSelect}

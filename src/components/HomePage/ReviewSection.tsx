@@ -107,7 +107,6 @@ function ReviewCard({
 
 export default function ReviewSection() {
   const t = useTranslations('home.reviews');
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const reviews = [
     {
