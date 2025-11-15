@@ -231,7 +231,7 @@ export default function BaseCard({
             {features && (
               <div className="space-y-3">
                 <p className="text-sm font-semibold text-foreground mb-4">
-                  What's included:
+                  What&apos;s included:
                 </p>
                 {features.map((feature, idx) => (
                   <div key={idx} className="flex items-start gap-3">

@@ -87,7 +87,7 @@ function ReviewCard({
         {/* Review text */}
         <div className="flex-1 mb-5">
           <p className="text-foreground leading-relaxed text-[15px]">
-            "{review}"
+            &quot;{review}&quot;
           </p>
         </div>
 

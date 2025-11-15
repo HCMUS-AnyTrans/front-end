@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Upload, ChevronDown, FileText, Film } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from '@/i18n/routing';
 
 export default function PageHeader() {
   const t = useTranslations('dashboard.header');
@@ -48,7 +49,7 @@ export default function PageHeader() {
 
             {showDropdown && (
               <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
-                <a
+                <Link
                   href="/features/document-translation"
                   className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
                 >
@@ -63,8 +64,8 @@ export default function PageHeader() {
                       {t('dropdown.document.description')}
                     </p>
                   </div>
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/features/subtitle-translation"
                   className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
                 >
@@ -79,7 +80,7 @@ export default function PageHeader() {
                       {t('dropdown.subtitle.description')}
                     </p>
                   </div>
-                </a>
+                </Link>
               </div>
             )}
           </div>

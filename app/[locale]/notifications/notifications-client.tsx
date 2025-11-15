@@ -237,7 +237,7 @@ export default function NotificationsClient() {
               searchQuery={searchQuery}
               onSearchChange={setSearchQuery}
               filters={filters.slice(0, 3)}
-              activeFilter={filterType as any}
+              activeFilter={filterType as string}
               onSelectFilter={setFilterType}
             />
           </div>
@@ -256,7 +256,7 @@ export default function NotificationsClient() {
           <div className="max-w-7xl mx-auto">
             <NotificationsList
               notifications={filteredNotifications}
-              activeFilter={filterType as any}
+              activeFilter={filterType as string}
               searchQuery={searchQuery}
               selectedIds={selectedIds}
               onToggleSelect={handleToggleSelect}

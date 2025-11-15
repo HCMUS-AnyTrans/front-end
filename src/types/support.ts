@@ -7,7 +7,7 @@ export interface FAQ {
 export interface Category {
   id: string;
   label: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 export interface ContactForm {
@@ -21,7 +21,7 @@ export interface QuickAction {
   id: string;
   title: string;
   description: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
   color: string;
   hoverColor: string;
   bgColor: string;
@@ -35,7 +35,7 @@ export interface AdditionalResource {
   id: string;
   title: string;
   description: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
   bgGradient: string;
   borderColor: string;
   iconBg: string;

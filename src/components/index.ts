@@ -15,7 +15,5 @@ export * from './Layout';
 export * from './Notifications';
 export * from './Pricing';
 export * from './Support';
-export * from './Terms';
-export * from './Privacy';
 export * from './Translation';
 export * from './TranslationHistory';

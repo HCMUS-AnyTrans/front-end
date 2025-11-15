@@ -13,7 +13,7 @@ export interface TranslationItem {
 }
 
 export interface StatusConfig {
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
   color: string;
   bg: string;
   border: string;
