@@ -44,3 +44,5 @@ next-env.d.ts
 
 
 logging_prompt/
+
+/.vscode
