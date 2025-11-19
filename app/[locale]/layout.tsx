@@ -5,9 +5,10 @@ import { notFound } from 'next/navigation';
 import { Nunito, Inter } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import { AccountDialogProvider } from '@/contexts/AccountDialogContext';
+import { AppProviders } from '@/providers';
 import { Toaster } from 'sonner';
 import '../globals.css';
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager } from '@next/third-parties/google';
 
 // Primary Font - Nunito (Universal font for all languages)
 // Optimized: Only loading essential weights to reduce bundle size
@@ -76,7 +77,7 @@ export default async function LocaleLayout({
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as typeof routing.locales[number])) {
+  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
     notFound();
   }
 
@@ -90,12 +91,14 @@ export default async function LocaleLayout({
         className={`${nunito.variable} ${inter.variable} antialiased min-h-screen font-nunito flex flex-col`}
         suppressHydrationWarning
       >
-        <NextIntlClientProvider messages={messages}>
-          <AccountDialogProvider>
-            {children}
-            <Toaster />
-          </AccountDialogProvider>
-        </NextIntlClientProvider>
+        <AppProviders>
+          <NextIntlClientProvider messages={messages}>
+            <AccountDialogProvider>
+              {children}
+              <Toaster />
+            </AccountDialogProvider>
+          </NextIntlClientProvider>
+        </AppProviders>
       </body>
     </html>
   );

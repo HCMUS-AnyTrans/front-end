@@ -15,7 +15,17 @@
   "sidebar": {
     "profile": "Profile",
     "billing": "Billing",
-    "settings": "Settings"
+    "settings": "Settings",
+    "logout": {
+      "label": "Logout",
+      "loggingOut": "Logging out...",
+      "dialogTitle": "Confirm Logout",
+      "confirm": "Are you sure you want to log out? You will need to log in again to access your account.",
+      "confirmButton": "Yes, Logout",
+      "cancel": "Cancel",
+      "success": "Logged out successfully",
+      "error": "Failed to log out. Please try again."
+    }
   },
   "profile": {
     "personalInfo": {

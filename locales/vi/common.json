@@ -15,7 +15,17 @@
   "sidebar": {
     "profile": "Hồ sơ",
     "billing": "Thanh toán",
-    "settings": "Cài đặt"
+    "settings": "Cài đặt",
+    "logout": {
+      "label": "Đăng xuất",
+      "loggingOut": "Đang đăng xuất...",
+      "dialogTitle": "Xác nhận đăng xuất",
+      "confirm": "Bạn có chắc chắn muốn đăng xuất? Bạn sẽ cần đăng nhập lại để truy cập tài khoản.",
+      "confirmButton": "Có, đăng xuất",
+      "cancel": "Hủy",
+      "success": "Đăng xuất thành công",
+      "error": "Đăng xuất thất bại. Vui lòng thử lại."
+    }
   },
   "profile": {
     "personalInfo": {
