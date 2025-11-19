@@ -3,6 +3,7 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
+import { API_BASE_URL } from '@/lib/api-config';
 
 interface OAuthButtonProps {
   provider: 'google' | 'github';
@@ -63,20 +64,23 @@ function OAuthButton({ provider, onClick, disabled }: OAuthButtonProps) {
 }
 
 export function OAuthButtons() {
-  const handleOAuthClick = (provider: 'google' | 'github') => {
-    // Placeholder for OAuth implementation
-    console.log(`OAuth login with ${provider}`);
+  const handleGoogleOAuth = () => {
+    // Redirect to Google OAuth endpoint
+    window.location.href = `${API_BASE_URL}/auth/google`;
+  };
+
+  const handleGitHubOAuth = () => {
+    // GitHub OAuth not yet implemented on backend
+    console.log('GitHub OAuth not yet implemented');
   };
 
   return (
     <div className="grid grid-cols-1 gap-3">
-      <OAuthButton
-        provider="google"
-        onClick={() => handleOAuthClick('google')}
-      />
+      <OAuthButton provider="google" onClick={handleGoogleOAuth} />
       <OAuthButton
         provider="github"
-        onClick={() => handleOAuthClick('github')}
+        onClick={handleGitHubOAuth}
+        disabled={true}
       />
     </div>
   );

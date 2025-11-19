@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState, useTransition } from 'react';
+import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 import { AuthShell, PasswordField, OAuthButtons } from '@/components/Auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,14 +18,21 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { signupAction } from '../actions';
+import { useRegisterMutation, useAuthErrorMessage } from '@/features/auth';
 import { createClientSchemas, type SignupFormData } from '../schemas';
 
 export function SignupForm() {
   const t = useTranslations('auth.signup');
   const tErrors = useTranslations('auth.errors');
-  const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | null>(null);
+  const getErrorMessage = useAuthErrorMessage();
+
+  // Register mutation
+  const registerMutation = useRegisterMutation({
+    onError: (error) => {
+      const errorMsg = getErrorMessage(error);
+      toast.error(errorMsg || 'Registration failed. Please try again.');
+    },
+  });
 
   const schemas = createClientSchemas(tErrors);
 
@@ -40,13 +48,10 @@ export function SignupForm() {
   });
 
   const onSubmit = async (data: SignupFormData) => {
-    setError(null);
-    startTransition(async () => {
-      const result = await signupAction(data);
-      if (result?.error) {
-        setError(result.error);
-      }
-      // If no result returned, redirect happened successfully
+    registerMutation.mutate({
+      email: data.email,
+      password: data.password,
+      fullName: data.name,
     });
   };
 
@@ -71,9 +76,9 @@ export function SignupForm() {
         {/* Signup Form */}
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            {error && (
+            {registerMutation.isError && (
               <div className="rounded-md bg-destructive/15 p-3 text-sm text-destructive">
-                {error}
+                {getErrorMessage(registerMutation.error)}
               </div>
             )}
 
@@ -88,7 +93,7 @@ export function SignupForm() {
                       {...field}
                       placeholder={t('fullName.placeholder')}
                       autoComplete="name"
-                      disabled={isPending}
+                      disabled={registerMutation.isPending}
                     />
                   </FormControl>
                   <FormMessage />
@@ -108,7 +113,7 @@ export function SignupForm() {
                       type="email"
                       placeholder={t('email.placeholder')}
                       autoComplete="email"
-                      disabled={isPending}
+                      disabled={registerMutation.isPending}
                     />
                   </FormControl>
                   <FormMessage />
@@ -127,7 +132,7 @@ export function SignupForm() {
                       {...field}
                       placeholder={t('password.placeholder')}
                       autoComplete="new-password"
-                      disabled={isPending}
+                      disabled={registerMutation.isPending}
                     />
                   </FormControl>
                   <FormMessage />
@@ -146,7 +151,7 @@ export function SignupForm() {
                       {...field}
                       placeholder={t('confirmPassword.placeholder')}
                       autoComplete="new-password"
-                      disabled={isPending}
+                      disabled={registerMutation.isPending}
                     />
                   </FormControl>
                   <FormMessage />
@@ -163,7 +168,7 @@ export function SignupForm() {
                     <Checkbox
                       checked={field.value}
                       onCheckedChange={field.onChange}
-                      disabled={isPending}
+                      disabled={registerMutation.isPending}
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
@@ -202,9 +207,9 @@ export function SignupForm() {
               variant="gradient-primary"
               size="default"
               className="w-full"
-              disabled={isPending}
+              disabled={registerMutation.isPending}
             >
-              {isPending ? t('submitting') : t('submit')}
+              {registerMutation.isPending ? t('submitting') : t('submit')}
             </Button>
           </form>
         </Form>
