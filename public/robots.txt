@@ -1,0 +1,29 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://anytrans.me
+
+# Sitemaps
+Sitemap: https://anytrans.me/sitemap.xml
+
+# Disallow admin and private routes
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow all public pages
+Allow: /en/
+Allow: /vi/
+Allow: /about
+Allow: /contact
+Allow: /features
+Allow: /pricing
+Allow: /faq
+Allow: /privacy
+Allow: /terms
+
+# Crawl-delay
+Crawl-delay: 1

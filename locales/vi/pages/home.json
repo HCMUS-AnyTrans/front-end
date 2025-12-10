@@ -1,4 +1,14 @@
 {
+  "meta": {
+    "title": "Anytrans - Dịch thuật AI cho Tài liệu & Phụ đề",
+    "description": "Dịch thông minh hơn, không khó hơn. Anytrans mang đến tốc độ, độ chính xác và tính năng tiên tiến để quản lý nội dung dễ dàng. Hỗ trợ 100+ ngôn ngữ.",
+    "keywords": "dịch thuật, dịch tài liệu, dịch phụ đề, dịch AI, dịch trực tuyến, dịch chuyên nghiệp, dịch đa ngôn ngữ, dịch DOCX, dịch PDF, dịch SRT, dịch VTT, dịch phụ đề video",
+    "ogTitle": "Anytrans - Dịch vụ Dịch thuật AI Chuyên nghiệp",
+    "ogDescription": "Chuyển đổi tài liệu và phụ đề với công nghệ AI tiên tiến. Nhanh, chính xác, hỗ trợ 100+ ngôn ngữ. Dùng thử miễn phí ngay!",
+    "ogImageAlt": "Nền tảng Dịch thuật Anytrans",
+    "twitterTitle": "Anytrans - Dịch thuật AI Đơn giản",
+    "twitterDescription": "Dịch tài liệu và phụ đề chuyên nghiệp bằng AI. Tham gia cùng hàng ngàn người dùng dịch nội dung sang 100+ ngôn ngữ."
+  },
   "hero": {
     "title": {
       "part1": "Nâng tầm",

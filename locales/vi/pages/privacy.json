@@ -1,7 +1,13 @@
 {
   "meta": {
     "title": "Chính Sách Bảo Mật - AnyTrans",
-    "description": "Tìm hiểu cách AnyTrans thu thập, sử dụng và bảo vệ thông tin cá nhân và dữ liệu dịch thuật của bạn."
+    "description": "Tìm hiểu cách AnyTrans thu thập, sử dụng và bảo vệ thông tin cá nhân và dữ liệu dịch thuật của bạn.",
+    "keywords": "chính sách bảo mật, bảo vệ dữ liệu, thông tin cá nhân, tuân thủ GDPR, bảo mật dữ liệu, quyền riêng tư người dùng, bảo mật dữ liệu dịch thuật",
+    "ogTitle": "Chính sách Bảo mật Anytrans - Dữ liệu của bạn được Bảo vệ",
+    "ogDescription": "Tìm hiểu cách chúng tôi thu thập, sử dụng và bảo vệ thông tin cá nhân của bạn với bảo mật cấp doanh nghiệp.",
+    "ogImageAlt": "Bảo vệ Quyền riêng tư Anytrans",
+    "twitterTitle": "Chính sách Bảo mật Anytrans",
+    "twitterDescription": "Quyền riêng tư của bạn rất quan trọng. Xem cách chúng tôi bảo vệ dữ liệu với các biện pháp bảo mật hàng đầu trong ngành."
   },
   "hero": {
     "title": "Chính Sách Bảo Mật",

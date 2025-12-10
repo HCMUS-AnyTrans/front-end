@@ -1,7 +1,13 @@
 {
   "meta": {
     "title": "Terms of Service - AnyTrans",
-    "description": "Read our Terms of Service to understand your rights and responsibilities when using AnyTrans translation services."
+    "description": "Read our Terms of Service to understand your rights and responsibilities when using AnyTrans translation services.",
+    "keywords": "terms of service, user agreement, service terms, legal terms, usage policy, translation service terms",
+    "ogTitle": "Anytrans Terms of Service",
+    "ogDescription": "Understand your rights and responsibilities when using Anytrans translation services.",
+    "ogImageAlt": "Anytrans Terms of Service",
+    "twitterTitle": "Anytrans Terms of Service",
+    "twitterDescription": "Read our terms to understand the rules and guidelines for using Anytrans."
   },
   "hero": {
     "title": "Terms of Service",

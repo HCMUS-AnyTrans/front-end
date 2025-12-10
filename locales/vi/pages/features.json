@@ -1,7 +1,13 @@
 {
   "meta": {
-    "title": "Tính năng | Anytrans",
-    "description": "Khám phá các tính năng dịch thuật mạnh mẽ của Anytrans - dịch tài liệu, dịch phụ đề và nhiều công cụ chuyên nghiệp cho nội dung toàn cầu."
+    "title": "Tính năng - Anytrans",
+    "description": "Khám phá các tính năng dịch thuật mạnh mẽ của Anytrans - dịch tài liệu, dịch phụ đề và nhiều công cụ chuyên nghiệp cho nội dung toàn cầu.",
+    "keywords": "tính năng dịch thuật, công cụ dịch tài liệu, phần mềm dịch phụ đề, tính năng dịch AI, xử lý hàng loạt, bảo toàn định dạng, xem trước thời gian thực, quản lý thuật ngữ",
+    "ogTitle": "Tính năng Anytrans - Hai Công cụ Mạnh mẽ, Vô vàn Khả năng",
+    "ogDescription": "Dịch tài liệu và phụ đề cấp chuyên nghiệp được hỗ trợ bởi công nghệ AI tiên tiến.",
+    "ogImageAlt": "Tính năng Dịch thuật Anytrans",
+    "twitterTitle": "Tính năng Dịch thuật Anytrans",
+    "twitterDescription": "Khám phá công cụ mạnh mẽ để dịch tài liệu và phụ đề với độ chính xác và đồng bộ hoàn hảo."
   },
   "hero": {
     "badge": "Nền tảng Dịch thuật",

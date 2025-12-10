@@ -1,7 +1,13 @@
 {
   "meta": {
     "title": "Privacy Policy - AnyTrans",
-    "description": "Learn how AnyTrans collects, uses, and protects your personal information and translation data."
+    "description": "Learn how AnyTrans collects, uses, and protects your personal information and translation data.",
+    "keywords": "privacy policy, data protection, personal information, GDPR compliance, data security, user privacy, translation data privacy",
+    "ogTitle": "Anytrans Privacy Policy - Your Data is Protected",
+    "ogDescription": "Learn how we collect, use, and protect your personal information with enterprise-grade security.",
+    "ogImageAlt": "Anytrans Privacy Protection",
+    "twitterTitle": "Anytrans Privacy Policy",
+    "twitterDescription": "Your privacy matters. See how we protect your data with industry-leading security measures."
   },
   "hero": {
     "title": "Privacy Policy",

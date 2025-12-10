@@ -1,7 +1,13 @@
 {
   "meta": {
     "title": "About Us - Anytrans",
-    "description": "Learn about Anytrans - our mission, values, team, and journey in making translation accessible to everyone."
+    "description": "Learn about Anytrans - our mission, values, team, and journey in making translation accessible to everyone.",
+    "keywords": "about anytrans, translation company, AI translation technology, our mission, our team, translation services, company values",
+    "ogTitle": "About Anytrans - Breaking Language Barriers",
+    "ogDescription": "Discover our mission to make professional translation accessible to everyone through innovative AI technology.",
+    "ogImageAlt": "About Anytrans Team",
+    "twitterTitle": "About Anytrans - Our Story",
+    "twitterDescription": "Learn about our journey in democratizing professional translation services worldwide."
   },
   "sections": {
     "story": {

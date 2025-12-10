@@ -92,7 +92,7 @@ export default function FAQClient() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-purple-700 py-16 sm:py-20">
+        <section className="bg-gradient-to-r from-[#4169E1] via-[#1e3a8a] to-[#4169E1] py-16 sm:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
