@@ -20,6 +20,7 @@ interface FeatureShowcaseProps {
   index: number;
   cta: string;
   mockupSubDomain: string;
+  id?: string;
 }
 
 export default function FeatureShowcase({
@@ -33,7 +34,8 @@ export default function FeatureShowcase({
   imagePosition,
   index,
   cta,
-  mockupSubDomain
+  mockupSubDomain,
+  id
 }: FeatureShowcaseProps) {
   // Convert string[] benefits to Benefit[] format
   // For now, we'll use generic icons or map to proper ones
@@ -60,6 +62,7 @@ export default function FeatureShowcase({
 
   return (
     <section
+      id={id}
       className={`w-full py-16 sm:py-20 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -16,7 +16,7 @@ export default function PrivacyPageClient() {
       <LegalPageHero 
         namespace="privacy" 
         icon={Shield} 
-        gradientColors="bg-gradient-to-br from-green-600 via-teal-600 to-blue-600"
+        gradientColors="bg-gradient-to-br from-blue-600 via-blue-700 to-purple-700"
       />
 
       {/* Main Content */}

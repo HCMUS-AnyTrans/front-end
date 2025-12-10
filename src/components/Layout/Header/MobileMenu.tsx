@@ -34,11 +34,11 @@ export default function MobileMenu({
 
   const featureItems = [
     {
-      href: '/features/document-translation',
+      href: '/features#document-translation',
       label: t('featuresDropdown.documentTranslation.title'),
     },
     {
-      href: '/features/subtitle-translation',
+      href: '/features#subtitle-translation',
       label: t('featuresDropdown.subtitleTranslation.title'),
     },
   ];

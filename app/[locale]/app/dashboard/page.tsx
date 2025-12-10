@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import Sidebar from '@/components/Layout/Sidebar/Sidebar';
 import DashboardClient from './dashboard-client';
 
 export async function generateMetadata({
@@ -93,14 +92,11 @@ export default async function DashboardPage({
   ];
 
   return (
-    <div className="flex h-screen bg-gray-50">
-      <Sidebar />
-      <DashboardClient
-        recentActivity={recentActivity}
-        topLanguages={topLanguages}
-        weeklyStatsDocuments={weeklyStatsDocuments}
-        weeklyStatsSubtitles={weeklyStatsSubtitles}
-      />
-    </div>
+    <DashboardClient
+      recentActivity={recentActivity}
+      topLanguages={topLanguages}
+      weeklyStatsDocuments={weeklyStatsDocuments}
+      weeklyStatsSubtitles={weeklyStatsSubtitles}
+    />
   );
 }

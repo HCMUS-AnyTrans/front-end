@@ -2,7 +2,6 @@
 
 import React, { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Sidebar } from '@/components/Layout';
 import {
   NotificationItem,
   NotificationFilter,
@@ -212,9 +211,7 @@ export default function NotificationsClient() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50">
-      <Sidebar />
-      <div className="flex-1 flex flex-col overflow-hidden">
+    <div className="flex-1 flex flex-col overflow-hidden">
         <div className="bg-white border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-4 sm:py-6 mt-16 lg:mt-0">
           <div className="max-w-7xl mx-auto">
             <NotificationsHeader
@@ -269,6 +266,5 @@ export default function NotificationsClient() {
           </div>
         </div>
       </div>
-    </div>
   );
 }

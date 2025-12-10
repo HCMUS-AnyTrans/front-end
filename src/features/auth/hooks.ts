@@ -47,7 +47,7 @@ export function useLoginMutation(
       }
 
       // Redirect to dashboard (or custom redirect)
-      router.push('/dashboard');
+      router.push('/app/dashboard');
     },
     ...options,
   });
@@ -80,7 +80,7 @@ export function useRegisterMutation(
       }
 
       // Redirect to dashboard (or custom redirect)
-      router.push('/dashboard');
+      router.push('/app/dashboard');
     },
     ...options,
   });

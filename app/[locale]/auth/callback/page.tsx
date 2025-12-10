@@ -63,7 +63,7 @@ export default function AuthCallbackPage() {
 
         // Redirect to dashboard after 1 second
         setTimeout(() => {
-          router.push('/dashboard');
+          router.push('/app/dashboard');
         }, 1000);
         return;
       } catch (err) {
@@ -87,7 +87,7 @@ export default function AuthCallbackPage() {
 
     // Redirect to dashboard
     setTimeout(() => {
-      router.push('/dashboard');
+      router.push('/app/dashboard');
     }, 1000);
   }, [searchParams, setAuth, router]);
 

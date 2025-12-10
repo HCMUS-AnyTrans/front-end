@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import Sidebar from '@/components/Layout/Sidebar/Sidebar';
-import DocumentTranslatorClient from './document-translator-interface';
+import SubtitleTranslationClient from './subtitle-translation-interface';
 
 export async function generateMetadata({
   params,
@@ -11,7 +10,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({
     locale,
-    namespace: 'documentTranslation.meta',
+    namespace: 'subtitleTranslation.meta',
   });
 
   return {
@@ -20,7 +19,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function DocumentTranslationPage({
+export default async function SubtitleTranslationPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -28,10 +27,5 @@ export default async function DocumentTranslationPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return (
-    <div className="flex h-screen bg-gray-50">
-      <Sidebar />
-      <DocumentTranslatorClient />
-    </div>
-  );
+  return <SubtitleTranslationClient />;
 }

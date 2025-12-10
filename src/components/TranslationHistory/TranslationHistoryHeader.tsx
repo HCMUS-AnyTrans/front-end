@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { BaseHeader } from '@/components/Common';
 
 interface TranslationHistoryHeaderProps {
@@ -14,6 +14,7 @@ export default function TranslationHistoryHeader({
   totalWords,
 }: TranslationHistoryHeaderProps) {
   const t = useTranslations('translationHistory.header');
+  const locale = useLocale();
 
   return (
     <BaseHeader
@@ -28,7 +29,7 @@ export default function TranslationHistoryHeader({
         },
         {
           label: t('stats.words'),
-          value: totalWords.toLocaleString(),
+          value: totalWords.toLocaleString(locale),
           color: 'bg-[#4169E1]',
         },
       ]}

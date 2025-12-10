@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { TranslationHistoryStats as Stats } from '@/types/translation-history';
 
 interface TranslationHistoryStatsProps {
@@ -12,6 +12,7 @@ export default function TranslationHistoryStats({
   stats,
 }: TranslationHistoryStatsProps) {
   const t = useTranslations('translationHistory.stats');
+  const locale = useLocale();
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
@@ -36,7 +37,7 @@ export default function TranslationHistoryStats({
           {t('totalWords')}
         </p>
         <p className="text-xl sm:text-2xl font-bold text-gray-900">
-          {stats.totalWords.toLocaleString()}
+          {stats.totalWords.toLocaleString(locale)}
         </p>
       </div>
       <div className="bg-white rounded-xl p-4 sm:p-5 border border-gray-200">

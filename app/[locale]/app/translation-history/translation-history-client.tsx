@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Sidebar } from '@/components/Layout';
 import {
   TranslationHistoryHeader,
   TranslationHistoryStats,
@@ -161,9 +160,7 @@ export default function TranslationHistoryClient() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50">
-      <Sidebar />
-      <div className="flex-1 flex flex-col overflow-hidden">
+    <div className="flex-1 flex flex-col overflow-hidden">
         <TranslationHistoryHeader
           totalCompleted={totalCompleted}
           totalWords={totalWords}
@@ -200,6 +197,5 @@ export default function TranslationHistoryClient() {
           </div>
         </div>
       </div>
-    </div>
   );
 }

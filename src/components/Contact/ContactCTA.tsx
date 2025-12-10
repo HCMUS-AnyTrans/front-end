@@ -26,7 +26,7 @@ export default function ContactCTA() {
         description={t('description')}
         primaryButton={{
           text: t('button'),
-          href: '/support',
+          href: '/faq',
         }}
       />
     </div>
