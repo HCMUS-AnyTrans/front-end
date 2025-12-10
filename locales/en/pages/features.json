@@ -1,7 +1,13 @@
 {
   "meta": {
-    "title": "Features | Anytrans",
-    "description": "Explore Anytrans powerful translation features - document translation, subtitle translation, and more professional tools for global content."
+    "title": "Features - Anytrans",
+    "description": "Explore Anytrans powerful translation features - document translation, subtitle translation, and more professional tools for global content.",
+    "keywords": "translation features, document translation tool, subtitle translation software, AI translation features, batch processing, format preservation, real-time preview, glossary management",
+    "ogTitle": "Anytrans Features - Two Powerful Tools, Infinite Possibilities",
+    "ogDescription": "Professional-grade document and subtitle translation powered by cutting-edge AI technology.",
+    "ogImageAlt": "Anytrans Translation Features",
+    "twitterTitle": "Anytrans Translation Features",
+    "twitterDescription": "Discover powerful tools for document and subtitle translation with perfect accuracy and timing."
   },
   "hero": {
     "badge": "Translation Platform",

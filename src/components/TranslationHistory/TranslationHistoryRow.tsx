@@ -119,7 +119,7 @@ export default function TranslationHistoryRow({
                 </p>
                 <div className="flex items-center gap-2 text-[10px] text-gray-500 mt-0.5">
                   <span>
-                    {item.wordCount.toLocaleString()} {t('words')}
+                    {item.wordCount.toLocaleString(locale)} {t('words')}
                   </span>
                   <span>•</span>
                   <span>{item.fileSize}</span>
@@ -214,7 +214,7 @@ export default function TranslationHistoryRow({
             </p>
             <div className="flex items-center gap-2 text-xs text-gray-500">
               <span>
-                {item.wordCount.toLocaleString()} {t('words')}
+                {item.wordCount.toLocaleString(locale)} {t('words')}
               </span>
               <span>•</span>
               <span>{item.fileSize}</span>

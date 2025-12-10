@@ -72,7 +72,7 @@ export async function loginAction(formData: LoginFormData) {
   if (validatedData.email && validatedData.password) {
     // Set authentication cookies/session here
     const locale = await getLocale();
-    nextRedirect(`/${locale}/dashboard`);
+    nextRedirect(`/${locale}/app/dashboard`);
   } else {
     return {
       error: t('invalidCredentials'),

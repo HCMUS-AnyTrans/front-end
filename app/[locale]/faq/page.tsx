@@ -1,8 +1,11 @@
-import React from 'react';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
-import AboutPageClient from './about-client';
+import FAQClient from './faq-client';
+
+interface FAQPageProps {
+  params: Promise<{ locale: string }>;
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -14,7 +17,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'about.meta' });
+  const t = await getTranslations({ locale, namespace: 'faq.meta' });
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://anytrans.me';
 
   return {
@@ -34,16 +37,16 @@ export async function generateMetadata({
       },
     },
     alternates: {
-      canonical: `${baseUrl}/${locale}/about`,
+      canonical: `${baseUrl}/${locale}/faq`,
       languages: {
-        en: `${baseUrl}/en/about`,
-        vi: `${baseUrl}/vi/about`,
+        en: `${baseUrl}/en/faq`,
+        vi: `${baseUrl}/vi/faq`,
       },
     },
     openGraph: {
       type: 'website',
       locale: locale,
-      url: `${baseUrl}/${locale}/about`,
+      url: `${baseUrl}/${locale}/faq`,
       siteName: 'Anytrans',
       title: t('ogTitle'),
       description: t('ogDescription'),
@@ -67,21 +70,17 @@ export async function generateMetadata({
   };
 }
 
-export default async function AboutPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function FAQPage({ params }: FAQPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'AboutPage',
-    name: 'About Anytrans',
+    '@type': 'FAQPage',
+    name: 'Frequently Asked Questions - Anytrans',
     description:
-      'Learn about Anytrans - our mission, values, team, and journey in making translation accessible to everyone.',
-    url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://anytrans.me'}/${locale}/about`,
+      'Find answers to common questions about Anytrans translation services, features, and pricing.',
+    url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://anytrans.me'}/${locale}/faq`,
     inLanguage: locale,
     publisher: {
       '@type': 'Organization',
@@ -96,7 +95,7 @@ export default async function AboutPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <AboutPageClient />
+      <FAQClient />
     </>
   );
 }

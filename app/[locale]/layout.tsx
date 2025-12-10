@@ -47,19 +47,71 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'common.meta' });
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://anytrans.me';
 
   return {
-    title: t('title'),
+    metadataBase: new URL(baseUrl),
+    title: {
+      default: t('title'),
+      template: '%s',
+    },
     description: t('description'),
-    robots: 'index, follow',
-    authors: [{ name: 'Anytrans' }],
-    keywords: 'translation, document translation, subtitle translation',
+    applicationName: 'Anytrans',
+    authors: [{ name: 'Anytrans', url: baseUrl }],
+    creator: 'Anytrans',
+    publisher: 'Anytrans',
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    keywords: [
+      'translation',
+      'document translation',
+      'subtitle translation',
+      'AI translation',
+      'online translator',
+      'professional translation',
+      'multilingual',
+    ],
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     openGraph: {
       type: 'website',
       locale: locale,
+      url: baseUrl,
+      siteName: 'Anytrans',
       title: t('title'),
       description: t('description'),
+      images: [
+        {
+          url: `${baseUrl}/banner/banner-homepage.svg`,
+          width: 1200,
+          height: 630,
+          alt: 'Anytrans Translation Platform',
+        },
+      ],
     },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@anytrans',
+      creator: '@anytrans',
+    },
+    icons: {
+      icon: '/logo/logo.svg',
+      shortcut: '/logo/logo.svg',
+      apple: '/logo/logo.svg',
+    },
+    manifest: '/site.webmanifest',
   };
 }
 

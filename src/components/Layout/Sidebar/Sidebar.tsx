@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { usePathname } from '@/i18n/routing';
 import {
@@ -11,6 +11,7 @@ import {
   Bell,
   Info,
   X,
+  ChevronLeft,
 } from 'lucide-react';
 import { AccountDialog } from '@/components/Account';
 import {
@@ -20,7 +21,6 @@ import {
   CreditSection,
   UserProfileButton,
   MobileHeader,
-  MobileOverlay,
 } from '@/components/Layout/Sidebar';
 import type { NavItem, SidebarProps } from '@/types/sidebar';
 
@@ -29,40 +29,42 @@ export default function Sidebar({ className }: SidebarProps) {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const [credits] = useState({ current: 45, total: 100, plan: 'Free' });
 
   const navigationItems: NavItem[] = [
     {
       label: t('navigation.dashboard'),
-      href: '/dashboard',
+      href: '/app/dashboard',
       icon: LayoutDashboard,
     },
     {
       label: t('navigation.documentTranslator'),
-      href: '/features/document-translation',
+      href: '/app/document-translation',
       icon: FileText,
     },
     {
       label: t('navigation.subtitleTranslator'),
-      href: '/features/subtitle-translation',
+      href: '/app/subtitle-translation',
       icon: Film,
     },
     {
       label: t('navigation.translationHistory'),
-      href: '/translation-history',
+      href: '/app/translation-history',
       icon: History,
     },
   ];
 
   const secondaryItems: NavItem[] = [
-    { label: t('secondary.notification'), href: '/notifications', icon: Bell },
-    { label: t('secondary.support'), href: '/support', icon: Info },
+    { label: t('secondary.notification'), href: '/app/notifications', icon: Bell },
+    { label: t('secondary.support'), href: '/app/support', icon: Info },
   ];
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [pathname]);
+
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -80,16 +82,16 @@ export default function Sidebar({ className }: SidebarProps) {
   }, [isMobileMenuOpen]);
 
   const isActive = (href: string) => {
-    if (href === '/dashboard') {
-      return pathname === '/dashboard' || pathname === '/';
+    if (href === '/app/dashboard') {
+      return pathname === '/app/dashboard' || pathname === '/';
     }
     return pathname.startsWith(href);
   };
 
-  const SidebarContent = () => (
+  const SidebarContent = ({ collapsed = false }: { collapsed?: boolean }) => (
     <>
       <div className="lg:hidden flex items-center justify-between px-4 py-2 mb-4 border-b border-gray-200">
-        <SidebarLogo />
+        <SidebarLogo isCollapsed={collapsed} />
         <button
           onClick={() => setIsMobileMenuOpen(false)}
           className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
@@ -99,19 +101,29 @@ export default function Sidebar({ className }: SidebarProps) {
         </button>
       </div>
 
-      <div className="hidden lg:block">
-        <SidebarLogo />
+      <div className="hidden lg:block px-4 py-6 relative">
+        <div className="flex items-center justify-center">
+          <SidebarLogo isCollapsed={collapsed} />
+        </div>
+        <button
+          onClick={() => setIsCollapsed(!collapsed)}
+          className="absolute -right-2.5 top-1/2 -translate-y-1/2 p-1 bg-gray-100 hover:bg-gray-200 rounded-md transition-all cursor-pointer"
+          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        >
+          <ChevronLeft className={`w-3.5 h-3.5 text-gray-600 transition-transform ${collapsed ? 'rotate-180' : ''}`} />
+        </button>
       </div>
 
-      <SidebarNav items={navigationItems} isActive={isActive} />
+      <SidebarNav items={navigationItems} isActive={isActive} isCollapsed={collapsed} />
 
-      <SecondaryNav items={secondaryItems} isActive={isActive} />
+      <SecondaryNav items={secondaryItems} isActive={isActive} isCollapsed={collapsed} />
 
-      <CreditSection current={credits.current} total={credits.total} />
+      {!collapsed && <CreditSection current={credits.current} total={credits.total} />}
 
       <UserProfileButton
         planLabel={credits.plan}
         onOpenAccount={() => setIsAccountOpen(true)}
+        isCollapsed={collapsed}
       />
 
       {isAccountOpen && (
@@ -132,9 +144,10 @@ export default function Sidebar({ className }: SidebarProps) {
       /> */}
 
       <div
-        className={`hidden lg:flex bg-white w-[260px] xl:w-[300px] h-screen flex-col border-r border-gray-200 ${className || ''}`}
+        suppressHydrationWarning
+        className={`hidden lg:flex bg-white h-screen flex-col border-r border-gray-200 transition-all duration-300 ${isCollapsed ? 'w-[80px]' : 'w-[260px] xl:w-[300px]'} ${className || ''}`}
       >
-        <SidebarContent />
+        <SidebarContent collapsed={isCollapsed} />
       </div>
 
       <div
@@ -145,7 +158,7 @@ export default function Sidebar({ className }: SidebarProps) {
         aria-modal="true"
         aria-label="Navigation menu"
       >
-        <SidebarContent />
+        <SidebarContent collapsed={false} />
       </div>
     </>
   );

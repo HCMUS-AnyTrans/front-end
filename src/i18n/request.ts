@@ -26,6 +26,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
       about: (await import(`../../locales/${locale}/pages/about.json`)).default,
       contact: (await import(`../../locales/${locale}/pages/contact.json`))
         .default,
+      faq: (await import(`../../locales/${locale}/pages/faq.json`)).default,
       dashboard: (
         await import(`../../locales/${locale}/features/dashboard.json`)
       ).default,

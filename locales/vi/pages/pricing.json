@@ -1,7 +1,13 @@
 {
   "meta": {
     "title": "Bảng giá - Anytrans",
-    "description": "Chọn gói dịch thuật phù hợp với nhu cầu của bạn. Giá cả linh hoạt cho cá nhân và doanh nghiệp."
+    "description": "Chọn gói dịch thuật phù hợp với nhu cầu của bạn. Giá cả linh hoạt cho cá nhân và doanh nghiệp.",
+    "keywords": "bảng giá dịch thuật, dịch thuật giá rẻ, gói dịch thuật, giá gói dịch, dịch thuật doanh nghiệp, chi phí dịch thuật, dịch thuật trả theo lượng sử dụng",
+    "ogTitle": "Bảng giá Anytrans - Chọn Gói Hoàn hảo",
+    "ogDescription": "Giá cả linh hoạt cho cá nhân và doanh nghiệp. Bắt đầu miễn phí hoặc chọn gói phù hợp với nhu cầu.",
+    "ogImageAlt": "Gói giá Anytrans",
+    "twitterTitle": "Gói giá Anytrans",
+    "twitterDescription": "Dịch vụ dịch thuật giá cả phải chăng cho mọi người. Chọn từ các gói linh hoạt bắt đầu từ 9 USD/tháng."
   },
   "header": {
     "title": {

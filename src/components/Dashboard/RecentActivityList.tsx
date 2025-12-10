@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { FileText, Languages, Clock, CheckCircle2 } from 'lucide-react';
 import { RecentActivityItem } from '@/types/dashboard';
 
@@ -11,6 +11,7 @@ type RecentActivityListProps = {
 
 export default function RecentActivityList({ items }: RecentActivityListProps) {
   const t = useTranslations('dashboard.recentActivity');
+  const locale = useLocale();
 
   return (
     <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-200">
@@ -49,7 +50,7 @@ export default function RecentActivityList({ items }: RecentActivityListProps) {
                   </div>
                   <span className="hidden sm:inline">•</span>
                   <span>
-                    {item.wordCount.toLocaleString()} {t('words')}
+                    {item.wordCount.toLocaleString(locale)} {t('words')}
                   </span>
                 </div>
               </div>

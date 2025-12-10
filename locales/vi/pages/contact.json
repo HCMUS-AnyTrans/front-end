@@ -1,7 +1,13 @@
 {
   "meta": {
     "title": "Liên hệ - Anytrans",
-    "description": "Liên hệ với đội ngũ Anytrans. Gửi tin nhắn cho chúng tôi, tìm thông tin liên hệ hoặc kết nối qua mạng xã hội."
+    "description": "Liên hệ với đội ngũ Anytrans. Gữi tin nhắn cho chúng tôi, tìm thông tin liên hệ hoặc kết nối qua mạng xã hội.",
+    "keywords": "liên hệ anytrans, hỗ trợ khách hàng, trợ giúp dịch thuật, thông tin liên hệ, liên lạc, hỗ trợ kỹ thuật, tư vấn bán hàng",
+    "ogTitle": "Liên hệ Anytrans - Chúng tôi sẵn sàng hỗ trợ",
+    "ogDescription": "Có câu hỏi về dịch vụ dịch thuật của chúng tôi? Đội ngũ của chúng tôi sẵn sàng hỗ trợ bạn thành công.",
+    "ogImageAlt": "Hỗ trợ Anytrans",
+    "twitterTitle": "Liên hệ Anytrans",
+    "twitterDescription": "Liên hệ với đội ngũ hỗ trợ của chúng tôi. Chúng tôi sẵn sàng 24/7 để trả lời câu hỏi của bạn."
   },
   "hero": {
     "badge": "Liên hệ",
