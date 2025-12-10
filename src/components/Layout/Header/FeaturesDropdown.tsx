@@ -9,6 +9,7 @@ interface FeaturesDropdownProps {
   pathname: string;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  onMouseDown?: () => void;
 }
 
 export default function FeaturesDropdown({
@@ -17,17 +18,18 @@ export default function FeaturesDropdown({
   pathname,
   onMouseEnter,
   onMouseLeave,
+  onMouseDown
 }: FeaturesDropdownProps) {
   const t = useTranslations('header');
 
   const features = [
     {
-      href: '/features/document-translation',
+      href: '/features#document-translation',
       title: t('featuresDropdown.documentTranslation.title'),
       description: t('featuresDropdown.documentTranslation.description'),
     },
     {
-      href: '/features/subtitle-translation',
+      href: '/features#subtitle-translation',
       title: t('featuresDropdown.subtitleTranslation.title'),
       description: t('featuresDropdown.subtitleTranslation.description'),
     },
@@ -38,6 +40,7 @@ export default function FeaturesDropdown({
       <button
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        onMouseDown={onMouseDown}
         className={`relative flex items-center gap-1.5 px-3 xl:px-5 py-2.5 rounded-lg font-medium text-sm xl:text-[15px] transition-all duration-300 cursor-pointer ${
           isActive
             ? 'text-[#4169E1]'

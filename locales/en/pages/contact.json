@@ -1,7 +1,13 @@
 {
   "meta": {
     "title": "Contact Us - Anytrans",
-    "description": "Get in touch with the Anytrans team. Send us a message, find our contact information, or connect with us on social media."
+    "description": "Get in touch with the Anytrans team. Send us a message, find our contact information, or connect with us on social media.",
+    "keywords": "contact anytrans, customer support, translation help, contact information, get in touch, technical support, sales inquiry",
+    "ogTitle": "Contact Anytrans - We're Here to Help",
+    "ogDescription": "Have questions about our translation services? Our team is here to help you succeed.",
+    "ogImageAlt": "Contact Anytrans Support",
+    "twitterTitle": "Contact Anytrans",
+    "twitterDescription": "Get in touch with our support team. We're available 24/7 to answer your questions."
   },
   "hero": {
     "badge": "Get in Touch",

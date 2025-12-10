@@ -17,11 +17,12 @@ export default function FeaturesClient() {
 
   const features = [
     {
+      id: 'document-translation',
       title: t('documentTranslation.title'),
       description: t('documentTranslation.description'),
       icon: FileText,
       gradient: 'from-blue-500 to-indigo-600',
-      href: '/features/document-translation',
+      href: '/app/document-translation',
       imagePosition: 'right' as const,
       features: [
         t('documentTranslation.features.0'),
@@ -42,11 +43,12 @@ export default function FeaturesClient() {
       mockupSubDomain: t('documentTranslation.mockupSubDomain')
     },
     {
+      id: 'subtitle-translation',
       title: t('subtitleTranslation.title'),
       description: t('subtitleTranslation.description'),
       icon: Film,
       gradient: 'from-purple-500 to-pink-600',
-      href: '/features/subtitle-translation',
+      href: '/app/subtitle-translation',
       imagePosition: 'left' as const,
       features: [
         t('subtitleTranslation.features.0'),

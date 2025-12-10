@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from '@/i18n/routing';
 
 interface BaseCTAProps {
   variant?: 'pricing' | 'about' | 'contact';
@@ -67,9 +68,9 @@ export default function BaseCTA({
 
     if (button.href) {
       return (
-        <a href={button.href} className={baseClass}>
+        <Link href={button.href} className={baseClass}>
           {content}
-        </a>
+        </Link>
       );
     }
 

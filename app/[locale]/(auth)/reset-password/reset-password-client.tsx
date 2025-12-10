@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState, useTransition } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 import { AuthShell, PasswordField, PasswordStrength } from '@/components/Auth';
 import { Button } from '@/components/ui/button';
 import {
@@ -16,7 +17,11 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { resetPasswordAction } from '../actions';
+import {
+  useResetPasswordMutation,
+  useValidateResetTokenMutation,
+  useAuthErrorMessage,
+} from '@/features/auth';
 import { createClientSchemas, type ResetPasswordFormData } from '../schemas';
 
 interface ResetPasswordClientProps {
@@ -26,10 +31,42 @@ interface ResetPasswordClientProps {
 export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
   const t = useTranslations('auth.resetPassword');
   const tErrors = useTranslations('auth.errors');
-  const [isPending, startTransition] = useTransition();
-  const [isValidToken, setIsValidToken] = useState(true);
+  const getErrorMessage = useAuthErrorMessage();
+  const [isValidating, setIsValidating] = useState(true);
+  const [isValidToken, setIsValidToken] = useState(false);
+  const [validationError, setValidationError] = useState<string>('');
 
   const schemas = createClientSchemas(tErrors);
+
+  // Validate reset token mutation
+  const validateTokenMutation = useValidateResetTokenMutation({
+    onSuccess: (data) => {
+      if (data.valid) {
+        setIsValidToken(true);
+      } else {
+        setIsValidToken(false);
+        setValidationError(data.message || t('invalidToken'));
+      }
+      setIsValidating(false);
+    },
+    onError: (error) => {
+      setIsValidToken(false);
+      setValidationError(getErrorMessage(error) || t('invalidToken'));
+      setIsValidating(false);
+    },
+  });
+
+  // Reset password mutation
+  const resetPasswordMutation = useResetPasswordMutation({
+    onSuccess: () => {
+      toast.success(t('success'));
+      // Hook automatically redirects to /login?message=password_reset
+    },
+    onError: (error) => {
+      const errorMsg = getErrorMessage(error);
+      toast.error(errorMsg || tErrors('serverError'));
+    },
+  });
 
   const form = useForm<ResetPasswordFormData>({
     resolver: zodResolver(schemas.resetPasswordSchema),
@@ -40,11 +77,17 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
   });
 
   // Validate token on mount
-  React.useEffect(() => {
+  useEffect(() => {
     if (!token || token.length < 10) {
       setIsValidToken(false);
+      setValidationError(t('invalidToken'));
+      setIsValidating(false);
+      return;
     }
-  }, [token]);
+
+    // Call API to validate token
+    validateTokenMutation.mutate(token);
+  }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onSubmit = async (data: ResetPasswordFormData) => {
     if (!token) {
@@ -52,14 +95,31 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
       return;
     }
 
-    startTransition(async () => {
-      const result = await resetPasswordAction({ ...data, token });
-      if (result?.error) {
-        toast.error(result.error);
-      }
-      // If no result returned, redirect happened successfully
+    resetPasswordMutation.mutate({
+      token,
+      newPassword: data.password,
     });
   };
+
+  // Show loading while validating token
+  if (isValidating) {
+    return (
+      <AuthShell
+        title={t('title')}
+        description={t('subtitle')}
+        showBackButton
+        backHref="/login"
+        backText={t('backToLogin')}
+      >
+        <div className="flex flex-col items-center justify-center py-12 space-y-4">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          <p className="text-sm text-muted-foreground">
+            {t('validatingToken')}
+          </p>
+        </div>
+      </AuthShell>
+    );
+  }
 
   // Show error if invalid token
   if (!isValidToken) {
@@ -74,7 +134,7 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
         <div className="space-y-4 text-center">
           <div className="p-4 border rounded-lg bg-destructive/15 border-destructive/20">
             <p className="text-sm text-destructive">
-              {t('invalidLink.message')}
+              {validationError || t('invalidLink.message')}
             </p>
           </div>
 
@@ -85,7 +145,9 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
               size="default"
               className="w-full"
             >
-              <Link href="/forgot-password">{t('invalidLink.requestNewLink')}</Link>
+              <Link href="/forgot-password">
+                {t('invalidLink.requestNewLink')}
+              </Link>
             </Button>
 
             <Button
@@ -111,6 +173,12 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          {resetPasswordMutation.isError && (
+            <div className="rounded-md bg-destructive/15 p-3 text-sm text-destructive">
+              {getErrorMessage(resetPasswordMutation.error)}
+            </div>
+          )}
+
           <FormField
             control={form.control}
             name="password"
@@ -122,7 +190,7 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
                     {...field}
                     placeholder={t('newPassword.placeholder')}
                     autoComplete="new-password"
-                    disabled={isPending}
+                    disabled={resetPasswordMutation.isPending}
                   />
                 </FormControl>
                 <FormMessage />
@@ -147,7 +215,7 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
                     {...field}
                     placeholder={t('confirmPassword.placeholder')}
                     autoComplete="new-password"
-                    disabled={isPending}
+                    disabled={resetPasswordMutation.isPending}
                   />
                 </FormControl>
                 <FormMessage />
@@ -160,9 +228,9 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
             variant="gradient-primary"
             size="default"
             className="w-full"
-            disabled={isPending}
+            disabled={resetPasswordMutation.isPending}
           >
-            {isPending ? t('submitting') : t('submit')}
+            {resetPasswordMutation.isPending ? t('submitting') : t('submit')}
           </Button>
         </form>
       </Form>

@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useTransition } from 'react';
+import React from 'react';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/routing';
+import { Link, useRouter } from '@/i18n/routing';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 import { AuthShell } from '@/components/Auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -16,15 +17,33 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { requestPasswordResetAction } from '../actions';
+import {
+  useForgotPasswordMutation,
+  useAuthErrorMessage,
+} from '@/features/auth';
 import { createClientSchemas, type ForgotPasswordFormData } from '../schemas';
 
 export function ForgotPasswordClient() {
   const t = useTranslations('auth.forgotPassword');
   const tErrors = useTranslations('auth.errors');
-  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const getErrorMessage = useAuthErrorMessage();
 
   const schemas = createClientSchemas(tErrors);
+
+  // Forgot password mutation
+  const forgotPasswordMutation = useForgotPasswordMutation({
+    onSuccess: (data, variables) => {
+      // Redirect to check-email page with email parameter
+      router.push(
+        `/forgot-password/check-email?email=${encodeURIComponent(variables.email)}`
+      );
+    },
+    onError: (error) => {
+      const errorMsg = getErrorMessage(error);
+      toast.error(errorMsg || tErrors('serverError'));
+    },
+  });
 
   const form = useForm<ForgotPasswordFormData>({
     resolver: zodResolver(schemas.forgotPasswordSchema),
@@ -34,10 +53,7 @@ export function ForgotPasswordClient() {
   });
 
   const onSubmit = async (data: ForgotPasswordFormData) => {
-    startTransition(async () => {
-      await requestPasswordResetAction(data);
-      // Action redirects to check-email page on success
-    });
+    forgotPasswordMutation.mutate(data);
   };
 
   return (
@@ -50,6 +66,12 @@ export function ForgotPasswordClient() {
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          {forgotPasswordMutation.isError && (
+            <div className="rounded-md bg-destructive/15 p-3 text-sm text-destructive">
+              {getErrorMessage(forgotPasswordMutation.error)}
+            </div>
+          )}
+
           <FormField
             control={form.control}
             name="email"
@@ -62,7 +84,7 @@ export function ForgotPasswordClient() {
                     type="email"
                     placeholder={t('email.placeholder')}
                     autoComplete="email"
-                    disabled={isPending}
+                    disabled={forgotPasswordMutation.isPending}
                   />
                 </FormControl>
                 <FormMessage />
@@ -75,9 +97,9 @@ export function ForgotPasswordClient() {
             variant="gradient-primary"
             size="default"
             className="w-full "
-            disabled={isPending}
+            disabled={forgotPasswordMutation.isPending}
           >
-            {isPending ? t('submitting') : t('submit')}
+            {forgotPasswordMutation.isPending ? t('submitting') : t('submit')}
           </Button>
         </form>
       </Form>

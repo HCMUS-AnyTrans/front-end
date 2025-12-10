@@ -1,7 +1,13 @@
 {
   "meta": {
     "title": "Về chúng tôi - Anytrans",
-    "description": "Tìm hiểu về Anytrans - sứ mệnh, giá trị, đội ngũ và hành trình làm cho dịch thuật trở nên dễ dàng tiếp cận với mọi người."
+    "description": "Tìm hiểu về Anytrans - sứ mệnh, giá trị, đội ngũ và hành trình làm cho dịch thuật trở nên dễ dàng tiếp cận với mọi người.",
+    "keywords": "về anytrans, công ty dịch thuật, công nghệ AI dịch thuật, sứ mệnh, đội ngũ, dịch vụ dịch thuật, giá trị công ty",
+    "ogTitle": "Về Anytrans - Phá vỡ Rào cản Ngôn ngữ",
+    "ogDescription": "Khám phá sứ mệnh của chúng tôi là làm cho dịch thuật chuyên nghiệp dễ tiếp cận với mọi người thông qua công nghệ AI sáng tạo.",
+    "ogImageAlt": "Đội ngũ Anytrans",
+    "twitterTitle": "Về Anytrans - Câu chuyện của chúng tôi",
+    "twitterDescription": "Tìm hiểu về hành trình của chúng tôi trong việc dân chủ hóa dịch vụ dịch thuật chuyên nghiệp trên toàn thế giới."
   },
   "sections": {
     "story": {

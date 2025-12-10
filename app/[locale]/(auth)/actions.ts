@@ -1,5 +1,27 @@
 'use server';
 
+/**
+ * ⚠️ DEPRECATION NOTICE
+ *
+ * This file contains server actions for authentication flows.
+ * Most of these have been DEPRECATED in favor of using features/auth hooks directly.
+ *
+ * DEPRECATED (use features/auth instead):
+ * - loginAction → use useLoginMutation from features/auth
+ * - signupAction → use useRegisterMutation from features/auth
+ * - requestPasswordResetAction → use useForgotPasswordMutation from features/auth
+ * - resendPasswordEmailAction → use useForgotPasswordMutation from features/auth
+ * - resetPasswordAction → use useResetPasswordMutation from features/auth
+ *
+ * STILL IN USE (for UI mockup only, no real backend):
+ * - verifyOtpAction → OTP verification (mockup, not connected to real API)
+ * - resendOtpAction → Resend OTP (mockup, not connected to real API)
+ *
+ * TODO: Remove this file once OTP flow is either:
+ * 1. Removed from UI, or
+ * 2. Implemented in backend and added to features/auth
+ */
+
 import { z } from 'zod';
 import { redirect as nextRedirect } from 'next/navigation';
 import { getLocale, getTranslations } from 'next-intl/server';
@@ -12,14 +34,20 @@ import {
   type ResetPasswordFormData,
 } from './schemas';
 
-// Server actions
+// ============================================================================
+// DEPRECATED ACTIONS - Use features/auth hooks instead
+// ============================================================================
+
+/**
+ * @deprecated Use useLoginMutation from features/auth instead
+ */
 export async function loginAction(formData: LoginFormData) {
   const t = await getTranslations('auth.errors');
   const schemas = await createSchemas();
-  
+
   // Validate the form data
   const result = schemas.loginSchema.safeParse(formData);
-  
+
   if (!result.success) {
     const errors = z.flattenError(result.error);
     return {
@@ -44,7 +72,7 @@ export async function loginAction(formData: LoginFormData) {
   if (validatedData.email && validatedData.password) {
     // Set authentication cookies/session here
     const locale = await getLocale();
-    nextRedirect(`/${locale}/dashboard`);
+    nextRedirect(`/${locale}/app/dashboard`);
   } else {
     return {
       error: t('invalidCredentials'),
@@ -52,13 +80,16 @@ export async function loginAction(formData: LoginFormData) {
   }
 }
 
+/**
+ * @deprecated Use useRegisterMutation from features/auth instead
+ */
 export async function signupAction(formData: SignupFormData) {
   const t = await getTranslations('auth.errors');
   const schemas = await createSchemas();
-  
+
   // Validate the form data
   const result = schemas.signupSchema.safeParse(formData);
-  
+
   if (!result.success) {
     const errors = z.flattenError(result.error);
     return {
@@ -88,17 +119,29 @@ export async function signupAction(formData: SignupFormData) {
 
   // Redirect to verify-otp page after successful signup with email parameter
   const locale = await getLocale();
-  nextRedirect(`/${locale}/verify-otp?email=${encodeURIComponent(validatedData.email)}`);
+  nextRedirect(
+    `/${locale}/verify-otp?email=${encodeURIComponent(validatedData.email)}`
+  );
 }
 
-// OTP verification action
+// ============================================================================
+// OTP ACTIONS - Mockup only (no real backend API)
+// ============================================================================
+
+/**
+ * OTP verification action (UI MOCKUP ONLY)
+ *
+ * Note: This is not connected to a real backend API.
+ * The backend register endpoint directly returns user + accessToken without OTP verification.
+ * This action is kept for UI/UX demonstration purposes only.
+ */
 export async function verifyOtpAction(formData: OtpFormData) {
   const t = await getTranslations('auth.errors');
   const schemas = await createSchemas();
-  
+
   // Validate the form data
   const result = schemas.otpSchema.safeParse(formData);
-  
+
   if (!result.success) {
     const errors = z.flattenError(result.error);
     return {
@@ -134,10 +177,15 @@ export async function verifyOtpAction(formData: OtpFormData) {
   }
 }
 
-// Resend OTP action
+/**
+ * Resend OTP action (UI MOCKUP ONLY)
+ *
+ * Note: This is not connected to a real backend API.
+ * This action is kept for UI/UX demonstration purposes only.
+ */
 export async function resendOtpAction(email: string) {
   const t = await getTranslations('auth.errors');
-  
+
   try {
     // Validate email
     const validatedEmail = z.email().parse(email);
@@ -165,16 +213,22 @@ export async function resendOtpAction(email: string) {
   }
 }
 
-// Forgot password request action
+// ============================================================================
+// DEPRECATED PASSWORD RESET ACTIONS - Use features/auth hooks instead
+// ============================================================================
+
+/**
+ * @deprecated Use useForgotPasswordMutation from features/auth instead
+ */
 export async function requestPasswordResetAction(
   formData: ForgotPasswordFormData
 ) {
   const t = await getTranslations('auth.errors');
   const schemas = await createSchemas();
-  
+
   // Validate the form data
   const result = schemas.forgotPasswordSchema.safeParse(formData);
-  
+
   if (!result.success) {
     const errors = z.flattenError(result.error);
     return {
@@ -201,13 +255,17 @@ export async function requestPasswordResetAction(
   // Redirect to check email page with real email (not masked)
   // The client component will handle masking for display
   const locale = await getLocale();
-  nextRedirect(`/${locale}/forgot-password/check-email?email=${encodeURIComponent(validatedData.email)}`);
+  nextRedirect(
+    `/${locale}/forgot-password/check-email?email=${encodeURIComponent(validatedData.email)}`
+  );
 }
 
-// Resend password reset email action
+/**
+ * @deprecated Use useForgotPasswordMutation from features/auth instead
+ */
 export async function resendPasswordEmailAction(email: string) {
   const t = await getTranslations('auth.errors');
-  
+
   try {
     // Validate email
     const validatedEmail = z.email().parse(email);
@@ -230,13 +288,15 @@ export async function resendPasswordEmailAction(email: string) {
   }
 }
 
-// Reset password action
+/**
+ * @deprecated Use useResetPasswordMutation from features/auth instead
+ */
 export async function resetPasswordAction(
   formData: ResetPasswordFormData & { token: string }
 ) {
   const t = await getTranslations('auth.errors');
   const schemas = await createSchemas();
-  
+
   // Validate token first
   if (!formData.token || formData.token.length < 10) {
     return {
@@ -246,7 +306,7 @@ export async function resetPasswordAction(
 
   // Validate the form data
   const result = schemas.resetPasswordSchema.safeParse(formData);
-  
+
   if (!result.success) {
     const errors = z.flattenError(result.error);
     return {

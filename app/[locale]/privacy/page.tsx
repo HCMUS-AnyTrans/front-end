@@ -15,10 +15,55 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'privacy.meta' });
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://anytrans.me';
 
   return {
     title: t('title'),
     description: t('description'),
+    keywords: t('keywords'),
+    authors: [{ name: 'Anytrans', url: baseUrl }],
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    alternates: {
+      canonical: `${baseUrl}/${locale}/privacy`,
+      languages: {
+        en: `${baseUrl}/en/privacy`,
+        vi: `${baseUrl}/vi/privacy`,
+      },
+    },
+    openGraph: {
+      type: 'website',
+      locale: locale,
+      url: `${baseUrl}/${locale}/privacy`,
+      siteName: 'Anytrans',
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      images: [
+        {
+          url: `${baseUrl}/banner/banner-homepage.svg`,
+          width: 1200,
+          height: 630,
+          alt: t('ogImageAlt'),
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@anytrans',
+      creator: '@anytrans',
+      title: t('twitterTitle'),
+      description: t('twitterDescription'),
+      images: [`${baseUrl}/banner/banner-homepage.svg`],
+    },
   };
 }
 
@@ -30,5 +75,28 @@ export default async function PrivacyPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return <PrivacyPageClient />;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Privacy Policy - Anytrans',
+    description:
+      'Learn about how Anytrans collects, uses, and protects your personal information.',
+    url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://anytrans.me'}/${locale}/privacy`,
+    inLanguage: locale,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Anytrans',
+      url: process.env.NEXT_PUBLIC_BASE_URL || 'https://anytrans.me',
+    },
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <PrivacyPageClient />
+    </>
+  );
 }

@@ -7,7 +7,10 @@ import { toast } from 'sonner';
 import { Mail } from 'lucide-react';
 import { AuthShell } from '@/components/Auth';
 import { Button } from '@/components/ui/button';
-import { resendPasswordEmailAction } from '../../actions';
+import {
+  useForgotPasswordMutation,
+  useAuthErrorMessage,
+} from '@/features/auth';
 
 interface CheckEmailClientProps {
   email?: string;
@@ -17,8 +20,21 @@ export function CheckEmailClient({
   email = 'user@example.com',
 }: CheckEmailClientProps) {
   const t = useTranslations('auth.forgotPassword.checkEmail');
-  const [isResending, setIsResending] = useState(false);
+  const tErrors = useTranslations('auth.errors');
+  const getErrorMessage = useAuthErrorMessage();
   const [resendCooldown, setResendCooldown] = useState(0);
+
+  // Resend mutation
+  const resendMutation = useForgotPasswordMutation({
+    onSuccess: () => {
+      toast.success(t('resendSuccess'));
+      setResendCooldown(60); // 60 seconds cooldown
+    },
+    onError: (error) => {
+      const errorMsg = getErrorMessage(error);
+      toast.error(errorMsg || t('resendError'));
+    },
+  });
 
   // Resend cooldown timer
   useEffect(() => {
@@ -32,21 +48,7 @@ export function CheckEmailClient({
 
   const handleResendEmail = async () => {
     if (resendCooldown > 0) return;
-
-    setIsResending(true);
-    try {
-      const result = await resendPasswordEmailAction(email);
-      if (result?.error) {
-        toast.error(result.error);
-      } else {
-        toast.success(result?.message || t('resendSuccess'));
-        setResendCooldown(60); // 60 seconds cooldown
-      }
-    } catch {
-      toast.error(t('resendError'));
-    } finally {
-      setIsResending(false);
-    }
+    resendMutation.mutate({ email });
   };
 
   const handleOpenEmailApp = () => {
@@ -73,9 +75,7 @@ export function CheckEmailClient({
 
         {/* Instructions */}
         <div className="space-y-3 text-center">
-          <p className="text-sm text-muted-foreground">
-            {t('instructions')}
-          </p>
+          <p className="text-sm text-muted-foreground">{t('instructions')}</p>
 
           <div className="p-3 border rounded-lg bg-muted/50">
             <p className="text-xs text-muted-foreground">
@@ -97,13 +97,13 @@ export function CheckEmailClient({
 
           <Button
             onClick={handleResendEmail}
-            disabled={resendCooldown > 0 || isResending}
+            disabled={resendCooldown > 0 || resendMutation.isPending}
             className="w-full"
             variant="ghost"
           >
             {resendCooldown > 0
               ? t('resendIn', { seconds: resendCooldown })
-              : isResending
+              : resendMutation.isPending
                 ? t('resending')
                 : t('resendEmail')}
           </Button>

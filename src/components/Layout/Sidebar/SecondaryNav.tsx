@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from '@/i18n/routing';
 import { SecondaryNavProps } from '@/types/sidebar';
 
-export default function SecondaryNav({ items, isActive }: SecondaryNavProps) {
+export default function SecondaryNav({ items, isActive, isCollapsed }: SecondaryNavProps) {
   return (
     <div className="px-4">
       <div className="h-px bg-gray-200 my-4" />
@@ -20,10 +20,11 @@ export default function SecondaryNav({ items, isActive }: SecondaryNavProps) {
                 active
                   ? 'bg-blue-50 text-blue-700'
                   : 'text-gray-600 hover:bg-gray-50'
-              }`}
+              } ${isCollapsed ? 'justify-center' : ''}`}
+              title={isCollapsed ? item.label : undefined}
             >
-              <Icon className="w-5 h-5" />
-              <span>{item.label}</span>
+              <Icon className="w-5 h-5 flex-shrink-0" />
+              {!isCollapsed && <span>{item.label}</span>}
             </Link>
           );
         })}

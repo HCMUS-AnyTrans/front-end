@@ -83,13 +83,13 @@ export default function RootNotFound() {
     {
       icon: FileText,
       label: t.documentTranslation,
-      href: `/${locale}/features/document-translation`,
+      href: `/${locale}/app/document-translation`,
       color: 'green',
     },
     {
       icon: Film,
       label: t.subtitleTranslation,
-      href: `/${locale}/features/subtitle-translation`,
+      href: `/${locale}/app/subtitle-translation`,
       color: 'purple',
     },
   ];

@@ -50,7 +50,7 @@ export default function PageHeader() {
             {showDropdown && (
               <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
                 <Link
-                  href="/features/document-translation"
+                  href="/app/document-translation"
                   className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
                 >
                   <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
@@ -66,7 +66,7 @@ export default function PageHeader() {
                   </div>
                 </Link>
                 <Link
-                  href="/features/subtitle-translation"
+                  href="/app/subtitle-translation"
                   className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
                 >
                   <div className="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center">

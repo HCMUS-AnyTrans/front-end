@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useTransition, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { useSearchParams } from 'next/navigation';
@@ -19,27 +19,40 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { loginAction } from '../actions';
+import { useLoginMutation, useAuthErrorMessage } from '@/features/auth';
 import { createClientSchemas, type LoginFormData } from '../schemas';
 
 export function LoginForm() {
   const t = useTranslations('auth.login');
   const tErrors = useTranslations('auth.errors');
   const searchParams = useSearchParams();
-  const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | null>(null);
   const hasShownToast = useRef(false);
+  const getErrorMessage = useAuthErrorMessage();
+
+  // Login mutation
+  const loginMutation = useLoginMutation({
+    onError: (error) => {
+      const errorMsg = getErrorMessage(error);
+      toast.error(errorMsg || tErrors('invalidCredentials'));
+    },
+  });
 
   // Show success messages from URL params (only once)
   useEffect(() => {
     if (hasShownToast.current) return;
-    
+
     const message = searchParams.get('message');
     if (message === 'account_created') {
       toast.success(t('accountCreatedSuccess'));
       hasShownToast.current = true;
     } else if (message === 'password_reset') {
       toast.success(t('passwordResetSuccess'));
+      hasShownToast.current = true;
+    }
+
+    const error = searchParams.get('error');
+    if (error === 'oauth_failed') {
+      toast.error('Google authentication failed. Please try again.');
       hasShownToast.current = true;
     }
   }, [searchParams, t]);
@@ -56,13 +69,9 @@ export function LoginForm() {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    setError(null);
-    startTransition(async () => {
-      const result = await loginAction(data);
-      if (result?.error) {
-        setError(result.error);
-      }
-      // If no result returned, redirect happened successfully
+    loginMutation.mutate({
+      email: data.email,
+      password: data.password,
     });
   };
 
@@ -72,9 +81,9 @@ export function LoginForm() {
         {/* Login Form */}
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            {error && (
+            {loginMutation.isError && (
               <div className="rounded-md bg-destructive/15 p-3 text-sm text-destructive">
-                {error}
+                {getErrorMessage(loginMutation.error)}
               </div>
             )}
 
@@ -90,7 +99,7 @@ export function LoginForm() {
                       type="email"
                       placeholder={t('email.placeholder')}
                       autoComplete="email"
-                      disabled={isPending}
+                      disabled={loginMutation.isPending}
                     />
                   </FormControl>
                   <FormMessage />
@@ -109,7 +118,7 @@ export function LoginForm() {
                       {...field}
                       placeholder={t('password.placeholder')}
                       autoComplete="current-password"
-                      disabled={isPending}
+                      disabled={loginMutation.isPending}
                     />
                   </FormControl>
                   <FormMessage />
@@ -127,7 +136,7 @@ export function LoginForm() {
                       <Checkbox
                         checked={field.value}
                         onCheckedChange={field.onChange}
-                        disabled={isPending}
+                        disabled={loginMutation.isPending}
                       />
                     </FormControl>
                     <div className="space-y-1 leading-none">
@@ -152,9 +161,9 @@ export function LoginForm() {
               variant="gradient-primary"
               size="default"
               className="w-full"
-              disabled={isPending}
+              disabled={loginMutation.isPending}
             >
-              {isPending ? t('submitting') : t('submit')}
+              {loginMutation.isPending ? t('submitting') : t('submit')}
             </Button>
           </form>
         </Form>

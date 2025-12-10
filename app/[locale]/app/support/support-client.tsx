@@ -12,7 +12,7 @@ import {
   Settings,
   CheckCircle,
 } from 'lucide-react';
-import { Sidebar } from '@/components/Layout';
+
 import {
   SupportHeader,
   SupportSearchBar,
@@ -140,11 +140,7 @@ export default function SupportClient() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50">
-      <Sidebar />
-
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+    <div className="flex-1 flex flex-col overflow-hidden">
         <SupportHeader
           title={t('header.title')}
           description={t('header.description')}
@@ -185,6 +181,5 @@ export default function SupportClient() {
           </div>
         </div>
       </div>
-    </div>
   );
 }

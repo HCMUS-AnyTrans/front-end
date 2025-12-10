@@ -18,16 +18,17 @@ export default function Footer() {
     { name: t('quickLinks.features'), href: '/features' },
     { name: t('quickLinks.pricing'), href: '/pricing' },
     { name: t('quickLinks.about'), href: '/about' },
+    { name: t('quickLinks.contact'), href: '/contact' },
   ];
 
   const services = [
     {
       name: t('services.documentTranslation'),
-      href: '/features/document-translation',
+      href: '/features#document-translation',
     },
     {
       name: t('services.subtitleTranslation'),
-      href: '/features/subtitle-translation',
+      href: '/features#subtitle-translation',
     },
   ];
 

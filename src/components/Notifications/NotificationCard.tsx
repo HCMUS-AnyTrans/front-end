@@ -12,7 +12,7 @@ import {
   ChevronRight,
   CreditCard,
 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { NotificationItem } from '@/types/notifications';
 
 type Props = {
@@ -65,6 +65,7 @@ export default function NotificationCard({
   formatTimestamp,
 }: Props) {
   const t = useTranslations('notifications.card');
+  const locale = useLocale();
 
   return (
     <div
@@ -170,7 +171,7 @@ export default function NotificationCard({
                   )}
                   {notification.metadata.wordsTranslated !== undefined && (
                     <span className="whitespace-nowrap">
-                      {notification.metadata.wordsTranslated.toLocaleString()}{' '}
+                      {notification.metadata.wordsTranslated.toLocaleString(locale)}{' '}
                       {t('metadata.wordsTranslated')}
                     </span>
                   )}

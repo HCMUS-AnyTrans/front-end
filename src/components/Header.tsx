@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import dynamic from 'next/dynamic';
 import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { usePathname, Link } from '@/i18n/routing';
+import { usePathname, Link, useRouter } from '@/i18n/routing';
 import Image from 'next/image';
 import NavigationLink from './Layout/Header/NavigationLink';
 
@@ -25,6 +25,7 @@ const LocaleSwitcher = dynamic(() => import('./Layout/Header/LocaleSwitcher'), {
 const Header = memo(function Header() {
   const t = useTranslations('header');
   const pathname = usePathname();
+  const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileFeaturesOpen, setIsMobileFeaturesOpen] = useState(false);
@@ -69,6 +70,9 @@ const Header = memo(function Header() {
 
   const handleDropdownEnter = useCallback(() => setIsDropdownOpen(true), []);
   const handleDropdownLeave = useCallback(() => setIsDropdownOpen(false), []);
+  const handleDropdownClick = useCallback(() => {
+    router.push('/features');
+  }, [router]);
   const toggleMobileMenu = useCallback(() => setIsMobileMenuOpen(prev => !prev), []);
   const toggleMobileFeatures = useCallback(() => setIsMobileFeaturesOpen(prev => !prev), []);
 
@@ -106,6 +110,7 @@ const Header = memo(function Header() {
               pathname={pathname}
               onMouseEnter={handleDropdownEnter}
               onMouseLeave={handleDropdownLeave}
+              onMouseDown={handleDropdownClick}
             />
 
             {navLinks.map((link) => (

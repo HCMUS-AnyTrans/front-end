@@ -33,7 +33,7 @@ export default function FeatureGrid() {
       imagePosition: 'right' as const,
       gradient: 'from-blue-500 to-indigo-600',
       ctaText: t('documentTranslation.cta'),
-      ctaHref: '/features/document-translation',
+      ctaHref: '/app/document-translation',
       mockupSubDomain: t('documentTranslation.mockupSubDomain'),
     },
     {
@@ -53,7 +53,7 @@ export default function FeatureGrid() {
       imagePosition: 'left' as const,
       gradient: 'from-purple-500 to-pink-600',
       ctaText: t('subtitleTranslation.cta'),
-      ctaHref: '/features/subtitle-translation',
+      ctaHref: '/app/subtitle-translation',
       mockupSubDomain: t('subtitleTranslation.mockupSubDomain'),
     },
   ];

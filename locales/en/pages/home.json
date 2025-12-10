@@ -1,4 +1,14 @@
 {
+  "meta": {
+    "title": "Anytrans - AI-Powered Translation for Documents & Subtitles",
+    "description": "Translate smarter, not harder. Anytrans brings you speed, accuracy, and cutting-edge features to manage all your content with ease. Support for 100+ languages.",
+    "keywords": "translation service, document translation, subtitle translation, AI translation, online translator, professional translation, multilingual translation, DOCX translation, PDF translation, SRT translation, VTT translation, video subtitle translation",
+    "ogTitle": "Anytrans - Professional AI-Powered Translation Services",
+    "ogDescription": "Transform your documents and subtitles with cutting-edge AI translation. Fast, accurate, and supporting 100+ languages. Try free today!",
+    "ogImageAlt": "Anytrans Translation Platform",
+    "twitterTitle": "Anytrans - AI Translation Made Simple",
+    "twitterDescription": "Professional document and subtitle translation powered by AI. Join thousands of users translating content in 100+ languages."
+  },
   "hero": {
     "title": {
       "part1": "We're here to",

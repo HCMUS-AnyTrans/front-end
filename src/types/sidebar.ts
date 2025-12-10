@@ -6,14 +6,21 @@ export type NavItem = {
 
 export type SidebarProps = {
   className?: string;
+  isCollapsed?: boolean;
+  onToggleCollapse?: () => void;
 };
 
 export type SidebarNavProps = {
   items: NavItem[];
   isActive: (href: string) => boolean;
+  isCollapsed?: boolean;
 };
 
-export type SecondaryNavProps = SidebarNavProps;
+export type SecondaryNavProps = {
+  items: NavItem[];
+  isActive: (href: string) => boolean;
+  isCollapsed?: boolean;
+};
 
 export type MobileHeaderProps = {
   isOpen: boolean;
@@ -28,4 +35,5 @@ export type MobileOverlayProps = {
 export type UserProfileButtonProps = {
   planLabel: string;
   onOpenAccount: () => void;
+  isCollapsed?: boolean;
 };
