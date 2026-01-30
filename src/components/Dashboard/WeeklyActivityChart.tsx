@@ -2,11 +2,14 @@
 
 import React, { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { WeeklyStat, WeeklySubStat } from '@/types/dashboard';
+import type {
+  WeeklyDocumentStat,
+  WeeklySubtitleStat,
+} from '@/features/dashboard';
 
 type WeeklyActivityChartProps = {
-  weeklyStats: WeeklyStat[];
-  weeklyStatsSubtitles: WeeklySubStat[];
+  weeklyStats: WeeklyDocumentStat[];
+  weeklyStatsSubtitles: WeeklySubtitleStat[];
 };
 
 export default function WeeklyActivityChart({

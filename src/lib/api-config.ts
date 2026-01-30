@@ -24,3 +24,11 @@ export const AUTH_ENDPOINTS = {
   GOOGLE_AUTH: '/auth/google',
   GOOGLE_CALLBACK: '/auth/google/callback',
 } as const;
+
+// Dashboard endpoints
+export const DASHBOARD_ENDPOINTS = {
+  STATS: '/dashboard/stats',
+  ACTIVITY: '/dashboard/activity',
+  WEEKLY: '/dashboard/weekly',
+  OVERVIEW: '/dashboard/overview',
+} as const;

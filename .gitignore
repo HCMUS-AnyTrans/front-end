@@ -46,3 +46,8 @@ next-env.d.ts
 logging_prompt/
 
 /.vscode
+
+# Skill for agent (testing...)
+/.agent
+/.agents
+/.github

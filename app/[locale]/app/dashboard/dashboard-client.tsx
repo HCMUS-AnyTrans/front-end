@@ -18,7 +18,7 @@ import {
   RecentActivityList,
   PromoBanner,
 } from '@/components/Dashboard';
-import { DashboardClientProps } from '@/types/dashboard';
+import type { DashboardClientProps } from '@/features/dashboard';
 
 export default function DashboardClient({
   recentActivity,

@@ -3,7 +3,7 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Globe } from 'lucide-react';
-import { TopLanguageItem } from '@/types/dashboard';
+import type { TopLanguageItem } from '@/features/dashboard';
 
 type TopLanguagesCardProps = {
   topLanguages: TopLanguageItem[];

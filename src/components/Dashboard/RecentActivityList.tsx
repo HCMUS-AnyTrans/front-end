@@ -2,8 +2,14 @@
 
 import React from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { FileText, Languages, Clock, CheckCircle2 } from 'lucide-react';
-import { RecentActivityItem } from '@/types/dashboard';
+import {
+  FileText,
+  Languages,
+  Clock,
+  CheckCircle2,
+  XCircle,
+} from 'lucide-react';
+import type { RecentActivityItem } from '@/features/dashboard';
 
 type RecentActivityListProps = {
   items: RecentActivityItem[];
@@ -60,6 +66,13 @@ export default function RecentActivityList({ items }: RecentActivityListProps) {
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-600" />
                     <span className="text-xs font-medium text-green-600">
                       {t('status.completed')}
+                    </span>
+                  </div>
+                ) : item.status === 'failed' ? (
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-50 border border-red-200 rounded-full">
+                    <XCircle className="w-3.5 h-3.5 text-red-600" />
+                    <span className="text-xs font-medium text-red-600">
+                      {t('status.failed')}
                     </span>
                   </div>
                 ) : (
