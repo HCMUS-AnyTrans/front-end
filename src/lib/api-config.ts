@@ -54,3 +54,14 @@ export const TRANSLATION_ENDPOINTS = {
   LANGUAGES: '/translation/languages',
   ESTIMATE: '/translation/estimate',
 } as const;
+
+// Notification endpoints
+export const NOTIFICATION_ENDPOINTS = {
+  LIST: '/notifications',
+  STATS: '/notifications/stats',
+  UNREAD_COUNT: '/notifications/unread-count',
+  MARK_READ: '/notifications/mark-read',
+  MARK_ALL_READ: '/notifications/mark-all-read',
+  DELETE: '/notifications/delete',
+  PIN: '/notifications/pin',
+} as const;
