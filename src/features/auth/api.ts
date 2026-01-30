@@ -6,7 +6,7 @@
  */
 
 import { api } from '@/lib/api-client';
-import { AUTH_ENDPOINTS } from '@/lib/api-config';
+import { AUTH_ENDPOINTS } from '@/config/api';
 import type {
   AuthResponse,
   RegisterPayload,

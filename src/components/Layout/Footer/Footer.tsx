@@ -8,7 +8,7 @@ import {
   FooterLinkSection,
   FooterSocial,
   FooterBottom,
-} from './Layout/Footer';
+} from './';
 import { ROUTES } from '@/config';
 
 export default function Footer() {

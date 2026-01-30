@@ -6,7 +6,7 @@
  */
 
 import { api } from '@/lib/api-client';
-import { NOTIFICATION_ENDPOINTS } from '@/lib/api-config';
+import { NOTIFICATION_ENDPOINTS } from '@/config/api';
 import type {
   NotificationItem,
   NotificationsStats,

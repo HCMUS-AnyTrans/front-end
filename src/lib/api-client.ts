@@ -9,7 +9,7 @@
  * - Integration with centralized error module
  */
 
-import { API_BASE_URL, AUTH_ENDPOINTS } from './api-config';
+import { API_BASE_URL, AUTH_ENDPOINTS } from '@/config/api';
 import { ApiError, ERROR_CODES } from './errors';
 
 // ============================================================================

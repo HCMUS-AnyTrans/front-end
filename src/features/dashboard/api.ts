@@ -6,7 +6,7 @@
  */
 
 import { api } from '@/lib/api-client';
-import { DASHBOARD_ENDPOINTS } from '@/lib/api-config';
+import { DASHBOARD_ENDPOINTS } from '@/config/api';
 import type {
   DashboardStatsResponse,
   DashboardActivityResponse,

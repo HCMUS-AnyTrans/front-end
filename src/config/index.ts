@@ -84,3 +84,18 @@ export {
 } from './constants';
 
 export type { SupportedLocale, Theme } from './constants';
+
+// ============================================================================
+// API Configuration
+// ============================================================================
+
+export {
+  API_ORIGIN,
+  API_BASE_URL,
+  AUTH_ENDPOINTS,
+  DASHBOARD_ENDPOINTS,
+  TRANSLATION_ENDPOINTS,
+  NOTIFICATION_ENDPOINTS,
+  HISTORY_ENDPOINTS,
+  ACCOUNT_ENDPOINTS,
+} from './api';

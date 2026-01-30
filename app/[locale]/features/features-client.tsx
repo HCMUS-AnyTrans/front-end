@@ -9,8 +9,8 @@ import {
   FeaturesComparison,
   FeaturesCTA,
 } from '@/components/Features';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import { Header } from '@/components/Layout/Header';
+import { Footer } from '@/components/Layout/Footer';
 
 export default function FeaturesClient() {
   const t = useTranslations('features.showcase');

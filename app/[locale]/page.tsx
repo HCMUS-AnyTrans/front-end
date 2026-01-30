@@ -1,5 +1,5 @@
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import { Header } from '@/components/Layout/Header';
+import { Footer } from '@/components/Layout/Footer';
 import { BackgroundDecorations } from '@/components/Common';
 import {
   FeatureGrid,

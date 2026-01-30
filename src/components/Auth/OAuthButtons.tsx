@@ -3,7 +3,7 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
-import { API_BASE_URL } from '@/lib/api-config';
+import { API_BASE_URL } from '@/config/api';
 
 interface OAuthButtonProps {
   provider: 'google' | 'github';

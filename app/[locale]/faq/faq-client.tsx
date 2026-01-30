@@ -11,8 +11,8 @@ import {
   Settings,
   HelpCircle,
 } from 'lucide-react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import { Header } from '@/components/Layout/Header';
+import { Footer } from '@/components/Layout/Footer';
 import { FAQ, Category } from '@/types/support';
 import { BaseFAQ } from '@/components/Common';
 

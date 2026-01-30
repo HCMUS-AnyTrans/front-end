@@ -6,7 +6,7 @@
  */
 
 import { api } from '@/lib/api-client';
-import { TRANSLATION_ENDPOINTS } from '@/lib/api-config';
+import { TRANSLATION_ENDPOINTS } from '@/config/api';
 import type {
   DocumentFile,
   DocumentTranslationRequest,

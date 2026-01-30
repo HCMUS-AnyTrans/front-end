@@ -1,6 +1,6 @@
-// Top-level component exports
-export { default as Header } from './Header';
-export { default as Footer } from './Footer';
+// Top-level component exports (from Layout)
+export { Header } from './Layout/Header';
+export { Footer } from './Layout/Footer';
 
 // Re-export from subfolders
 export * from './About';

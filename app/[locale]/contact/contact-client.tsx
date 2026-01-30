@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import { Header } from '@/components/Layout/Header';
+import { Footer } from '@/components/Layout/Footer';
 import {
   ContactHero,
   ContactMethods,
@@ -12,7 +12,7 @@ import {
   ContactSocial,
   ContactCTA,
 } from '@/components/Contact';
-import { socialLinks } from '@/lib/contact-data';
+import { socialLinks } from '@/lib/data/contact';
 import { ContactFormData } from '@/types/contact';
 import {
   Mail,

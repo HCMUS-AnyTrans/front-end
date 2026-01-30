@@ -32,8 +32,8 @@ export * as authApi from './api';
 export { useAuthStore } from './store';
 
 // Hooks
-export { useAuth } from './useAuth';
 export {
+  useAuth,
   useLoginMutation,
   useRegisterMutation,
   useLogoutMutation,

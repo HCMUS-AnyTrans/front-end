@@ -5,7 +5,7 @@
  */
 
 import { api } from '@/lib/api-client';
-import { HISTORY_ENDPOINTS } from '@/lib/api-config';
+import { HISTORY_ENDPOINTS } from '@/config/api';
 import type {
   TranslationItem,
   TranslationHistoryStats,

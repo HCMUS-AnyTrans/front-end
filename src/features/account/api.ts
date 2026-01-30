@@ -5,7 +5,7 @@
  */
 
 import { api } from '@/lib/api-client';
-import { ACCOUNT_ENDPOINTS } from '@/lib/api-config';
+import { ACCOUNT_ENDPOINTS } from '@/config/api';
 import type {
   UserProfile,
   UpdateProfileRequest,

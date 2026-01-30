@@ -6,23 +6,20 @@ import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { usePathname, Link, useRouter } from '@/i18n/routing';
 import Image from 'next/image';
-import NavigationLink from './Layout/Header/NavigationLink';
+import NavigationLink from './NavigationLink';
 import { ROUTES } from '@/config';
 
 // Dynamic imports for components that are not always visible
-const FeaturesDropdown = dynamic(
-  () => import('./Layout/Header/FeaturesDropdown'),
-  {
-    ssr: true,
-  }
-);
-const AuthButtons = dynamic(() => import('./Layout/Header/AuthButtons'), {
+const FeaturesDropdown = dynamic(() => import('./FeaturesDropdown'), {
   ssr: true,
 });
-const MobileMenu = dynamic(() => import('./Layout/Header/MobileMenu'), {
+const AuthButtons = dynamic(() => import('./AuthButtons'), {
+  ssr: true,
+});
+const MobileMenu = dynamic(() => import('./MobileMenu'), {
   ssr: false,
 });
-const LocaleSwitcher = dynamic(() => import('./Layout/Header/LocaleSwitcher'), {
+const LocaleSwitcher = dynamic(() => import('./LocaleSwitcher'), {
   ssr: true,
 });
 

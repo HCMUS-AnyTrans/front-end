@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import { Header } from '@/components/Layout/Header';
+import { Footer } from '@/components/Layout/Footer';
 import {
   AboutHero,
   AboutStory,
@@ -13,7 +13,7 @@ import {
   AboutCTA,
   AboutSocial,
 } from '@/components/About';
-import { socialLinks } from '@/lib/about-data';
+import { socialLinks } from '@/lib/data/about';
 import { Target, Globe } from 'lucide-react';
 
 export default function AboutPageClient() {
