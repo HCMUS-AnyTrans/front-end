@@ -4,6 +4,16 @@ import React from 'react';
 import { X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { BaseDialog, BaseDialogContent } from '@/components/Common';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 type AddCardDialogProps = {
   open: boolean;
@@ -34,107 +44,123 @@ export default function AddCardDialog({
       <BaseDialogContent className="max-w-md w-full mx-4 p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-bold text-gray-900">{t('title')}</h3>
-          <button
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={() => onOpenChange(false)}
-            className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer"
+            className="h-8 w-8 rounded-full"
           >
             <X className="w-5 h-5 text-gray-500" />
-          </button>
+          </Button>
         </div>
 
         <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-semibold text-gray-900 mb-2">
+          <div className="space-y-2">
+            <Label
+              htmlFor="cardNumber"
+              className="text-sm font-semibold text-gray-900"
+            >
               {t('cardNumber')}
-            </label>
-            <input
+            </Label>
+            <Input
+              id="cardNumber"
               type="text"
               placeholder={t('cardNumberPlaceholder')}
               value={cardNumber}
               onChange={(e) => setCardNumber(e.target.value)}
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              className="focus-visible:ring-primary"
             />
           </div>
 
           <div className="grid grid-cols-3 gap-3">
-            <div className="col-span-1">
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+            <div className="space-y-2">
+              <Label className="text-sm font-semibold text-gray-900">
                 {t('month')}
-              </label>
-              <select
-                value={month}
-                onChange={(e) => setMonth(e.target.value)}
-                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                <option value="">MM</option>
-                {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
-                  <option key={m} value={m.toString()}>
-                    {m.toString().padStart(2, '0')}
-                  </option>
-                ))}
-              </select>
+              </Label>
+              <Select value={month} onValueChange={setMonth}>
+                <SelectTrigger className="focus:ring-primary">
+                  <SelectValue placeholder="MM" />
+                </SelectTrigger>
+                <SelectContent>
+                  {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
+                    <SelectItem key={m} value={m.toString()}>
+                      {m.toString().padStart(2, '0')}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
-            <div className="col-span-1">
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+            <div className="space-y-2">
+              <Label className="text-sm font-semibold text-gray-900">
                 {t('year')}
-              </label>
-              <select
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                <option value="">YYYY</option>
-                {Array.from({ length: 10 }, (_, i) => 2025 + i).map((y) => (
-                  <option key={y} value={y.toString()}>
-                    {y}
-                  </option>
-                ))}
-              </select>
+              </Label>
+              <Select value={year} onValueChange={setYear}>
+                <SelectTrigger className="focus:ring-primary">
+                  <SelectValue placeholder="YYYY" />
+                </SelectTrigger>
+                <SelectContent>
+                  {Array.from({ length: 10 }, (_, i) => 2025 + i).map((y) => (
+                    <SelectItem key={y} value={y.toString()}>
+                      {y}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
-            <div className="col-span-1">
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+            <div className="space-y-2">
+              <Label
+                htmlFor="cvc"
+                className="text-sm font-semibold text-gray-900"
+              >
                 {t('cvc')}
-              </label>
-              <input
+              </Label>
+              <Input
+                id="cvc"
                 type="text"
                 placeholder={t('cvcPlaceholder')}
                 maxLength={3}
                 value={cvc}
                 onChange={(e) => setCvc(e.target.value)}
-                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="focus-visible:ring-primary"
               />
             </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-gray-900 mb-2">
+          <div className="space-y-2">
+            <Label
+              htmlFor="cardholder"
+              className="text-sm font-semibold text-gray-900"
+            >
               {t('cardholderName')}
-            </label>
-            <input
+            </Label>
+            <Input
+              id="cardholder"
               type="text"
               placeholder={t('cardholderPlaceholder')}
               value={cardholder}
               onChange={(e) => setCardholder(e.target.value)}
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              className="focus-visible:ring-primary"
             />
           </div>
 
           <div className="flex gap-3 pt-4">
-            <button
+            <Button
+              variant="outline"
               onClick={() => onOpenChange(false)}
-              className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all cursor-pointer"
+              className="flex-1"
             >
               {t('cancel')}
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="gradient"
               onClick={() => {
                 onSubmit({ cardNumber, month, year, cvc, cardholder });
                 onOpenChange(false);
               }}
-              className="flex-1 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-sm font-semibold transition-all cursor-pointer"
+              className="flex-1"
             >
               {t('addCard')}
-            </button>
+            </Button>
           </div>
         </div>
       </BaseDialogContent>

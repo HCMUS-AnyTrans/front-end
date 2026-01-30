@@ -1,6 +1,8 @@
 'use client';
 
 import React from 'react';
+import { Switch } from '@/components/ui/switch';
+import { IconContainer } from '@/components/ui/icon-container';
 
 interface ToggleSettingRowProps {
   label: string;
@@ -21,24 +23,16 @@ export function ToggleSettingRow({
     <div className="flex items-center justify-between gap-3">
       <div className="flex items-center gap-3 flex-1 min-w-0">
         {icon && (
-          <div className="w-10 h-10 shrink-0 bg-gray-100 rounded-lg flex items-center justify-center">
+          <IconContainer variant="secondary" size="sm">
             {icon}
-          </div>
+          </IconContainer>
         )}
         <div className="min-w-0">
           <p className="font-semibold text-gray-900 text-sm">{label}</p>
           <p className="text-xs text-gray-600">{description}</p>
         </div>
       </div>
-      <label className="relative inline-flex items-center cursor-pointer shrink-0">
-        <input
-          type="checkbox"
-          checked={checked}
-          onChange={(e) => onChange(e.target.checked)}
-          className="sr-only peer"
-        />
-        <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-      </label>
+      <Switch checked={checked} onCheckedChange={onChange} />
     </div>
   );
 }

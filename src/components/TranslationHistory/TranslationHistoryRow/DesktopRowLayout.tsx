@@ -12,6 +12,9 @@ import {
   Trash2,
 } from 'lucide-react';
 import { TranslationItem, StatusConfig } from '@/types/translation-history';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Button } from '@/components/ui/button';
+import { IconContainer } from '@/components/ui/icon-container';
 
 interface DesktopRowLayoutProps {
   item: TranslationItem;
@@ -48,15 +51,14 @@ export function DesktopRowLayout({
   return (
     <div className="hidden md:grid grid-cols-12 gap-4 items-center">
       <div className="col-span-5 flex items-center gap-3">
-        <input
-          type="checkbox"
+        <Checkbox
           checked={isSelected}
-          onChange={handleSelect}
-          className="w-4 h-4 text-brand-primary-light bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2"
+          onCheckedChange={handleSelect}
+          className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
         />
-        <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
-          <FileText className="w-5 h-5 text-brand-primary-light" />
-        </div>
+        <IconContainer variant="primary" size="sm">
+          <FileText className="w-5 h-5" />
+        </IconContainer>
         <div className="flex-1 min-w-0">
           <p className="font-semibold text-gray-900 truncate mb-1">
             {item.fileName}
@@ -102,36 +104,41 @@ export function DesktopRowLayout({
 
       <div className="col-span-1 flex justify-end">
         <div className="relative">
-          <button
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={onToggleActionMenu}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
+            className="h-9 w-9"
           >
             <MoreVertical className="w-5 h-5 text-gray-400" />
-          </button>
+          </Button>
 
           {showActionMenu && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-10">
-              <button
+              <Button
+                variant="ghost"
                 onClick={onViewDetails}
-                className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer"
+                className="w-full justify-start px-4 py-2 h-auto text-sm text-gray-700 hover:bg-gray-50"
               >
-                <Eye className="w-4 h-4" />
+                <Eye className="w-4 h-4 mr-3" />
                 {t('actions.viewDetails')}
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="ghost"
                 onClick={onDownload}
-                className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3 cursor-pointer"
+                className="w-full justify-start px-4 py-2 h-auto text-sm text-gray-700 hover:bg-gray-50"
               >
-                <Download className="w-4 h-4" />
+                <Download className="w-4 h-4 mr-3" />
                 {t('actions.download')}
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="ghost"
                 onClick={onDelete}
-                className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 cursor-pointer"
+                className="w-full justify-start px-4 py-2 h-auto text-sm text-red-600 hover:bg-red-50"
               >
-                <Trash2 className="w-4 h-4" />
+                <Trash2 className="w-4 h-4 mr-3" />
                 {t('actions.delete')}
-              </button>
+              </Button>
             </div>
           )}
         </div>

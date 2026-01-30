@@ -12,6 +12,9 @@ import {
   Trash2,
 } from 'lucide-react';
 import { TranslationItem, StatusConfig } from '@/types/translation-history';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Button } from '@/components/ui/button';
+import { IconContainer } from '@/components/ui/icon-container';
 
 interface MobileRowLayoutProps {
   item: TranslationItem;
@@ -48,17 +51,16 @@ export function MobileRowLayout({
   return (
     <div className="block md:hidden space-y-3">
       <div className="flex items-start gap-3">
-        <input
-          type="checkbox"
+        <Checkbox
           checked={isSelected}
-          onChange={handleSelect}
-          className="w-4 h-4 mt-1 text-brand-primary-light bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2"
+          onCheckedChange={handleSelect}
+          className="mt-1 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
         />
         <div className="flex-1 min-w-0">
           <div className="flex items-start gap-2 mb-2">
-            <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
-              <FileText className="w-4 h-4 text-brand-primary-light" />
-            </div>
+            <IconContainer variant="primary" size="sm" className="w-8 h-8">
+              <FileText className="w-4 h-4" />
+            </IconContainer>
             <div className="flex-1 min-w-0">
               <p className="font-semibold text-sm text-gray-900 truncate">
                 {item.fileName}
@@ -106,36 +108,41 @@ export function MobileRowLayout({
         </div>
 
         <div className="relative">
-          <button
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={onToggleActionMenu}
-            className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
+            className="h-7 w-7"
           >
             <MoreVertical className="w-4 h-4 text-gray-400" />
-          </button>
+          </Button>
 
           {showActionMenu && (
             <div className="absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-10">
-              <button
+              <Button
+                variant="ghost"
                 onClick={onViewDetails}
-                className="w-full text-left px-3 py-2 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2 cursor-pointer"
+                className="w-full justify-start px-3 py-2 h-auto text-xs text-gray-700 hover:bg-gray-50"
               >
-                <Eye className="w-3.5 h-3.5" />
+                <Eye className="w-3.5 h-3.5 mr-2" />
                 {t('actions.viewDetails')}
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="ghost"
                 onClick={onDownload}
-                className="w-full text-left px-3 py-2 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2 cursor-pointer"
+                className="w-full justify-start px-3 py-2 h-auto text-xs text-gray-700 hover:bg-gray-50"
               >
-                <Download className="w-3.5 h-3.5" />
+                <Download className="w-3.5 h-3.5 mr-2" />
                 {t('actions.download')}
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="ghost"
                 onClick={onDelete}
-                className="w-full text-left px-3 py-2 text-xs text-red-600 hover:bg-red-50 flex items-center gap-2 cursor-pointer"
+                className="w-full justify-start px-3 py-2 h-auto text-xs text-red-600 hover:bg-red-50"
               >
-                <Trash2 className="w-3.5 h-3.5" />
+                <Trash2 className="w-3.5 h-3.5 mr-2" />
                 {t('actions.delete')}
-              </button>
+              </Button>
             </div>
           )}
         </div>

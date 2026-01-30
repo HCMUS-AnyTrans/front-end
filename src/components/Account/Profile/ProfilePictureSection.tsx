@@ -4,6 +4,7 @@ import React from 'react';
 import { Camera, Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { UserData } from '@/types/account';
+import { Button } from '@/components/ui/button';
 
 type ProfilePictureSectionProps = {
   user: UserData;
@@ -27,19 +28,20 @@ export default function ProfilePictureSection({
               .map((n) => n[0])
               .join('')}
           </div>
-          <button className="absolute -bottom-2 -right-2 w-10 h-10 bg-white border-2 border-blue-600 text-primary rounded-full flex items-center justify-center hover:bg-blue-50 transition-colors shadow-lg cursor-pointer">
+          <Button
+            variant="outline"
+            size="icon"
+            className="absolute -bottom-2 -right-2 w-10 h-10 bg-white border-2 border-blue-600 text-primary rounded-full hover:bg-blue-50 shadow-lg"
+          >
             <Camera className="w-5 h-5" />
-          </button>
+          </Button>
         </div>
         <div className="flex-1 text-center sm:text-left">
           <p className="text-sm text-gray-600 mb-3">{t('uploadDescription')}</p>
-          <button
-            onClick={onUploadClick}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-all"
-          >
+          <Button variant="outline" onClick={onUploadClick} className="gap-2">
             <Upload className="w-4 h-4" />
             {t('uploadNewPhoto')}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

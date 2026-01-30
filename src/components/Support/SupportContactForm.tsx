@@ -6,6 +6,9 @@ import { Send, Clock } from 'lucide-react';
 import { BaseForm } from '@/components/Common';
 import { ContactForm } from '@/types/support';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 
 interface SupportContactFormProps {
   title: string;
@@ -54,60 +57,73 @@ export default function SupportContactForm({
       submitButton={submitButton}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
+        <div className="space-y-2">
+          <Label htmlFor="name" className="text-sm font-semibold text-gray-900">
             {t('fields.name.label')}
-          </label>
-          <input
+          </Label>
+          <Input
+            id="name"
             type="text"
             value={form.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
             placeholder={t('fields.name.placeholder')}
             required
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="focus-visible:ring-primary"
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-semibold text-gray-900 mb-2">
+        <div className="space-y-2">
+          <Label
+            htmlFor="email"
+            className="text-sm font-semibold text-gray-900"
+          >
             {t('fields.email.label')}
-          </label>
-          <input
+          </Label>
+          <Input
+            id="email"
             type="email"
             value={form.email}
             onChange={(e) => handleInputChange('email', e.target.value)}
             placeholder={t('fields.email.placeholder')}
             required
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="focus-visible:ring-primary"
           />
         </div>
       </div>
 
-      <div>
-        <label className="block text-sm font-semibold text-gray-900 mb-2">
+      <div className="space-y-2">
+        <Label
+          htmlFor="subject"
+          className="text-sm font-semibold text-gray-900"
+        >
           {t('fields.subject.label')}
-        </label>
-        <input
+        </Label>
+        <Input
+          id="subject"
           type="text"
           value={form.subject}
           onChange={(e) => handleInputChange('subject', e.target.value)}
           placeholder={t('fields.subject.placeholder')}
           required
-          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+          className="focus-visible:ring-primary"
         />
       </div>
 
-      <div>
-        <label className="block text-sm font-semibold text-gray-900 mb-2">
+      <div className="space-y-2">
+        <Label
+          htmlFor="message"
+          className="text-sm font-semibold text-gray-900"
+        >
           {t('fields.message.label')}
-        </label>
-        <textarea
+        </Label>
+        <Textarea
+          id="message"
           value={form.message}
           onChange={(e) => handleInputChange('message', e.target.value)}
           placeholder={t('fields.message.placeholder')}
           required
           rows={6}
-          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+          className="focus-visible:ring-primary resize-none"
         />
       </div>
     </BaseForm>

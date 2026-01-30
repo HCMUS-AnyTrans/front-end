@@ -5,6 +5,8 @@ import { useTranslations } from 'next-intl';
 import { Linkedin, Twitter, Mail } from 'lucide-react';
 import { AboutTeamProps } from '@/types/about';
 import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 
 export default function AboutTeam({ team }: AboutTeamProps) {
   const t = useTranslations('about.sections.team');
@@ -26,16 +28,16 @@ export default function AboutTeam({ team }: AboutTeamProps) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-        {team.map((member, idx) => (
-          <div
+        {team.map((member) => (
+          <Card
             key={member.name}
-            className={`bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-300 shadow-lg ${
+            className={`overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-300 shadow-lg ${
               isVisible
                 ? 'opacity-100 translate-y-0'
                 : 'opacity-0 translate-y-12'
             }`}
           >
-            <div className="bg-gradient-to-br from-[#4169E1] via-[#1e3a8a] to-[#4169E1] h-48 flex items-center justify-center">
+            <div className="bg-gradient-to-br from-brand-primary-light via-brand-primary-dark to-brand-primary-light h-48 flex items-center justify-center">
               <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg relative">
                 <Image
                   src={member.image}
@@ -54,18 +56,30 @@ export default function AboutTeam({ team }: AboutTeamProps) {
               </p>
               <p className="text-sm text-gray-600 mb-4">{member.bio}</p>
               <div className="flex items-center gap-2">
-                <button className="w-8 h-8 bg-gray-100 hover:bg-brand-primary-light/10 rounded-lg flex items-center justify-center transition-all group cursor-pointer">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="w-8 h-8 bg-gray-100 hover:bg-brand-primary-light/10 rounded-lg"
+                >
                   <Linkedin className="w-4 h-4 text-gray-600 group-hover:text-brand-primary-light" />
-                </button>
-                <button className="w-8 h-8 bg-gray-100 hover:bg-brand-primary-light/10 rounded-lg flex items-center justify-center transition-all group cursor-pointer">
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="w-8 h-8 bg-gray-100 hover:bg-brand-primary-light/10 rounded-lg"
+                >
                   <Twitter className="w-4 h-4 text-gray-600 group-hover:text-brand-primary-light" />
-                </button>
-                <button className="w-8 h-8 bg-gray-100 hover:bg-brand-primary-light/10 rounded-lg flex items-center justify-center transition-all group cursor-pointer">
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="w-8 h-8 bg-gray-100 hover:bg-brand-primary-light/10 rounded-lg"
+                >
                   <Mail className="w-4 h-4 text-gray-600 group-hover:text-brand-primary-light" />
-                </button>
+                </Button>
               </div>
             </div>
-          </div>
+          </Card>
         ))}
       </div>
     </section>
