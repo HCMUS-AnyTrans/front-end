@@ -1,13 +1,14 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
+import { ROUTES } from '@/config';
 
 export default function FooterBottom() {
   const t = useTranslations('footer.bottom');
 
   const legalLinks = [
-    { name: t('terms'), href: '/terms' },
-    { name: t('privacy'), href: '/privacy' },
+    { name: t('terms'), href: ROUTES.PUBLIC.TERMS },
+    { name: t('privacy'), href: ROUTES.PUBLIC.PRIVACY },
   ];
 
   return (

@@ -22,6 +22,7 @@ import {
   UserProfileButton,
   MobileHeader,
 } from '@/components/Layout/Sidebar';
+import { ROUTES } from '@/config';
 import type { NavItem, SidebarProps } from '@/types/sidebar';
 
 export default function Sidebar({ className }: SidebarProps) {
@@ -36,35 +37,38 @@ export default function Sidebar({ className }: SidebarProps) {
   const navigationItems: NavItem[] = [
     {
       label: t('navigation.dashboard'),
-      href: '/app/dashboard',
+      href: ROUTES.APP.DASHBOARD,
       icon: LayoutDashboard,
     },
     {
       label: t('navigation.documentTranslator'),
-      href: '/app/document-translation',
+      href: ROUTES.APP.DOCUMENT_TRANSLATION,
       icon: FileText,
     },
     {
       label: t('navigation.subtitleTranslator'),
-      href: '/app/subtitle-translation',
+      href: ROUTES.APP.SUBTITLE_TRANSLATION,
       icon: Film,
     },
     {
       label: t('navigation.translationHistory'),
-      href: '/app/translation-history',
+      href: ROUTES.APP.TRANSLATION_HISTORY,
       icon: History,
     },
   ];
 
   const secondaryItems: NavItem[] = [
-    { label: t('secondary.notification'), href: '/app/notifications', icon: Bell },
-    { label: t('secondary.support'), href: '/app/support', icon: Info },
+    {
+      label: t('secondary.notification'),
+      href: ROUTES.APP.NOTIFICATIONS,
+      icon: Bell,
+    },
+    { label: t('secondary.support'), href: ROUTES.APP.SUPPORT, icon: Info },
   ];
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [pathname]);
-
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -82,8 +86,10 @@ export default function Sidebar({ className }: SidebarProps) {
   }, [isMobileMenuOpen]);
 
   const isActive = (href: string) => {
-    if (href === '/app/dashboard') {
-      return pathname === '/app/dashboard' || pathname === '/';
+    if (href === ROUTES.APP.DASHBOARD) {
+      return (
+        pathname === ROUTES.APP.DASHBOARD || pathname === ROUTES.PUBLIC.HOME
+      );
     }
     return pathname.startsWith(href);
   };
@@ -108,17 +114,29 @@ export default function Sidebar({ className }: SidebarProps) {
         <button
           onClick={() => setIsCollapsed(!collapsed)}
           className="absolute -right-2.5 top-1/2 -translate-y-1/2 p-1 bg-gray-100 hover:bg-gray-200 rounded-md transition-all cursor-pointer"
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
-          <ChevronLeft className={`w-3.5 h-3.5 text-gray-600 transition-transform ${collapsed ? 'rotate-180' : ''}`} />
+          <ChevronLeft
+            className={`w-3.5 h-3.5 text-gray-600 transition-transform ${collapsed ? 'rotate-180' : ''}`}
+          />
         </button>
       </div>
 
-      <SidebarNav items={navigationItems} isActive={isActive} isCollapsed={collapsed} />
+      <SidebarNav
+        items={navigationItems}
+        isActive={isActive}
+        isCollapsed={collapsed}
+      />
 
-      <SecondaryNav items={secondaryItems} isActive={isActive} isCollapsed={collapsed} />
+      <SecondaryNav
+        items={secondaryItems}
+        isActive={isActive}
+        isCollapsed={collapsed}
+      />
 
-      {!collapsed && <CreditSection current={credits.current} total={credits.total} />}
+      {!collapsed && (
+        <CreditSection current={credits.current} total={credits.total} />
+      )}
 
       <UserProfileButton
         planLabel={credits.plan}

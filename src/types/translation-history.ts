@@ -1,28 +1,15 @@
-export interface TranslationItem {
-  id: string;
-  fileName: string;
-  fileType: string;
-  category: 'document' | 'subtitle';
-  sourceLanguage: string;
-  targetLanguage: string;
-  status: 'completed' | 'processing' | 'failed';
-  translatedAt: string;
-  fileSize: string;
-  wordCount: number;
-  credits: number;
-}
+/**
+ * Translation History Types
+ *
+ * Re-exported from feature module for backward compatibility.
+ * Prefer importing directly from '@/features/translation-history'.
+ */
 
-export interface StatusConfig {
-  icon: React.ComponentType<{ className?: string }>;
-  color: string;
-  bg: string;
-  border: string;
-  label: string;
-}
-
-export interface TranslationHistoryStats {
-  totalProjects: number;
-  totalCompleted: number;
-  totalWords: number;
-  totalCredits: number;
-}
+export type {
+  TranslationItem,
+  TranslationHistoryStats,
+  StatusConfig,
+  TranslationCategory,
+  TranslationStatus,
+  FileType,
+} from '@/features/translation-history';

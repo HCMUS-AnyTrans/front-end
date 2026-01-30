@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { BaseCTA } from '@/components/Common';
+import { ROUTES } from '@/config';
 
 export default function ContactCTA() {
   const t = useTranslations('contact.cta');
@@ -26,7 +27,7 @@ export default function ContactCTA() {
         description={t('description')}
         primaryButton={{
           text: t('button'),
-          href: '/faq',
+          href: ROUTES.PUBLIC.FAQ,
         }}
       />
     </div>

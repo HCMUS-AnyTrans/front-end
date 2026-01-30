@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { BaseCTA } from '@/components/Common';
+import { ROUTES } from '@/config';
 
 export default function AboutCTA() {
   const t = useTranslations('about.cta');
@@ -26,11 +27,11 @@ export default function AboutCTA() {
         description={t('description')}
         primaryButton={{
           text: t('primaryButton'),
-          href: '/signup',
+          href: ROUTES.AUTH.SIGNUP,
         }}
         secondaryButton={{
           text: t('secondaryButton'),
-          href: '/contact',
+          href: ROUTES.PUBLIC.CONTACT,
         }}
       />
     </div>

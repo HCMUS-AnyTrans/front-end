@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import Image from 'next/image';
+import { ROUTES } from '@/config';
 
 export default function FooterLogo() {
   const t = useTranslations('footer.logo');
@@ -9,7 +10,7 @@ export default function FooterLogo() {
   return (
     <div className="flex flex-col gap-4">
       <Link
-        href="/"
+        href={ROUTES.PUBLIC.HOME}
         className="group inline-flex items-center gap-3 w-fit transition-all duration-300 hover:shadow-2xl hover:scale-102"
         aria-label="Anytrans - Go to homepage"
       >

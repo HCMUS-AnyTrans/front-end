@@ -3,6 +3,7 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import BaseCTA from '@/components/Common/BaseCTA';
+import { ROUTES } from '@/config';
 
 export default function FeaturesCTA() {
   const t = useTranslations('features.cta');
@@ -24,11 +25,11 @@ export default function FeaturesCTA() {
             description={t('description')}
             primaryButton={{
               text: t('buttons.startFreeTrial'),
-              href: '/signup',
+              href: ROUTES.AUTH.SIGNUP,
             }}
             secondaryButton={{
               text: t('buttons.contactSales'),
-              href: '/contact',
+              href: ROUTES.PUBLIC.CONTACT,
             }}
             className="bg-transparent shadow-none p-0 text-white"
           />

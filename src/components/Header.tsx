@@ -7,11 +7,15 @@ import { useTranslations } from 'next-intl';
 import { usePathname, Link, useRouter } from '@/i18n/routing';
 import Image from 'next/image';
 import NavigationLink from './Layout/Header/NavigationLink';
+import { ROUTES } from '@/config';
 
 // Dynamic imports for components that are not always visible
-const FeaturesDropdown = dynamic(() => import('./Layout/Header/FeaturesDropdown'), {
-  ssr: true,
-});
+const FeaturesDropdown = dynamic(
+  () => import('./Layout/Header/FeaturesDropdown'),
+  {
+    ssr: true,
+  }
+);
 const AuthButtons = dynamic(() => import('./Layout/Header/AuthButtons'), {
   ssr: true,
 });
@@ -51,17 +55,24 @@ const Header = memo(function Header() {
     };
   }, [isMobileMenuOpen]);
 
-  const isActive = useCallback((href: string) => {
-    if (href === '/') return pathname === '/';
-    if (href === '/features') return pathname.startsWith('/features');
-    return pathname === href;
-  }, [pathname]);
+  const isActive = useCallback(
+    (href: string) => {
+      if (href === ROUTES.PUBLIC.HOME) return pathname === ROUTES.PUBLIC.HOME;
+      if (href === ROUTES.PUBLIC.FEATURES)
+        return pathname.startsWith(ROUTES.PUBLIC.FEATURES);
+      return pathname === href;
+    },
+    [pathname]
+  );
 
-  const navLinks = useMemo(() => [
-    { href: '/pricing', label: t('navigation.pricing') },
-    { href: '/about', label: t('navigation.about') },
-    { href: '/contact', label: t('navigation.contact') },
-  ], [t]);
+  const navLinks = useMemo(
+    () => [
+      { href: ROUTES.PUBLIC.PRICING, label: t('navigation.pricing') },
+      { href: ROUTES.PUBLIC.ABOUT, label: t('navigation.about') },
+      { href: ROUTES.PUBLIC.CONTACT, label: t('navigation.contact') },
+    ],
+    [t]
+  );
 
   const closeMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(false);
@@ -71,10 +82,16 @@ const Header = memo(function Header() {
   const handleDropdownEnter = useCallback(() => setIsDropdownOpen(true), []);
   const handleDropdownLeave = useCallback(() => setIsDropdownOpen(false), []);
   const handleDropdownClick = useCallback(() => {
-    router.push('/features');
+    router.push(ROUTES.PUBLIC.FEATURES);
   }, [router]);
-  const toggleMobileMenu = useCallback(() => setIsMobileMenuOpen(prev => !prev), []);
-  const toggleMobileFeatures = useCallback(() => setIsMobileFeaturesOpen(prev => !prev), []);
+  const toggleMobileMenu = useCallback(
+    () => setIsMobileMenuOpen((prev) => !prev),
+    []
+  );
+  const toggleMobileFeatures = useCallback(
+    () => setIsMobileFeaturesOpen((prev) => !prev),
+    []
+  );
 
   return (
     <>
@@ -82,7 +99,7 @@ const Header = memo(function Header() {
         <div className="flex items-center justify-between w-full max-w-7xl mx-auto px-4 sm:px-6 py-3 lg:py-4">
           {/* Logo */}
           <Link
-            href="/"
+            href={ROUTES.PUBLIC.HOME}
             className="flex items-center hover:scale-102 transition-all duration-300 delay-0"
             onClick={closeMobileMenu}
           >
@@ -99,13 +116,13 @@ const Header = memo(function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
             <NavigationLink
-              href="/"
+              href={ROUTES.PUBLIC.HOME}
               label={t('navigation.home')}
-              isActive={isActive('/')}
+              isActive={isActive(ROUTES.PUBLIC.HOME)}
             />
 
             <FeaturesDropdown
-              isActive={isActive('/features')}
+              isActive={isActive(ROUTES.PUBLIC.FEATURES)}
               isOpen={isDropdownOpen}
               pathname={pathname}
               onMouseEnter={handleDropdownEnter}

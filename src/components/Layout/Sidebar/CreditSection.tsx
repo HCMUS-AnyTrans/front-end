@@ -4,6 +4,7 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { Coins, TrendingUp } from 'lucide-react';
+import { ROUTES } from '@/config';
 
 type CreditSectionProps = {
   current: number;
@@ -34,7 +35,7 @@ export default function CreditSection({ current, total }: CreditSectionProps) {
             </div>
           </div>
           <Link
-            href="/credits"
+            href={ROUTES.ACCOUNT.CREDITS}
             className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors"
           >
             {t('viewDetails')}
@@ -80,13 +81,13 @@ export default function CreditSection({ current, total }: CreditSectionProps) {
 
         <div className="grid grid-cols-2 gap-2">
           <Link
-            href="/buy-credits"
+            href={ROUTES.ACCOUNT.BUY_CREDITS}
             className="text-center text-xs font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 py-2 rounded-lg transition-colors"
           >
             {t('buyCredits')}
           </Link>
           <Link
-            href="/pricing"
+            href={ROUTES.PUBLIC.PRICING}
             className="text-center text-xs font-semibold text-gray-700 bg-white hover:bg-gray-50 py-2 rounded-lg transition-colors border border-gray-200"
           >
             {t('viewPlans')}

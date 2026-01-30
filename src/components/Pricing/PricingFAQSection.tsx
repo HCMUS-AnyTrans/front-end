@@ -6,6 +6,7 @@ import { HelpCircle } from 'lucide-react';
 import { BaseFAQ } from '@/components/Common';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/routing';
+import { ROUTES } from '@/config';
 
 interface FAQItem {
   question: string;
@@ -50,7 +51,7 @@ export default function PricingFAQSection({ faqs }: PricingFAQSectionProps) {
         <div className="mt-10 sm:mt-12 text-center">
           <p className="text-gray-600 mb-4">{t('cta.text')}</p>
           <Button variant="gradient-primary" size="hero" asChild>
-            <Link href="/contact">{t('cta.button')}</Link>
+            <Link href={ROUTES.PUBLIC.CONTACT}>{t('cta.button')}</Link>
           </Button>
         </div>
       </div>

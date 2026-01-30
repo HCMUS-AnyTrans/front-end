@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import Image from 'next/image';
+import { ROUTES } from '@/config';
 
 interface AuthShellProps {
   title: string;
@@ -28,7 +29,7 @@ export function AuthShell({
   description,
   children,
   showBackButton = false,
-  backHref = '/login',
+  backHref = ROUTES.AUTH.LOGIN,
   backText = 'Back to login',
   className = '',
 }: AuthShellProps) {
@@ -74,7 +75,7 @@ export function AuthShell({
 
         {/* Logo with animation */}
         <Link
-          href="/"
+          href={ROUTES.PUBLIC.HOME}
           className={`mx-auto mb-4 block group transition-all duration-700 delay-200 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
           }`}

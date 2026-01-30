@@ -11,6 +11,7 @@ import {
   BackgroundPattern,
   Benefit,
 } from '@/components/Features/shared';
+import { ROUTES } from '@/config';
 
 export default function FeatureGrid() {
   const t = useTranslations('home.featureGrid');
@@ -33,7 +34,7 @@ export default function FeatureGrid() {
       imagePosition: 'right' as const,
       gradient: 'from-blue-500 to-indigo-600',
       ctaText: t('documentTranslation.cta'),
-      ctaHref: '/app/document-translation',
+      ctaHref: ROUTES.APP.DOCUMENT_TRANSLATION,
       mockupSubDomain: t('documentTranslation.mockupSubDomain'),
     },
     {
@@ -53,7 +54,7 @@ export default function FeatureGrid() {
       imagePosition: 'left' as const,
       gradient: 'from-purple-500 to-pink-600',
       ctaText: t('subtitleTranslation.cta'),
-      ctaHref: '/app/subtitle-translation',
+      ctaHref: ROUTES.APP.SUBTITLE_TRANSLATION,
       mockupSubDomain: t('subtitleTranslation.mockupSubDomain'),
     },
   ];
@@ -96,7 +97,7 @@ export default function FeatureGrid() {
             {t('bottomCTA.description')}
           </p>
           <Button variant="gradient-primary" size="hero" asChild>
-            <Link href="/signup">{t('bottomCTA.button')}</Link>
+            <Link href={ROUTES.AUTH.SIGNUP}>{t('bottomCTA.button')}</Link>
           </Button>
         </div>
       </div>

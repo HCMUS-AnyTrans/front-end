@@ -65,3 +65,36 @@ export const NOTIFICATION_ENDPOINTS = {
   DELETE: '/notifications/delete',
   PIN: '/notifications/pin',
 } as const;
+
+// Translation history endpoints
+export const HISTORY_ENDPOINTS = {
+  LIST: '/translation/history',
+  DETAIL: '/translation/history', // + /:id
+  STATS: '/translation/history/stats',
+  DELETE: '/translation/history', // + /:id (DELETE method)
+  BATCH_DELETE: '/translation/history/batch',
+  DOWNLOAD: '/translation/history/download', // + /:id
+  BATCH_DOWNLOAD: '/translation/history/batch-download',
+} as const;
+
+// Account endpoints
+export const ACCOUNT_ENDPOINTS = {
+  // Profile
+  PROFILE: '/account/profile',
+  AVATAR: '/account/avatar',
+  // Security
+  CHANGE_PASSWORD: '/account/change-password',
+  TWO_FACTOR: '/account/2fa',
+  SESSIONS: '/account/sessions',
+  REVOKE_SESSION: '/account/sessions', // + /:id (DELETE method)
+  REVOKE_ALL_SESSIONS: '/account/sessions/revoke-all',
+  // Preferences
+  PREFERENCES: '/account/preferences',
+  // Billing
+  PLAN: '/account/billing/plan',
+  PAYMENT_METHODS: '/account/billing/payment-methods',
+  DEFAULT_PAYMENT_METHOD: '/account/billing/payment-methods/default',
+  INVOICES: '/account/billing/invoices',
+  CANCEL_SUBSCRIPTION: '/account/billing/cancel',
+  UPGRADE_PLAN: '/account/billing/upgrade',
+} as const;

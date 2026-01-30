@@ -9,26 +9,27 @@ import {
   FooterSocial,
   FooterBottom,
 } from './Layout/Footer';
+import { ROUTES } from '@/config';
 
 export default function Footer() {
   const t = useTranslations('footer');
 
   const quickLinks = [
-    { name: t('quickLinks.home'), href: '/' },
-    { name: t('quickLinks.features'), href: '/features' },
-    { name: t('quickLinks.pricing'), href: '/pricing' },
-    { name: t('quickLinks.about'), href: '/about' },
-    { name: t('quickLinks.contact'), href: '/contact' },
+    { name: t('quickLinks.home'), href: ROUTES.PUBLIC.HOME },
+    { name: t('quickLinks.features'), href: ROUTES.PUBLIC.FEATURES },
+    { name: t('quickLinks.pricing'), href: ROUTES.PUBLIC.PRICING },
+    { name: t('quickLinks.about'), href: ROUTES.PUBLIC.ABOUT },
+    { name: t('quickLinks.contact'), href: ROUTES.PUBLIC.CONTACT },
   ];
 
   const services = [
     {
       name: t('services.documentTranslation'),
-      href: '/features#document-translation',
+      href: ROUTES.FEATURES.DOCUMENT_TRANSLATION,
     },
     {
       name: t('services.subtitleTranslation'),
-      href: '/features#subtitle-translation',
+      href: ROUTES.FEATURES.SUBTITLE_TRANSLATION,
     },
   ];
 

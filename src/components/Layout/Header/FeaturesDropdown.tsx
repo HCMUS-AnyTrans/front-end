@@ -2,6 +2,7 @@ import React from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
+import { ROUTES } from '@/config';
 
 interface FeaturesDropdownProps {
   isActive: boolean;
@@ -18,18 +19,18 @@ export default function FeaturesDropdown({
   pathname,
   onMouseEnter,
   onMouseLeave,
-  onMouseDown
+  onMouseDown,
 }: FeaturesDropdownProps) {
   const t = useTranslations('header');
 
   const features = [
     {
-      href: '/features#document-translation',
+      href: ROUTES.FEATURES.DOCUMENT_TRANSLATION,
       title: t('featuresDropdown.documentTranslation.title'),
       description: t('featuresDropdown.documentTranslation.description'),
     },
     {
-      href: '/features#subtitle-translation',
+      href: ROUTES.FEATURES.SUBTITLE_TRANSLATION,
       title: t('featuresDropdown.subtitleTranslation.title'),
       description: t('featuresDropdown.subtitleTranslation.description'),
     },
