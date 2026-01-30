@@ -18,56 +18,55 @@ export default function StepUpload({ variant, onUpload }: StepUploadProps) {
     variant === 'document' ? 'documentTranslation' : 'subtitleTranslation';
   const t = useTranslations(`${namespace}.upload`);
 
-  const uploadConfig = {
-    document: {
-      icon: FileText,
-      features: [
-        {
-          icon: <Upload className="w-5 h-5 text-purple-600" />,
-          title: t('features.fast.title'),
-          description: t('features.fast.description'),
-          iconBgClass: 'bg-purple-100',
-        },
-        {
-          icon: <FileText className="w-5 h-5 text-green-600" />,
-          title: t('features.formatPreserved.title'),
-          description: t('features.formatPreserved.description'),
-          iconBgClass: 'bg-green-100',
-        },
-        {
-          icon: <FileText className="w-5 h-5 text-[#4169E1]" />,
-          title: t('features.languages.title'),
-          description: t('features.languages.description'),
-          iconBgClass: 'bg-blue-100',
-        },
-      ],
-    },
-    subtitle: {
-      icon: Film,
-      features: [
-        {
-          icon: <Upload className="w-5 h-5 text-amber-600" />,
-          title: t('features.contextAware.title'),
-          description: t('features.contextAware.description'),
-          iconBgClass: 'bg-amber-100',
-        },
-        {
-          icon: <Film className="w-5 h-5 text-indigo-600" />,
-          title: t('features.multiFormat.title'),
-          description: t('features.multiFormat.description'),
-          iconBgClass: 'bg-indigo-100',
-        },
-        {
-          icon: <FileText className="w-5 h-5 text-rose-600" />,
-          title: t('features.speakerDetection.title'),
-          description: t('features.speakerDetection.description'),
-          iconBgClass: 'bg-rose-100',
-        },
-      ],
-    },
-  };
+  const config =
+    variant === 'document'
+      ? {
+          icon: FileText,
+          features: [
+            {
+              icon: <Upload className="w-5 h-5 text-purple-600" />,
+              title: t('features.fast.title'),
+              description: t('features.fast.description'),
+              iconBgClass: 'bg-purple-100',
+            },
+            {
+              icon: <FileText className="w-5 h-5 text-green-600" />,
+              title: t('features.formatPreserved.title'),
+              description: t('features.formatPreserved.description'),
+              iconBgClass: 'bg-green-100',
+            },
+            {
+              icon: <FileText className="w-5 h-5 text-[#4169E1]" />,
+              title: t('features.languages.title'),
+              description: t('features.languages.description'),
+              iconBgClass: 'bg-blue-100',
+            },
+          ],
+        }
+      : {
+          icon: Film,
+          features: [
+            {
+              icon: <Upload className="w-5 h-5 text-amber-600" />,
+              title: t('features.contextAware.title'),
+              description: t('features.contextAware.description'),
+              iconBgClass: 'bg-amber-100',
+            },
+            {
+              icon: <Film className="w-5 h-5 text-indigo-600" />,
+              title: t('features.multiFormat.title'),
+              description: t('features.multiFormat.description'),
+              iconBgClass: 'bg-indigo-100',
+            },
+            {
+              icon: <FileText className="w-5 h-5 text-rose-600" />,
+              title: t('features.speakerDetection.title'),
+              description: t('features.speakerDetection.description'),
+              iconBgClass: 'bg-rose-100',
+            },
+          ],
+        };
 
-  const config = uploadConfig[variant];
   const IconComponent = config.icon;
 
   return (

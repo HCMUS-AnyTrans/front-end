@@ -1,4 +1,4 @@
-export { default as AccountDialog } from './AccountDialog';
+export { default as AccountDialog } from './AccountDialog/index';
 export { default as AccountDialogHeader } from './AccountDialogHeader';
 export { default as AccountSidebarTabs } from './AccountSidebarTabs';
 

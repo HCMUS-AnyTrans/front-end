@@ -1,25 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { Preferences } from '@/types/account';
-import {
-  Bell,
-  Smartphone,
-  Globe,
-  Calendar,
-  Clock,
-  Languages,
-  Save,
-  Info,
-} from 'lucide-react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { Bell, Smartphone, Globe, Save, Info } from 'lucide-react';
+import { SelectSettingRow } from './SelectSettingRow';
+import { ToggleSettingRow } from './ToggleSettingRow';
 
 type PreferencesSectionProps = {
   preferences: Preferences;
@@ -37,360 +23,183 @@ export default function PreferencesSection({
   const t = useTranslations('common.settings.preferences');
   const tActions = useTranslations('common.settings.actions');
 
+  const selectSettings = useMemo(
+    () => [
+      {
+        key: 'theme',
+        label: t('theme.label'),
+        description: t('theme.description'),
+        value: preferences.theme,
+        options: [
+          { value: 'light', label: t('theme.light') },
+          { value: 'dark', label: t('theme.dark') },
+          { value: 'auto', label: t('theme.auto') },
+        ],
+        onChange: (value: string) =>
+          onChange({ theme: value as Preferences['theme'] }),
+        width: 'w-full sm:w-[140px]',
+      },
+      {
+        key: 'language',
+        label: t('language.label'),
+        description: t('language.description'),
+        value: preferences.language,
+        options: [
+          { value: 'en', label: t('language.english') },
+          { value: 'vi', label: t('language.vietnamese') },
+          { value: 'es', label: t('language.spanish') },
+          { value: 'fr', label: t('language.french') },
+        ],
+        onChange: (value: string) =>
+          onChange({ language: value as Preferences['language'] }),
+        width: 'w-full sm:w-[140px]',
+      },
+      {
+        key: 'dateFormat',
+        label: t('dateFormat.label'),
+        description: t('dateFormat.description'),
+        value: preferences.dateFormat,
+        options: [
+          { value: 'MM/DD/YYYY', label: 'MM/DD/YYYY' },
+          { value: 'DD/MM/YYYY', label: 'DD/MM/YYYY' },
+          { value: 'YYYY-MM-DD', label: 'YYYY-MM-DD' },
+        ],
+        onChange: (value: string) =>
+          onChange({ dateFormat: value as Preferences['dateFormat'] }),
+        width: 'w-full sm:w-[160px]',
+      },
+      {
+        key: 'timeFormat',
+        label: t('timeFormat.label'),
+        description: t('timeFormat.description'),
+        value: preferences.timeFormat,
+        options: [
+          { value: '12h', label: t('timeFormat.12hour') },
+          { value: '24h', label: t('timeFormat.24hour') },
+        ],
+        onChange: (value: string) =>
+          onChange({ timeFormat: value as Preferences['timeFormat'] }),
+        width: 'w-full sm:w-[140px]',
+      },
+      {
+        key: 'defaultSourceLanguage',
+        label: t('defaultSourceLanguage.label'),
+        description: t('defaultSourceLanguage.description'),
+        value: preferences.defaultSourceLanguage,
+        options: [
+          { value: 'en', label: t('defaultSourceLanguage.english') },
+          { value: 'vi', label: t('defaultSourceLanguage.vietnamese') },
+          { value: 'es', label: t('defaultSourceLanguage.spanish') },
+          { value: 'fr', label: t('defaultSourceLanguage.french') },
+          { value: 'de', label: t('defaultSourceLanguage.german') },
+          { value: 'ja', label: t('defaultSourceLanguage.japanese') },
+          { value: 'ko', label: t('defaultSourceLanguage.korean') },
+          { value: 'zh', label: t('defaultSourceLanguage.chinese') },
+        ],
+        onChange: (value: string) => onChange({ defaultSourceLanguage: value }),
+        width: 'w-full sm:w-[140px]',
+      },
+      {
+        key: 'defaultTargetLanguage',
+        label: t('defaultTargetLanguage.label'),
+        description: t('defaultTargetLanguage.description'),
+        value: preferences.defaultTargetLanguage,
+        options: [
+          { value: 'en', label: t('defaultTargetLanguage.english') },
+          { value: 'vi', label: t('defaultTargetLanguage.vietnamese') },
+          { value: 'es', label: t('defaultTargetLanguage.spanish') },
+          { value: 'fr', label: t('defaultTargetLanguage.french') },
+          { value: 'de', label: t('defaultTargetLanguage.german') },
+          { value: 'ja', label: t('defaultTargetLanguage.japanese') },
+          { value: 'ko', label: t('defaultTargetLanguage.korean') },
+          { value: 'zh', label: t('defaultTargetLanguage.chinese') },
+        ],
+        onChange: (value: string) => onChange({ defaultTargetLanguage: value }),
+        width: 'w-full sm:w-[140px]',
+      },
+    ],
+    [t, preferences, onChange]
+  );
+
+  const toggleSettings = useMemo(
+    () => [
+      {
+        key: 'emailNotifications',
+        label: t('emailNotifications.label'),
+        description: t('emailNotifications.description'),
+        checked: preferences.emailNotifications,
+        onChange: (checked: boolean) =>
+          onChange({ emailNotifications: checked }),
+        icon: <Bell className="w-5 h-5 text-blue-600" />,
+      },
+      {
+        key: 'pushNotifications',
+        label: t('pushNotifications.label'),
+        description: t('pushNotifications.description'),
+        checked: preferences.pushNotifications,
+        onChange: (checked: boolean) =>
+          onChange({ pushNotifications: checked }),
+        icon: <Smartphone className="w-5 h-5 text-green-600" />,
+      },
+      {
+        key: 'translationAlerts',
+        label: t('translationAlerts.label'),
+        description: t('translationAlerts.description'),
+        checked: preferences.translationAlerts,
+        onChange: (checked: boolean) =>
+          onChange({ translationAlerts: checked }),
+        icon: <Globe className="w-5 h-5 text-orange-600" />,
+      },
+      {
+        key: 'autoSaveDrafts',
+        label: t('autoSaveDrafts.label'),
+        description: t('autoSaveDrafts.description'),
+        checked: preferences.autoSaveDrafts,
+        onChange: (checked: boolean) => onChange({ autoSaveDrafts: checked }),
+        icon: <Save className="w-5 h-5 text-indigo-600" />,
+      },
+      {
+        key: 'showTooltips',
+        label: t('showTooltips.label'),
+        description: t('showTooltips.description'),
+        checked: preferences.showTooltips,
+        onChange: (checked: boolean) => onChange({ showTooltips: checked }),
+        icon: <Info className="w-5 h-5 text-amber-600" />,
+      },
+    ],
+    [t, preferences, onChange]
+  );
+
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 ">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
           {t('title')}
         </h3>
 
         <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex-1 min-w-0">
-              <p className="font-semibold text-gray-900 text-sm">
-                {t('theme.label')}
-              </p>
-              <p className="text-xs text-gray-600">{t('theme.description')}</p>
-            </div>
-            <Select
-              value={preferences.theme}
-              onValueChange={(value) =>
-                onChange({ theme: value as Preferences['theme'] })
-              }
-            >
-              <SelectTrigger className="w-full sm:w-[140px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="light">{t('theme.light')}</SelectItem>
-                <SelectItem value="dark">{t('theme.dark')}</SelectItem>
-                <SelectItem value="auto">{t('theme.auto')}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          {selectSettings.map((setting) => (
+            <SelectSettingRow
+              key={setting.key}
+              label={setting.label}
+              description={setting.description}
+              value={setting.value}
+              options={setting.options}
+              onChange={setting.onChange}
+              width={setting.width}
+            />
+          ))}
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex-1 min-w-0">
-              <p className="font-semibold text-gray-900 text-sm">
-                {t('language.label')}
-              </p>
-              <p className="text-xs text-gray-600">
-                {t('language.description')}
-              </p>
-            </div>
-            <Select
-              value={preferences.language}
-              onValueChange={(value) =>
-                onChange({ language: value as Preferences['language'] })
-              }
-            >
-              <SelectTrigger className="w-full sm:w-[140px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="en">{t('language.english')}</SelectItem>
-                <SelectItem value="vi">{t('language.vietnamese')}</SelectItem>
-                <SelectItem value="es">{t('language.spanish')}</SelectItem>
-                <SelectItem value="fr">{t('language.french')}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="w-10 h-10 shrink-0 bg-purple-100 rounded-lg flex items-center justify-center">
-                <Calendar className="w-5 h-5 text-purple-600" />
-              </div>
-              <div className="min-w-0">
-                <p className="font-semibold text-gray-900 text-sm">
-                  {t('dateFormat.label')}
-                </p>
-                <p className="text-xs text-gray-600">
-                  {t('dateFormat.description')}
-                </p>
-              </div>
-            </div>
-            <Select
-              value={preferences.dateFormat}
-              onValueChange={(value) =>
-                onChange({ dateFormat: value as Preferences['dateFormat'] })
-              }
-            >
-              <SelectTrigger className="w-full sm:w-[160px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="MM/DD/YYYY">MM/DD/YYYY</SelectItem>
-                <SelectItem value="DD/MM/YYYY">DD/MM/YYYY</SelectItem>
-                <SelectItem value="YYYY-MM-DD">YYYY-MM-DD</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="w-10 h-10 shrink-0 bg-pink-100 rounded-lg flex items-center justify-center">
-                <Clock className="w-5 h-5 text-pink-600" />
-              </div>
-              <div className="min-w-0">
-                <p className="font-semibold text-gray-900 text-sm">
-                  {t('timeFormat.label')}
-                </p>
-                <p className="text-xs text-gray-600">
-                  {t('timeFormat.description')}
-                </p>
-              </div>
-            </div>
-            <Select
-              value={preferences.timeFormat}
-              onValueChange={(value) =>
-                onChange({ timeFormat: value as Preferences['timeFormat'] })
-              }
-            >
-              <SelectTrigger className="w-full sm:w-[140px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="12h">{t('timeFormat.12hour')}</SelectItem>
-                <SelectItem value="24h">{t('timeFormat.24hour')}</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="w-10 h-10 shrink-0 bg-cyan-100 rounded-lg flex items-center justify-center">
-                <Languages className="w-5 h-5 text-cyan-600" />
-              </div>
-              <div className="min-w-0">
-                <p className="font-semibold text-gray-900 text-sm">
-                  {t('defaultSourceLanguage.label')}
-                </p>
-                <p className="text-xs text-gray-600">
-                  {t('defaultSourceLanguage.description')}
-                </p>
-              </div>
-            </div>
-            <Select
-              value={preferences.defaultSourceLanguage}
-              onValueChange={(value) =>
-                onChange({ defaultSourceLanguage: value })
-              }
-            >
-              <SelectTrigger className="w-full sm:w-[140px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="en">
-                  {t('defaultSourceLanguage.english')}
-                </SelectItem>
-                <SelectItem value="vi">
-                  {t('defaultSourceLanguage.vietnamese')}
-                </SelectItem>
-                <SelectItem value="es">
-                  {t('defaultSourceLanguage.spanish')}
-                </SelectItem>
-                <SelectItem value="fr">
-                  {t('defaultSourceLanguage.french')}
-                </SelectItem>
-                <SelectItem value="de">
-                  {t('defaultSourceLanguage.german')}
-                </SelectItem>
-                <SelectItem value="ja">
-                  {t('defaultSourceLanguage.japanese')}
-                </SelectItem>
-                <SelectItem value="ko">
-                  {t('defaultSourceLanguage.korean')}
-                </SelectItem>
-                <SelectItem value="zh">
-                  {t('defaultSourceLanguage.chinese')}
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="w-10 h-10 shrink-0 bg-teal-100 rounded-lg flex items-center justify-center">
-                <Languages className="w-5 h-5 text-teal-600" />
-              </div>
-              <div className="min-w-0">
-                <p className="font-semibold text-gray-900 text-sm">
-                  {t('defaultTargetLanguage.label')}
-                </p>
-                <p className="text-xs text-gray-600">
-                  {t('defaultTargetLanguage.description')}
-                </p>
-              </div>
-            </div>
-            <Select
-              value={preferences.defaultTargetLanguage}
-              onValueChange={(value) =>
-                onChange({ defaultTargetLanguage: value })
-              }
-            >
-              <SelectTrigger className="w-full sm:w-[140px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="en">
-                  {t('defaultTargetLanguage.english')}
-                </SelectItem>
-                <SelectItem value="vi">
-                  {t('defaultTargetLanguage.vietnamese')}
-                </SelectItem>
-                <SelectItem value="es">
-                  {t('defaultTargetLanguage.spanish')}
-                </SelectItem>
-                <SelectItem value="fr">
-                  {t('defaultTargetLanguage.french')}
-                </SelectItem>
-                <SelectItem value="de">
-                  {t('defaultTargetLanguage.german')}
-                </SelectItem>
-                <SelectItem value="ja">
-                  {t('defaultTargetLanguage.japanese')}
-                </SelectItem>
-                <SelectItem value="ko">
-                  {t('defaultTargetLanguage.korean')}
-                </SelectItem>
-                <SelectItem value="zh">
-                  {t('defaultTargetLanguage.chinese')}
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="w-10 h-10 shrink-0 bg-blue-100 rounded-lg flex items-center justify-center">
-                <Bell className="w-5 h-5 text-blue-600" />
-              </div>
-              <div className="min-w-0">
-                <p className="font-semibold text-gray-900 text-sm">
-                  {t('emailNotifications.label')}
-                </p>
-                <p className="text-xs text-gray-600">
-                  {t('emailNotifications.description')}
-                </p>
-              </div>
-            </div>
-            <label className="relative inline-flex items-center cursor-pointer shrink-0">
-              <input
-                type="checkbox"
-                checked={preferences.emailNotifications}
-                onChange={(e) =>
-                  onChange({ emailNotifications: e.target.checked })
-                }
-                className="sr-only peer"
-              />
-              <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-            </label>
-          </div>
-
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="w-10 h-10 shrink-0 bg-green-100 rounded-lg flex items-center justify-center">
-                <Smartphone className="w-5 h-5 text-green-600" />
-              </div>
-              <div className="min-w-0">
-                <p className="font-semibold text-gray-900 text-sm">
-                  {t('pushNotifications.label')}
-                </p>
-                <p className="text-xs text-gray-600">
-                  {t('pushNotifications.description')}
-                </p>
-              </div>
-            </div>
-            <label className="relative inline-flex items-center cursor-pointer shrink-0">
-              <input
-                type="checkbox"
-                checked={preferences.pushNotifications}
-                onChange={(e) =>
-                  onChange({ pushNotifications: e.target.checked })
-                }
-                className="sr-only peer"
-              />
-              <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-            </label>
-          </div>
-
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="w-10 h-10 shrink-0 bg-orange-100 rounded-lg flex items-center justify-center">
-                <Globe className="w-5 h-5 text-orange-600" />
-              </div>
-              <div className="min-w-0">
-                <p className="font-semibold text-gray-900 text-sm">
-                  {t('translationAlerts.label')}
-                </p>
-                <p className="text-xs text-gray-600">
-                  {t('translationAlerts.description')}
-                </p>
-              </div>
-            </div>
-            <label className="relative inline-flex items-center cursor-pointer shrink-0">
-              <input
-                type="checkbox"
-                checked={preferences.translationAlerts}
-                onChange={(e) =>
-                  onChange({ translationAlerts: e.target.checked })
-                }
-                className="sr-only peer"
-              />
-              <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-            </label>
-          </div>
-
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="w-10 h-10 shrink-0 bg-indigo-100 rounded-lg flex items-center justify-center">
-                <Save className="w-5 h-5 text-indigo-600" />
-              </div>
-              <div className="min-w-0">
-                <p className="font-semibold text-gray-900 text-sm">
-                  {t('autoSaveDrafts.label')}
-                </p>
-                <p className="text-xs text-gray-600">
-                  {t('autoSaveDrafts.description')}
-                </p>
-              </div>
-            </div>
-            <label className="relative inline-flex items-center cursor-pointer shrink-0">
-              <input
-                type="checkbox"
-                checked={preferences.autoSaveDrafts}
-                onChange={(e) => onChange({ autoSaveDrafts: e.target.checked })}
-                className="sr-only peer"
-              />
-              <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-            </label>
-          </div>
-
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="w-10 h-10 shrink-0 bg-amber-100 rounded-lg flex items-center justify-center">
-                <Info className="w-5 h-5 text-amber-600" />
-              </div>
-              <div className="min-w-0">
-                <p className="font-semibold text-gray-900 text-sm">
-                  {t('showTooltips.label')}
-                </p>
-                <p className="text-xs text-gray-600">
-                  {t('showTooltips.description')}
-                </p>
-              </div>
-            </div>
-            <label className="relative inline-flex items-center cursor-pointer shrink-0">
-              <input
-                type="checkbox"
-                checked={preferences.showTooltips}
-                onChange={(e) => onChange({ showTooltips: e.target.checked })}
-                className="sr-only peer"
-              />
-              <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-            </label>
-          </div>
+          {toggleSettings.map((setting) => (
+            <ToggleSettingRow
+              key={setting.key}
+              label={setting.label}
+              description={setting.description}
+              checked={setting.checked}
+              onChange={setting.onChange}
+              icon={setting.icon}
+            />
+          ))}
         </div>
       </div>
 

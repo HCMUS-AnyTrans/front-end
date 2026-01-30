@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Sparkles } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import {
   Card,
   CardContent,
@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/card';
 import Image from 'next/image';
 import { ROUTES } from '@/config';
+import { useAuthShellAnimation } from './useAuthShellAnimation';
 
 interface AuthShellProps {
   title: string;
@@ -33,11 +34,7 @@ export function AuthShell({
   backText = 'Back to login',
   className = '',
 }: AuthShellProps) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
+  const { isVisible } = useAuthShellAnimation();
 
   return (
     <Card
@@ -73,7 +70,6 @@ export function AuthShell({
           </div>
         )}
 
-        {/* Logo with animation */}
         <Link
           href={ROUTES.PUBLIC.HOME}
           className={`mx-auto mb-4 block group transition-all duration-700 delay-200 ${
@@ -91,7 +87,6 @@ export function AuthShell({
           </div>
         </Link>
 
-        {/* Title and Description */}
         <div
           className={`space-y-2 transition-all duration-700 delay-300 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'

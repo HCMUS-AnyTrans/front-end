@@ -1,7 +1,7 @@
 'use client';
 
 import React, { ReactNode } from 'react';
-import { BaseCard } from '@/components/Common';
+import { StatCard as BaseStatCard } from '@/components/Common/BaseCard/StatCard';
 
 export type StatCardProps = {
   icon: ReactNode;
@@ -23,13 +23,12 @@ export default function StatCard({
   subtitle,
 }: StatCardProps) {
   return (
-    <BaseCard
+    <BaseStatCard
       icon={icon}
       iconWrapperClass={iconWrapperClass}
       title={title}
       value={value}
       subtitle={subtitle}
-      variant="stat"
       trend={trend}
       trendClass={trendClass}
     />

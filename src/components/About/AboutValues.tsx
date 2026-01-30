@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { BaseCard } from '@/components/Common';
+import { ValueCard } from '@/components/Common/BaseCard/ValueCard';
 import { AboutValuesProps } from '@/types/about';
 
 export default function AboutValues({ values }: AboutValuesProps) {
@@ -41,8 +41,7 @@ export default function AboutValues({ values }: AboutValuesProps) {
                 transitionDelay: isVisible ? '0ms' : `${idx * 150}ms`,
               }}
             >
-              <BaseCard
-                variant="value"
+              <ValueCard
                 icon={<Icon className="w-6 h-6" />}
                 title={value.title}
                 description={value.description}

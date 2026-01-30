@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { BaseCard } from '@/components/Common';
+import { ContactCard } from '@/components/Common/BaseCard/ContactCard';
 import { ContactMethodsProps } from '@/types/contact';
 
 export default function ContactMethods({ methods }: ContactMethodsProps) {
@@ -28,8 +28,7 @@ export default function ContactMethods({ methods }: ContactMethodsProps) {
                 transitionDelay: isVisible ? '0ms' : `${index * 150}ms`,
               }}
             >
-              <BaseCard
-                variant="contact"
+              <ContactCard
                 icon={<Icon className="w-7 h-7" />}
                 title={method.title}
                 description={method.description}
