@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { Star, FileText, Video, Globe, Quote } from 'lucide-react';
 
@@ -108,62 +108,66 @@ function ReviewCard({
 export default function ReviewSection() {
   const t = useTranslations('home.reviews');
 
-  const reviews = [
-    {
-      name: t('testimonials.sarah.name'),
-      role: t('testimonials.sarah.role'),
-      company: t('testimonials.sarah.company'),
-      rating: 5,
-      review: t('testimonials.sarah.review'),
-      metadata: t('testimonials.sarah.metadata'),
-      icon: <FileText size={14} strokeWidth={2.5} />,
-    },
-    {
-      name: t('testimonials.miguel.name'),
-      role: t('testimonials.miguel.role'),
-      company: t('testimonials.miguel.company'),
-      rating: 5,
-      review: t('testimonials.miguel.review'),
-      metadata: t('testimonials.miguel.metadata'),
-      icon: <Video size={14} strokeWidth={2.5} />,
-    },
-    {
-      name: t('testimonials.aisha.name'),
-      role: t('testimonials.aisha.role'),
-      company: t('testimonials.aisha.company'),
-      rating: 4,
-      review: t('testimonials.aisha.review'),
-      metadata: t('testimonials.aisha.metadata'),
-      icon: <Globe size={14} strokeWidth={2.5} />,
-    },
-    {
-      name: t('testimonials.david.name'),
-      role: t('testimonials.david.role'),
-      company: t('testimonials.david.company'),
-      rating: 5,
-      review: t('testimonials.david.review'),
-      metadata: t('testimonials.david.metadata'),
-      icon: <FileText size={14} strokeWidth={2.5} />,
-    },
-    {
-      name: t('testimonials.emma.name'),
-      role: t('testimonials.emma.role'),
-      company: t('testimonials.emma.company'),
-      rating: 5,
-      review: t('testimonials.emma.review'),
-      metadata: t('testimonials.emma.metadata'),
-      icon: <Video size={14} strokeWidth={2.5} />,
-    },
-    {
-      name: t('testimonials.james.name'),
-      role: t('testimonials.james.role'),
-      company: t('testimonials.james.company'),
-      rating: 4,
-      review: t('testimonials.james.review'),
-      metadata: t('testimonials.james.metadata'),
-      icon: <Globe size={14} strokeWidth={2.5} />,
-    },
-  ];
+  // Memoize reviews to avoid recreation on every render
+  const reviews = useMemo(
+    () => [
+      {
+        name: t('testimonials.sarah.name'),
+        role: t('testimonials.sarah.role'),
+        company: t('testimonials.sarah.company'),
+        rating: 5,
+        review: t('testimonials.sarah.review'),
+        metadata: t('testimonials.sarah.metadata'),
+        icon: <FileText size={14} strokeWidth={2.5} />,
+      },
+      {
+        name: t('testimonials.miguel.name'),
+        role: t('testimonials.miguel.role'),
+        company: t('testimonials.miguel.company'),
+        rating: 5,
+        review: t('testimonials.miguel.review'),
+        metadata: t('testimonials.miguel.metadata'),
+        icon: <Video size={14} strokeWidth={2.5} />,
+      },
+      {
+        name: t('testimonials.aisha.name'),
+        role: t('testimonials.aisha.role'),
+        company: t('testimonials.aisha.company'),
+        rating: 4,
+        review: t('testimonials.aisha.review'),
+        metadata: t('testimonials.aisha.metadata'),
+        icon: <Globe size={14} strokeWidth={2.5} />,
+      },
+      {
+        name: t('testimonials.david.name'),
+        role: t('testimonials.david.role'),
+        company: t('testimonials.david.company'),
+        rating: 5,
+        review: t('testimonials.david.review'),
+        metadata: t('testimonials.david.metadata'),
+        icon: <FileText size={14} strokeWidth={2.5} />,
+      },
+      {
+        name: t('testimonials.emma.name'),
+        role: t('testimonials.emma.role'),
+        company: t('testimonials.emma.company'),
+        rating: 5,
+        review: t('testimonials.emma.review'),
+        metadata: t('testimonials.emma.metadata'),
+        icon: <Video size={14} strokeWidth={2.5} />,
+      },
+      {
+        name: t('testimonials.james.name'),
+        role: t('testimonials.james.role'),
+        company: t('testimonials.james.company'),
+        rating: 4,
+        review: t('testimonials.james.review'),
+        metadata: t('testimonials.james.metadata'),
+        icon: <Globe size={14} strokeWidth={2.5} />,
+      },
+    ],
+    [t]
+  );
 
   return (
     <section className="w-full py-20 bg-gradient-to-br from-muted via-accent/30 to-accent/20 relative overflow-hidden">

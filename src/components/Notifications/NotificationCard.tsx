@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { memo } from 'react';
 import {
   FileCheck,
   AlertCircle,
@@ -55,7 +55,7 @@ function getNotificationColor(type: NotificationItem['type']) {
   }
 }
 
-export default function NotificationCard({
+const NotificationCard = memo(function NotificationCard({
   notification,
   isSelected,
   onToggleSelect,
@@ -171,7 +171,9 @@ export default function NotificationCard({
                   )}
                   {notification.metadata.wordsTranslated !== undefined && (
                     <span className="whitespace-nowrap">
-                      {notification.metadata.wordsTranslated.toLocaleString(locale)}{' '}
+                      {notification.metadata.wordsTranslated.toLocaleString(
+                        locale
+                      )}{' '}
                       {t('metadata.wordsTranslated')}
                     </span>
                   )}
@@ -215,4 +217,6 @@ export default function NotificationCard({
       </div>
     </div>
   );
-}
+});
+
+export default NotificationCard;

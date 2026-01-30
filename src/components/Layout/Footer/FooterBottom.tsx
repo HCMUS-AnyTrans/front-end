@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { ROUTES } from '@/config';
@@ -6,10 +6,14 @@ import { ROUTES } from '@/config';
 export default function FooterBottom() {
   const t = useTranslations('footer.bottom');
 
-  const legalLinks = [
-    { name: t('terms'), href: ROUTES.PUBLIC.TERMS },
-    { name: t('privacy'), href: ROUTES.PUBLIC.PRIVACY },
-  ];
+  // Memoize legalLinks to avoid recreation on every render
+  const legalLinks = useMemo(
+    () => [
+      { name: t('terms'), href: ROUTES.PUBLIC.TERMS },
+      { name: t('privacy'), href: ROUTES.PUBLIC.PRIVACY },
+    ],
+    [t]
+  );
 
   return (
     <>

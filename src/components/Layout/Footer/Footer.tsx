@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import {
   FooterLogo,
@@ -14,24 +14,32 @@ import { ROUTES } from '@/config';
 export default function Footer() {
   const t = useTranslations('footer');
 
-  const quickLinks = [
-    { name: t('quickLinks.home'), href: ROUTES.PUBLIC.HOME },
-    { name: t('quickLinks.features'), href: ROUTES.PUBLIC.FEATURES },
-    { name: t('quickLinks.pricing'), href: ROUTES.PUBLIC.PRICING },
-    { name: t('quickLinks.about'), href: ROUTES.PUBLIC.ABOUT },
-    { name: t('quickLinks.contact'), href: ROUTES.PUBLIC.CONTACT },
-  ];
+  // Memoize quickLinks to avoid recreation on every render
+  const quickLinks = useMemo(
+    () => [
+      { name: t('quickLinks.home'), href: ROUTES.PUBLIC.HOME },
+      { name: t('quickLinks.features'), href: ROUTES.PUBLIC.FEATURES },
+      { name: t('quickLinks.pricing'), href: ROUTES.PUBLIC.PRICING },
+      { name: t('quickLinks.about'), href: ROUTES.PUBLIC.ABOUT },
+      { name: t('quickLinks.contact'), href: ROUTES.PUBLIC.CONTACT },
+    ],
+    [t]
+  );
 
-  const services = [
-    {
-      name: t('services.documentTranslation'),
-      href: ROUTES.FEATURES.DOCUMENT_TRANSLATION,
-    },
-    {
-      name: t('services.subtitleTranslation'),
-      href: ROUTES.FEATURES.SUBTITLE_TRANSLATION,
-    },
-  ];
+  // Memoize services to avoid recreation on every render
+  const services = useMemo(
+    () => [
+      {
+        name: t('services.documentTranslation'),
+        href: ROUTES.FEATURES.DOCUMENT_TRANSLATION,
+      },
+      {
+        name: t('services.subtitleTranslation'),
+        href: ROUTES.FEATURES.SUBTITLE_TRANSLATION,
+      },
+    ],
+    [t]
+  );
 
   return (
     <footer className="relative overflow-hidden bg-gradient-to-br from-[#0F172A] via-[#1e293b] to-[#0F172A]">

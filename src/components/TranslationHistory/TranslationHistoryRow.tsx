@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import {
   FileText,
@@ -27,7 +27,7 @@ interface TranslationHistoryRowProps {
   onDelete: (id: string) => void;
 }
 
-export default function TranslationHistoryRow({
+const TranslationHistoryRow = memo(function TranslationHistoryRow({
   item,
   isSelected,
   onSelect,
@@ -40,8 +40,9 @@ export default function TranslationHistoryRow({
   const t = useTranslations('translationHistory.table');
   const locale = useLocale();
 
-  const getStatusConfig = (status: string): StatusConfig => {
-    switch (status) {
+  // Memoize status config
+  const statusConfig = useMemo((): StatusConfig => {
+    switch (item.status) {
       case 'completed':
         return {
           icon: CheckCircle2,
@@ -75,10 +76,11 @@ export default function TranslationHistoryRow({
           label: t('status.unknown'),
         };
     }
-  };
+  }, [item.status, t]);
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
+  // Memoize formatted date
+  const formattedDate = useMemo(() => {
+    const date = new Date(item.translatedAt);
     const now = new Date();
     const diffInHours = Math.floor(
       (now.getTime() - date.getTime()) / (1000 * 60 * 60)
@@ -92,9 +94,25 @@ export default function TranslationHistoryRow({
       day: 'numeric',
       year: 'numeric',
     });
-  };
+  }, [item.translatedAt, locale, t]);
 
-  const statusConfig = getStatusConfig(item.status);
+  // Memoize callbacks to prevent re-renders
+  const handleSelect = useCallback(() => {
+    onSelect(item.id);
+  }, [onSelect, item.id]);
+
+  const handleViewDetails = useCallback(() => {
+    onViewDetails(item.id);
+  }, [onViewDetails, item.id]);
+
+  const handleDownload = useCallback(() => {
+    onDownload(item.id);
+  }, [onDownload, item.id]);
+
+  const handleDelete = useCallback(() => {
+    onDelete(item.id);
+  }, [onDelete, item.id]);
+
   const StatusIcon = statusConfig.icon;
 
   return (
@@ -105,7 +123,7 @@ export default function TranslationHistoryRow({
           <input
             type="checkbox"
             checked={isSelected}
-            onChange={() => onSelect(item.id)}
+            onChange={handleSelect}
             className="w-4 h-4 mt-1 text-[#4169E1] bg-gray-100 border-gray-300 rounded focus:ring-[#4169E1] focus:ring-2"
           />
           <div className="flex-1 min-w-0">
@@ -151,9 +169,7 @@ export default function TranslationHistoryRow({
 
                 <div className="flex items-center gap-1.5 text-gray-600">
                   <Clock className="w-3.5 h-3.5 text-gray-400" />
-                  <span className="text-[10px]">
-                    {formatDate(item.translatedAt)}
-                  </span>
+                  <span className="text-[10px]">{formattedDate}</span>
                 </div>
               </div>
             </div>
@@ -170,21 +186,21 @@ export default function TranslationHistoryRow({
             {showActionMenu && (
               <div className="absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-10">
                 <button
-                  onClick={() => onViewDetails(item.id)}
+                  onClick={handleViewDetails}
                   className="w-full text-left px-3 py-2 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2 cursor-pointer"
                 >
                   <Eye className="w-3.5 h-3.5" />
                   {t('actions.viewDetails')}
                 </button>
                 <button
-                  onClick={() => onDownload(item.id)}
+                  onClick={handleDownload}
                   className="w-full text-left px-3 py-2 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2 cursor-pointer"
                 >
                   <Download className="w-3.5 h-3.5" />
                   {t('actions.download')}
                 </button>
                 <button
-                  onClick={() => onDelete(item.id)}
+                  onClick={handleDelete}
                   className="w-full text-left px-3 py-2 text-xs text-red-600 hover:bg-red-50 flex items-center gap-2 cursor-pointer"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -202,7 +218,7 @@ export default function TranslationHistoryRow({
           <input
             type="checkbox"
             checked={isSelected}
-            onChange={() => onSelect(item.id)}
+            onChange={handleSelect}
             className="w-4 h-4 text-[#4169E1] bg-gray-100 border-gray-300 rounded focus:ring-[#4169E1] focus:ring-2"
           />
           <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -247,7 +263,7 @@ export default function TranslationHistoryRow({
         <div className="col-span-2">
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <Clock className="w-4 h-4 text-gray-400" />
-            {formatDate(item.translatedAt)}
+            {formattedDate}
           </div>
         </div>
 
@@ -290,4 +306,6 @@ export default function TranslationHistoryRow({
       </div>
     </div>
   );
-}
+});
+
+export default TranslationHistoryRow;
