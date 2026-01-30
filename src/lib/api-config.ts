@@ -32,3 +32,25 @@ export const DASHBOARD_ENDPOINTS = {
   WEEKLY: '/dashboard/weekly',
   OVERVIEW: '/dashboard/overview',
 } as const;
+
+// Translation endpoints
+export const TRANSLATION_ENDPOINTS = {
+  // Document translation
+  DOCUMENT: {
+    UPLOAD: '/translation/document/upload',
+    TRANSLATE: '/translation/document/translate',
+    STATUS: '/translation/document/status',
+    DOWNLOAD: '/translation/document/download',
+  },
+  // Subtitle translation
+  SUBTITLE: {
+    UPLOAD: '/translation/subtitle/upload',
+    DETECT_CONTEXT: '/translation/subtitle/detect-context',
+    TRANSLATE: '/translation/subtitle/translate',
+    STATUS: '/translation/subtitle/status',
+    EXPORT: '/translation/subtitle/export',
+  },
+  // Common
+  LANGUAGES: '/translation/languages',
+  ESTIMATE: '/translation/estimate',
+} as const;
