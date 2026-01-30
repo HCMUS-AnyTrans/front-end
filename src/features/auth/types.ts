@@ -2,6 +2,11 @@
  * Authentication types and interfaces
  */
 
+import {
+  ApiError as ApiErrorClass,
+  AUTH_ERROR_CODES as ErrorCodes,
+} from '@/lib/errors';
+
 // ============================================================================
 // Core User Types
 // ============================================================================
@@ -21,6 +26,7 @@ export interface User {
 
 /**
  * Standard API error structure from backend
+ * @deprecated Use ApiErrorData from '@/lib/errors' instead
  */
 export interface ApiError {
   code: string;
@@ -123,44 +129,24 @@ export interface AuthActions {
 }
 
 // ============================================================================
-// Custom Error Class
+// Custom Error Class (Re-export for backward compatibility)
 // ============================================================================
 
 /**
  * Custom error class for API errors
- * Thrown when API response has success: false
+ * @deprecated Use ApiError from '@/lib/errors' instead
  */
-export class ApiErrorException extends Error {
-  code: string;
-  details?: unknown;
-
-  constructor(error: ApiError) {
-    super(error.message);
-    this.name = 'ApiErrorException';
-    this.code = error.code;
-    this.details = error.details;
-
-    // Maintain proper stack trace for where our error was thrown (only available on V8)
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, ApiErrorException);
-    }
-  }
-}
+export const ApiErrorException = ApiErrorClass;
+export type ApiErrorException = ApiErrorClass;
 
 // ============================================================================
-// Error Code Constants
+// Error Code Constants (Re-export for backward compatibility)
 // ============================================================================
 
-export const AUTH_ERROR_CODES = {
-  INVALID_CREDENTIALS: 'INVALID_CREDENTIALS',
-  EMAIL_ALREADY_EXISTS: 'EMAIL_ALREADY_EXISTS',
-  INVALID_TOKEN: 'INVALID_TOKEN',
-  TOKEN_EXPIRED: 'TOKEN_EXPIRED',
-  REFRESH_TOKEN_MISSING: 'REFRESH_TOKEN_MISSING',
-  REFRESH_TOKEN_INVALID: 'REFRESH_TOKEN_INVALID',
-  ACCOUNT_DISABLED: 'ACCOUNT_DISABLED',
-  ACCOUNT_LOCKED: 'ACCOUNT_LOCKED',
-} as const;
+/**
+ * @deprecated Use AUTH_ERROR_CODES from '@/lib/errors' instead
+ */
+export const AUTH_ERROR_CODES = ErrorCodes;
 
 export type AuthErrorCode =
   (typeof AUTH_ERROR_CODES)[keyof typeof AUTH_ERROR_CODES];

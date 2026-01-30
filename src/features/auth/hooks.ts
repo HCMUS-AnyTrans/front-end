@@ -6,6 +6,8 @@
 
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query';
 import { useRouter } from '@/i18n/routing';
+import { ApiError, getErrorMessage } from '@/lib/errors';
+import { ROUTES } from '@/config';
 import * as authApi from './api';
 import { useAuth } from './useAuth';
 import type {
@@ -17,7 +19,6 @@ import type {
   ForgotPasswordResponse,
   ValidateResetTokenResponse,
   ResetPasswordResponse,
-  ApiErrorException,
 } from './types';
 
 // ============================================================================
@@ -26,7 +27,7 @@ import type {
 
 export function useLoginMutation(
   options?: Omit<
-    UseMutationOptions<AuthResponse, ApiErrorException, LoginPayload>,
+    UseMutationOptions<AuthResponse, ApiError, LoginPayload>,
     'mutationFn' | 'onSuccess'
   > & {
     onSuccess?: (data: AuthResponse, variables: LoginPayload) => void;
@@ -46,8 +47,8 @@ export function useLoginMutation(
         options.onSuccess(data, variables);
       }
 
-      // Redirect to dashboard (or custom redirect)
-      router.push('/app/dashboard');
+      // Redirect to dashboard
+      router.push(ROUTES.APP.DASHBOARD);
     },
     ...options,
   });
@@ -59,7 +60,7 @@ export function useLoginMutation(
 
 export function useRegisterMutation(
   options?: Omit<
-    UseMutationOptions<AuthResponse, ApiErrorException, RegisterPayload>,
+    UseMutationOptions<AuthResponse, ApiError, RegisterPayload>,
     'mutationFn' | 'onSuccess'
   > & {
     onSuccess?: (data: AuthResponse, variables: RegisterPayload) => void;
@@ -79,8 +80,8 @@ export function useRegisterMutation(
         options.onSuccess(data, variables);
       }
 
-      // Redirect to dashboard (or custom redirect)
-      router.push('/app/dashboard');
+      // Redirect to dashboard
+      router.push(ROUTES.APP.DASHBOARD);
     },
     ...options,
   });
@@ -92,7 +93,7 @@ export function useRegisterMutation(
 
 export function useLogoutMutation(
   options?: Omit<
-    UseMutationOptions<void, ApiErrorException, void>,
+    UseMutationOptions<void, ApiError, void>,
     'mutationFn' | 'onSuccess'
   > & {
     onSuccess?: () => void;
@@ -112,7 +113,7 @@ export function useLogoutMutation(
       }
 
       // Redirect to homepage
-      router.push('/');
+      router.push(ROUTES.PUBLIC.HOME);
     },
     ...options,
   });
@@ -124,11 +125,7 @@ export function useLogoutMutation(
 
 export function useForgotPasswordMutation(
   options?: Omit<
-    UseMutationOptions<
-      ForgotPasswordResponse,
-      ApiErrorException,
-      ForgotPasswordPayload
-    >,
+    UseMutationOptions<ForgotPasswordResponse, ApiError, ForgotPasswordPayload>,
     'mutationFn'
   >
 ) {
@@ -144,7 +141,7 @@ export function useForgotPasswordMutation(
 
 export function useValidateResetTokenMutation(
   options?: Omit<
-    UseMutationOptions<ValidateResetTokenResponse, ApiErrorException, string>,
+    UseMutationOptions<ValidateResetTokenResponse, ApiError, string>,
     'mutationFn'
   >
 ) {
@@ -160,11 +157,7 @@ export function useValidateResetTokenMutation(
 
 export function useResetPasswordMutation(
   options?: Omit<
-    UseMutationOptions<
-      ResetPasswordResponse,
-      ApiErrorException,
-      ResetPasswordPayload
-    >,
+    UseMutationOptions<ResetPasswordResponse, ApiError, ResetPasswordPayload>,
     'mutationFn' | 'onSuccess'
   > & {
     onSuccess?: (
@@ -184,7 +177,7 @@ export function useResetPasswordMutation(
       }
 
       // Redirect to login with success message
-      router.push('/login?message=password_reset');
+      router.push(`${ROUTES.AUTH.LOGIN}?message=password_reset`);
     },
     ...options,
   });
@@ -196,24 +189,13 @@ export function useResetPasswordMutation(
 
 /**
  * Helper hook to get user-friendly error messages from API errors
+ * Now uses centralized error message system
  */
 export function useAuthErrorMessage() {
-  return (error: ApiErrorException | null): string | null => {
+  return (error: ApiError | null): string | null => {
     if (!error) return null;
 
-    // Map common error codes to user-friendly messages
-    const errorMessages: Record<string, string> = {
-      INVALID_CREDENTIALS: 'Invalid email or password',
-      EMAIL_ALREADY_EXISTS: 'An account with this email already exists',
-      INVALID_TOKEN: 'This reset link is invalid or has expired',
-      TOKEN_EXPIRED: 'This reset link has expired',
-      REFRESH_TOKEN_MISSING: 'Your session has expired. Please log in again',
-      REFRESH_TOKEN_INVALID: 'Your session is invalid. Please log in again',
-      ACCOUNT_DISABLED: 'Your account has been disabled',
-      ACCOUNT_LOCKED: 'Your account has been locked',
-      VALIDATION_ERROR: 'Please check your input and try again',
-    };
-
-    return errorMessages[error.code] || error.message || 'An error occurred';
+    // Use centralized error message getter
+    return getErrorMessage(error.code, error.message);
   };
 }

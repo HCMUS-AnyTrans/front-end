@@ -6,19 +6,40 @@
  * - Automatic token refresh on 401 for protected routes
  * - Credentials included for refresh token cookie support
  * - Type-safe responses
+ * - Integration with centralized error module
  */
 
 import { API_BASE_URL, AUTH_ENDPOINTS } from './api-config';
-import type {
-  ApiResponse,
-  ApiErrorException,
-  AuthResponse,
-} from '@/features/auth/types';
-import { ApiErrorException as ApiError } from '@/features/auth/types';
+import { ApiError, ERROR_CODES } from './errors';
 
 // ============================================================================
 // Types
 // ============================================================================
+
+/**
+ * Standard API response envelope from backend
+ */
+export interface ApiResponse<T> {
+  success: boolean;
+  data: T | null;
+  error: {
+    code: string;
+    message: string;
+    details?: unknown;
+  } | null;
+}
+
+/**
+ * Auth response structure
+ */
+interface AuthResponse {
+  user: {
+    id: string;
+    email: string;
+    fullName: string;
+  };
+  accessToken: string;
+}
 
 interface RequestOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
@@ -80,12 +101,12 @@ async function refreshAccessToken(): Promise<string> {
       const result: ApiResponse<AuthResponse> = await response.json();
 
       if (!result.success || !result.data) {
-        throw new ApiError(
-          result.error || {
-            code: 'REFRESH_FAILED',
-            message: 'Failed to refresh token',
-          }
-        );
+        throw new ApiError({
+          code: result.error?.code || ERROR_CODES.REFRESH_FAILED,
+          message: result.error?.message || 'Failed to refresh token',
+          details: result.error?.details,
+          statusCode: response.status,
+        });
       }
 
       // Update the access token in the store
@@ -99,7 +120,7 @@ async function refreshAccessToken(): Promise<string> {
       if (clearAuthFn) {
         clearAuthFn();
       }
-      throw error;
+      throw ApiError.fromError(error);
     } finally {
       isRefreshing = false;
       refreshPromise = null;
@@ -117,14 +138,14 @@ async function refreshAccessToken(): Promise<string> {
  * Parse and validate API response
  * Throws ApiError if success is false
  */
-function parseApiResponse<T>(response: ApiResponse<T>): T {
+function parseApiResponse<T>(response: ApiResponse<T>, statusCode?: number): T {
   if (!response.success || response.data === null) {
-    throw new ApiError(
-      response.error || {
-        code: 'UNKNOWN_ERROR',
-        message: 'An unknown error occurred',
-      }
-    );
+    throw new ApiError({
+      code: response.error?.code || ERROR_CODES.UNKNOWN_ERROR,
+      message: response.error?.message || 'An unknown error occurred',
+      details: response.error?.details,
+      statusCode,
+    });
   }
   return response.data;
 }
@@ -135,7 +156,7 @@ function parseApiResponse<T>(response: ApiResponse<T>): T {
  * @param endpoint - API endpoint (e.g., '/auth/login')
  * @param options - Request options
  * @returns Parsed response data
- * @throws ApiErrorException if request fails
+ * @throws ApiError if request fails
  */
 export async function apiClient<T>(
   endpoint: string,
@@ -176,33 +197,37 @@ export async function apiClient<T>(
 
   // Make the request
   const url = `${API_BASE_URL}${endpoint}`;
-  let response = await fetch(url, config);
 
-  // Handle 401 for protected routes - attempt token refresh
-  if (response.status === 401 && requiresAuth) {
-    try {
-      // Attempt to refresh the token
-      const newAccessToken = await refreshAccessToken();
+  try {
+    let response = await fetch(url, config);
 
-      // Retry the original request with the new token
-      headers['Authorization'] = `Bearer ${newAccessToken}`;
-      response = await fetch(url, {
-        ...config,
-        headers,
-      });
-    } catch (refreshError) {
-      // Refresh failed, redirect to login
-      // In a Next.js App Router, we'll handle this in the error boundary
-      // or the calling component
-      throw refreshError;
+    // Handle 401 for protected routes - attempt token refresh
+    if (response.status === 401 && requiresAuth) {
+      try {
+        // Attempt to refresh the token
+        const newAccessToken = await refreshAccessToken();
+
+        // Retry the original request with the new token
+        headers['Authorization'] = `Bearer ${newAccessToken}`;
+        response = await fetch(url, {
+          ...config,
+          headers,
+        });
+      } catch (refreshError) {
+        // Refresh failed, throw the error
+        throw refreshError;
+      }
     }
+
+    // Parse response
+    const result: ApiResponse<T> = await response.json();
+
+    // Return parsed data or throw error
+    return parseApiResponse(result, response.status);
+  } catch (error) {
+    // Convert any error to ApiError
+    throw ApiError.fromError(error);
   }
-
-  // Parse response
-  const result: ApiResponse<T> = await response.json();
-
-  // Return parsed data or throw error
-  return parseApiResponse(result);
 }
 
 // ============================================================================
@@ -225,3 +250,10 @@ export const api = {
   delete: <T>(endpoint: string, requiresAuth = false) =>
     apiClient<T>(endpoint, { method: 'DELETE', requiresAuth }),
 };
+
+// ============================================================================
+// Re-exports for convenience
+// ============================================================================
+
+export { ApiError, ERROR_CODES } from './errors';
+export type { ApiErrorData, ApiErrorOptions } from './errors';
