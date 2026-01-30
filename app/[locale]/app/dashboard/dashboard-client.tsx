@@ -37,7 +37,7 @@ export default function DashboardClient({
           {/* Quick Stats */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <QuickStats.StatCard
-              icon={<FileText className="w-6 h-6 text-[#4169E1]" />}
+              icon={<FileText className="w-6 h-6 text-brand-primary-light" />}
               iconWrapperClass="bg-blue-50"
               trend={<TrendingUp className="w-4 h-4" />}
               trendClass="text-green-600"

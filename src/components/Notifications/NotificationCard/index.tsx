@@ -8,6 +8,8 @@ import { NotificationIcon } from './NotificationIcon';
 import { NotificationActions } from './NotificationActions';
 import { NotificationMetadata } from './NotificationMetadata';
 import { useNotificationCardStyles } from './useNotificationCardStyles';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 
 type Props = {
   notification: NotificationItem;
@@ -38,11 +40,10 @@ const NotificationCard = memo(function NotificationCard({
     <div className={cardClassName}>
       <div className="p-3 sm:p-4 md:p-5">
         <div className="flex items-start gap-2 sm:gap-3 md:gap-4">
-          <input
-            type="checkbox"
+          <Checkbox
             checked={isSelected}
-            onChange={onToggleSelect}
-            className="mt-0.5 sm:mt-1 w-4 h-4 text-[#4169E1] border-gray-300 rounded focus:ring-[#4169E1]"
+            onCheckedChange={onToggleSelect}
+            className="mt-0.5 sm:mt-1 w-4 h-4 border-gray-300 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
           />
 
           <NotificationIcon type={notification.type} />
@@ -56,7 +57,7 @@ const NotificationCard = memo(function NotificationCard({
                   )}
                   <h3 className={titleClassName}>{notification.title}</h3>
                   {!notification.isRead && (
-                    <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#4169E1] rounded-full flex-shrink-0"></span>
+                    <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-primary rounded-full flex-shrink-0"></span>
                   )}
                 </div>
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
@@ -84,10 +85,13 @@ const NotificationCard = memo(function NotificationCard({
                 <span className="capitalize">{notification.category}</span>
               </div>
               {notification.category === 'translation' && (
-                <button className="text-[#4169E1] hover:text-[#1e3a8a] font-medium flex items-center gap-1 cursor-pointer whitespace-nowrap">
+                <Button
+                  variant="link"
+                  className="text-xs p-0 h-auto font-medium"
+                >
                   {t('viewDetails')}
                   <ChevronRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                </button>
+                </Button>
               )}
             </div>
           </div>

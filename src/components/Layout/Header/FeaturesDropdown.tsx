@@ -44,7 +44,7 @@ export default function FeaturesDropdown({
         onMouseDown={onMouseDown}
         className={`relative flex items-center gap-1.5 px-3 xl:px-5 py-2.5 rounded-lg font-medium text-sm xl:text-[15px] transition-all duration-300 cursor-pointer ${
           isActive
-            ? 'text-[#4169E1]'
+            ? 'text-brand-primary-light'
             : 'text-gray-600 hover:text-gray-900 hover:bg-gray-500/10'
         }`}
         aria-current={isActive ? 'page' : undefined}
@@ -81,7 +81,7 @@ export default function FeaturesDropdown({
                 pathname === feature.href ? 'bg-blue-50' : 'hover:bg-blue-50'
               }`}
             >
-              <span className="font-semibold text-[15px] text-gray-900 group-hover:text-[#4169E1] transition-colors">
+              <span className="font-semibold text-[15px] text-gray-900 group-hover:text-brand-primary-light transition-colors">
                 {feature.title}
               </span>
               <span className="text-sm text-gray-500 mt-0.5">

@@ -20,7 +20,7 @@ const buttonVariants = cva(
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
         gradient:
-          'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:from-gray-400 disabled:to-gray-500 text-white shadow-lg rounded-xl font-semibold',
+          'bg-gradient-to-r from-gradient-from to-gradient-to hover:from-gradient-to hover:to-gradient-from disabled:from-gray-400 disabled:to-gray-500 text-white shadow-lg rounded-xl font-semibold',
         'gradient-primary':
           'bg-gradient-to-r from-gradient-from via-gradient-to to-gradient-from text-primary-foreground rounded-xl font-semibold hover:shadow-xl bg-[length:200%_100%] bg-[position:0%_0%] hover:bg-[position:100%_0%] transition-[background-position,box-shadow] duration-700 ease-in-out',
         'outline-gradient':

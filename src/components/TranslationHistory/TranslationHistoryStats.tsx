@@ -44,7 +44,7 @@ export default function TranslationHistoryStats({
         <p className="text-xs sm:text-sm text-gray-600 mb-1">
           {t('creditsUsed')}
         </p>
-        <p className="text-xl sm:text-2xl font-bold text-[#4169E1]">
+        <p className="text-xl sm:text-2xl font-bold text-brand-primary-light">
           {stats.totalCredits}
         </p>
       </div>

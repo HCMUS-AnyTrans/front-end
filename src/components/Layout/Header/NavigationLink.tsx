@@ -19,7 +19,7 @@ export default function NavigationLink({
       href={href}
       className={`relative px-3 xl:px-5 py-2.5 rounded-lg text-sm xl:text-[15px] transition-all duration-300 ${
         isActive
-          ? 'text-[#4169E1]'
+          ? 'text-brand-primary-light'
           : 'text-gray-600 hover:text-gray-900 hover:bg-gray-500/10'
       }`}
       aria-current={isActive ? 'page' : undefined}

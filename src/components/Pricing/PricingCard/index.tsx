@@ -39,7 +39,7 @@ const PricingCard = memo(function PricingCard({
       className={`group ${cardBg} rounded-3xl w-full p-8 flex flex-col relative border-2 transition-all duration-300 ease-out will-change-transform ${
         isHighlighted
           ? 'border-transparent shadow-2xl hover:border-yellow-400/50 hover:shadow-[0_0_40px_rgba(250,204,21,0.4)] hover:scale-[1.02] hover:-translate-y-2'
-          : 'border-border shadow-lg hover:border-[#4169E1]/50 hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-2'
+          : 'border-border shadow-lg hover:border-brand-primary-light/50 hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-2'
       }`}
       style={{
         height: isHighlighted ? '700px' : '660px',

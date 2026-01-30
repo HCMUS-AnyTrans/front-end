@@ -63,7 +63,7 @@ export default function FeatureDetailSection({
           {/* Badge (for default variant) */}
           {variant === 'default' && (
             <div className="inline-block">
-              <span className="text-sm font-bold uppercase tracking-wider text-[#4169E1] bg-blue-50 px-4 py-2 rounded-full">
+              <span className="text-sm font-bold uppercase tracking-wider text-brand-primary-light bg-blue-50 px-4 py-2 rounded-full">
                 Feature
               </span>
             </div>

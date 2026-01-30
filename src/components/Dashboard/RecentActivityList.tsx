@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   XCircle,
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import type { RecentActivityItem } from '@/features/dashboard';
 
 type RecentActivityListProps = {
@@ -24,9 +25,9 @@ export default function RecentActivityList({ items }: RecentActivityListProps) {
       <div className="px-4 py-3 sm:px-6 sm:py-4 border-b border-gray-200">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-bold text-gray-900">{t('title')}</h3>
-          <button className="text-sm text-[#4169E1] hover:text-[#1e3a8a] font-medium cursor-pointer">
+          <Button variant="link" className="text-sm p-0 h-auto">
             {t('viewAll')}
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -37,8 +38,8 @@ export default function RecentActivityList({ items }: RecentActivityListProps) {
             className="px-4 py-3 sm:px-6 sm:py-4 hover:bg-gray-50 transition-colors"
           >
             <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
-              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                <FileText className="w-5 h-5 text-[#4169E1]" />
+              <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <FileText className="w-5 h-5 text-primary" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-gray-900 truncate mb-1">
@@ -76,9 +77,9 @@ export default function RecentActivityList({ items }: RecentActivityListProps) {
                     </span>
                   </div>
                 ) : (
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-full">
-                    <Clock className="w-3.5 h-3.5 text-[#4169E1]" />
-                    <span className="text-xs font-medium text-[#4169E1]">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 border border-primary/20 rounded-full">
+                    <Clock className="w-3.5 h-3.5 text-primary" />
+                    <span className="text-xs font-medium text-primary">
                       {t('status.processing')}
                     </span>
                   </div>

@@ -45,7 +45,7 @@ export default function StepHeader({
                         isCompleted
                           ? 'bg-green-100 text-green-700'
                           : isActive
-                            ? 'bg-[#4169E1] text-white'
+                            ? 'bg-brand-primary-light text-white'
                             : 'bg-gray-100 text-gray-400'
                       }`}
                     >

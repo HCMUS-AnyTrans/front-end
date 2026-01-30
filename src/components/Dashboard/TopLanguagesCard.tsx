@@ -39,7 +39,7 @@ export default function TopLanguagesCard({
               <div
                 className={`h-full rounded-full transition-all ${
                   index === 0
-                    ? 'bg-[#4169E1]'
+                    ? 'bg-brand-primary-light'
                     : index === 1
                       ? 'bg-purple-500'
                       : index === 2

@@ -57,11 +57,11 @@ export function AuthShell({
               variant="ghost"
               size="sm"
               asChild
-              className="hover:bg-[#4169E1]/10 transition-all duration-300"
+              className="hover:bg-brand-primary-light/10 transition-all duration-300"
             >
               <Link
                 href={backHref}
-                className="text-muted-foreground hover:text-[#4169E1]"
+                className="text-muted-foreground hover:text-brand-primary-light"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 {backText}

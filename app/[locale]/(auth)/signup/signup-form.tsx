@@ -177,7 +177,7 @@ export function SignupForm() {
                         termsLink: (chunks) => (
                           <Link
                             href="/terms"
-                            className="text-[#4169E1] hover:text-[#1e3a8a] font-medium transition-colors duration-300"
+                            className="text-brand-primary-light hover:text-brand-primary-dark font-medium transition-colors duration-300"
                             rel="noopener noreferrer"
                             target="_blank"
                           >
@@ -187,7 +187,7 @@ export function SignupForm() {
                         privacyLink: (chunks) => (
                           <Link
                             href="/privacy"
-                            className="text-[#4169E1] hover:text-[#1e3a8a] font-medium transition-colors duration-300"
+                            className="text-brand-primary-light hover:text-brand-primary-dark font-medium transition-colors duration-300"
                             rel="noopener noreferrer"
                             target="_blank"
                           >
@@ -219,7 +219,7 @@ export function SignupForm() {
           {t('haveAccount')}{' '}
           <Link
             href="/login"
-            className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300"
+            className="font-semibold text-brand-primary-light hover:text-brand-primary-dark transition-colors duration-300"
           >
             {t('signIn')}
           </Link>

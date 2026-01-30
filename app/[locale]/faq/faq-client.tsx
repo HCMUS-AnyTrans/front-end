@@ -132,7 +132,7 @@ export default function FAQClient() {
                         onClick={() => setSelectedCategory(category.id)}
                         className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap transition-all cursor-pointer ${
                           selectedCategory === category.id
-                            ? 'bg-[#4169E1] text-white shadow-md'
+                            ? 'bg-brand-primary-light text-white shadow-md'
                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                         }`}
                       >

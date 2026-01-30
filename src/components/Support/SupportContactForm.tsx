@@ -64,7 +64,7 @@ export default function SupportContactForm({
             onChange={(e) => handleInputChange('name', e.target.value)}
             placeholder={t('fields.name.placeholder')}
             required
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
           />
         </div>
 
@@ -78,7 +78,7 @@ export default function SupportContactForm({
             onChange={(e) => handleInputChange('email', e.target.value)}
             placeholder={t('fields.email.placeholder')}
             required
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
+            className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
           />
         </div>
       </div>
@@ -93,7 +93,7 @@ export default function SupportContactForm({
           onChange={(e) => handleInputChange('subject', e.target.value)}
           placeholder={t('fields.subject.placeholder')}
           required
-          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
+          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
         />
       </div>
 
@@ -107,7 +107,7 @@ export default function SupportContactForm({
           placeholder={t('fields.message.placeholder')}
           required
           rows={6}
-          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4169E1] focus:border-transparent resize-none"
+          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
         />
       </div>
     </BaseForm>

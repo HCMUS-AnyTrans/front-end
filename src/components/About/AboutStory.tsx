@@ -36,8 +36,8 @@ export default function AboutStory({ mission, vision }: AboutStoryProps) {
               : 'opacity-0 -translate-x-12'
           }`}
         >
-          <div className="w-14 h-14 bg-[#4169E1]/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#4169E1]/20 group-hover:scale-110 transition-all duration-300">
-            <MissionIcon className="w-7 h-7 text-[#4169E1]" />
+          <div className="w-14 h-14 bg-brand-primary-light/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-brand-primary-light/20 group-hover:scale-110 transition-all duration-300">
+            <MissionIcon className="w-7 h-7 text-brand-primary-light" />
           </div>
           <h3 className="text-xl font-bold text-gray-900 mb-3">
             {mission.title}

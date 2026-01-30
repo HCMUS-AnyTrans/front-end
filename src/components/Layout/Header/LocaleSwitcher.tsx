@@ -70,21 +70,21 @@ export default function LocaleSwitcher() {
               disabled={isPending}
               className={`cursor-pointer w-full flex items-center gap-3 px-4 py-2 rounded-lg transition-colors duration-200 text-left group ${
                 locale === loc.code
-                  ? 'bg-blue-50 text-[#4169E1]'
+                  ? 'bg-blue-50 text-brand-primary-light'
                   : 'hover:bg-blue-50  text-gray-700'
               }`}
             >
               <span
                 className={`font-semibold text-[15px] transition-colors ${
                   locale === loc.code
-                    ? 'text-[#4169E1]'
-                    : 'text-gray-900 group-hover:text-[#4169E1]'
+                    ? 'text-brand-primary-light'
+                    : 'text-gray-900 group-hover:text-brand-primary-light'
                 }`}
               >
                 {t(loc.code)}
               </span>
               {locale === loc.code && (
-                <span className="ml-auto text-[#4169E1] font-bold">✓</span>
+                <span className="ml-auto text-brand-primary-light font-bold">✓</span>
               )}
             </button>
           ))}

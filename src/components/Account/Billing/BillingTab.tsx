@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
+import { Button } from '@/components/ui/button';
 
 export default function BillingTab() {
   const t = useTranslations('common.billing.billingTab');
@@ -36,7 +37,7 @@ export default function BillingTab() {
             </label>
             <div className="bg-gray-50 rounded-lg p-4">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
+                <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
                   <span className="text-white text-sm font-bold">V</span>
                 </div>
                 <div>
@@ -50,12 +51,8 @@ export default function BillingTab() {
           </div>
 
           <div className="flex gap-3">
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors cursor-pointer">
-              {t('updatePaymentMethod')}
-            </button>
-            <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors cursor-pointer">
-              {t('viewBillingHistory')}
-            </button>
+            <Button variant="default">{t('updatePaymentMethod')}</Button>
+            <Button variant="secondary">{t('viewBillingHistory')}</Button>
           </div>
         </div>
       </div>

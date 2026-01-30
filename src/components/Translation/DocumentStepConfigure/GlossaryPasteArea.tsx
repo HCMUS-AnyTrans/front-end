@@ -25,7 +25,7 @@ export function GlossaryPasteArea({
         rows={8}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:ring-2 focus:ring-[#4169E1] focus:border-transparent"
+        className="w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:ring-2 focus:ring-primary focus:border-transparent"
       />
       {value && (
         <div className="mt-2 flex items-center justify-between text-sm">

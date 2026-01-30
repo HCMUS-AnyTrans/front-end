@@ -24,7 +24,7 @@ export default function PromoBanner({ variant }: PromoBannerProps) {
       className:
         'bg-gradient-to-br from-[#4169E1] to-[#1e3a8a] rounded-2xl p-6 text-white',
       buttonClassName:
-        'w-full inline-flex items-center justify-center bg-white hover:bg-gray-100 text-[#4169E1] px-4 py-2.5 rounded-xl font-semibold transition-all',
+        'w-full inline-flex items-center justify-center bg-white hover:bg-gray-100 text-brand-primary-light px-4 py-2.5 rounded-xl font-semibold transition-all',
       descriptionClassName: 'text-sm text-blue-100 mb-4',
     },
     referral: {
@@ -36,7 +36,7 @@ export default function PromoBanner({ variant }: PromoBannerProps) {
       icon: ArrowUpRight,
       className: 'bg-white rounded-2xl border border-gray-200 p-6',
       buttonClassName:
-        'w-full inline-flex items-center justify-center border-2 border-gray-200 hover:border-[#4169E1] hover:bg-blue-50 text-gray-700 hover:text-[#4169E1] px-4 py-2.5 rounded-xl font-semibold transition-all',
+        'w-full inline-flex items-center justify-center border-2 border-gray-200 hover:border-brand-primary-light hover:bg-blue-50 text-gray-700 hover:text-brand-primary-light px-4 py-2.5 rounded-xl font-semibold transition-all',
       descriptionClassName: 'text-sm text-gray-600 mb-4',
     },
   };

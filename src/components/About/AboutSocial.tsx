@@ -33,7 +33,7 @@ export default function AboutSocial({ socialLinks }: AboutSocialProps) {
             return (
               <button
                 key={link.name}
-                className={`flex items-center gap-3 bg-gray-50 hover:bg-[#4169E1]/10 border border-gray-200 hover:border-[#4169E1]/30 px-6 py-3 rounded-xl font-medium text-gray-700 hover:text-[#4169E1] transition-all duration-300 hover:scale-110 hover:shadow-lg cursor-pointer group ${
+                className={`flex items-center gap-3 bg-gray-50 hover:bg-brand-primary-light/10 border border-gray-200 hover:border-brand-primary-light/30 px-6 py-3 rounded-xl font-medium text-gray-700 hover:text-brand-primary-light transition-all duration-300 hover:scale-110 hover:shadow-lg cursor-pointer group ${
                   isVisible
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-8'

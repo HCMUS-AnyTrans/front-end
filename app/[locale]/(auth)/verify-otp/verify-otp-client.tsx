@@ -127,7 +127,7 @@ export function VerifyOtpClient({
               type="button"
               onClick={handleResendCode}
               disabled={resendCooldown > 0 || isResending}
-              className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="font-semibold text-brand-primary-light hover:text-brand-primary-dark transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {resendCooldown > 0
                 ? t('resendIn', { seconds: resendCooldown })

@@ -1,5 +1,8 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 interface UserData {
   fullName: string;
@@ -24,51 +27,47 @@ export default function ProfileTab({ userData }: ProfileTabProps) {
           {t('title')}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              {t('fullName')}
-            </label>
-            <input
+          <div className="space-y-2">
+            <Label htmlFor="fullName">{t('fullName')}</Label>
+            <Input
+              id="fullName"
               type="text"
-              value={userData.fullName}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              defaultValue={userData.fullName}
+              className="focus-visible:ring-primary"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              {t('emailAddress')}
-            </label>
-            <input
+          <div className="space-y-2">
+            <Label htmlFor="email">{t('emailAddress')}</Label>
+            <Input
+              id="email"
               type="email"
-              value={userData.email}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              defaultValue={userData.email}
+              className="focus-visible:ring-primary"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              {t('phoneNumber')}
-            </label>
-            <input
+          <div className="space-y-2">
+            <Label htmlFor="phone">{t('phoneNumber')}</Label>
+            <Input
+              id="phone"
               type="tel"
-              value={userData.phone}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              defaultValue={userData.phone}
+              className="focus-visible:ring-primary"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              {t('company')}
-            </label>
-            <input
+          <div className="space-y-2">
+            <Label htmlFor="company">{t('company')}</Label>
+            <Input
+              id="company"
               type="text"
-              value={userData.company}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              defaultValue={userData.company}
+              className="focus-visible:ring-primary"
             />
           </div>
         </div>
         <div className="mt-6">
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors cursor-pointer">
+          <Button variant="default" size="lg">
             {tActions('saveChanges')}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

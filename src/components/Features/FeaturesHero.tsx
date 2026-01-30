@@ -23,7 +23,7 @@ const FeaturesHero = memo(function FeaturesHero() {
         {/* Main Content */}
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-block mb-6 animate-fade-in-scale">
-            <span className="text-sm font-bold tracking-wider uppercase text-[#4169E1]">
+            <span className="text-sm font-bold tracking-wider uppercase text-brand-primary-light">
               {t('badge')}
             </span>
           </div>
@@ -31,7 +31,7 @@ const FeaturesHero = memo(function FeaturesHero() {
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight animate-fade-in-up">
             {t('title.part1')}
             <br />
-            <span className="text-[#4169E1]">{t('title.highlight')}</span>
+            <span className="text-brand-primary-light">{t('title.highlight')}</span>
           </h1>
 
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-12 animate-fade-in-up-delay-300">
@@ -45,7 +45,7 @@ const FeaturesHero = memo(function FeaturesHero() {
               return (
                 <div key={index} className="text-center">
                   <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-50 rounded-xl mb-3">
-                    <Icon className="w-6 h-6 text-[#4169E1]" />
+                    <Icon className="w-6 h-6 text-brand-primary-light" />
                   </div>
                   <div className="text-3xl font-bold text-gray-900 mb-1">
                     {stat.value}

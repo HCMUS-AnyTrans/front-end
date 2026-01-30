@@ -22,7 +22,7 @@ export default function BenefitGrid({
         return (
           <div key={idx} className="text-center">
             <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-50 rounded-xl mb-2">
-              <Icon className="w-6 h-6 text-[#4169E1]" />
+              <Icon className="w-6 h-6 text-brand-primary-light" />
             </div>
             <p className="text-xs font-semibold text-gray-700">
               {benefit.text}

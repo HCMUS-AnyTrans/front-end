@@ -62,7 +62,7 @@ export default function WeeklyActivityChart({
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2 text-sm">
             <div className="flex items-center gap-1">
-              <div className="w-3 h-3 bg-[#4169E1] rounded-full"></div>
+              <div className="w-3 h-3 bg-brand-primary-light rounded-full"></div>
               <span className="text-gray-600">
                 {weeklyFilter === 'subtitle'
                   ? t('legend.subtitles')
@@ -81,7 +81,7 @@ export default function WeeklyActivityChart({
               }
               className={`px-3 py-1.5 rounded-lg border text-sm font-medium cursor-pointer ${
                 weeklyFilter === 'document'
-                  ? 'bg-[#4169E1] text-white border-[#4169E1]'
+                  ? 'bg-brand-primary-light text-white border-brand-primary-light'
                   : 'border-gray-300 text-gray-700 hover:bg-gray-50'
               }`}
             >
@@ -95,7 +95,7 @@ export default function WeeklyActivityChart({
               }
               className={`px-3 py-1.5 rounded-lg border text-sm font-medium cursor-pointer ${
                 weeklyFilter === 'subtitle'
-                  ? 'bg-[#4169E1] text-white border-[#4169E1]'
+                  ? 'bg-brand-primary-light text-white border-brand-primary-light'
                   : 'border-gray-300 text-gray-700 hover:bg-gray-50'
               }`}
             >

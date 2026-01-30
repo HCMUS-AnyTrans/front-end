@@ -23,7 +23,7 @@ export function DocumentInfoCard({ fileName, onBack }: DocumentInfoCardProps) {
             onClick={onBack}
             variant="ghost"
             size="sm"
-            className="text-sm text-[#4169E1] hover:text-[#1e3a8a] font-medium"
+            className="text-sm text-[#4169E1] hover:text-brand-primary-dark font-medium"
           >
             <ArrowLeft className="w-4 h-4" />
             {t('changeFile')}

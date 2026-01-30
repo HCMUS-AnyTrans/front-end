@@ -108,7 +108,7 @@ export function ForgotPasswordClient() {
         {t('rememberPassword')}{' '}
         <Link
           href="/login"
-          className="font-semibold text-[#4169E1] hover:text-[#1e3a8a] transition-colors duration-300"
+          className="font-semibold text-brand-primary-light hover:text-brand-primary-dark transition-colors duration-300"
         >
           {t('signIn')}
         </Link>

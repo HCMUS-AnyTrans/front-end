@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
+import { Button } from '@/components/ui/button';
 
 type ProfileSaveBarProps = {
   onCancel: () => void;
@@ -16,18 +17,12 @@ export default function ProfileSaveBar({
 
   return (
     <div className="flex flex-col sm:flex-row justify-end gap-3">
-      <button
-        onClick={onCancel}
-        className="w-full sm:w-auto px-6 py-2.5 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all cursor-pointer"
-      >
+      <Button variant="outline" onClick={onCancel} className="w-full sm:w-auto">
         {t('cancel')}
-      </button>
-      <button
-        onClick={onSave}
-        className="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-sm font-semibold shadow-lg transition-all cursor-pointer"
-      >
+      </Button>
+      <Button variant="gradient" onClick={onSave} className="w-full sm:w-auto">
         {t('saveChanges')}
-      </button>
+      </Button>
     </div>
   );
 }

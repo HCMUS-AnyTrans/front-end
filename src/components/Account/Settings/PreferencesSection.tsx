@@ -130,7 +130,7 @@ export default function PreferencesSection({
         checked: preferences.emailNotifications,
         onChange: (checked: boolean) =>
           onChange({ emailNotifications: checked }),
-        icon: <Bell className="w-5 h-5 text-blue-600" />,
+        icon: <Bell className="w-5 h-5 text-primary" />,
       },
       {
         key: 'pushNotifications',

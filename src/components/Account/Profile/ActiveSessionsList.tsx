@@ -31,7 +31,7 @@ export default function ActiveSessionsList({
           >
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 shrink-0 bg-blue-50 rounded-lg flex items-center justify-center">
-                <Smartphone className="w-6 h-6 text-blue-600" />
+                <Smartphone className="w-6 h-6 text-primary" />
               </div>
               <div>
                 <div className="flex items-center gap-2 flex-wrap">

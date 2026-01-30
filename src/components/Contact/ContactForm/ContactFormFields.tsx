@@ -47,7 +47,7 @@ export function ContactFormFields({
           onChange={onChange}
           required
           placeholder={t('fields.name.placeholder')}
-          className="h-11 px-4 focus-visible:ring-[#4169E1]"
+          className="h-11 px-4 focus-visible:ring-primary"
         />
       </div>
 
@@ -62,7 +62,7 @@ export function ContactFormFields({
           onChange={onChange}
           required
           placeholder={t('fields.email.placeholder')}
-          className="h-11 px-4 focus-visible:ring-[#4169E1]"
+          className="h-11 px-4 focus-visible:ring-primary"
         />
       </div>
 
@@ -75,7 +75,7 @@ export function ContactFormFields({
           onValueChange={onSubjectChange}
           required
         >
-          <SelectTrigger className="w-full h-16 px-4 py-5 focus:ring-[#4169E1]">
+          <SelectTrigger className="w-full h-16 px-4 py-5 focus:ring-primary">
             <SelectValue placeholder={t('fields.subject.placeholder')} />
           </SelectTrigger>
           <SelectContent>
@@ -110,7 +110,7 @@ export function ContactFormFields({
           required
           rows={10}
           placeholder={t('fields.message.placeholder')}
-          className="px-4 py-3 focus-visible:ring-[#4169E1]"
+          className="px-4 py-3 focus-visible:ring-primary"
         />
       </div>
 

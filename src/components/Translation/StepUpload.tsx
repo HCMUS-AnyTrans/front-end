@@ -83,7 +83,7 @@ export default function StepUpload({ variant, onUpload }: StepUploadProps) {
             <p className="text-gray-600">{t('description')}</p>
           </div>
 
-          <div className="border-2 border-dashed border-gray-300 hover:border-[#4169E1] rounded-xl p-12 text-center transition-all cursor-pointer bg-gray-50 hover:bg-blue-50">
+          <div className="border-2 border-dashed border-gray-300 hover:border-brand-primary-light rounded-xl p-12 text-center transition-all cursor-pointer bg-gray-50 hover:bg-blue-50">
             <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
             <Button
               onClick={onUpload}

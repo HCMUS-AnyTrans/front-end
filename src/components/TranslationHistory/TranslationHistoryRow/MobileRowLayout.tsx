@@ -52,12 +52,12 @@ export function MobileRowLayout({
           type="checkbox"
           checked={isSelected}
           onChange={handleSelect}
-          className="w-4 h-4 mt-1 text-[#4169E1] bg-gray-100 border-gray-300 rounded focus:ring-[#4169E1] focus:ring-2"
+          className="w-4 h-4 mt-1 text-brand-primary-light bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2"
         />
         <div className="flex-1 min-w-0">
           <div className="flex items-start gap-2 mb-2">
             <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
-              <FileText className="w-4 h-4 text-[#4169E1]" />
+              <FileText className="w-4 h-4 text-brand-primary-light" />
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-semibold text-sm text-gray-900 truncate">

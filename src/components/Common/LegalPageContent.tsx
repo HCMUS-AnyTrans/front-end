@@ -45,7 +45,7 @@ export default function LegalPageContent({ namespace }: LegalPageContentProps) {
                 <strong className="font-semibold text-gray-900" {...props} />
               ),
               a: ({ ...props }) => (
-                <a className="text-blue-600 hover:text-blue-700 hover:underline" {...props} />
+                <a className="text-primary hover:text-blue-700 hover:underline" {...props} />
               ),
               blockquote: ({ ...props }) => (
                 <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-700 my-4" {...props} />

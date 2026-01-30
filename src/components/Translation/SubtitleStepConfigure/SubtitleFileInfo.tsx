@@ -36,7 +36,7 @@ export function SubtitleFileInfo({
         </Button>
       </div>
       <div className="flex items-start gap-4 p-4 bg-blue-50 rounded-xl border border-blue-100">
-        <div className="w-12 h-12 bg-[#4169E1] rounded-lg flex items-center justify-center flex-shrink-0">
+        <div className="w-12 h-12 bg-brand-primary-light rounded-lg flex items-center justify-center flex-shrink-0">
           <FileVideo className="w-6 h-6 text-white" />
         </div>
         <div className="flex-1 min-w-0">

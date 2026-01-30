@@ -52,7 +52,7 @@ export default function AddCardDialog({
               placeholder={t('cardNumberPlaceholder')}
               value={cardNumber}
               onChange={(e) => setCardNumber(e.target.value)}
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
 
@@ -64,7 +64,7 @@ export default function AddCardDialog({
               <select
                 value={month}
                 onChange={(e) => setMonth(e.target.value)}
-                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">MM</option>
                 {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
@@ -81,7 +81,7 @@ export default function AddCardDialog({
               <select
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
-                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">YYYY</option>
                 {Array.from({ length: 10 }, (_, i) => 2025 + i).map((y) => (
@@ -101,7 +101,7 @@ export default function AddCardDialog({
                 maxLength={3}
                 value={cvc}
                 onChange={(e) => setCvc(e.target.value)}
-                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function AddCardDialog({
               placeholder={t('cardholderPlaceholder')}
               value={cardholder}
               onChange={(e) => setCardholder(e.target.value)}
-              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
 

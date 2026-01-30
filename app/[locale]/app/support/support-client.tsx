@@ -99,7 +99,7 @@ export default function SupportClient() {
       icon: CheckCircle,
       bgGradient: 'bg-gradient-to-br from-blue-50 to-indigo-50',
       borderColor: 'border-blue-100',
-      iconBg: 'bg-blue-600',
+      iconBg: 'bg-primary',
       textColor: 'text-blue-600',
       hoverTextColor: 'text-blue-700',
       actionText: t('additionalResources.statusPage.action'),

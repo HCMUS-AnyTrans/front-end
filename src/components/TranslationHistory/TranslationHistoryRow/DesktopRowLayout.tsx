@@ -52,10 +52,10 @@ export function DesktopRowLayout({
           type="checkbox"
           checked={isSelected}
           onChange={handleSelect}
-          className="w-4 h-4 text-[#4169E1] bg-gray-100 border-gray-300 rounded focus:ring-[#4169E1] focus:ring-2"
+          className="w-4 h-4 text-brand-primary-light bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2"
         />
         <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
-          <FileText className="w-5 h-5 text-[#4169E1]" />
+          <FileText className="w-5 h-5 text-brand-primary-light" />
         </div>
         <div className="flex-1 min-w-0">
           <p className="font-semibold text-gray-900 truncate mb-1">

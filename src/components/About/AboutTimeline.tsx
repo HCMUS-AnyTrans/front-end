@@ -50,7 +50,7 @@ export default function AboutTimeline({ milestones }: AboutTimelineProps) {
             >
               {/* Mobile timeline dot */}
               <div className="lg:hidden relative flex-shrink-0">
-                <div className="w-4 h-4 bg-[#4169E1] rounded-full border-4 border-gray-50 animate-pulse"></div>
+                <div className="w-4 h-4 bg-brand-primary-light rounded-full border-4 border-gray-50 animate-pulse"></div>
               </div>
 
               <div
@@ -58,8 +58,8 @@ export default function AboutTimeline({ milestones }: AboutTimelineProps) {
               >
                 <div className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6 hover:shadow-2xl hover:scale-105 transition-all duration-300 inline-block w-full lg:w-auto cursor-pointer shadow-lg">
                   <div className="flex items-center gap-3 mb-3">
-                    <Calendar className="w-5 h-5 text-[#4169E1]" />
-                    <span className="text-xl sm:text-2xl font-bold text-[#4169E1]">
+                    <Calendar className="w-5 h-5 text-brand-primary-light" />
+                    <span className="text-xl sm:text-2xl font-bold text-brand-primary-light">
                       {milestone.year}
                     </span>
                   </div>
@@ -74,7 +74,7 @@ export default function AboutTimeline({ milestones }: AboutTimelineProps) {
 
               {/* Desktop timeline dot */}
               <div className="hidden lg:block relative">
-                <div className="w-4 h-4 bg-[#4169E1] rounded-full border-4 border-gray-50 animate-pulse"></div>
+                <div className="w-4 h-4 bg-brand-primary-light rounded-full border-4 border-gray-50 animate-pulse"></div>
               </div>
 
               <div className="flex-1 hidden lg:block"></div>

@@ -49,14 +49,14 @@ export function MobileMenuNav({
           href={item.href}
           className={`flex items-center justify-between px-4 py-3 rounded-xl font-semibold transition-all duration-300 ${
             isActive(item.href)
-              ? 'bg-gradient-to-r from-blue-50 to-indigo-50 text-[#4169E1] shadow-sm'
+              ? 'bg-gradient-to-r from-blue-50 to-indigo-50 text-brand-primary-light shadow-sm'
               : 'text-gray-700 hover:bg-gray-50 active:scale-98'
           }`}
           onClick={onClose}
         >
           <span>{item.label}</span>
           <div
-            className={`w-2 h-2 bg-[#4169E1] rounded-full transition-all duration-300 ${
+            className={`w-2 h-2 bg-brand-primary-light rounded-full transition-all duration-300 ${
               isActive(item.href)
                 ? 'opacity-100 scale-100'
                 : 'opacity-0 scale-0'
@@ -102,7 +102,7 @@ export function MobileFeaturesSection({
         onClick={onToggle}
         className={`w-full flex items-center justify-between px-4 py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer ${
           isActive('/features')
-            ? 'bg-gradient-to-r from-blue-50 to-indigo-50 text-[#4169E1] shadow-sm'
+            ? 'bg-gradient-to-r from-blue-50 to-indigo-50 text-brand-primary-light shadow-sm'
             : 'text-gray-700 hover:bg-gray-50 active:scale-98'
         }`}
       >
@@ -125,14 +125,14 @@ export function MobileFeaturesSection({
             href={item.href}
             className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-all duration-300 ${
               pathname === item.href
-                ? 'bg-blue-50 text-[#4169E1] font-semibold'
+                ? 'bg-blue-50 text-brand-primary-light font-semibold'
                 : 'text-gray-600 hover:bg-gray-50 active:scale-98'
             }`}
             onClick={onClose}
           >
             <div
               className={`w-1.5 h-1.5 rounded-full ${
-                pathname === item.href ? 'bg-[#4169E1]' : 'bg-gray-400'
+                pathname === item.href ? 'bg-brand-primary-light' : 'bg-gray-400'
               }`}
             />
             <span>{item.label}</span>

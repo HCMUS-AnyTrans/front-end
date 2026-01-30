@@ -78,7 +78,7 @@ export default function NotificationsHeader({
         {unreadCount > 0 && (
           <button
             onClick={onMarkAllRead}
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 border-2 border-[#4169E1] text-[#1e3a8a] hover:bg-blue-50 rounded-xl text-sm font-semibold transition-all cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 border-2 border-brand-primary-light text-[#1e3a8a] hover:bg-blue-50 rounded-xl text-sm font-semibold transition-all cursor-pointer"
           >
             <CheckCheck className="w-4 h-4" />
             <span className="hidden sm:inline">{t('markAllRead')}</span>
@@ -98,7 +98,7 @@ export default function NotificationsHeader({
             <Filter className="w-4 h-4" />
             <span>{t('filter')}</span>
             {filterType !== 'all' && (
-              <span className="w-2 h-2 rounded-full bg-[#4169E1]"></span>
+              <span className="w-2 h-2 rounded-full bg-brand-primary-light"></span>
             )}
             <ChevronDown className="w-4 h-4" />
           </button>

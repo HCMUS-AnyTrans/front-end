@@ -20,8 +20,8 @@ export function OfficeLocations({ offices, isVisible }: OfficeLocationsProps) {
       }`}
     >
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-12 h-12 bg-[#4169E1]/10 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-[#4169E1]/20">
-          <MapPin className="w-6 h-6 text-[#4169E1]" />
+        <div className="w-12 h-12 bg-brand-primary-light/10 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-brand-primary-light/20">
+          <MapPin className="w-6 h-6 text-brand-primary-light" />
         </div>
         <div>
           <h3 className="text-xl font-bold text-gray-900">
@@ -37,7 +37,7 @@ export function OfficeLocations({ offices, isVisible }: OfficeLocationsProps) {
         {offices.map((office, idx) => (
           <div
             key={idx}
-            className="p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-[#4169E1]/30 hover:bg-[#4169E1]/5 transition-all duration-300 cursor-pointer hover:scale-[1.02]"
+            className="p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-brand-primary-light/30 hover:bg-brand-primary-light/5 transition-all duration-300 cursor-pointer hover:scale-[1.02]"
           >
             <h4 className="font-bold text-gray-900 mb-1">
               {office.city}, {office.country}

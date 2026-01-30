@@ -27,7 +27,7 @@ export default function FooterNewsletter() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder={t('placeholder')}
-          className="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-5 py-3.5 pr-12 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4169E1]/50 focus:border-[#4169E1]/50 transition-all duration-300"
+          className="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-5 py-3.5 pr-12 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-brand-primary-light/50 transition-all duration-300"
         />
         <Button
           onClick={handleSubmit}

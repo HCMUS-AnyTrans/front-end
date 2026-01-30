@@ -18,7 +18,7 @@ export function FeaturesComparisonTable({
     <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
       <div className="grid grid-cols-3 gap-4 p-6 bg-gray-50 border-b border-gray-200">
         <div className="font-bold text-gray-900">{t('columns.features')}</div>
-        <div className="text-center font-bold text-blue-600">
+        <div className="text-center font-bold text-primary">
           {t('columns.documentTranslation')}
         </div>
         <div className="text-center font-bold text-purple-600">
@@ -45,7 +45,7 @@ export function FeaturesComparisonTable({
               <div className="flex justify-center">
                 {item.document ? (
                   <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
-                    <Check className="w-4 h-4 text-blue-600" strokeWidth={3} />
+                    <Check className="w-4 h-4 text-primary" strokeWidth={3} />
                   </div>
                 ) : (
                   <div className="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center">

@@ -36,7 +36,7 @@ export default function CreditSection({ current, total }: CreditSectionProps) {
           </div>
           <Link
             href={ROUTES.ACCOUNT.CREDITS}
-            className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors"
+            className="text-xs font-semibold text-primary hover:text-blue-700 transition-colors"
           >
             {t('viewDetails')}
           </Link>
@@ -82,7 +82,7 @@ export default function CreditSection({ current, total }: CreditSectionProps) {
         <div className="grid grid-cols-2 gap-2">
           <Link
             href={ROUTES.ACCOUNT.BUY_CREDITS}
-            className="text-center text-xs font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 py-2 rounded-lg transition-colors"
+            className="text-center text-xs font-semibold text-primary bg-blue-50 hover:bg-blue-100 py-2 rounded-lg transition-colors"
           >
             {t('buyCredits')}
           </Link>
