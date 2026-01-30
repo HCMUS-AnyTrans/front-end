@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
+import { ROUTES } from '@/config';
 
 interface AuthButtonsProps {
   variant?: 'desktop' | 'mobile';
@@ -20,7 +21,7 @@ export default function AuthButtons({
     return (
       <div className="p-4 space-y-3 border-t border-gray-200 mt-4">
         <Link
-          href="/login"
+          href={ROUTES.AUTH.LOGIN}
           className="flex items-center justify-center h-11 px-4 text-base rounded-lg font-semibold text-center text-gray-700 bg-gray-100 hover:bg-gray-200 border border-gray-300 transition-all duration-300 active:scale-98"
           onClick={onLoginClick}
         >
@@ -32,7 +33,7 @@ export default function AuthButtons({
           className="w-full h-11 px-4 text-base rounded-lg"
           asChild
         >
-          <Link href="/signup" onClick={onSignupClick}>
+          <Link href={ROUTES.AUTH.SIGNUP} onClick={onSignupClick}>
             {t('signup')}
           </Link>
         </Button>
@@ -43,7 +44,7 @@ export default function AuthButtons({
   return (
     <div className="flex items-center gap-3">
       <Link
-        href="/login"
+        href={ROUTES.AUTH.LOGIN}
         className="px-4 xl:px-5 py-2.5 rounded-lg font-semibold text-sm xl:text-[15px] text-gray-600 hover:text-gray-900 hover:bg-gray-500/10 transition-all duration-300"
       >
         {t('login')}
@@ -54,7 +55,7 @@ export default function AuthButtons({
         className="px-5 xl:px-6 py-3 rounded-lg text-sm xl:text-[15px]"
         asChild
       >
-        <Link href="/signup">{t('signup')}</Link>
+        <Link href={ROUTES.AUTH.SIGNUP}>{t('signup')}</Link>
       </Button>
     </div>
   );

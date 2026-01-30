@@ -6,6 +6,7 @@ import AuthButtons from './AuthButtons';
 import LocaleSwitcher from './LocaleSwitcher';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
+import { ROUTES } from '@/config';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -27,18 +28,18 @@ export default function MobileMenu({
   const t = useTranslations('header');
 
   const navItems = [
-    { href: '/pricing', label: t('navigation.pricing') },
-    { href: '/about', label: t('navigation.about') },
-    { href: '/contact', label: t('navigation.contact') },
+    { href: ROUTES.PUBLIC.PRICING, label: t('navigation.pricing') },
+    { href: ROUTES.PUBLIC.ABOUT, label: t('navigation.about') },
+    { href: ROUTES.PUBLIC.CONTACT, label: t('navigation.contact') },
   ];
 
   const featureItems = [
     {
-      href: '/features#document-translation',
+      href: ROUTES.FEATURES.DOCUMENT_TRANSLATION,
       label: t('featuresDropdown.documentTranslation.title'),
     },
     {
-      href: '/features#subtitle-translation',
+      href: ROUTES.FEATURES.SUBTITLE_TRANSLATION,
       label: t('featuresDropdown.subtitleTranslation.title'),
     },
   ];
@@ -62,7 +63,9 @@ export default function MobileMenu({
       >
         {/* Header */}
         <div className="flex items-center justify-between p-3 border-b border-gray-200 bg-gradient-to-r from-[#4169E1] to-[#1e3a8a]">
-          <h2 className="font-bold text-xl text-white">{t('mobileMenu.title')}</h2>
+          <h2 className="font-bold text-xl text-white">
+            {t('mobileMenu.title')}
+          </h2>
           <div className="flex items-center gap-2">
             <div className="[&_button]:text-white hover:bg-white/20 rounded-xl [&_button]:hover:text-white transition-all duration-300">
               <LocaleSwitcher />
@@ -82,7 +85,7 @@ export default function MobileMenu({
           <nav className="p-4 space-y-1">
             {/* Home */}
             <Link
-              href="/"
+              href={ROUTES.PUBLIC.HOME}
               className={`flex items-center justify-between px-4 py-3 rounded-xl font-semibold transition-all duration-300 ${
                 isActive('/')
                   ? 'bg-gradient-to-r from-blue-50 to-indigo-50 text-[#4169E1] shadow-sm'

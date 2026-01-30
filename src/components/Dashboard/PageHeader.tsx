@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Upload, ChevronDown, FileText, Film } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/routing';
+import { ROUTES } from '@/config';
 
 export default function PageHeader() {
   const t = useTranslations('dashboard.header');
@@ -50,7 +51,7 @@ export default function PageHeader() {
             {showDropdown && (
               <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
                 <Link
-                  href="/app/document-translation"
+                  href={ROUTES.APP.DOCUMENT_TRANSLATION}
                   className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
                 >
                   <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
@@ -66,7 +67,7 @@ export default function PageHeader() {
                   </div>
                 </Link>
                 <Link
-                  href="/app/subtitle-translation"
+                  href={ROUTES.APP.SUBTITLE_TRANSLATION}
                   className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
                 >
                   <div className="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center">
