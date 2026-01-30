@@ -13,6 +13,10 @@ export { default as ContentContainer } from './ContentContainer';
 export { default as SectionHeader } from './SectionHeader';
 export { default as LegalPageHero } from './LegalPageHero';
 export { default as LegalPageContent } from './LegalPageContent';
+export { SocialLinksSection } from './SocialLinksSection';
+export type { SocialLink, SocialLinksSectionProps } from './SocialLinksSection';
+export { default as PageHero } from './PageHero';
+export type { PageHeroProps, HeroStat } from './PageHero';
 
 // Feature Components
 export * from '../Features/shared';

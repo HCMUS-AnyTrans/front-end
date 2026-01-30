@@ -11,6 +11,8 @@ import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/features/auth';
 import { useTranslations } from 'next-intl';
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
+import { CheckCircle2, XCircle } from 'lucide-react';
 
 export default function AuthCallbackPage() {
   const router = useRouter();
@@ -95,7 +97,11 @@ export default function AuthCallbackPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-primary mx-auto mb-6"></div>
+          <LoadingSpinner
+            size="xl"
+            variant="primary"
+            className="mx-auto mb-6"
+          />
           <h2 className="text-2xl font-semibold text-gray-800 mb-2">
             {t ? t('processing') : 'Completing authentication...'}
           </h2>
@@ -112,17 +118,7 @@ export default function AuthCallbackPage() {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 to-orange-100">
         <div className="text-center max-w-md mx-auto p-8">
           <div className="bg-red-100 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6">
-            <svg
-              className="h-8 w-8 text-red-600"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
+            <XCircle className="h-8 w-8 text-red-600" />
           </div>
           <h2 className="text-2xl font-semibold text-gray-800 mb-2">
             {t ? t('authenticationFailed') : 'Authentication Failed'}
@@ -146,17 +142,7 @@ export default function AuthCallbackPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100">
       <div className="text-center">
         <div className="bg-green-100 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6">
-          <svg
-            className="h-8 w-8 text-green-600"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M5 13l4 4L19 7"></path>
-          </svg>
+          <CheckCircle2 className="h-8 w-8 text-green-600" />
         </div>
         <h2 className="text-2xl font-semibold text-gray-800 mb-2">
           {t ? t('success') : 'Authentication Successful!'}

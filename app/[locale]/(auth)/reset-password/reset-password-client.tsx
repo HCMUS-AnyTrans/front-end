@@ -6,9 +6,9 @@ import { Link } from '@/i18n/routing';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { Loader2 } from 'lucide-react';
 import { AuthShell, PasswordField, PasswordStrength } from '@/components/Auth';
 import { Button } from '@/components/ui/button';
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import {
   Form,
   FormControl,
@@ -112,7 +112,7 @@ export function ResetPasswordClient({ token }: ResetPasswordClientProps) {
         backText={t('backToLogin')}
       >
         <div className="flex flex-col items-center justify-center py-12 space-y-4">
-          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          <LoadingSpinner size="lg" variant="primary" />
           <p className="text-sm text-muted-foreground">
             {t('validatingToken')}
           </p>
