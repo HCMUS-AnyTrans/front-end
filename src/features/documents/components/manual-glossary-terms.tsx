@@ -11,6 +11,7 @@ interface ManualGlossaryTermsProps {
   onAddManualTerm: () => void
   onUpdateManualTerm: (id: string, field: "src" | "tgt", value: string) => void
   onRemoveManualTerm: (id: string) => void
+  embedded?: boolean
 }
 
 export function ManualGlossaryTerms({
@@ -18,17 +19,20 @@ export function ManualGlossaryTerms({
   onAddManualTerm,
   onUpdateManualTerm,
   onRemoveManualTerm,
+  embedded = false,
 }: ManualGlossaryTermsProps) {
   const t = useTranslations("documents.configure")
   const isNearLimit = manualTerms.length >= 18
 
   return (
-    <div className="space-y-3 rounded-lg border bg-background/70 p-4">
+    <div className="space-y-3 rounded-lg bg-muted/10 p-4">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="text-sm font-medium text-foreground">{t("manualTermsTitle")}</p>
-          <p className="text-xs text-muted-foreground">{t("manualTermsHelper")}</p>
-        </div>
+        {!embedded ? (
+          <div>
+            <p className="text-sm font-medium text-foreground">{t("manualTermsTitle")}</p>
+            <p className="text-xs text-muted-foreground">{t("manualTermsHelper")}</p>
+          </div>
+        ) : <div className="hidden sm:block" />}
         <Button
           variant="outline"
           size="sm"

@@ -71,6 +71,8 @@ export interface ManualTerm {
   tgt: string;
 }
 
+export type GlossaryInputMode = 'saved' | 'manual' | 'none';
+
 export interface FontReplacement {
   from_font: string;
   to_font: string;
@@ -265,6 +267,7 @@ export interface TranslationConfig {
   domain: string;
   customDomain: string;
   tone: string;
+  glossaryInputMode: GlossaryInputMode;
   selectedGlossaryId: string | null;
   manualTerms: ManualTerm[];
   useSystemGlossary: boolean;

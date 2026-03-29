@@ -67,16 +67,19 @@ export function usePdfPreviewDocument({
 
   useEffect(() => {
     const effectivePageNumber = numPages > 0 ? Math.min(currentPage, numPages) : currentPage;
+    const activePdfDocument = pdfDocument;
 
-    if (!pdfDocument || !fileUrl || !effectivePageNumber) {
+    if (activePdfDocument === null || !fileUrl || !effectivePageNumber) {
       return;
     }
+
+    const pdf = activePdfDocument;
 
     let isActive = true;
 
     async function loadPageDimensions() {
       try {
-        const pdfPage = await pdfDocument.getPage(effectivePageNumber);
+        const pdfPage = await pdf.getPage(effectivePageNumber);
 
         if (!isActive) {
           return;

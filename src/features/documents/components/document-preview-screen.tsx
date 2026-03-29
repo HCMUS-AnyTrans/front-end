@@ -1,7 +1,7 @@
 'use client';
 
 import { Loader2 } from 'lucide-react';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { DocumentPreviewState } from './document-preview-state';
@@ -135,39 +135,29 @@ export function DocumentPreviewScreen() {
     t,
   });
 
-  const previewPanes = useMemo(() => {
-    if (!job?.input_file || !job.output_file) {
-      return [];
-    }
-
-    return [
-      {
-        paneId: 'input' as const,
-        fileId: job.input_file.id,
-        fileName: job.input_file.name,
-        title: t('original'),
-        loadingLabel: t('loadingOriginal'),
-        isVisiblePageAuthority: continuousInteractionPane === 'input',
-        onNumPagesChange: handleInputNumPagesChange,
-      },
-      {
-        paneId: 'output' as const,
-        fileId: job.output_file.id,
-        fileName: job.output_file.name,
-        title: t('translated'),
-        loadingLabel: t('loadingTranslated'),
-        isVisiblePageAuthority: continuousInteractionPane === 'output',
-        onNumPagesChange: handleOutputNumPagesChange,
-      },
-    ];
-  }, [
-    continuousInteractionPane,
-    handleInputNumPagesChange,
-    handleOutputNumPagesChange,
-    job?.input_file,
-    job?.output_file,
-    t,
-  ]);
+  const previewPanes =
+    job?.input_file && job.output_file
+      ? [
+          {
+            paneId: 'input' as const,
+            fileId: job.input_file.id,
+            fileName: job.input_file.name,
+            title: t('original'),
+            loadingLabel: t('loadingOriginal'),
+            isVisiblePageAuthority: continuousInteractionPane === 'input',
+            onNumPagesChange: handleInputNumPagesChange,
+          },
+          {
+            paneId: 'output' as const,
+            fileId: job.output_file.id,
+            fileName: job.output_file.name,
+            title: t('translated'),
+            loadingLabel: t('loadingTranslated'),
+            isVisiblePageAuthority: continuousInteractionPane === 'output',
+            onNumPagesChange: handleOutputNumPagesChange,
+          },
+        ]
+      : [];
 
   if (isLoading) {
     return (

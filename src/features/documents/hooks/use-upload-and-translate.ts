@@ -24,6 +24,7 @@ import { extractErrorMessage } from './utils';
 import { setActiveJobId } from '../store/translation.store';
 import { walletKeys } from '@/lib/query-client';
 import { domains } from '@/shared/constants/domains';
+import { buildUserGlossaryEntries } from '../utils/glossary-mode';
 
 interface UploadAndTranslateState {
   flowStatus: TranslationFlowStatus;
@@ -171,27 +172,14 @@ function buildJobDto(
     doc_domain: resolvedDomainValue,
   };
 
-  const mergedTerms = new Map<string, { src: string; tgt: string }>();
-
-  glossaryTerms.forEach((term) => {
-    const src = term.srcTerm.trim();
-    const tgt = term.tgtTerm.trim();
-    if (!src || !tgt) return;
-    mergedTerms.set(src.toLowerCase(), { src, tgt });
+  const userGlossaryEntries = buildUserGlossaryEntries({
+    glossaryInputMode: config.glossaryInputMode,
+    manualTerms: config.manualTerms,
+    glossaryTerms,
   });
 
-  config.manualTerms.forEach((term) => {
-    const src = term.src.trim();
-    const tgt = term.tgt.trim();
-    if (!src || !tgt) return;
-    mergedTerms.set(src.toLowerCase(), { src, tgt });
-  });
-
-  if (mergedTerms.size > 0) {
-    dto.user_glossary = Array.from(mergedTerms.values()).map((term) => ({
-      src_lang: term.src.trim(),
-      tgt_lang: term.tgt.trim(),
-    }));
+  if (userGlossaryEntries.length > 0) {
+    dto.user_glossary = userGlossaryEntries;
   }
 
   if (fontReplacements.length > 0) {

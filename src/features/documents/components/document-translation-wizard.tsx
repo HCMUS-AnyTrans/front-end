@@ -27,6 +27,7 @@ import { useWallet } from "@/features/dashboard/hooks"
 import { useTranslationStore } from "../store/translation.store"
 import type { FontCheckItem, FontEnabledMap, FontReplacement, FontSelectionMap, LanguageCode } from "../types"
 import { canPreviewTranslationJob } from "../utils/preview-capabilities"
+import { deriveGlossaryInputMode } from "../utils/glossary-mode"
 
 function buildDefaultFontSelections(items: FontCheckItem[]): FontSelectionMap {
   return items.reduce<FontSelectionMap>((acc, item) => {
@@ -185,9 +186,12 @@ export function DocumentTranslationWizard() {
   } = useGlossaries(glossaryFilters)
 
   const visibleGlossaries = isFetchingGlossaries ? [] : glossaries
+  const glossaryInputMode = deriveGlossaryInputMode(config)
 
   const activeSelectedGlossaryId =
-    config.selectedGlossaryId && visibleGlossaries.some((item) => item.id === config.selectedGlossaryId)
+    glossaryInputMode === "saved" &&
+    config.selectedGlossaryId &&
+    visibleGlossaries.some((item) => item.id === config.selectedGlossaryId)
       ? config.selectedGlossaryId
       : null
 
@@ -373,7 +377,7 @@ export function DocumentTranslationWizard() {
     // Move to step 3 immediately to show upload progress
     goToStep(3)
 
-    const usableGlossaryTerms = activeSelectedGlossaryId ? selectedGlossaryTerms : []
+     const usableGlossaryTerms = activeSelectedGlossaryId ? selectedGlossaryTerms : []
     const fontReplacements = buildFontReplacements(
       fontCheckItems,
       config.fontSelections,
@@ -382,16 +386,17 @@ export function DocumentTranslationWizard() {
     )
 
     // Start the translation job for the already-uploaded file
-    startTranslation(config, usableGlossaryTerms, fontReplacements)
+     startTranslation({ ...config, glossaryInputMode }, usableGlossaryTerms, fontReplacements)
   }, [
     file,
     fileId,
     config,
     activeSelectedGlossaryId,
-    selectedGlossaryTerms,
-    goToStep,
-    startTranslation,
-    fontCheckItems,
+     selectedGlossaryTerms,
+     glossaryInputMode,
+     goToStep,
+     startTranslation,
+     fontCheckItems,
   ])
 
   // =============== RESULT HANDLERS ===============
@@ -465,7 +470,7 @@ export function DocumentTranslationWizard() {
 
         {step === 2 && (
           <StepConfigure
-            config={{ ...config, selectedGlossaryId: activeSelectedGlossaryId }}
+            config={{ ...config, glossaryInputMode, selectedGlossaryId: activeSelectedGlossaryId }}
             onConfigChange={handleConfigChange}
             glossaries={visibleGlossaries}
             selectedGlossaryTerms={selectedGlossaryTerms}

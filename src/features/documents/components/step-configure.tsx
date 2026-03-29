@@ -95,7 +95,23 @@ export function StepConfigure({
   const handleDomainChange = (domain: string) => onConfigChange({ domain })
   const handleCustomDomainChange = (customDomain: string) => onConfigChange({ customDomain })
   const handleToneChange = (tone: string) => onConfigChange({ tone })
-  const handleGlossarySelect = (id: string | null) => onConfigChange({ selectedGlossaryId: id })
+  const handleGlossarySelect = (id: string | null) =>
+    onConfigChange({ selectedGlossaryId: id, glossaryInputMode: "saved" })
+  const handleGlossaryInputModeChange = (mode: TranslationConfig["glossaryInputMode"]) => {
+    if (mode === "manual") {
+      onConfigChange({ glossaryInputMode: mode, selectedGlossaryId: null })
+      return
+    }
+
+    if (mode === "none") {
+      onConfigChange({ glossaryInputMode: mode })
+      return
+    }
+
+    onConfigChange({ glossaryInputMode: mode })
+  }
+  const handleConfirmSavedGlossaryMode = () =>
+    onConfigChange({ glossaryInputMode: "saved", manualTerms: [] })
   const handleUseSystemGlossaryChange = (enabled: boolean) =>
     onConfigChange({ useSystemGlossary: enabled })
 
@@ -144,10 +160,13 @@ export function StepConfigure({
           <GlossarySection
             glossaries={glossaries}
             domain={config.domain}
+            glossaryInputMode={config.glossaryInputMode}
             selectedGlossaryId={config.selectedGlossaryId}
             selectedGlossaryTermCount={selectedGlossaryTerms.length}
             isLoadingGlossaries={isLoadingGlossaries}
             onSelectGlossary={handleGlossarySelect}
+            onGlossaryInputModeChange={handleGlossaryInputModeChange}
+            onConfirmSavedGlossaryMode={handleConfirmSavedGlossaryMode}
             useSystemGlossary={config.useSystemGlossary}
             onUseSystemGlossaryChange={handleUseSystemGlossaryChange}
             manualTerms={config.manualTerms}

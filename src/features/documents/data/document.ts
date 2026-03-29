@@ -52,6 +52,7 @@ export const defaultConfig: TranslationConfig = {
   domain: 'auto',
   customDomain: '',
   tone: 'professional',
+  glossaryInputMode: 'saved',
   selectedGlossaryId: null,
   manualTerms: [],
   useSystemGlossary: true,
