@@ -11,6 +11,7 @@ export interface Glossary {
   domain: string;
   srcLang: string;
   tgtLang: string;
+  status: 'pending' | 'processing' | 'created' | 'failed';
   termCount: number;
   createdAt: string;
   updatedAt: string;
@@ -68,6 +69,22 @@ export interface TermListResponse {
   pagination: PaginationMeta;
 }
 
+export interface GlossaryTemplate {
+  id: string;
+  name: string;
+  domain: string;
+  termCount: number;
+  createdAt: string;
+}
+
+export interface GlossaryTemplateListResponse {
+  items: GlossaryTemplate[];
+}
+
+export interface GlossaryLlmPrice {
+  cost: number;
+}
+
 // =============== REQUEST DTOs ===============
 
 /**
@@ -79,6 +96,12 @@ export interface CreateGlossaryDto {
   domain: string;
   srcLang: string;
   tgtLang: string;
+  mode?: 'manual' | 'template' | 'llm';
+  templateId?: string;
+  files?: Array<{
+    storageKey: string;
+    fileName?: string;
+  }>;
 }
 
 /**

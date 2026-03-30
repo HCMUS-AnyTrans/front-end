@@ -3,6 +3,8 @@ import { apiClient } from '@/lib/api-client';
 import type {
   RequestUploadUrlDto,
   UploadUrlResponse,
+  TempUploadUrlDto,
+  PresignedUploadUrlResponse,
   UpdateFileStatusDto,
   FileResponse,
   FileAnalysisResponse,
@@ -26,6 +28,20 @@ export async function requestDocUploadUrl(
 ): Promise<UploadUrlResponse> {
   const response = await apiClient.post<UploadUrlResponse>(
     '/files/upload/doc',
+    dto,
+  );
+  return response.data;
+}
+
+/**
+ * Request a presigned upload URL for a temporary file.
+ * POST /files/upload/temp
+ */
+export async function requestTempUploadUrl(
+  dto: TempUploadUrlDto,
+): Promise<PresignedUploadUrlResponse> {
+  const response = await apiClient.post<PresignedUploadUrlResponse>(
+    '/files/upload/temp',
     dto,
   );
   return response.data;

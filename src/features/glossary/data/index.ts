@@ -3,6 +3,7 @@ import {
   NON_AUTO_DOMAIN_OPTIONS_WITH_ICONS,
   type DomainOption as SharedDomainOption,
 } from '@/shared/constants/domains';
+import type { GlossarySourceType } from './create-glossary-source';
 
 // ============================================================================
 // DOMAIN OPTIONS
@@ -151,6 +152,15 @@ export const bulkImportSchema = z.object({
 });
 
 export type BulkImportFormValues = z.infer<typeof bulkImportSchema>;
+
+export const glossarySourceOptions: Array<{
+  id: Exclude<GlossarySourceType, null>;
+  icon: 'manual' | 'template' | 'document';
+}> = [
+  { id: 'manual', icon: 'manual' },
+  { id: 'template', icon: 'template' },
+  { id: 'document', icon: 'document' },
+];
 
 // ============================================================================
 // DEFAULTS

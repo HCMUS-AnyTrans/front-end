@@ -77,6 +77,10 @@ export function GlossaryContent() {
 
   const handleGlossaryClick = useCallback(
     (glossary: Glossary) => {
+      if (glossary.status === 'pending' || glossary.status === 'processing') {
+        return;
+      }
+
       router.push(`/${locale}/glossary/${glossary.id}`);
     },
     [router, locale],

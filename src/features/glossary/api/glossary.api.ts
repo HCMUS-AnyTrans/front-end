@@ -3,6 +3,8 @@ import type {
   Glossary,
   GlossaryDetail,
   GlossaryListResponse,
+  GlossaryTemplateListResponse,
+  GlossaryLlmPrice,
   GlossaryQueryParams,
   CreateGlossaryDto,
   UpdateGlossaryDto,
@@ -41,6 +43,20 @@ export async function listGlossariesApi(
   const response = await apiClient.get<GlossaryListResponse>('/glossaries', {
     params,
   });
+  return response.data;
+}
+
+export async function listGlossaryTemplatesApi(
+  domain?: string,
+): Promise<GlossaryTemplateListResponse> {
+  const response = await apiClient.get<GlossaryTemplateListResponse>('/glossaries/templates', {
+    params: domain ? { domain } : undefined,
+  });
+  return response.data;
+}
+
+export async function getGlossaryLlmPriceApi(): Promise<GlossaryLlmPrice> {
+  const response = await apiClient.get<GlossaryLlmPrice>('/glossaries/pricing/llm-generation');
   return response.data;
 }
 

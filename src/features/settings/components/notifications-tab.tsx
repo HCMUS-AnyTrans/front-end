@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils"
 
 const notificationTypeIcons: Record<NotificationType, string> = {
   translation_status: "\u{1F4C4}",
+  glossary_status: "\u{1F4DA}",
   credit_purchase: "\u{1F4B3}",
   file_expiring: "\u26A0\uFE0F",
   security_alert: "\u{1F512}",

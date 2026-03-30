@@ -160,6 +160,20 @@ export interface UploadUrlResponse {
   expires_in: number;
 }
 
+/** POST /files/upload/temp — request body */
+export interface TempUploadUrlDto {
+  file_name: string;
+  mime_type: string;
+  file_size: number;
+}
+
+/** POST /files/upload/temp — response */
+export interface PresignedUploadUrlResponse {
+  upload_url: string;
+  storage_key: string;
+  expires_in: number;
+}
+
 /** PATCH /files/:file_id/status — request body */
 export interface UpdateFileStatusDto {
   status: 'uploaded' | 'failed';

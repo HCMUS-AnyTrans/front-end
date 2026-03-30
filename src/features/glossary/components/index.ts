@@ -14,3 +14,4 @@ export { AddTermForm } from './add-term-form';
 export { EditTermDialog } from './edit-term-dialog';
 export { DeleteTermDialog } from './delete-term-dialog';
 export { BulkImportDialog } from './bulk-import-dialog';
+export { GlossarySocketProvider } from './glossary-socket-provider';

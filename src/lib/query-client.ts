@@ -125,6 +125,11 @@ export const glossaryKeys = {
     params !== undefined
       ? ([...glossaryKeys.all, 'list', params] as const)
       : ([...glossaryKeys.all, 'list'] as const),
+  templates: (domain?: string) =>
+    domain
+      ? ([...glossaryKeys.all, 'templates', domain] as const)
+      : ([...glossaryKeys.all, 'templates'] as const),
+  llmPricing: () => [...glossaryKeys.all, 'llm-pricing'] as const,
   detail: (id: string) => [...glossaryKeys.all, 'detail', id] as const,
   terms: (glossaryId: string, params?: unknown) =>
     params !== undefined

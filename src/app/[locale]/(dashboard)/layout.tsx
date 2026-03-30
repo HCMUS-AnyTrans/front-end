@@ -5,6 +5,7 @@ import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
 import { AppSidebar, DashboardHeader } from "@/features/dashboard"
 import { ProtectedRoute } from "@/features/auth"
 import { TranslationSocketProvider } from "@/features/documents/components/translation-socket-provider"
+import { GlossarySocketProvider } from "@/features/glossary"
 
 function getSidebarDefaultOpen(): boolean {
   if (typeof document === "undefined") return true
@@ -23,6 +24,7 @@ export default function DashboardLayout({
   return (
     <ProtectedRoute>
       <TranslationSocketProvider />
+      <GlossarySocketProvider />
       <SidebarProvider defaultOpen={defaultOpen}>
         <DashboardHeader />
         <AppSidebar />

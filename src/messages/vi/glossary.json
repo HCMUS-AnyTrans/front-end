@@ -16,6 +16,10 @@
     "noResults": "Không tìm thấy kết quả",
     "noResultsDescription": "Hãy thử điều chỉnh từ khóa tìm kiếm hoặc bộ lọc.",
     "createGlossary": "Tạo bảng thuật ngữ",
+    "stepOneLabel": "Bước 1 / 2",
+    "stepTwoLabel": "Bước 2 / 2",
+    "stepOneTitle": "Thông tin glossary",
+    "stepTwoTitle": "Nguồn dữ liệu glossary",
     "editGlossary": "Chỉnh sửa bảng thuật ngữ",
     "deleteGlossary": "Xóa bảng thuật ngữ",
     "deleteGlossaryConfirm": "Bạn có chắc chắn muốn xóa bảng thuật ngữ này? Tất cả thuật ngữ bên trong sẽ bị xóa vĩnh viễn. Hành động này không thể hoàn tác.",
@@ -25,6 +29,19 @@
     "tgtLang": "Ngôn ngữ đích",
     "createdAt": "Ngày tạo",
     "updatedAt": "Cập nhật lần cuối",
+    "status": {
+      "pending": "Đang chờ",
+      "processing": "Đang xử lý",
+      "created": "Sẵn sàng",
+      "failed": "Thất bại",
+      "waitingHint": "Glossary này đang được tạo. Có thể mở sau khi xử lý hoàn tất."
+    },
+    "socket": {
+      "successTitle": "Glossary đã sẵn sàng",
+      "successDescription": "{name} đã sẵn sàng với {count} thuật ngữ.",
+      "failedTitle": "Tạo glossary thất bại",
+      "failedDescription": "Không thể tạo {name}. Credits đã được hoàn lại."
+    },
     "backToList": "Quay lại danh sách",
     "domains": {
       "auto": "Tự động phát hiện",
@@ -65,6 +82,57 @@
       "saving": "Đang lưu...",
       "deleting": "Đang xóa...",
       "languagePair": "Cặp ngôn ngữ"
+    },
+    "stepTwo": {
+      "continue": "Tiếp tục",
+      "selectSource": "Chọn một nguồn dữ liệu",
+      "selectSourceHelper": "Hãy chọn một option bên trái để cấu hình cách khởi tạo glossary.",
+      "templateSelectHelper": "Hãy chọn một template để tạo glossary từ mẫu đó.",
+      "documentSelectHelper": "Hãy tải lên ít nhất một tài liệu để tạo glossary bằng LLM extraction.",
+      "manualPanelTitle": "Tạo glossary trống trước",
+      "manualPanelDescription": "Chọn option này nếu bạn muốn tự thêm từng thuật ngữ sau khi glossary được tạo.",
+      "templateLoading": "Đang tải template...",
+      "templateEmptyTitle": "Chưa có template phù hợp",
+      "templateEmptyDescription": "Hiện chưa có glossary template nào cho domain đã chọn.",
+      "templateErrorTitle": "Không tải được template",
+      "templateErrorDescription": "Vui lòng thử lại sau ít phút.",
+      "templateRetry": "Thử lại",
+      "documentPanelTitle": "Tải lên tài liệu nguồn",
+      "documentPanelDescription": "Thêm một hoặc nhiều tài liệu sẽ được dùng để tạo thuật ngữ ở phase sau.",
+      "documentUploadTitle": "Tải lên tài liệu cho glossary",
+      "documentUploadDescription": "Bấm để chọn file. Giao diện phase này cho phép nhiều file.",
+      "documentConstraints": "Hỗ trợ PDF, DOC, DOCX, PPT, PPTX - tối đa 5 MB mỗi file - tối đa 10 file",
+      "documentMaxReached": "Bạn đã đạt giới hạn 10 file. Hãy xóa bớt một file để thêm file mới.",
+      "documentUploadIssuesTitle": "Một số file đã bị bỏ qua",
+      "documentInvalidType": "{count, plural, one {# file không đúng định dạng hỗ trợ} other {# file không đúng định dạng hỗ trợ}}: {files}",
+      "documentTooLarge": "{count, plural, one {# file vượt quá 5 MB} other {# file vượt quá 5 MB}}: {files}",
+      "documentDuplicate": "{count, plural, one {# file đã được chọn trước đó} other {# file đã được chọn trước đó}}: {files}",
+      "documentLimitExceeded": "{count, plural, one {# file bị bỏ qua vì chỉ cho phép tối đa {max} file} other {# file bị bỏ qua vì chỉ cho phép tối đa {max} file}}: {files}",
+      "documentCreditTitle": "Chi phí credit ước tính",
+      "documentCreditDescription": "Tạo glossary bằng LLM sẽ tiêu tốn một lượng credit cố định cho mỗi lần tạo.",
+      "documentCreditLoading": "Đang tải chi phí credit...",
+      "documentCreditShort": "credits",
+      "documentCreditUnit": "credit cho mỗi lần tạo glossary",
+      "documentEmptyTitle": "Thêm tài liệu để bắt đầu",
+      "documentEmptyDescription": "Tải lên một hoặc nhiều tài liệu tham chiếu. File đã chọn sẽ hiển thị ở đây để bạn xem lại.",
+      "documentSelectedFiles": "Tệp đã chọn",
+      "documentSelectedFilesCount": "{count}/{max}",
+      "documentRemoveFile": "Xóa tệp",
+      "documentPhaseNote": "Luồng import từ document chưa được nối với backend. Phase này chỉ triển khai giao diện.",
+      "sources": {
+        "manual": {
+          "title": "Thủ công",
+          "description": "Tạo glossary trước rồi tự thêm thuật ngữ sau."
+        },
+        "template": {
+          "title": "Template",
+          "description": "Bắt đầu từ một template có sẵn theo domain đã chọn."
+        },
+        "document": {
+          "title": "Document",
+          "description": "Chuẩn bị tài liệu để tạo thuật ngữ ở phase sau."
+        }
+      }
     },
     "terms": {
       "title": "Thuật ngữ",
