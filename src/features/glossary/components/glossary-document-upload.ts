@@ -1,7 +1,9 @@
-const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+import {
+  DOCUMENT_MAX_FILE_SIZE_BYTES,
+  validateDocumentFile,
+} from '@/shared/utils/document-upload';
+
 const MAX_FILE_COUNT = 10;
-const ALLOWED_EXTENSIONS = ['pdf', 'doc', 'docx', 'ppt', 'pptx'] as const;
-const FILE_INPUT_ACCEPT = '.pdf,.doc,.docx,.ppt,.pptx';
 const FILE_PREVIEW_LIMIT = 3;
 
 export type RejectionGroup =
@@ -26,12 +28,6 @@ export function createEmptyRejections(): FileRejections {
   };
 }
 
-export function getFileExtension(fileName: string) {
-  const extension = fileName.split('.').pop();
-
-  return extension ? extension.toLowerCase() : '';
-}
-
 export function isSameFile(a: File, b: File) {
   return (
     a.name === b.name &&
@@ -48,21 +44,21 @@ export function validateIncomingFiles(
   const rejected = createEmptyRejections();
 
   for (const file of incomingFiles) {
-    const extension = getFileExtension(file.name);
+    const validationResult = validateDocumentFile(file, {
+      maxFileSizeBytes: DOCUMENT_MAX_FILE_SIZE_BYTES,
+      checkMimeType: false,
+      checkExtension: true,
+    });
     const isDuplicate = [...existingFiles, ...acceptedFiles].some(
       (currentFile) => isSameFile(currentFile, file),
     );
 
-    if (
-      !ALLOWED_EXTENSIONS.includes(
-        extension as (typeof ALLOWED_EXTENSIONS)[number],
-      )
-    ) {
+    if (validationResult === 'invalidType') {
       rejected.invalidType.push(file);
       continue;
     }
 
-    if (file.size > MAX_FILE_SIZE_BYTES) {
+    if (validationResult === 'tooLarge') {
       rejected.tooLarge.push(file);
       continue;
     }
@@ -137,8 +133,5 @@ export function getValidationMessages(
 }
 
 export {
-  ALLOWED_EXTENSIONS,
-  FILE_INPUT_ACCEPT,
   MAX_FILE_COUNT,
-  MAX_FILE_SIZE_BYTES,
 };

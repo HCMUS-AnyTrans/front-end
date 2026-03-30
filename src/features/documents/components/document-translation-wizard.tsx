@@ -3,6 +3,10 @@
 import { useState, useCallback, useMemo, useEffect, useRef } from "react"
 import { useLocale, useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
+import {
+  DOCUMENT_MAX_FILE_SIZE_BYTES,
+  validateDocumentFile,
+} from "@/shared/utils/document-upload"
 import { TranslationStepper } from "./translation-stepper"
 import { StepUpload } from "./step-upload"
 import { StepConfigure } from "./step-configure"
@@ -11,8 +15,6 @@ import {
   type TranslationStep,
   type TranslationConfig,
   type UploadedFile,
-  ALLOWED_FILE_TYPES,
-  MAX_FILE_SIZE,
   LANGUAGE_CODE_TO_API_NAME,
 } from "../types"
 import { defaultConfig } from "../data"
@@ -220,12 +222,20 @@ export function DocumentTranslationWizard() {
   // =============== FILE HANDLERS ===============
 
   const validateFile = useCallback((f: File): string | null => {
-    if (!ALLOWED_FILE_TYPES.includes(f.type as (typeof ALLOWED_FILE_TYPES)[number])) {
+    const validationResult = validateDocumentFile(f, {
+      maxFileSizeBytes: DOCUMENT_MAX_FILE_SIZE_BYTES,
+      checkMimeType: true,
+      checkExtension: true,
+    })
+
+    if (validationResult === "invalidType") {
       return t("errorUnsupported")
     }
-    if (f.size > MAX_FILE_SIZE) {
+
+    if (validationResult === "tooLarge") {
       return t("errorTooLarge")
     }
+
     return null
   }, [t])
 

@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { FileTypeIcon } from "@/components/shared/file-type-icon"
+import { formatFileSize } from "@/shared/utils/document-upload"
 import type { TranslationFlowStatus, TranslationJobResponse, UploadedFile } from "../types"
 import type { LanguageCode } from "../types"
 
@@ -40,14 +41,6 @@ interface StepReviewProps {
   onReset: () => void
   isDownloading?: boolean
   canPreview?: boolean
-}
-
-// =============== HELPERS ===============
-
-function formatFileSize(bytes: number): string {
-  if (bytes < 1024) return bytes + " B"
-  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB"
-  return (bytes / (1024 * 1024)).toFixed(1) + " MB"
 }
 
 // =============== UPLOADING STATE ===============

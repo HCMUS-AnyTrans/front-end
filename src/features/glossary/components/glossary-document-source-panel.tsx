@@ -7,7 +7,10 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import {
-  FILE_INPUT_ACCEPT,
+  DOCUMENT_INPUT_ACCEPT,
+  formatFileSize,
+} from '@/shared/utils/document-upload';
+import {
   MAX_FILE_COUNT,
   getValidationMessages,
   validateIncomingFiles,
@@ -58,7 +61,7 @@ export function GlossaryDocumentSourcePanel({
       <input
         ref={inputRef}
         type="file"
-        accept={FILE_INPUT_ACCEPT}
+        accept={DOCUMENT_INPUT_ACCEPT}
         multiple
         className="hidden"
         onChange={(event) => {
@@ -138,7 +141,7 @@ export function GlossaryDocumentSourcePanel({
                           {file.name}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          {Math.max(1, Math.round(file.size / 1024))} KB
+                          {formatFileSize(file.size)}
                         </p>
                       </div>
                     </div>
