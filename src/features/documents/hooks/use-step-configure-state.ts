@@ -9,7 +9,8 @@ import type {
 interface UseStepConfigureStateOptions {
   srcLang: LanguageCode;
   tgtLang: LanguageCode;
-  domain: string;
+  domainId: string;
+  selectedDomainKey?: string | null;
   customDomain: string;
   estimate: CreditEstimateResponse | undefined;
   isEstimating: boolean;
@@ -23,7 +24,8 @@ interface UseStepConfigureStateOptions {
 export function useStepConfigureState({
   srcLang,
   tgtLang,
-  domain,
+  domainId,
+  selectedDomainKey,
   customDomain,
   estimate,
   isEstimating,
@@ -34,7 +36,9 @@ export function useStepConfigureState({
   isLoading,
 }: UseStepConfigureStateOptions) {
   const isSameLang = srcLang === tgtLang;
-  const isOtherDomainMissing = domain === 'other' && customDomain.trim().length === 0;
+  const isDomainMissing = domainId.trim().length === 0;
+  const isOtherDomainMissing =
+    selectedDomainKey === 'other' && customDomain.trim().length === 0;
   const hasEstimate = !isEstimating && !!estimate;
   const isEstimatePending = isEstimating || !estimate;
   const hasParsedFonts = Object.keys(fontsUsedByGroup).length > 0;
@@ -50,6 +54,7 @@ export function useStepConfigureState({
     hasParsedFonts && fontParseSupported === true && isCheckingFonts;
   const isStartDisabled =
     isSameLang ||
+    isDomainMissing ||
     isOtherDomainMissing ||
     isLoading ||
     isEstimatePending ||
@@ -58,6 +63,7 @@ export function useStepConfigureState({
 
   return {
     isSameLang,
+    isDomainMissing,
     isOtherDomainMissing,
     hasEstimate,
     isEstimatePending,

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
 import { AppSidebar, DashboardHeader } from "@/features/dashboard"
 import { ProtectedRoute } from "@/features/auth"
+import { useDomains } from '@/features/domains'
 import { TranslationSocketProvider } from "@/features/documents/components/translation-socket-provider"
 import { GlossarySocketProvider } from "@/features/glossary"
 
@@ -20,6 +21,8 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   const [defaultOpen] = useState(getSidebarDefaultOpen)
+
+  useDomains()
 
   return (
     <ProtectedRoute>

@@ -14,7 +14,6 @@ export {
 export type {
   LanguageCode,
   Language,
-  Domain,
   Tone,
   GlossaryTerm,
   ManualTerm,
@@ -41,7 +40,6 @@ export {
   languages,
   sourceLanguages,
   targetLanguages,
-  domains,
   tones,
   defaultConfig,
 } from './data';

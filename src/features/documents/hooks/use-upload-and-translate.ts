@@ -23,7 +23,6 @@ import { LANGUAGE_CODE_TO_API_NAME } from '../types';
 import { extractErrorMessage } from './utils';
 import { setActiveJobId } from '../store/translation.store';
 import { walletKeys } from '@/lib/query-client';
-import { domains } from '@/shared/constants/domains';
 import { buildUserGlossaryEntries } from '../utils/glossary-mode';
 
 interface UploadAndTranslateState {
@@ -43,6 +42,7 @@ interface UseUploadAndTranslateReturn extends UploadAndTranslateState {
   startUpload: (file: File) => Promise<string | null>;
   startTranslation: (
     config: TranslationConfig,
+    selectedDomainKey?: string,
     glossaryTerms?: Array<{ srcTerm: string; tgtTerm: string }>,
     fontReplacements?: FontReplacement[],
   ) => Promise<void>;
@@ -153,24 +153,21 @@ async function pollFileAnalysis(
 function buildJobDto(
   fileId: string,
   config: TranslationConfig,
+  selectedDomainKey?: string,
   glossaryTerms: Array<{ srcTerm: string; tgtTerm: string }> = [],
   fontReplacements: FontReplacement[] = [],
 ): CreateTranslationJobDto {
-  const selectedDomainValue = domains.find(
-    (domain) => domain.id === config.domain,
-  )?.value;
-  const resolvedDomainValue =
-    config.domain === 'other'
-      ? config.customDomain.trim()
-      : selectedDomainValue || 'Auto';
-
   const dto: CreateTranslationJobDto = {
     file_id: fileId,
     src_lang: LANGUAGE_CODE_TO_API_NAME[config.srcLang],
     tgt_lang: LANGUAGE_CODE_TO_API_NAME[config.tgtLang],
     doc_tone: config.tone || undefined,
-    doc_domain: resolvedDomainValue,
+    domain_id: config.domainId || undefined,
   };
+
+  if (selectedDomainKey === 'other' && config.customDomain.trim()) {
+    dto.customized_domain = config.customDomain.trim();
+  }
 
   const userGlossaryEntries = buildUserGlossaryEntries({
     glossaryInputMode: config.glossaryInputMode,
@@ -329,6 +326,7 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
   const startTranslation = useCallback(
     async (
       config: TranslationConfig,
+      selectedDomainKey?: string,
       glossaryTerms: Array<{ srcTerm: string; tgtTerm: string }> = [],
       fontReplacements: FontReplacement[] = [],
     ) => {
@@ -351,6 +349,7 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
         const jobDto = buildJobDto(
           state.fileId,
           config,
+          selectedDomainKey,
           glossaryTerms,
           fontReplacements,
         );

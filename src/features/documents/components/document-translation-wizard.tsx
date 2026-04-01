@@ -3,6 +3,7 @@
 import { useState, useCallback, useMemo, useEffect, useRef } from "react"
 import { useLocale, useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
+import { useDomains } from '@/features/domains'
 import {
   DOCUMENT_MAX_FILE_SIZE_BYTES,
   validateDocumentFile,
@@ -117,6 +118,7 @@ export function DocumentTranslationWizard() {
 
   // Config state
   const [config, setConfig] = useState<TranslationConfig>(defaultConfig)
+  const { domains, getDomainById, getDomainByKey, isLoading: isLoadingDomains } = useDomains()
 
   // API hooks
   const {
@@ -171,14 +173,18 @@ export function DocumentTranslationWizard() {
   const fontCheckUnavailable = fontCheckState?.fontCheckUnavailable ?? false
 
   const glossaryFilters = useMemo(
-    () => ({
-      page: 1,
-      limit: 100,
-      srcLang: config.srcLang,
-      tgtLang: config.tgtLang,
-      ...(config.domain !== "auto" ? { domain: config.domain } : {}),
-    }),
-    [config.domain, config.srcLang, config.tgtLang]
+    () => {
+      const selectedDomain = getDomainById(config.domainId)
+
+      return {
+        page: 1,
+        limit: 100,
+        srcLang: config.srcLang,
+        tgtLang: config.tgtLang,
+        ...(selectedDomain ? { domain: selectedDomain.key } : {}),
+      }
+    },
+    [config.domainId, config.srcLang, config.tgtLang, getDomainById]
   )
 
   const {
@@ -356,6 +362,29 @@ export function DocumentTranslationWizard() {
     previousTargetLangRef.current = config.tgtLang
   }, [config.tgtLang, fontCheckItems])
 
+  useEffect(() => {
+    if (config.domainId || isLoadingDomains || domains.length === 0) {
+      return
+    }
+
+    const autoDomain = getDomainByKey('auto')
+
+    if (!autoDomain) {
+      return
+    }
+
+    setConfig((prev) => {
+      if (prev.domainId) {
+        return prev
+      }
+
+      return {
+        ...prev,
+        domainId: autoDomain.id,
+      }
+    })
+  }, [config.domainId, domains.length, getDomainByKey, isLoadingDomains])
+
   // =============== NAVIGATION HANDLERS ===============
 
   const goToStep = useCallback((newStep: TranslationStep) => {
@@ -384,6 +413,10 @@ export function DocumentTranslationWizard() {
   const handleStartTranslation = useCallback(() => {
     if (!file || !fileId) return
 
+    const selectedDomain = getDomainById(config.domainId)
+
+    if (!selectedDomain) return
+
     // Move to step 3 immediately to show upload progress
     goToStep(3)
 
@@ -396,14 +429,20 @@ export function DocumentTranslationWizard() {
     )
 
     // Start the translation job for the already-uploaded file
-     startTranslation({ ...config, glossaryInputMode }, usableGlossaryTerms, fontReplacements)
+     startTranslation(
+      { ...config, glossaryInputMode },
+      selectedDomain.key,
+      usableGlossaryTerms,
+      fontReplacements,
+    )
   }, [
     file,
     fileId,
     config,
+    getDomainById,
     activeSelectedGlossaryId,
-     selectedGlossaryTerms,
-     glossaryInputMode,
+      selectedGlossaryTerms,
+      glossaryInputMode,
      goToStep,
      startTranslation,
      fontCheckItems,

@@ -83,6 +83,11 @@ export const translationKeys = {
   detail: (id: string) => [...translationKeys.all, 'detail', id] as const,
 };
 
+export const domainKeys = {
+  all: ['domains'] as const,
+  list: () => [...domainKeys.all, 'list'] as const,
+};
+
 // Settings-related query keys
 export const settingsKeys = {
   all: ['settings'] as const,

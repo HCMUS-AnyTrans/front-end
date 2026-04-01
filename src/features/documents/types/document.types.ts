@@ -1,5 +1,3 @@
-import type { LucideIcon } from 'lucide-react';
-
 // =============== LANGUAGE TYPES ===============
 
 export type LanguageCode =
@@ -41,14 +39,6 @@ export const LANGUAGE_CODE_TO_API_NAME: Record<LanguageCode, string> = {
   th: 'Thai',
   hi: 'Hindi',
 };
-
-// =============== DOMAIN TYPES ===============
-
-export interface Domain {
-  id: string;
-  name: string;
-  icon: LucideIcon;
-}
 
 // =============== TONE TYPES ===============
 
@@ -211,7 +201,8 @@ export interface CreateTranslationJobDto {
   src_lang: string;
   tgt_lang: string;
   doc_tone?: string;
-  doc_domain?: string;
+  domain_id?: string;
+  customized_domain?: string;
   user_glossary?: { src_lang: string; tgt_lang: string }[];
   keep_original_font_size?: boolean;
   font_replacements?: FontReplacement[];
@@ -266,7 +257,7 @@ export type TranslationFlowStatus =
 export interface TranslationConfig {
   srcLang: LanguageCode;
   tgtLang: LanguageCode;
-  domain: string;
+  domainId: string;
   customDomain: string;
   tone: string;
   glossaryInputMode: GlossaryInputMode;

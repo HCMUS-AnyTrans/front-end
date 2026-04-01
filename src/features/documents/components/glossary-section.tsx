@@ -24,7 +24,7 @@ import { SavedGlossarySelector } from "./saved-glossary-selector"
 
 interface GlossarySectionProps {
   glossaries: Glossary[]
-  domain: string
+  selectedDomainKey?: string | null
   glossaryInputMode: GlossaryInputMode
   selectedGlossaryId: string | null
   selectedGlossaryTermCount: number
@@ -88,7 +88,7 @@ function ModeCard({
 
 export function GlossarySection({
   glossaries,
-  domain,
+  selectedDomainKey,
   glossaryInputMode,
   selectedGlossaryId,
   selectedGlossaryTermCount,
@@ -148,7 +148,7 @@ export function GlossarySection({
           <CardTitle className="text-base">{t("glossary")}</CardTitle>
         </AppCardHeader>
         <AppCardContent className="space-y-4">
-          {domain !== "other" ? (
+          {selectedDomainKey !== "other" ? (
             <div className="flex items-start justify-between gap-4 rounded-xl border bg-background/70 px-4 py-3">
               <div className="space-y-1">
                 <p className="text-sm font-medium text-foreground">{t("systemGlossaryTitle")}</p>

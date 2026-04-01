@@ -1,7 +1,4 @@
-import { domains } from '@/shared/constants/domains';
 import type { Language, Tone, TranslationConfig } from '../types';
-
-export { domains };
 
 // =============== LANGUAGES ===============
 
@@ -49,7 +46,7 @@ export const tones: Tone[] = [
 export const defaultConfig: TranslationConfig = {
   srcLang: 'en',
   tgtLang: 'vi',
-  domain: 'auto',
+  domainId: '',
   customDomain: '',
   tone: 'professional',
   glossaryInputMode: 'saved',

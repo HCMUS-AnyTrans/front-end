@@ -21,6 +21,29 @@ type DomainDefinition = {
   icon: LucideIcon;
 };
 
+type DomainMetadata = {
+  icon: LucideIcon;
+};
+
+export const DEFAULT_DOMAIN_ICON = FolderOpen;
+
+export const DOMAIN_METADATA: Record<string, DomainMetadata> = {
+  administrative: { icon: FileText },
+  auto: { icon: FolderOpen },
+  commerce: { icon: ShoppingCart },
+  engineering: { icon: Wrench },
+  finance: { icon: Landmark },
+  general: { icon: Globe },
+  it_software: { icon: Laptop },
+  legal: { icon: Scale },
+  marketing_advertising: { icon: Megaphone },
+  media_entertainment: { icon: Film },
+  medical: { icon: Stethoscope },
+  other: { icon: Wrench },
+  science_academic: { icon: FlaskConical },
+  tourism: { icon: Plane },
+};
+
 const DOMAIN_DEFINITIONS = [
   { id: 'auto', value: 'Auto', icon: FolderOpen },
   { id: 'general', value: 'General', icon: Globe },
