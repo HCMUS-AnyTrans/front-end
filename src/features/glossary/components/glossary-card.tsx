@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import {
   ArrowRightLeft,
   MoreHorizontal,
@@ -16,7 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { glossaryDomains } from '../data';
+import { getDomainLabel, useDomains } from '@/features/domains';
 import type { Glossary } from '../types';
 
 interface GlossaryCardProps {
@@ -32,12 +32,15 @@ export function GlossaryCard({
   onEdit,
   onDelete,
 }: GlossaryCardProps) {
+  const locale = useLocale();
   const t = useTranslations('glossary');
   const tCommon = useTranslations('common');
   const isBlocked = glossary.status === 'pending' || glossary.status === 'processing';
 
-  const domainInfo = glossaryDomains.find((d) => d.id === glossary.domain);
+  const { getDomainById } = useDomains();
+  const domainInfo = getDomainById(glossary.domainId);
   const DomainIcon = domainInfo?.icon;
+  const domainLabel = domainInfo ? getDomainLabel(domainInfo, locale) : '';
 
   const formattedDate = new Date(glossary.createdAt).toLocaleDateString();
 
@@ -86,7 +89,7 @@ export function GlossaryCard({
               ) : null}
             </div>
             <p className="mt-0.5 text-xs font-medium text-muted-foreground">
-              {t(`domains.${glossary.domain}`)}
+              {domainLabel}
             </p>
           </div>
         </div>

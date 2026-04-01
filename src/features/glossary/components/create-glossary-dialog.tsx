@@ -51,6 +51,7 @@ export function CreateGlossaryDialog({
       domain: '',
       srcLang: '',
       tgtLang: '',
+      customizedDomain: '',
     },
   });
 
@@ -110,7 +111,10 @@ export function CreateGlossaryDialog({
   const isStepTwoSubmitDisabled =
     stepTwoState.submitDisabled ||
     (stepTwoState.requiresTemplate ? selectedTemplateId === null : false) ||
-    (stepTwoState.requiresDocument ? documentFiles.length === 0 : false);
+    (stepTwoState.requiresDocument ? documentFiles.length === 0 : false) ||
+    (sourceType === 'document' && form.getValues('domain') === 'other'
+      ? form.getValues('customizedDomain')?.trim().length === 0
+      : false);
   const shouldShowDocumentCredit =
     step === 2 && sourceType === 'document' && documentFiles.length > 0;
 
@@ -140,6 +144,7 @@ export function CreateGlossaryDialog({
             {step === 1 ? <CreateGlossaryStepOne form={form} /> : null}
             {step === 2 ? (
               <CreateGlossaryStepTwo
+                form={form}
                 domain={form.getValues('domain')}
                 sourceType={sourceType}
                 onSourceTypeChange={handleSourceTypeChange}

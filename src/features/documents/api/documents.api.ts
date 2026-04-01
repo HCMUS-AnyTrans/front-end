@@ -15,6 +15,19 @@ import type {
   FontCheckResponse,
 } from '../types';
 
+interface TranslationJobResponseDto extends Omit<TranslationJobResponse, 'domainId'> {
+  domain_id?: string;
+}
+
+function mapTranslationJobResponse(
+  dto: TranslationJobResponseDto,
+): TranslationJobResponse {
+  return {
+    ...dto,
+    domainId: dto.domain_id,
+  };
+}
+
 // ============================================================================
 // File Upload API Functions
 // ============================================================================
@@ -117,12 +130,12 @@ export async function createTranslationJob(
   if (idempotencyKey) {
     headers['Idempotency-Key'] = idempotencyKey;
   }
-  const response = await apiClient.post<TranslationJobResponse>(
+  const response = await apiClient.post<TranslationJobResponseDto>(
     '/translations/doc',
     dto,
     { headers },
   );
-  return response.data;
+  return mapTranslationJobResponse(response.data);
 }
 
 /**
@@ -132,10 +145,10 @@ export async function createTranslationJob(
 export async function getTranslationJob(
   jobId: string,
 ): Promise<TranslationJobResponse> {
-  const response = await apiClient.get<TranslationJobResponse>(
+  const response = await apiClient.get<TranslationJobResponseDto>(
     `/translations/${jobId}`,
   );
-  return response.data;
+  return mapTranslationJobResponse(response.data);
 }
 
 /**

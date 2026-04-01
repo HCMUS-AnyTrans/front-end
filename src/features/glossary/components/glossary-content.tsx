@@ -6,6 +6,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Pagination } from '@/components/ui/pagination';
+import { useDomains } from '@/features/domains';
 import { useGlossaries } from '../hooks/use-glossaries';
 import { GlossaryFilters } from './glossary-filters';
 import { GlossaryList } from './glossary-list';
@@ -24,6 +25,7 @@ export function GlossaryContent() {
   const t = useTranslations('glossary');
   const router = useRouter();
   const locale = useLocale();
+  const { getDomainByKey, isLoading: isLoadingDomains } = useDomains();
 
   // ─── Filter & Pagination State ──────────────────────────────────────
   const [search, setSearch] = useState('');
@@ -31,6 +33,11 @@ export function GlossaryContent() {
   const [srcLangFilter, setSrcLangFilter] = useState('all');
   const [page, setPage] = useState(1);
   const deferredSearch = useDeferredValue(search);
+  const selectedDomain = domainFilter !== 'all' ? getDomainByKey(domainFilter) : null;
+  const effectiveDomainFilter =
+    domainFilter !== 'all' && !isLoadingDomains && !selectedDomain
+      ? 'all'
+      : domainFilter;
 
   // ─── Dialog State ───────────────────────────────────────────────────
   const [createOpen, setCreateOpen] = useState(false);
@@ -39,21 +46,24 @@ export function GlossaryContent() {
   const [selectedGlossary, setSelectedGlossary] = useState<Glossary | null>(null);
 
   // ─── Build Query Params ─────────────────────────────────────────────
-  const queryParams: GlossaryQueryParams = {
-    page,
-    limit: 20,
-    sortBy: 'createdAt',
-    sortOrder: 'desc',
-    ...(deferredSearch && { search: deferredSearch }),
-    ...(domainFilter !== 'all' && { domain: domainFilter }),
-    ...(srcLangFilter !== 'all' && { srcLang: srcLangFilter }),
-  };
+  const queryParams: GlossaryQueryParams | undefined =
+    domainFilter !== 'all' && !selectedDomain && isLoadingDomains
+      ? undefined
+      : {
+          page,
+          limit: 20,
+          sortBy: 'createdAt',
+          sortOrder: 'desc',
+          ...(deferredSearch && { search: deferredSearch }),
+          ...(selectedDomain ? { domainId: selectedDomain.id } : {}),
+          ...(srcLangFilter !== 'all' && { srcLang: srcLangFilter }),
+        };
 
   const { glossaries, pagination, isLoading, isError, isFetching } =
     useGlossaries(queryParams);
 
   const hasFilters =
-    search !== '' || domainFilter !== 'all' || srcLangFilter !== 'all';
+    search !== '' || effectiveDomainFilter !== 'all' || srcLangFilter !== 'all';
 
   const isEmpty = !glossaries || glossaries.length === 0;
   // isFetching but we already have data — show overlay, not skeleton
@@ -106,7 +116,7 @@ export function GlossaryContent() {
         <GlossaryFilters
           search={search}
           onSearchChange={handleSearchChange}
-          domainFilter={domainFilter}
+          domainFilter={effectiveDomainFilter}
           onDomainChange={handleDomainChange}
           srcLangFilter={srcLangFilter}
           onSrcLangChange={handleSrcLangChange}

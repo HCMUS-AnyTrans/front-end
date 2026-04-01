@@ -1,10 +1,10 @@
 'use client';
 
 import { Loader2, LayoutTemplate } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
+import { getDomainLabel, useDomains } from '@/features/domains';
 import { useGlossaryTemplates } from '../hooks';
-import { filterTemplatesByDomain } from '../data/create-glossary-source';
 
 interface GlossaryTemplatePanelProps {
   domain: string;
@@ -17,12 +17,14 @@ export function GlossaryTemplatePanel({
   selectedTemplateId,
   onSelectTemplate,
 }: GlossaryTemplatePanelProps) {
+  const locale = useLocale();
   const t = useTranslations('glossary');
+  const { getDomainById, getDomainByKey } = useDomains();
+  const selectedDomain = getDomainByKey(domain);
   const { templates, isLoading, isError, refetch } = useGlossaryTemplates(
-    domain,
-    true,
+    selectedDomain?.id,
+    Boolean(selectedDomain),
   );
-  const filteredTemplates = filterTemplatesByDomain(templates, domain);
 
   if (isLoading) {
     return (
@@ -51,7 +53,7 @@ export function GlossaryTemplatePanel({
     );
   }
 
-  if (filteredTemplates.length === 0) {
+  if (templates.length === 0) {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-3 rounded-xl border border-dashed bg-background/70 p-6 text-center">
         <div className="flex size-14 items-center justify-center rounded-2xl bg-muted text-muted-foreground">
@@ -72,8 +74,12 @@ export function GlossaryTemplatePanel({
   return (
     <div className="space-y-4 h-full rounded-xl border bg-background/70 p-5">
       <div className="grid gap-3 md:grid-cols-2">
-        {filteredTemplates.map((template) => {
+        {templates.map((template) => {
           const isSelected = selectedTemplateId === template.id;
+          const templateDomain = getDomainById(template.domainId);
+          const templateDomainLabel = templateDomain
+            ? getDomainLabel(templateDomain, locale)
+            : '';
 
           return (
             <button
@@ -98,7 +104,7 @@ export function GlossaryTemplatePanel({
                     {template.name}
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    {template.domain}
+                    {templateDomainLabel}
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">

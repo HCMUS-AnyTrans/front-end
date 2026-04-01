@@ -1,8 +1,9 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Loader2, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { getDomainLabel, useDomains } from '@/features/domains';
 import {
   Dialog,
   DialogContent,
@@ -25,8 +26,10 @@ export function DeleteGlossaryDialog({
   onOpenChange,
   glossary,
 }: DeleteGlossaryDialogProps) {
+  const locale = useLocale();
   const t = useTranslations('glossary');
   const tCommon = useTranslations('common');
+  const { getDomainById } = useDomains();
 
   const { deleteGlossary, isDeleting } = useDeleteGlossary({
     onSuccess: () => {
@@ -38,6 +41,9 @@ export function DeleteGlossaryDialog({
     if (!glossary) return;
     deleteGlossary(glossary.id);
   }
+
+  const domain = glossary ? getDomainById(glossary.domainId) : null;
+  const domainLabel = domain ? getDomainLabel(domain, locale) : '';
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -56,7 +62,7 @@ export function DeleteGlossaryDialog({
           <div className="rounded-md border bg-muted/50 p-3 text-sm">
             <p className="font-medium">{glossary.name}</p>
             <p className="text-muted-foreground">
-              {t(`domains.${glossary.domain}`)} · {t(`languages.${glossary.srcLang}`)} → {t(`languages.${glossary.tgtLang}`)}
+              {domainLabel} · {t(`languages.${glossary.srcLang}`)} → {t(`languages.${glossary.tgtLang}`)}
               {' · '}
               {t('termCount', { count: glossary.termCount })}
             </p>

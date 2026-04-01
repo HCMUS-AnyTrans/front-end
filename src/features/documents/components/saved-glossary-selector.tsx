@@ -1,6 +1,7 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { getDomainLabel, useDomains } from '@/features/domains';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import type { Glossary } from '@/features/glossary';
@@ -20,8 +21,10 @@ export function SavedGlossarySelector({
   onSelectGlossary,
   embedded = false,
 }: SavedGlossarySelectorProps) {
+  const locale = useLocale();
   const t = useTranslations('documents.configure');
   const tGlossary = useTranslations('glossary');
+  const { getDomainById } = useDomains();
   const hasSavedGlossaries = glossaries.length > 0;
 
   return (
@@ -41,6 +44,8 @@ export function SavedGlossarySelector({
           <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2">
             {glossaries.map((glossary) => {
               const isSelected = selectedGlossaryId === glossary.id;
+              const domain = getDomainById(glossary.domainId);
+              const domainLabel = domain ? getDomainLabel(domain, locale) : '';
 
               return (
                 <button
@@ -65,7 +70,7 @@ export function SavedGlossarySelector({
                     {glossary.name}
                   </span>
                   <span className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">
-                    {tGlossary(`domains.${glossary.domain}`)}
+                    {domainLabel}
                   </span>
                   <span className="mt-2 inline-flex rounded-full border border-border bg-background px-2 py-0.5 text-[11px] text-muted-foreground">
                     {tGlossary('termCount', { count: glossary.termCount })}

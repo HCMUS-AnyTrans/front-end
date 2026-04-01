@@ -65,6 +65,10 @@ export const createGlossarySchema = z
       .string()
       .min(1, 'Vui lòng chọn ngôn ngữ đích')
       .max(10, 'Mã ngôn ngữ không hợp lệ'),
+    customizedDomain: z
+      .string()
+      .max(100, 'Lĩnh vực tùy chỉnh không được vượt quá 100 ký tự')
+      .optional(),
   })
   .refine((data) => data.srcLang !== data.tgtLang, {
     message: 'Ngôn ngữ nguồn và ngôn ngữ đích phải khác nhau',

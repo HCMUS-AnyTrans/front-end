@@ -13,11 +13,12 @@ import type { GlossaryQueryParams } from '../types';
  */
 export function useGlossaries(params?: GlossaryQueryParams) {
   const { isAuthenticated, accessToken } = useAuthStore();
+  const isEnabled = params !== undefined;
 
   const result = useQuery({
     queryKey: glossaryKeys.list(params),
     queryFn: () => listGlossariesApi(params),
-    enabled: isAuthenticated && !!accessToken,
+    enabled: isAuthenticated && !!accessToken && isEnabled,
     staleTime: 60 * 1000,
     gcTime: 5 * 60 * 1000,
     placeholderData: keepPreviousData,

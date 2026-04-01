@@ -181,7 +181,7 @@ export function DocumentTranslationWizard() {
         limit: 100,
         srcLang: config.srcLang,
         tgtLang: config.tgtLang,
-        ...(selectedDomain ? { domain: selectedDomain.key } : {}),
+        ...(selectedDomain ? { domainId: selectedDomain.id } : {}),
       }
     },
     [config.domainId, config.srcLang, config.tgtLang, getDomainById]

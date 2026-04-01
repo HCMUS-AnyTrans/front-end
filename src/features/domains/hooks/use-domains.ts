@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAuthStore } from '@/features/auth';
 import { domainKeys } from '@/lib/query-client';
@@ -43,27 +43,34 @@ export function useDomains() {
     [domains],
   );
 
-  const getDomainById = (id: string | null | undefined): DomainWithIcon | null => {
-    if (!id) {
-      return null;
-    }
+  const getDomainById = useCallback(
+    (id: string | null | undefined): DomainWithIcon | null => {
+      if (!id) {
+        return null;
+      }
 
-    return domainsById.get(id) ?? null;
-  };
+      return domainsById.get(id) ?? null;
+    },
+    [domainsById],
+  );
 
-  const getDomainByKey = (
-    key: string | null | undefined,
-  ): DomainWithIcon | null => {
-    if (!key) {
-      return null;
-    }
+  const getDomainByKey = useCallback(
+    (key: string | null | undefined): DomainWithIcon | null => {
+      if (!key) {
+        return null;
+      }
 
-    return domainsByKey.get(key) ?? null;
-  };
+      return domainsByKey.get(key) ?? null;
+    },
+    [domainsByKey],
+  );
 
-  const getDomainWithIcon = (idOrKey: string): DomainWithIcon | null => {
-    return getDomainById(idOrKey) ?? getDomainByKey(idOrKey);
-  };
+  const getDomainWithIcon = useCallback(
+    (idOrKey: string): DomainWithIcon | null => {
+      return getDomainById(idOrKey) ?? getDomainByKey(idOrKey);
+    },
+    [getDomainById, getDomainByKey],
+  );
 
   return {
     ...query,

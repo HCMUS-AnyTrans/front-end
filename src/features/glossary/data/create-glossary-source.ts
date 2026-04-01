@@ -4,14 +4,14 @@ export type GlossaryTemplateLike = GlossaryTemplate
 
 export type GlossarySourceType = "manual" | "template" | "document" | null
 
-export function filterTemplatesByDomain<T extends GlossaryTemplateLike>(templates: T[], domain: string): T[] {
-  const normalizedDomain = domain.trim().toLowerCase()
+export function filterTemplatesByDomain<T extends GlossaryTemplateLike>(templates: T[], domainId: string): T[] {
+  const normalizedDomainId = domainId.trim().toLowerCase()
 
-  if (!normalizedDomain) {
+  if (!normalizedDomainId) {
     return templates
   }
 
-  return templates.filter((template) => template.domain.trim().toLowerCase().includes(normalizedDomain))
+  return templates.filter((template) => template.domainId.trim().toLowerCase() === normalizedDomainId)
 }
 
 export function resetSourceSpecificState({

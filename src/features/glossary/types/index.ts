@@ -8,7 +8,7 @@ export interface Glossary {
   id: string;
   userId: string;
   name: string;
-  domain: string;
+  domainId: string;
   srcLang: string;
   tgtLang: string;
   status: 'pending' | 'processing' | 'created' | 'failed';
@@ -72,7 +72,7 @@ export interface TermListResponse {
 export interface GlossaryTemplate {
   id: string;
   name: string;
-  domain: string;
+  domainId: string;
   termCount: number;
   createdAt: string;
 }
@@ -93,9 +93,10 @@ export interface GlossaryLlmPrice {
  */
 export interface CreateGlossaryDto {
   name: string;
-  domain: string;
+  domainId: string;
   srcLang: string;
   tgtLang: string;
+  customized_domain?: string;
   mode?: 'manual' | 'template' | 'llm';
   templateId?: string;
   files?: Array<{
@@ -110,7 +111,7 @@ export interface CreateGlossaryDto {
  */
 export interface UpdateGlossaryDto {
   name?: string;
-  domain?: string;
+  domainId?: string;
   srcLang?: string;
   tgtLang?: string;
 }
@@ -126,7 +127,7 @@ export interface GlossaryQueryParams {
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
   search?: string;
-  domain?: string;
+  domainId?: string;
   srcLang?: string;
   tgtLang?: string;
 }

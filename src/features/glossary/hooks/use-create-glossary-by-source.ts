@@ -3,6 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { glossaryKeys } from '@/lib/query-client';
 import { getErrorMessage } from '@/lib/api-error';
+import { useDomains } from '@/features/domains';
 import {
   requestTempUploadUrl,
   uploadFileToPresignedUrl,
@@ -27,12 +28,19 @@ interface UseCreateGlossaryBySourceOptions {
 export function useCreateGlossaryBySource(options?: UseCreateGlossaryBySourceOptions) {
   const queryClient = useQueryClient();
   const { onSuccess, onError } = options || {};
+  const { getDomainByKey } = useDomains();
 
   const mutation = useMutation({
     mutationFn: async ({ values, sourceType, selectedTemplateId, documentFiles }: CreateGlossaryBySourcePayload) => {
+      const selectedDomain = getDomainByKey(values.domain);
+
+      if (!selectedDomain) {
+        throw new Error('Selected glossary domain is invalid');
+      }
+
       const dto: CreateGlossaryDto = {
         name: values.name,
-        domain: values.domain,
+        domainId: selectedDomain.id,
         srcLang: values.srcLang,
         tgtLang: values.tgtLang,
       };
@@ -49,6 +57,16 @@ export function useCreateGlossaryBySource(options?: UseCreateGlossaryBySourceOpt
       } else if (sourceType === 'document') {
         if (documentFiles.length === 0) {
           throw new Error('At least one document is required');
+        }
+
+        if (selectedDomain.key === 'other') {
+          const customizedDomain = values.customizedDomain?.trim();
+
+          if (!customizedDomain) {
+            throw new Error('Custom domain is required for other glossary domain');
+          }
+
+          dto.customized_domain = customizedDomain;
         }
 
         const uploadedFiles = await Promise.all(

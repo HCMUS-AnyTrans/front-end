@@ -1,8 +1,9 @@
 'use client';
 
 import { ArrowRightLeft } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import type { UseFormReturn } from 'react-hook-form';
+import { getDomainLabel, useDomains } from '@/features/domains';
 import { Input } from '@/components/ui/input';
 import {
   FormControl,
@@ -19,18 +20,17 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
-import {
-  glossaryDomains,
-  glossaryLanguages,
-  type CreateGlossaryFormValues,
-} from '../data';
+import { glossaryLanguages, type CreateGlossaryFormValues } from '../data';
 
 interface CreateGlossaryStepOneProps {
   form: UseFormReturn<CreateGlossaryFormValues>;
 }
 
 export function CreateGlossaryStepOne({ form }: CreateGlossaryStepOneProps) {
+  const locale = useLocale();
   const t = useTranslations('glossary');
+  const { domains, isLoading: isLoadingDomains } = useDomains();
+  const glossaryDomains = domains.filter((domain) => domain.key !== 'auto');
 
   return (
     <div className="space-y-6 px-8 pb-8">
@@ -57,31 +57,36 @@ export function CreateGlossaryStepOne({ form }: CreateGlossaryStepOneProps) {
             <div className="grid grid-cols-2 gap-2.5 min-[480px]:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5">
               {glossaryDomains.map((domain) => {
                 const Icon = domain.icon;
-                const isSelected = field.value === domain.id;
+                const isSelected = field.value === domain.key;
 
                 return (
                   <button
                     key={domain.id}
                     type="button"
-                    onClick={() => field.onChange(domain.id)}
+                    onClick={() => field.onChange(domain.key)}
+                    disabled={isLoadingDomains}
                     className={cn(
                       'flex flex-col items-start gap-2 rounded-xl border p-3 text-left transition-all',
                       isSelected
                         ? 'border-primary bg-primary text-primary-foreground shadow-md'
-                        : 'border-border bg-card text-foreground hover:border-primary/30 hover:bg-muted/50'
+                        : 'border-border bg-card text-foreground hover:border-primary/30 hover:bg-muted/50',
+                      isLoadingDomains && 'cursor-wait opacity-70'
                     )}
                   >
                     <Icon
                       className={cn(
-                        'size-5',
-                        isSelected ? 'text-primary-foreground' : 'text-muted-foreground'
-                      )}
+                          'size-5',
+                          isSelected ? 'text-primary-foreground' : 'text-muted-foreground'
+                        )}
                     />
-                    <span className="text-xs font-medium">{t(`domains.${domain.id}`)}</span>
+                    <span className="text-xs font-medium">{getDomainLabel(domain, locale)}</span>
                   </button>
                 );
               })}
             </div>
+            {isLoadingDomains ? (
+              <p className="text-xs text-muted-foreground">{t('stepTwo.templateLoading')}</p>
+            ) : null}
             <FormMessage />
           </FormItem>
         )}

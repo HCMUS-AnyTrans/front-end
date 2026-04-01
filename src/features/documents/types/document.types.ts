@@ -217,11 +217,13 @@ export interface TranslationJobResponse {
   status: JobStatus;
   input_file?: FileResponse;
   output_file?: FileResponse;
+  domainId?: string;
   src_lang?: string;
   tgt_lang?: string;
   error?: string;
   created_at?: string;
   completed_at?: string;
+  customized_domain?: string;
 }
 
 /** GET /files/:file_id/download — response */
