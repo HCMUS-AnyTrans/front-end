@@ -138,7 +138,7 @@ export interface RecentJobsQuery {
   limit?: number;
   job_type?: 'document' | 'subtitle';
   status?: string;
-  domain?: string;
+  domain_id?: string;
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
   search?: string;
