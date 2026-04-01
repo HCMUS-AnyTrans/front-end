@@ -1,7 +1,8 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Search } from 'lucide-react';
+import { getDomainLabel, useDomains } from '@/features/domains';
 import { Input } from '@/components/ui/input';
 import {
   Select,
@@ -10,10 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import {
-  DOMAIN_FILTER_OPTIONS,
-  domainById,
-} from '@/shared/constants/domains';
 import { glossaryLanguages } from '../data';
 
 interface GlossaryFiltersProps {
@@ -33,7 +30,10 @@ export function GlossaryFilters({
   srcLangFilter,
   onSrcLangChange,
 }: GlossaryFiltersProps) {
+  const locale = useLocale();
   const t = useTranslations('glossary');
+  const { domains } = useDomains();
+  const glossaryDomains = domains.filter((domain) => domain.key !== 'auto');
 
   return (
     <div className="flex flex-1 flex-col sm:flex-row gap-3">
@@ -50,13 +50,15 @@ export function GlossaryFilters({
         <SelectTrigger className="w-full bg-background hover:bg-background sm:w-[160px]">
           <SelectValue placeholder={t('filterDomain')} />
         </SelectTrigger>
-          <SelectContent className="bg-popover">
-            {DOMAIN_FILTER_OPTIONS.map((domainId) => {
-              const Icon = domainId === 'all' ? undefined : domainById[domainId]?.icon;
-              return (
-                <SelectItem key={domainId} value={domainId}>
-                  {Icon && <Icon className="size-4" />}
-                {domainId === 'all' ? t('allDomains') : t(`domains.${domainId}`)}
+        <SelectContent className="bg-popover">
+          <SelectItem value="all">{t('allDomains')}</SelectItem>
+          {glossaryDomains.map((domain) => {
+            const Icon = domain.icon;
+
+            return (
+              <SelectItem key={domain.id} value={domain.key}>
+                <Icon className="size-4" />
+                {getDomainLabel(domain, locale)}
               </SelectItem>
             );
           })}

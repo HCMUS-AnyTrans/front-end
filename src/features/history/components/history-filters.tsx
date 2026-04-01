@@ -1,5 +1,6 @@
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Input } from '@/components/ui/input';
+import { getDomainLabel, useDomains } from '@/features/domains';
 import {
   Select,
   SelectContent,
@@ -8,10 +9,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Search } from 'lucide-react';
-import {
-  HISTORY_DOMAIN_FILTER_OPTIONS,
-  domainById,
-} from '@/shared/constants/domains';
 import { STATUS_OPTIONS } from '../data';
 import type { HistoryFiltersProps } from '../types';
 
@@ -23,9 +20,10 @@ export function HistoryFilters({
   domainFilter,
   onDomainChange,
 }: HistoryFiltersProps) {
+  const locale = useLocale();
   const t = useTranslations('dashboard.history');
   const tStatus = useTranslations('dashboard.status');
-  const tDomain = useTranslations('documents.domains');
+  const { domains } = useDomains();
 
   return (
     <div className="flex flex-col sm:flex-row gap-3">
@@ -43,14 +41,14 @@ export function HistoryFilters({
           <SelectValue placeholder={t('filterDomain')} />
         </SelectTrigger>
         <SelectContent className="bg-popover">
-          {HISTORY_DOMAIN_FILTER_OPTIONS.map((domainId) => {
-            const Icon = domainId === 'all' ? undefined : domainById[domainId]?.icon;
+          <SelectItem value="all">{t('allDomains')}</SelectItem>
+          {domains.map((domain) => {
+            const Icon = domain.icon;
+
             return (
-              <SelectItem key={domainId} value={domainId}>
-                {Icon && <Icon className="size-4" />}
-                {domainId === 'all'
-                  ? t('allDomains')
-                  : tDomain(domainId)}
+              <SelectItem key={domain.id} value={domain.key}>
+                <Icon className="size-4" />
+                {getDomainLabel(domain, locale)}
               </SelectItem>
             );
           })}
