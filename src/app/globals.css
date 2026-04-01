@@ -102,7 +102,7 @@
 :root {
   --radius: 0.75rem;
   --dashboard-header-height: clamp(48px, calc(56 * 100vw / 1920), 56px);
-  --dashboard-sidebar-width: clamp(160px, calc(200 * 100vw / 1920), 200px);
+  --dashboard-sidebar-width: clamp(208px, calc(260 * 100vw / 1920), 260px);
   --dashboard-content-margin: clamp(24px, calc(230 * 100vw / 1920), 230px);
 
   --primary: oklch(0.4 0.15 260);

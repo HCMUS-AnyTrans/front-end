@@ -61,11 +61,14 @@ export function GlossaryContent() {
 
   const { glossaries, pagination, isLoading, isError, isFetching } =
     useGlossaries(queryParams);
+  const visibleGlossaries = (glossaries ?? []).filter(
+    (glossary) => glossary.status !== 'failed',
+  );
 
   const hasFilters =
     search !== '' || effectiveDomainFilter !== 'all' || srcLangFilter !== 'all';
 
-  const isEmpty = !glossaries || glossaries.length === 0;
+  const isEmpty = visibleGlossaries.length === 0;
   // isFetching but we already have data — show overlay, not skeleton
   const isRefetching = isFetching && !isLoading && !isEmpty;
 
@@ -131,13 +134,13 @@ export function GlossaryContent() {
       {isLoading && !glossaries ? (
         <GlossarySkeleton showFilters={false} />
       ) : isRefetching ? (
-        <GlossarySkeleton showFilters={false} count={glossaries?.length ?? 6} />
+        <GlossarySkeleton showFilters={false} count={visibleGlossaries.length || 6} />
       ) : isError || isEmpty ? (
         <GlossaryEmptyState hasFilters={hasFilters} onCreateClick={handleCreateOpen} />
       ) : (
         <>
           <GlossaryList
-            glossaries={glossaries}
+            glossaries={visibleGlossaries}
             onGlossaryClick={handleGlossaryClick}
             onEdit={handleEdit}
             onDelete={handleDelete}

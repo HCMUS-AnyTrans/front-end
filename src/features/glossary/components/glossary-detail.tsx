@@ -95,6 +95,7 @@ export function GlossaryDetail({ glossaryId }: GlossaryDetailProps) {
   const domainInfo = getDomainById(glossary.domainId);
   const DomainIcon = domainInfo?.icon;
   const domainLabel = domainInfo ? getDomainLabel(domainInfo, locale) : '';
+  const isTermLimitReached = glossary.termCount >= 80;
 
   // ─── Render ─────────────────────────────────────────────────────────
   return (
@@ -145,7 +146,10 @@ export function GlossaryDetail({ glossaryId }: GlossaryDetailProps) {
       </div>
 
       {/* Inline add-term form */}
-      <AddTermForm glossaryId={glossaryId} />
+      <AddTermForm
+        glossaryId={glossaryId}
+        isTermLimitReached={isTermLimitReached}
+      />
 
       {/* Search + Term table card */}
       <AppCard className="overflow-hidden">
@@ -210,6 +214,7 @@ export function GlossaryDetail({ glossaryId }: GlossaryDetailProps) {
         open={bulkImportOpen}
         onOpenChange={setBulkImportOpen}
         glossaryId={glossaryId}
+        remainingTermSlots={Math.max(0, 80 - glossary.termCount)}
       />
     </>
   );
