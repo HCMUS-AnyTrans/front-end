@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useWallet } from '@/features/dashboard';
 import {
   Dialog,
   DialogContent,
@@ -35,6 +36,7 @@ export function CreateGlossaryDialog({
   open,
   onOpenChange,
 }: CreateGlossaryDialogProps) {
+  const locale = useLocale();
   const t = useTranslations('glossary');
   const tCommon = useTranslations('common');
   const [step, setStep] = useState<1 | 2>(1);
@@ -77,11 +79,24 @@ export function CreateGlossaryDialog({
       onOpenChange(false);
     },
   });
-  const { price, isLoading: isPriceLoading } = useGlossaryLlmPrice(
+  const {
+    price,
+    isLoading: isPriceLoading,
+    isFetching: isPriceFetching,
+    isError: isPriceError,
+  } = useGlossaryLlmPrice(
     step === 2 && sourceType === 'document' && documentFiles.length > 0,
   );
+  const {
+    wallet,
+    isLoading: isWalletLoading,
+    isError: isWalletError,
+  } = useWallet();
 
   const stepTwoState = getCreateGlossaryStepTwoState(sourceType);
+  const creditsFormatter = new Intl.NumberFormat(
+    locale === 'vi' ? 'vi-VN' : 'en-US',
+  );
 
   const handleContinue = async () => {
     const isValid = await form.trigger([
@@ -115,8 +130,28 @@ export function CreateGlossaryDialog({
     (sourceType === 'document' && form.getValues('domain') === 'other'
       ? form.getValues('customizedDomain')?.trim().length === 0
       : false);
-  const shouldShowDocumentCredit =
+  const isDocumentCreditFlow =
     step === 2 && sourceType === 'document' && documentFiles.length > 0;
+  const requiredCredits = typeof price?.cost === 'number' ? price.cost : null;
+  const currentBalance = typeof wallet?.balance === 'number' ? wallet.balance : null;
+  const isPricePending =
+    isDocumentCreditFlow &&
+    requiredCredits === null &&
+    (isPriceLoading || isPriceFetching);
+  const isPriceUnavailable =
+    isDocumentCreditFlow && requiredCredits === null && isPriceError;
+  const isInsufficientCredits =
+    isDocumentCreditFlow &&
+    requiredCredits !== null &&
+    currentBalance !== null &&
+    currentBalance < requiredCredits;
+  const missingCredits =
+    isInsufficientCredits && requiredCredits !== null && currentBalance !== null
+      ? requiredCredits - currentBalance
+      : 0;
+  const shouldShowDocumentCredit = isDocumentCreditFlow;
+  const shouldDisableDocumentSubmit =
+    isPricePending || isPriceUnavailable || isInsufficientCredits;
 
   const handleSubmit = (values: CreateGlossaryFormValues) => {
     createGlossaryBySource({
@@ -189,7 +224,11 @@ export function CreateGlossaryDialog({
                   <Button
                     key="glossary-step-two-submit"
                     type="submit"
-                    disabled={isStepTwoSubmitDisabled || isCreating}
+                    disabled={
+                      isStepTwoSubmitDisabled ||
+                      shouldDisableDocumentSubmit ||
+                      isCreating
+                    }
                     className="gap-2.5"
                   >
                     {isCreating ? (
@@ -202,13 +241,39 @@ export function CreateGlossaryDialog({
                     </span>
                     {shouldShowDocumentCredit ? (
                       <span className="rounded-full bg-primary-foreground/16 px-2 py-0.5 text-[11px] font-semibold text-primary-foreground/90">
-                        - {isPriceLoading ? '--' : price?.cost ?? '--'}{' '}
+                        - {isPricePending ? '--' : requiredCredits ?? '--'}{' '}
                         {t('stepTwo.documentCreditShort')}
                       </span>
                     ) : null}
                   </Button>
                 )}
               </div>
+              {isDocumentCreditFlow ? (
+                <div className="space-y-1 text-right text-xs">
+                  <p className="text-muted-foreground">
+                    <span>{t('stepTwo.documentBalanceLabel')}: </span>
+                    <span className="font-medium text-foreground">
+                      {isWalletLoading
+                        ? t('stepTwo.documentBalanceLoading')
+                        : isWalletError || currentBalance === null
+                          ? t('stepTwo.documentBalanceUnavailable')
+                          : `${creditsFormatter.format(currentBalance)} ${t('stepTwo.documentCreditShort')}`}
+                    </span>
+                  </p>
+                  {isPriceUnavailable ? (
+                    <p className="font-medium text-destructive">
+                      {t('stepTwo.documentCreditUnavailable')}
+                    </p>
+                  ) : null}
+                  {isInsufficientCredits ? (
+                    <p className="font-medium text-destructive">
+                      {t('stepTwo.documentInsufficientCredits', {
+                        missing: creditsFormatter.format(missingCredits),
+                      })}
+                    </p>
+                  ) : null}
+                </div>
+              ) : null}
             </div>
           </form>
         </Form>
