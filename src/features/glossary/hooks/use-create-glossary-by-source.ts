@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { glossaryKeys } from '@/lib/query-client';
+import { glossaryKeys, walletKeys } from '@/lib/query-client';
 import { getErrorMessage } from '@/lib/api-error';
 import { useDomains } from '@/features/domains';
 import {
@@ -37,6 +37,9 @@ export function useCreateGlossaryBySource(
   const { getDomainByKey } = useDomains();
 
   const mutation = useMutation({
+    onMutate: async () => {
+      await queryClient.invalidateQueries({ queryKey: walletKeys.all });
+    },
     mutationFn: async ({
       values,
       sourceType,
@@ -131,6 +134,9 @@ export function useCreateGlossaryBySource(
     },
     onError: (error) => {
       onError?.(getErrorMessage(error));
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey: walletKeys.all });
     },
   });
 

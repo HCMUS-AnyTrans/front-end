@@ -45,7 +45,11 @@
       "hours": "{count} giờ",
       "hourUnit": "giờ",
       "custom": "Tùy chỉnh",
-      "customHoursPlaceholder": "Nhập số giờ"
+      "customHoursPlaceholder": "Nhập số giờ",
+      "fileTtlPresetMode": "Mốc sẵn",
+      "fileTtlCustomMode": "Tùy chỉnh",
+      "fileTtlSelectPresetPrompt": "Hãy chọn một mốc thời gian để tiếp tục.",
+      "fileTtlCustomValidation": "Nhập giá trị từ 1 đến {max} giờ."
     },
     "security": {
       "title": "Bảo mật tài khoản",
