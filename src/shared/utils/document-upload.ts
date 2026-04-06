@@ -14,7 +14,13 @@ export const DOCUMENT_ALLOWED_EXTENSIONS = [
   '.ppt',
 ] as const;
 
-export const DOCUMENT_FILE_TYPE_LABELS = ['PDF', 'DOCX', 'DOC', 'PPTX', 'PPT'] as const;
+export const DOCUMENT_FILE_TYPE_LABELS = [
+  'PDF',
+  'DOCX',
+  'DOC',
+  'PPTX',
+  'PPT',
+] as const;
 
 export const DOCUMENT_INPUT_ACCEPT = DOCUMENT_ALLOWED_EXTENSIONS.join(',');
 
@@ -57,8 +63,12 @@ export function validateDocumentFile(
     checkExtension = true,
   } = options;
 
-  const hasValidMimeType = checkMimeType ? isAllowedDocumentMimeType(file.type) : false;
-  const hasValidExtension = checkExtension ? isAllowedDocumentExtension(file.name) : false;
+  const hasValidMimeType = checkMimeType
+    ? isAllowedDocumentMimeType(file.type)
+    : false;
+  const hasValidExtension = checkExtension
+    ? isAllowedDocumentExtension(file.name)
+    : false;
 
   if (
     (checkMimeType || checkExtension) &&

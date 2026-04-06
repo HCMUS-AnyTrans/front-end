@@ -8,8 +8,8 @@ export function canPreviewTranslationJob(files: {
 }) {
   return Boolean(
     files.inputFile?.id &&
-      files.outputFile?.id &&
-      !files.inputFile.is_expired &&
-      !files.outputFile.is_expired,
+    files.outputFile?.id &&
+    !files.inputFile.is_expired &&
+    !files.outputFile.is_expired,
   );
 }

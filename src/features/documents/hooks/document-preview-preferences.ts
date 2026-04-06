@@ -14,7 +14,8 @@ type PreviewPreferences = {
 const PREVIEW_DISPLAY_MODE_KEY = 'preview-display-mode';
 const PREVIEW_ZOOM_MODE_KEY = 'preview-zoom-mode';
 const PREVIEW_ZOOM_SCALE_KEY = 'preview-zoom-scale';
-const PREVIEW_PREFERENCES_UPDATED_EVENT = 'document-preview-preferences-updated';
+const PREVIEW_PREFERENCES_UPDATED_EVENT =
+  'document-preview-preferences-updated';
 
 const MIN_ZOOM_SCALE = 0.5;
 const MAX_ZOOM_SCALE = 2;
@@ -40,7 +41,10 @@ function normalizeZoomScale(scale: number): number {
   return roundZoomScale(clampZoomScale(scale));
 }
 
-function getZoomScaleStepTarget(scale: number, direction: 'in' | 'out'): number {
+function getZoomScaleStepTarget(
+  scale: number,
+  direction: 'in' | 'out',
+): number {
   const normalizedScale = normalizeZoomScale(scale);
   const scaledStep = normalizedScale / ZOOM_STEP;
   const nearestStep = Math.round(scaledStep);
@@ -57,7 +61,9 @@ function getZoomScaleStepTarget(scale: number, direction: 'in' | 'out'): number 
   return normalizeZoomScale(nextStepCount * ZOOM_STEP);
 }
 
-function isDisplayMode(value: string | null): value is DocumentPreviewDisplayMode {
+function isDisplayMode(
+  value: string | null,
+): value is DocumentPreviewDisplayMode {
   return value === 'paged' || value === 'continuous';
 }
 
@@ -68,13 +74,17 @@ function isZoomMode(value: string | null): value is PreviewZoomMode {
 function readStoredDisplayMode(): DocumentPreviewDisplayMode {
   const storedValue = window.localStorage.getItem(PREVIEW_DISPLAY_MODE_KEY);
 
-  return isDisplayMode(storedValue) ? storedValue : defaultPreviewPreferences.displayMode;
+  return isDisplayMode(storedValue)
+    ? storedValue
+    : defaultPreviewPreferences.displayMode;
 }
 
 function readStoredZoomMode(): PreviewZoomMode {
   const storedValue = window.localStorage.getItem(PREVIEW_ZOOM_MODE_KEY);
 
-  return isZoomMode(storedValue) ? storedValue : defaultPreviewPreferences.zoomMode;
+  return isZoomMode(storedValue)
+    ? storedValue
+    : defaultPreviewPreferences.zoomMode;
 }
 
 function readStoredZoomScale(): number {
@@ -131,9 +141,15 @@ function persistPreviewPreferences(preferences: PreviewPreferences) {
 
   try {
     cachedPreviewPreferences = preferences;
-    window.localStorage.setItem(PREVIEW_DISPLAY_MODE_KEY, preferences.displayMode);
+    window.localStorage.setItem(
+      PREVIEW_DISPLAY_MODE_KEY,
+      preferences.displayMode,
+    );
     window.localStorage.setItem(PREVIEW_ZOOM_MODE_KEY, preferences.zoomMode);
-    window.localStorage.setItem(PREVIEW_ZOOM_SCALE_KEY, String(preferences.zoomScale));
+    window.localStorage.setItem(
+      PREVIEW_ZOOM_SCALE_KEY,
+      String(preferences.zoomScale),
+    );
     notifyPreviewPreferenceSubscribers();
   } catch {
     // Ignore storage failures so preview state remains usable.
@@ -161,7 +177,10 @@ function subscribeToPreviewPreferenceStorage(onStoreChange: () => void) {
 
   return () => {
     window.removeEventListener('storage', handleStorage);
-    window.removeEventListener(PREVIEW_PREFERENCES_UPDATED_EVENT, onStoreChange);
+    window.removeEventListener(
+      PREVIEW_PREFERENCES_UPDATED_EVENT,
+      onStoreChange,
+    );
   };
 }
 
@@ -189,12 +208,15 @@ export function useDocumentPreviewPreferences() {
     () => defaultPreviewPreferences,
   );
 
-  const setDisplayMode = useCallback((displayMode: DocumentPreviewDisplayMode) => {
-    updatePreviewPreferences((currentPreferences) => ({
-      ...currentPreferences,
-      displayMode,
-    }));
-  }, []);
+  const setDisplayMode = useCallback(
+    (displayMode: DocumentPreviewDisplayMode) => {
+      updatePreviewPreferences((currentPreferences) => ({
+        ...currentPreferences,
+        displayMode,
+      }));
+    },
+    [],
+  );
 
   const setZoomMode = useCallback((zoomMode: PreviewZoomMode) => {
     updatePreviewPreferences((currentPreferences) => ({

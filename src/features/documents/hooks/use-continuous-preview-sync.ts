@@ -10,7 +10,8 @@ function getMostVisibleContinuousPage(params: {
 }) {
   const { container, pageWrappers, numPages, fallbackPage } = params;
   const containerRect = container.getBoundingClientRect();
-  let bestPage = numPages > 0 ? Math.min(Math.max(fallbackPage, 1), numPages) : 1;
+  let bestPage =
+    numPages > 0 ? Math.min(Math.max(fallbackPage, 1), numPages) : 1;
   let bestVisibleHeight = -1;
 
   for (let pageNumber = 1; pageNumber <= numPages; pageNumber += 1) {
@@ -69,7 +70,9 @@ export function useContinuousPreviewSync({
   onContinuousScrollRatioChange,
   onCurrentVisiblePageChange,
 }: UseContinuousPreviewSyncParams) {
-  const continuousPageWrapperRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const continuousPageWrapperRefs = useRef<
+    Record<number, HTMLDivElement | null>
+  >({});
   const isProgrammaticScrollRef = useRef(false);
   const isVisiblePageAuthorityRef = useRef(isVisiblePageAuthority);
   const handledContinuousJumpCommandIdRef = useRef<number | null>(null);
@@ -120,7 +123,13 @@ export function useContinuousPreviewSync({
     if (isVisiblePageAuthorityRef.current) {
       onCurrentVisiblePageChange(nextVisiblePage);
     }
-  }, [currentVisiblePage, displayMode, numPages, onCurrentVisiblePageChange, scrollContainerRef]);
+  }, [
+    currentVisiblePage,
+    displayMode,
+    numPages,
+    onCurrentVisiblePageChange,
+    scrollContainerRef,
+  ]);
 
   const flushContinuousScrollState = useCallback(() => {
     continuousScrollFrameRef.current = null;
@@ -145,7 +154,12 @@ export function useContinuousPreviewSync({
     }
 
     onContinuousScrollRatioChange(container.scrollTop / maxScrollableTop);
-  }, [displayMode, onContinuousScrollRatioChange, scrollContainerRef, updateCurrentVisiblePage]);
+  }, [
+    displayMode,
+    onContinuousScrollRatioChange,
+    scrollContainerRef,
+    updateCurrentVisiblePage,
+  ]);
 
   const handleContinuousScroll = useCallback(() => {
     if (displayMode !== 'continuous') {
@@ -172,8 +186,16 @@ export function useContinuousPreviewSync({
       return;
     }
 
-    continuousScrollFrameRef.current = window.requestAnimationFrame(flushContinuousScrollState);
-  }, [displayMode, flushContinuousScrollState, onContinuousInteractionStart, paneId, scrollContainerRef]);
+    continuousScrollFrameRef.current = window.requestAnimationFrame(
+      flushContinuousScrollState,
+    );
+  }, [
+    displayMode,
+    flushContinuousScrollState,
+    onContinuousInteractionStart,
+    paneId,
+    scrollContainerRef,
+  ]);
 
   useEffect(() => {
     if (displayMode !== 'continuous' || numPages < 1) {
@@ -191,7 +213,15 @@ export function useContinuousPreviewSync({
     return () => {
       window.cancelAnimationFrame(frameId);
     };
-  }, [canvasSize.height, canvasSize.width, displayMode, effectiveZoomMode, numPages, safeZoomScale, updateCurrentVisiblePage]);
+  }, [
+    canvasSize.height,
+    canvasSize.width,
+    displayMode,
+    effectiveZoomMode,
+    numPages,
+    safeZoomScale,
+    updateCurrentVisiblePage,
+  ]);
 
   useEffect(() => {
     if (
@@ -204,7 +234,8 @@ export function useContinuousPreviewSync({
     }
 
     const container = scrollContainerRef.current;
-    const pageWrapper = continuousPageWrapperRefs.current[continuousJumpCommand.page];
+    const pageWrapper =
+      continuousPageWrapperRefs.current[continuousJumpCommand.page];
 
     if (!container || !pageWrapper) {
       return;
@@ -247,9 +278,21 @@ export function useContinuousPreviewSync({
 
     isProgrammaticScrollRef.current = true;
     container.scrollTop = nextScrollTop;
-  }, [canvasSize.height, canvasSize.width, continuousScrollRatio, displayMode, effectiveZoomMode, numPages, safeZoomScale, scrollContainerRef]);
+  }, [
+    canvasSize.height,
+    canvasSize.width,
+    continuousScrollRatio,
+    displayMode,
+    effectiveZoomMode,
+    numPages,
+    safeZoomScale,
+    scrollContainerRef,
+  ]);
 
-  function setContinuousPageWrapperRef(pageNumber: number, node: HTMLDivElement | null) {
+  function setContinuousPageWrapperRef(
+    pageNumber: number,
+    node: HTMLDivElement | null,
+  ) {
     continuousPageWrapperRefs.current[pageNumber] = node;
   }
 

@@ -118,6 +118,14 @@
         "noSearchResults": "Không tìm thấy phông phù hợp.",
         "noCandidates": "Không có danh sách phông thay thế nào được trả về cho phông này."
       },
+      "pdfFlow": {
+        "label": "Luồng dịch PDF",
+        "description": "Chọn cách xử lý tệp PDF khi dịch.",
+        "formatPreservedTitle": "Giữ định dạng",
+        "formatPreservedDescription": "Giữ bố cục gốc nhiều nhất có thể.",
+        "nonFormatPreservedTitle": "Không giữ định dạng",
+        "nonFormatPreservedDescription": "Dùng luồng dịch PDF thay thế và xuất ra PDF mới, không giữ bố cục gốc."
+      },
       "back": "Quay lại",
       "startTranslation": "Bắt đầu dịch",
       "processing": "Đang xử lý..."
@@ -175,7 +183,7 @@
       "notReadyTitle": "Bản xem trước chưa sẵn sàng",
       "notReadyDescription": "Tác vụ dịch chưa hoàn tất hoặc chưa có file đầu ra để hiển thị.",
       "unsupportedTitle": "Chưa thể xem trước",
-      "unsupportedDescription": "Chỉ có thể xem trước khi tác vụ dịch đã có đầy đủ tệp gốc và tệp bản dịch sẵn sàng để render PDF."
+      "unsupportedDescription": "Chỉ có thể xem trước khi cả tệp gốc và tệp bản dịch đều là PDF hợp lệ và còn hiệu lực."
     },
     "translationResult": {
       "success": "Dịch tài liệu hoàn tất",

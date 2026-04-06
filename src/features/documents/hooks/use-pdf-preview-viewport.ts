@@ -2,7 +2,9 @@
 
 import { RefObject, useEffect, useState } from 'react';
 
-export function usePdfPreviewViewport(viewportRef: RefObject<HTMLDivElement | null>) {
+export function usePdfPreviewViewport(
+  viewportRef: RefObject<HTMLDivElement | null>,
+) {
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
@@ -14,10 +16,14 @@ export function usePdfPreviewViewport(viewportRef: RefObject<HTMLDivElement | nu
 
     const measureViewport = () => {
       const nextWidth = container.clientWidth > 0 ? container.clientWidth : 0;
-      const nextHeight = container.clientHeight > 0 ? container.clientHeight : 0;
+      const nextHeight =
+        container.clientHeight > 0 ? container.clientHeight : 0;
 
       setCanvasSize((currentSize) => {
-        if (currentSize.width === nextWidth && currentSize.height === nextHeight) {
+        if (
+          currentSize.width === nextWidth &&
+          currentSize.height === nextHeight
+        ) {
           return currentSize;
         }
 
@@ -39,8 +45,12 @@ export function usePdfPreviewViewport(viewportRef: RefObject<HTMLDivElement | nu
     }
 
     const observer = new ResizeObserver(([entry]) => {
-      const nextWidth = Math.floor(entry?.contentRect.width ?? container.clientWidth);
-      const nextHeight = Math.floor(entry?.contentRect.height ?? container.clientHeight);
+      const nextWidth = Math.floor(
+        entry?.contentRect.width ?? container.clientWidth,
+      );
+      const nextHeight = Math.floor(
+        entry?.contentRect.height ?? container.clientHeight,
+      );
 
       setCanvasSize((currentSize) => {
         const normalizedWidth = nextWidth > 0 ? nextWidth : 0;

@@ -118,6 +118,14 @@
         "noSearchResults": "No matching fonts found.",
         "noCandidates": "No replacement candidates were returned for this font."
       },
+      "pdfFlow": {
+        "label": "PDF translation flow",
+        "description": "Choose how PDF files should be translated.",
+        "formatPreservedTitle": "Format-preserved",
+        "formatPreservedDescription": "Keeps the original layout as much as possible.",
+        "nonFormatPreservedTitle": "Not format-preserved",
+        "nonFormatPreservedDescription": "Uses an alternate PDF translation flow and exports a new PDF without preserving the original layout."
+      },
       "back": "Back",
       "startTranslation": "Start translation",
       "processing": "Processing..."
@@ -175,7 +183,7 @@
       "notReadyTitle": "Preview not ready",
       "notReadyDescription": "The translation job is not finished yet or there is no output file to display.",
       "unsupportedTitle": "Preview unavailable",
-      "unsupportedDescription": "Preview is available only when the translation job has both original and translated files ready for PDF rendering."
+      "unsupportedDescription": "Preview is available only when both original and translated files are valid PDF documents and still available."
     },
     "translationResult": {
       "success": "Translation completed",

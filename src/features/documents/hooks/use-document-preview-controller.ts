@@ -59,7 +59,11 @@ export function useDocumentPreviewController(params: {
 
   const commitPage = useCallback(
     (nextPage: number) => {
-      dispatch({ type: 'commit-page', page: nextPage, maxPage: maxAvailablePage });
+      dispatch({
+        type: 'commit-page',
+        page: nextPage,
+        maxPage: maxAvailablePage,
+      });
     },
     [maxAvailablePage],
   );
@@ -98,14 +102,20 @@ export function useDocumentPreviewController(params: {
     }
 
     if (jumpToPageInput === '') {
-      dispatch({ type: 'set-jump-to-page-input', value: String(currentVisiblePage) });
+      dispatch({
+        type: 'set-jump-to-page-input',
+        value: String(currentVisiblePage),
+      });
       return;
     }
 
     const parsedPage = Number.parseInt(jumpToPageInput, 10);
 
     if (Number.isNaN(parsedPage)) {
-      dispatch({ type: 'set-jump-to-page-input', value: String(currentVisiblePage) });
+      dispatch({
+        type: 'set-jump-to-page-input',
+        value: String(currentVisiblePage),
+      });
       return;
     }
 
@@ -138,13 +148,18 @@ export function useDocumentPreviewController(params: {
 
   const setCurrentVisiblePage = useCallback(
     (nextPage: number) => {
-      dispatch({ type: 'set-current-visible-page', page: nextPage, maxPage: maxAvailablePage });
+      dispatch({
+        type: 'set-current-visible-page',
+        page: nextPage,
+        maxPage: maxAvailablePage,
+      });
     },
     [maxAvailablePage],
   );
 
   const goToPreviousPage = useCallback(() => {
-    const pageBase = displayMode === 'continuous' ? currentVisiblePage : currentPage;
+    const pageBase =
+      displayMode === 'continuous' ? currentVisiblePage : currentPage;
     const nextPage = clampNavigationPage(pageBase - 1, maxAvailablePage);
 
     if (displayMode === 'continuous') {
@@ -161,10 +176,17 @@ export function useDocumentPreviewController(params: {
     }
 
     commitPage(nextPage);
-  }, [commitPage, currentPage, currentVisiblePage, displayMode, maxAvailablePage]);
+  }, [
+    commitPage,
+    currentPage,
+    currentVisiblePage,
+    displayMode,
+    maxAvailablePage,
+  ]);
 
   const goToNextPage = useCallback(() => {
-    const pageBase = displayMode === 'continuous' ? currentVisiblePage : currentPage;
+    const pageBase =
+      displayMode === 'continuous' ? currentVisiblePage : currentPage;
     const nextPage = clampNavigationPage(pageBase + 1, maxAvailablePage);
 
     if (displayMode === 'continuous') {
@@ -181,7 +203,13 @@ export function useDocumentPreviewController(params: {
     }
 
     commitPage(nextPage);
-  }, [commitPage, currentPage, currentVisiblePage, displayMode, maxAvailablePage]);
+  }, [
+    commitPage,
+    currentPage,
+    currentVisiblePage,
+    displayMode,
+    maxAvailablePage,
+  ]);
 
   useEffect(() => {
     dispatch({ type: 'reset-navigation' });

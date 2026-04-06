@@ -45,13 +45,17 @@ export function usePdfPreviewRenderModel({
       ? 'fit-width'
       : zoomMode;
   const renderDevicePixelRatio =
-    typeof window === 'undefined' ? 1 : Math.min(window.devicePixelRatio || 1, 2);
-  const effectivePageNumber = numPages > 0 ? Math.min(currentPage, numPages) : currentPage;
+    typeof window === 'undefined'
+      ? 1
+      : Math.min(window.devicePixelRatio || 1, 2);
+  const effectivePageNumber =
+    numPages > 0 ? Math.min(currentPage, numPages) : currentPage;
   const pageDimensions = pageDimensionsByPage[effectivePageNumber] ?? {
     width: 0,
     height: 0,
   };
-  const availableCanvasWidth = canvasSize.width > 8 ? canvasSize.width - 8 : canvasSize.width;
+  const availableCanvasWidth =
+    canvasSize.width > 8 ? canvasSize.width - 8 : canvasSize.width;
   const availableCanvasHeight =
     canvasSize.height > 8 ? canvasSize.height - 8 : canvasSize.height;
   const widthFitScale =
@@ -76,7 +80,8 @@ export function usePdfPreviewRenderModel({
   const requiresPagedMeasurement =
     effectiveZoomMode === 'fit-page' || effectiveZoomMode === 'fit-width';
   const canRenderPagedPage = fileUrl && !error && effectivePagedScale > 0;
-  const continuousPageWidth = canvasSize.width > 0 ? Math.max(canvasSize.width - 2, 1) : undefined;
+  const continuousPageWidth =
+    canvasSize.width > 0 ? Math.max(canvasSize.width - 2, 1) : undefined;
   const isPageDimensionsLoading =
     isPagedMode &&
     requiresPagedMeasurement &&

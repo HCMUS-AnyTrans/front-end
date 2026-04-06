@@ -5,6 +5,7 @@ import { AppCard, AppCardContent } from "@/components/ui/app-card"
 import { LanguageSelector } from "./language-selector"
 import { DomainSelector } from "./domain-selector"
 import { ToneSelector } from "./tone-selector"
+import { PdfFlowSelector } from "./pdf-flow-selector"
 import { GlossarySection } from "./glossary-section"
 import { FontConfigurationSection } from "./font-configuration-section"
 import { ConfigureEstimateCard } from "./configure-estimate-card"
@@ -14,7 +15,14 @@ import { ConfigureMobileActionBar } from "./configure-mobile-action-bar"
 import { getDomainLabel, useDomains } from '@/features/domains'
 import { useManualTerms } from "../hooks/use-manual-terms"
 import { useStepConfigureState } from "../hooks/use-step-configure-state"
-import type { TranslationConfig, LanguageCode, ParsedFontsByGroup, FontCheckItem, FontEnabledMap } from "../types"
+import type {
+  TranslationConfig,
+  LanguageCode,
+  ParsedFontsByGroup,
+  FontCheckItem,
+  FontEnabledMap,
+  PdfTranslationFlow,
+} from "../types"
 import type { Glossary, Term } from "@/features/glossary"
 import type { CreditEstimateResponse } from "../types"
 
@@ -29,6 +37,8 @@ interface StepConfigureProps {
   estimateError: string | null
   currentBalance?: number
   isLoadingBalance?: boolean
+  isPdfFile: boolean
+  pdfTranslationFlow: PdfTranslationFlow
   fontsUsedByGroup: ParsedFontsByGroup
   fontCheckItems: FontCheckItem[]
   keepOriginalFontSize: boolean
@@ -42,6 +52,7 @@ interface StepConfigureProps {
   onFontConfigEnabledChange: (enabled: boolean) => void
   onFontEnabledChange: (fromFont: string, enabled: boolean) => void
   onFontSelectionChange: (fromFont: string, toFont: string) => void
+  onPdfTranslationFlowChange: (flow: PdfTranslationFlow) => void
   onBack: () => void
   onStart: () => void
   isLoading?: boolean
@@ -58,6 +69,8 @@ export function StepConfigure({
   estimateError,
   currentBalance,
   isLoadingBalance,
+  isPdfFile,
+  pdfTranslationFlow,
   fontsUsedByGroup,
   fontCheckItems,
   keepOriginalFontSize,
@@ -71,6 +84,7 @@ export function StepConfigure({
   onFontConfigEnabledChange,
   onFontEnabledChange,
   onFontSelectionChange,
+  onPdfTranslationFlowChange,
   onBack,
   onStart,
   isLoading,
@@ -85,6 +99,8 @@ export function StepConfigure({
     icon: domain.icon,
   }))
   const isUnknownSelectedDomain = Boolean(config.domainId) && !isLoadingDomains && !selectedDomain
+  const isFontConfigurationApplicable =
+    !isPdfFile || pdfTranslationFlow === "format_preserved"
   const { isInsufficientCredits, missingCredits, isStartDisabled } = useStepConfigureState({
     srcLang: config.srcLang,
     tgtLang: config.tgtLang,
@@ -97,6 +113,7 @@ export function StepConfigure({
     fontsUsedByGroup,
     fontParseSupported,
     isCheckingFonts,
+    isFontConfigurationApplicable,
     isLoading,
   })
   const { addManualTerm, updateManualTerm, removeManualTerm } = useManualTerms({
@@ -154,26 +171,34 @@ export function StepConfigure({
                 onCustomValueChange={handleCustomDomainChange}
               />
               <ToneSelector value={config.tone} onChange={handleToneChange} />
+              {isPdfFile ? (
+                <PdfFlowSelector
+                  value={pdfTranslationFlow}
+                  onChange={onPdfTranslationFlowChange}
+                />
+              ) : null}
             </AppCardContent>
           </AppCard>
 
-          <FontConfigurationSection
-            fontsUsedByGroup={fontsUsedByGroup}
-            tgtLang={config.tgtLang}
-            fontCheckItems={fontCheckItems}
-            keepOriginalFontSize={keepOriginalFontSize}
-            fontConfigEnabled={fontConfigEnabled}
-            fontEnabledMap={fontEnabledMap}
-            fontSelections={config.fontSelections}
-            fontParseSupported={fontParseSupported}
-            fontFlowUnavailable={fontFlowUnavailable}
-            fontCheckUnavailable={fontCheckUnavailable}
-            isCheckingFonts={isCheckingFonts}
-            onKeepOriginalFontSizeChange={onKeepOriginalFontSizeChange}
-            onConfigEnabledChange={onFontConfigEnabledChange}
-            onFontEnabledChange={onFontEnabledChange}
-            onSelectionChange={onFontSelectionChange}
-          />
+          {isFontConfigurationApplicable ? (
+            <FontConfigurationSection
+              fontsUsedByGroup={fontsUsedByGroup}
+              tgtLang={config.tgtLang}
+              fontCheckItems={fontCheckItems}
+              keepOriginalFontSize={keepOriginalFontSize}
+              fontConfigEnabled={fontConfigEnabled}
+              fontEnabledMap={fontEnabledMap}
+              fontSelections={config.fontSelections}
+              fontParseSupported={fontParseSupported}
+              fontFlowUnavailable={fontFlowUnavailable}
+              fontCheckUnavailable={fontCheckUnavailable}
+              isCheckingFonts={isCheckingFonts}
+              onKeepOriginalFontSizeChange={onKeepOriginalFontSizeChange}
+              onConfigEnabledChange={onFontConfigEnabledChange}
+              onFontEnabledChange={onFontEnabledChange}
+              onSelectionChange={onFontSelectionChange}
+            />
+          ) : null}
 
             <GlossarySection
               glossaries={glossaries}

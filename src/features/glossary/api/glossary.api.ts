@@ -77,16 +77,21 @@ export async function listGlossariesApi(
 export async function listGlossaryTemplatesApi(
   domainId?: string,
 ): Promise<GlossaryTemplateListResponse> {
-  const response = await apiClient.get<{ items: GlossaryTemplateDto[] }>('/glossaries/templates', {
-    params: domainId ? { domain_id: domainId } : undefined,
-  });
+  const response = await apiClient.get<{ items: GlossaryTemplateDto[] }>(
+    '/glossaries/templates',
+    {
+      params: domainId ? { domain_id: domainId } : undefined,
+    },
+  );
   return {
     items: response.data.items.map(mapGlossaryTemplateDto),
   };
 }
 
 export async function getGlossaryLlmPriceApi(): Promise<GlossaryLlmPrice> {
-  const response = await apiClient.get<GlossaryLlmPrice>('/glossaries/pricing/llm-generation');
+  const response = await apiClient.get<GlossaryLlmPrice>(
+    '/glossaries/pricing/llm-generation',
+  );
   return response.data;
 }
 
