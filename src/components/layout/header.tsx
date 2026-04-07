@@ -12,7 +12,7 @@ import { ModeToggle, LanguageSwitcher, UserAvatarMenu, UserMenuList, getUserInit
 import { siteConfig } from "@/data/site";
 import { locales } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
-import { useAuthStore } from "@/features/auth";
+import { useIsAuthenticated, useUser } from "@/features/auth";
 
 export interface NavItem {
   label: string;
@@ -45,8 +45,8 @@ export function Header({
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const user = useAuthStore((s) => s.user);
-  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+  const user = useUser();
+  const isAuthenticated = useIsAuthenticated();
 
   const normalizedPathname = (() => {
     if (!pathname) return "/";

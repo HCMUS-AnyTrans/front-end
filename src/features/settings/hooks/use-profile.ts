@@ -3,13 +3,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { getProfileApi } from '../api/settings.api';
 import { settingsKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 
 /**
  * Hook to fetch current user profile
  */
 export function useProfile() {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: settingsKeys.profile(),

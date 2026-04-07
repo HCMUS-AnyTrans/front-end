@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { useShallow } from 'zustand/react/shallow';
 import type { AuthStore, User } from '../types';
 
 /**
@@ -86,6 +87,17 @@ export const useIsAuthenticated = () =>
   useAuthStore((state) => state.isAuthenticated);
 export const useIsInitialized = () =>
   useAuthStore((state) => state.isInitialized);
+export const useAuthActions = () =>
+  useAuthStore(
+    useShallow((state) => ({
+      setAuth: state.setAuth,
+      setUser: state.setUser,
+      setAccessToken: state.setAccessToken,
+      clearAuth: state.clearAuth,
+      updateUser: state.updateUser,
+      setInitialized: state.setInitialized,
+    })),
+  );
 
 /**
  * Non-reactive getters for use outside React components

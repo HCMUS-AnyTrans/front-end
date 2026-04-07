@@ -3,13 +3,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { getStorageApi } from '../api/dashboard.api';
 import { dashboardKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 
 /**
  * Hook to fetch storage usage information
  */
 export function useStorage() {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: dashboardKeys.storage(),

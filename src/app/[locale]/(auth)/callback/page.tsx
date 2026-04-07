@@ -2,12 +2,12 @@
 
 import { useEffect, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
-import { useAuthStore } from "@/features/auth"
+import { useAuthActions } from "@/features/auth"
 
 function CallbackContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
-  const { setAuth, clearAuth } = useAuthStore()
+  const { setAuth, clearAuth } = useAuthActions()
 
   useEffect(() => {
     const handleCallback = async () => {

@@ -1,7 +1,12 @@
 'use client';
 
 import { useEffect, useCallback } from 'react';
-import { useAuthStore } from '../store/auth.store';
+import {
+  useAccessToken,
+  useAuthActions,
+  useAuthStore,
+  useIsAuthenticated,
+} from '../store/auth.store';
 import { refreshTokenApi } from '../api/auth.api';
 
 interface AuthProviderProps {
@@ -16,7 +21,9 @@ interface AuthProviderProps {
  * but doesn't have an access token (e.g., after page refresh).
  */
 export function AuthProvider({ children }: AuthProviderProps) {
-  const { isAuthenticated, accessToken, setAuth, clearAuth, setInitialized } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
+  const { setAuth, clearAuth, setInitialized } = useAuthActions();
 
   const initializeAuth = useCallback(async () => {
     // If we have user data but no access token, try to refresh

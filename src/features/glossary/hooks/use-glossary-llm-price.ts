@@ -1,12 +1,13 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import { glossaryKeys } from '@/lib/query-client';
 import { getGlossaryLlmPriceApi } from '../api/glossary.api';
 
 export function useGlossaryLlmPrice(enabled = true) {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: glossaryKeys.llmPricing(),

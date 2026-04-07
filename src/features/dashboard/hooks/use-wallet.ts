@@ -3,13 +3,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { getWalletApi } from '../api/dashboard.api';
 import { walletKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 
 /**
  * Hook to fetch current user wallet balance
  */
 export function useWallet() {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: walletKeys.balance(),

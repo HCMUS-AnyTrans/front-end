@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { keepPreviousData } from '@tanstack/react-query';
 import { listGlossariesApi } from '../api/glossary.api';
 import { glossaryKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type { GlossaryQueryParams } from '../types';
 
 /**
@@ -12,7 +12,8 @@ import type { GlossaryQueryParams } from '../types';
  * Supports filtering by domain, srcLang, tgtLang, and free-text search.
  */
 export function useGlossaries(params?: GlossaryQueryParams) {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
   const isEnabled = params !== undefined;
 
   const result = useQuery({

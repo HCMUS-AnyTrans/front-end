@@ -2,7 +2,11 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { getCurrentUserApi } from '../api/auth.api';
-import { useAuthStore } from '../store/auth.store';
+import {
+  useAccessToken,
+  useAuthActions,
+  useIsAuthenticated,
+} from '../store/auth.store';
 import { authKeys } from '@/lib/query-client';
 import { useEffect } from 'react';
 
@@ -10,7 +14,9 @@ import { useEffect } from 'react';
  * Hook to fetch and sync current user data
  */
 export function useCurrentUser() {
-  const { isAuthenticated, setUser, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
+  const { setUser } = useAuthActions();
 
   const query = useQuery({
     queryKey: authKeys.user(),

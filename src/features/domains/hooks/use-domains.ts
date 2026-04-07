@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import { domainKeys } from '@/lib/query-client';
 import {
   DEFAULT_DOMAIN_ICON,
@@ -14,7 +14,8 @@ import type { DomainWithIcon } from '../types';
 const DOMAINS_CACHE_TIME = 24 * 60 * 60 * 1000;
 
 export function useDomains() {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const query = useQuery({
     queryKey: domainKeys.list(),

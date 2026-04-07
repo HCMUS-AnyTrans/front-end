@@ -9,14 +9,15 @@ import {
   getStorageUsageApi,
 } from '../api/settings.api';
 import { fileKeys, dashboardKeys, translationKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type { FilesQuery } from '../types';
 
 /**
  * Hook to fetch user files
  */
 export function useFiles(query?: FilesQuery) {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: fileKeys.list(query),
@@ -105,7 +106,8 @@ export function useDeleteFilesByJob() {
  * Hook to fetch storage usage
  */
 export function useStorageUsage() {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: fileKeys.storage(),

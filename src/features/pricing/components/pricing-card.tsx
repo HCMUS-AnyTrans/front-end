@@ -12,7 +12,7 @@ import {
   createCreditPackageViewModel,
 } from "@/lib/credit-package"
 import { cn } from "@/lib/utils"
-import { useAuthStore } from "@/features/auth"
+import { useIsAuthenticated } from "@/features/auth"
 import { useCreateVnpayPayment } from "@/features/settings"
 import type { Plan } from "../data"
 
@@ -30,7 +30,7 @@ export function PricingCard({
   const t = useTranslations("marketing.pricingPage")
   const locale = useLocale()
   const router = useRouter()
-  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const isAuthenticated = useIsAuthenticated()
   const { createPaymentAsync, isCreating } = useCreateVnpayPayment()
   const [paymentError, setPaymentError] = useState<string | null>(null)
 

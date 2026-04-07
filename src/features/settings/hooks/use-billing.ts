@@ -14,7 +14,7 @@ import {
   createVnpayPaymentApi,
 } from '../api/settings.api';
 import { walletKeys, billingKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type {
   LedgerQuery,
   PaymentsQuery,
@@ -25,7 +25,8 @@ import type {
  * Hook to fetch wallet balance
  */
 export function useWallet() {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: walletKeys.balance(),
@@ -49,7 +50,8 @@ export function useWallet() {
  * Hook to fetch wallet ledger (transaction history)
  */
 export function useWalletLedger(query?: LedgerQuery) {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: billingKeys.ledger(query),
@@ -97,7 +99,8 @@ export function useCreditPackages() {
  * Hook to fetch payment history
  */
 export function usePayments(query?: PaymentsQuery) {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: billingKeys.payments(query),

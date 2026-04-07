@@ -1,6 +1,11 @@
 'use client';
 
-import { useAuthStore } from '../store/auth.store';
+import {
+  useAccessToken,
+  useIsAuthenticated,
+  useIsInitialized,
+  useUser,
+} from '../store/auth.store';
 import { useLogin } from './use-login';
 import { useLogout } from './use-logout';
 import { useRegister } from './use-register';
@@ -12,7 +17,10 @@ import { initiateGoogleAuth } from '../api/auth.api';
  * Provides a single interface for authentication operations
  */
 export function useAuth() {
-  const { user, isAuthenticated, isInitialized, accessToken } = useAuthStore();
+  const user = useUser();
+  const isAuthenticated = useIsAuthenticated();
+  const isInitialized = useIsInitialized();
+  const accessToken = useAccessToken();
 
   const login = useLogin();
   const logout = useLogout();

@@ -2,11 +2,12 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { glossaryKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import { listGlossaryTemplatesApi } from '../api/glossary.api';
 
 export function useGlossaryTemplates(domainId?: string, enabled = true) {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: glossaryKeys.templates(domainId),

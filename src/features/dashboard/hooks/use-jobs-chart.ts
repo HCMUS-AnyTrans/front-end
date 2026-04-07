@@ -3,14 +3,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { getJobsChartApi } from '../api/dashboard.api';
 import { dashboardKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type { JobsChartQuery } from '../types';
 
 /**
  * Hook to fetch jobs chart data grouped by day
  */
 export function useJobsChart(query?: JobsChartQuery) {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: dashboardKeys.jobsChart(query),
