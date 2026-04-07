@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useMemo, useState } from "react"
 import { useTranslations, useLocale } from "next-intl"
 import { useSearchParams } from "next/navigation"
 import { Link } from "@/i18n/navigation"
@@ -10,7 +10,6 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Skeleton } from "@/components/ui/skeleton"
 import { ProtectedRoute } from "@/features/auth"
 import { useCreditPackages, useCreateVnpayPayment } from "@/features/settings"
-import { trackEvent } from "@/lib/analytics"
 import {
   createCreditPackageFormatter,
   createCreditPackageViewModel,
@@ -31,7 +30,6 @@ function CheckoutContent() {
   const { packages, isLoading, isError, refetch } = useCreditPackages()
   const { createPaymentAsync, isCreating } = useCreateVnpayPayment()
   const [paymentError, setPaymentError] = useState<string | null>(null)
-  const hasTrackedView = useRef(false)
 
   const selectedPackage = useMemo(() => {
     if (!packageId) return null
@@ -44,10 +42,6 @@ function CheckoutContent() {
   const handlePay = async () => {
     if (!selectedPackage) return
     setPaymentError(null)
-    trackEvent("buy_credit_payment_submit", {
-      source: source ?? "checkout",
-      packageId: selectedPackage.id,
-    })
     try {
       const returnUrl = `${window.location.origin}/${locale}/settings/billing${
         isDashboardSource ? "?source=dashboard" : ""
@@ -56,32 +50,11 @@ function CheckoutContent() {
         packageId: selectedPackage.id,
         returnUrl,
       })
-      trackEvent("buy_credit_redirect_vnpay", {
-        source: source ?? "checkout",
-        packageId: selectedPackage.id,
-        paymentId: data.paymentId,
-      })
       window.location.href = data.paymentUrl
     } catch {
-      trackEvent("buy_credit_payment_failed", {
-        source: source ?? "checkout",
-        packageId: selectedPackage.id,
-      })
       setPaymentError(t("paymentError"))
     }
   }
-
-  useEffect(() => {
-    if (!selectedPackage || hasTrackedView.current) return
-    hasTrackedView.current = true
-    trackEvent("buy_credit_checkout_viewed", {
-      source: source ?? "checkout",
-      packageId: selectedPackage.id,
-      credits: selectedPackage.credits,
-      price: selectedPackage.price,
-      currency: selectedPackage.currency,
-    })
-  }, [selectedPackage, source])
 
   return (
     <section className="py-16 px-4">

@@ -9,7 +9,6 @@ import { toast } from "sonner"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { billingKeys, dashboardKeys, notificationKeys, walletKeys } from "@/lib/query-client"
-import { trackEvent } from "@/lib/analytics"
 
 type BannerStatus = "success" | "error" | "pending" | null
 
@@ -35,11 +34,6 @@ export function PaymentStatusBanner() {
   useEffect(() => {
     if (!status || hasTracked.current) return
     hasTracked.current = true
-
-    trackEvent("buy_credit_dashboard_banner_viewed", {
-      source: "dashboard",
-      status,
-    })
 
     if (status === "success") {
       queryClient.invalidateQueries({ queryKey: walletKeys.all })

@@ -14,7 +14,6 @@ import {
 import { cn } from "@/lib/utils"
 import { useAuthStore } from "@/features/auth"
 import { useCreateVnpayPayment } from "@/features/settings"
-import { trackEvent } from "@/lib/analytics"
 import type { Plan } from "../data"
 
 export interface PricingCardProps {
@@ -41,14 +40,11 @@ export function PricingCard({
       return
     }
     setPaymentError(null)
-    trackEvent("buy_credit_payment_submit", { source: "pricing", packageId: plan.id })
     try {
       const returnUrl = `${window.location.origin}/${locale}/settings/billing`
       const data = await createPaymentAsync({ packageId: plan.id, returnUrl })
-      trackEvent("buy_credit_redirect_vnpay", { source: "pricing", packageId: plan.id, paymentId: data.paymentId })
       window.location.href = data.paymentUrl
     } catch {
-      trackEvent("buy_credit_payment_failed", { source: "pricing", packageId: plan.id })
       setPaymentError(t("paymentError"))
     }
   }

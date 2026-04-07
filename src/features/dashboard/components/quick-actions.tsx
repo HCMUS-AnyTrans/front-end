@@ -4,8 +4,6 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Button } from '@/components/ui/button';
 import { FileUp, Coins } from 'lucide-react';
-import { BuyCreditsDialog } from './buy-credits-dialog';
-import { trackEvent } from '@/lib/analytics';
 
 export function QuickActions() {
   const t = useTranslations('dashboard.quickActions');
@@ -21,20 +19,16 @@ export function QuickActions() {
           {t('uploadDocument')}
         </Link>
       </Button>
-      <BuyCreditsDialog>
-        <Button
-          variant="outline"
-          className="w-full gap-2 bg-secondary-500 text-white hover:bg-secondary-400 hover:text-white cursor-pointer sm:w-auto"
-          onClick={() => {
-            trackEvent('buy_credit_click', {
-              source: 'dashboard_quick_actions',
-            });
-          }}
-        >
+      <Button
+        asChild
+        variant="outline"
+        className="w-full gap-2 bg-secondary-500 text-white hover:bg-secondary-400 hover:text-white cursor-pointer sm:w-auto"
+      >
+        <Link target="_blank" href="/pricing">
           <Coins className="size-4" />
           {t('buyCredits')}
-        </Button>
-      </BuyCreditsDialog>
+        </Link>
+      </Button>
     </div>
   );
 }

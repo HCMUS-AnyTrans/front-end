@@ -10,7 +10,6 @@ import {
   Plus,
   ArrowUpRight,
   ArrowDownLeft,
-  Loader2,
   CreditCard,
   CheckCircle,
   XCircle,
@@ -20,24 +19,13 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { CreditPackageCard } from '@/components/shared';
 import { SettingsSection, SettingsDivider } from './settings-section';
 import { Pagination } from '@/components/ui/pagination';
-import {
-  useWallet,
-  useWalletLedger,
-  useCreditPackages,
-  usePayments,
-  useCreateVnpayPayment,
-} from '../hooks/use-billing';
+import { useWallet, useWalletLedger, usePayments } from '../hooks/use-billing';
 import type { LedgerType, PaymentStatus } from '../types';
 import { cn } from '@/lib/utils';
-import {
-  createCreditPackageFormatter,
-  createCreditPackageViewModels,
-} from '@/lib/credit-package';
+import { createCreditPackageFormatter } from '@/lib/credit-package';
 import { walletKeys, billingKeys } from '@/lib/query-client';
-import { trackEvent } from '@/lib/analytics';
 
 // ============================================================================
 // Skeleton Loading State
@@ -58,25 +46,6 @@ function BillingTabSkeleton() {
             </div>
           </div>
           <Skeleton className="h-9 w-28" />
-        </div>
-      </div>
-
-      {/* Credit Packages Skeleton */}
-      <div className="rounded-lg border bg-card p-6">
-        <Skeleton className="mb-1 h-5 w-28" />
-        <Skeleton className="mb-4 h-4 w-48" />
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {[1, 2, 3, 4].map((i) => (
-            <div
-              key={i}
-              className="flex flex-col items-center rounded-xl border-2 p-4"
-            >
-              <Skeleton className="mt-2 h-7 w-16" />
-              <Skeleton className="mt-1 h-4 w-12" />
-              <Skeleton className="mt-3 h-5 w-20" />
-              <Skeleton className="mt-3 h-8 w-full" />
-            </div>
-          ))}
         </div>
       </div>
 
@@ -136,17 +105,13 @@ function BillingTabSkeleton() {
 export function BillingTab() {
   const t = useTranslations('settings.billing');
   const locale = useLocale();
-  const { formatCredits, formatAmount, formatPerCredit } =
-    createCreditPackageFormatter(locale);
+  const { formatCredits } = createCreditPackageFormatter(locale);
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
 
   // Pagination state
   const [ledgerPage, setLedgerPage] = useState(1);
   const [paymentsPage, setPaymentsPage] = useState(1);
-
-  // Ref for scrolling to credit packages
-  const creditPackagesRef = useRef<HTMLDivElement>(null);
 
   // Data hooks
   const { wallet, isLoading: isLoadingWallet } = useWallet();
@@ -156,14 +121,12 @@ export function BillingTab() {
     isLoading: isLoadingLedger,
     isFetching: isFetchingLedger,
   } = useWalletLedger({ page: ledgerPage, limit: 10 });
-  const { packages, isLoading: isLoadingPackages } = useCreditPackages();
   const {
     payments,
     pagination: paymentsPagination,
     isLoading: isLoadingPayments,
     isFetching: isFetchingPayments,
   } = usePayments({ page: paymentsPage, limit: 10 });
-  const { createPayment, isCreating } = useCreateVnpayPayment();
 
   const [vnpayStatus] = useState<'success' | 'error' | 'pending' | null>(() => {
     const responseCode = searchParams.get('vnp_ResponseCode');
@@ -181,11 +144,6 @@ export function BillingTab() {
     hasHandledVnpay.current = true;
 
     if (responseCode === '00') {
-      trackEvent('buy_credit_returned', {
-        source: returnSource ?? 'billing',
-        status: 'success',
-        responseCode,
-      });
       // Invalidate wallet + ledger + payments queries to refresh data
       queryClient.invalidateQueries({ queryKey: walletKeys.all });
       queryClient.invalidateQueries({ queryKey: billingKeys.all });
@@ -193,24 +151,11 @@ export function BillingTab() {
     }
 
     if (responseCode === '24') {
-      trackEvent('buy_credit_returned', {
-        source: returnSource ?? 'billing',
-        status: 'cancelled',
-        responseCode,
-      });
       return;
     }
-
-    trackEvent('buy_credit_returned', {
-      source: returnSource ?? 'billing',
-      status: 'failed',
-      responseCode,
-    });
   }, [searchParams, queryClient, returnSource]);
 
-  // Full-page skeleton only for wallet + packages (above-the-fold content).
-  // Ledger and payments pagination refetch only their own section.
-  const isInitialLoading = isLoadingWallet || isLoadingPackages;
+  const isInitialLoading = isLoadingWallet;
 
   if (isInitialLoading) {
     return <BillingTabSkeleton />;
@@ -271,26 +216,6 @@ export function BillingTab() {
     );
   }
 
-  const handlePurchase = (packageId: string) => {
-    const returnUrl = `${window.location.origin}/${locale}/settings/billing`;
-    createPayment(
-      { packageId, returnUrl },
-      {
-        onSuccess: (data) => {
-          window.location.href = data.paymentUrl;
-        },
-      },
-    );
-  };
-
-  const handleScrollToPackages = () => {
-    creditPackagesRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
-  };
-
-  const packageList = createCreditPackageViewModels(packages);
   const ledgerList = ledger ?? [];
   const paymentList = payments ?? [];
 
@@ -359,90 +284,15 @@ export function BillingTab() {
           </div>
 
           <div className="flex gap-2">
-            <Button onClick={handleScrollToPackages}>
-              <Plus className="size-4" />
-              {t('addMore')}
+            <Button asChild>
+              <Link href="/pricing" target="_blank" rel="noreferrer">
+                <Plus className="size-4" />
+                {t('addMore')}
+              </Link>
             </Button>
           </div>
         </div>
       </SettingsSection>
-
-      {/* Credit Packages */}
-      <div ref={creditPackagesRef}>
-        <SettingsSection
-          title={t('creditPackages')}
-          description={t('creditPackagesDescription')}
-        >
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {packageList.map((pkg) => {
-              return (
-                <CreditPackageCard
-                  key={pkg.id}
-                  title={pkg.name}
-                  creditsText={formatCredits(pkg.credits)}
-                  creditsLabel={t('credits')}
-                  originalPriceText={
-                    pkg.discountPercent
-                      ? formatAmount(pkg.price, pkg.currency)
-                      : undefined
-                  }
-                  priceText={formatAmount(pkg.discountedPrice, pkg.currency)}
-                  perCreditText={formatPerCredit(
-                    pkg.unitPrice,
-                    pkg.currency,
-                    t('perCredit'),
-                  )}
-                  topBadge={
-                    pkg.isBestValue
-                      ? {
-                          label: t('bestValue'),
-                          tone: 'warning',
-                          placement: 'top-right',
-                        }
-                      : pkg.isPopular
-                        ? {
-                            label: t('popular'),
-                            tone: 'secondary',
-                            placement: 'top-right',
-                          }
-                        : undefined
-                  }
-                  metaBadges={
-                    pkg.discountPercent || pkg.bonusCredits ? (
-                      <>
-                        {pkg.discountPercent ? (
-                          <Badge className="border border-success/20 bg-success/10 text-success hover:bg-success/10">
-                            {t('save', { percent: pkg.discountPercent })}
-                          </Badge>
-                        ) : null}
-                        {pkg.bonusCredits ? (
-                          <Badge className="border border-primary/20 bg-primary/10 text-primary hover:bg-primary/10">
-                            {t('bonusCredits', { credits: pkg.bonusCredits })}
-                          </Badge>
-                        ) : null}
-                      </>
-                    ) : null
-                  }
-                  action={
-                    <Button
-                      size="sm"
-                      className="w-full"
-                      variant={pkg.isBestValue ? 'default' : 'outline'}
-                      onClick={() => handlePurchase(pkg.id)}
-                      disabled={isCreating}
-                    >
-                      {isCreating ? (
-                        <Loader2 className="mr-2 size-4 animate-spin" />
-                      ) : null}
-                      {t('buyNow')}
-                    </Button>
-                  }
-                />
-              );
-            })}
-          </div>
-        </SettingsSection>
-      </div>
 
       {/* Transaction History (Ledger) */}
       <SettingsSection

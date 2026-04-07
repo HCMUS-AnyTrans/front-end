@@ -70,20 +70,6 @@
       "files": "Files",
       "activity": "Activity"
     },
-    "buyCreditsDialog": {
-      "title": "Buy Credits",
-      "description": "Current balance: {balance} credits. Select a package to continue checkout.",
-      "bestValue": "Best value",
-      "popular": "Popular",
-      "bonusCredits": "+{credits} bonus credits",
-      "credits": "credits",
-      "perCredit": "credit",
-      "cancel": "Cancel",
-      "viewPricing": "View pricing page",
-      "loadError": "Unable to load credit packages right now.",
-      "retry": "Try again",
-      "empty": "No credit packages are currently available."
-    },
     "paymentBanner": {
       "success": "Payment successful. Your credit balance has been updated.",
       "error": "Payment failed or was cancelled. Please try again.",

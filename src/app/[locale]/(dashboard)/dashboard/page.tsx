@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from 'next-intl/server';
 import {
   StatsCards,
   QuickActions,
@@ -7,7 +7,7 @@ import {
   PaymentStatusBanner,
   RecentJobsTable,
   UsagePanel,
-} from "@/features/dashboard";
+} from '@/features/dashboard';
 
 type Props = {
   params: Promise<{ locale: string }>;
