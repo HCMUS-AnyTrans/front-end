@@ -1,49 +1,58 @@
-import type { Term } from "@/features/glossary"
+import type { Term } from '@/features/glossary';
 import type {
   CreateTranslationJobDto,
   GlossaryInputMode,
   ManualTerm,
   TranslationConfig,
-} from "../types"
+} from '../types';
 
-type GlossaryModeConfig = Pick<TranslationConfig, "selectedGlossaryId" | "manualTerms"> & {
-  glossaryInputMode?: GlossaryInputMode
-}
+type GlossaryModeConfig = Pick<
+  TranslationConfig,
+  'selectedGlossaryId' | 'manualTerms'
+> & {
+  glossaryInputMode?: GlossaryInputMode;
+};
 
-type GlossaryTermLike = Pick<Term, "srcTerm" | "tgtTerm">
+type GlossaryTermLike = Pick<Term, 'srcTerm' | 'tgtTerm'>;
 
 export function hasNonEmptyManualTerms(manualTerms: ManualTerm[]): boolean {
-  return manualTerms.some((term) => term.src.trim().length > 0 || term.tgt.trim().length > 0)
+  return manualTerms.some(
+    (term) => term.src.trim().length > 0 || term.tgt.trim().length > 0,
+  );
 }
 
 export function countValidManualTerms(manualTerms: ManualTerm[]): number {
-  return manualTerms.filter((term) => term.src.trim().length > 0 && term.tgt.trim().length > 0).length
+  return manualTerms.filter(
+    (term) => term.src.trim().length > 0 && term.tgt.trim().length > 0,
+  ).length;
 }
 
-export function deriveGlossaryInputMode(config: GlossaryModeConfig): GlossaryInputMode {
-  if (config.glossaryInputMode === "none") {
-    return "none"
+export function deriveGlossaryInputMode(
+  config: GlossaryModeConfig,
+): GlossaryInputMode {
+  if (config.glossaryInputMode === 'none') {
+    return 'none';
   }
 
   if (hasNonEmptyManualTerms(config.manualTerms)) {
-    return "manual"
+    return 'manual';
   }
 
   if (config.selectedGlossaryId) {
-    return "saved"
+    return 'saved';
   }
 
-  return config.glossaryInputMode ?? "saved"
+  return config.glossaryInputMode ?? 'saved';
 }
 
 export function shouldConfirmManualToSavedSwitch({
   glossaryInputMode,
   manualTerms,
 }: {
-  glossaryInputMode: GlossaryInputMode
-  manualTerms: ManualTerm[]
+  glossaryInputMode: GlossaryInputMode;
+  manualTerms: ManualTerm[];
 }): boolean {
-  return glossaryInputMode === "manual" && hasNonEmptyManualTerms(manualTerms)
+  return glossaryInputMode === 'manual' && hasNonEmptyManualTerms(manualTerms);
 }
 
 export function buildUserGlossaryEntries({
@@ -51,35 +60,35 @@ export function buildUserGlossaryEntries({
   manualTerms,
   glossaryTerms,
 }: {
-  glossaryInputMode: GlossaryInputMode
-  manualTerms: ManualTerm[]
-  glossaryTerms?: GlossaryTermLike[]
-}): NonNullable<CreateTranslationJobDto["user_glossary"]> {
-  const entries = new Map<string, { src_lang: string; tgt_lang: string }>()
+  glossaryInputMode: GlossaryInputMode;
+  manualTerms: ManualTerm[];
+  glossaryTerms?: GlossaryTermLike[];
+}): NonNullable<CreateTranslationJobDto['user_glossary']> {
+  const entries = new Map<string, { src_lang: string; tgt_lang: string }>();
 
-  if (glossaryInputMode === "saved") {
-    ;(glossaryTerms ?? []).forEach((term) => {
-      const src = term.srcTerm.trim()
-      const tgt = term.tgtTerm.trim()
+  if (glossaryInputMode === 'saved') {
+    (glossaryTerms ?? []).forEach((term) => {
+      const src = term.srcTerm.trim();
+      const tgt = term.tgtTerm.trim();
 
       if (!src || !tgt) {
-        return
+        return;
       }
 
-      entries.set(src.toLowerCase(), { src_lang: src, tgt_lang: tgt })
-    })
-  } else if (glossaryInputMode === "manual") {
+      entries.set(src.toLowerCase(), { src_lang: src, tgt_lang: tgt });
+    });
+  } else if (glossaryInputMode === 'manual') {
     manualTerms.forEach((term) => {
-      const src = term.src.trim()
-      const tgt = term.tgt.trim()
+      const src = term.src.trim();
+      const tgt = term.tgt.trim();
 
       if (!src || !tgt) {
-        return
+        return;
       }
 
-      entries.set(src.toLowerCase(), { src_lang: src, tgt_lang: tgt })
-    })
+      entries.set(src.toLowerCase(), { src_lang: src, tgt_lang: tgt });
+    });
   }
 
-  return Array.from(entries.values())
+  return Array.from(entries.values());
 }

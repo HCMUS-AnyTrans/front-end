@@ -20,7 +20,9 @@ export function usePdfPreviewDocument({
   const onNumPagesChangeRef = useRef(onNumPagesChange);
   const [fileUrl, setFileUrl] = useState<string | null>(null);
   const [numPages, setNumPages] = useState(0);
-  const [pdfDocument, setPdfDocument] = useState<pdfjs.PDFDocumentProxy | null>(null);
+  const [pdfDocument, setPdfDocument] = useState<pdfjs.PDFDocumentProxy | null>(
+    null,
+  );
   const [pageDimensionsByPage, setPageDimensionsByPage] = useState<
     Record<number, { width: number; height: number }>
   >({});
@@ -44,7 +46,9 @@ export function usePdfPreviewDocument({
       onNumPagesChangeRef.current(null);
 
       try {
-        const { download_url } = await getFileDownloadUrl(fileId, { pdf: true });
+        const { download_url } = await getFileDownloadUrl(fileId, {
+          pdf: true,
+        });
 
         if (!isActive) return;
 
@@ -66,7 +70,8 @@ export function usePdfPreviewDocument({
   }, [errorLabel, fileId]);
 
   useEffect(() => {
-    const effectivePageNumber = numPages > 0 ? Math.min(currentPage, numPages) : currentPage;
+    const effectivePageNumber =
+      numPages > 0 ? Math.min(currentPage, numPages) : currentPage;
     const activePdfDocument = pdfDocument;
 
     if (activePdfDocument === null || !fileUrl || !effectivePageNumber) {

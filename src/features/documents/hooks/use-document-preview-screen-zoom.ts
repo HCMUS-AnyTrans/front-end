@@ -13,7 +13,10 @@ type PaneZoomIndicatorState = {
   zoomPercent: number | null;
 };
 
-const INITIAL_PANE_ZOOM_STATE: Record<DocumentPreviewPaneId, PaneZoomIndicatorState> = {
+const INITIAL_PANE_ZOOM_STATE: Record<
+  DocumentPreviewPaneId,
+  PaneZoomIndicatorState
+> = {
   input: {
     zoomMode: 'custom',
     zoomScale: null,
@@ -47,7 +50,9 @@ export function useDocumentPreviewScreenZoom({
   incrementZoomFromScale,
   decrementZoomFromScale,
 }: UseDocumentPreviewScreenZoomParams) {
-  const [zoomStateByPane, setZoomStateByPane] = useState(INITIAL_PANE_ZOOM_STATE);
+  const [zoomStateByPane, setZoomStateByPane] = useState(
+    INITIAL_PANE_ZOOM_STATE,
+  );
 
   const handleZoomPercentageChange = useCallback(
     (
@@ -80,22 +85,33 @@ export function useDocumentPreviewScreenZoom({
     [],
   );
 
-  const preferredPane = displayMode === 'continuous' ? continuousInteractionPane : 'input';
+  const preferredPane =
+    displayMode === 'continuous' ? continuousInteractionPane : 'input';
   const preferredPaneState = zoomStateByPane[preferredPane];
   const inputPaneState = zoomStateByPane.input;
   const outputPaneState = zoomStateByPane.output;
   const fallbackZoomPercent = Math.round(zoomScale * 100);
 
   const resolvedZoomPercent =
-    (preferredPaneState.zoomMode === zoomMode ? preferredPaneState.zoomPercent : null) ??
-    (inputPaneState.zoomMode === zoomMode ? inputPaneState.zoomPercent : null) ??
-    (outputPaneState.zoomMode === zoomMode ? outputPaneState.zoomPercent : null) ??
+    (preferredPaneState.zoomMode === zoomMode
+      ? preferredPaneState.zoomPercent
+      : null) ??
+    (inputPaneState.zoomMode === zoomMode
+      ? inputPaneState.zoomPercent
+      : null) ??
+    (outputPaneState.zoomMode === zoomMode
+      ? outputPaneState.zoomPercent
+      : null) ??
     fallbackZoomPercent;
 
   const resolvedZoomScale =
-    (preferredPaneState.zoomMode === zoomMode ? preferredPaneState.zoomScale : null) ??
+    (preferredPaneState.zoomMode === zoomMode
+      ? preferredPaneState.zoomScale
+      : null) ??
     (inputPaneState.zoomMode === zoomMode ? inputPaneState.zoomScale : null) ??
-    (outputPaneState.zoomMode === zoomMode ? outputPaneState.zoomScale : null) ??
+    (outputPaneState.zoomMode === zoomMode
+      ? outputPaneState.zoomScale
+      : null) ??
     zoomScale;
 
   const handleZoomIn = useCallback(() => {

@@ -14,6 +14,7 @@ import type {
   CreateTranslationJobDto,
   TranslationConfig,
   CreditEstimateResponse,
+  FileAnalysisEstimateModes,
   FileAnalysisResponse,
   FileResponse,
   FontReplacement,
@@ -30,6 +31,7 @@ interface UploadAndTranslateState {
   uploadProgress: number;
   fileId: string | null;
   estimate: CreditEstimateResponse | null;
+  estimateModes: FileAnalysisEstimateModes | null;
   analysisFile: FileResponse | null;
   fontsUsedByGroup: ParsedFontsByGroup;
   fontParseSupported: boolean | null;
@@ -56,6 +58,7 @@ const initialState: UploadAndTranslateState = {
   uploadProgress: 0,
   fileId: null,
   estimate: null,
+  estimateModes: null,
   analysisFile: null,
   fontsUsedByGroup: {},
   fontParseSupported: null,
@@ -157,6 +160,9 @@ function buildJobDto(
   glossaryTerms: Array<{ srcTerm: string; tgtTerm: string }> = [],
   fontReplacements: FontReplacement[] = [],
 ): CreateTranslationJobDto {
+  const isFontConfigurationApplicable =
+    config.pdfTranslationFlow !== 'non_format_preserved';
+
   const dto: CreateTranslationJobDto = {
     file_id: fileId,
     src_lang: LANGUAGE_CODE_TO_API_NAME[config.srcLang],
@@ -179,12 +185,16 @@ function buildJobDto(
     dto.user_glossary = userGlossaryEntries;
   }
 
-  if (fontReplacements.length > 0) {
+  if (isFontConfigurationApplicable && fontReplacements.length > 0) {
     dto.font_replacements = fontReplacements;
   }
 
-  if (config.keepOriginalFontSize) {
+  if (isFontConfigurationApplicable && config.keepOriginalFontSize) {
     dto.keep_original_font_size = true;
+  }
+
+  if (config.pdfTranslationFlow) {
+    dto.pdf_translation_flow = config.pdfTranslationFlow;
   }
 
   dto.use_system_glossary = config.useSystemGlossary;
@@ -223,6 +233,7 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
         uploadProgress: 0,
         fileId: null,
         estimate: null,
+        estimateModes: null,
         analysisFile: null,
         fontsUsedByGroup: {},
         fontParseSupported: null,
@@ -280,6 +291,7 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
         ...prev,
         flowStatus: 'idle',
         estimate: analysisResult.estimate,
+        estimateModes: analysisResult.estimate_modes ?? null,
         analysisFile: analysisResult.file,
         fontsUsedByGroup: normalizeFontsUsed(
           analysisResult.file.metadata?.fontsUsed,
@@ -312,6 +324,7 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
         uploadProgress: 0,
         fileId: null,
         estimate: null,
+        estimateModes: null,
         analysisFile: null,
         fontsUsedByGroup: {},
         fontParseSupported: null,

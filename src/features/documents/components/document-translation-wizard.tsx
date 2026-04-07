@@ -126,6 +126,7 @@ export function DocumentTranslationWizard() {
     uploadProgress,
     fileId,
     estimate,
+    estimateModes,
     analysisFile,
     fontsUsedByGroup,
     fontParseSupported,
@@ -161,10 +162,15 @@ export function DocumentTranslationWizard() {
   const { download, isDownloading } = useDownloadFile()
   const { wallet, isLoading: isLoadingWallet } = useWallet()
   const previousTargetLangRef = useRef<LanguageCode>(config.tgtLang)
+  const isPdfFile = analysisFile?.mime === "application/pdf"
+  const isFontConfigurationApplicable =
+    !isPdfFile || config.pdfTranslationFlow === "format_preserved"
 
   const { data: fontCheckState, isLoading: isCheckingFonts } = useFontCheck(
     fileId,
-    analysisFile?.id ? LANGUAGE_CODE_TO_API_NAME[config.tgtLang] : null,
+    analysisFile?.id && isFontConfigurationApplicable
+      ? LANGUAGE_CODE_TO_API_NAME[config.tgtLang]
+      : null,
     config.tgtLang,
     fontsUsedByGroup,
     fontParseSupported
@@ -215,6 +221,16 @@ export function DocumentTranslationWizard() {
   // Estimate is now provided by the upload hook (polled during Step 1 analyzing phase).
   // It is already available by the time the user reaches Step 2.
   const isEstimating = false
+
+  const selectedEstimate = useMemo(() => {
+    if (analysisFile?.mime !== "application/pdf" || !estimateModes) {
+      return estimate ?? undefined
+    }
+
+    return config.pdfTranslationFlow === "non_format_preserved"
+      ? estimateModes.non_format_preserved
+      : estimateModes.format_preserved
+  }, [analysisFile?.mime, config.pdfTranslationFlow, estimate, estimateModes])
 
   // Update flow status when job polling returns a terminal state
   // The wizard tracks "succeeded" / "failed" based on job polling data
@@ -301,6 +317,13 @@ export function DocumentTranslationWizard() {
     setConfig((prev) => ({
       ...prev,
       keepOriginalFontSize: enabled,
+    }))
+  }, [])
+
+  const handlePdfTranslationFlowChange = useCallback((flow: TranslationConfig["pdfTranslationFlow"]) => {
+    setConfig((prev) => ({
+      ...prev,
+      pdfTranslationFlow: flow,
     }))
   }, [])
 
@@ -421,16 +444,24 @@ export function DocumentTranslationWizard() {
     goToStep(3)
 
      const usableGlossaryTerms = activeSelectedGlossaryId ? selectedGlossaryTerms : []
-    const fontReplacements = buildFontReplacements(
-      fontCheckItems,
-      config.fontSelections,
-      config.fontConfigEnabled,
-      config.fontEnabledMap
-    )
+    const fontReplacements = isFontConfigurationApplicable
+      ? buildFontReplacements(
+          fontCheckItems,
+          config.fontSelections,
+          config.fontConfigEnabled,
+          config.fontEnabledMap
+        )
+      : []
 
     // Start the translation job for the already-uploaded file
      startTranslation(
-      { ...config, glossaryInputMode },
+      {
+        ...config,
+        glossaryInputMode,
+        keepOriginalFontSize: isFontConfigurationApplicable
+          ? config.keepOriginalFontSize
+          : false,
+      },
       selectedDomain.key,
       usableGlossaryTerms,
       fontReplacements,
@@ -524,11 +555,13 @@ export function DocumentTranslationWizard() {
             glossaries={visibleGlossaries}
             selectedGlossaryTerms={selectedGlossaryTerms}
             isLoadingGlossaries={isLoadingGlossaries || isFetchingGlossaries}
-            estimate={estimate ?? undefined}
+            estimate={selectedEstimate}
             isEstimating={isEstimating}
             estimateError={null}
             currentBalance={wallet?.balance}
             isLoadingBalance={isLoadingWallet}
+            isPdfFile={isPdfFile}
+            pdfTranslationFlow={config.pdfTranslationFlow}
             fontsUsedByGroup={fontsUsedByGroup}
             fontCheckItems={fontCheckItems}
             keepOriginalFontSize={config.keepOriginalFontSize}
@@ -542,6 +575,7 @@ export function DocumentTranslationWizard() {
             onFontConfigEnabledChange={handleFontConfigEnabledChange}
             onFontEnabledChange={handleFontEnabledChange}
             onFontSelectionChange={handleFontSelectionChange}
+            onPdfTranslationFlowChange={handlePdfTranslationFlowChange}
             onBack={handleConfigBack}
             onStart={handleStartTranslation}
             isLoading={flowStatus === "creating" || flowStatus === "translating"}

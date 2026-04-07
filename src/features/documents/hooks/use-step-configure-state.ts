@@ -18,6 +18,7 @@ interface UseStepConfigureStateOptions {
   fontsUsedByGroup: ParsedFontsByGroup;
   fontParseSupported: boolean | null;
   isCheckingFonts: boolean;
+  isFontConfigurationApplicable: boolean;
   isLoading?: boolean;
 }
 
@@ -33,6 +34,7 @@ export function useStepConfigureState({
   fontsUsedByGroup,
   fontParseSupported,
   isCheckingFonts,
+  isFontConfigurationApplicable,
   isLoading,
 }: UseStepConfigureStateOptions) {
   const isSameLang = srcLang === tgtLang;
@@ -51,7 +53,10 @@ export function useStepConfigureState({
       ? estimate.totalCredits - currentBalance
       : 0;
   const isFontCheckPending =
-    hasParsedFonts && fontParseSupported === true && isCheckingFonts;
+    isFontConfigurationApplicable &&
+    hasParsedFonts &&
+    fontParseSupported === true &&
+    isCheckingFonts;
   const isStartDisabled =
     isSameLang ||
     isDomainMissing ||

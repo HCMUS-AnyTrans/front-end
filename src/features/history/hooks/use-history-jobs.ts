@@ -21,7 +21,8 @@ export function useHistoryJobs() {
   const [domainFilter, setDomainFilter] = useState<string>('all');
   const deferredSearch = useDeferredValue(search);
   const { getDomainByKey, isLoading: isLoadingDomains } = useDomains();
-  const selectedDomain = domainFilter !== 'all' ? getDomainByKey(domainFilter) : null;
+  const selectedDomain =
+    domainFilter !== 'all' ? getDomainByKey(domainFilter) : null;
   const effectiveDomainFilter =
     domainFilter !== 'all' && !isLoadingDomains && !selectedDomain
       ? 'all'

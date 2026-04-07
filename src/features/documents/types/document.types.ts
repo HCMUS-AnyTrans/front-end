@@ -101,6 +101,8 @@ export interface FontSelectionMap {
   [from_font: string]: string;
 }
 
+export type PdfTranslationFlow = 'format_preserved' | 'non_format_preserved';
+
 // =============== FILE TYPES ===============
 
 export interface UploadedFile {
@@ -188,10 +190,16 @@ export interface CreditEstimateResponse {
   breakdown: CreditEstimateItem[];
 }
 
+export interface FileAnalysisEstimateModes {
+  format_preserved: CreditEstimateResponse;
+  non_format_preserved: CreditEstimateResponse;
+}
+
 export interface FileAnalysisResponse {
   status: 'pending' | 'ready' | 'failed';
   file: FileResponse;
   estimate: CreditEstimateResponse | null;
+  estimate_modes?: FileAnalysisEstimateModes | null;
   error?: string | null;
 }
 
@@ -208,6 +216,7 @@ export interface CreateTranslationJobDto {
   font_replacements?: FontReplacement[];
   use_system_glossary?: boolean;
   pdf_output_format?: 'docx' | 'pptx';
+  pdf_translation_flow?: PdfTranslationFlow;
 }
 
 /** GET /translations/:job_id — response */
@@ -224,6 +233,7 @@ export interface TranslationJobResponse {
   created_at?: string;
   completed_at?: string;
   customized_domain?: string;
+  pdf_translation_flow?: PdfTranslationFlow;
 }
 
 /** GET /files/:file_id/download — response */
@@ -270,6 +280,7 @@ export interface TranslationConfig {
   fontConfigEnabled: boolean;
   fontEnabledMap: FontEnabledMap;
   fontSelections: FontSelectionMap;
+  pdfTranslationFlow: PdfTranslationFlow;
 }
 
 // =============== STEP TYPES ===============
