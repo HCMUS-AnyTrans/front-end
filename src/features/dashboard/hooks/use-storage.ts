@@ -16,8 +16,8 @@ export function useStorage() {
     queryKey: dashboardKeys.storage(),
     queryFn: getStorageApi,
     enabled: isAuthenticated && !!accessToken,
-    staleTime: 2 * 60 * 1000, // 2 minutes (storage changes less frequently)
-    gcTime: 10 * 60 * 1000, // 10 minutes
+    staleTime: 2 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   });
 
   return {

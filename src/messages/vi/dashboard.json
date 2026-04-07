@@ -29,6 +29,9 @@
       "totalJobs": "Tổng bản dịch",
       "processing": "Đang xử lý",
       "completedThisMonth": "Hoàn thành tháng này",
+      "loadErrorTitle": "Không thể tải thống kê",
+      "loadErrorDescription": "Đã xảy ra lỗi khi lấy dữ liệu tổng quan. Vui lòng thử lại.",
+      "retry": "Thử lại",
       "vsLastMonth": "so với tháng trước",
       "vsYesterday": "so với hôm qua",
       "documentsCount": "{docs} Tài liệu",
@@ -89,6 +92,9 @@
     "recentJobs": {
       "title": "Bản dịch gần đây",
       "noJobs": "Chưa có thông tin",
+      "loadErrorTitle": "Không thể tải danh sách bản dịch",
+      "loadErrorDescription": "Đã xảy ra lỗi khi lấy các bản dịch gần đây. Vui lòng thử lại.",
+      "retry": "Thử lại",
       "viewAll": "Xem tất cả",
       "fileName": "Tên file",
       "type": "Loại",
@@ -104,6 +110,9 @@
     "storage": {
       "title": "Lưu trữ",
       "remaining": "Còn lại {value} MB dung lượng",
+      "loadErrorTitle": "Không thể tải dữ liệu lưu trữ",
+      "loadErrorDescription": "Đã xảy ra lỗi khi lấy thông tin lưu trữ. Vui lòng thử lại.",
+      "retry": "Thử lại",
       "creditUsageTitle": "Credit đã sử dụng",
       "noUsageInfo": "Chưa có thông tin sử dụng credit",
       "documents": "Tài liệu",
@@ -112,6 +121,9 @@
     "charts": {
       "jobsByDay": "Tổng quan hoạt động",
       "creditAllocation": "Phân bổ credits",
+      "loadErrorTitle": "Không thể tải biểu đồ",
+      "loadErrorDescription": "Đã xảy ra lỗi khi lấy dữ liệu biểu đồ. Vui lòng thử lại.",
+      "retry": "Thử lại",
       "noUsageInfo": "Chưa có thông tin sử dụng credit",
       "documents": "Tài liệu",
       "remaining": "Còn lại"

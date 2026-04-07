@@ -2,7 +2,6 @@
 
 import { useTranslations } from "next-intl";
 import { CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   ChartContainer,
   ChartTooltip,
@@ -11,34 +10,18 @@ import {
 } from "@/components/ui/chart";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useJobsChart } from "../hooks";
+import { useJobsChart } from "../../hooks";
 import {
   DashboardCard,
   DashboardCardContent,
   DashboardCardHeader,
-} from "./dashboard-card";
-
-function JobsChartSkeleton() {
-  return (
-    <DashboardCard className="h-full">
-      <DashboardCardHeader>
-        <Skeleton className="h-5 w-40" />
-      </DashboardCardHeader>
-      <DashboardCardContent>
-        <Skeleton className="h-[140px] w-full rounded-md sm:h-[160px] md:h-[180px]" />
-        <div className="mt-3 flex items-center justify-center gap-6">
-          <Skeleton className="h-4 w-20" />
-          <Skeleton className="h-4 w-20" />
-        </div>
-      </DashboardCardContent>
-    </DashboardCard>
-  );
-}
+} from "../dashboard-card";
+import { JobsChartError, JobsChartLoading } from "./jobs-chart.fallback";
 
 export function JobsChart() {
   const t = useTranslations("dashboard.charts");
   const isMobile = useIsMobile();
-  const { chartData, isLoading, isError } = useJobsChart();
+  const { chartData, isLoading, isError, refetch, isFetching } = useJobsChart();
 
   const chartConfig = {
     document: {
@@ -47,8 +30,10 @@ export function JobsChart() {
     },
   } satisfies ChartConfig;
 
-  if (isLoading) return <JobsChartSkeleton />;
-  if (isError || !chartData) return <JobsChartSkeleton />;
+  if (isLoading) return <JobsChartLoading />;
+  if (isError)
+    return <JobsChartError onRetry={() => refetch()} isRetrying={isFetching} />;
+  if (!chartData) return <JobsChartLoading />;
 
   return (
     <DashboardCard className="h-full">

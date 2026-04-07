@@ -6,7 +6,8 @@ import {
   DashboardGreeting,
   PaymentStatusBanner,
   RecentJobsTable,
-  UsagePanel,
+  CreditUsageCard,
+  StorageUsageCard,
 } from '@/features/dashboard';
 
 type Props = {
@@ -37,8 +38,13 @@ export default async function DashboardPage({ params }: Props) {
         <div className="lg:col-span-8">
           <RecentJobsTable />
         </div>
-        <div className="lg:col-span-4">
-          <UsagePanel />
+        <div className="flex flex-col gap-6 lg:col-span-4 lg:h-full">
+          <div className="lg:flex-1">
+            <CreditUsageCard />
+          </div>
+          <div className="lg:flex-1">
+            <StorageUsageCard />
+          </div>
         </div>
       </div>
 

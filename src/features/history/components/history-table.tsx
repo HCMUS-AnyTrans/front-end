@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useState, useCallback } from "react";
-import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { useState, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
   DropdownMenuLabel,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 import {
   Table,
   TableBody,
@@ -20,13 +20,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/table';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 import {
   ArrowRight,
   Coins,
@@ -35,40 +35,40 @@ import {
   FileDown,
   FileInput,
   Loader2,
-} from "lucide-react";
-import { jobStatusConfig } from "@/features/dashboard/data";
-import { getFileDownloadUrl } from "@/features/documents/api/documents.api";
-import { FileTypeIcon } from "@/components/shared/file-type-icon";
-import { canPreviewTranslationJob } from "@/features/documents/utils/preview-capabilities";
-import type { TranslationJobResponse } from "@/features/dashboard/api/dashboard.api";
-import type { HistoryTableProps } from "../types";
+} from 'lucide-react';
+import { jobStatusConfig } from '@/features/dashboard/data';
+import { getFileDownloadUrl } from '@/features/documents/api/documents.api';
+import { FileTypeIcon } from '@/components/shared/file-type-icon';
+import { canPreviewTranslationJob } from '@/features/documents/utils/preview-capabilities';
+import type { TranslationJobResponse } from '@/features/dashboard/api/dashboard.api';
+import type { HistoryTableProps } from '../types';
 
 async function triggerDownload(fileId: string, fileName: string) {
   const { download_url } = await getFileDownloadUrl(fileId);
-  const anchor = document.createElement("a");
+  const anchor = document.createElement('a');
   anchor.href = download_url;
   anchor.download = fileName;
-  anchor.target = "_blank";
-  anchor.rel = "noopener noreferrer";
+  anchor.target = '_blank';
+  anchor.rel = 'noopener noreferrer';
   document.body.appendChild(anchor);
   anchor.click();
   document.body.removeChild(anchor);
 }
 
 function formatLocaleDate(dateStr: string, locale: string) {
-  return new Date(dateStr).toLocaleString(locale === "vi" ? "vi-VN" : "en-US", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
+  return new Date(dateStr).toLocaleString(locale === 'vi' ? 'vi-VN' : 'en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
   });
 }
 
 // ─── DownloadButton ───────────────────────────────────────────────────────────
 
 function DownloadButton({ job }: { job: TranslationJobResponse }) {
-  const tHistory = useTranslations("dashboard.history");
+  const tHistory = useTranslations('dashboard.history');
   const [loadingOriginal, setLoadingOriginal] = useState(false);
   const [loadingTranslated, setLoadingTranslated] = useState(false);
 
@@ -117,14 +117,14 @@ function DownloadButton({ job }: { job: TranslationJobResponse }) {
                 ) : (
                   <Download className="size-3.5 text-muted-foreground" />
                 )}
-                <span className="sr-only">{tHistory("download.label")}</span>
+                <span className="sr-only">{tHistory('download.label')}</span>
               </Button>
             </DropdownMenuTrigger>
           </TooltipTrigger>
 
           <DropdownMenuContent align="end" className="w-52">
             <DropdownMenuLabel className="text-xs font-medium text-muted-foreground">
-              {tHistory("download.label")}
+              {tHistory('download.label')}
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
 
@@ -140,16 +140,16 @@ function DownloadButton({ job }: { job: TranslationJobResponse }) {
                       >
                         <FileInput className="size-4 shrink-0" />
                         <div className="flex flex-col">
-                          <span>{tHistory("download.original")}</span>
+                          <span>{tHistory('download.original')}</span>
                           <span className="text-xs text-muted-foreground">
-                            {tHistory("fileExpired")}
+                            {tHistory('fileExpired')}
                           </span>
                         </div>
                       </DropdownMenuItem>
                     </span>
                   </TooltipTrigger>
                   <TooltipContent side="left">
-                    {tHistory("fileExpired")}
+                    {tHistory('fileExpired')}
                   </TooltipContent>
                 </Tooltip>
               ) : (
@@ -160,7 +160,7 @@ function DownloadButton({ job }: { job: TranslationJobResponse }) {
                 >
                   <FileInput className="size-4 shrink-0 text-muted-foreground" />
                   <div className="flex flex-col">
-                    <span>{tHistory("download.original")}</span>
+                    <span>{tHistory('download.original')}</span>
                     <span className="max-w-[150px] truncate text-xs text-muted-foreground">
                       {job.input_file!.name}
                     </span>
@@ -180,16 +180,16 @@ function DownloadButton({ job }: { job: TranslationJobResponse }) {
                       >
                         <FileDown className="size-4 shrink-0" />
                         <div className="flex flex-col">
-                          <span>{tHistory("download.translated")}</span>
+                          <span>{tHistory('download.translated')}</span>
                           <span className="text-xs text-muted-foreground">
-                            {tHistory("fileExpired")}
+                            {tHistory('fileExpired')}
                           </span>
                         </div>
                       </DropdownMenuItem>
                     </span>
                   </TooltipTrigger>
                   <TooltipContent side="left">
-                    {tHistory("fileExpired")}
+                    {tHistory('fileExpired')}
                   </TooltipContent>
                 </Tooltip>
               ) : (
@@ -200,7 +200,7 @@ function DownloadButton({ job }: { job: TranslationJobResponse }) {
                 >
                   <FileDown className="size-4 shrink-0 text-primary" />
                   <div className="flex flex-col">
-                    <span>{tHistory("download.translated")}</span>
+                    <span>{tHistory('download.translated')}</span>
                     <span className="max-w-[150px] truncate text-xs text-muted-foreground">
                       {job.output_file!.name}
                     </span>
@@ -210,7 +210,7 @@ function DownloadButton({ job }: { job: TranslationJobResponse }) {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <TooltipContent>{tHistory("download.label")}</TooltipContent>
+        <TooltipContent>{tHistory('download.label')}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );
@@ -222,14 +222,13 @@ export function HistoryTable({
   jobs,
   locale,
   onViewDetails,
-  compact = false,
   hideActions = false,
 }: HistoryTableProps) {
   const router = useRouter();
-  const tJobs = useTranslations("dashboard.recentJobs");
-  const tStatus = useTranslations("dashboard.status");
-  const tHistory = useTranslations("dashboard.history");
-  const tReview = useTranslations("documents.review");
+  const tJobs = useTranslations('dashboard.recentJobs');
+  const tStatus = useTranslations('dashboard.status');
+  const tHistory = useTranslations('dashboard.history');
+  const tReview = useTranslations('documents.review');
 
   return (
     <div className="overflow-x-auto">
@@ -237,27 +236,25 @@ export function HistoryTable({
         <TableHeader className="bg-muted/40">
           <TableRow className="hover:bg-transparent">
             <TableHead className="h-11 px-4 text-sm font-medium text-muted-foreground lg:px-6">
-              {tJobs("fileName")}
+              {tJobs('fileName')}
             </TableHead>
             <TableHead className="hidden h-11 px-4 text-sm font-medium text-muted-foreground sm:table-cell lg:px-6">
-              {tJobs("languages")}
+              {tJobs('languages')}
             </TableHead>
             <TableHead className="h-11 px-4 text-sm font-medium text-muted-foreground lg:px-6">
-              {tJobs("status")}
+              {tJobs('status')}
             </TableHead>
             <TableHead
-              className={`h-11 px-4 text-right text-sm font-medium text-muted-foreground lg:px-6 ${compact ? "hidden sm:table-cell" : "hidden md:table-cell"}`}
+              className="hidden h-11 px-4 text-right text-sm font-medium text-muted-foreground md:table-cell lg:px-6"
             >
-              {tHistory("columns.credits")}
+              {tHistory('columns.credits')}
             </TableHead>
-            {!compact && (
-              <TableHead className="hidden h-11 px-4 text-sm font-medium text-muted-foreground md:table-cell lg:px-6">
-                {tJobs("createdAt")}
-              </TableHead>
-            )}
+            <TableHead className="hidden h-11 px-4 text-sm font-medium text-muted-foreground md:table-cell lg:px-6">
+              {tJobs('createdAt')}
+            </TableHead>
             {!hideActions && (
               <TableHead className="h-11 px-4 text-right text-sm font-medium text-muted-foreground lg:px-6">
-                {tJobs("actions")}
+                {tJobs('actions')}
               </TableHead>
             )}
           </TableRow>
@@ -268,7 +265,7 @@ export function HistoryTable({
             const fileName = job.input_file?.name ?? job.job_id;
             const statusCfg = jobStatusConfig[job.status];
             const canPreview =
-              job.status === "succeeded" &&
+              job.status === 'succeeded' &&
               !job.input_file?.is_expired &&
               !job.output_file?.is_expired &&
               canPreviewTranslationJob({
@@ -313,14 +310,14 @@ export function HistoryTable({
                 <TableCell className="px-4 py-3.5 lg:px-6">
                   <Badge
                     variant="outline"
-                    className={`text-xs ${statusCfg?.className ?? ""}`}
+                    className={`text-xs ${statusCfg?.className ?? ''}`}
                   >
                     {tStatus(job.status)}
                   </Badge>
                 </TableCell>
 
                 <TableCell
-                  className={`px-4 py-3.5 text-right lg:px-6 ${compact ? "hidden sm:table-cell" : "hidden md:table-cell"}`}
+                  className="hidden px-4 py-3.5 text-right md:table-cell lg:px-6"
                 >
                   {job.cost_credits !== undefined ? (
                     <div className="flex items-center justify-end gap-1">
@@ -333,13 +330,11 @@ export function HistoryTable({
                     <span className="text-sm text-muted-foreground">—</span>
                   )}
                 </TableCell>
-                {!compact && (
-                  <TableCell className="hidden px-4 py-3.5 md:table-cell lg:px-6">
-                    <span className="text-sm text-muted-foreground">
-                      {formatLocaleDate(job.created_at, locale)}
-                    </span>
-                  </TableCell>
-                )}
+                <TableCell className="hidden px-4 py-3.5 md:table-cell lg:px-6">
+                  <span className="text-sm text-muted-foreground">
+                    {formatLocaleDate(job.created_at, locale)}
+                  </span>
+                </TableCell>
 
                 {!hideActions && (
                   <TableCell
@@ -359,10 +354,14 @@ export function HistoryTable({
                                 onClick={handlePreview}
                               >
                                 <Eye className="size-3.5 text-muted-foreground" />
-                                <span className="sr-only">{tReview("preview")}</span>
+                                <span className="sr-only">
+                                  {tReview('preview')}
+                                </span>
                               </Button>
                             </TooltipTrigger>
-                            <TooltipContent>{tReview("preview")}</TooltipContent>
+                            <TooltipContent>
+                              {tReview('preview')}
+                            </TooltipContent>
                           </Tooltip>
                         </TooltipProvider>
                       )}

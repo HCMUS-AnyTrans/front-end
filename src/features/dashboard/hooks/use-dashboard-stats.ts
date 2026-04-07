@@ -5,7 +5,7 @@ import { getDashboardStatsApi } from '../api/dashboard.api';
 import { dashboardKeys } from '@/lib/query-client';
 import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type { DashboardStatsQuery } from '../types';
-
+import Error from 'next/error';
 /**
  * Hook to fetch dashboard statistics overview
  */
