@@ -9,9 +9,10 @@ import { useAddTerm } from '../hooks/use-add-term';
 
 interface AddTermFormProps {
   glossaryId: string;
+  isTermLimitReached?: boolean;
 }
 
-export function AddTermForm({ glossaryId }: AddTermFormProps) {
+export function AddTermForm({ glossaryId, isTermLimitReached = false }: AddTermFormProps) {
   const t = useTranslations('glossary.terms');
 
   const [srcTerm, setSrcTerm] = useState('');
@@ -28,7 +29,7 @@ export function AddTermForm({ glossaryId }: AddTermFormProps) {
     e.preventDefault();
     const trimmedSrc = srcTerm.trim();
     const trimmedTgt = tgtTerm.trim();
-    if (!trimmedSrc || !trimmedTgt) return;
+    if (!trimmedSrc || !trimmedTgt || isTermLimitReached) return;
 
     addTerm({
       glossaryId,
@@ -39,13 +40,18 @@ export function AddTermForm({ glossaryId }: AddTermFormProps) {
   return (
     <div className="rounded-2xl border bg-card p-5 mb-6">
       <h3 className="text-sm font-semibold mb-4">{t('addNewTerm')}</h3>
+      {isTermLimitReached ? (
+        <p className="mb-4 text-sm text-muted-foreground">
+          {t('termLimitReached')}
+        </p>
+      ) : null}
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
         <Input
           placeholder={t('srcTermPlaceholder')}
           value={srcTerm}
           onChange={(e) => setSrcTerm(e.target.value)}
           className="flex-1"
-          disabled={isAdding}
+          disabled={isAdding || isTermLimitReached}
           aria-label={t('srcTerm')}
         />
         <Input
@@ -53,13 +59,18 @@ export function AddTermForm({ glossaryId }: AddTermFormProps) {
           value={tgtTerm}
           onChange={(e) => setTgtTerm(e.target.value)}
           className="flex-1"
-          disabled={isAdding}
+          disabled={isAdding || isTermLimitReached}
           aria-label={t('tgtTerm')}
         />
         <Button
           type="submit"
           size="sm"
-          disabled={isAdding || !srcTerm.trim() || !tgtTerm.trim()}
+          disabled={
+            isAdding ||
+            isTermLimitReached ||
+            !srcTerm.trim() ||
+            !tgtTerm.trim()
+          }
           className="shrink-0"
         >
           {isAdding ? (

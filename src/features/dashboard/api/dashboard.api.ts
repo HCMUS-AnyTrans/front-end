@@ -112,7 +112,13 @@ export interface TranslationJobResponse {
   completed_at?: string;
   cost_credits?: number;
   pricing_breakdown?: PricingBreakdownItem[];
+  domainId?: string;
   domain?: string;
+  customized_domain?: string;
+}
+
+interface TranslationJobResponseDto extends Omit<TranslationJobResponse, 'domainId'> {
+  domain_id?: string;
 }
 
 export interface TranslationJobsListResponse {
@@ -132,7 +138,7 @@ export interface RecentJobsQuery {
   limit?: number;
   job_type?: 'document' | 'subtitle';
   status?: string;
-  domain?: string;
+  domain_id?: string;
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
   search?: string;
@@ -145,9 +151,19 @@ export interface RecentJobsQuery {
 export async function getRecentJobsApi(
   params?: RecentJobsQuery,
 ): Promise<TranslationJobsListResponse> {
-  const response = await apiClient.get<TranslationJobsListResponse>(
+  const response = await apiClient.get<{
+    data: TranslationJobResponseDto[];
+    meta: TranslationJobsListResponse['meta'];
+  }>(
     '/translations',
     { params },
   );
-  return response.data;
+
+  return {
+    ...response.data,
+    data: response.data.data.map((job) => ({
+      ...job,
+      domainId: job.domain_id,
+    })),
+  };
 }

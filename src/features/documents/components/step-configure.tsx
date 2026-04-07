@@ -1,5 +1,6 @@
 "use client"
 
+import { useLocale } from 'next-intl'
 import { AppCard, AppCardContent } from "@/components/ui/app-card"
 import { LanguageSelector } from "./language-selector"
 import { DomainSelector } from "./domain-selector"
@@ -10,6 +11,7 @@ import { ConfigureEstimateCard } from "./configure-estimate-card"
 import { ConfigureEstimateSummary } from "./configure-estimate-summary"
 import { ConfigureActionsPanel } from "./configure-actions-panel"
 import { ConfigureMobileActionBar } from "./configure-mobile-action-bar"
+import { getDomainLabel, useDomains } from '@/features/domains'
 import { useManualTerms } from "../hooks/use-manual-terms"
 import { useStepConfigureState } from "../hooks/use-step-configure-state"
 import type { TranslationConfig, LanguageCode, ParsedFontsByGroup, FontCheckItem, FontEnabledMap } from "../types"
@@ -73,9 +75,22 @@ export function StepConfigure({
   onStart,
   isLoading,
 }: StepConfigureProps) {
+  const locale = useLocale()
+  const { domains, getDomainById, isLoading: isLoadingDomains } = useDomains()
+  const selectedDomain = getDomainById(config.domainId)
+  const domainOptions = domains.map((domain) => ({
+    id: domain.id,
+    key: domain.key,
+    label: getDomainLabel(domain, locale),
+    icon: domain.icon,
+  }))
+  const isUnknownSelectedDomain = Boolean(config.domainId) && !isLoadingDomains && !selectedDomain
   const { isInsufficientCredits, missingCredits, isStartDisabled } = useStepConfigureState({
     srcLang: config.srcLang,
     tgtLang: config.tgtLang,
+    domainId: config.domainId,
+    selectedDomainKey: selectedDomain?.key,
+    customDomain: config.customDomain,
     estimate,
     isEstimating,
     currentBalance,
@@ -90,9 +105,30 @@ export function StepConfigure({
   })
   const handleSourceLanguageChange = (lang: LanguageCode) => onConfigChange({ srcLang: lang })
   const handleTargetLanguageChange = (lang: LanguageCode) => onConfigChange({ tgtLang: lang })
-  const handleDomainChange = (domain: string) => onConfigChange({ domain })
+  const handleDomainChange = (domainId: string) => onConfigChange({ domainId })
+  const handleCustomDomainChange = (customDomain: string) => onConfigChange({ customDomain })
   const handleToneChange = (tone: string) => onConfigChange({ tone })
-  const handleGlossarySelect = (id: string | null) => onConfigChange({ selectedGlossaryId: id })
+  const handleGlossarySelect = (id: string | null) =>
+    onConfigChange({ selectedGlossaryId: id, glossaryInputMode: "saved" })
+  const handleGlossaryInputModeChange = (mode: TranslationConfig["glossaryInputMode"]) => {
+    if (mode === "manual") {
+      onConfigChange({ glossaryInputMode: mode, selectedGlossaryId: null })
+      return
+    }
+
+    if (mode === "none") {
+      onConfigChange({ glossaryInputMode: mode })
+      return
+    }
+
+    onConfigChange({ glossaryInputMode: mode })
+  }
+  const handleConfirmSavedGlossaryMode = () =>
+    onConfigChange({ glossaryInputMode: "saved", manualTerms: [] })
+  const handleUseSystemGlossaryChange = (enabled: boolean) =>
+    onConfigChange({ useSystemGlossary: enabled })
+
+  const isStartBlocked = isStartDisabled || isLoadingDomains || isUnknownSelectedDomain
 
   return (
     <div className="mx-auto max-w-6xl space-y-5 pb-24 xl:pb-0">
@@ -108,7 +144,15 @@ export function StepConfigure({
 
           <AppCard>
             <AppCardContent className="space-y-6 pt-6">
-              <DomainSelector value={config.domain} onChange={handleDomainChange} />
+              <DomainSelector
+                domains={domainOptions}
+                value={config.domainId}
+                selectedDomainKey={selectedDomain?.key}
+                customValue={config.customDomain}
+                isLoading={isLoadingDomains}
+                onChange={handleDomainChange}
+                onCustomValueChange={handleCustomDomainChange}
+              />
               <ToneSelector value={config.tone} onChange={handleToneChange} />
             </AppCardContent>
           </AppCard>
@@ -131,12 +175,18 @@ export function StepConfigure({
             onSelectionChange={onFontSelectionChange}
           />
 
-          <GlossarySection
-            glossaries={glossaries}
+            <GlossarySection
+              glossaries={glossaries}
+              selectedDomainKey={selectedDomain?.key}
+              glossaryInputMode={config.glossaryInputMode}
             selectedGlossaryId={config.selectedGlossaryId}
             selectedGlossaryTermCount={selectedGlossaryTerms.length}
             isLoadingGlossaries={isLoadingGlossaries}
             onSelectGlossary={handleGlossarySelect}
+            onGlossaryInputModeChange={handleGlossaryInputModeChange}
+            onConfirmSavedGlossaryMode={handleConfirmSavedGlossaryMode}
+            useSystemGlossary={config.useSystemGlossary}
+            onUseSystemGlossaryChange={handleUseSystemGlossaryChange}
             manualTerms={config.manualTerms}
             onAddManualTerm={addManualTerm}
             onUpdateManualTerm={updateManualTerm}
@@ -159,7 +209,7 @@ export function StepConfigure({
             onBack={onBack}
             onStart={onStart}
             isLoading={isLoading}
-            isStartDisabled={isStartDisabled}
+            isStartDisabled={isStartBlocked}
             isInsufficientCredits={isInsufficientCredits}
           />
         </div>
@@ -179,7 +229,7 @@ export function StepConfigure({
         onBack={onBack}
         onStart={onStart}
         isLoading={isLoading}
-        isStartDisabled={isStartDisabled}
+        isStartDisabled={isStartBlocked}
         isInsufficientCredits={isInsufficientCredits}
       />
     </div>

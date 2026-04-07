@@ -8,9 +8,10 @@ export interface Glossary {
   id: string;
   userId: string;
   name: string;
-  domain: string;
+  domainId: string;
   srcLang: string;
   tgtLang: string;
+  status: 'pending' | 'processing' | 'created' | 'failed';
   termCount: number;
   createdAt: string;
   updatedAt: string;
@@ -68,6 +69,22 @@ export interface TermListResponse {
   pagination: PaginationMeta;
 }
 
+export interface GlossaryTemplate {
+  id: string;
+  name: string;
+  domainId: string;
+  termCount: number;
+  createdAt: string;
+}
+
+export interface GlossaryTemplateListResponse {
+  items: GlossaryTemplate[];
+}
+
+export interface GlossaryLlmPrice {
+  cost: number;
+}
+
 // =============== REQUEST DTOs ===============
 
 /**
@@ -76,9 +93,16 @@ export interface TermListResponse {
  */
 export interface CreateGlossaryDto {
   name: string;
-  domain: string;
+  domainId: string;
   srcLang: string;
   tgtLang: string;
+  customized_domain?: string;
+  mode?: 'manual' | 'template' | 'llm';
+  templateId?: string;
+  files?: Array<{
+    storageKey: string;
+    fileName?: string;
+  }>;
 }
 
 /**
@@ -87,7 +111,7 @@ export interface CreateGlossaryDto {
  */
 export interface UpdateGlossaryDto {
   name?: string;
-  domain?: string;
+  domainId?: string;
   srcLang?: string;
   tgtLang?: string;
 }
@@ -103,7 +127,7 @@ export interface GlossaryQueryParams {
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
   search?: string;
-  domain?: string;
+  domainId?: string;
   srcLang?: string;
   tgtLang?: string;
 }

@@ -16,6 +16,10 @@
     "noResults": "No results found",
     "noResultsDescription": "Try adjusting your search or filter criteria.",
     "createGlossary": "Create Glossary",
+    "stepOneLabel": "Step 1 of 2",
+    "stepTwoLabel": "Step 2 of 2",
+    "stepOneTitle": "Glossary details",
+    "stepTwoTitle": "Glossary source",
     "editGlossary": "Edit Glossary",
     "deleteGlossary": "Delete Glossary",
     "deleteGlossaryConfirm": "Are you sure you want to delete this glossary? All terms within it will be permanently removed. This action cannot be undone.",
@@ -25,18 +29,35 @@
     "tgtLang": "Target Language",
     "createdAt": "Created",
     "updatedAt": "Last Updated",
+    "status": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "created": "Ready",
+      "failed": "Failed",
+      "waitingHint": "This glossary is being generated. It will open after processing finishes."
+    },
+    "socket": {
+      "successTitle": "Glossary ready",
+      "successDescription": "{name} is ready with {count} terms.",
+      "failedTitle": "Glossary generation failed",
+      "failedDescription": "{name} could not be generated. Your credits were refunded."
+    },
     "backToList": "Back to glossaries",
     "domains": {
       "auto": "Auto Detect",
       "general": "General",
-      "technology": "Technology",
-      "medical": "Medical",
+      "it_software": "IT & Software",
+      "medical": "Medical & Healthcare",
       "legal": "Legal",
-      "finance": "Finance",
-      "marketing": "Marketing",
-      "education": "Education",
-      "engineering": "Engineering",
-      "science": "Science"
+      "finance": "Finance & Banking",
+      "engineering": "Engineering & Industrial",
+      "science_academic": "Science & Academic",
+      "commerce": "Commerce & Retail",
+      "tourism": "Tourism & Hospitality",
+      "media_entertainment": "Media & Entertainment",
+      "marketing_advertising": "Marketing & Advertising",
+      "administrative": "Administrative",
+      "other": "Other"
     },
     "languages": {
       "en": "English",
@@ -46,7 +67,11 @@
       "zh": "Chinese",
       "fr": "French",
       "de": "German",
-      "es": "Spanish"
+      "es": "Spanish",
+      "ru": "Russian",
+      "ar": "Arabic",
+      "th": "Thai",
+      "hi": "Hindi"
     },
     "form": {
       "domainPlaceholder": "Select domain",
@@ -57,6 +82,65 @@
       "saving": "Saving...",
       "deleting": "Deleting...",
       "languagePair": "Language Pair"
+    },
+    "stepTwo": {
+      "continue": "Continue",
+      "selectSource": "Choose a source",
+      "selectSourceHelper": "Pick one option on the left to configure how this glossary will be populated.",
+      "templateSelectHelper": "Select one template to create the glossary from it.",
+      "documentSelectHelper": "Upload at least one document to create the glossary with LLM extraction.",
+      "manualPanelTitle": "Create an empty glossary first",
+      "manualPanelDescription": "Choose this option if you want to add terms yourself after the glossary is created.",
+      "templateLoading": "Loading templates...",
+      "templateEmptyTitle": "No templates found",
+      "templateEmptyDescription": "There are no glossary templates for the selected domain yet.",
+      "templateErrorTitle": "Unable to load templates",
+      "templateErrorDescription": "Please try again in a moment.",
+      "templateRetry": "Retry",
+      "customDomainLabel": "Other domain",
+      "customDomainPlaceholder": "Enter your domain",
+      "customDomainDescription": "Provide a specific domain so the glossary extraction can better match your context.",
+      "documentPanelTitle": "Upload source documents",
+      "documentPanelDescription": "Add one or more documents that will later be used to generate glossary terms.",
+      "documentUploadTitle": "Upload glossary source documents",
+      "documentUploadDescription": "Click to browse files. Multiple files are allowed in this UI phase.",
+      "documentConstraints": "Supported: PDF, DOC, DOCX, PPT, PPTX - up to 5 MB each - up to 10 files",
+      "documentMaxReached": "You have reached the 10-file limit. Remove a file to add another.",
+      "documentUploadIssuesTitle": "Some files were skipped",
+      "documentInvalidType": "{count, plural, one {# file has an unsupported format} other {# files have unsupported formats}}: {files}",
+      "documentTooLarge": "{count, plural, one {# file exceeds 5 MB} other {# files exceed 5 MB}}: {files}",
+      "documentDuplicate": "{count, plural, one {# file is already selected} other {# files are already selected}}: {files}",
+      "documentLimitExceeded": "{count, plural, one {# file was skipped because only {max} files are allowed} other {# files were skipped because only {max} files are allowed}}: {files}",
+      "documentCreditTitle": "Estimated credit cost",
+      "documentCreditDescription": "LLM glossary generation charges a fixed credit amount per request.",
+      "documentCreditLoading": "Loading credit cost...",
+      "documentCreditShort": "credits",
+      "documentCreditUnit": "credits per glossary generation",
+      "documentBalanceLabel": "Current balance",
+      "documentBalanceLoading": "Loading balance...",
+      "documentBalanceUnavailable": "Balance unavailable",
+      "documentCreditUnavailable": "Unable to load credit cost right now.",
+      "documentInsufficientCredits": "Insufficient credits. Need {missing} more credits.",
+      "documentEmptyTitle": "Add documents to start",
+      "documentEmptyDescription": "Upload one or more reference documents. Selected files will appear here for review.",
+      "documentSelectedFiles": "Selected files",
+      "documentSelectedFilesCount": "{count}/{max}",
+      "documentRemoveFile": "Remove file",
+      "documentPhaseNote": "Document import is not connected to backend processing yet. This phase only prepares the UI.",
+      "sources": {
+        "manual": {
+          "title": "Manual",
+          "description": "Create the glossary first, then add terms yourself."
+        },
+        "template": {
+          "title": "Template",
+          "description": "Start from a prebuilt template for the selected domain."
+        },
+        "document": {
+          "title": "Document",
+          "description": "Prepare documents that will later generate glossary terms."
+        }
+      }
     },
     "terms": {
       "title": "Terms",
@@ -75,6 +159,7 @@
       "srcTermPlaceholder": "Source term (e.g. machine learning)",
       "tgtTermPlaceholder": "Target term (e.g. học máy)",
       "adding": "Adding...",
+      "termLimitReached": "You have reached the maximum of 80 terms for this glossary.",
       "totalTerms": "{count} terms total",
       "bulkImport": "Bulk Import",
       "bulkImportDescription": "Paste CSV data or upload a CSV file. Each row should have a source term and target term separated by a comma.",
@@ -89,6 +174,7 @@
       "bulkImportError": "Import failed. Please check your data and try again.",
       "bulkImportParseError": "Could not parse CSV. Ensure each line has two comma-separated values.",
       "bulkImportMaxExceeded": "Maximum {max} terms per import. You have {count} terms.",
+      "bulkImportRemainingExceeded": "This glossary only has space for {remaining} more terms, but you are trying to import {count}.",
       "bulkImportNoData": "No valid terms found. Please paste or upload CSV data.",
       "bulkImportClear": "Clear",
       "bulkImportCreated": "Terms added",

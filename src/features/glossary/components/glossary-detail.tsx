@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { AppCard, AppCardContent } from '@/components/ui/app-card';
 import { Input } from '@/components/ui/input';
 import { Pagination } from '@/components/ui/pagination';
-import { glossaryDomains } from '../data';
+import { getDomainLabel, useDomains } from '@/features/domains';
 import { useGlossaryDetail } from '../hooks/use-glossary-detail';
 import { useTerms } from '../hooks/use-terms';
 import { AddTermForm } from './add-term-form';
@@ -34,6 +34,7 @@ export function GlossaryDetail({ glossaryId }: GlossaryDetailProps) {
   const tTerms = useTranslations('glossary.terms');
   const router = useRouter();
   const locale = useLocale();
+  const { getDomainById } = useDomains();
 
   // ─── Term search & pagination state ─────────────────────────────────
   const [termSearch, setTermSearch] = useState('');
@@ -91,8 +92,10 @@ export function GlossaryDetail({ glossaryId }: GlossaryDetailProps) {
     return null;
   }
 
-  const domainInfo = glossaryDomains.find((d) => d.id === glossary.domain);
+  const domainInfo = getDomainById(glossary.domainId);
   const DomainIcon = domainInfo?.icon;
+  const domainLabel = domainInfo ? getDomainLabel(domainInfo, locale) : '';
+  const isTermLimitReached = glossary.termCount >= 80;
 
   // ─── Render ─────────────────────────────────────────────────────────
   return (
@@ -121,7 +124,7 @@ export function GlossaryDetail({ glossaryId }: GlossaryDetailProps) {
               {glossary.name}
             </h2>
             <div className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-sm text-muted-foreground">
-              <span>{t(`domains.${glossary.domain}`)}</span>
+              <span>{domainLabel}</span>
               <span>·</span>
               <span>{t(`languages.${glossary.srcLang}`)}</span>
               <ArrowRight className="size-3 shrink-0" />
@@ -143,7 +146,10 @@ export function GlossaryDetail({ glossaryId }: GlossaryDetailProps) {
       </div>
 
       {/* Inline add-term form */}
-      <AddTermForm glossaryId={glossaryId} />
+      <AddTermForm
+        glossaryId={glossaryId}
+        isTermLimitReached={isTermLimitReached}
+      />
 
       {/* Search + Term table card */}
       <AppCard className="overflow-hidden">
@@ -208,6 +214,7 @@ export function GlossaryDetail({ glossaryId }: GlossaryDetailProps) {
         open={bulkImportOpen}
         onOpenChange={setBulkImportOpen}
         glossaryId={glossaryId}
+        remainingTermSlots={Math.max(0, 80 - glossary.termCount)}
       />
     </>
   );

@@ -1,5 +1,3 @@
-import type { LucideIcon } from 'lucide-react';
-
 // =============== LANGUAGE TYPES ===============
 
 export type LanguageCode =
@@ -10,7 +8,11 @@ export type LanguageCode =
   | 'zh'
   | 'fr'
   | 'de'
-  | 'es';
+  | 'es'
+  | 'ru'
+  | 'ar'
+  | 'th'
+  | 'hi';
 
 export interface Language {
   code: LanguageCode;
@@ -32,15 +34,11 @@ export const LANGUAGE_CODE_TO_API_NAME: Record<LanguageCode, string> = {
   fr: 'French',
   de: 'German',
   es: 'Spanish',
+  ru: 'Russian',
+  ar: 'Arabic',
+  th: 'Thai',
+  hi: 'Hindi',
 };
-
-// =============== DOMAIN TYPES ===============
-
-export interface Domain {
-  id: string;
-  name: string;
-  icon: LucideIcon;
-}
 
 // =============== TONE TYPES ===============
 
@@ -62,6 +60,8 @@ export interface ManualTerm {
   src: string;
   tgt: string;
 }
+
+export type GlossaryInputMode = 'saved' | 'manual' | 'none';
 
 export interface FontReplacement {
   from_font: string;
@@ -111,18 +111,6 @@ export interface UploadedFile {
   file: File;
 }
 
-export const ALLOWED_FILE_TYPES = [
-  'application/pdf',
-  'application/msword',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  'application/vnd.ms-powerpoint',
-  'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-] as const;
-
-export const ALLOWED_EXTENSIONS = ['.pdf', '.docx', '.doc', '.pptx', '.ppt'];
-
-export const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
-
 // =============== JOB TYPES ===============
 
 /**
@@ -146,6 +134,20 @@ export interface RequestUploadUrlDto {
 export interface UploadUrlResponse {
   upload_url: string;
   file_id: string;
+  storage_key: string;
+  expires_in: number;
+}
+
+/** POST /files/upload/temp — request body */
+export interface TempUploadUrlDto {
+  file_name: string;
+  mime_type: string;
+  file_size: number;
+}
+
+/** POST /files/upload/temp — response */
+export interface PresignedUploadUrlResponse {
+  upload_url: string;
   storage_key: string;
   expires_in: number;
 }
@@ -199,10 +201,12 @@ export interface CreateTranslationJobDto {
   src_lang: string;
   tgt_lang: string;
   doc_tone?: string;
-  doc_domain?: string;
+  domain_id?: string;
+  customized_domain?: string;
   user_glossary?: { src_lang: string; tgt_lang: string }[];
   keep_original_font_size?: boolean;
   font_replacements?: FontReplacement[];
+  use_system_glossary?: boolean;
   pdf_output_format?: 'docx' | 'pptx';
 }
 
@@ -213,16 +217,22 @@ export interface TranslationJobResponse {
   status: JobStatus;
   input_file?: FileResponse;
   output_file?: FileResponse;
+  domainId?: string;
   src_lang?: string;
   tgt_lang?: string;
   error?: string;
   created_at?: string;
   completed_at?: string;
+  customized_domain?: string;
 }
 
 /** GET /files/:file_id/download — response */
 export interface FileDownloadUrlResponse {
   download_url: string;
+}
+
+export interface FileDownloadUrlOptions {
+  pdf?: boolean;
 }
 
 // =============== UPLOAD FLOW STATE ===============
@@ -249,10 +259,13 @@ export type TranslationFlowStatus =
 export interface TranslationConfig {
   srcLang: LanguageCode;
   tgtLang: LanguageCode;
-  domain: string;
+  domainId: string;
+  customDomain: string;
   tone: string;
+  glossaryInputMode: GlossaryInputMode;
   selectedGlossaryId: string | null;
   manualTerms: ManualTerm[];
+  useSystemGlossary: boolean;
   keepOriginalFontSize: boolean;
   fontConfigEnabled: boolean;
   fontEnabledMap: FontEnabledMap;

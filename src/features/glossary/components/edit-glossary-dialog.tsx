@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2, ArrowRightLeft } from 'lucide-react';
+import { useDomains } from '@/features/domains';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -52,6 +53,7 @@ export function EditGlossaryDialog({
 }: EditGlossaryDialogProps) {
   const t = useTranslations('glossary');
   const tCommon = useTranslations('common');
+  const { getDomainById, getDomainByKey, isLoading: isLoadingDomains } = useDomains();
 
   const form = useForm<CreateGlossaryFormValues>({
     resolver: zodResolver(createGlossarySchema),
@@ -66,14 +68,16 @@ export function EditGlossaryDialog({
   // Sync form values when glossary changes
   useEffect(() => {
     if (glossary) {
+      const domain = getDomainById(glossary.domainId);
+
       form.reset({
         name: glossary.name,
-        domain: glossary.domain,
+        domain: domain?.key ?? '',
         srcLang: glossary.srcLang,
         tgtLang: glossary.tgtLang,
       });
     }
-  }, [glossary, form]);
+  }, [glossary, form, getDomainById, isLoadingDomains]);
 
   const { updateGlossary, isUpdating } = useUpdateGlossary({
     onSuccess: () => {
@@ -83,9 +87,25 @@ export function EditGlossaryDialog({
 
   function handleSubmit(values: CreateGlossaryFormValues) {
     if (!glossary) return;
+
+    const selectedDomain = getDomainByKey(values.domain);
+
+    if (!selectedDomain) {
+      return;
+    }
+
+    const restValues = {
+      name: values.name,
+      srcLang: values.srcLang,
+      tgtLang: values.tgtLang,
+    };
+
     updateGlossary({
       glossaryId: glossary.id,
-      dto: values,
+      dto: {
+        ...restValues,
+        domainId: selectedDomain.id,
+      },
     });
   }
 

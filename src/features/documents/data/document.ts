@@ -1,16 +1,5 @@
-import type { Language, Domain, Tone, TranslationConfig } from '../types';
-import {
-  Globe,
-  Laptop,
-  Stethoscope,
-  Scale,
-  Landmark,
-  Megaphone,
-  GraduationCap,
-  Cog,
-  FlaskConical,
-  FolderOpen,
-} from 'lucide-react';
+import type { Language, Tone, TranslationConfig } from '../types';
+
 // =============== LANGUAGES ===============
 
 export const languages: Language[] = [
@@ -22,25 +11,14 @@ export const languages: Language[] = [
   { code: 'fr', name: 'Français', apiName: 'French' },
   { code: 'de', name: 'Deutsch', apiName: 'German' },
   { code: 'es', name: 'Español', apiName: 'Spanish' },
+  { code: 'ru', name: 'Русский', apiName: 'Russian' },
+  { code: 'ar', name: 'العربية', apiName: 'Arabic' },
+  { code: 'th', name: 'ภาษาไทย', apiName: 'Thai' },
+  { code: 'hi', name: 'हिन्दी', apiName: 'Hindi' },
 ];
 
 export const sourceLanguages = languages;
 export const targetLanguages = languages;
-
-// =============== DOMAINS ===============
-
-export const domains: Domain[] = [
-  { id: 'auto', name: 'Auto Detect', icon: FolderOpen },
-  { id: 'general', name: 'Tổng quát', icon: Globe },
-  { id: 'technology', name: 'Công nghệ', icon: Laptop },
-  { id: 'medical', name: 'Y tế', icon: Stethoscope },
-  { id: 'legal', name: 'Pháp lý', icon: Scale },
-  { id: 'finance', name: 'Tài chính', icon: Landmark },
-  { id: 'marketing', name: 'Marketing', icon: Megaphone },
-  { id: 'education', name: 'Giáo dục', icon: GraduationCap },
-  { id: 'engineering', name: 'Kỹ thuật', icon: Cog },
-  { id: 'science', name: 'Khoa học', icon: FlaskConical },
-];
 
 // =============== TONES ===============
 
@@ -68,10 +46,13 @@ export const tones: Tone[] = [
 export const defaultConfig: TranslationConfig = {
   srcLang: 'en',
   tgtLang: 'vi',
-  domain: 'auto',
+  domainId: '',
+  customDomain: '',
   tone: 'professional',
+  glossaryInputMode: 'saved',
   selectedGlossaryId: null,
   manualTerms: [],
+  useSystemGlossary: true,
   keepOriginalFontSize: false,
   fontConfigEnabled: true,
   fontEnabledMap: {},

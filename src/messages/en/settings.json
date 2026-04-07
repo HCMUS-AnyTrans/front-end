@@ -45,7 +45,11 @@
       "hours": "{count} hours",
       "hourUnit": "hours",
       "custom": "Custom",
-      "customHoursPlaceholder": "Enter hours"
+      "customHoursPlaceholder": "Enter hours",
+      "fileTtlPresetMode": "Preset",
+      "fileTtlCustomMode": "Custom",
+      "fileTtlSelectPresetPrompt": "Select a preset to continue.",
+      "fileTtlCustomValidation": "Enter a value between 1 and {max} hours."
     },
     "security": {
       "title": "Account Security",

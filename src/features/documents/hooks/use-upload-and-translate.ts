@@ -23,6 +23,7 @@ import { LANGUAGE_CODE_TO_API_NAME } from '../types';
 import { extractErrorMessage } from './utils';
 import { setActiveJobId } from '../store/translation.store';
 import { walletKeys } from '@/lib/query-client';
+import { buildUserGlossaryEntries } from '../utils/glossary-mode';
 
 interface UploadAndTranslateState {
   flowStatus: TranslationFlowStatus;
@@ -41,6 +42,7 @@ interface UseUploadAndTranslateReturn extends UploadAndTranslateState {
   startUpload: (file: File) => Promise<string | null>;
   startTranslation: (
     config: TranslationConfig,
+    selectedDomainKey?: string,
     glossaryTerms?: Array<{ srcTerm: string; tgtTerm: string }>,
     fontReplacements?: FontReplacement[],
   ) => Promise<void>;
@@ -151,6 +153,7 @@ async function pollFileAnalysis(
 function buildJobDto(
   fileId: string,
   config: TranslationConfig,
+  selectedDomainKey?: string,
   glossaryTerms: Array<{ srcTerm: string; tgtTerm: string }> = [],
   fontReplacements: FontReplacement[] = [],
 ): CreateTranslationJobDto {
@@ -159,30 +162,21 @@ function buildJobDto(
     src_lang: LANGUAGE_CODE_TO_API_NAME[config.srcLang],
     tgt_lang: LANGUAGE_CODE_TO_API_NAME[config.tgtLang],
     doc_tone: config.tone || undefined,
-    doc_domain: config.domain || 'auto',
+    domain_id: config.domainId || undefined,
   };
 
-  const mergedTerms = new Map<string, { src: string; tgt: string }>();
+  if (selectedDomainKey === 'other' && config.customDomain.trim()) {
+    dto.customized_domain = config.customDomain.trim();
+  }
 
-  glossaryTerms.forEach((term) => {
-    const src = term.srcTerm.trim();
-    const tgt = term.tgtTerm.trim();
-    if (!src || !tgt) return;
-    mergedTerms.set(src.toLowerCase(), { src, tgt });
+  const userGlossaryEntries = buildUserGlossaryEntries({
+    glossaryInputMode: config.glossaryInputMode,
+    manualTerms: config.manualTerms,
+    glossaryTerms,
   });
 
-  config.manualTerms.forEach((term) => {
-    const src = term.src.trim();
-    const tgt = term.tgt.trim();
-    if (!src || !tgt) return;
-    mergedTerms.set(src.toLowerCase(), { src, tgt });
-  });
-
-  if (mergedTerms.size > 0) {
-    dto.user_glossary = Array.from(mergedTerms.values()).map((term) => ({
-      src_lang: term.src.trim(),
-      tgt_lang: term.tgt.trim(),
-    }));
+  if (userGlossaryEntries.length > 0) {
+    dto.user_glossary = userGlossaryEntries;
   }
 
   if (fontReplacements.length > 0) {
@@ -192,6 +186,8 @@ function buildJobDto(
   if (config.keepOriginalFontSize) {
     dto.keep_original_font_size = true;
   }
+
+  dto.use_system_glossary = config.useSystemGlossary;
 
   return dto;
 }
@@ -285,7 +281,9 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
         flowStatus: 'idle',
         estimate: analysisResult.estimate,
         analysisFile: analysisResult.file,
-        fontsUsedByGroup: normalizeFontsUsed(analysisResult.file.metadata?.fontsUsed),
+        fontsUsedByGroup: normalizeFontsUsed(
+          analysisResult.file.metadata?.fontsUsed,
+        ),
         fontParseSupported:
           typeof analysisResult.file.metadata?.fontParseSupported === 'boolean'
             ? analysisResult.file.metadata.fontParseSupported
@@ -328,6 +326,7 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
   const startTranslation = useCallback(
     async (
       config: TranslationConfig,
+      selectedDomainKey?: string,
       glossaryTerms: Array<{ srcTerm: string; tgtTerm: string }> = [],
       fontReplacements: FontReplacement[] = [],
     ) => {
@@ -350,6 +349,7 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
         const jobDto = buildJobDto(
           state.fileId,
           config,
+          selectedDomainKey,
           glossaryTerms,
           fontReplacements,
         );

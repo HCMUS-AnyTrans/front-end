@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import {
   ArrowRightLeft,
   MoreHorizontal,
@@ -16,7 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { glossaryDomains } from '../data';
+import { getDomainLabel, useDomains } from '@/features/domains';
 import type { Glossary } from '../types';
 
 interface GlossaryCardProps {
@@ -32,23 +32,36 @@ export function GlossaryCard({
   onEdit,
   onDelete,
 }: GlossaryCardProps) {
+  const locale = useLocale();
   const t = useTranslations('glossary');
   const tCommon = useTranslations('common');
+  const isBlocked = glossary.status === 'pending' || glossary.status === 'processing';
 
-  const domainInfo = glossaryDomains.find((d) => d.id === glossary.domain);
+  const { getDomainById } = useDomains();
+  const domainInfo = getDomainById(glossary.domainId);
   const DomainIcon = domainInfo?.icon;
+  const domainLabel = domainInfo ? getDomainLabel(domainInfo, locale) : '';
 
   const formattedDate = new Date(glossary.createdAt).toLocaleDateString();
 
   return (
     <div
-      className="group relative cursor-pointer rounded-2xl border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-      onClick={() => onClick(glossary)}
+      className={
+        isBlocked
+          ? 'group relative rounded-2xl border bg-card p-5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 opacity-90'
+          : 'group relative cursor-pointer rounded-2xl border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+      }
+      onClick={() => {
+        if (!isBlocked) {
+          onClick(glossary);
+        }
+      }}
       role="button"
       tabIndex={0}
+      aria-disabled={isBlocked}
       aria-label={`${glossary.name} — ${t(`languages.${glossary.srcLang}`)} → ${t(`languages.${glossary.tgtLang}`)}`}
       onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (!isBlocked && (e.key === 'Enter' || e.key === ' ')) {
           e.preventDefault();
           onClick(glossary);
         }
@@ -61,11 +74,22 @@ export function GlossaryCard({
             {DomainIcon && <DomainIcon className="size-5" />}
           </div>
           <div className="min-w-0">
-            <h3 className="line-clamp-1 pr-2 text-base font-semibold leading-tight">
-              {glossary.name}
-            </h3>
+            <div className="flex flex-wrap items-center gap-2 pr-2">
+              <h3 className="line-clamp-1 text-base font-semibold leading-tight">{glossary.name}</h3>
+              {glossary.status !== 'created' ? (
+                <span
+                  className={
+                    glossary.status === 'failed'
+                      ? 'inline-flex rounded-full border border-destructive/30 bg-destructive/10 px-2 py-0.5 text-[11px] font-medium text-destructive'
+                      : 'inline-flex rounded-full border border-amber-300/40 bg-amber-100/70 px-2 py-0.5 text-[11px] font-medium text-amber-700'
+                  }
+                >
+                  {t(`status.${glossary.status}`)}
+                </span>
+              ) : null}
+            </div>
             <p className="mt-0.5 text-xs font-medium text-muted-foreground">
-              {t(`domains.${glossary.domain}`)}
+              {domainLabel}
             </p>
           </div>
         </div>
@@ -77,6 +101,7 @@ export function GlossaryCard({
               size="icon"
               className="-mr-2 -mt-2 size-8 rounded-full opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
               onClick={(e) => e.stopPropagation()}
+              disabled={isBlocked}
             >
               <MoreHorizontal className="size-5" />
               <span className="sr-only">{tCommon('actions')}</span>

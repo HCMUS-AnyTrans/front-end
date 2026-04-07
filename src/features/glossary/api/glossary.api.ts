@@ -3,6 +3,8 @@ import type {
   Glossary,
   GlossaryDetail,
   GlossaryListResponse,
+  GlossaryTemplateListResponse,
+  GlossaryLlmPrice,
   GlossaryQueryParams,
   CreateGlossaryDto,
   UpdateGlossaryDto,
@@ -16,6 +18,31 @@ import type {
 } from '../types';
 import type { MessageResponse } from '@/types/api.types';
 
+type GlossaryDto = Glossary;
+
+type GlossaryDetailDto = GlossaryDetail;
+
+type GlossaryTemplateDto = GlossaryTemplateListResponse['items'][number];
+
+interface GlossaryListResponseDto {
+  items: GlossaryDto[];
+  pagination: GlossaryListResponse['pagination'];
+}
+
+function mapGlossaryDto(dto: GlossaryDto): Glossary {
+  return dto;
+}
+
+function mapGlossaryDetailDto(dto: GlossaryDetailDto): GlossaryDetail {
+  return dto;
+}
+
+function mapGlossaryTemplateDto(
+  dto: GlossaryTemplateDto,
+): GlossaryTemplateListResponse['items'][number] {
+  return dto;
+}
+
 // ============================================================================
 // Glossary CRUD
 // ============================================================================
@@ -27,8 +54,8 @@ import type { MessageResponse } from '@/types/api.types';
 export async function createGlossaryApi(
   dto: CreateGlossaryDto,
 ): Promise<Glossary> {
-  const response = await apiClient.post<Glossary>('/glossaries', dto);
-  return response.data;
+  const response = await apiClient.post<GlossaryDto>('/glossaries', dto);
+  return mapGlossaryDto(response.data);
 }
 
 /**
@@ -38,9 +65,28 @@ export async function createGlossaryApi(
 export async function listGlossariesApi(
   params?: GlossaryQueryParams,
 ): Promise<GlossaryListResponse> {
-  const response = await apiClient.get<GlossaryListResponse>('/glossaries', {
+  const response = await apiClient.get<GlossaryListResponseDto>('/glossaries', {
     params,
   });
+  return {
+    ...response.data,
+    items: response.data.items.map(mapGlossaryDto),
+  };
+}
+
+export async function listGlossaryTemplatesApi(
+  domainId?: string,
+): Promise<GlossaryTemplateListResponse> {
+  const response = await apiClient.get<{ items: GlossaryTemplateDto[] }>('/glossaries/templates', {
+    params: domainId ? { domain_id: domainId } : undefined,
+  });
+  return {
+    items: response.data.items.map(mapGlossaryTemplateDto),
+  };
+}
+
+export async function getGlossaryLlmPriceApi(): Promise<GlossaryLlmPrice> {
+  const response = await apiClient.get<GlossaryLlmPrice>('/glossaries/pricing/llm-generation');
   return response.data;
 }
 
@@ -51,10 +97,10 @@ export async function listGlossariesApi(
 export async function getGlossaryApi(
   glossaryId: string,
 ): Promise<GlossaryDetail> {
-  const response = await apiClient.get<GlossaryDetail>(
+  const response = await apiClient.get<GlossaryDetailDto>(
     `/glossaries/${glossaryId}`,
   );
-  return response.data;
+  return mapGlossaryDetailDto(response.data);
 }
 
 /**
@@ -65,11 +111,11 @@ export async function updateGlossaryApi(
   glossaryId: string,
   dto: UpdateGlossaryDto,
 ): Promise<Glossary> {
-  const response = await apiClient.patch<Glossary>(
+  const response = await apiClient.patch<GlossaryDto>(
     `/glossaries/${glossaryId}`,
     dto,
   );
-  return response.data;
+  return mapGlossaryDto(response.data);
 }
 
 /**

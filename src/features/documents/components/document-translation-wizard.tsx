@@ -1,7 +1,13 @@
 "use client"
 
 import { useState, useCallback, useMemo, useEffect, useRef } from "react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
+import { useRouter } from "next/navigation"
+import { useDomains } from '@/features/domains'
+import {
+  DOCUMENT_MAX_FILE_SIZE_BYTES,
+  validateDocumentFile,
+} from "@/shared/utils/document-upload"
 import { TranslationStepper } from "./translation-stepper"
 import { StepUpload } from "./step-upload"
 import { StepConfigure } from "./step-configure"
@@ -10,8 +16,6 @@ import {
   type TranslationStep,
   type TranslationConfig,
   type UploadedFile,
-  ALLOWED_FILE_TYPES,
-  MAX_FILE_SIZE,
   LANGUAGE_CODE_TO_API_NAME,
 } from "../types"
 import { defaultConfig } from "../data"
@@ -25,6 +29,8 @@ import { useGlossaries, useTerms } from "@/features/glossary"
 import { useWallet } from "@/features/dashboard/hooks"
 import { useTranslationStore } from "../store/translation.store"
 import type { FontCheckItem, FontEnabledMap, FontReplacement, FontSelectionMap, LanguageCode } from "../types"
+import { canPreviewTranslationJob } from "../utils/preview-capabilities"
+import { deriveGlossaryInputMode } from "../utils/glossary-mode"
 
 function buildDefaultFontSelections(items: FontCheckItem[]): FontSelectionMap {
   return items.reduce<FontSelectionMap>((acc, item) => {
@@ -99,6 +105,8 @@ function buildFontReplacements(
 
 export function DocumentTranslationWizard() {
   const t = useTranslations("documents.upload")
+  const router = useRouter()
+  const locale = useLocale()
 
   // Step state
   const [step, setStep] = useState<TranslationStep>(1)
@@ -110,6 +118,7 @@ export function DocumentTranslationWizard() {
 
   // Config state
   const [config, setConfig] = useState<TranslationConfig>(defaultConfig)
+  const { domains, getDomainById, getDomainByKey, isLoading: isLoadingDomains } = useDomains()
 
   // API hooks
   const {
@@ -164,14 +173,18 @@ export function DocumentTranslationWizard() {
   const fontCheckUnavailable = fontCheckState?.fontCheckUnavailable ?? false
 
   const glossaryFilters = useMemo(
-    () => ({
-      page: 1,
-      limit: 100,
-      srcLang: config.srcLang,
-      tgtLang: config.tgtLang,
-      ...(config.domain !== "auto" ? { domain: config.domain } : {}),
-    }),
-    [config.domain, config.srcLang, config.tgtLang]
+    () => {
+      const selectedDomain = getDomainById(config.domainId)
+
+      return {
+        page: 1,
+        limit: 100,
+        srcLang: config.srcLang,
+        tgtLang: config.tgtLang,
+        ...(selectedDomain ? { domainId: selectedDomain.id } : {}),
+      }
+    },
+    [config.domainId, config.srcLang, config.tgtLang, getDomainById]
   )
 
   const {
@@ -181,9 +194,12 @@ export function DocumentTranslationWizard() {
   } = useGlossaries(glossaryFilters)
 
   const visibleGlossaries = isFetchingGlossaries ? [] : glossaries
+  const glossaryInputMode = deriveGlossaryInputMode(config)
 
   const activeSelectedGlossaryId =
-    config.selectedGlossaryId && visibleGlossaries.some((item) => item.id === config.selectedGlossaryId)
+    glossaryInputMode === "saved" &&
+    config.selectedGlossaryId &&
+    visibleGlossaries.some((item) => item.id === config.selectedGlossaryId)
       ? config.selectedGlossaryId
       : null
 
@@ -212,12 +228,20 @@ export function DocumentTranslationWizard() {
   // =============== FILE HANDLERS ===============
 
   const validateFile = useCallback((f: File): string | null => {
-    if (!ALLOWED_FILE_TYPES.includes(f.type as (typeof ALLOWED_FILE_TYPES)[number])) {
+    const validationResult = validateDocumentFile(f, {
+      maxFileSizeBytes: DOCUMENT_MAX_FILE_SIZE_BYTES,
+      checkMimeType: true,
+      checkExtension: true,
+    })
+
+    if (validationResult === "invalidType") {
       return t("errorUnsupported")
     }
-    if (f.size > MAX_FILE_SIZE) {
+
+    if (validationResult === "tooLarge") {
       return t("errorTooLarge")
     }
+
     return null
   }, [t])
 
@@ -338,6 +362,29 @@ export function DocumentTranslationWizard() {
     previousTargetLangRef.current = config.tgtLang
   }, [config.tgtLang, fontCheckItems])
 
+  useEffect(() => {
+    if (config.domainId || isLoadingDomains || domains.length === 0) {
+      return
+    }
+
+    const autoDomain = getDomainByKey('auto')
+
+    if (!autoDomain) {
+      return
+    }
+
+    setConfig((prev) => {
+      if (prev.domainId) {
+        return prev
+      }
+
+      return {
+        ...prev,
+        domainId: autoDomain.id,
+      }
+    })
+  }, [config.domainId, domains.length, getDomainByKey, isLoadingDomains])
+
   // =============== NAVIGATION HANDLERS ===============
 
   const goToStep = useCallback((newStep: TranslationStep) => {
@@ -366,10 +413,14 @@ export function DocumentTranslationWizard() {
   const handleStartTranslation = useCallback(() => {
     if (!file || !fileId) return
 
+    const selectedDomain = getDomainById(config.domainId)
+
+    if (!selectedDomain) return
+
     // Move to step 3 immediately to show upload progress
     goToStep(3)
 
-    const usableGlossaryTerms = activeSelectedGlossaryId ? selectedGlossaryTerms : []
+     const usableGlossaryTerms = activeSelectedGlossaryId ? selectedGlossaryTerms : []
     const fontReplacements = buildFontReplacements(
       fontCheckItems,
       config.fontSelections,
@@ -378,16 +429,23 @@ export function DocumentTranslationWizard() {
     )
 
     // Start the translation job for the already-uploaded file
-    startTranslation(config, usableGlossaryTerms, fontReplacements)
+     startTranslation(
+      { ...config, glossaryInputMode },
+      selectedDomain.key,
+      usableGlossaryTerms,
+      fontReplacements,
+    )
   }, [
     file,
     fileId,
     config,
+    getDomainById,
     activeSelectedGlossaryId,
-    selectedGlossaryTerms,
-    goToStep,
-    startTranslation,
-    fontCheckItems,
+      selectedGlossaryTerms,
+      glossaryInputMode,
+     goToStep,
+     startTranslation,
+     fontCheckItems,
   ])
 
   // =============== RESULT HANDLERS ===============
@@ -399,6 +457,23 @@ export function DocumentTranslationWizard() {
     const outputFileName = jobData?.output_file?.name || `translated-${file?.name || "document"}`
     download(outputFileId, outputFileName)
   }, [jobData, file, download])
+
+  const handlePreview = useCallback(() => {
+    const previewJobId = jobData?.job_id
+    if (!previewJobId) return
+
+    const previewUrl = `/${locale}/documents/preview?jobId=${encodeURIComponent(previewJobId)}`
+    router.push(previewUrl)
+  }, [jobData?.job_id, locale, router])
+
+  const canPreview = useMemo(
+    () =>
+      canPreviewTranslationJob({
+        inputFile: jobData?.input_file,
+        outputFile: jobData?.output_file,
+      }),
+    [jobData?.input_file, jobData?.output_file]
+  )
 
   const handleReset = useCallback(() => {
     // Reset all states
@@ -444,7 +519,7 @@ export function DocumentTranslationWizard() {
 
         {step === 2 && (
           <StepConfigure
-            config={{ ...config, selectedGlossaryId: activeSelectedGlossaryId }}
+            config={{ ...config, glossaryInputMode, selectedGlossaryId: activeSelectedGlossaryId }}
             onConfigChange={handleConfigChange}
             glossaries={visibleGlossaries}
             selectedGlossaryTerms={selectedGlossaryTerms}
@@ -483,8 +558,10 @@ export function DocumentTranslationWizard() {
             srcLang={config.srcLang}
             tgtLang={config.tgtLang}
             onDownload={handleDownload}
+            onPreview={handlePreview}
             onReset={handleReset}
             isDownloading={isDownloading}
+            canPreview={canPreview}
           />
         )}
       </div>

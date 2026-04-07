@@ -3,14 +3,30 @@ import { apiClient } from '@/lib/api-client';
 import type {
   RequestUploadUrlDto,
   UploadUrlResponse,
+  TempUploadUrlDto,
+  PresignedUploadUrlResponse,
   UpdateFileStatusDto,
   FileResponse,
   FileAnalysisResponse,
   CreateTranslationJobDto,
   TranslationJobResponse,
   FileDownloadUrlResponse,
+  FileDownloadUrlOptions,
   FontCheckResponse,
 } from '../types';
+
+interface TranslationJobResponseDto extends Omit<TranslationJobResponse, 'domainId'> {
+  domain_id?: string;
+}
+
+function mapTranslationJobResponse(
+  dto: TranslationJobResponseDto,
+): TranslationJobResponse {
+  return {
+    ...dto,
+    domainId: dto.domain_id,
+  };
+}
 
 // ============================================================================
 // File Upload API Functions
@@ -25,6 +41,20 @@ export async function requestDocUploadUrl(
 ): Promise<UploadUrlResponse> {
   const response = await apiClient.post<UploadUrlResponse>(
     '/files/upload/doc',
+    dto,
+  );
+  return response.data;
+}
+
+/**
+ * Request a presigned upload URL for a temporary file.
+ * POST /files/upload/temp
+ */
+export async function requestTempUploadUrl(
+  dto: TempUploadUrlDto,
+): Promise<PresignedUploadUrlResponse> {
+  const response = await apiClient.post<PresignedUploadUrlResponse>(
+    '/files/upload/temp',
     dto,
   );
   return response.data;
@@ -100,12 +130,12 @@ export async function createTranslationJob(
   if (idempotencyKey) {
     headers['Idempotency-Key'] = idempotencyKey;
   }
-  const response = await apiClient.post<TranslationJobResponse>(
+  const response = await apiClient.post<TranslationJobResponseDto>(
     '/translations/doc',
     dto,
     { headers },
   );
-  return response.data;
+  return mapTranslationJobResponse(response.data);
 }
 
 /**
@@ -115,10 +145,10 @@ export async function createTranslationJob(
 export async function getTranslationJob(
   jobId: string,
 ): Promise<TranslationJobResponse> {
-  const response = await apiClient.get<TranslationJobResponse>(
+  const response = await apiClient.get<TranslationJobResponseDto>(
     `/translations/${jobId}`,
   );
-  return response.data;
+  return mapTranslationJobResponse(response.data);
 }
 
 /**
@@ -143,9 +173,17 @@ export async function checkFonts(dto: {
  */
 export async function getFileDownloadUrl(
   fileId: string,
+  options: FileDownloadUrlOptions = {},
 ): Promise<FileDownloadUrlResponse> {
+  const pdf = options.pdf ?? false;
+
   const response = await apiClient.get<FileDownloadUrlResponse>(
     `/files/${fileId}/download`,
+    {
+      params: {
+        pdf,
+      },
+    },
   );
   return response.data;
 }

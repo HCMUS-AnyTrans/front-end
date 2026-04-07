@@ -42,6 +42,7 @@ interface BulkImportDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   glossaryId: string;
+  remainingTermSlots: number;
 }
 
 // ─── CSV Parser ──────────────────────────────────────────────────────────────
@@ -124,6 +125,7 @@ export function BulkImportDialog({
   open,
   onOpenChange,
   glossaryId,
+  remainingTermSlots,
 }: BulkImportDialogProps) {
   const t = useTranslations("glossary.terms");
   const tCommon = useTranslations("common");
@@ -180,9 +182,20 @@ export function BulkImportDialog({
         return;
       }
 
+      if (terms.length > remainingTermSlots) {
+        setParseError(
+          t("bulkImportRemainingExceeded", {
+            remaining: remainingTermSlots,
+            count: terms.length,
+          }),
+        );
+        setParsedTerms([]);
+        return;
+      }
+
       setParsedTerms(terms);
     },
-    [t, resetMutation],
+    [remainingTermSlots, t, resetMutation],
   );
 
   const handleFileRead = useCallback(
@@ -221,9 +234,9 @@ export function BulkImportDialog({
   );
 
   const handleImport = useCallback(() => {
-    if (parsedTerms.length === 0) return;
+    if (parsedTerms.length === 0 || remainingTermSlots <= 0) return;
     bulkImport({ glossaryId, dto: { terms: parsedTerms } });
-  }, [bulkImport, glossaryId, parsedTerms]);
+  }, [bulkImport, glossaryId, parsedTerms, remainingTermSlots]);
 
   const handleClear = useCallback(() => {
     setCsvText("");
@@ -243,6 +256,7 @@ export function BulkImportDialog({
   );
 
   const hasError = !!(parseError || importError);
+  const isTermLimitReached = remainingTermSlots <= 0;
 
   // ─── Render ───────────────────────────────────────────────────────────
   return (
@@ -282,6 +296,13 @@ export function BulkImportDialog({
                 </div>
               )}
 
+              {isTermLimitReached && !hasError ? (
+                <div className="flex items-start gap-2.5 rounded-xl border border-border bg-muted/40 p-3.5 text-muted-foreground">
+                  <AlertCircle className="mt-0.5 size-4 shrink-0" />
+                  <p className="text-sm">{t("termLimitReached")}</p>
+                </div>
+              ) : null}
+
               {/* Upload drop zone */}
               <div
                 className={cn(
@@ -318,7 +339,7 @@ export function BulkImportDialog({
                   variant="outline"
                   size="sm"
                   onClick={() => fileInputRef.current?.click()}
-                  disabled={isImporting}
+                  disabled={isImporting || isTermLimitReached}
                   className="gap-2"
                 >
                   <FileUp className="size-3.5" />
@@ -353,7 +374,7 @@ export function BulkImportDialog({
                     onChange={(e) => handleParse(e.target.value)}
                     rows={5}
                     className="resize-none text-sm"
-                    disabled={isImporting}
+                    disabled={isImporting || isTermLimitReached}
                   />
                 </div>
 
@@ -364,9 +385,9 @@ export function BulkImportDialog({
                       type="button"
                       variant="ghost"
                       size="sm"
-                      onClick={handleClear}
-                      disabled={isImporting}
-                      className="h-7 gap-1.5 px-2 text-xs text-muted-foreground hover:text-destructive"
+                       onClick={handleClear}
+                       disabled={isImporting || isTermLimitReached}
+                       className="h-7 gap-1.5 px-2 text-xs text-muted-foreground hover:text-destructive"
                     >
                       <X className="size-3.5" />
                       {t("bulkImportClear")}
@@ -443,7 +464,7 @@ export function BulkImportDialog({
             </Button>
             <Button
               onClick={handleImport}
-              disabled={isImporting || parsedTerms.length === 0}
+              disabled={isImporting || isTermLimitReached || parsedTerms.length === 0}
               className="min-w-[140px]"
             >
               {isImporting ? (

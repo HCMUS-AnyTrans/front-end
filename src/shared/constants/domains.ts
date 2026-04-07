@@ -1,75 +1,115 @@
-/**
- * Shared domain constants for Glossary, History, and Document translation.
- * Single source of truth - aligned with backend domain values.
- */
-
 import type { LucideIcon } from 'lucide-react';
 import {
-  Globe,
-  Laptop,
-  Stethoscope,
-  Scale,
-  Landmark,
-  Megaphone,
-  GraduationCap,
-  Cog,
+  Film,
+  FileText,
   FlaskConical,
   FolderOpen,
+  Globe,
+  Landmark,
+  Laptop,
+  Megaphone,
+  Plane,
+  Scale,
+  ShoppingCart,
+  Stethoscope,
+  Wrench,
 } from 'lucide-react';
 
-// ============================================================================
-// DOMAIN IDs (for filtering)
-// ============================================================================
+type DomainDefinition = {
+  id: string;
+  value: string;
+  icon: LucideIcon;
+};
 
-/** Domain IDs used for filtering (glossary list, history). Excludes "auto". */
-export const DOMAIN_FILTER_IDS = [
-  'general',
-  'technology',
-  'medical',
-  'legal',
-  'finance',
-  'marketing',
-  'education',
-  'engineering',
-  'science',
-] as const;
+type DomainMetadata = {
+  icon: LucideIcon;
+};
 
-export type DomainFilterId = (typeof DOMAIN_FILTER_IDS)[number];
+export const DEFAULT_DOMAIN_ICON = FolderOpen;
 
-/** Filter options: "all" + domain IDs. Used by Glossary. */
-export const DOMAIN_FILTER_OPTIONS = ['all', ...DOMAIN_FILTER_IDS] as const;
+export const DOMAIN_METADATA: Record<string, DomainMetadata> = {
+  administrative: { icon: FileText },
+  auto: { icon: FolderOpen },
+  commerce: { icon: ShoppingCart },
+  engineering: { icon: Wrench },
+  finance: { icon: Landmark },
+  general: { icon: Globe },
+  it_software: { icon: Laptop },
+  legal: { icon: Scale },
+  marketing_advertising: { icon: Megaphone },
+  media_entertainment: { icon: Film },
+  medical: { icon: Stethoscope },
+  other: { icon: Wrench },
+  science_academic: { icon: FlaskConical },
+  tourism: { icon: Plane },
+};
 
-export type DomainFilterValue = (typeof DOMAIN_FILTER_OPTIONS)[number];
+const DOMAIN_DEFINITIONS = [
+  { id: 'auto', value: 'Auto', icon: FolderOpen },
+  { id: 'general', value: 'General', icon: Globe },
+  { id: 'it_software', value: 'IT & Software', icon: Laptop },
+  { id: 'medical', value: 'Medical', icon: Stethoscope },
+  { id: 'legal', value: 'Legal', icon: Scale },
+  { id: 'finance', value: 'Finance', icon: Landmark },
+  { id: 'engineering', value: 'Engineering', icon: Wrench },
+  { id: 'science_academic', value: 'Science & Academic', icon: FlaskConical },
+  { id: 'commerce', value: 'Commerce & Retail', icon: ShoppingCart },
+  { id: 'tourism', value: 'Tourism & Hospitality', icon: Plane },
+  { id: 'media_entertainment', value: 'Media & Entertainment', icon: Film },
+  {
+    id: 'marketing_advertising',
+    value: 'Marketing & Advertising',
+    icon: Megaphone,
+  },
+  { id: 'administrative', value: 'Administrative', icon: FileText },
+  { id: 'other', value: 'Other', icon: Wrench },
+] as const satisfies readonly DomainDefinition[];
 
-/** Filter options for History: "all" + "auto" + domain IDs. */
-export const HISTORY_DOMAIN_FILTER_OPTIONS = [
-  'all',
-  'auto',
-  ...DOMAIN_FILTER_IDS,
-] as const;
-
-export type HistoryDomainFilterValue =
-  (typeof HISTORY_DOMAIN_FILTER_OPTIONS)[number];
-
-// ============================================================================
-// DOMAIN OPTIONS WITH ICONS (for forms: glossary create/edit, document wizard)
-// ============================================================================
+export type SharedDomainId = (typeof DOMAIN_DEFINITIONS)[number]['id'];
+export type DomainFilterId = Exclude<SharedDomainId, 'auto'>;
+export type DomainFilterValue = 'all' | DomainFilterId;
+export type HistoryDomainFilterValue = 'all' | SharedDomainId;
 
 export interface DomainOption {
-  id: string;
+  id: SharedDomainId;
   icon: LucideIcon;
 }
 
-/** Domain options with icons. Includes "auto" for document translation. */
-export const DOMAIN_OPTIONS_WITH_ICONS: DomainOption[] = [
-  { id: 'auto', icon: FolderOpen },
-  { id: 'general', icon: Globe },
-  { id: 'technology', icon: Laptop },
-  { id: 'medical', icon: Stethoscope },
-  { id: 'legal', icon: Scale },
-  { id: 'finance', icon: Landmark },
-  { id: 'marketing', icon: Megaphone },
-  { id: 'education', icon: GraduationCap },
-  { id: 'engineering', icon: Cog },
-  { id: 'science', icon: FlaskConical },
+export const domains: DomainDefinition[] = [...DOMAIN_DEFINITIONS];
+
+export const nonAutoDomains: DomainDefinition[] = DOMAIN_DEFINITIONS.filter(
+  (
+    domain,
+  ): domain is (typeof DOMAIN_DEFINITIONS)[number] & { id: DomainFilterId } =>
+    domain.id !== 'auto',
+);
+
+export const DOMAIN_FILTER_IDS: DomainFilterId[] = nonAutoDomains.map(
+  (domain) => domain.id,
+) as DomainFilterId[];
+
+export const DOMAIN_FILTER_OPTIONS: DomainFilterValue[] = [
+  'all',
+  ...DOMAIN_FILTER_IDS,
 ];
+
+export const HISTORY_DOMAIN_FILTER_OPTIONS: HistoryDomainFilterValue[] = [
+  'all',
+  ...DOMAIN_DEFINITIONS.map((domain) => domain.id),
+];
+
+export const DOMAIN_OPTIONS_WITH_ICONS: DomainOption[] = DOMAIN_DEFINITIONS.map(
+  ({ id, icon }) => ({ id, icon }),
+) as DomainOption[];
+
+export const NON_AUTO_DOMAIN_OPTIONS_WITH_ICONS: DomainOption[] =
+  nonAutoDomains.map(({ id, icon }) => ({ id, icon })) as DomainOption[];
+
+export const domainById: Record<SharedDomainId, DomainDefinition> =
+  DOMAIN_DEFINITIONS.reduce(
+    (acc, domain) => {
+      acc[domain.id] = domain;
+      return acc;
+    },
+    {} as Record<SharedDomainId, DomainDefinition>,
+  );

@@ -2,12 +2,9 @@
 
 import { useRef, useCallback } from "react";
 import {
-  FileText,
-  File,
   X,
   Check,
   AlertCircle,
-  Presentation,
   Upload,
   HardDrive,
   ShieldCheck,
@@ -20,8 +17,14 @@ import {
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { FileTypeIcon } from "@/components/shared/file-type-icon";
 import { cn } from "@/lib/utils";
-import { ALLOWED_EXTENSIONS, type UploadedFile } from "../types";
+import {
+  DOCUMENT_FILE_TYPE_LABELS,
+  DOCUMENT_INPUT_ACCEPT,
+  formatFileSize,
+} from "@/shared/utils/document-upload";
+import type { UploadedFile } from "../types";
 
 type UploadPipelineStatus =
   | "idle"
@@ -41,25 +44,6 @@ interface StepUploadProps {
   pipelineStatus?: UploadPipelineStatus;
   uploadError?: string | null;
 }
-
-function formatFileSize(bytes: number): string {
-  if (bytes < 1024) return bytes + " B";
-  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
-  return (bytes / (1024 * 1024)).toFixed(1) + " MB";
-}
-
-function getFileIcon(fileName: string, size: "sm" | "md" | "lg" = "md") {
-  const ext = fileName.split(".").pop()?.toLowerCase();
-  const sizeClass =
-    size === "sm" ? "size-8" : size === "lg" ? "size-14" : "size-10";
-  if (ext === "pdf")
-    return <FileText className={cn(sizeClass, "text-destructive")} />;
-  if (ext === "pptx" || ext === "ppt")
-    return <Presentation className={cn(sizeClass, "text-warning")} />;
-  return <File className={cn(sizeClass, "text-primary")} />;
-}
-
-const FILE_TYPES = ["PDF", "DOCX", "DOC", "PPTX", "PPT"];
 
 const PIPELINE_STEPS = [
   { key: "uploading", icon: CloudUpload, label: "pipelineUploading" },
@@ -218,7 +202,7 @@ export function StepUpload({
 
             {/* File type badges */}
             <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5">
-              {FILE_TYPES.map((ext) => (
+               {DOCUMENT_FILE_TYPE_LABELS.map((ext) => (
                 <span
                   key={ext}
                   className="rounded-md border border-border bg-muted/60 px-2 py-0.5 text-xs font-medium text-muted-foreground"
@@ -263,7 +247,7 @@ export function StepUpload({
             <div className="flex items-start gap-3 sm:gap-4">
               {/* File type icon */}
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-border bg-muted/40 sm:h-16 sm:w-16">
-                {getFileIcon(file.name, "sm")}
+                <FileTypeIcon fileName={file.name} className={cn("size-8")} />
               </div>
 
               <div className="min-w-0 flex-1 pt-0.5">
@@ -408,7 +392,7 @@ export function StepUpload({
       <input
         ref={inputRef}
         type="file"
-        accept={ALLOWED_EXTENSIONS.join(",")}
+        accept={DOCUMENT_INPUT_ACCEPT}
         onChange={handleInputChange}
         disabled={isBusy}
         className="hidden"

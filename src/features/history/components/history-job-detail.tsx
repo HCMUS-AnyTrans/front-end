@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import {
   Sheet,
   SheetContent,
@@ -11,28 +12,20 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import {
-  FileText,
-  Presentation,
-  File,
   Clock,
   CheckCircle2,
   Coins,
   ArrowRight,
   AlertCircle,
   Download,
+  Eye,
 } from 'lucide-react';
 import { jobStatusConfig } from '@/features/dashboard/data';
 import { useDownloadFile } from '@/features/documents';
+import { FileTypeIcon } from '@/components/shared/file-type-icon';
+import { canPreviewTranslationJob } from '@/features/documents/utils/preview-capabilities';
 import { formatFileSize } from '../data';
 import type { HistoryJobDetailProps } from '../types';
-
-function getFileIcon(name: string) {
-  const ext = name.split('.').pop()?.toLowerCase();
-  if (ext === 'pdf') return <FileText className="size-4 text-destructive" />;
-  if (ext === 'pptx' || ext === 'ppt')
-    return <Presentation className="size-4 text-warning" />;
-  return <File className="size-4 text-primary" />;
-}
 
 function formatDateTime(dateStr: string | undefined, locale: string): string {
   if (!dateStr) return '—';
@@ -52,13 +45,30 @@ export function HistoryJobDetail({
   onOpenChange,
   locale,
 }: HistoryJobDetailProps) {
+  const router = useRouter();
   const t = useTranslations('dashboard.history');
   const tStatus = useTranslations('dashboard.status');
+  const tReview = useTranslations('documents.review');
   const { download, isDownloading } = useDownloadFile();
 
   if (!job) return null;
 
   const statusCfg = jobStatusConfig[job.status];
+  const canPreview =
+    job.status === 'succeeded' &&
+    !job.input_file?.is_expired &&
+    !job.output_file?.is_expired &&
+    canPreviewTranslationJob({
+      inputFile: job.input_file,
+      outputFile: job.output_file,
+    });
+
+  const handlePreview = () => {
+    if (!canPreview) return;
+
+    const previewUrl = `/${locale}/documents/preview?jobId=${encodeURIComponent(job.job_id)}&from=history`;
+    router.push(previewUrl);
+  };
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -136,7 +146,7 @@ export function HistoryJobDetail({
                 </p>
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-2">
-                    {getFileIcon(job.input_file.name)}
+                    <FileTypeIcon fileName={job.input_file.name} className="size-4" />
                     <div className="min-w-0 flex-1">
                       <p className="wrap-break-word text-sm font-medium text-foreground">
                         {job.input_file.name}
@@ -182,7 +192,7 @@ export function HistoryJobDetail({
                 </p>
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-2">
-                    {getFileIcon(job.output_file.name)}
+                    <FileTypeIcon fileName={job.output_file.name} className="size-4" />
                     <div className="min-w-0 flex-1">
                       <p className="wrap-break-word text-sm font-medium text-foreground">
                         {job.output_file.name}
@@ -200,19 +210,32 @@ export function HistoryJobDetail({
                       )}
                     </div>
                   </div>
-                  {!job.output_file.is_expired && (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        download(job.output_file!.id, job.output_file!.name)
-                      }
-                      disabled={isDownloading}
-                      title={t('download.translated')}
-                      className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-border bg-background text-foreground shadow-sm hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                      <Download className="size-4" />
-                    </button>
-                  )}
+                  <div className="flex shrink-0 items-center gap-2">
+                    {canPreview && (
+                      <button
+                        type="button"
+                        onClick={handlePreview}
+                        title={tReview('preview')}
+                        className="inline-flex size-9 items-center justify-center rounded-full border border-border bg-background text-foreground shadow-sm hover:border-primary hover:text-primary"
+                      >
+                        <Eye className="size-4" />
+                      </button>
+                    )}
+
+                    {!job.output_file.is_expired && (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          download(job.output_file!.id, job.output_file!.name)
+                        }
+                        disabled={isDownloading}
+                        title={t('download.translated')}
+                        className="inline-flex size-9 items-center justify-center rounded-full border border-border bg-background text-foreground shadow-sm hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        <Download className="size-4" />
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
               <Separator />

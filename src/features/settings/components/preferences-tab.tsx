@@ -7,17 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   SettingsSection,
   SettingsRow,
   SettingsDivider,
 } from "./settings-section";
+import { cn } from "@/lib/utils";
 import { uiLanguageOptions } from "../data";
 import { usePreferences, useUpdatePreferences } from "../hooks/use-preferences";
 import { useThemeSync } from "../hooks/use-theme-sync";
@@ -39,6 +33,11 @@ const FILE_TTL_OPTIONS: { value: FileTTL; hours: number }[] = [
 ];
 
 const DEFAULT_FILE_TTL: FileTTL = 6;
+const MAX_FILE_TTL_HOURS = 8760;
+
+function isPresetFileTtl(value: FileTTL) {
+  return FILE_TTL_OPTIONS.some((option) => option.value === value);
+}
 
 function normalizeFileTtl(value: number | null | undefined): FileTTL {
   if (typeof value === "number" && Number.isFinite(value) && value > 0) {
@@ -119,36 +118,48 @@ export function PreferencesTab() {
 
   // Local state (fileTtl only — theme and language are handled instantly)
   const [selectedFileTtl, setSelectedFileTtl] = useState<FileTTL | null>(null);
-  const [customFileTtlInput, setCustomFileTtlInput] = useState("");
-  const [hasChanges, setHasChanges] = useState(false);
+  const [customFileTtlInput, setCustomFileTtlInput] = useState<string | null>(null);
+  const [fileTtlMode, setFileTtlMode] = useState<"preset" | "custom" | null>(null);
 
   // Show skeleton while loading
   if (isLoading || !preferences) {
     return <PreferencesTabSkeleton />;
   }
 
-  const normalizedPreferenceFileTtl = normalizeFileTtl(preferences.fileTtl);
-  const currentFileTtl = selectedFileTtl ?? normalizedPreferenceFileTtl;
-  const isPresetFileTtl = FILE_TTL_OPTIONS.some(
-    (option) => option.value === currentFileTtl,
-  );
-  const showCustomFileTtlInput = customFileTtlInput !== "" || !isPresetFileTtl;
-  const hasInvalidLegacyTtl = false;
+  const savedFileTtl = normalizeFileTtl(preferences.fileTtl);
+  const draftFileTtl = selectedFileTtl ?? savedFileTtl;
+  const savedMode = isPresetFileTtl(savedFileTtl) ? "preset" : "custom";
+  const activeFileTtlMode = fileTtlMode ?? savedMode;
+  const selectedPresetValue = isPresetFileTtl(draftFileTtl) ? draftFileTtl : null;
+  const resolvedCustomFileTtlInput = customFileTtlInput ?? String(draftFileTtl);
+  const customFileTtlValue = Number(resolvedCustomFileTtlInput);
+  const isCustomFileTtlInvalid =
+    activeFileTtlMode === "custom" &&
+    (resolvedCustomFileTtlInput.trim() === "" ||
+      !Number.isFinite(customFileTtlValue) ||
+      customFileTtlValue <= 0 ||
+      customFileTtlValue > MAX_FILE_TTL_HOURS);
+  const hasFileTtlChanges = draftFileTtl !== savedFileTtl;
+  const needsPresetSelection =
+    activeFileTtlMode === "preset" && selectedPresetValue === null;
+  const showFileTtlActions = hasFileTtlChanges || isCustomFileTtlInvalid;
+  const isFileTtlSaveDisabled =
+    isUpdating || isCustomFileTtlInvalid || needsPresetSelection || !hasFileTtlChanges;
 
   const handleFileTtlChange = (value: FileTTL) => {
     setSelectedFileTtl(value);
-    setCustomFileTtlInput("");
-    setHasChanges(true);
+    setCustomFileTtlInput(null);
   };
 
-  const handleFileTtlSelectChange = (value: string) => {
-    if (value === "custom") {
-      setSelectedFileTtl(currentFileTtl);
-      setCustomFileTtlInput(String(currentFileTtl));
+  const handleFileTtlModeChange = (mode: "preset" | "custom") => {
+    setFileTtlMode(mode);
+
+    if (mode === "custom") {
+      setCustomFileTtlInput(String(draftFileTtl));
       return;
     }
 
-    handleFileTtlChange(Number(value));
+    setCustomFileTtlInput(null);
   };
 
   const handleCustomFileTtlChange = (value: string) => {
@@ -159,19 +170,23 @@ export function PreferencesTab() {
     if (!sanitizedValue) return;
 
     const hours = Number(sanitizedValue);
-    if (hours > 0) {
+    if (hours > 0 && hours <= MAX_FILE_TTL_HOURS) {
       setSelectedFileTtl(hours);
-      setHasChanges(true);
     }
+  };
+
+  const handleFileTtlReset = () => {
+    setSelectedFileTtl(null);
+    setCustomFileTtlInput(null);
+    setFileTtlMode(null);
   };
 
   const handleSave = () => {
     updatePreferences(
-      { fileTtl: currentFileTtl },
+      { fileTtl: draftFileTtl },
       {
         onSuccess: () => {
-          setHasChanges(false);
-          setSelectedFileTtl(null);
+          handleFileTtlReset();
         },
       },
     );
@@ -241,63 +256,121 @@ export function PreferencesTab() {
       </SettingsSection>
 
       {/* File Settings */}
-      <SettingsSection title={t("fileTtl")}>
-        <div className="space-y-1">
-          <SettingsRow
-            label={t("fileTtl")}
-            description={t("fileTtlDescription")}
-          >
-            <Select
-              value={showCustomFileTtlInput ? "custom" : String(currentFileTtl)}
-              onValueChange={handleFileTtlSelectChange}
-            >
-              <SelectTrigger className="w-32">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {FILE_TTL_OPTIONS.map((option) => (
-                  <SelectItem key={option.value} value={String(option.value)}>
-                    {t("hours", { count: option.hours })}
-                  </SelectItem>
-                ))}
-                <SelectItem value="custom">{t("custom")}</SelectItem>
-              </SelectContent>
-            </Select>
-            {showCustomFileTtlInput ? (
-              <div className="flex items-center mt-2 gap-2">
-                <Input
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  value={customFileTtlInput || String(currentFileTtl)}
-                  onChange={(e) => handleCustomFileTtlChange(e.target.value)}
-                  className="w-32"
-                  placeholder={t("customHoursPlaceholder")}
-                />
-                <span className="text-sm text-muted-foreground">
-                  {t("hourUnit")}
-                </span>
+      <SettingsSection title={t("fileTtl")} description={t("fileTtlDescription")}>
+        <div className="space-y-4">
+          <div className="rounded-xl border border-border/70 bg-muted/20 p-4">
+            <div className="flex flex-wrap gap-1">
+              <button
+                type="button"
+                onClick={() => handleFileTtlModeChange("preset")}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm transition-colors",
+                  activeFileTtlMode === "preset"
+                    ? "border-primary bg-primary/5 text-primary"
+                    : "border-border bg-card text-foreground hover:bg-muted/50",
+                )}
+              >
+                {t("fileTtlPresetMode")}
+              </button>
+              <button
+                type="button"
+                onClick={() => handleFileTtlModeChange("custom")}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm transition-colors",
+                  activeFileTtlMode === "custom"
+                    ? "border-primary bg-primary/5 text-primary"
+                    : "border-border bg-card text-foreground hover:bg-muted/50",
+                )}
+              >
+                {t("fileTtlCustomMode")}
+              </button>
+            </div>
+
+            {activeFileTtlMode === "preset" ? (
+              <div className="mt-4 space-y-3">
+                <div className="flex flex-wrap gap-2">
+                  {FILE_TTL_OPTIONS.map((option) => {
+                    const isActive = selectedPresetValue === option.value;
+
+                    return (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => handleFileTtlChange(option.value)}
+                        className={cn(
+                          "flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm transition-colors",
+                          isActive
+                            ? "border-primary bg-primary/5 text-primary"
+                            : "border-border bg-card text-foreground hover:bg-muted/50",
+                        )}
+                      >
+                        {t("hours", { count: option.hours })}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {needsPresetSelection ? (
+                  <p className="text-sm text-amber-600">
+                    {t("fileTtlSelectPresetPrompt")}
+                  </p>
+                ) : null}
+              </div>
+            ) : (
+              <div className="mt-4 space-y-3">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+                  <Input
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    value={resolvedCustomFileTtlInput}
+                    onChange={(e) => handleCustomFileTtlChange(e.target.value)}
+                    className="w-full sm:w-40"
+                    placeholder={t("customHoursPlaceholder")}
+                    aria-invalid={isCustomFileTtlInvalid}
+                  />
+                  <span className="text-sm text-muted-foreground">
+                    {t("hourUnit")}
+                  </span>
+                </div>
+
+                {isCustomFileTtlInvalid ? (
+                  <p className="text-sm text-destructive">
+                    {t("fileTtlCustomValidation", { max: MAX_FILE_TTL_HOURS })}
+                  </p>
+                ) : null}
+              </div>
+            )}
+
+            {showFileTtlActions ? (
+              <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:justify-end">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleFileTtlReset}
+                  disabled={isUpdating}
+                >
+                  {tCommon("cancel")}
+                </Button>
+                <Button
+                  type="button"
+                  onClick={handleSave}
+                  disabled={isFileTtlSaveDisabled}
+                >
+                  {isUpdating ? (
+                    <>
+                      <Loader2 className="mr-2 size-4 animate-spin" />
+                      {tCommon("save")}
+                    </>
+                  ) : (
+                    tCommon("save")
+                  )}
+                </Button>
               </div>
             ) : null}
-          </SettingsRow>
+          </div>
         </div>
       </SettingsSection>
-
-      {/* Save Button */}
-      {(hasChanges || hasInvalidLegacyTtl) && (
-        <div className="flex justify-end">
-          <Button onClick={handleSave} disabled={isUpdating}>
-            {isUpdating ? (
-              <>
-                <Loader2 className="mr-2 size-4 animate-spin" />
-                {tCommon("save")}
-              </>
-            ) : (
-              tCommon("save")
-            )}
-          </Button>
-        </div>
-      )}
     </div>
   );
 }

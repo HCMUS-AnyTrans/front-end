@@ -1,8 +1,9 @@
 import { z } from 'zod';
 import {
-  DOMAIN_OPTIONS_WITH_ICONS,
+  NON_AUTO_DOMAIN_OPTIONS_WITH_ICONS,
   type DomainOption as SharedDomainOption,
 } from '@/shared/constants/domains';
+import type { GlossarySourceType } from './create-glossary-source';
 
 // ============================================================================
 // DOMAIN OPTIONS
@@ -15,9 +16,8 @@ export type DomainOption = SharedDomainOption & { name?: string };
  * Available domain/subject area options for glossaries.
  * Uses shared constants - aligned with backend and document translation.
  */
-export const glossaryDomains: DomainOption[] = DOMAIN_OPTIONS_WITH_ICONS.map(
-  (d) => ({ id: d.id, icon: d.icon }),
-);
+export const glossaryDomains: DomainOption[] =
+  NON_AUTO_DOMAIN_OPTIONS_WITH_ICONS.map((d) => ({ id: d.id, icon: d.icon }));
 
 // ============================================================================
 // LANGUAGE OPTIONS
@@ -65,6 +65,10 @@ export const createGlossarySchema = z
       .string()
       .min(1, 'Vui lòng chọn ngôn ngữ đích')
       .max(10, 'Mã ngôn ngữ không hợp lệ'),
+    customizedDomain: z
+      .string()
+      .max(100, 'Lĩnh vực tùy chỉnh không được vượt quá 100 ký tự')
+      .optional(),
   })
   .refine((data) => data.srcLang !== data.tgtLang, {
     message: 'Ngôn ngữ nguồn và ngôn ngữ đích phải khác nhau',
@@ -152,6 +156,15 @@ export const bulkImportSchema = z.object({
 });
 
 export type BulkImportFormValues = z.infer<typeof bulkImportSchema>;
+
+export const glossarySourceOptions: Array<{
+  id: Exclude<GlossarySourceType, null>;
+  icon: 'manual' | 'template' | 'document';
+}> = [
+  { id: 'manual', icon: 'manual' },
+  { id: 'template', icon: 'template' },
+  { id: 'document', icon: 'document' },
+];
 
 // ============================================================================
 // DEFAULTS
