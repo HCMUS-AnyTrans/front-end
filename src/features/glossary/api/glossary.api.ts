@@ -8,13 +8,6 @@ import type {
   GlossaryQueryParams,
   CreateGlossaryDto,
   UpdateGlossaryDto,
-  Term,
-  TermListResponse,
-  TermQueryParams,
-  CreateTermDto,
-  UpdateTermDto,
-  BulkCreateTermsDto,
-  BulkImportResult,
 } from '../types';
 import type { MessageResponse } from '@/types/api.types';
 
@@ -43,12 +36,8 @@ function mapGlossaryTemplateDto(
   return dto;
 }
 
-// ============================================================================
-// Glossary CRUD
-// ============================================================================
-
 /**
- * Create a new glossary
+ * Create a new glossary.
  * POST /glossaries
  */
 export async function createGlossaryApi(
@@ -59,7 +48,7 @@ export async function createGlossaryApi(
 }
 
 /**
- * List glossaries for the current user (paginated, filterable)
+ * List glossaries for the current user.
  * GET /glossaries
  */
 export async function listGlossariesApi(
@@ -74,6 +63,10 @@ export async function listGlossariesApi(
   };
 }
 
+/**
+ * List glossary templates available for a domain.
+ * GET /glossaries/templates
+ */
 export async function listGlossaryTemplatesApi(
   domainId?: string,
 ): Promise<GlossaryTemplateListResponse> {
@@ -88,6 +81,10 @@ export async function listGlossaryTemplatesApi(
   };
 }
 
+/**
+ * Get the current LLM glossary generation price.
+ * GET /glossaries/pricing/llm-generation
+ */
 export async function getGlossaryLlmPriceApi(): Promise<GlossaryLlmPrice> {
   const response = await apiClient.get<GlossaryLlmPrice>(
     '/glossaries/pricing/llm-generation',
@@ -96,7 +93,7 @@ export async function getGlossaryLlmPriceApi(): Promise<GlossaryLlmPrice> {
 }
 
 /**
- * Get a single glossary with its first 50 terms
+ * Get a glossary with its first page of terms.
  * GET /glossaries/:glossaryId
  */
 export async function getGlossaryApi(
@@ -109,7 +106,7 @@ export async function getGlossaryApi(
 }
 
 /**
- * Update glossary metadata (domain, srcLang, tgtLang)
+ * Update glossary metadata.
  * PATCH /glossaries/:glossaryId
  */
 export async function updateGlossaryApi(
@@ -124,7 +121,7 @@ export async function updateGlossaryApi(
 }
 
 /**
- * Delete a glossary and all its terms (cascade)
+ * Delete a glossary and all its terms.
  * DELETE /glossaries/:glossaryId
  */
 export async function deleteGlossaryApi(
@@ -132,85 +129,6 @@ export async function deleteGlossaryApi(
 ): Promise<MessageResponse> {
   const response = await apiClient.delete<MessageResponse>(
     `/glossaries/${glossaryId}`,
-  );
-  return response.data;
-}
-
-// ============================================================================
-// Term CRUD
-// ============================================================================
-
-/**
- * Add a single term to a glossary
- * POST /glossaries/:glossaryId/terms
- */
-export async function addTermApi(
-  glossaryId: string,
-  dto: CreateTermDto,
-): Promise<Term> {
-  const response = await apiClient.post<Term>(
-    `/glossaries/${glossaryId}/terms`,
-    dto,
-  );
-  return response.data;
-}
-
-/**
- * List terms within a glossary (paginated, searchable)
- * GET /glossaries/:glossaryId/terms
- */
-export async function listTermsApi(
-  glossaryId: string,
-  params?: TermQueryParams,
-): Promise<TermListResponse> {
-  const response = await apiClient.get<TermListResponse>(
-    `/glossaries/${glossaryId}/terms`,
-    { params },
-  );
-  return response.data;
-}
-
-/**
- * Bulk import terms into a glossary (max 500 per request)
- * POST /glossaries/:glossaryId/terms/bulk
- */
-export async function bulkImportTermsApi(
-  glossaryId: string,
-  dto: BulkCreateTermsDto,
-): Promise<BulkImportResult> {
-  const response = await apiClient.post<BulkImportResult>(
-    `/glossaries/${glossaryId}/terms/bulk`,
-    dto,
-  );
-  return response.data;
-}
-
-/**
- * Update a single term
- * PATCH /glossaries/:glossaryId/terms/:termId
- */
-export async function updateTermApi(
-  glossaryId: string,
-  termId: string,
-  dto: UpdateTermDto,
-): Promise<Term> {
-  const response = await apiClient.patch<Term>(
-    `/glossaries/${glossaryId}/terms/${termId}`,
-    dto,
-  );
-  return response.data;
-}
-
-/**
- * Delete a single term
- * DELETE /glossaries/:glossaryId/terms/:termId
- */
-export async function deleteTermApi(
-  glossaryId: string,
-  termId: string,
-): Promise<MessageResponse> {
-  const response = await apiClient.delete<MessageResponse>(
-    `/glossaries/${glossaryId}/terms/${termId}`,
   );
   return response.data;
 }

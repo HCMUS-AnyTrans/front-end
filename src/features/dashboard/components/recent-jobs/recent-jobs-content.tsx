@@ -13,7 +13,7 @@ import {
 import { ArrowRight, Coins } from 'lucide-react';
 import { FileTypeIcon } from '@/components/shared/file-type-icon';
 import { jobStatusConfig } from '@/features/dashboard/data';
-import type { TranslationJobResponse } from '../../types';
+import type { TranslationJobResponse } from '@/types';
 
 type RecentJobsContentProps = {
   jobs: TranslationJobResponse[];

@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { bulkImportTermsApi } from '../api/glossary.api';
+import { bulkImportTermsApi } from '../api';
 import { glossaryKeys } from '@/lib/query-client';
 import { getErrorMessage } from '@/lib/api-error';
 import type { BulkCreateTermsDto, BulkImportResult } from '../types';

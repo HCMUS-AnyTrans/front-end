@@ -47,7 +47,7 @@ import { useDeleteFilesByJob, useStorageUsage } from "../hooks/use-files"
 import { useRecentJobs } from "@/features/dashboard/hooks"
 import { getFileDownloadUrl } from "@/features/documents/api/documents.api"
 import { jobStatusConfig } from "@/features/dashboard/data"
-import type { TranslationJobResponse, TranslationJobFile } from "@/features/dashboard/types"
+import type { TranslationJobResponse, TranslationJobFile } from "@/types"
 
 function formatFileSize(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`

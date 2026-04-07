@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { keepPreviousData } from '@tanstack/react-query';
-import { listGlossariesApi } from '../api/glossary.api';
+import { listGlossariesApi } from '../api';
 import { glossaryKeys } from '@/lib/query-client';
 import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type { GlossaryQueryParams } from '../types';

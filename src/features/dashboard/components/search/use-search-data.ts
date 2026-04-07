@@ -4,7 +4,7 @@ import { useState, useEffect, useDeferredValue } from 'react';
 import { useTranslations } from 'next-intl';
 import { getRecentJobsApi } from '../../api/dashboard.api';
 import { listGlossariesApi } from '@/features/glossary/api/glossary.api';
-import type { TranslationJobResponse } from '../../types';
+import type { TranslationJobResponse } from '@/types';
 import type { Glossary } from '@/features/glossary/types';
 import {
   LayoutDashboard,

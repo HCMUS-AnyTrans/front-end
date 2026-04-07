@@ -1,4 +1,5 @@
 import { apiClient } from '@/lib/api-client';
+import type { TranslationJobResponse } from '@/types';
 import type {
   DashboardStats,
   DashboardStatsQuery,
@@ -8,7 +9,6 @@ import type {
   CreditsChartQuery,
   StorageResponse,
   WalletResponse,
-  TranslationJobResponse,
   TranslationJobsListResponse,
   RecentJobsQuery,
 } from '../types';

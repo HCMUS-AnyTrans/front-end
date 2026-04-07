@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { glossaryKeys } from '@/lib/query-client';
 import { useAccessToken, useIsAuthenticated } from '@/features/auth';
-import { listGlossaryTemplatesApi } from '../api/glossary.api';
+import { listGlossaryTemplatesApi } from '../api';
 
 export function useGlossaryTemplates(domainId?: string, enabled = true) {
   const isAuthenticated = useIsAuthenticated();

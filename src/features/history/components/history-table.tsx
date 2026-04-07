@@ -37,7 +37,7 @@ import {
   Loader2,
 } from 'lucide-react';
 import { jobStatusConfig } from '@/features/dashboard/data';
-import type { TranslationJobResponse } from '@/features/dashboard/types';
+import type { TranslationJobResponse } from '@/types';
 import { getFileDownloadUrl } from '@/features/documents/api/documents.api';
 import { FileTypeIcon } from '@/components/shared/file-type-icon';
 import { canPreviewTranslationJob } from '@/features/documents/utils/preview-capabilities';

@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { listTermsApi } from '../api/glossary.api';
+import { listTermsApi } from '../api';
 import { glossaryKeys } from '@/lib/query-client';
 import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type { TermQueryParams } from '../types';

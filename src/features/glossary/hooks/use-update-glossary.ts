@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateGlossaryApi } from '../api/glossary.api';
+import { updateGlossaryApi } from '../api';
 import { glossaryKeys } from '@/lib/query-client';
 import { getErrorMessage } from '@/lib/api-error';
 import type { UpdateGlossaryDto, Glossary } from '../types';

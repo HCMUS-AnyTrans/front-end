@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import { glossaryKeys } from '@/lib/query-client';
-import { getGlossaryLlmPriceApi } from '../api/glossary.api';
+import { getGlossaryLlmPriceApi } from '../api';
 
 export function useGlossaryLlmPrice(enabled = true) {
   const isAuthenticated = useIsAuthenticated();

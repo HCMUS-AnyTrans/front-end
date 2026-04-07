@@ -5,7 +5,7 @@ import { CommandGroup, CommandItem, CommandSeparator } from "cmdk";
 import { ArrowRight, Clock, BookOpen, Loader2 } from "lucide-react";
 import { getDomainLabel, useDomains } from "@/features/domains";
 import type { NavItem } from "./use-search-data";
-import type { TranslationJobResponse } from "../../types";
+import type { TranslationJobResponse } from "@/types";
 import type { Glossary } from "@/features/glossary/types";
 
 const ITEM_CLASS =

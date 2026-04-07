@@ -8,7 +8,7 @@ import {
   requestTempUploadUrl,
   uploadFileToPresignedUrl,
 } from '@/features/documents/api/documents.api';
-import { createGlossaryApi } from '../api/glossary.api';
+import { createGlossaryApi } from '../api';
 import type { CreateGlossaryFormValues } from '../data';
 import type {
   Glossary,

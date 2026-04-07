@@ -46,3 +46,15 @@ export interface PaginatedResponse<T> {
   limit: number;
   totalPages: number;
 }
+
+/**
+ * Pagination metadata returned by feature list endpoints.
+ */
+export interface PaginationMeta {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+}

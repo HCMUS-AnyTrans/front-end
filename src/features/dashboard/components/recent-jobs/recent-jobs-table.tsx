@@ -16,7 +16,7 @@ import {
 } from './recent-jobs-table.fallback';
 import { HistoryJobDetail } from '@/features/history';
 import { RecentJobsContent } from './recent-jobs-content';
-import type { TranslationJobResponse } from '../../types';
+import type { TranslationJobResponse } from '@/types';
 
 export function RecentJobsTable() {
   const t = useTranslations('dashboard.recentJobs');
