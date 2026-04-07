@@ -117,7 +117,10 @@ export interface TranslationJobResponse {
   customized_domain?: string;
 }
 
-interface TranslationJobResponseDto extends Omit<TranslationJobResponse, 'domainId'> {
+interface TranslationJobResponseDto extends Omit<
+  TranslationJobResponse,
+  'domainId'
+> {
   domain_id?: string;
 }
 
@@ -154,10 +157,7 @@ export async function getRecentJobsApi(
   const response = await apiClient.get<{
     data: TranslationJobResponseDto[];
     meta: TranslationJobsListResponse['meta'];
-  }>(
-    '/translations',
-    { params },
-  );
+  }>('/translations', { params });
 
   return {
     ...response.data,

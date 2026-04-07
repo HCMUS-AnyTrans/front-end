@@ -10,7 +10,11 @@ import {
 } from '@/features/documents/api/documents.api';
 import { createGlossaryApi } from '../api/glossary.api';
 import type { CreateGlossaryFormValues } from '../data';
-import type { Glossary, GlossaryListResponse, CreateGlossaryDto } from '../types';
+import type {
+  Glossary,
+  GlossaryListResponse,
+  CreateGlossaryDto,
+} from '../types';
 import type { GlossarySourceType } from '../data/create-glossary-source';
 
 interface CreateGlossaryBySourcePayload {
@@ -25,7 +29,9 @@ interface UseCreateGlossaryBySourceOptions {
   onError?: (error: string) => void;
 }
 
-export function useCreateGlossaryBySource(options?: UseCreateGlossaryBySourceOptions) {
+export function useCreateGlossaryBySource(
+  options?: UseCreateGlossaryBySourceOptions,
+) {
   const queryClient = useQueryClient();
   const { onSuccess, onError } = options || {};
   const { getDomainByKey } = useDomains();
@@ -34,7 +40,12 @@ export function useCreateGlossaryBySource(options?: UseCreateGlossaryBySourceOpt
     onMutate: async () => {
       await queryClient.invalidateQueries({ queryKey: walletKeys.all });
     },
-    mutationFn: async ({ values, sourceType, selectedTemplateId, documentFiles }: CreateGlossaryBySourcePayload) => {
+    mutationFn: async ({
+      values,
+      sourceType,
+      selectedTemplateId,
+      documentFiles,
+    }: CreateGlossaryBySourcePayload) => {
       const selectedDomain = getDomainByKey(values.domain);
 
       if (!selectedDomain) {
@@ -66,7 +77,9 @@ export function useCreateGlossaryBySource(options?: UseCreateGlossaryBySourceOpt
           const customizedDomain = values.customizedDomain?.trim();
 
           if (!customizedDomain) {
-            throw new Error('Custom domain is required for other glossary domain');
+            throw new Error(
+              'Custom domain is required for other glossary domain',
+            );
           }
 
           dto.customized_domain = customizedDomain;
@@ -86,7 +99,7 @@ export function useCreateGlossaryBySource(options?: UseCreateGlossaryBySourceOpt
               storageKey: storage_key,
               fileName: file.name,
             };
-          })
+          }),
         );
 
         dto.mode = 'llm';
@@ -105,13 +118,15 @@ export function useCreateGlossaryBySource(options?: UseCreateGlossaryBySourceOpt
             return current;
           }
 
-          const existingItems = current.items.filter((item) => item.id !== data.id);
+          const existingItems = current.items.filter(
+            (item) => item.id !== data.id,
+          );
 
           return {
             ...current,
             items: [data, ...existingItems],
           };
-        }
+        },
       );
 
       queryClient.invalidateQueries({ queryKey: glossaryKeys.list() });

@@ -17,7 +17,12 @@ type PreviewNavigationAction =
   | { type: 'commit-page'; page: number; maxPage: number | null }
   | { type: 'set-page-input'; value: string }
   | { type: 'set-jump-to-page-input'; value: string }
-  | { type: 'commit-continuous-jump'; page: number; maxPage: number | null; commandId: number }
+  | {
+      type: 'commit-continuous-jump';
+      page: number;
+      maxPage: number | null;
+      commandId: number;
+    }
   | { type: 'set-input-num-pages'; numPages: number | null }
   | { type: 'set-output-num-pages'; numPages: number | null }
   | { type: 'clamp-page'; maxPage: number }
@@ -166,6 +171,9 @@ export function previewNavigationReducer(
   }
 }
 
-export function clampNavigationPage(page: number, maxPage: number | null): number {
+export function clampNavigationPage(
+  page: number,
+  maxPage: number | null,
+): number {
   return clampPage(page, maxPage);
 }

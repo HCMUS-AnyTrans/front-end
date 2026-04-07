@@ -30,9 +30,7 @@ export function createEmptyRejections(): FileRejections {
 
 export function isSameFile(a: File, b: File) {
   return (
-    a.name === b.name &&
-    a.size === b.size &&
-    a.lastModified === b.lastModified
+    a.name === b.name && a.size === b.size && a.lastModified === b.lastModified
   );
 }
 
@@ -132,6 +130,4 @@ export function getValidationMessages(
   ].filter(({ id }) => rejections[id].length > 0);
 }
 
-export {
-  MAX_FILE_COUNT,
-};
+export { MAX_FILE_COUNT };

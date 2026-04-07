@@ -15,7 +15,10 @@ import type {
   FontCheckResponse,
 } from '../types';
 
-interface TranslationJobResponseDto extends Omit<TranslationJobResponse, 'domainId'> {
+interface TranslationJobResponseDto extends Omit<
+  TranslationJobResponse,
+  'domainId'
+> {
   domain_id?: string;
 }
 

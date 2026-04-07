@@ -57,4 +57,5 @@ export const defaultConfig: TranslationConfig = {
   fontConfigEnabled: true,
   fontEnabledMap: {},
   fontSelections: {},
+  pdfTranslationFlow: 'format_preserved',
 };
