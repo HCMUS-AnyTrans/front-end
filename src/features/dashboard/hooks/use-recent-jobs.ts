@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { keepPreviousData } from '@tanstack/react-query';
 import { getRecentJobsApi } from '../api/dashboard.api';
-import type { RecentJobsQuery } from '../api/dashboard.api';
+import type { RecentJobsQuery } from '../types';
 import { translationKeys } from '@/lib/query-client';
 import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 

@@ -49,9 +49,8 @@ export default async function DashboardPage({ params }: Props) {
       </div>
 
       {/* Analytics: Activity chart (full width) */}
-      <div className="w-full">
-        <JobsChart />
-      </div>
+      <div className="w-full"></div>
+      <JobsChart />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { useState, useCallback, useDeferredValue } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useDomains } from '@/features/domains';
 import { useRecentJobs } from '@/features/dashboard/hooks';
-import type { RecentJobsQuery } from '@/features/dashboard/api/dashboard.api';
+import type { RecentJobsQuery } from '@/features/dashboard/types';
 import { ITEMS_PER_PAGE } from '../data';
 
 /**

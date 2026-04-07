@@ -1,4 +1,4 @@
-import type { TranslationJobResponse } from '@/features/dashboard/api/dashboard.api';
+import type { TranslationJobResponse } from '@/features/dashboard/types';
 
 // ============================================================================
 // Component Prop Types

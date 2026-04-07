@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import { useLocale } from "next-intl";
 import { AppCard, AppCardContent } from "@/components/ui/app-card";
-import type { TranslationJobResponse } from "@/features/dashboard/api/dashboard.api";
+import type { TranslationJobResponse } from "@/features/dashboard/types";
 import { useHistoryJobs } from "../hooks";
 import { HistoryFilters } from "./history-filters";
 import { HistoryTable } from "./history-table";
