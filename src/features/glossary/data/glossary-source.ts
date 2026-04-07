@@ -4,6 +4,15 @@ export type GlossaryTemplateLike = GlossaryTemplate;
 
 export type GlossarySourceType = 'manual' | 'template' | 'document' | null;
 
+export const glossarySourceOptions: Array<{
+  id: Exclude<GlossarySourceType, null>;
+  icon: 'manual' | 'template' | 'document';
+}> = [
+  { id: 'manual', icon: 'manual' },
+  { id: 'template', icon: 'template' },
+  { id: 'document', icon: 'document' },
+];
+
 export function filterTemplatesByDomain<T extends GlossaryTemplateLike>(
   templates: T[],
   domainId: string,

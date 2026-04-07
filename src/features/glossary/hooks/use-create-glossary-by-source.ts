@@ -15,7 +15,7 @@ import type {
   GlossaryListResponse,
   CreateGlossaryDto,
 } from '../types';
-import type { GlossarySourceType } from '../data/create-glossary-source';
+import type { GlossarySourceType } from '../data';
 
 interface CreateGlossaryBySourcePayload {
   values: CreateGlossaryFormValues;

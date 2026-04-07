@@ -19,7 +19,7 @@ import {
   getCreateGlossaryStepTwoState,
   resetSourceSpecificState,
   type GlossarySourceType,
-} from '../data/create-glossary-source';
+} from '../data';
 import { CreateGlossaryStepOne } from './create-glossary-step-one';
 import { CreateGlossaryStepTwo } from './create-glossary-step-two';
 import {

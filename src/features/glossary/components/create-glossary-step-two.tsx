@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/form';
 import { glossarySourceOptions } from '../data';
 import type { CreateGlossaryFormValues } from '../data';
-import type { GlossarySourceType } from '../data/create-glossary-source';
+import type { GlossarySourceType } from '../data';
 import { GlossaryDocumentSourcePanel } from './glossary-document-source-panel';
 import { GlossaryManualSourcePanel } from './glossary-manual-source-panel';
 import { GlossarySourceOptionCard } from './glossary-source-option-card';

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useDeferredValue } from 'react';
+import { useState, useDeferredValue } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { Plus } from 'lucide-react';
@@ -33,7 +33,8 @@ export function GlossaryContent() {
   const [srcLangFilter, setSrcLangFilter] = useState('all');
   const [page, setPage] = useState(1);
   const deferredSearch = useDeferredValue(search);
-  const selectedDomain = domainFilter !== 'all' ? getDomainByKey(domainFilter) : null;
+  const selectedDomain =
+    domainFilter !== 'all' ? getDomainByKey(domainFilter) : null;
   const effectiveDomainFilter =
     domainFilter !== 'all' && !isLoadingDomains && !selectedDomain
       ? 'all'
@@ -43,7 +44,9 @@ export function GlossaryContent() {
   const [createOpen, setCreateOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
-  const [selectedGlossary, setSelectedGlossary] = useState<Glossary | null>(null);
+  const [selectedGlossary, setSelectedGlossary] = useState<Glossary | null>(
+    null,
+  );
 
   // ─── Build Query Params ─────────────────────────────────────────────
   const queryParams: GlossaryQueryParams | undefined =
@@ -73,43 +76,40 @@ export function GlossaryContent() {
   const isRefetching = isFetching && !isLoading && !isEmpty;
 
   // ─── Handlers ───────────────────────────────────────────────────────
-  const handleSearchChange = useCallback((value: string) => {
+  const handleSearchChange = (value: string) => {
     setSearch(value);
     setPage(1);
-  }, []);
+  };
 
-  const handleDomainChange = useCallback((value: string) => {
+  const handleDomainChange = (value: string) => {
     setDomainFilter(value);
     setPage(1);
-  }, []);
+  };
 
-  const handleSrcLangChange = useCallback((value: string) => {
+  const handleSrcLangChange = (value: string) => {
     setSrcLangFilter(value);
     setPage(1);
-  }, []);
+  };
 
-  const handleGlossaryClick = useCallback(
-    (glossary: Glossary) => {
-      if (glossary.status === 'pending' || glossary.status === 'processing') {
-        return;
-      }
+  const handleGlossaryClick = (glossary: Glossary) => {
+    if (glossary.status === 'pending' || glossary.status === 'processing') {
+      return;
+    }
 
-      router.push(`/${locale}/glossary/${glossary.id}`);
-    },
-    [router, locale],
-  );
+    router.push(`/${locale}/glossary/${glossary.id}`);
+  };
 
-  const handleEdit = useCallback((glossary: Glossary) => {
+  const handleEdit = (glossary: Glossary) => {
     setSelectedGlossary(glossary);
     setEditOpen(true);
-  }, []);
+  };
 
-  const handleDelete = useCallback((glossary: Glossary) => {
+  const handleDelete = (glossary: Glossary) => {
     setSelectedGlossary(glossary);
     setDeleteOpen(true);
-  }, []);
+  };
 
-  const handleCreateOpen = useCallback(() => setCreateOpen(true), []);
+  const handleCreateOpen = () => setCreateOpen(true);
 
   // ─── Render ─────────────────────────────────────────────────────────
   return (
@@ -124,7 +124,11 @@ export function GlossaryContent() {
           srcLangFilter={srcLangFilter}
           onSrcLangChange={handleSrcLangChange}
         />
-        <Button size="sm" className="w-full shrink-0 sm:w-auto" onClick={handleCreateOpen}>
+        <Button
+          size="sm"
+          className="w-full shrink-0 sm:w-auto"
+          onClick={handleCreateOpen}
+        >
           <Plus className="size-4" />
           {t('createGlossary')}
         </Button>
@@ -134,9 +138,15 @@ export function GlossaryContent() {
       {isLoading && !glossaries ? (
         <GlossarySkeleton showFilters={false} />
       ) : isRefetching ? (
-        <GlossarySkeleton showFilters={false} count={visibleGlossaries.length || 6} />
+        <GlossarySkeleton
+          showFilters={false}
+          count={visibleGlossaries.length || 6}
+        />
       ) : isError || isEmpty ? (
-        <GlossaryEmptyState hasFilters={hasFilters} onCreateClick={handleCreateOpen} />
+        <GlossaryEmptyState
+          hasFilters={hasFilters}
+          onCreateClick={handleCreateOpen}
+        />
       ) : (
         <>
           <GlossaryList
