@@ -8,10 +8,7 @@ import type {
   Theme,
 } from '../types';
 
-export const uiLanguageOptions = [
-  { value: 'vi', label: 'Tiếng Việt', flag: '🇻🇳' },
-  { value: 'en', label: 'English', flag: '🇺🇸' },
-] as const;
+export { settingsUiLanguageOptions as uiLanguageOptions } from '@/shared/data';
 
 export const authProviderOptions = [
   {

@@ -20,7 +20,7 @@ import {
   Download,
   Eye,
 } from 'lucide-react';
-import { jobStatusConfig } from '@/features/dashboard/data';
+import { getJobStatusConfig } from '@/features/dashboard/data';
 import { useDownloadFile } from '@/features/documents';
 import { FileTypeIcon } from '@/components/shared/file-type-icon';
 import { canPreviewTranslationJob } from '@/features/documents/utils/preview-capabilities';
@@ -53,7 +53,7 @@ export function HistoryJobDetail({
 
   if (!job) return null;
 
-  const statusCfg = jobStatusConfig[job.status];
+  const statusCfg = getJobStatusConfig(job.status);
   const canPreview =
     job.status === 'succeeded' &&
     !job.input_file?.is_expired &&
@@ -146,7 +146,10 @@ export function HistoryJobDetail({
                 </p>
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-2">
-                    <FileTypeIcon fileName={job.input_file.name} className="size-4" />
+                    <FileTypeIcon
+                      fileName={job.input_file.name}
+                      className="size-4"
+                    />
                     <div className="min-w-0 flex-1">
                       <p className="wrap-break-word text-sm font-medium text-foreground">
                         {job.input_file.name}
@@ -192,7 +195,10 @@ export function HistoryJobDetail({
                 </p>
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-2">
-                    <FileTypeIcon fileName={job.output_file.name} className="size-4" />
+                    <FileTypeIcon
+                      fileName={job.output_file.name}
+                      className="size-4"
+                    />
                     <div className="min-w-0 flex-1">
                       <p className="wrap-break-word text-sm font-medium text-foreground">
                         {job.output_file.name}

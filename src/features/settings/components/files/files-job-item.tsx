@@ -5,7 +5,7 @@ import { ArrowRight, Coins, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { FileTypeIcon } from '@/components/shared/file-type-icon';
-import { jobStatusConfig } from '@/features/dashboard/data';
+import { getJobStatusConfig } from '@/features/dashboard/data';
 import { FileExpiryInfo } from './file-expiry-info';
 import { FilesDownloadButton } from './files-download-button';
 import { formatSettingsFileSize } from '../../utils/files-display';
@@ -26,7 +26,7 @@ export function FilesJobItem({
   const tStatus = useTranslations('dashboard.status');
 
   const fileName = job.input_file?.name ?? job.job_id;
-  const statusCfg = jobStatusConfig[job.status];
+  const statusCfg = getJobStatusConfig(job.status);
   const hasInputFile = Boolean(job.input_file);
   const hasOutputFile = Boolean(job.output_file);
 

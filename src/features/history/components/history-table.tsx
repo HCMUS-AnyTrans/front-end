@@ -36,7 +36,7 @@ import {
   FileInput,
   Loader2,
 } from 'lucide-react';
-import { jobStatusConfig } from '@/features/dashboard/data';
+import { getJobStatusConfig } from '@/features/dashboard/data';
 import type { TranslationJobResponse } from '@/types';
 import { getFileDownloadUrl } from '@/features/documents/api/documents.api';
 import { FileTypeIcon } from '@/components/shared/file-type-icon';
@@ -244,9 +244,7 @@ export function HistoryTable({
             <TableHead className="h-11 px-4 text-sm font-medium text-muted-foreground lg:px-6">
               {tJobs('status')}
             </TableHead>
-            <TableHead
-              className="hidden h-11 px-4 text-right text-sm font-medium text-muted-foreground md:table-cell lg:px-6"
-            >
+            <TableHead className="hidden h-11 px-4 text-right text-sm font-medium text-muted-foreground md:table-cell lg:px-6">
               {tHistory('columns.credits')}
             </TableHead>
             <TableHead className="hidden h-11 px-4 text-sm font-medium text-muted-foreground md:table-cell lg:px-6">
@@ -263,7 +261,7 @@ export function HistoryTable({
         <TableBody>
           {jobs.map((job) => {
             const fileName = job.input_file?.name ?? job.job_id;
-            const statusCfg = jobStatusConfig[job.status];
+            const statusCfg = getJobStatusConfig(job.status);
             const canPreview =
               job.status === 'succeeded' &&
               !job.input_file?.is_expired &&
@@ -316,9 +314,7 @@ export function HistoryTable({
                   </Badge>
                 </TableCell>
 
-                <TableCell
-                  className="hidden px-4 py-3.5 text-right md:table-cell lg:px-6"
-                >
+                <TableCell className="hidden px-4 py-3.5 text-right md:table-cell lg:px-6">
                   {job.cost_credits !== undefined ? (
                     <div className="flex items-center justify-end gap-1">
                       <Coins className="size-3.5 text-warning" />

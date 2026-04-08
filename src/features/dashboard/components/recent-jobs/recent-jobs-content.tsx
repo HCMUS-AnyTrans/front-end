@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/table';
 import { ArrowRight, Coins } from 'lucide-react';
 import { FileTypeIcon } from '@/components/shared/file-type-icon';
-import { jobStatusConfig } from '@/features/dashboard/data';
+import { getJobStatusConfig } from '@/features/dashboard/data';
 import type { TranslationJobResponse } from '@/types';
 
 type RecentJobsContentProps = {
@@ -51,7 +51,7 @@ export function RecentJobsContent({
         <TableBody>
           {jobs.map((job) => {
             const fileName = job.input_file?.name ?? job.job_id;
-            const statusCfg = jobStatusConfig[job.status];
+            const statusCfg = getJobStatusConfig(job.status);
 
             return (
               <TableRow
