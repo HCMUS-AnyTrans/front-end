@@ -23,9 +23,9 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { useUpdateTerm } from '../hooks/use-update-term';
-import { createTermSchema, type CreateTermFormValues } from '../data';
-import type { Term } from '../types';
+import { useUpdateTerm } from '../../hooks/use-update-term';
+import { createTermSchema, type CreateTermFormValues } from '../../data';
+import type { Term } from '../../types';
 
 interface EditTermDialogProps {
   open: boolean;
@@ -97,10 +97,7 @@ export function EditTermDialog({
                 <FormItem>
                   <FormLabel>{t('srcTerm')}</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder={t('srcTermPlaceholder')}
-                      {...field}
-                    />
+                    <Input placeholder={t('srcTermPlaceholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -114,10 +111,7 @@ export function EditTermDialog({
                 <FormItem>
                   <FormLabel>{t('tgtTerm')}</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder={t('tgtTermPlaceholder')}
-                      {...field}
-                    />
+                    <Input placeholder={t('tgtTermPlaceholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

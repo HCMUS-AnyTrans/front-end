@@ -10,8 +10,8 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import type { CreateGlossaryFormValues } from '../data';
-import { GlossaryDocumentSourcePanel } from './glossary-document-source-panel';
+import type { CreateGlossaryFormValues } from '../../../data';
+import { GlossaryDocumentSourcePanel } from './document-source-panel';
 
 type GlossaryDocumentSourceSectionProps = {
   form: UseFormReturn<CreateGlossaryFormValues>;

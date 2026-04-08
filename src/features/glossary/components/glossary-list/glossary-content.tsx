@@ -7,15 +7,17 @@ import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Pagination } from '@/components/ui/pagination';
 import { useDomains } from '@/features/domains';
-import { useGlossaries } from '../hooks/use-glossaries';
+import { useGlossaries } from '../../hooks/use-glossaries';
+import {
+  CreateGlossaryDialog,
+  DeleteGlossaryDialog,
+  EditGlossaryDialog,
+} from '../dialogs';
+import { GlossaryEmptyState } from './glossary-empty-state';
 import { GlossaryFilters } from './glossary-filters';
 import { GlossaryList } from './glossary-list';
-import { GlossaryEmptyState } from './glossary-empty-state';
 import { GlossarySkeleton } from './glossary-skeleton';
-import { CreateGlossaryDialog } from './create-glossary-dialog';
-import { EditGlossaryDialog } from './edit-glossary-dialog';
-import { DeleteGlossaryDialog } from './delete-glossary-dialog';
-import type { Glossary, GlossaryQueryParams } from '../types';
+import type { Glossary, GlossaryQueryParams } from '../../types';
 
 /**
  * Top-level orchestrator for the glossary list page.

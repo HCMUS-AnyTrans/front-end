@@ -1,4 +1,4 @@
-import type { Glossary } from '../types';
+import type { Glossary } from '../../types';
 import { GlossaryCard } from './glossary-card';
 
 interface GlossaryListProps {

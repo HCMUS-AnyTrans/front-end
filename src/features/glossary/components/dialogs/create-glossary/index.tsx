@@ -10,15 +10,18 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
-import { createGlossarySchema, type CreateGlossaryFormValues } from '../data';
-import { getCreateGlossaryStepTwoState } from '../data';
-import { CreateGlossaryStepOne } from './create-glossary-step-one';
-import { CreateGlossaryStepTwo } from './create-glossary-step-two';
-import { CreateGlossaryDialogFooter } from './create-glossary-dialog-footer';
-import { useCreateGlossaryBySource as useCreateGlossaryBySourceHook } from '../hooks';
-import { useCreateGlossaryFlow } from '../hooks/use-create-glossary-flow';
-import { useDocumentCreditState } from '../hooks/use-document-credit-state';
-import { getStepTwoSubmitState } from '../selectors/get-step-two-submit-state';
+import {
+  createGlossarySchema,
+  type CreateGlossaryFormValues,
+} from '../../../data';
+import { getCreateGlossaryStepTwoState } from '../../../data';
+import { useCreateGlossaryBySource as useCreateGlossaryBySourceHook } from '../../../hooks';
+import { useCreateGlossaryFlow } from '../../../hooks/use-create-glossary-flow';
+import { useDocumentCreditState } from '../../../hooks/use-document-credit-state';
+import { getStepTwoSubmitState } from '../../../selectors/get-step-two-submit-state';
+import { CreateGlossaryDialogFooter } from './footer';
+import { CreateGlossaryStepOne } from './step-one';
+import { CreateGlossaryStepTwo } from './step-two';
 
 interface CreateGlossaryDialogProps {
   open: boolean;

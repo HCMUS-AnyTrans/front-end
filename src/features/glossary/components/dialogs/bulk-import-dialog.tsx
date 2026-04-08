@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useState, useCallback, useRef } from "react";
-import { useTranslations } from "next-intl";
+import { useState, useCallback, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import {
   FileUp,
   Loader2,
@@ -11,10 +11,10 @@ import {
   FileText,
   ClipboardList,
   ArrowRightLeft,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Badge } from '@/components/ui/badge';
 import {
   Dialog,
   DialogContent,
@@ -22,7 +22,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Table,
   TableBody,
@@ -30,11 +30,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { cn } from "@/lib/utils";
-import { useBulkImport } from "../hooks/use-bulk-import";
-import { MAX_BULK_IMPORT_SIZE } from "../data";
-import type { CreateTermDto, BulkImportResult } from "../types";
+} from '@/components/ui/table';
+import { cn } from '@/lib/utils';
+import { useBulkImport } from '../../hooks/use-bulk-import';
+import { MAX_BULK_IMPORT_SIZE } from '../../data';
+import type { CreateTermDto, BulkImportResult } from '../../types';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -61,11 +61,14 @@ function parseCsv(raw: string): CreateTermDto[] {
     if (!trimmed) continue;
     if (/^(source|src|srcTerm)/i.test(trimmed)) continue;
 
-    const commaIdx = trimmed.indexOf(",");
+    const commaIdx = trimmed.indexOf(',');
     if (commaIdx === -1) continue;
 
-    const srcTerm = trimmed.slice(0, commaIdx).trim().replace(/^"|"$/g, "");
-    const tgtTerm = trimmed.slice(commaIdx + 1).trim().replace(/^"|"$/g, "");
+    const srcTerm = trimmed.slice(0, commaIdx).trim().replace(/^"|"$/g, '');
+    const tgtTerm = trimmed
+      .slice(commaIdx + 1)
+      .trim()
+      .replace(/^"|"$/g, '');
 
     if (srcTerm && tgtTerm) {
       terms.push({ srcTerm, tgtTerm });
@@ -94,7 +97,7 @@ function SuccessView({ result, t, tCommon, onClose }: SuccessViewProps) {
 
       <div>
         <h3 className="text-lg font-semibold text-foreground">
-          {t("bulkImportSuccess", {
+          {t('bulkImportSuccess', {
             created: result.created,
             skipped: result.skipped,
           })}
@@ -104,16 +107,22 @@ function SuccessView({ result, t, tCommon, onClose }: SuccessViewProps) {
       <div className="grid w-full max-w-xs grid-cols-2 gap-3">
         <div className="rounded-xl border bg-muted/40 p-4 text-center">
           <p className="text-2xl font-bold text-foreground">{result.created}</p>
-          <p className="mt-0.5 text-xs text-muted-foreground">{t("bulkImportCreated")}</p>
+          <p className="mt-0.5 text-xs text-muted-foreground">
+            {t('bulkImportCreated')}
+          </p>
         </div>
         <div className="rounded-xl border bg-muted/40 p-4 text-center">
-          <p className="text-2xl font-bold text-muted-foreground">{result.skipped}</p>
-          <p className="mt-0.5 text-xs text-muted-foreground">{t("bulkImportSkipped")}</p>
+          <p className="text-2xl font-bold text-muted-foreground">
+            {result.skipped}
+          </p>
+          <p className="mt-0.5 text-xs text-muted-foreground">
+            {t('bulkImportSkipped')}
+          </p>
         </div>
       </div>
 
       <Button onClick={onClose} className="w-full max-w-xs">
-        {tCommon("close")}
+        {tCommon('close')}
       </Button>
     </div>
   );
@@ -127,21 +136,27 @@ export function BulkImportDialog({
   glossaryId,
   remainingTermSlots,
 }: BulkImportDialogProps) {
-  const t = useTranslations("glossary.terms");
-  const tCommon = useTranslations("common");
+  const t = useTranslations('glossary.terms');
+  const tCommon = useTranslations('common');
 
   // ─── Local state ──────────────────────────────────────────────────────
-  const [csvText, setCsvText] = useState("");
+  const [csvText, setCsvText] = useState('');
   const [parsedTerms, setParsedTerms] = useState<CreateTermDto[]>([]);
   const [parseError, setParseError] = useState<string | null>(null);
-  const [importResult, setImportResult] = useState<BulkImportResult | null>(null);
+  const [importResult, setImportResult] = useState<BulkImportResult | null>(
+    null,
+  );
   const [importError, setImportError] = useState<string | null>(null);
   const [isDragOver, setIsDragOver] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // ─── Hook ─────────────────────────────────────────────────────────────
-  const { bulkImport, isImporting, reset: resetMutation } = useBulkImport({
+  const {
+    bulkImport,
+    isImporting,
+    reset: resetMutation,
+  } = useBulkImport({
     onSuccess: (data) => {
       setImportResult(data);
       setImportError(null);
@@ -169,14 +184,17 @@ export function BulkImportDialog({
       const terms = parseCsv(text);
 
       if (terms.length === 0) {
-        setParseError(t("bulkImportParseError"));
+        setParseError(t('bulkImportParseError'));
         setParsedTerms([]);
         return;
       }
 
       if (terms.length > MAX_BULK_IMPORT_SIZE) {
         setParseError(
-          t("bulkImportMaxExceeded", { max: MAX_BULK_IMPORT_SIZE, count: terms.length }),
+          t('bulkImportMaxExceeded', {
+            max: MAX_BULK_IMPORT_SIZE,
+            count: terms.length,
+          }),
         );
         setParsedTerms([]);
         return;
@@ -184,7 +202,7 @@ export function BulkImportDialog({
 
       if (terms.length > remainingTermSlots) {
         setParseError(
-          t("bulkImportRemainingExceeded", {
+          t('bulkImportRemainingExceeded', {
             remaining: remainingTermSlots,
             count: terms.length,
           }),
@@ -203,7 +221,7 @@ export function BulkImportDialog({
       const reader = new FileReader();
       reader.onload = (ev) => {
         const text = ev.target?.result;
-        if (typeof text === "string") {
+        if (typeof text === 'string') {
           handleParse(text);
         }
       };
@@ -216,7 +234,7 @@ export function BulkImportDialog({
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (file) handleFileRead(file);
-      e.target.value = "";
+      e.target.value = '';
     },
     [handleFileRead],
   );
@@ -226,7 +244,7 @@ export function BulkImportDialog({
       e.preventDefault();
       setIsDragOver(false);
       const file = e.dataTransfer.files?.[0];
-      if (file && (file.name.endsWith(".csv") || file.name.endsWith(".txt"))) {
+      if (file && (file.name.endsWith('.csv') || file.name.endsWith('.txt'))) {
         handleFileRead(file);
       }
     },
@@ -239,7 +257,7 @@ export function BulkImportDialog({
   }, [bulkImport, glossaryId, parsedTerms, remainingTermSlots]);
 
   const handleClear = useCallback(() => {
-    setCsvText("");
+    setCsvText('');
     setParsedTerms([]);
     setParseError(null);
     setImportResult(null);
@@ -269,9 +287,9 @@ export function BulkImportDialog({
               <FileUp className="size-4" />
             </div>
             <div>
-              <DialogTitle className="text-base">{t("bulkImport")}</DialogTitle>
+              <DialogTitle className="text-base">{t('bulkImport')}</DialogTitle>
               <DialogDescription className="mt-0.5 text-xs">
-                {t("bulkImportDescription")}
+                {t('bulkImportDescription')}
               </DialogDescription>
             </div>
           </div>
@@ -299,35 +317,46 @@ export function BulkImportDialog({
               {isTermLimitReached && !hasError ? (
                 <div className="flex items-start gap-2.5 rounded-xl border border-border bg-muted/40 p-3.5 text-muted-foreground">
                   <AlertCircle className="mt-0.5 size-4 shrink-0" />
-                  <p className="text-sm">{t("termLimitReached")}</p>
+                  <p className="text-sm">{t('termLimitReached')}</p>
                 </div>
               ) : null}
 
               {/* Upload drop zone */}
               <div
                 className={cn(
-                  "group relative flex flex-col items-center gap-3 rounded-2xl border-2 border-dashed px-6 py-7 text-center transition-all duration-150",
+                  'group relative flex flex-col items-center gap-3 rounded-2xl border-2 border-dashed px-6 py-7 text-center transition-all duration-150',
                   isDragOver
-                    ? "border-primary bg-primary/5"
-                    : "border-border bg-muted/30 hover:border-primary/50 hover:bg-primary/2",
+                    ? 'border-primary bg-primary/5'
+                    : 'border-border bg-muted/30 hover:border-primary/50 hover:bg-primary/2',
                 )}
-                onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
-                onDragEnter={(e) => { e.preventDefault(); setIsDragOver(true); }}
-                onDragLeave={(e) => { e.preventDefault(); setIsDragOver(false); }}
+                onDragOver={(e) => {
+                  e.preventDefault();
+                  setIsDragOver(true);
+                }}
+                onDragEnter={(e) => {
+                  e.preventDefault();
+                  setIsDragOver(true);
+                }}
+                onDragLeave={(e) => {
+                  e.preventDefault();
+                  setIsDragOver(false);
+                }}
                 onDrop={handleDrop}
               >
-                <div className={cn(
-                  "flex size-12 items-center justify-center rounded-xl border transition-colors",
-                  isDragOver
-                    ? "border-primary/30 bg-primary/10 text-primary"
-                    : "border-border bg-background text-muted-foreground group-hover:border-primary/30 group-hover:text-primary",
-                )}>
+                <div
+                  className={cn(
+                    'flex size-12 items-center justify-center rounded-xl border transition-colors',
+                    isDragOver
+                      ? 'border-primary/30 bg-primary/10 text-primary'
+                      : 'border-border bg-background text-muted-foreground group-hover:border-primary/30 group-hover:text-primary',
+                  )}
+                >
                   <FileText className="size-5" />
                 </div>
 
                 <div>
                   <p className="text-sm font-medium text-foreground">
-                    {t("bulkImportUploadHint")}
+                    {t('bulkImportUploadHint')}
                   </p>
                   <p className="mt-0.5 text-xs text-muted-foreground">
                     .csv, .txt
@@ -343,7 +372,7 @@ export function BulkImportDialog({
                   className="gap-2"
                 >
                   <FileUp className="size-3.5" />
-                  {t("bulkImportUpload")}
+                  {t('bulkImportUpload')}
                 </Button>
 
                 <input
@@ -360,7 +389,7 @@ export function BulkImportDialog({
                 <div className="h-px flex-1 bg-border" />
                 <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
                   <ClipboardList className="size-3.5" />
-                  {t("bulkImportPaste")}
+                  {t('bulkImportPaste')}
                 </span>
                 <div className="h-px flex-1 bg-border" />
               </div>
@@ -369,7 +398,7 @@ export function BulkImportDialog({
               <div className="space-y-2">
                 <div className="relative">
                   <Textarea
-                    placeholder={t("bulkImportPlaceholder")}
+                    placeholder={t('bulkImportPlaceholder')}
                     value={csvText}
                     onChange={(e) => handleParse(e.target.value)}
                     rows={5}
@@ -385,17 +414,17 @@ export function BulkImportDialog({
                       type="button"
                       variant="ghost"
                       size="sm"
-                       onClick={handleClear}
-                       disabled={isImporting || isTermLimitReached}
-                       className="h-7 gap-1.5 px-2 text-xs text-muted-foreground hover:text-destructive"
+                      onClick={handleClear}
+                      disabled={isImporting || isTermLimitReached}
+                      className="h-7 gap-1.5 px-2 text-xs text-muted-foreground hover:text-destructive"
                     >
                       <X className="size-3.5" />
-                      {t("bulkImportClear")}
+                      {t('bulkImportClear')}
                     </Button>
                     {parsedTerms.length > 0 && (
                       <Badge variant="secondary" className="gap-1.5 text-xs">
                         <ArrowRightLeft className="size-3" />
-                        {t("bulkImportParsed", { count: parsedTerms.length })}
+                        {t('bulkImportParsed', { count: parsedTerms.length })}
                       </Badge>
                     )}
                   </div>
@@ -407,7 +436,7 @@ export function BulkImportDialog({
                 <div className="overflow-hidden rounded-xl border">
                   <div className="flex items-center justify-between border-b bg-muted/40 px-4 py-2.5">
                     <span className="text-xs font-medium text-foreground">
-                      {t("bulkImportPreview")}
+                      {t('bulkImportPreview')}
                     </span>
                     <span className="text-xs text-muted-foreground">
                       {parsedTerms.length} rows
@@ -421,10 +450,10 @@ export function BulkImportDialog({
                             #
                           </TableHead>
                           <TableHead className="h-9 px-4 text-xs font-medium text-muted-foreground">
-                            {t("srcTerm")}
+                            {t('srcTerm')}
                           </TableHead>
                           <TableHead className="h-9 px-4 text-xs font-medium text-muted-foreground">
-                            {t("tgtTerm")}
+                            {t('tgtTerm')}
                           </TableHead>
                         </TableRow>
                       </TableHeader>
@@ -460,24 +489,26 @@ export function BulkImportDialog({
               onClick={() => handleClose(false)}
               disabled={isImporting}
             >
-              {tCommon("cancel")}
+              {tCommon('cancel')}
             </Button>
             <Button
               onClick={handleImport}
-              disabled={isImporting || isTermLimitReached || parsedTerms.length === 0}
+              disabled={
+                isImporting || isTermLimitReached || parsedTerms.length === 0
+              }
               className="min-w-[140px]"
             >
               {isImporting ? (
                 <>
                   <Loader2 className="size-4 animate-spin" />
-                  {t("bulkImportImporting")}
+                  {t('bulkImportImporting')}
                 </>
               ) : (
                 <>
                   <FileUp className="size-4" />
                   {parsedTerms.length > 0
-                    ? t("bulkImportParsed", { count: parsedTerms.length })
-                    : t("bulkImport")}
+                    ? t('bulkImportParsed', { count: parsedTerms.length })
+                    : t('bulkImport')}
                 </>
               )}
             </Button>

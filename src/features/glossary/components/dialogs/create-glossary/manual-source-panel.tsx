@@ -13,8 +13,12 @@ export function GlossaryManualSourcePanel() {
           <PencilLine className="size-6" />
         </div>
         <div className="space-y-2">
-          <h3 className="text-lg font-semibold text-foreground">{t('stepTwo.manualPanelTitle')}</h3>
-          <p className="text-sm leading-6 text-muted-foreground">{t('stepTwo.manualPanelDescription')}</p>
+          <h3 className="text-lg font-semibold text-foreground">
+            {t('stepTwo.manualPanelTitle')}
+          </h3>
+          <p className="text-sm leading-6 text-muted-foreground">
+            {t('stepTwo.manualPanelDescription')}
+          </p>
         </div>
       </div>
     </div>

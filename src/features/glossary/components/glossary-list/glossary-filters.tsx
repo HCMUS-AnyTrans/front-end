@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { glossaryLanguages } from '../data';
+import { glossaryLanguages } from '../../data';
 
 interface GlossaryFiltersProps {
   search: string;

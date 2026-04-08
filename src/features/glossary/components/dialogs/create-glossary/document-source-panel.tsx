@@ -14,7 +14,7 @@ import {
   MAX_FILE_COUNT,
   getValidationMessages,
   validateIncomingFiles,
-} from './glossary-document-upload';
+} from './document-upload';
 
 interface GlossaryDocumentSourcePanelProps {
   files: File[];

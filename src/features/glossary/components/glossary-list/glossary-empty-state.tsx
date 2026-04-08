@@ -20,9 +20,7 @@ export function GlossaryEmptyState({
         {hasFilters ? t('noResults') : t('noGlossaries')}
       </h3>
       <p className="text-sm text-muted-foreground max-w-sm mb-4">
-        {hasFilters
-          ? t('noResultsDescription')
-          : t('noGlossariesDescription')}
+        {hasFilters ? t('noResultsDescription') : t('noGlossariesDescription')}
       </p>
       {!hasFilters && (
         <Button size="sm" onClick={onCreateClick}>

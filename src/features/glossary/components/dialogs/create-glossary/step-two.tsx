@@ -3,11 +3,11 @@
 import { FileUp, LayoutTemplate, PencilLine } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import type { UseFormReturn } from 'react-hook-form';
-import { glossarySourceOptions } from '../data';
-import type { CreateGlossaryFormValues } from '../data';
-import type { GlossarySourceType } from '../data';
-import { GlossarySourceOptionCard } from './glossary-source-option-card';
-import { GlossarySourcePanelSwitch } from './glossary-source-panel-switch';
+import { glossarySourceOptions } from '../../../data';
+import type { CreateGlossaryFormValues } from '../../../data';
+import type { GlossarySourceType } from '../../../data';
+import { GlossarySourceOptionCard } from './source-option-card';
+import { GlossarySourcePanelSwitch } from './source-panel-switch';
 
 interface CreateGlossaryStepTwoProps {
   form: UseFormReturn<CreateGlossaryFormValues>;

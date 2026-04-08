@@ -7,7 +7,11 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { glossaryKeys, notificationKeys, walletKeys } from '@/lib/query-client';
 import { getAccessToken, useAccessToken } from '@/features/auth/store';
-import type { Glossary, GlossaryDetail, GlossaryListResponse } from '../types';
+import type {
+  Glossary,
+  GlossaryDetail,
+  GlossaryListResponse,
+} from '../../types';
 
 interface GlossaryStatusSocketEvent {
   glossary: Glossary;
@@ -51,7 +55,10 @@ export function GlossarySocketProvider() {
             item.id === glossaryId ? event.glossary : item,
           );
 
-          if (nextItems !== current.items && nextItems.some((item) => item.id === glossaryId)) {
+          if (
+            nextItems !== current.items &&
+            nextItems.some((item) => item.id === glossaryId)
+          ) {
             matchedInListCache = true;
           }
 
@@ -62,16 +69,24 @@ export function GlossarySocketProvider() {
         },
       );
 
-      queryClient.setQueryData(glossaryKeys.detail(glossaryId), (current: GlossaryDetail | undefined) =>
-        current ? { ...current, ...event.glossary } : current,
+      queryClient.setQueryData(
+        glossaryKeys.detail(glossaryId),
+        (current: GlossaryDetail | undefined) =>
+          current ? { ...current, ...event.glossary } : current,
       );
 
-      if (!matchedInListCache || glossaryStatus === 'created' || glossaryStatus === 'failed') {
+      if (
+        !matchedInListCache ||
+        glossaryStatus === 'created' ||
+        glossaryStatus === 'failed'
+      ) {
         void queryClient.invalidateQueries({ queryKey: glossaryKeys.list() });
       }
 
       if (glossaryStatus === 'created' || glossaryStatus === 'failed') {
-        void queryClient.invalidateQueries({ queryKey: glossaryKeys.detail(glossaryId) });
+        void queryClient.invalidateQueries({
+          queryKey: glossaryKeys.detail(glossaryId),
+        });
       }
 
       void queryClient.invalidateQueries({ queryKey: notificationKeys.all });
@@ -87,7 +102,9 @@ export function GlossarySocketProvider() {
 
       if (glossaryStatus === 'failed') {
         toast.error(t('failedTitle'), {
-          description: event.error ?? t('failedDescription', { name: event.glossary.name }),
+          description:
+            event.error ??
+            t('failedDescription', { name: event.glossary.name }),
         });
       }
 

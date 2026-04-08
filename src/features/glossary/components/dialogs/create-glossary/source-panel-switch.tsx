@@ -2,10 +2,13 @@
 
 import { useTranslations } from 'next-intl';
 import type { UseFormReturn } from 'react-hook-form';
-import type { CreateGlossaryFormValues, GlossarySourceType } from '../data';
-import { GlossaryDocumentSourceSection } from './glossary-document-source-section';
-import { GlossaryManualSourcePanel } from './glossary-manual-source-panel';
-import { GlossaryTemplatePanel } from './glossary-template-panel';
+import type {
+  CreateGlossaryFormValues,
+  GlossarySourceType,
+} from '../../../data';
+import { GlossaryDocumentSourceSection } from './document-source-section';
+import { GlossaryManualSourcePanel } from './manual-source-panel';
+import { GlossaryTemplatePanel } from './template-panel';
 
 type GlossarySourcePanelSwitchProps = {
   form: UseFormReturn<CreateGlossaryFormValues>;

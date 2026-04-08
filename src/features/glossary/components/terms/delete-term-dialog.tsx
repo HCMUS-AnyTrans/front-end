@@ -1,9 +1,8 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { Loader2, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { getDomainLabel, useDomains } from '@/features/domains';
 import {
   Dialog,
   DialogContent,
@@ -12,38 +11,35 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { useDeleteGlossary } from '../hooks/use-delete-glossary';
-import type { Glossary } from '../types';
+import { useDeleteTerm } from '../../hooks/use-delete-term';
+import type { Term } from '../../types';
 
-interface DeleteGlossaryDialogProps {
+interface DeleteTermDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  glossary: Glossary | null;
+  glossaryId: string;
+  term: Term | null;
 }
 
-export function DeleteGlossaryDialog({
+export function DeleteTermDialog({
   open,
   onOpenChange,
-  glossary,
-}: DeleteGlossaryDialogProps) {
-  const locale = useLocale();
-  const t = useTranslations('glossary');
+  glossaryId,
+  term,
+}: DeleteTermDialogProps) {
+  const t = useTranslations('glossary.terms');
   const tCommon = useTranslations('common');
-  const { getDomainById } = useDomains();
 
-  const { deleteGlossary, isDeleting } = useDeleteGlossary({
+  const { deleteTerm, isDeleting } = useDeleteTerm({
     onSuccess: () => {
       onOpenChange(false);
     },
   });
 
   function handleDelete() {
-    if (!glossary) return;
-    deleteGlossary(glossary.id);
+    if (!term) return;
+    deleteTerm({ glossaryId, termId: term.id });
   }
-
-  const domain = glossary ? getDomainById(glossary.domainId) : null;
-  const domainLabel = domain ? getDomainLabel(domain, locale) : '';
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -51,20 +47,17 @@ export function DeleteGlossaryDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <AlertTriangle className="size-5 text-destructive" />
-            {t('deleteGlossary')}
+            {t('deleteTerm')}
           </DialogTitle>
-          <DialogDescription>
-            {t('deleteGlossaryConfirm')}
-          </DialogDescription>
+          <DialogDescription>{t('deleteTermConfirm')}</DialogDescription>
         </DialogHeader>
 
-        {glossary && (
+        {term && (
           <div className="rounded-md border bg-muted/50 p-3 text-sm">
-            <p className="font-medium">{glossary.name}</p>
-            <p className="text-muted-foreground">
-              {domainLabel} · {t(`languages.${glossary.srcLang}`)} → {t(`languages.${glossary.tgtLang}`)}
-              {' · '}
-              {t('termCount', { count: glossary.termCount })}
+            <p>
+              <span className="font-medium">{term.srcTerm}</span>
+              {' → '}
+              <span className="text-muted-foreground">{term.tgtTerm}</span>
             </p>
           </div>
         )}
@@ -84,7 +77,7 @@ export function DeleteGlossaryDialog({
             disabled={isDeleting}
           >
             {isDeleting && <Loader2 className="size-4 animate-spin" />}
-            {isDeleting ? t('form.deleting') : tCommon('delete')}
+            {isDeleting ? tCommon('loading') : tCommon('delete')}
           </Button>
         </DialogFooter>
       </DialogContent>

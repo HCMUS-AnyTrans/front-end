@@ -30,15 +30,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useUpdateGlossary } from '../hooks/use-update-glossary';
+import { useUpdateGlossary } from '../../hooks/use-update-glossary';
 import {
   createGlossarySchema,
   glossaryDomains,
   glossaryLanguages,
   type CreateGlossaryFormValues,
-} from '../data';
+} from '../../data';
 import { cn } from '@/lib/utils';
-import type { Glossary } from '../types';
+import type { Glossary } from '../../types';
 
 interface EditGlossaryDialogProps {
   open: boolean;
@@ -53,7 +53,11 @@ export function EditGlossaryDialog({
 }: EditGlossaryDialogProps) {
   const t = useTranslations('glossary');
   const tCommon = useTranslations('common');
-  const { getDomainById, getDomainByKey, isLoading: isLoadingDomains } = useDomains();
+  const {
+    getDomainById,
+    getDomainByKey,
+    isLoading: isLoadingDomains,
+  } = useDomains();
 
   const form = useForm<CreateGlossaryFormValues>({
     resolver: zodResolver(createGlossarySchema),
@@ -160,11 +164,20 @@ export function EditGlossaryDialog({
                               'flex flex-col items-start gap-2 p-3 rounded-xl border text-left transition-all',
                               isSelected
                                 ? 'border-primary bg-primary text-primary-foreground shadow-md'
-                                : 'border-border bg-card hover:border-primary/30 hover:bg-muted/50 text-foreground'
+                                : 'border-border bg-card hover:border-primary/30 hover:bg-muted/50 text-foreground',
                             )}
                           >
-                            <Icon className={cn('size-5', isSelected ? 'text-primary-foreground' : 'text-muted-foreground')} />
-                            <span className="text-xs font-medium">{t(`domains.${domain.id}`)}</span>
+                            <Icon
+                              className={cn(
+                                'size-5',
+                                isSelected
+                                  ? 'text-primary-foreground'
+                                  : 'text-muted-foreground',
+                              )}
+                            />
+                            <span className="text-xs font-medium">
+                              {t(`domains.${domain.id}`)}
+                            </span>
                           </button>
                         );
                       })}
@@ -176,7 +189,9 @@ export function EditGlossaryDialog({
 
               {/* Language Pair - horizontal layout */}
               <div>
-                <FormLabel className="mb-3 block">{t('form.languagePair')}</FormLabel>
+                <FormLabel className="mb-3 block">
+                  {t('form.languagePair')}
+                </FormLabel>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                   {/* Source Language */}
                   <FormField
@@ -190,7 +205,9 @@ export function EditGlossaryDialog({
                         >
                           <FormControl>
                             <SelectTrigger className="w-full">
-                              <SelectValue placeholder={t('form.srcLangPlaceholder')} />
+                              <SelectValue
+                                placeholder={t('form.srcLangPlaceholder')}
+                              />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
@@ -223,7 +240,9 @@ export function EditGlossaryDialog({
                         >
                           <FormControl>
                             <SelectTrigger className="w-full">
-                              <SelectValue placeholder={t('form.tgtLangPlaceholder')} />
+                              <SelectValue
+                                placeholder={t('form.tgtLangPlaceholder')}
+                              />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>

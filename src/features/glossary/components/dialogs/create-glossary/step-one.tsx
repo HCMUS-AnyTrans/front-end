@@ -25,7 +25,10 @@ import {
 } from '@/components/ui/select';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { cn } from '@/lib/utils';
-import { glossaryLanguages, type CreateGlossaryFormValues } from '../data';
+import {
+  glossaryLanguages,
+  type CreateGlossaryFormValues,
+} from '../../../data';
 
 interface CreateGlossaryStepOneProps {
   form: UseFormReturn<CreateGlossaryFormValues>;

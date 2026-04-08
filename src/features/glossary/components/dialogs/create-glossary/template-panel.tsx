@@ -4,7 +4,7 @@ import { Loader2, LayoutTemplate } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { getDomainLabel, useDomains } from '@/features/domains';
-import { useGlossaryTemplates } from '../hooks';
+import { useGlossaryTemplates } from '../../../hooks';
 
 interface GlossaryTemplatePanelProps {
   domain: string;

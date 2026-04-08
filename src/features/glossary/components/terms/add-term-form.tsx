@@ -5,14 +5,17 @@ import { useTranslations } from 'next-intl';
 import { Plus, Loader2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useAddTerm } from '../hooks/use-add-term';
+import { useAddTerm } from '../../hooks/use-add-term';
 
 interface AddTermFormProps {
   glossaryId: string;
   isTermLimitReached?: boolean;
 }
 
-export function AddTermForm({ glossaryId, isTermLimitReached = false }: AddTermFormProps) {
+export function AddTermForm({
+  glossaryId,
+  isTermLimitReached = false,
+}: AddTermFormProps) {
   const t = useTranslations('glossary.terms');
 
   const [srcTerm, setSrcTerm] = useState('');
@@ -66,10 +69,7 @@ export function AddTermForm({ glossaryId, isTermLimitReached = false }: AddTermF
           type="submit"
           size="sm"
           disabled={
-            isAdding ||
-            isTermLimitReached ||
-            !srcTerm.trim() ||
-            !tgtTerm.trim()
+            isAdding || isTermLimitReached || !srcTerm.trim() || !tgtTerm.trim()
           }
           className="shrink-0"
         >

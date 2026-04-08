@@ -8,9 +8,27 @@ export * from './pricing';
 export * from './contact';
 
 // App features
+// Note: auth and documents have conflicting type exports (TranslationJobResponse)
 // Note: dashboard and documents have conflicting type exports (JobStatus, LanguageCode)
-// Import them directly from their respective modules when needed
-export * from './documents';
+// Import document types directly from '@/features/documents' when needed
+export {
+  TranslationStepper,
+  StepUpload,
+  StepConfigure,
+  StepReview,
+  DocumentTranslationWizard,
+  TranslationSocketProvider,
+  LANGUAGE_CODE_TO_API_NAME,
+  languages,
+  sourceLanguages,
+  targetLanguages,
+  tones,
+  defaultConfig,
+  useUploadAndTranslate,
+  useTranslationJobSocket,
+  useTranslationJob,
+  useDownloadFile,
+} from './documents';
 // Dashboard exports: use `import { ... } from '@/features/dashboard'` directly
 // Settings exports: use `import { ... } from '@/features/settings'` directly
 // History exports: use `import { ... } from '@/features/history'` directly

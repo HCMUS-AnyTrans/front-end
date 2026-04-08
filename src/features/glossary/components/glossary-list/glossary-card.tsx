@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { getDomainLabel, useDomains } from '@/features/domains';
-import type { Glossary } from '../types';
+import type { Glossary } from '../../types';
 
 interface GlossaryCardProps {
   glossary: Glossary;
@@ -35,7 +35,8 @@ export function GlossaryCard({
   const locale = useLocale();
   const t = useTranslations('glossary');
   const tCommon = useTranslations('common');
-  const isBlocked = glossary.status === 'pending' || glossary.status === 'processing';
+  const isBlocked =
+    glossary.status === 'pending' || glossary.status === 'processing';
 
   const { getDomainById } = useDomains();
   const domainInfo = getDomainById(glossary.domainId);
@@ -75,7 +76,9 @@ export function GlossaryCard({
           </div>
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2 pr-2">
-              <h3 className="line-clamp-1 text-base font-semibold leading-tight">{glossary.name}</h3>
+              <h3 className="line-clamp-1 text-base font-semibold leading-tight">
+                {glossary.name}
+              </h3>
               {glossary.status !== 'created' ? (
                 <span
                   className={

@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import type { Term } from '../types';
+import type { Term } from '../../types';
 
 interface TermTableProps {
   terms: Term[];
@@ -45,10 +45,7 @@ export function TermTable({ terms, onEdit, onDelete }: TermTableProps) {
         </TableHeader>
         <TableBody>
           {terms.map((term) => (
-            <TableRow
-              key={term.id}
-              className="group hover:bg-muted/30"
-            >
+            <TableRow key={term.id} className="group hover:bg-muted/30">
               <TableCell className="px-4 py-3.5 text-sm font-medium text-foreground lg:px-6">
                 {term.srcTerm}
               </TableCell>
