@@ -31,7 +31,7 @@ import type {
   AuditLog,
   ActivityQuery,
 } from '../types';
-import { normalizeNotifField } from '../types';
+import { normalizeNotifField } from '../utils/notification';
 
 // ============================================================================
 // Profile API Functions

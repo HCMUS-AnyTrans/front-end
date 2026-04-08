@@ -3,8 +3,9 @@ import {
   validateDocumentFile,
 } from '@/shared/utils/document-upload';
 
-const MAX_FILE_COUNT = 10;
 const FILE_PREVIEW_LIMIT = 3;
+
+export const MAX_FILE_COUNT = 10;
 
 export type RejectionGroup =
   | 'invalidType'
@@ -129,5 +130,3 @@ export function getValidationMessages(
     },
   ].filter(({ id }) => rejections[id].length > 0);
 }
-
-export { MAX_FILE_COUNT };

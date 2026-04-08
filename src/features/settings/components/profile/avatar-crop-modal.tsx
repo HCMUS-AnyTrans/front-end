@@ -1,14 +1,15 @@
 'use client';
 
 import { useState, useCallback, useEffect, useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 import Cropper, { type Area } from 'react-easy-crop';
 import { ZoomIn, ZoomOut } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
@@ -29,6 +30,8 @@ function AvatarCropEditor({
   onSave: (cropArea: CroppedAreaPixels) => void;
   onCancel: () => void;
 }) {
+  const t = useTranslations('settings.profile');
+  const tCommon = useTranslations('common');
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] =
@@ -39,9 +42,7 @@ function AvatarCropEditor({
   }, []);
 
   const handleSave = () => {
-    if (croppedAreaPixels) {
-      onSave(croppedAreaPixels);
-    }
+    if (croppedAreaPixels) onSave(croppedAreaPixels);
   };
 
   return (
@@ -57,9 +58,7 @@ function AvatarCropEditor({
           onCropChange={setCrop}
           onZoomChange={setZoom}
           onCropComplete={onCropComplete}
-          classes={{
-            containerClassName: 'rounded-lg',
-          }}
+          classes={{ containerClassName: 'rounded-lg' }}
         />
       </div>
 
@@ -72,21 +71,21 @@ function AvatarCropEditor({
           value={[zoom]}
           onValueChange={([value]) => setZoom(value)}
           className="flex-1"
-          aria-label="Zoom"
+          aria-label={t('zoom')}
         />
         <ZoomIn className="size-4 shrink-0 text-muted-foreground" />
       </div>
 
       <p className="text-center text-xs text-muted-foreground">
-        Drag to reposition · Scroll or use the slider to zoom
+        {t('avatarCropHelp')}
       </p>
 
       <DialogFooter className="gap-4 sm:gap-2">
         <Button variant="outline" onClick={onCancel}>
-          Cancel
+          {tCommon('cancel')}
         </Button>
         <Button onClick={handleSave} disabled={!croppedAreaPixels}>
-          Save avatar
+          {t('saveAvatar')}
         </Button>
       </DialogFooter>
     </>
@@ -106,6 +105,7 @@ export function AvatarCropModal({
   onSave,
   onCancel,
 }: AvatarCropModalProps) {
+  const t = useTranslations('settings.profile');
   const imageUrl = useMemo(() => {
     if (!file) return null;
     return URL.createObjectURL(file);
@@ -113,9 +113,7 @@ export function AvatarCropModal({
 
   useEffect(() => {
     return () => {
-      if (imageUrl) {
-        URL.revokeObjectURL(imageUrl);
-      }
+      if (imageUrl) URL.revokeObjectURL(imageUrl);
     };
   }, [imageUrl]);
 
@@ -127,7 +125,7 @@ export function AvatarCropModal({
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Crop your avatar</DialogTitle>
+          <DialogTitle>{t('cropAvatarTitle')}</DialogTitle>
         </DialogHeader>
 
         {imageUrl ? (

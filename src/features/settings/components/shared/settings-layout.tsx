@@ -1,6 +1,6 @@
-"use client";
-import { useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+'use client';
+import { useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import {
   User,
   Settings,
@@ -9,9 +9,9 @@ import {
   CreditCard,
   FolderOpen,
   History,
-} from "lucide-react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import type { SettingsTab } from "../types";
+} from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import type { SettingsTab } from '../../types';
 
 // Icon mapping
 const iconMap = {
@@ -31,13 +31,13 @@ interface TabConfig {
 }
 
 const tabConfigs: TabConfig[] = [
-  { id: "profile", labelKey: "profile", icon: "User" },
-  { id: "preferences", labelKey: "preferences", icon: "Settings" },
-  { id: "security", labelKey: "security", icon: "Shield" },
-  { id: "notifications", labelKey: "notifications", icon: "Bell" },
-  { id: "billing", labelKey: "billing", icon: "CreditCard" },
-  { id: "files", labelKey: "files", icon: "FolderOpen" },
-  { id: "activity", labelKey: "activity", icon: "History" },
+  { id: 'profile', labelKey: 'profile', icon: 'User' },
+  { id: 'preferences', labelKey: 'preferences', icon: 'Settings' },
+  { id: 'security', labelKey: 'security', icon: 'Shield' },
+  { id: 'notifications', labelKey: 'notifications', icon: 'Bell' },
+  { id: 'billing', labelKey: 'billing', icon: 'CreditCard' },
+  { id: 'files', labelKey: 'files', icon: 'FolderOpen' },
+  { id: 'activity', labelKey: 'activity', icon: 'History' },
 ];
 
 interface SettingsLayoutProps {
@@ -50,14 +50,14 @@ const validTabs = tabConfigs.map((t) => t.id);
 
 export function SettingsLayout({
   children,
-  defaultTab = "profile",
+  defaultTab = 'profile',
   onTabChange,
 }: SettingsLayoutProps) {
   const searchParams = useSearchParams();
-  const t = useTranslations("settings.tabs");
+  const t = useTranslations('settings.tabs');
 
   // Read ?tab= from URL to support deep-linking (e.g. /settings?tab=security)
-  const tabFromUrl = searchParams.get("tab") as SettingsTab | null;
+  const tabFromUrl = searchParams.get('tab') as SettingsTab | null;
   const activeTab =
     tabFromUrl && validTabs.includes(tabFromUrl) ? tabFromUrl : defaultTab;
 
@@ -67,12 +67,12 @@ export function SettingsLayout({
 
     // Sync URL search params so the tab is preserved on refresh / shareable
     const url = new URL(window.location.href);
-    if (tab === "profile") {
-      url.searchParams.delete("tab");
+    if (tab === 'profile') {
+      url.searchParams.delete('tab');
     } else {
-      url.searchParams.set("tab", tab);
+      url.searchParams.set('tab', tab);
     }
-    window.history.replaceState({}, "", url.toString());
+    window.history.replaceState({}, '', url.toString());
   };
 
   return (

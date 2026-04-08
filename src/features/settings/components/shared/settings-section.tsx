@@ -1,15 +1,19 @@
-"use client"
+'use client';
 
-import { CardTitle, CardDescription } from "@/components/ui/card"
-import { AppCard, AppCardContent, AppCardHeader } from "@/components/ui/app-card"
-import { cn } from "@/lib/utils"
+import { CardTitle, CardDescription } from '@/components/ui/card';
+import {
+  AppCard,
+  AppCardContent,
+  AppCardHeader,
+} from '@/components/ui/app-card';
+import { cn } from '@/lib/utils';
 
 interface SettingsSectionProps {
-  title: string
-  description?: string
-  children: React.ReactNode
-  className?: string
-  action?: React.ReactNode
+  title: string;
+  description?: string;
+  children: React.ReactNode;
+  className?: string;
+  action?: React.ReactNode;
 }
 
 export function SettingsSection({
@@ -32,20 +36,20 @@ export function SettingsSection({
       </AppCardHeader>
       <AppCardContent>{children}</AppCardContent>
     </AppCard>
-  )
+  );
 }
 
 // Simple divider for within sections
 export function SettingsDivider() {
-  return <div className="my-4 border-t border-border" />
+  return <div className="my-4 border-t border-border" />;
 }
 
 // Row layout for settings items
 interface SettingsRowProps {
-  label: string
-  description?: string
-  children: React.ReactNode
-  className?: string
+  label: string;
+  description?: string;
+  children: React.ReactNode;
+  className?: string;
 }
 
 export function SettingsRow({
@@ -57,8 +61,8 @@ export function SettingsRow({
   return (
     <div
       className={cn(
-        "flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between",
-        className
+        'flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between',
+        className,
       )}
     >
       <div className="space-y-0.5">
@@ -69,5 +73,5 @@ export function SettingsRow({
       </div>
       <div className="shrink-0">{children}</div>
     </div>
-  )
+  );
 }
