@@ -5,7 +5,7 @@ import { CreditCard } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Pagination } from '@/components/ui/pagination';
 import { SettingsDivider, SettingsSection } from '../shared/settings-section';
-import { BillingPaymentItem } from './billing-payment-item';
+import { BillingPaymentItem } from './payment-item';
 import type { Payment } from '../../types';
 
 interface BillingPaymentSectionProps {

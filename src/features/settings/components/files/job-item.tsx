@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { FileTypeIcon } from '@/components/shared/file-type-icon';
 import { getJobStatusConfig } from '@/features/dashboard/data';
 import { FileExpiryInfo } from './file-expiry-info';
-import { FilesDownloadButton } from './files-download-button';
+import { FilesDownloadButton } from './download-button';
 import { formatSettingsFileSize } from '../../utils/files-display';
 import type { TranslationJobResponse } from '@/types';
 

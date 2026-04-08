@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
-import { BillingLedgerSection } from './billing-ledger-section';
-import { BillingPaymentSection } from './billing-payment-section';
-import { BillingTabFallback } from './billing-tab.fallback';
-import { BillingVnpayStatusBanner } from './billing-vnpay-status-banner';
-import { BillingWalletSection } from './billing-wallet-section';
+import { BillingLedgerSection } from './ledger-section';
+import { BillingPaymentSection } from './payment-section';
+import { BillingTabFallback } from './tab.fallback';
+import { BillingVnpayStatusBanner } from './vnpay-status-banner';
+import { BillingWalletSection } from './wallet-section';
 import {
   useWallet,
   useWalletLedger,

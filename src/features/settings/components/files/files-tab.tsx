@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { FilesDeleteDialog } from './files-delete-dialog';
-import { FilesListSection } from './files-list-section';
-import { FilesStorageSection } from './files-storage-section';
-import { FilesTabFallback } from './files-tab.fallback';
+import { FilesDeleteDialog } from './delete-dialog';
+import { FilesListSection } from './list-section';
+import { FilesStorageSection } from './storage-section';
+import { FilesTabFallback } from './tab.fallback';
 import { useRecentJobs } from '@/features/dashboard/hooks';
 import { useDeleteFilesByJob, useStorageUsage } from '../../hooks/use-files';
 import { useFilesDeleteDialog } from '../../hooks/use-files-delete-dialog';

@@ -5,7 +5,7 @@ import { Key } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { SettingsSection } from '../shared/settings-section';
-import { SecurityPasswordDialog } from './security-password-dialog';
+import { SecurityPasswordDialog } from './password-dialog';
 import type { ChangePasswordDto } from '../../types';
 
 interface SecurityPasswordSectionProps {

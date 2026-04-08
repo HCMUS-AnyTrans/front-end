@@ -9,8 +9,8 @@ import {
   useNotificationPreferences,
   useUpdateNotificationPreferences,
 } from '../../hooks/use-notifications';
-import { NotificationsTabFallback } from './notifications-tab.fallback';
-import { NotificationsListSection } from './notifications-list-section';
+import { NotificationsTabFallback } from './tab.fallback';
+import { NotificationsListSection } from './list-section';
 import { NotificationPreferencesSection } from './notification-preferences-section';
 import { useNotificationPreferencesForm } from '../../hooks/use-notification-preferences-form';
 

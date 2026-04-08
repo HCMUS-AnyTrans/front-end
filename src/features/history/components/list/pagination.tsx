@@ -6,7 +6,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from 'lucide-react';
-import type { HistoryPaginationProps } from '../types';
+import type { HistoryPaginationProps } from '../../types';
 
 export function HistoryPagination({
   meta,

@@ -1,7 +1,17 @@
-export { HistoryContent } from './history-content';
-export { HistoryFilters } from './history-filters';
-export { HistoryTable } from './history-table';
-export { HistoryPagination } from './history-pagination';
-export { HistoryEmptyState } from './history-empty-state';
-export { HistoryTableSkeleton } from './history-table-skeleton';
-export { HistoryJobDetail } from './history-job-detail';
+export {
+  HistoryContent,
+  HistoryFilters,
+  HistoryTable,
+  HistoryTableRow,
+  HistoryDownloadButton,
+  HistoryPagination,
+  HistoryEmptyState,
+  HistoryTableSkeleton,
+} from './list';
+
+export {
+  HistoryJobDetail,
+  HistoryJobDetailHeader,
+  HistoryJobDetailFileSection,
+  HistoryJobDetailPricingSection,
+} from './detail';

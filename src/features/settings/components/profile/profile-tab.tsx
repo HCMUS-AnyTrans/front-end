@@ -1,10 +1,10 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { ProfileAccountInfoSection } from './profile-account-info-section';
-import { ProfileAvatarSection } from './profile-avatar-section';
-import { ProfileTabFallback } from './profile-tab.fallback';
-import { ProfilePersonalInfoSection } from './profile-personal-info-section';
+import { ProfileAccountInfoSection } from './account-info-section';
+import { ProfileAvatarSection } from './avatar-section';
+import { ProfileTabFallback } from './tab.fallback';
+import { ProfilePersonalInfoSection } from './personal-info-section';
 import { useProfile } from '../../hooks/use-profile';
 import { useProfileAvatarUpload } from '../../hooks/use-profile-avatar-upload';
 import { useProfileForm } from '../../hooks/use-profile-form';

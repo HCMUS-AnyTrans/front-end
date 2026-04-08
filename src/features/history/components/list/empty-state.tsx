@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { FileQuestion } from 'lucide-react';
-import type { HistoryEmptyStateProps } from '../types';
+import type { HistoryEmptyStateProps } from '../../types';
 
 export function HistoryEmptyState({ hasFilters }: HistoryEmptyStateProps) {
   const t = useTranslations('dashboard.history');

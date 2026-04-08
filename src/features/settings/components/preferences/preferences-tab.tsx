@@ -6,9 +6,9 @@ import {
 } from '../../hooks/use-preferences';
 import { useThemeSync } from '../../hooks/use-theme-sync';
 import { useLanguageSync } from '../../hooks/use-language-sync';
-import { PreferencesDisplaySection } from './preferences-display-section';
-import { PreferencesFileTtlSection } from './preferences-file-ttl-section';
-import { PreferencesTabFallback } from './preferences-tab.fallback';
+import { PreferencesDisplaySection } from './display-section';
+import { PreferencesFileTtlSection } from './file-ttl-section';
+import { PreferencesTabFallback } from './tab.fallback';
 import { usePreferencesFileTtl } from '../../hooks/use-preferences-file-ttl';
 
 // ============================================================================

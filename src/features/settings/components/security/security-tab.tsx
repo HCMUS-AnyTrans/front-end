@@ -1,10 +1,10 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { SecurityLoginMethodsSection } from './security-login-methods-section';
-import { SecurityOauthBanner } from './security-oauth-banner';
-import { SecurityPasswordSection } from './security-password-section';
-import { SecurityTabFallback } from './security-tab.fallback';
+import { SecurityLoginMethodsSection } from './login-methods-section';
+import { SecurityOauthBanner } from './oauth-banner';
+import { SecurityPasswordSection } from './password-section';
+import { SecurityTabFallback } from './tab.fallback';
 import {
   useIdentities,
   useUnlinkIdentity,

@@ -9,8 +9,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Search } from 'lucide-react';
-import { STATUS_OPTIONS } from '../data';
-import type { HistoryFiltersProps } from '../types';
+import { STATUS_OPTIONS } from '../../data';
+import type { HistoryFiltersProps } from '../../types';
 
 export function HistoryFilters({
   search,

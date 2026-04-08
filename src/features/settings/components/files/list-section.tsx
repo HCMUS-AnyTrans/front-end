@@ -6,7 +6,7 @@ import { FolderOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Pagination } from '@/components/ui/pagination';
 import { SettingsDivider, SettingsSection } from '../shared/settings-section';
-import { FilesJobItem } from './files-job-item';
+import { FilesJobItem } from './job-item';
 import type { TranslationJobResponse } from '@/types';
 
 interface FilesListSectionProps {

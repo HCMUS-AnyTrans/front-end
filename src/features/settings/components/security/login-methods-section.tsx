@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { SettingsDivider, SettingsSection } from '../shared/settings-section';
 import { authProviderOptions } from '../../data';
-import { SecurityProviderRow } from './security-provider-row';
+import { SecurityProviderRow } from './provider-row';
 import type { AuthIdentity, AuthProvider } from '../../types';
 
 interface SecurityLoginMethodsSectionProps {

@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useState, useCallback } from "react";
-import { useLocale } from "next-intl";
-import { AppCard, AppCardContent } from "@/components/ui/app-card";
-import type { TranslationJobResponse } from "@/types";
-import { useHistoryJobs } from "../hooks";
-import { HistoryFilters } from "./history-filters";
-import { HistoryTable } from "./history-table";
-import { HistoryPagination } from "./history-pagination";
-import { HistoryEmptyState } from "./history-empty-state";
-import { HistoryTableSkeleton } from "./history-table-skeleton";
-import { HistoryJobDetail } from "./history-job-detail";
+import { useState, useCallback } from 'react';
+import { useLocale } from 'next-intl';
+import { AppCard, AppCardContent } from '@/components/ui/app-card';
+import type { TranslationJobResponse } from '@/types';
+import { useHistoryJobs } from '../../hooks';
+import { HistoryFilters } from './filters';
+import { HistoryTable } from './table';
+import { HistoryPagination } from './pagination';
+import { HistoryEmptyState } from './empty-state';
+import { HistoryTableSkeleton } from './table-skeleton';
+import { HistoryJobDetail } from '../detail/job-detail';
 
 /**
  * Orchestrator for the history page.

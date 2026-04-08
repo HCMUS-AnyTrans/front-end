@@ -5,7 +5,7 @@ import { Wallet } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Pagination } from '@/components/ui/pagination';
 import { SettingsDivider, SettingsSection } from '../shared/settings-section';
-import { BillingLedgerItem } from './billing-ledger-item';
+import { BillingLedgerItem } from './ledger-item';
 import type { WalletLedger } from '../../types';
 
 interface BillingLedgerSectionProps {
