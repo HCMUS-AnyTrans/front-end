@@ -6,7 +6,7 @@ import {
   unlinkIdentityApi,
   linkIdentityApi,
   changePasswordApi,
-} from '../api/settings.api';
+} from '../api';
 import { settingsKeys } from '@/lib/query-client';
 import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type { ChangePasswordDto } from '../types';

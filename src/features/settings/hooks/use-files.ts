@@ -7,7 +7,7 @@ import {
   deleteFileApi,
   deleteFilesByJobApi,
   getStorageUsageApi,
-} from '../api/settings.api';
+} from '../api';
 import { fileKeys, dashboardKeys, translationKeys } from '@/lib/query-client';
 import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type { FilesQuery } from '../types';

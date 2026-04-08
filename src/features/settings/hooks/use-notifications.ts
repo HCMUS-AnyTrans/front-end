@@ -8,7 +8,7 @@ import {
   deleteNotificationApi,
   getNotificationPreferencesApi,
   updateNotificationPreferencesApi,
-} from '../api/settings.api';
+} from '../api';
 import { settingsKeys, notificationKeys } from '@/lib/query-client';
 import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type {

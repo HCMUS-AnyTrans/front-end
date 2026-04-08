@@ -12,7 +12,7 @@ import {
   getCreditPackagesApi,
   getPaymentsApi,
   createVnpayPaymentApi,
-} from '../api/settings.api';
+} from '../api';
 import { walletKeys, billingKeys } from '@/lib/query-client';
 import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type {

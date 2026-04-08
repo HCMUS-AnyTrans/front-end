@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateProfileApi } from '../api/settings.api';
+import { updateProfileApi } from '../api';
 import { settingsKeys, authKeys } from '@/lib/query-client';
 import { getErrorMessage } from '@/lib/api-error';
 import { useAuthActions } from '@/features/auth';

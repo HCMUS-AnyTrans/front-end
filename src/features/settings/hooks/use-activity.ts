@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { getActivityApi } from '../api/settings.api';
+import { getActivityApi } from '../api';
 import { settingsKeys } from '@/lib/query-client';
 import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type { ActivityQuery } from '../types';

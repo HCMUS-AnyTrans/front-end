@@ -5,7 +5,7 @@ import {
   requestGeneralUploadApi,
   uploadFileToPresignedUrl,
   processAvatarApi,
-} from '../api/settings.api';
+} from '../api';
 import { settingsKeys, authKeys } from '@/lib/query-client';
 import { getErrorMessage } from '@/lib/api-error';
 import { useAuthActions } from '@/features/auth';
