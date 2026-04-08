@@ -1,24 +1,29 @@
 'use client';
 
+import { useId } from 'react';
 import { ArrowRightLeft } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import type { UseFormReturn } from 'react-hook-form';
+import { Controller, type UseFormReturn } from 'react-hook-form';
 import { getDomainLabel, useDomains } from '@/features/domains';
 import { Input } from '@/components/ui/input';
 import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSet,
+} from '@/components/ui/field';
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { cn } from '@/lib/utils';
 import { glossaryLanguages, type CreateGlossaryFormValues } from '../data';
 
@@ -27,127 +32,168 @@ interface CreateGlossaryStepOneProps {
 }
 
 export function CreateGlossaryStepOne({ form }: CreateGlossaryStepOneProps) {
+  const id = useId();
   const locale = useLocale();
   const t = useTranslations('glossary');
   const { domains, isLoading: isLoadingDomains } = useDomains();
   const glossaryDomains = domains.filter((domain) => domain.key !== 'auto');
 
   return (
-    <div className="space-y-6 px-8 pb-8">
-      <FormField
-        control={form.control}
-        name="name"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>{t('name')}</FormLabel>
-            <FormControl>
-              <Input placeholder={t('form.namePlaceholder')} {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+    <div className="px-8 pb-4">
+      <FieldGroup>
+        <Controller
+          control={form.control}
+          name="name"
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <FieldLabel htmlFor={`${id}-name`}>{t('name')}</FieldLabel>
+              <Input
+                {...field}
+                id={`${id}-name`}
+                aria-invalid={fieldState.invalid}
+                placeholder={t('form.namePlaceholder')}
+              />
+              <FieldError errors={[fieldState.error]} />
+            </Field>
+          )}
+        />
 
-      <FormField
-        control={form.control}
-        name="domain"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>{t('domain')}</FormLabel>
-            <div className="grid grid-cols-2 gap-2.5 min-[480px]:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5">
-              {glossaryDomains.map((domain) => {
-                const Icon = domain.icon;
-                const isSelected = field.value === domain.key;
+        <Controller
+          control={form.control}
+          name="domain"
+          render={({ field, fieldState }) => (
+            <Field
+              data-invalid={fieldState.invalid}
+              data-disabled={isLoadingDomains}
+            >
+              <FieldLabel>{t('domain')}</FieldLabel>
+              <ToggleGroup
+                type="single"
+                value={field.value}
+                onValueChange={(value) => field.onChange(value)}
+                disabled={isLoadingDomains}
+                variant="outline"
+                spacing={3}
+                aria-invalid={fieldState.invalid}
+                className="grid w-full grid-cols-2 gap-2.5 min-[480px]:grid-cols-3 sm:grid-cols-5 lg:grid-cols-7"
+              >
+                {glossaryDomains.map((domain) => {
+                  const Icon = domain.icon;
+                  const isSelected = field.value === domain.key;
 
-                return (
-                  <button
-                    key={domain.id}
-                    type="button"
-                    onClick={() => field.onChange(domain.key)}
-                    disabled={isLoadingDomains}
-                    className={cn(
-                      'flex flex-col items-start gap-2 rounded-xl border p-3 text-left transition-all',
-                      isSelected
-                        ? 'border-primary bg-primary text-primary-foreground shadow-md'
-                        : 'border-border bg-card text-foreground hover:border-primary/30 hover:bg-muted/50',
-                      isLoadingDomains && 'cursor-wait opacity-70'
-                    )}
-                  >
-                    <Icon
+                  return (
+                    <ToggleGroupItem
+                      key={domain.id}
+                      value={domain.key}
                       className={cn(
-                          'size-5',
-                          isSelected ? 'text-primary-foreground' : 'text-muted-foreground'
+                        'h-auto min-h-24 items-start justify-start rounded-xl px-3 py-3 text-left',
+                        'flex-col gap-2 whitespace-normal',
+                        isSelected
+                          ? 'border-primary/90 bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground data-[state=on]:bg-primary data-[state=on]:text-primary-foreground'
+                          : 'bg-card text-foreground hover:border-primary/50 hover:bg-muted/70 hover:text-foreground',
+                      )}
+                    >
+                      <Icon
+                        className={cn(
+                          isSelected
+                            ? 'text-primary-foreground'
+                            : 'text-muted-foreground',
                         )}
-                    />
-                    <span className="text-xs font-medium">{getDomainLabel(domain, locale)}</span>
-                  </button>
-                );
-              })}
-            </div>
-            {isLoadingDomains ? (
-              <p className="text-xs text-muted-foreground">{t('stepTwo.templateLoading')}</p>
-            ) : null}
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+                      />
+                      <span className="text-xs font-medium leading-relaxed">
+                        {getDomainLabel(domain, locale)}
+                      </span>
+                    </ToggleGroupItem>
+                  );
+                })}
+              </ToggleGroup>
+              {isLoadingDomains ? (
+                <FieldDescription>
+                  {t('stepTwo.templateLoading')}
+                </FieldDescription>
+              ) : null}
+              <FieldError errors={[fieldState.error]} />
+            </Field>
+          )}
+        />
 
-      <div>
-        <FormLabel className="mb-3 block">{t('form.languagePair')}</FormLabel>
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <FormField
-            control={form.control}
-            name="srcLang"
-            render={({ field }) => (
-              <FormItem className="min-w-0 flex-1">
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="w-full">
+        <FieldSet>
+          <FieldLegend variant="label">{t('form.languagePair')}</FieldLegend>
+          <FieldGroup className="flex flex-col gap-3 sm:flex-row sm:items-start">
+            <Controller
+              control={form.control}
+              name="srcLang"
+              render={({ field, fieldState }) => (
+                <Field
+                  data-invalid={fieldState.invalid}
+                  className="min-w-0 flex-1"
+                >
+                  <FieldLabel htmlFor={`${id}-src-lang`} className="sr-only">
+                    {t('form.srcLangPlaceholder')}
+                  </FieldLabel>
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger
+                      id={`${id}-src-lang`}
+                      className="w-full"
+                      aria-invalid={fieldState.invalid}
+                    >
                       <SelectValue placeholder={t('form.srcLangPlaceholder')} />
                     </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {glossaryLanguages.map((lang) => (
-                      <SelectItem key={lang.code} value={lang.code}>
-                        {t(`languages.${lang.code}`)}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                    <SelectContent>
+                      <SelectGroup>
+                        {glossaryLanguages.map((lang) => (
+                          <SelectItem key={lang.code} value={lang.code}>
+                            {t(`languages.${lang.code}`)}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                  <FieldError errors={[fieldState.error]} />
+                </Field>
+              )}
+            />
 
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center self-center rounded-full bg-muted text-muted-foreground sm:rotate-0 rotate-90">
-            <ArrowRightLeft className="size-4" />
-          </div>
+            <div className="flex size-8 shrink-0 items-center justify-center self-center rounded-full bg-muted text-muted-foreground sm:mt-2 sm:self-auto sm:rotate-0 rotate-90">
+              <ArrowRightLeft className="size-4" />
+            </div>
 
-          <FormField
-            control={form.control}
-            name="tgtLang"
-            render={({ field }) => (
-              <FormItem className="min-w-0 flex-1">
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="w-full">
+            <Controller
+              control={form.control}
+              name="tgtLang"
+              render={({ field, fieldState }) => (
+                <Field
+                  data-invalid={fieldState.invalid}
+                  className="min-w-0 flex-1"
+                >
+                  <FieldLabel htmlFor={`${id}-tgt-lang`} className="sr-only">
+                    {t('form.tgtLangPlaceholder')}
+                  </FieldLabel>
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger
+                      id={`${id}-tgt-lang`}
+                      className="w-full"
+                      aria-invalid={fieldState.invalid}
+                    >
                       <SelectValue placeholder={t('form.tgtLangPlaceholder')} />
                     </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {glossaryLanguages.map((lang) => (
-                      <SelectItem key={lang.code} value={lang.code}>
-                        {t(`languages.${lang.code}`)}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-      </div>
+                    <SelectContent>
+                      <SelectGroup>
+                        {glossaryLanguages.map((lang) => (
+                          <SelectItem key={lang.code} value={lang.code}>
+                            {t(`languages.${lang.code}`)}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                  <FieldError errors={[fieldState.error]} />
+                </Field>
+              )}
+            />
+          </FieldGroup>
+        </FieldSet>
+      </FieldGroup>
     </div>
   );
 }

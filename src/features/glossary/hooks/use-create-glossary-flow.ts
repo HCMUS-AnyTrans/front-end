@@ -1,10 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  resetSourceSpecificState,
-  type GlossarySourceType,
-} from '../data';
+import { resetSourceSpecificState, type GlossarySourceType } from '../data';
 
 export function useCreateGlossaryFlow() {
   const [step, setStep] = useState<1 | 2>(1);
