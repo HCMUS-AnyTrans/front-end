@@ -1,20 +1,20 @@
-"use client"
+'use client';
 
-import { useLocale } from 'next-intl'
-import { AppCard, AppCardContent } from "@/components/ui/app-card"
-import { LanguageSelector } from "./language-selector"
-import { DomainSelector } from "./domain-selector"
-import { ToneSelector } from "./tone-selector"
-import { PdfFlowSelector } from "./pdf-flow-selector"
-import { GlossarySection } from "./glossary-section"
-import { FontConfigurationSection } from "./font-configuration-section"
-import { ConfigureEstimateCard } from "./configure-estimate-card"
-import { ConfigureEstimateSummary } from "./configure-estimate-summary"
-import { ConfigureActionsPanel } from "./configure-actions-panel"
-import { ConfigureMobileActionBar } from "./configure-mobile-action-bar"
-import { getDomainLabel, useDomains } from '@/features/domains'
-import { useManualTerms } from "../hooks/use-manual-terms"
-import { useStepConfigureState } from "../hooks/use-step-configure-state"
+import { AppCard, AppCardContent } from '@/components/ui/app-card';
+import { LanguageSelector } from './language-selector';
+import { DomainSelector } from './domain-selector';
+import type { DomainOption } from './domain-selector';
+import { ToneSelector } from './tone-selector';
+import { PdfFlowSelector } from './pdf-flow-selector';
+import { GlossarySection } from './glossary-section';
+import { FontConfigurationSection } from './font-configuration-section';
+import { ConfigureEstimateCard } from './configure-estimate-card';
+import { ConfigureEstimateSummary } from './configure-estimate-summary';
+import { ConfigureActionsPanel } from './configure-actions-panel';
+import { ConfigureMobileActionBar } from './configure-mobile-action-bar';
+import { useManualTerms } from '../hooks/use-manual-terms';
+import { useStepConfigureState } from '../hooks/use-step-configure-state';
+import { getFontConfigurationApplicable } from '../utils/document-wizard-selectors';
 import type {
   TranslationConfig,
   LanguageCode,
@@ -22,40 +22,43 @@ import type {
   FontCheckItem,
   FontEnabledMap,
   PdfTranslationFlow,
-} from "../types"
-import type { Glossary, Term } from "@/features/glossary"
-import type { CreditEstimateResponse } from "../types"
+} from '../types';
+import type { Glossary, Term } from '@/features/glossary';
+import type { CreditEstimateResponse } from '../types';
 
 interface StepConfigureProps {
-  config: TranslationConfig
-  onConfigChange: (updates: Partial<TranslationConfig>) => void
-  glossaries: Glossary[]
-  selectedGlossaryTerms: Term[]
-  isLoadingGlossaries: boolean
-  estimate: CreditEstimateResponse | undefined
-  isEstimating: boolean
-  estimateError: string | null
-  currentBalance?: number
-  isLoadingBalance?: boolean
-  isPdfFile: boolean
-  pdfTranslationFlow: PdfTranslationFlow
-  fontsUsedByGroup: ParsedFontsByGroup
-  fontCheckItems: FontCheckItem[]
-  keepOriginalFontSize: boolean
-  fontConfigEnabled: boolean
-  fontEnabledMap: FontEnabledMap
-  fontParseSupported: boolean | null
-  fontFlowUnavailable: boolean
-  fontCheckUnavailable: boolean
-  isCheckingFonts: boolean
-  onKeepOriginalFontSizeChange: (enabled: boolean) => void
-  onFontConfigEnabledChange: (enabled: boolean) => void
-  onFontEnabledChange: (fromFont: string, enabled: boolean) => void
-  onFontSelectionChange: (fromFont: string, toFont: string) => void
-  onPdfTranslationFlowChange: (flow: PdfTranslationFlow) => void
-  onBack: () => void
-  onStart: () => void
-  isLoading?: boolean
+  config: TranslationConfig;
+  onConfigChange: (updates: Partial<TranslationConfig>) => void;
+  glossaries: Glossary[];
+  selectedGlossaryTerms: Term[];
+  isLoadingGlossaries: boolean;
+  estimate: CreditEstimateResponse | undefined;
+  isEstimating: boolean;
+  estimateError: string | null;
+  currentBalance?: number;
+  isLoadingBalance?: boolean;
+  domainOptions: DomainOption[];
+  selectedDomainKey?: string | null;
+  isLoadingDomains?: boolean;
+  isPdfFile: boolean;
+  pdfTranslationFlow: PdfTranslationFlow;
+  fontsUsedByGroup: ParsedFontsByGroup;
+  fontCheckItems: FontCheckItem[];
+  keepOriginalFontSize: boolean;
+  fontConfigEnabled: boolean;
+  fontEnabledMap: FontEnabledMap;
+  fontParseSupported: boolean | null;
+  fontFlowUnavailable: boolean;
+  fontCheckUnavailable: boolean;
+  isCheckingFonts: boolean;
+  onKeepOriginalFontSizeChange: (enabled: boolean) => void;
+  onFontConfigEnabledChange: (enabled: boolean) => void;
+  onFontEnabledChange: (fromFont: string, enabled: boolean) => void;
+  onFontSelectionChange: (fromFont: string, toFont: string) => void;
+  onPdfTranslationFlowChange: (flow: PdfTranslationFlow) => void;
+  onBack: () => void;
+  onStart: () => void;
+  isLoading?: boolean;
 }
 
 export function StepConfigure({
@@ -69,6 +72,9 @@ export function StepConfigure({
   estimateError,
   currentBalance,
   isLoadingBalance,
+  domainOptions,
+  selectedDomainKey,
+  isLoadingDomains,
   isPdfFile,
   pdfTranslationFlow,
   fontsUsedByGroup,
@@ -89,63 +95,64 @@ export function StepConfigure({
   onStart,
   isLoading,
 }: StepConfigureProps) {
-  const locale = useLocale()
-  const { domains, getDomainById, isLoading: isLoadingDomains } = useDomains()
-  const selectedDomain = getDomainById(config.domainId)
-  const domainOptions = domains.map((domain) => ({
-    id: domain.id,
-    key: domain.key,
-    label: getDomainLabel(domain, locale),
-    icon: domain.icon,
-  }))
-  const isUnknownSelectedDomain = Boolean(config.domainId) && !isLoadingDomains && !selectedDomain
-  const isFontConfigurationApplicable =
-    !isPdfFile || pdfTranslationFlow === "format_preserved"
-  const { isInsufficientCredits, missingCredits, isStartDisabled } = useStepConfigureState({
-    srcLang: config.srcLang,
-    tgtLang: config.tgtLang,
-    domainId: config.domainId,
-    selectedDomainKey: selectedDomain?.key,
-    customDomain: config.customDomain,
-    estimate,
-    isEstimating,
-    currentBalance,
-    fontsUsedByGroup,
-    fontParseSupported,
-    isCheckingFonts,
-    isFontConfigurationApplicable,
-    isLoading,
-  })
+  const isUnknownSelectedDomain =
+    Boolean(config.domainId) && !isLoadingDomains && !selectedDomainKey;
+  const isFontConfigurationApplicable = getFontConfigurationApplicable({
+    fileMime: isPdfFile ? 'application/pdf' : null,
+    pdfTranslationFlow,
+  });
+  const { isInsufficientCredits, missingCredits, isStartDisabled } =
+    useStepConfigureState({
+      srcLang: config.srcLang,
+      tgtLang: config.tgtLang,
+      domainId: config.domainId,
+      selectedDomainKey,
+      customDomain: config.customDomain,
+      estimate,
+      isEstimating,
+      currentBalance,
+      fontsUsedByGroup,
+      fontParseSupported,
+      isCheckingFonts,
+      isFontConfigurationApplicable,
+      isLoading,
+    });
   const { addManualTerm, updateManualTerm, removeManualTerm } = useManualTerms({
     manualTerms: config.manualTerms,
     onConfigChange,
-  })
-  const handleSourceLanguageChange = (lang: LanguageCode) => onConfigChange({ srcLang: lang })
-  const handleTargetLanguageChange = (lang: LanguageCode) => onConfigChange({ tgtLang: lang })
-  const handleDomainChange = (domainId: string) => onConfigChange({ domainId })
-  const handleCustomDomainChange = (customDomain: string) => onConfigChange({ customDomain })
-  const handleToneChange = (tone: string) => onConfigChange({ tone })
+  });
+  const handleSourceLanguageChange = (lang: LanguageCode) =>
+    onConfigChange({ srcLang: lang });
+  const handleTargetLanguageChange = (lang: LanguageCode) =>
+    onConfigChange({ tgtLang: lang });
+  const handleDomainChange = (domainId: string) => onConfigChange({ domainId });
+  const handleCustomDomainChange = (customDomain: string) =>
+    onConfigChange({ customDomain });
+  const handleToneChange = (tone: string) => onConfigChange({ tone });
   const handleGlossarySelect = (id: string | null) =>
-    onConfigChange({ selectedGlossaryId: id, glossaryInputMode: "saved" })
-  const handleGlossaryInputModeChange = (mode: TranslationConfig["glossaryInputMode"]) => {
-    if (mode === "manual") {
-      onConfigChange({ glossaryInputMode: mode, selectedGlossaryId: null })
-      return
+    onConfigChange({ selectedGlossaryId: id, glossaryInputMode: 'saved' });
+  const handleGlossaryInputModeChange = (
+    mode: TranslationConfig['glossaryInputMode'],
+  ) => {
+    if (mode === 'manual') {
+      onConfigChange({ glossaryInputMode: mode, selectedGlossaryId: null });
+      return;
     }
 
-    if (mode === "none") {
-      onConfigChange({ glossaryInputMode: mode })
-      return
+    if (mode === 'none') {
+      onConfigChange({ glossaryInputMode: mode });
+      return;
     }
 
-    onConfigChange({ glossaryInputMode: mode })
-  }
+    onConfigChange({ glossaryInputMode: mode });
+  };
   const handleConfirmSavedGlossaryMode = () =>
-    onConfigChange({ glossaryInputMode: "saved", manualTerms: [] })
+    onConfigChange({ glossaryInputMode: 'saved', manualTerms: [] });
   const handleUseSystemGlossaryChange = (enabled: boolean) =>
-    onConfigChange({ useSystemGlossary: enabled })
+    onConfigChange({ useSystemGlossary: enabled });
 
-  const isStartBlocked = isStartDisabled || isLoadingDomains || isUnknownSelectedDomain
+  const isStartBlocked =
+    isStartDisabled || isLoadingDomains || isUnknownSelectedDomain;
 
   return (
     <div className="mx-auto max-w-6xl space-y-5 pb-24 xl:pb-0">
@@ -164,7 +171,7 @@ export function StepConfigure({
               <DomainSelector
                 domains={domainOptions}
                 value={config.domainId}
-                selectedDomainKey={selectedDomain?.key}
+                selectedDomainKey={selectedDomainKey}
                 customValue={config.customDomain}
                 isLoading={isLoadingDomains}
                 onChange={handleDomainChange}
@@ -200,10 +207,10 @@ export function StepConfigure({
             />
           ) : null}
 
-            <GlossarySection
-              glossaries={glossaries}
-              selectedDomainKey={selectedDomain?.key}
-              glossaryInputMode={config.glossaryInputMode}
+          <GlossarySection
+            glossaries={glossaries}
+            selectedDomainKey={selectedDomainKey}
+            glossaryInputMode={config.glossaryInputMode}
             selectedGlossaryId={config.selectedGlossaryId}
             selectedGlossaryTermCount={selectedGlossaryTerms.length}
             isLoadingGlossaries={isLoadingGlossaries}
@@ -258,5 +265,5 @@ export function StepConfigure({
         isInsufficientCredits={isInsufficientCredits}
       />
     </div>
-  )
+  );
 }

@@ -23,7 +23,7 @@ export function RecentJobsTable() {
   const locale = useLocale();
   const { jobsData, isLoading, isError, refetch, isFetching, isFetched } =
     useRecentJobs({
-      limit: 6,
+      limit: 5,
       page: 1,
       sortBy: 'createdAt',
       sortOrder: 'desc',

@@ -5,11 +5,3 @@ export { StepConfigure } from './step-configure';
 export { StepReview } from './step-review';
 export { DocumentTranslationWizard } from './document-translation-wizard';
 export { TranslationSocketProvider } from './translation-socket-provider';
-
-// Sub-components (for granular imports)
-export { LanguageSelector } from './language-selector';
-export { DomainSelector } from './domain-selector';
-export { ToneSelector } from './tone-selector';
-export { GlossarySection } from './glossary-section';
-export { FontConfigurationSection } from './font-configuration-section';
-export { FontMappingRow } from './font-mapping-row';
