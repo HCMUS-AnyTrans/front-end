@@ -42,9 +42,9 @@ export {
   useWalletLedger,
   useCreditPackages,
   usePayments,
-  useCreateVnpayPayment,
+  useCreatePayment,
 } from './use-billing';
-export { useBillingVnpayStatus } from './use-billing-vnpay-status';
+export { useBillingPaymentStatus } from './use-billing-payment-status';
 
 // File hooks
 export {

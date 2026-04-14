@@ -140,9 +140,9 @@
       },
       "paymentAmount": "Số tiền",
       "package": "Gói",
-      "vnpaySuccess": "Thanh toán thành công! Credits đã được cộng vào tài khoản của bạn.",
-      "vnpayError": "Thanh toán không thành công. Vui lòng thử lại.",
-      "vnpayPending": "Thanh toán đang được xử lý. Vui lòng đợi trong giây lát.",
+      "paymentSuccess": "Thanh toán thành công. Credits đã được cộng vào tài khoản của bạn.",
+      "paymentError": "Thanh toán chưa thành công. Vui lòng thử lại.",
+      "paymentPending": "Thanh toán đang được xử lý. Vui lòng chờ trong giây lát.",
       "backToDashboard": "Quay lại dashboard"
     },
     "files": {

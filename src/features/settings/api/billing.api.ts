@@ -1,7 +1,7 @@
 import { apiClient } from '@/lib/api-client';
 import type {
-  CreateVnpayPaymentDto,
-  CreateVnpayPaymentResponse,
+  CreatePaymentDto,
+  CreatePaymentResponse,
   CreditPackage,
   LedgerQuery,
   PaginatedResponse,
@@ -30,11 +30,11 @@ export async function getCreditPackagesApi(): Promise<CreditPackage[]> {
   return response.data;
 }
 
-export async function createVnpayPaymentApi(
-  dto: CreateVnpayPaymentDto,
-): Promise<CreateVnpayPaymentResponse> {
-  const response = await apiClient.post<CreateVnpayPaymentResponse>(
-    '/payments/vnpay/create',
+export async function createPaymentApi(
+  dto: CreatePaymentDto,
+): Promise<CreatePaymentResponse> {
+  const response = await apiClient.post<CreatePaymentResponse>(
+    '/payments/create',
     dto,
   );
   return response.data;

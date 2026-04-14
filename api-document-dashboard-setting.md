@@ -1107,9 +1107,9 @@ List available credit packages.
 
 ---
 
-#### POST /payments/vnpay/create
+#### POST /payments/create
 
-Create VNPay payment for credit purchase.
+Create payment link for credit purchase.
 
 **Request Body:**
 
@@ -1127,7 +1127,7 @@ Create VNPay payment for credit purchase.
   "statusCode": 200,
   "data": {
     "paymentId": "pay-123",
-    "paymentUrl": "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?...",
+    "paymentUrl": "https://pay.payos.vn/web/xxxxxxxxxxxxxxxx",
     "expiresAt": "2026-02-07T10:45:00.000Z"
   }
 }
@@ -1137,7 +1137,7 @@ Create VNPay payment for credit purchase.
 1. User selects package
 2. Frontend calls this API
 3. Redirect user to `paymentUrl`
-4. VNPay redirects back to `returnUrl` with result
+4. Payment gateway redirects back to `returnUrl` with result
 
 ---
 
@@ -1613,7 +1613,7 @@ type AuditAction =
 | GET | `/wallet` | Wallet balance |
 | GET | `/wallet/ledger` | Transaction history |
 | GET | `/credit-packages` | List packages |
-| POST | `/payments/vnpay/create` | Create payment |
+| POST | `/payments/create` | Create payment |
 | GET | `/payments` | Payment history |
 
 ### Settings APIs - Files

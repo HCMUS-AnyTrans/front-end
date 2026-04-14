@@ -6,14 +6,14 @@ import { useQueryClient } from '@tanstack/react-query';
 import { BillingLedgerSection } from './ledger-section';
 import { BillingPaymentSection } from './payment-section';
 import { BillingTabFallback } from './tab.fallback';
-import { BillingVnpayStatusBanner } from './vnpay-status-banner';
+import { BillingPaymentStatusBanner } from './billing-payment-status-banner';
 import { BillingWalletSection } from './wallet-section';
 import {
   useWallet,
   useWalletLedger,
   usePayments,
 } from '../../hooks/use-billing';
-import { useBillingVnpayStatus } from '../../hooks/use-billing-vnpay-status';
+import { useBillingPaymentStatus } from '../../hooks/use-billing-payment-status';
 
 export function BillingTab() {
   const searchParams = useSearchParams();
@@ -35,7 +35,7 @@ export function BillingTab() {
     isFetching: isFetchingPayments,
   } = usePayments({ page: paymentsPage, limit: 10 });
 
-  const { vnpayStatus, returnSource } = useBillingVnpayStatus({
+  const { paymentStatus, returnSource } = useBillingPaymentStatus({
     searchParams,
     queryClient,
   });
@@ -46,8 +46,8 @@ export function BillingTab() {
 
   return (
     <div className="space-y-6">
-      <BillingVnpayStatusBanner
-        status={vnpayStatus}
+      <BillingPaymentStatusBanner
+        status={paymentStatus}
         returnSource={returnSource}
       />
 

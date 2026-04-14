@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Skeleton } from "@/components/ui/skeleton"
 import { ProtectedRoute } from "@/features/auth"
-import { useCreditPackages, useCreateVnpayPayment } from "@/features/settings"
+import { useCreditPackages, useCreatePayment } from "@/features/settings"
 import {
   createCreditPackageFormatter,
   createCreditPackageViewModel,
@@ -28,7 +28,7 @@ function CheckoutContent() {
   const backLabel = isDashboardSource ? t("backToDashboard") : t("backToPricing")
 
   const { packages, isLoading, isError, refetch } = useCreditPackages()
-  const { createPaymentAsync, isCreating } = useCreateVnpayPayment()
+  const { createPaymentAsync, isCreating } = useCreatePayment()
   const [paymentError, setPaymentError] = useState<string | null>(null)
 
   const selectedPackage = useMemo(() => {

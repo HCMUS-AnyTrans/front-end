@@ -1,9 +1,5 @@
 import type { PaginationMeta } from '@/types';
-import type {
-  Glossary,
-  GlossaryTemplate,
-  Term,
-} from './glossary.types';
+import type { Glossary, GlossaryTemplate, Term } from './glossary.types';
 
 /**
  * Paginated list of glossaries.

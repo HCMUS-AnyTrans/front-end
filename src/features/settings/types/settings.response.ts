@@ -15,7 +15,7 @@ export interface WalletLedgerResponse extends PaginatedResponse<WalletLedger> {
   summary: LedgerSummary;
 }
 
-export interface CreateVnpayPaymentResponse {
+export interface CreatePaymentResponse {
   paymentId: string;
   paymentUrl: string;
   expiresAt: string;

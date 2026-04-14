@@ -49,7 +49,7 @@ export interface UpdateNotificationPreferencesDto {
   }>;
 }
 
-export interface CreateVnpayPaymentDto {
+export interface CreatePaymentDto {
   packageId: string;
   returnUrl: string;
 }

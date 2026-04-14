@@ -50,7 +50,7 @@ export {
   getWalletApi,
   getWalletLedgerApi,
   getCreditPackagesApi,
-  createVnpayPaymentApi,
+  createPaymentApi,
   getPaymentsApi,
   getFilesApi,
   getFileDownloadApi,
@@ -88,7 +88,7 @@ export {
   useWalletLedger,
   useCreditPackages,
   usePayments,
-  useCreateVnpayPayment,
+  useCreatePayment,
   useFiles,
   useFileDownload,
   useDeleteFile,
@@ -134,8 +134,8 @@ export type {
   Payment,
   CreditPackageType,
   CreditPackage,
-  CreateVnpayPaymentDto,
-  CreateVnpayPaymentResponse,
+  CreatePaymentDto,
+  CreatePaymentResponse,
 } from './types';
 
 // Types - files & activity

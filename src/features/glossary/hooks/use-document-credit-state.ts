@@ -23,10 +23,12 @@ export function useDocumentCreditState({
   } = useWallet();
 
   const requiredCredits = typeof price?.cost === 'number' ? price.cost : null;
-  const currentBalance = typeof wallet?.balance === 'number' ? wallet.balance : null;
+  const currentBalance =
+    typeof wallet?.balance === 'number' ? wallet.balance : null;
   const isPricePending =
     enabled && requiredCredits === null && (isPriceLoading || isPriceFetching);
-  const isPriceUnavailable = enabled && requiredCredits === null && isPriceError;
+  const isPriceUnavailable =
+    enabled && requiredCredits === null && isPriceError;
   const isInsufficientCredits =
     enabled &&
     requiredCredits !== null &&

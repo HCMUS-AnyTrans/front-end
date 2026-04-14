@@ -13,7 +13,7 @@ import {
 } from "@/lib/credit-package"
 import { cn } from "@/lib/utils"
 import { useIsAuthenticated } from "@/features/auth"
-import { useCreateVnpayPayment } from "@/features/settings"
+import { useCreatePayment } from "@/features/settings"
 import type { Plan } from "../data"
 
 export interface PricingCardProps {
@@ -31,7 +31,7 @@ export function PricingCard({
   const locale = useLocale()
   const router = useRouter()
   const isAuthenticated = useIsAuthenticated()
-  const { createPaymentAsync, isCreating } = useCreateVnpayPayment()
+  const { createPaymentAsync, isCreating } = useCreatePayment()
   const [paymentError, setPaymentError] = useState<string | null>(null)
 
   const handleBuyNow = async () => {

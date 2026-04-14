@@ -11,15 +11,11 @@ import {
   getWalletLedgerApi,
   getCreditPackagesApi,
   getPaymentsApi,
-  createVnpayPaymentApi,
+  createPaymentApi,
 } from '../api';
 import { walletKeys, billingKeys } from '@/lib/query-client';
 import { useAccessToken, useIsAuthenticated } from '@/features/auth';
-import type {
-  LedgerQuery,
-  PaymentsQuery,
-  CreateVnpayPaymentDto,
-} from '../types';
+import type { LedgerQuery, PaymentsQuery, CreatePaymentDto } from '../types';
 
 /**
  * Hook to fetch wallet balance
@@ -123,13 +119,13 @@ export function usePayments(query?: PaymentsQuery) {
 }
 
 /**
- * Hook to create a VNPay payment
+ * Hook to create a payment link
  */
-export function useCreateVnpayPayment() {
+export function useCreatePayment() {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: (dto: CreateVnpayPaymentDto) => createVnpayPaymentApi(dto),
+    mutationFn: (dto: CreatePaymentDto) => createPaymentApi(dto),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: billingKeys.payments() });
     },
