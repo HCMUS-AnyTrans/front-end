@@ -143,7 +143,21 @@
       "paymentSuccess": "Payment successful. Credits have been added to your account.",
       "paymentError": "Payment was not successful. Please try again.",
       "paymentPending": "Your payment is being processed. Please wait a moment.",
-      "backToDashboard": "Back to dashboard"
+      "backToDashboard": "Back to dashboard",
+      "buyCreditsTitle": "Buy credits",
+      "buyCreditsDescription": "Select a package and continue to secure checkout.",
+      "buySelectedPackage": "Buy selected package",
+      "processingPayment": "Redirecting to payment...",
+      "paymentCreateError": "Payment could not be created. Please try again.",
+      "mostPopular": "Most popular",
+      "perCreditLabel": "per credit",
+      "noPackageDescription": "Credits are added instantly after successful payment.",
+      "close": "Close",
+      "savePercent": "Save {percent}%",
+      "bonusCredits": "+{credits} bonus credits",
+      "packagesError": "Unable to load credit packages right now.",
+      "packagesEmpty": "No credit packages available at the moment.",
+      "retry": "Try again"
     },
     "files": {
       "title": "File Management",

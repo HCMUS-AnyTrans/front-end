@@ -1,19 +1,14 @@
 "use client"
 
-import { useState } from "react"
 import { useTranslations, useLocale } from "next-intl"
-import { useRouter } from "@/i18n/navigation"
-import { Check, Star, ArrowRight } from "lucide-react"
+import { Check, Star } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { CreditPackageCard } from "@/components/shared"
 import {
   createCreditPackageFormatter,
   createCreditPackageViewModel,
 } from "@/lib/credit-package"
 import { cn } from "@/lib/utils"
-import { useIsAuthenticated } from "@/features/auth"
-import { useCreatePayment } from "@/features/settings"
 import type { Plan } from "../data"
 
 export interface PricingCardProps {
@@ -29,25 +24,6 @@ export function PricingCard({
 }: PricingCardProps) {
   const t = useTranslations("marketing.pricingPage")
   const locale = useLocale()
-  const router = useRouter()
-  const isAuthenticated = useIsAuthenticated()
-  const { createPaymentAsync, isCreating } = useCreatePayment()
-  const [paymentError, setPaymentError] = useState<string | null>(null)
-
-  const handleBuyNow = async () => {
-    if (!isAuthenticated) {
-      router.push("/login")
-      return
-    }
-    setPaymentError(null)
-    try {
-      const returnUrl = `${window.location.origin}/${locale}/settings/billing`
-      const data = await createPaymentAsync({ packageId: plan.id, returnUrl })
-      window.location.href = data.paymentUrl
-    } catch {
-      setPaymentError(t("paymentError"))
-    }
-  }
 
   const { formatCredits, formatAmount, formatPerCredit } = createCreditPackageFormatter(locale)
   const packageView = createCreditPackageViewModel({
@@ -67,7 +43,7 @@ export function PricingCard({
     <div
       className={cn(
         "relative",
-        plan.popular && "md:-mt-4 md:mb-[-16px]",
+        plan.popular && "md:-mt-4 md:-mb-4",
         className
       )}
     >
@@ -113,24 +89,6 @@ export function PricingCard({
               </li>
             ))}
           </ul>
-        }
-        action={
-          <div className="flex flex-col gap-2">
-            <Button
-              className={cn("group h-12 w-full", plan.popular && "shadow-lg shadow-primary/20")}
-              variant={plan.popular ? "default" : "outline"}
-              onClick={handleBuyNow}
-              disabled={isCreating}
-            >
-              <span className="flex items-center justify-center gap-2">
-                {isCreating ? t("processing") : t("buyNow")}
-                {!isCreating && <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />}
-              </span>
-            </Button>
-            {paymentError && (
-              <p className="text-xs text-destructive text-center">{paymentError}</p>
-            )}
-          </div>
         }
       />
     </div>

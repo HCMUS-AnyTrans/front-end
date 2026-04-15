@@ -12,10 +12,16 @@ import {
   getCreditPackagesApi,
   getPaymentsApi,
   createPaymentApi,
+  markPaymentCancelledApi,
 } from '../api';
 import { walletKeys, billingKeys } from '@/lib/query-client';
 import { useAccessToken, useIsAuthenticated } from '@/features/auth';
-import type { LedgerQuery, PaymentsQuery, CreatePaymentDto } from '../types';
+import type {
+  LedgerQuery,
+  PaymentsQuery,
+  CreatePaymentDto,
+  MarkPaymentCancelledDto,
+} from '../types';
 
 /**
  * Hook to fetch wallet balance
@@ -135,6 +141,30 @@ export function useCreatePayment() {
     createPayment: mutation.mutate,
     createPaymentAsync: mutation.mutateAsync,
     isCreating: mutation.isPending,
+    isError: mutation.isError,
+    error: mutation.error,
+    data: mutation.data,
+  };
+}
+
+/**
+ * Hook to mark a payment as cancelled by gateway order code
+ */
+export function useMarkPaymentCancelled() {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (dto: MarkPaymentCancelledDto) => markPaymentCancelledApi(dto),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: billingKeys.payments() });
+      queryClient.invalidateQueries({ queryKey: billingKeys.all });
+    },
+  });
+
+  return {
+    markPaymentCancelled: mutation.mutate,
+    markPaymentCancelledAsync: mutation.mutateAsync,
+    isMarkingCancelled: mutation.isPending,
     isError: mutation.isError,
     error: mutation.error,
     data: mutation.data,

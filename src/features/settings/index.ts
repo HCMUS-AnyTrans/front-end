@@ -51,6 +51,7 @@ export {
   getWalletLedgerApi,
   getCreditPackagesApi,
   createPaymentApi,
+  markPaymentCancelledApi,
   getPaymentsApi,
   getFilesApi,
   getFileDownloadApi,
@@ -89,6 +90,7 @@ export {
   useCreditPackages,
   usePayments,
   useCreatePayment,
+  useMarkPaymentCancelled,
   useFiles,
   useFileDownload,
   useDeleteFile,
@@ -135,6 +137,7 @@ export type {
   CreditPackageType,
   CreditPackage,
   CreatePaymentDto,
+  MarkPaymentCancelledDto,
   CreatePaymentResponse,
 } from './types';
 

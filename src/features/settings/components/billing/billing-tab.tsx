@@ -1,23 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { useQueryClient } from '@tanstack/react-query';
 import { BillingLedgerSection } from './ledger-section';
 import { BillingPaymentSection } from './payment-section';
 import { BillingTabFallback } from './tab.fallback';
-import { BillingPaymentStatusBanner } from './billing-payment-status-banner';
 import { BillingWalletSection } from './wallet-section';
 import {
   useWallet,
   useWalletLedger,
   usePayments,
 } from '../../hooks/use-billing';
-import { useBillingPaymentStatus } from '../../hooks/use-billing-payment-status';
 
 export function BillingTab() {
-  const searchParams = useSearchParams();
-  const queryClient = useQueryClient();
   const [ledgerPage, setLedgerPage] = useState(1);
   const [paymentsPage, setPaymentsPage] = useState(1);
 
@@ -35,22 +29,12 @@ export function BillingTab() {
     isFetching: isFetchingPayments,
   } = usePayments({ page: paymentsPage, limit: 10 });
 
-  const { paymentStatus, returnSource } = useBillingPaymentStatus({
-    searchParams,
-    queryClient,
-  });
-
   if (isLoadingWallet) {
     return <BillingTabFallback />;
   }
 
   return (
     <div className="space-y-6">
-      <BillingPaymentStatusBanner
-        status={paymentStatus}
-        returnSource={returnSource}
-      />
-
       <BillingWalletSection balance={wallet?.balance ?? 0} />
 
       <BillingLedgerSection

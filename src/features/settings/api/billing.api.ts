@@ -4,6 +4,7 @@ import type {
   CreatePaymentResponse,
   CreditPackage,
   LedgerQuery,
+  MarkPaymentCancelledDto,
   PaginatedResponse,
   Payment,
   PaymentsQuery,
@@ -46,6 +47,16 @@ export async function getPaymentsApi(
   const response = await apiClient.get<PaginatedResponse<Payment>>(
     '/payments',
     { params: query },
+  );
+  return response.data;
+}
+
+export async function markPaymentCancelledApi(
+  dto: MarkPaymentCancelledDto,
+): Promise<{ message: string }> {
+  const response = await apiClient.post<{ message: string }>(
+    '/payments/cancel',
+    dto,
   );
   return response.data;
 }

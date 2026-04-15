@@ -43,8 +43,8 @@ export {
   useCreditPackages,
   usePayments,
   useCreatePayment,
+  useMarkPaymentCancelled,
 } from './use-billing';
-export { useBillingPaymentStatus } from './use-billing-payment-status';
 
 // File hooks
 export {

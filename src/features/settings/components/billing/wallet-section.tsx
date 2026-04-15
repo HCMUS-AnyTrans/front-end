@@ -1,17 +1,19 @@
 'use client';
 
+import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Plus, Wallet } from 'lucide-react';
-import { Link } from '@/i18n/navigation';
 import { Button } from '@/components/ui/button';
 import { SettingsSection } from '../shared/settings-section';
 import { createCreditPackageFormatter } from '@/lib/credit-package';
+import { BuyCreditsDialog } from './buy-credits-dialog';
 
 interface BillingWalletSectionProps {
   balance: number;
 }
 
 export function BillingWalletSection({ balance }: BillingWalletSectionProps) {
+  const [openBuyCredits, setOpenBuyCredits] = useState(false);
   const t = useTranslations('settings.billing');
   const locale = useLocale();
   const { formatCredits } = createCreditPackageFormatter(locale);
@@ -32,14 +34,17 @@ export function BillingWalletSection({ balance }: BillingWalletSectionProps) {
         </div>
 
         <div className="flex gap-2">
-          <Button asChild>
-            <Link href="/pricing" target="_blank" rel="noreferrer">
-              <Plus className="size-4" />
-              {t('addMore')}
-            </Link>
+          <Button onClick={() => setOpenBuyCredits(true)}>
+            <Plus className="size-4" />
+            {t('addMore')}
           </Button>
         </div>
       </div>
+
+      <BuyCreditsDialog
+        open={openBuyCredits}
+        onOpenChange={setOpenBuyCredits}
+      />
     </SettingsSection>
   );
 }

@@ -143,7 +143,21 @@
       "paymentSuccess": "Thanh toán thành công. Credits đã được cộng vào tài khoản của bạn.",
       "paymentError": "Thanh toán chưa thành công. Vui lòng thử lại.",
       "paymentPending": "Thanh toán đang được xử lý. Vui lòng chờ trong giây lát.",
-      "backToDashboard": "Quay lại dashboard"
+      "backToDashboard": "Quay lại dashboard",
+      "buyCreditsTitle": "Mua credits",
+      "buyCreditsDescription": "Chọn gói credits và tiếp tục đến cổng thanh toán.",
+      "buySelectedPackage": "Mua gói đã chọn",
+      "processingPayment": "Đang chuyển đến trang thanh toán...",
+      "paymentCreateError": "Không thể tạo thanh toán. Vui lòng thử lại.",
+      "mostPopular": "Phổ biến nhất",
+      "perCreditLabel": "mỗi credit",
+      "noPackageDescription": "Credits sẽ được cộng ngay sau khi thanh toán thành công.",
+      "close": "Đóng",
+      "savePercent": "Tiết kiệm {percent}%",
+      "bonusCredits": "+{credits} credits thưởng",
+      "packagesError": "Không thể tải danh sách gói credits lúc này.",
+      "packagesEmpty": "Hiện chưa có gói credits khả dụng.",
+      "retry": "Thử lại"
     },
     "files": {
       "title": "Quản lý tệp",

@@ -52,6 +52,11 @@ export interface UpdateNotificationPreferencesDto {
 export interface CreatePaymentDto {
   packageId: string;
   returnUrl: string;
+  cancelUrl?: string;
+}
+
+export interface MarkPaymentCancelledDto {
+  orderCode: string;
 }
 
 export interface NotificationsQuery {

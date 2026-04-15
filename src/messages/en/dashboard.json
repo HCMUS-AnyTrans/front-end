@@ -74,6 +74,7 @@
       "activity": "Activity"
     },
     "paymentBanner": {
+      "title": "Payment status",
       "success": "Payment successful. Your credit balance has been updated.",
       "error": "Payment failed or was cancelled. Please try again.",
       "pending": "Payment is being processed. Please check again shortly.",

@@ -32,8 +32,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         const response = await refreshTokenApi();
         setAuth(response.user, response.accessToken);
       } catch {
-        // Refresh failed - clear auth state
-        clearAuth();
+        // Avoid clearing a valid session if another concurrent refresh already succeeded.
+        const latestState = useAuthStore.getState();
+        if (!latestState.accessToken) {
+          clearAuth();
+        }
       }
     }
     setInitialized(true);

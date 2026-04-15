@@ -18,9 +18,11 @@ import { UserAvatarMenu } from '@/components/shared';
 import { NotificationBell } from './notification-bell';
 import { useWallet } from '../hooks';
 import { Button } from '@/components/ui/button';
+import { BuyCreditsDialog } from '@/features/settings/components/billing/buy-credits-dialog';
 
 export function DashboardHeader() {
   const [creditsMenuOpen, setCreditsMenuOpen] = useState(false);
+  const [openBuyCredits, setOpenBuyCredits] = useState(false);
   const [mobileSearchActive, setMobileSearchActive] = useState(false);
   const locale = useLocale();
   const tHeaderMenu = useTranslations('dashboard.headerMenu');
@@ -129,15 +131,17 @@ export function DashboardHeader() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuItem asChild>
-                <Link
-                  target="_blank"
-                  href="/pricing"
-                  onClick={() => setCreditsMenuOpen(false)}
-                >
+              <DropdownMenuItem
+                onSelect={(event) => {
+                  event.preventDefault();
+                  setCreditsMenuOpen(false);
+                  setOpenBuyCredits(true);
+                }}
+              >
+                <button type="button" className="flex w-full items-center">
                   <Coins className="mr-2 size-4 text-primary" />
                   {tHeaderMenu('buyMoreCredits')}
-                </Link>
+                </button>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/settings?tab=billing">
@@ -155,6 +159,11 @@ export function DashboardHeader() {
         {/* User avatar menu */}
         <UserAvatarMenu />
       </div>
+
+      <BuyCreditsDialog
+        open={openBuyCredits}
+        onOpenChange={setOpenBuyCredits}
+      />
     </header>
   );
 }
