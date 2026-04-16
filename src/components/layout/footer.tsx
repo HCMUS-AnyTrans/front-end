@@ -13,6 +13,10 @@ import {
   type SocialLink,
   type ContactInfo,
 } from '@/data/site';
+import {
+  FOOTER_BOTTOM_LINK_DEFS,
+  FOOTER_NAV_SECTION_DEFS,
+} from '@/data/site-marketing-nav';
 
 export interface NavItem {
   label: string;
@@ -53,7 +57,7 @@ function FooterLinkColumn({ section }: FooterLinkColumnProps) {
       <h4 className="font-semibold text-white mb-4">{section.title}</h4>
       <ul className="space-y-3">
         {section.links.map((link) => (
-          <li key={link.label}>
+          <li key={link.href}>
             <Link
               href={link.href}
               className="text-sm text-[hsl(215,16%,70%)] hover:text-white transition-colors"
@@ -101,54 +105,25 @@ export function Footer({
   const currentYear = new Date().getFullYear();
   const copyrightText = copyright || t('copyright', { year: currentYear });
 
-  // Build footer sections with translations
-  const sections: Record<string, FooterSection> = {
-    product: {
-      title: t('product'),
-      links: [
-        { label: tLinks('features'), href: '#features' },
-        { label: tLinks('pricing'), href: '/pricing' },
-        { label: tLinks('api'), href: '/api' },
-        { label: tLinks('integrations'), href: '/integrations' },
-        { label: tLinks('changelog'), href: '/changelog' },
-      ],
-    },
-    company: {
-      title: t('company'),
-      links: [
-        { label: tLinks('about'), href: '/about' },
-        { label: tLinks('blog'), href: '/blog' },
-        { label: tLinks('careers'), href: '/careers' },
-        { label: tLinks('contact'), href: '/contact' },
-        { label: tLinks('partners'), href: '/partners' },
-      ],
-    },
-    resources: {
-      title: t('resources'),
-      links: [
-        { label: tLinks('documentation'), href: '/docs' },
-        { label: tLinks('guides'), href: '/guides' },
-        { label: tLinks('tutorials'), href: '/tutorials' },
-        { label: tLinks('caseStudies'), href: '/case-studies' },
-        { label: tLinks('support'), href: '/support' },
-      ],
-    },
-    legal: {
-      title: t('legal'),
-      links: [
-        { label: tLinks('terms'), href: '/terms' },
-        { label: tLinks('privacy'), href: '/privacy' },
-        { label: tLinks('cookies'), href: '/cookies' },
-        { label: tLinks('dmca'), href: '/dmca' },
-      ],
-    },
-  };
+  const sections: Record<string, FooterSection> =
+    FOOTER_NAV_SECTION_DEFS.reduce<Record<string, FooterSection>>(
+      (acc, def) => {
+        acc[def.id] = {
+          title: t(def.id),
+          links: def.links.map((link) => ({
+            label: tLinks(link.labelKey),
+            href: link.href,
+          })),
+        };
+        return acc;
+      },
+      {},
+    );
 
-  const bottomLinks: NavItem[] = [
-    { label: tLinks('terms'), href: '/terms' },
-    { label: tLinks('privacy'), href: '/privacy' },
-    { label: tLinks('cookies'), href: '/cookies' },
-  ];
+  const bottomLinks: NavItem[] = FOOTER_BOTTOM_LINK_DEFS.map((link) => ({
+    label: tLinks(link.labelKey),
+    href: link.href,
+  }));
 
   return (
     <footer
@@ -240,7 +215,7 @@ export function Footer({
             <div className="flex items-center gap-6">
               {bottomLinks.map((link) => (
                 <Link
-                  key={link.label}
+                  key={link.href}
                   href={link.href}
                   className="text-sm text-[hsl(215,16%,50%)] hover:text-white transition-colors"
                 >

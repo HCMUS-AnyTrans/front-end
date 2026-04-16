@@ -1,3 +1,3 @@
 // Global Data - Shared across all features
-export * from './navigation';
+export * from './site-marketing-nav';
 export * from './site';

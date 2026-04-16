@@ -1,32 +1,13 @@
-import { use } from "react";
-import { setRequestLocale } from "next-intl/server";
-import {
-  HeroSection,
-  PainPoints,
-  FeaturesSection,
-  HowItWorks,
-  PricingSection,
-  TestimonialsSection,
-  SocialProof,
-} from "@/features/landing";
+import { setRequestLocale } from 'next-intl/server';
+import { LandingPage } from '@/features/landing';
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
-export default function Home({ params }: Props) {
-  const { locale } = use(params);
+export default async function Home({ params }: Props) {
+  const { locale } = await params;
   setRequestLocale(locale);
 
-  return (
-    <>
-      <HeroSection />
-      <SocialProof />
-      <PainPoints />
-      <FeaturesSection />
-      <HowItWorks />
-      <PricingSection />
-      <TestimonialsSection />
-    </>
-  );
+  return <LandingPage />;
 }

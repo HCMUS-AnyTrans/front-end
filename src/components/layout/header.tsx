@@ -1,18 +1,58 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ModeToggle, LanguageSwitcher, UserAvatarMenu, UserMenuList, getUserInitials } from "@/components/shared";
-import { siteConfig } from "@/data/site";
-import { locales } from "@/i18n/routing";
-import { cn } from "@/lib/utils";
-import { useIsAuthenticated, useUser } from "@/features/auth";
+import { useState, useEffect, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
+import { Link, usePathname } from '@/i18n/navigation';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, ChevronRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  ModeToggle,
+  LanguageSwitcher,
+  UserAvatarMenu,
+  UserMenuList,
+  getUserInitials,
+} from '@/components/shared';
+import { siteConfig } from '@/data/site';
+import { locales } from '@/i18n/routing';
+import { cn } from '@/lib/utils';
+import { useIsAuthenticated, useUser } from '@/features/auth';
+import {
+  MARKETING_NAV_ITEMS,
+  MARKETING_SECTION_IDS,
+} from '@/data/site-marketing-nav';
+
+function useActiveSection() {
+  const [activeId, setActiveId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const elements = MARKETING_SECTION_IDS.map((id) =>
+      document.getElementById(id),
+    ).filter(Boolean) as HTMLElement[];
+
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visible.length > 0) {
+          setActiveId(visible[0].target.id);
+        }
+      },
+      { rootMargin: '-20% 0px -60% 0px', threshold: 0 },
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  return activeId;
+}
 
 export interface NavItem {
   label: string;
@@ -39,9 +79,9 @@ export interface HeaderProps {
 }
 
 export function Header({
-  logo = { text: siteConfig.name, icon: "A", href: "/" },
+  logo = { text: siteConfig.name, icon: 'A', href: '/' },
 }: HeaderProps) {
-  const t = useTranslations("marketing.nav");
+  const t = useTranslations('marketing.nav');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -49,55 +89,78 @@ export function Header({
   const isAuthenticated = useIsAuthenticated();
 
   const normalizedPathname = (() => {
-    if (!pathname) return "/";
+    if (!pathname) return '/';
 
     // Strip query/hash defensively (shouldn't exist on pathname but keeps this robust)
-    const raw = pathname.split("#")[0]?.split("?")[0] ?? "/";
+    const raw = pathname.split('#')[0]?.split('?')[0] ?? '/';
 
     // Remove trailing slash (except root)
-    const noTrailing = raw !== "/" ? raw.replace(/\/+$/, "") : "/";
+    const noTrailing = raw !== '/' ? raw.replace(/\/+$/, '') : '/';
 
     // Remove locale prefix when present (e.g. /en/pricing -> /pricing)
-    const parts = noTrailing.split("/").filter(Boolean);
+    const parts = noTrailing.split('/').filter(Boolean);
     const first = parts[0];
     if (first && (locales as readonly string[]).includes(first)) {
-      const rest = parts.slice(1).join("/");
-      return rest ? `/${rest}` : "/";
+      const rest = parts.slice(1).join('/');
+      return rest ? `/${rest}` : '/';
     }
 
     return noTrailing;
   })();
 
-  const isActiveHref = (href: string) => {
-    const normalizedHref = href !== "/" ? href.replace(/\/+$/, "") : "/";
-    if (normalizedHref === "/") return normalizedPathname === "/";
-    return (
-      normalizedPathname === normalizedHref ||
-      normalizedPathname.startsWith(`${normalizedHref}/`)
-    );
-  };
+  const activeSection = useActiveSection();
+
+  const isActiveHref = useCallback(
+    (href: string) => {
+      const hashIdx = href.indexOf('#');
+      if (hashIdx !== -1) {
+        const rawPath = href.slice(0, hashIdx);
+        const normalizedPathPart =
+          !rawPath || rawPath === '/'
+            ? '/'
+            : rawPath.replace(/\/+$/, '') || '/';
+
+        if (normalizedPathname !== normalizedPathPart) {
+          return false;
+        }
+
+        const sectionId = href.slice(hashIdx + 1);
+        return sectionId === activeSection;
+      }
+
+      const hrefWithoutHash = href.split('#')[0] ?? href;
+      const normalizedHref =
+        hrefWithoutHash && hrefWithoutHash !== '/'
+          ? hrefWithoutHash.replace(/\/+$/, '')
+          : '/';
+      if (normalizedHref === '/') return normalizedPathname === '/';
+      return (
+        normalizedPathname === normalizedHref ||
+        normalizedPathname.startsWith(`${normalizedHref}/`)
+      );
+    },
+    [activeSection, normalizedPathname],
+  );
 
   // Build nav items with translations
-  const navItems: NavItem[] = [
-    { label: t("homepage"), href: "/" },
-    { label: t("pricing"), href: "/pricing" },
-    { label: t("about"), href: "/about" },
-    { label: t("contact"), href: "/contact" },
-  ];
+  const navItems: NavItem[] = MARKETING_NAV_ITEMS.map((item) => ({
+    label: t(item.labelKey),
+    href: item.href,
+  }));
 
   const ctaButton = {
-    label: t("getStarted"),
-    href: "/register",
+    label: t('getStarted'),
+    href: '/register',
     showIcon: true,
   };
-  const loginButton = { label: t("login"), href: "/login" };
+  const loginButton = { label: t('login'), href: '/login' };
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -107,15 +170,15 @@ export function Header({
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-background/95 backdrop-blur-md shadow-lg shadow-primary/5 border-b border-border"
-            : "bg-transparent"
+            ? 'bg-background/95 backdrop-blur-md shadow-lg shadow-primary/5 border-b border-border'
+            : 'bg-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <Link
-              href={logo.href || "/"}
+              href={logo.href || '/'}
               className="flex items-center gap-2 group"
             >
               <div className="relative w-10 h-10">
@@ -139,17 +202,19 @@ export function Header({
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "relative px-4 py-2 text-sm font-medium transition-colors group rounded-lg",
+                    'relative px-4 py-2 text-sm font-medium transition-colors group rounded-lg',
                     isActiveHref(item.href)
-                      ? "text-primary"
-                      : "text-foreground hover:text-primary",
+                      ? 'text-primary'
+                      : 'text-foreground hover:text-primary',
                   )}
                 >
                   {item.label}
                   <span
                     className={cn(
-                      "absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-primary transition-all duration-300",
-                      isActiveHref(item.href) ? "w-3/4" : "w-0 group-hover:w-3/4",
+                      'absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-primary transition-all duration-300',
+                      isActiveHref(item.href)
+                        ? 'w-3/4'
+                        : 'w-0 group-hover:w-3/4',
                     )}
                   />
                 </Link>
@@ -165,7 +230,9 @@ export function Header({
               ) : (
                 <>
                   <Button
-                    variant={isActiveHref(loginButton.href) ? "secondary" : "ghost"}
+                    variant={
+                      isActiveHref(loginButton.href) ? 'secondary' : 'ghost'
+                    }
                     asChild
                   >
                     <Link href={loginButton.href}>{loginButton.label}</Link>
@@ -176,7 +243,8 @@ export function Header({
                   >
                     <Button
                       className={cn(
-                        isActiveHref(ctaButton.href) && "ring-2 ring-primary/30",
+                        isActiveHref(ctaButton.href) &&
+                          'ring-2 ring-primary/30',
                       )}
                       asChild
                     >
@@ -185,7 +253,9 @@ export function Header({
                         className="flex items-center gap-1"
                       >
                         {ctaButton.label}
-                        {ctaButton.showIcon && <ChevronRight className="w-4 h-4" />}
+                        {ctaButton.showIcon && (
+                          <ChevronRight className="w-4 h-4" />
+                        )}
                       </Link>
                     </Button>
                   </motion.div>
@@ -231,10 +301,10 @@ export function Header({
                       href={item.href}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={cn(
-                        "block px-4 py-3 rounded-xl transition-colors font-medium",
+                        'block px-4 py-3 rounded-xl transition-colors font-medium',
                         isActiveHref(item.href)
-                          ? "text-primary bg-primary-50 dark:bg-primary-900/40"
-                          : "text-foreground hover:text-primary hover:bg-primary-50 dark:hover:bg-primary-900",
+                          ? 'text-primary bg-primary-50 dark:bg-primary-900/40'
+                          : 'text-foreground hover:text-primary hover:bg-primary-50 dark:hover:bg-primary-900',
                       )}
                     >
                       {item.label}
@@ -251,14 +321,17 @@ export function Header({
                       <div className="flex items-center gap-3 px-4 py-2 mb-1">
                         <Avatar className="h-10 w-10">
                           {user?.avatarUrl && (
-                            <AvatarImage src={user.avatarUrl} alt={user.fullName} />
+                            <AvatarImage
+                              src={user.avatarUrl}
+                              alt={user.fullName}
+                            />
                           )}
                           <AvatarFallback className="bg-primary text-primary-foreground text-sm">
                             {getUserInitials(user)}
                           </AvatarFallback>
                         </Avatar>
                         <span className="font-medium text-foreground truncate">
-                          {user?.fullName ?? user?.email ?? "User"}
+                          {user?.fullName ?? user?.email ?? 'User'}
                         </span>
                       </div>
                       <UserMenuList
@@ -269,7 +342,9 @@ export function Header({
                   ) : (
                     <>
                       <Button
-                        variant={isActiveHref(loginButton.href) ? "secondary" : "ghost"}
+                        variant={
+                          isActiveHref(loginButton.href) ? 'secondary' : 'ghost'
+                        }
                         className="justify-center"
                         asChild
                       >
@@ -277,8 +352,9 @@ export function Header({
                       </Button>
                       <Button
                         className={cn(
-                          "justify-center",
-                          isActiveHref(ctaButton.href) && "ring-2 ring-primary/30",
+                          'justify-center',
+                          isActiveHref(ctaButton.href) &&
+                            'ring-2 ring-primary/30',
                         )}
                         asChild
                       >

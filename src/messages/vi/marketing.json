@@ -331,6 +331,167 @@
       "packagesError": "Không thể tải gói credit lúc này.",
       "retry": "Thử lại"
     },
+    "landing": {
+      "hero": {
+        "badge": "Tài liệu được mã hóa, xử lý nhanh và giữ nguyên bố cục",
+        "title": "Dịch tài liệu chuyên nghiệp.",
+        "titleAccent": "Giữ nguyên định dạng gốc.",
+        "description": "Tải lên DOCX, PPTX hoặc PDF và nhận bản dịch hoàn chỉnh chỉ sau vài phút. Bảng biểu, font chữ, hình ảnh và cấu trúc trang vẫn được giữ ổn định từ đầu đến cuối.",
+        "primaryCta": "Dùng thử miễn phí",
+        "secondaryCta": "Xem bảng giá",
+        "highlights": {
+          "languages": "40+ ngôn ngữ",
+          "retention": "Tự động xóa file sau 24 giờ",
+          "slides": "{count} luồng xử lý minh họa"
+        },
+        "carousel": {
+          "goToSlide": "Chuyển đến slide {index}",
+          "previousSlide": "Xem slide trước",
+          "nextSlide": "Xem slide tiếp theo"
+        }
+      },
+      "benefits": {
+        "eyebrow": "Lý do chọn AnyTrans",
+        "title": "Tối ưu cho tài liệu cần tốc độ, độ chính xác và bố cục ổn định.",
+        "description": "Giảm thao tác dàn trang lại, rút ngắn vòng lặp phê duyệt và giữ trải nghiệm đọc nhất quán trên mọi tài liệu.",
+        "items": {
+          "layout": {
+            "title": "Giữ nguyên định dạng",
+            "description": "Bảng biểu, font chữ, tiêu đề, căn lề và hình ảnh được bảo toàn để bạn không phải dàn trang lại từ đầu."
+          },
+          "speed": {
+            "title": "Dịch trong vài phút",
+            "description": "Chọn ngôn ngữ, gửi file và nhận bản dịch hoàn chỉnh nhanh hơn nhiều so với quy trình thủ công truyền thống."
+          },
+          "security": {
+            "title": "Bảo mật rõ ràng",
+            "description": "Tài liệu được mã hóa trong quá trình xử lý và có cơ chế tự động xóa để hạn chế rủi ro lưu trữ kéo dài."
+          }
+        }
+      },
+      "howItWorks": {
+        "eyebrow": "Quy trình 3 bước",
+        "title": "Bắt đầu nhanh, không cần học lại workflow.",
+        "description": "Ba bước đơn giản: tải file, chọn cặp ngôn ngữ, nhận bản dịch hoàn chỉnh với bố cục ổn định.",
+        "steps": {
+          "upload": {
+            "title": "Tải lên",
+            "description": "Kéo thả file DOCX, PPTX hoặc PDF vào hệ thống và để nền tảng tự nhận diện nội dung."
+          },
+          "selectLanguage": {
+            "title": "Chọn ngôn ngữ",
+            "description": "Thiết lập ngôn ngữ nguồn, ngôn ngữ đích và các ưu tiên xử lý theo tài liệu của bạn."
+          },
+          "download": {
+            "title": "Tải về",
+            "description": "Nhận file đã dịch với bố cục ổn định, sẵn sàng gửi khách hàng hoặc đưa vào workflow nội bộ."
+          }
+        }
+      },
+      "pricing": {
+        "eyebrow": "Bảng giá minh bạch",
+        "title": "Mua credit một lần, dùng khi cần.",
+        "description": "Không subscription, không ràng buộc dài hạn. Chọn gói phù hợp với khối lượng tài liệu của bạn.",
+        "popular": "Phổ biến nhất",
+        "credits": "credits",
+        "bonusCredits": "+{credits} bonus",
+        "buyNow": "Mua ngay",
+        "plans": {
+          "starter": {
+            "name": "Starter",
+            "features": [
+              "20 credits",
+              "DOCX và PDF",
+              "10 ngôn ngữ",
+              "Hỗ trợ qua email"
+            ]
+          },
+          "vip": {
+            "name": "VIP",
+            "discount": "Tiết kiệm 10%",
+            "features": [
+              "50 + 5 bonus credits",
+              "Tất cả định dạng file",
+              "40+ ngôn ngữ",
+              "Ưu tiên giữ layout",
+              "Hỗ trợ nhanh hơn"
+            ]
+          },
+          "business": {
+            "name": "Business",
+            "discount": "Tiết kiệm 30%",
+            "features": [
+              "200 + 30 bonus credits",
+              "Tất cả định dạng file",
+              "Tối ưu cho tài liệu số lượng lớn",
+              "Truy cập API",
+              "Hỗ trợ account riêng"
+            ]
+          }
+        }
+      },
+      "faq": {
+        "eyebrow": "Câu hỏi thường gặp",
+        "title": "Giải đáp nhanh trước khi bạn bắt đầu.",
+        "items": {
+          "supportedFormats": {
+            "question": "Hỗ trợ những định dạng file nào?",
+            "answer": "Hiện tại nền tảng hỗ trợ DOCX, PPTX và PDF. Các định dạng phổ biến khác sẽ tiếp tục được bổ sung theo nhu cầu sử dụng."
+          },
+          "formatRetention": {
+            "question": "Định dạng gốc có được giữ nguyên không?",
+            "answer": "Có. Bảng biểu, heading, font chữ và cấu trúc tài liệu được ưu tiên bảo toàn để giảm tối đa công đoạn chỉnh sửa lại sau dịch."
+          },
+          "turnaroundTime": {
+            "question": "Mất bao lâu để hoàn thành một bản dịch?",
+            "answer": "Phần lớn tài liệu phổ thông được xử lý trong khoảng 2-5 phút. Với file dài hoặc nhiều trang trình bày, thời gian có thể lâu hơn."
+          },
+          "creditExpiry": {
+            "question": "Credit có hết hạn không?",
+            "answer": "Không. Credit đã mua vẫn có thể dùng bất kỳ lúc nào nên bạn không cần lo lắng về việc bị trôi hạn sử dụng."
+          }
+        }
+      },
+      "cta": {
+        "eyebrow": "Sẵn sàng bắt đầu",
+        "title": "Dịch tài liệu ngay hôm nay và giữ trọn định dạng gốc.",
+        "description": "Bắt đầu bằng gói dùng thử hoặc chuyển thẳng sang gói credit phù hợp nếu bạn đã có nhu cầu rõ ràng.",
+        "primaryCta": "Dùng thử miễn phí",
+        "secondaryCta": "Xem bảng giá"
+      },
+      "previewSlides": {
+        "uploadPreview": {
+          "eyebrow": "Tải lên trong vài giây",
+          "title": "Kéo thả tài liệu và chọn cặp ngôn ngữ ngay trên một màn hình.",
+          "description": "Quy trình được thiết kế gọn, rõ và phù hợp cho cả đội vận hành lẫn người dùng cá nhân.",
+          "highlights": [
+            "DOCX, PPTX, PDF",
+            "Nhận diện ngôn ngữ tự động",
+            "Theo dõi tiến độ theo từng bước"
+          ]
+        },
+        "reviewPreview": {
+          "eyebrow": "So sánh trực quan",
+          "title": "Bản gốc và bản dịch được giữ song song để kiểm tra nhanh độ chính xác.",
+          "description": "Bạn có thể nhìn thấy cấu trúc heading, bảng biểu và nhịp nội dung trước khi tải file cuối cùng.",
+          "highlights": [
+            "Bố cục hai cột",
+            "Giữ nguyên format",
+            "Dễ kiểm tra trước khi xuất"
+          ]
+        },
+        "deliveryPreview": {
+          "eyebrow": "Xuất bản dịch hoàn chỉnh",
+          "title": "Nhận file đã dịch với định dạng gần như nguyên vẹn và sẵn sàng chia sẻ.",
+          "description": "Phù hợp cho hợp đồng, proposal, slide thuyết trình và các tài liệu nhiều bố cục phức tạp.",
+          "highlights": [
+            "Tải xuống một chạm",
+            "Bảo toàn hình ảnh",
+            "Hỗ trợ tài liệu dài"
+          ]
+        }
+      }
+    },
     "testimonials": {
       "title": "Khách hàng nói gì",
       "subtitle": "Hàng ngàn khách hàng tin tưởng sử dụng"
