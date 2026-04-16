@@ -107,7 +107,7 @@ export function StepUpload({
         className={cn(
           'relative overflow-hidden rounded-2xl border-2 transition-all duration-200',
           isDragging
-            ? 'border-primary bg-primary/5 shadow-[0_0_0_4px_hsl(var(--primary)/0.12)]'
+            ? 'border-primary bg-primary/5 shadow-[0_0_0_4px_var(--ring-glow)]'
             : file
               ? 'border-border bg-card'
               : 'border-dashed border-border bg-card hover:border-primary/50 hover:bg-primary/2',
@@ -118,7 +118,7 @@ export function StepUpload({
         onDragLeave={handleDragLeave}
       >
         {!file && (
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,hsl(var(--primary)/0.08),transparent)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,var(--primary-faint),transparent)]" />
         )}
 
         {!file ? (

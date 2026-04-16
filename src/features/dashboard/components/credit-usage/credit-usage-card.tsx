@@ -123,7 +123,7 @@ export function CreditUsageCard() {
               innerRadius={isMobile ? 24 : 28}
               outerRadius={isMobile ? 40 : 48}
               strokeWidth={2}
-              stroke="hsl(var(--background))"
+              stroke="var(--background)"
             >
               {creditUsageData.map((entry) => (
                 <Cell key={entry.name} fill={entry.fill} />

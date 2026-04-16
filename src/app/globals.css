@@ -1,15 +1,34 @@
+/* ============================================================================
+   Design System Entry Point
+   ============================================================================ */
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import './styles/phone-input.css';
+@import './styles/scrollbar.css';
+@import './styles/utilities.css';
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================================================
+   Tailwind Theme
+   Maps semantic custom properties → Tailwind utility classes
+   ============================================================================ */
 @theme inline {
+  /* ── Typography ── */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
+  /* ── Core surfaces & text ── */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
 
+  /* ── Brand: primary (hue 260) ── */
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary-50: var(--primary-50);
@@ -22,7 +41,9 @@
   --color-primary-700: var(--primary-700);
   --color-primary-800: var(--primary-800);
   --color-primary-900: var(--primary-900);
+  --color-primary-950: var(--primary-950);
 
+  /* ── Brand: secondary (hue 75 — amber/gold) ── */
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary-50: var(--secondary-50);
@@ -36,6 +57,7 @@
   --color-secondary-800: var(--secondary-800);
   --color-secondary-900: var(--secondary-900);
 
+  /* ── Brand: accent (hue 220 — cyan/blue) ── */
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent-50: var(--accent-50);
@@ -49,38 +71,37 @@
   --color-accent-800: var(--accent-800);
   --color-accent-900: var(--accent-900);
 
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-
+  /* ── Feedback / status ── */
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
+  --color-success-200: var(--success-200);
+  --color-success-800: var(--success-800);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
 
+  /* ── Borders & interactive ── */
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset: var(--ring-offset);
 
+  /* ── Utility ── */
   --color-overlay: var(--overlay);
   --color-disabled: var(--disabled);
   --color-disabled-foreground: var(--disabled-foreground);
 
+  /* ── Data visualization ── */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
+  /* ── Sidebar ── */
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -90,6 +111,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  /* ── Radius scale ── */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -99,12 +121,17 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
+/* ============================================================================
+   Light Mode Tokens
+   ============================================================================ */
 :root {
+  /* ── Layout ── */
   --radius: 0.75rem;
   --dashboard-header-height: clamp(48px, calc(56 * 100vw / 1920), 56px);
   --dashboard-sidebar-width: clamp(208px, calc(260 * 100vw / 1920), 260px);
   --dashboard-content-margin: clamp(24px, calc(230 * 100vw / 1920), 230px);
 
+  /* ── Brand: primary (hue 260) ── */
   --primary: oklch(0.4 0.15 260);
   --primary-foreground: oklch(0.98 0.01 260);
   --primary-50: oklch(0.98 0.01 260);
@@ -117,7 +144,9 @@
   --primary-700: oklch(0.38 0.14 260);
   --primary-800: oklch(0.3 0.12 260);
   --primary-900: oklch(0.22 0.1 260);
+  --primary-950: oklch(0.16 0.08 260);
 
+  /* ── Brand: secondary (hue 75 — amber/gold) ── */
   --secondary: oklch(0.8 0.16 75);
   --secondary-foreground: oklch(0.25 0.05 75);
   --secondary-50: oklch(0.98 0.02 75);
@@ -131,6 +160,7 @@
   --secondary-800: oklch(0.5 0.12 75);
   --secondary-900: oklch(0.4 0.1 75);
 
+  /* ── Brand: accent (hue 220 — cyan/blue) ── */
   --accent: oklch(0.7 0.14 220);
   --accent-foreground: oklch(0.15 0.03 220);
   --accent-50: oklch(0.98 0.01 220);
@@ -144,46 +174,47 @@
   --accent-800: oklch(0.38 0.1 220);
   --accent-900: oklch(0.28 0.08 220);
 
+  /* ── Surfaces ── */
   --background: oklch(1 0 0);
   --foreground: oklch(0.2 0.05 260);
-
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.2 0.05 260);
-
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.2 0.05 260);
-
   --muted: oklch(0.96 0.01 260);
   --muted-foreground: oklch(0.5 0.02 260);
 
+  /* ── Borders & interactive ── */
   --border: oklch(0.92 0.01 260);
   --input: oklch(0.92 0.01 260);
-
-  --destructive: oklch(0.6 0.22 25);
-  --destructive-foreground: oklch(1 0 0);
-
-  --success: oklch(0.55 0.16 145);
-  --success-foreground: oklch(1 0 0);
-
-  --warning: oklch(0.8 0.16 75);
-  --warning-foreground: oklch(0.25 0.05 75);
-
-  --info: oklch(0.65 0.14 220);
-  --info-foreground: oklch(1 0 0);
-
   --ring: oklch(0.4 0.15 260);
   --ring-offset: oklch(1 0 0);
 
+  /* ── Feedback / status ── */
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.55 0.16 145);
+  --success-foreground: oklch(1 0 0);
+  --success-200: oklch(0.88 0.08 145);
+  --success-800: oklch(0.32 0.1 145);
+  --warning: oklch(0.8 0.16 75);
+  --warning-foreground: oklch(0.25 0.05 75);
+  --info: oklch(0.65 0.14 220);
+  --info-foreground: oklch(1 0 0);
+
+  /* ── Utility ── */
   --overlay: oklch(0 0 0 / 50%);
   --disabled: oklch(0.92 0.01 260);
   --disabled-foreground: oklch(0.55 0.02 260);
 
+  /* ── Data visualization ── */
   --chart-1: oklch(0.4 0.15 260);
   --chart-2: oklch(0.8 0.16 75);
   --chart-3: oklch(0.7 0.14 220);
   --chart-4: oklch(0.55 0.16 145);
   --chart-5: oklch(0.6 0.22 25);
 
+  /* ── Sidebar ── */
   --sidebar: oklch(0.985 0.006 260);
   --sidebar-foreground: oklch(0.28 0.04 260);
   --sidebar-primary: oklch(0.45 0.15 260);
@@ -192,9 +223,25 @@
   --sidebar-accent-foreground: oklch(0.42 0.12 260);
   --sidebar-border: oklch(0.9 0.015 260);
   --sidebar-ring: oklch(0.52 0.14 260);
+
+  /* ── Alpha / mix helpers (resolved colors for safe composition) ── */
+  --ring-glow: color-mix(in oklch, var(--primary) 12%, transparent);
+  --primary-faint: color-mix(in oklch, var(--primary) 8%, transparent);
+  --scrollbar-thumb: color-mix(in oklch, var(--primary-400) 40%, transparent);
+  --scrollbar-thumb-hover: color-mix(
+    in oklch,
+    var(--primary-500) 60%,
+    transparent
+  );
 }
 
+/* ============================================================================
+   Dark Mode Tokens
+   Scale note: numeric ramps are inverted — lower numbers are darker in dark
+   mode so that e.g. `bg-primary-50` always means "subtle tint".
+   ============================================================================ */
 .dark {
+  /* ── Brand: primary (hue 260) ── */
   --primary: oklch(0.7 0.12 260);
   --primary-foreground: oklch(0.15 0.05 260);
   --primary-50: oklch(0.2 0.04 260);
@@ -207,7 +254,9 @@
   --primary-700: oklch(0.78 0.1 260);
   --primary-800: oklch(0.85 0.08 260);
   --primary-900: oklch(0.92 0.05 260);
+  --primary-950: oklch(0.96 0.03 260);
 
+  /* ── Brand: secondary (hue 75) ── */
   --secondary: oklch(0.8 0.14 75);
   --secondary-foreground: oklch(0.18 0.04 75);
   --secondary-50: oklch(0.22 0.04 75);
@@ -221,6 +270,7 @@
   --secondary-800: oklch(0.88 0.08 75);
   --secondary-900: oklch(0.94 0.04 75);
 
+  /* ── Brand: accent (hue 220) ── */
   --accent: oklch(0.75 0.12 220);
   --accent-foreground: oklch(0.15 0.04 220);
   --accent-50: oklch(0.2 0.03 220);
@@ -234,56 +284,70 @@
   --accent-800: oklch(0.86 0.07 220);
   --accent-900: oklch(0.93 0.04 220);
 
-  --background: oklch(0.15 0.02 260);
+  /* ── Surfaces (widened hierarchy: bg < sidebar < card < muted) ── */
+  --background: oklch(0.13 0.02 260);
   --foreground: oklch(0.95 0.01 260);
-
-  --card: oklch(0.2 0.03 260);
+  --card: oklch(0.19 0.03 260);
   --card-foreground: oklch(0.95 0.01 260);
-
-  --popover: oklch(0.2 0.03 260);
+  --popover: oklch(0.19 0.03 260);
   --popover-foreground: oklch(0.95 0.01 260);
-
   --muted: oklch(0.25 0.02 260);
   --muted-foreground: oklch(0.65 0.02 260);
 
+  /* ── Borders & interactive ── */
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.7 0.12 260);
+  --ring-offset: oklch(0.13 0.02 260);
 
+  /* ── Feedback / status ── */
   --destructive: oklch(0.65 0.2 25);
   --destructive-foreground: oklch(1 0 0);
-
   --success: oklch(0.65 0.14 145);
   --success-foreground: oklch(0.15 0.04 145);
-
+  --success-200: oklch(0.32 0.06 145);
+  --success-800: oklch(0.82 0.08 145);
   --warning: oklch(0.8 0.14 75);
   --warning-foreground: oklch(0.18 0.04 75);
-
   --info: oklch(0.72 0.12 220);
   --info-foreground: oklch(0.15 0.04 220);
 
-  --ring: oklch(0.7 0.12 260);
-  --ring-offset: oklch(0.15 0.02 260);
-
+  /* ── Utility ── */
   --overlay: oklch(0 0 0 / 70%);
   --disabled: oklch(0.25 0.02 260);
   --disabled-foreground: oklch(0.5 0.02 260);
 
+  /* ── Data visualization ── */
   --chart-1: oklch(0.7 0.12 260);
   --chart-2: oklch(0.8 0.14 75);
   --chart-3: oklch(0.75 0.12 220);
   --chart-4: oklch(0.65 0.14 145);
   --chart-5: oklch(0.65 0.2 25);
 
-  --sidebar: oklch(0.19 0.03 260);
+  /* ── Sidebar ── */
+  --sidebar: oklch(0.16 0.025 260);
   --sidebar-foreground: oklch(0.93 0.02 260);
   --sidebar-primary: oklch(0.74 0.11 260);
-  --sidebar-primary-foreground: oklch(0.19 0.03 260);
-  --sidebar-accent: oklch(0.28 0.04 260);
+  --sidebar-primary-foreground: oklch(0.16 0.025 260);
+  --sidebar-accent: oklch(0.26 0.04 260);
   --sidebar-accent-foreground: oklch(0.84 0.06 260);
   --sidebar-border: oklch(1 0 0 / 14%);
   --sidebar-ring: oklch(0.74 0.11 260);
+
+  /* ── Alpha / mix helpers ── */
+  --ring-glow: color-mix(in oklch, var(--primary) 12%, transparent);
+  --primary-faint: color-mix(in oklch, var(--primary) 8%, transparent);
+  --scrollbar-thumb: color-mix(in oklch, var(--primary-400) 50%, transparent);
+  --scrollbar-thumb-hover: color-mix(
+    in oklch,
+    var(--primary-300) 70%,
+    transparent
+  );
 }
 
+/* ============================================================================
+   Base Layer
+   ============================================================================ */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -296,179 +360,4 @@
   .heading-serif-scope h2 {
     font-family: var(--font-playfair-display), serif !important;
   }
-}
-
-/* ============================================================================
-   Phone Input with Country Selector - Custom Styles
-   Matches FloatingLabelInput design system
-   ============================================================================ */
-
-/* Container */
-.phone-input-container {
-  @apply relative w-full;
-}
-
-/* Main wrapper - match FloatingLabelInput h-14, full width like other inputs */
-.phone-input-container .PhoneInput {
-  @apply relative flex items-center w-full min-w-0 h-14 rounded-md border border-border bg-transparent dark:bg-input/30 shadow-xs;
-  @apply transition-all duration-200;
-}
-
-/* Focus state */
-.phone-input-container .PhoneInput:focus-within {
-  @apply border-primary ring-[3px] ring-ring/50;
-}
-
-/* Error state */
-.phone-input-error .PhoneInput {
-  @apply border-destructive;
-}
-
-.phone-input-error .PhoneInput:focus-within {
-  @apply border-destructive ring-destructive/20;
-}
-
-/* Disabled state */
-.phone-input-disabled .PhoneInput {
-  @apply opacity-50 cursor-not-allowed;
-}
-
-/* Country selector button — now handled by custom CountrySelect component */
-.phone-input-container .PhoneInputCountry {
-  @apply relative flex items-center justify-center h-full;
-}
-
-/* Country flag inside custom trigger */
-.phone-input-container .PhoneInputCountryIcon {
-  @apply w-6 h-4 rounded-sm overflow-hidden;
-}
-
-/* Country flag SVG/image */
-.phone-input-container .PhoneInputCountryIconImg {
-  @apply w-full h-full object-cover;
-}
-
-/* Phone number input field */
-.phone-input-container .PhoneInputInput {
-  @apply flex-1 h-full bg-transparent outline-none;
-  @apply text-base md:text-sm text-foreground;
-  @apply pl-4 pr-4 pt-5 pb-2;
-}
-
-.phone-input-container .PhoneInputInput::placeholder {
-  @apply text-transparent;
-}
-
-/* Remove default focus outline from input */
-.phone-input-container .PhoneInputInput:focus {
-  outline: none;
-}
-
-/* Ensure country code text has proper spacing */
-.phone-input-container .PhoneInputCountryCallingCode {
-  @apply ml-1 text-foreground;
-}
-
-/* Custom country select dropdown list scrollbar */
-.country-select-list::-webkit-scrollbar {
-  width: 4px;
-}
-.country-select-list::-webkit-scrollbar-track {
-  @apply bg-transparent;
-}
-.country-select-list::-webkit-scrollbar-thumb {
-  @apply bg-border rounded-full;
-}
-.country-select-list::-webkit-scrollbar-thumb:hover {
-  @apply bg-muted-foreground/30;
-}
-
-/* ============================================================================
-   CUSTOM SCROLLBAR
-   Thin & subtle style using primary color from design system
-   ============================================================================ */
-
-/* Webkit browsers (Chrome, Edge, Safari) */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: oklch(var(--primary-400) / 0.4);
-  border-radius: 9999px;
-  transition: background 0.2s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: oklch(var(--primary-500) / 0.6);
-}
-
-::-webkit-scrollbar-corner {
-  background: transparent;
-}
-
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: oklch(var(--primary-400) / 0.4) transparent;
-}
-
-/* Dark mode - slightly brighter for visibility */
-.dark ::-webkit-scrollbar-thumb {
-  background: oklch(var(--primary-400) / 0.5);
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: oklch(var(--primary-300) / 0.7);
-}
-
-.dark * {
-  scrollbar-color: oklch(var(--primary-400) / 0.5) transparent;
-}
-
-/* ============================================================================
-   INDETERMINATE PROGRESS BAR ANIMATION
-   Used by document translation progress indicator
-   ============================================================================ */
-
-@keyframes indeterminate {
-  0% {
-    left: -33%;
-  }
-  100% {
-    left: 100%;
-  }
-}
-
-/* ============================================================================
-   SMOOTH SCROLL BEHAVIOR
-   ============================================================================ */
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* Respect user preference for reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* Hide default password reveal button in Microsoft Edge */
-input[type='password']::-ms-reveal {
-  display: none;
 }
