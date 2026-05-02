@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { loginApi } from '../api/auth.api';
-import { useAuthStore } from '../store/auth.store';
+import { useAuthActions } from '../store/auth.store';
 import { getErrorMessage } from '@/lib/api-error';
 import { authKeys } from '@/lib/query-client';
 import type { LoginDto, AuthResponse } from '../types';
@@ -22,7 +22,7 @@ interface UseLoginOptions {
 export function useLogin(options?: UseLoginOptions) {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { setAuth } = useAuthStore();
+  const { setAuth } = useAuthActions();
   const { redirectTo = '/dashboard', onSuccess, onError } = options || {};
 
   const mutation = useMutation({

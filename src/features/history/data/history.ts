@@ -2,6 +2,7 @@ import {
   HISTORY_DOMAIN_FILTER_OPTIONS,
   type HistoryDomainFilterValue,
 } from '@/shared/constants/domains';
+import { JOB_STATUS_VALUES } from '@/shared/data';
 
 // ============================================================================
 // History Page Constants
@@ -9,13 +10,7 @@ import {
 
 export const ITEMS_PER_PAGE = 10;
 
-export const STATUS_OPTIONS = [
-  'all',
-  'pending',
-  'processing',
-  'succeeded',
-  'failed',
-] as const;
+export const STATUS_OPTIONS = ['all', ...JOB_STATUS_VALUES] as const;
 
 export type StatusFilterValue = (typeof STATUS_OPTIONS)[number];
 
@@ -27,8 +22,4 @@ export type DomainFilterValue = HistoryDomainFilterValue;
 // Helpers
 // ============================================================================
 
-export function formatFileSize(bytes: number): string {
-  if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-}
+export { formatHistoryFileSize as formatFileSize } from '../utils/history-display';

@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addTermApi } from '../api/glossary.api';
+import { addTermApi } from '../api';
 import { glossaryKeys } from '@/lib/query-client';
 import { getErrorMessage } from '@/lib/api-error';
 import type {
@@ -120,7 +120,7 @@ export function useAddTerm(options?: UseAddTermOptions) {
       onError?.(message);
     },
 
-    onSuccess: (data, variables) => {
+    onSuccess: (data) => {
       onSuccess?.(data);
     },
 

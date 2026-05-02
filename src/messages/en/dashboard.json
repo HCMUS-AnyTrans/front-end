@@ -29,6 +29,9 @@
       "totalJobs": "Total Jobs",
       "processing": "Processing",
       "completedThisMonth": "Completed This Month",
+      "loadErrorTitle": "Unable to load stats",
+      "loadErrorDescription": "Something went wrong while loading the overview data. Please try again.",
+      "retry": "Retry",
       "vsLastMonth": "vs last month",
       "vsYesterday": "vs yesterday",
       "documentsCount": "{docs} Documents",
@@ -70,21 +73,8 @@
       "files": "Files",
       "activity": "Activity"
     },
-    "buyCreditsDialog": {
-      "title": "Buy Credits",
-      "description": "Current balance: {balance} credits. Select a package to continue checkout.",
-      "bestValue": "Best value",
-      "popular": "Popular",
-      "bonusCredits": "+{credits} bonus credits",
-      "credits": "credits",
-      "perCredit": "credit",
-      "cancel": "Cancel",
-      "viewPricing": "View pricing page",
-      "loadError": "Unable to load credit packages right now.",
-      "retry": "Try again",
-      "empty": "No credit packages are currently available."
-    },
     "paymentBanner": {
+      "title": "Payment status",
       "success": "Payment successful. Your credit balance has been updated.",
       "error": "Payment failed or was cancelled. Please try again.",
       "pending": "Payment is being processed. Please check again shortly.",
@@ -103,6 +93,9 @@
     "recentJobs": {
       "title": "Recent Jobs",
       "noJobs": "No information yet",
+      "loadErrorTitle": "Unable to load recent jobs",
+      "loadErrorDescription": "Something went wrong while loading recent translation jobs. Please try again.",
+      "retry": "Retry",
       "viewAll": "View all",
       "fileName": "File Name",
       "type": "Type",
@@ -118,6 +111,9 @@
     "storage": {
       "title": "Storage",
       "remaining": "{value} MB remaining",
+      "loadErrorTitle": "Unable to load storage data",
+      "loadErrorDescription": "Something went wrong while loading storage information. Please try again.",
+      "retry": "Retry",
       "creditUsageTitle": "Credit Usage",
       "noUsageInfo": "No credit usage information yet",
       "documents": "Documents",
@@ -126,6 +122,9 @@
     "charts": {
       "jobsByDay": "Activity Overview",
       "creditAllocation": "Credit Allocation",
+      "loadErrorTitle": "Unable to load chart",
+      "loadErrorDescription": "Something went wrong while loading chart data. Please try again.",
+      "retry": "Retry",
       "noUsageInfo": "No credit usage information yet",
       "documents": "Documents",
       "remaining": "Remaining"

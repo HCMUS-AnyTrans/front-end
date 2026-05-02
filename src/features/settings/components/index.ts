@@ -1,16 +1,29 @@
-// Layout & Structure
-export { SettingsLayout, SettingsTabContent } from './settings-layout';
+// Shared
 export {
+  SettingsLayout,
+  SettingsTabContent,
   SettingsSection,
   SettingsRow,
   SettingsDivider,
-} from './settings-section';
+} from './shared';
 
-// Tab Components
-export { ProfileTab } from './profile-tab';
-export { PreferencesTab } from './preferences-tab';
-export { SecurityTab } from './security-tab';
-export { NotificationsTab } from './notifications-tab';
-export { BillingTab } from './billing-tab';
-export { FilesTab } from './files-tab';
-export { ActivityTab } from './activity-tab';
+// Profile
+export { ProfileTab } from './profile';
+
+// Preferences
+export { PreferencesTab } from './preferences';
+
+// Security
+export { SecurityTab } from './security';
+
+// Notifications
+export { NotificationsTab } from './notifications';
+
+// Billing
+export { BillingTab } from './billing';
+
+// Files
+export { FilesTab } from './files';
+
+// Activity
+export { ActivityTab } from './activity';

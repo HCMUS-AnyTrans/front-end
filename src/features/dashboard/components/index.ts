@@ -9,18 +9,16 @@ export {
 } from './dashboard-card';
 
 // Stats components
-export { StatsCards } from './stats-cards';
-export { CreditUsageChart } from './credit-usage-chart';
-export { JobsChart } from './jobs-chart';
-export { StorageUsage } from './storage-usage';
-export { UsagePanel } from './usage-panel';
+export { StatsCards } from './stats-cards/stats-cards';
+export { JobsChart } from './jobs-chart/jobs-chart';
+export { CreditUsageCard } from './credit-usage/credit-usage-card';
+export { StorageUsageCard } from './storage-usage/storage-usage-card';
 
 // Tables
-export { RecentJobsTable } from './recent-jobs-table';
+export { RecentJobsTable } from './recent-jobs/recent-jobs-table';
 export { NotificationBell } from './notification-bell';
 
 // Widgets
 export { QuickActions } from './quick-actions';
-export { BuyCreditsDialog } from './buy-credits-dialog';
 export { PaymentStatusBanner } from './payment-status-banner';
 export { CommandPalette } from './command-palette';

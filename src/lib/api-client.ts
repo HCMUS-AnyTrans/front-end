@@ -171,7 +171,10 @@ apiClient.interceptors.response.use(
 
       if (isAuthEndpoint) {
         // Don't clear auth state for login failures (user might just have wrong credentials)
-        if (!originalRequest.url?.includes('/auth/login')) {
+        // and avoid race-driven logout when another refresh already set a new token.
+        const shouldClearAuth =
+          !originalRequest.url?.includes('/auth/login') && !getAccessToken();
+        if (shouldClearAuth) {
           clearAuthState();
         }
         // Transform to ApiError format before rejecting
@@ -230,10 +233,14 @@ apiClient.interceptors.response.use(
       } catch (refreshError) {
         // Refresh failed - clear auth state and redirect to login
         processQueue(refreshError as Error, null);
-        clearAuthState();
+        const hasRecoveredToken = !!getAccessToken();
+
+        if (!hasRecoveredToken) {
+          clearAuthState();
+        }
 
         // Redirect to login (only in browser)
-        if (typeof window !== 'undefined') {
+        if (typeof window !== 'undefined' && !hasRecoveredToken) {
           const currentPath = window.location.pathname;
           if (!currentPath.includes('/login') && !isPublicPath(currentPath)) {
             window.location.href = `/login?redirect=${encodeURIComponent(currentPath)}`;

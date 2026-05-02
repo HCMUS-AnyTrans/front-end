@@ -3,14 +3,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { getCreditsChartApi } from '../api/dashboard.api';
 import { dashboardKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type { CreditsChartQuery } from '../types';
 
 /**
  * Hook to fetch credit usage breakdown
  */
 export function useCreditsChart(query?: CreditsChartQuery) {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: dashboardKeys.creditsChart(query),

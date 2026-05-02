@@ -1,0 +1,72 @@
+/* ============================================================================
+   Phone Input with Country Selector
+   Matches FloatingLabelInput design system
+   ============================================================================ */
+
+.phone-input-container {
+  @apply relative w-full;
+}
+
+.phone-input-container .PhoneInput {
+  @apply relative flex items-center w-full min-w-0 h-14 rounded-md border border-border bg-transparent dark:bg-input/30 shadow-xs;
+  @apply transition-all duration-200;
+}
+
+.phone-input-container .PhoneInput:focus-within {
+  @apply border-primary ring-[3px] ring-ring/50;
+}
+
+.phone-input-error .PhoneInput {
+  @apply border-destructive;
+}
+
+.phone-input-error .PhoneInput:focus-within {
+  @apply border-destructive ring-destructive/20;
+}
+
+.phone-input-disabled .PhoneInput {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.phone-input-container .PhoneInputCountry {
+  @apply relative flex items-center justify-center h-full;
+}
+
+.phone-input-container .PhoneInputCountryIcon {
+  @apply w-6 h-4 rounded-sm overflow-hidden;
+}
+
+.phone-input-container .PhoneInputCountryIconImg {
+  @apply w-full h-full object-cover;
+}
+
+.phone-input-container .PhoneInputInput {
+  @apply flex-1 h-full bg-transparent outline-none;
+  @apply text-base md:text-sm text-foreground;
+  @apply pl-4 pr-4 pt-5 pb-2;
+}
+
+.phone-input-container .PhoneInputInput::placeholder {
+  @apply text-transparent;
+}
+
+.phone-input-container .PhoneInputInput:focus {
+  outline: none;
+}
+
+.phone-input-container .PhoneInputCountryCallingCode {
+  @apply ml-1 text-foreground;
+}
+
+.country-select-list::-webkit-scrollbar {
+  width: 4px;
+}
+.country-select-list::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+.country-select-list::-webkit-scrollbar-thumb {
+  @apply bg-border rounded-full;
+}
+.country-select-list::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/30;
+}

@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter, usePathname } from 'next/navigation';
 import { logoutApi } from '../api/auth.api';
-import { useAuthStore } from '../store/auth.store';
+import { useAuthActions } from '../store/auth.store';
 import { getErrorMessage } from '@/lib/api-error';
 import type { MessageResponse } from '../types';
 
@@ -31,7 +31,7 @@ export function useLogout(options?: UseLogoutOptions) {
   const router = useRouter();
   const pathname = usePathname();
   const queryClient = useQueryClient();
-  const { clearAuth } = useAuthStore();
+  const { clearAuth } = useAuthActions();
   const { onSuccess, onError, redirectTo = '/' } = options || {};
 
   const handleRedirect = () => {

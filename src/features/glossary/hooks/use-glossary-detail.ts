@@ -1,16 +1,17 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { getGlossaryApi } from '../api/glossary.api';
+import { getGlossaryApi } from '../api';
 import { glossaryKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 
 /**
  * Hook to fetch a single glossary with its first 50 terms.
  * Pass glossaryId to enable the query; pass null/undefined to disable.
  */
 export function useGlossaryDetail(glossaryId: string | null | undefined) {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: glossaryKeys.detail(glossaryId!),

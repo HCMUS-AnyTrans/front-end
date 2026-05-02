@@ -4,7 +4,9 @@ import { useState } from "react"
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
 import { AppSidebar, DashboardHeader } from "@/features/dashboard"
 import { ProtectedRoute } from "@/features/auth"
+import { useDomains } from '@/features/domains'
 import { TranslationSocketProvider } from "@/features/documents/components/translation-socket-provider"
+import { GlossarySocketProvider } from "@/features/glossary"
 
 function getSidebarDefaultOpen(): boolean {
   if (typeof document === "undefined") return true
@@ -20,9 +22,12 @@ export default function DashboardLayout({
 }) {
   const [defaultOpen] = useState(getSidebarDefaultOpen)
 
+  useDomains()
+
   return (
     <ProtectedRoute>
       <TranslationSocketProvider />
+      <GlossarySocketProvider />
       <SidebarProvider defaultOpen={defaultOpen}>
         <DashboardHeader />
         <AppSidebar />

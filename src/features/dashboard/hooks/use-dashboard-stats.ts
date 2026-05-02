@@ -3,14 +3,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { getDashboardStatsApi } from '../api/dashboard.api';
 import { dashboardKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type { DashboardStatsQuery } from '../types';
-
 /**
  * Hook to fetch dashboard statistics overview
  */
 export function useDashboardStats(query?: DashboardStatsQuery) {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: dashboardKeys.stats(query),

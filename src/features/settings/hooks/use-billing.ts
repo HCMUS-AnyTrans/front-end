@@ -11,21 +11,24 @@ import {
   getWalletLedgerApi,
   getCreditPackagesApi,
   getPaymentsApi,
-  createVnpayPaymentApi,
-} from '../api/settings.api';
+  createPaymentApi,
+  markPaymentCancelledApi,
+} from '../api';
 import { walletKeys, billingKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type {
   LedgerQuery,
   PaymentsQuery,
-  CreateVnpayPaymentDto,
+  CreatePaymentDto,
+  MarkPaymentCancelledDto,
 } from '../types';
 
 /**
  * Hook to fetch wallet balance
  */
 export function useWallet() {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: walletKeys.balance(),
@@ -49,7 +52,8 @@ export function useWallet() {
  * Hook to fetch wallet ledger (transaction history)
  */
 export function useWalletLedger(query?: LedgerQuery) {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: billingKeys.ledger(query),
@@ -97,7 +101,8 @@ export function useCreditPackages() {
  * Hook to fetch payment history
  */
 export function usePayments(query?: PaymentsQuery) {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: billingKeys.payments(query),
@@ -120,13 +125,13 @@ export function usePayments(query?: PaymentsQuery) {
 }
 
 /**
- * Hook to create a VNPay payment
+ * Hook to create a payment link
  */
-export function useCreateVnpayPayment() {
+export function useCreatePayment() {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: (dto: CreateVnpayPaymentDto) => createVnpayPaymentApi(dto),
+    mutationFn: (dto: CreatePaymentDto) => createPaymentApi(dto),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: billingKeys.payments() });
     },
@@ -136,6 +141,30 @@ export function useCreateVnpayPayment() {
     createPayment: mutation.mutate,
     createPaymentAsync: mutation.mutateAsync,
     isCreating: mutation.isPending,
+    isError: mutation.isError,
+    error: mutation.error,
+    data: mutation.data,
+  };
+}
+
+/**
+ * Hook to mark a payment as cancelled by gateway order code
+ */
+export function useMarkPaymentCancelled() {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (dto: MarkPaymentCancelledDto) => markPaymentCancelledApi(dto),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: billingKeys.payments() });
+      queryClient.invalidateQueries({ queryKey: billingKeys.all });
+    },
+  });
+
+  return {
+    markPaymentCancelled: mutation.mutate,
+    markPaymentCancelledAsync: mutation.mutateAsync,
+    isMarkingCancelled: mutation.isPending,
     isError: mutation.isError,
     error: mutation.error,
     data: mutation.data,

@@ -1,41 +1,50 @@
-"use client"
+'use client';
 
-import { useTranslations } from "next-intl"
-import { Link } from "@/i18n/navigation"
-import { Building2, ArrowRight, Zap, Shield, Headphones, Settings } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { enterpriseFeatures } from "../data"
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
+import {
+  Building2,
+  ArrowRight,
+  Zap,
+  Shield,
+  Headphones,
+  Settings,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { enterpriseFeatures } from '../data';
 
-const featureIcons = [Zap, Shield, Headphones, Settings]
+const featureIcons = [Zap, Shield, Headphones, Settings];
 
 export interface EnterpriseBlockProps {
-  className?: string
-  variant?: "dark" | "light"
+  className?: string;
+  variant?: 'dark' | 'light';
 }
 
 export function EnterpriseBlock({
   className,
-  variant = "dark",
+  variant = 'dark',
 }: EnterpriseBlockProps) {
-  const t = useTranslations("marketing.pricingPage.enterpriseSection")
-  const isDark = variant === "dark"
+  const t = useTranslations('marketing.pricingPage.enterpriseSection');
+  const isDark = variant === 'dark';
 
   return (
     <div className={className}>
       <div
         className={cn(
-          "relative rounded-3xl p-8 md:p-12 overflow-hidden",
+          'relative rounded-3xl p-8 md:p-12 overflow-hidden',
           isDark
-            ? "bg-foreground shadow-xl shadow-black/10 dark:bg-card dark:border dark:border-border/80 dark:shadow-black/30"
-            : "bg-card border border-border dark:bg-card/90 dark:border-border/80"
+            ? 'bg-foreground shadow-xl shadow-black/10 dark:bg-card dark:border dark:border-border/80 dark:shadow-black/30'
+            : 'bg-card border border-border dark:bg-card/90 dark:border-border/80',
         )}
       >
         {/* Background Pattern */}
         <div
           className={cn(
-            "absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:32px_32px]",
-            isDark ? "opacity-100 dark:opacity-40" : "opacity-50 dark:opacity-20"
+            'absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:32px_32px]',
+            isDark
+              ? 'opacity-100 dark:opacity-40'
+              : 'opacity-50 dark:opacity-20',
           )}
         />
 
@@ -43,33 +52,37 @@ export function EnterpriseBlock({
           <div className="flex items-center gap-6">
             <div
               className={cn(
-                "w-16 h-16 rounded-2xl flex items-center justify-center",
-                isDark ? "bg-primary" : "bg-primary/10"
+                'w-16 h-16 rounded-2xl flex items-center justify-center',
+                isDark ? 'bg-primary' : 'bg-primary/10',
               )}
             >
               <Building2
                 className={cn(
-                  "w-8 h-8",
-                  isDark ? "text-primary-foreground" : "text-primary"
+                  'w-8 h-8',
+                  isDark ? 'text-primary-foreground' : 'text-primary',
                 )}
               />
             </div>
             <div>
               <h3
                 className={cn(
-                  "text-2xl font-bold",
-                  isDark ? "text-background dark:text-white" : "text-foreground"
+                  'text-2xl font-bold',
+                  isDark
+                    ? 'text-background dark:text-white'
+                    : 'text-foreground',
                 )}
               >
-                {t("enterpriseTitle")}
+                {t('enterpriseTitle')}
               </h3>
               <p
                 className={cn(
-                  "mt-1",
-                  isDark ? "text-background/80 dark:text-muted-foreground" : "text-muted-foreground"
+                  'mt-1',
+                  isDark
+                    ? 'text-background/80 dark:text-muted-foreground'
+                    : 'text-muted-foreground',
                 )}
               >
-                {t("enterpriseDesc")}
+                {t('enterpriseDesc')}
               </p>
             </div>
           </div>
@@ -78,15 +91,15 @@ export function EnterpriseBlock({
             size="lg"
             variant="secondary"
             className={cn(
-              "shadow-xl group",
+              'shadow-xl group',
               isDark
-                ? "bg-background text-foreground hover:bg-muted"
-                : "bg-primary text-primary-foreground hover:bg-primary/90"
+                ? 'bg-background text-foreground hover:bg-muted'
+                : 'bg-primary text-primary-foreground hover:bg-primary/90',
             )}
             asChild
           >
-            <Link href="/contact" className="flex items-center gap-2">
-              {t("contactSales")}
+            <Link href="/register" className="flex items-center gap-2">
+              {t('contactSales')}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </Button>
@@ -97,21 +110,21 @@ export function EnterpriseBlock({
           <div className="relative mt-8 pt-8 border-t border-border">
             <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
               {enterpriseFeatures.map((feature, idx) => {
-                const Icon = featureIcons[idx]
+                const Icon = featureIcons[idx];
                 return (
-                    <div
-                      key={feature}
-                      className="flex items-center gap-2 text-muted-foreground dark:text-muted-foreground/90"
-                    >
+                  <div
+                    key={feature}
+                    className="flex items-center gap-2 text-muted-foreground dark:text-muted-foreground/90"
+                  >
                     <Icon className="w-5 h-5 text-primary" />
                     <span className="text-sm">{feature}</span>
                   </div>
-                )
+                );
               })}
             </div>
           </div>
         )}
       </div>
     </div>
-  )
+  );
 }

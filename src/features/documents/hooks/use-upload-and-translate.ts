@@ -7,24 +7,35 @@ import {
   uploadFileToPresignedUrl,
   confirmFileUpload,
   createTranslationJob,
-  estimateTranslationCredits,
+  getFileAnalysis,
 } from '../api/documents.api';
 import type {
   TranslationFlowStatus,
   CreateTranslationJobDto,
   TranslationConfig,
   CreditEstimateResponse,
+  FileAnalysisEstimateModes,
+  FileAnalysisResponse,
+  FileResponse,
+  FontReplacement,
+  ParsedFontsByGroup,
 } from '../types';
 import { LANGUAGE_CODE_TO_API_NAME } from '../types';
 import { extractErrorMessage } from './utils';
 import { setActiveJobId } from '../store/translation.store';
 import { walletKeys } from '@/lib/query-client';
+import { buildUserGlossaryEntries } from '../utils/glossary-mode';
 
 interface UploadAndTranslateState {
   flowStatus: TranslationFlowStatus;
   uploadProgress: number;
   fileId: string | null;
   estimate: CreditEstimateResponse | null;
+  estimateModes: FileAnalysisEstimateModes | null;
+  analysisFile: FileResponse | null;
+  fontsUsedByGroup: ParsedFontsByGroup;
+  fontParseSupported: boolean | null;
+  fontFlowUnavailable: boolean;
   jobId: string | null;
   error: string | null;
 }
@@ -33,7 +44,9 @@ interface UseUploadAndTranslateReturn extends UploadAndTranslateState {
   startUpload: (file: File) => Promise<string | null>;
   startTranslation: (
     config: TranslationConfig,
+    selectedDomainKey?: string,
     glossaryTerms?: Array<{ srcTerm: string; tgtTerm: string }>,
+    fontReplacements?: FontReplacement[],
   ) => Promise<void>;
   reset: () => void;
   /** Restore a previously started job (e.g. after navigating back to the page) */
@@ -45,44 +58,60 @@ const initialState: UploadAndTranslateState = {
   uploadProgress: 0,
   fileId: null,
   estimate: null,
+  estimateModes: null,
+  analysisFile: null,
+  fontsUsedByGroup: {},
+  fontParseSupported: null,
+  fontFlowUnavailable: false,
   jobId: null,
   error: null,
 };
 
-const ESTIMATE_POLL_INTERVAL = 5000;
-const ESTIMATE_MAX_ATTEMPTS = 20;
+const ANALYSIS_POLL_INTERVAL = 5000;
+const ANALYSIS_MAX_ATTEMPTS = 20;
 
-async function pollEstimateCredits(
+function normalizeFontsUsed(value: unknown): ParsedFontsByGroup {
+  if (!value || typeof value !== 'object') {
+    return {};
+  }
+
+  const grouped = value as Record<string, unknown>;
+  const normalized: ParsedFontsByGroup = {};
+
+  Object.entries(grouped).forEach(([group, fonts]) => {
+    if (!Array.isArray(fonts)) {
+      return;
+    }
+
+    const cleaned = fonts
+      .map((font) => (typeof font === 'string' ? font.trim() : ''))
+      .filter((font) => font.length > 0);
+
+    if (cleaned.length > 0) {
+      normalized[group] = cleaned;
+    }
+  });
+
+  return normalized;
+}
+
+async function pollFileAnalysis(
   fileId: string,
   abortRef: React.RefObject<boolean>,
-): Promise<CreditEstimateResponse> {
-  for (let attempt = 0; attempt < ESTIMATE_MAX_ATTEMPTS; attempt++) {
+): Promise<FileAnalysisResponse> {
+  for (let attempt = 0; attempt < ANALYSIS_MAX_ATTEMPTS; attempt++) {
     if (abortRef.current) {
       throw new Error('Aborted');
     }
 
+    let result: FileAnalysisResponse | null = null;
+
     try {
-      const result = await estimateTranslationCredits({
-        job_type: 'doc-trans',
-        file_id: fileId,
-      });
-      // Backend returns status: "pending" when metadata is not ready yet — retry
-      if (result.status === 'pending') {
-        if (attempt < ESTIMATE_MAX_ATTEMPTS - 1) {
-          await new Promise((resolve) =>
-            setTimeout(resolve, ESTIMATE_POLL_INTERVAL),
-          );
-          continue;
-        }
-        throw new Error(
-          'Document analysis timed out. Please try again or upload a different file.',
-        );
-      }
-      return result;
+      result = await getFileAnalysis(fileId);
     } catch (err) {
-      if (attempt < ESTIMATE_MAX_ATTEMPTS - 1) {
+      if (attempt < ANALYSIS_MAX_ATTEMPTS - 1) {
         await new Promise((resolve) =>
-          setTimeout(resolve, ESTIMATE_POLL_INTERVAL),
+          setTimeout(resolve, ANALYSIS_POLL_INTERVAL),
         );
       } else {
         throw err instanceof Error
@@ -92,6 +121,31 @@ async function pollEstimateCredits(
             );
       }
     }
+
+    if (!result) {
+      continue;
+    }
+
+    if (result.status === 'pending') {
+      if (attempt < ANALYSIS_MAX_ATTEMPTS - 1) {
+        await new Promise((resolve) =>
+          setTimeout(resolve, ANALYSIS_POLL_INTERVAL),
+        );
+        continue;
+      }
+      throw new Error(
+        'Document analysis timed out. Please try again or upload a different file.',
+      );
+    }
+
+    if (result.status === 'failed') {
+      throw new Error(
+        result.error ??
+          'Document analysis failed. Please try again or upload a different file.',
+      );
+    }
+
+    return result;
   }
 
   throw new Error(
@@ -102,38 +156,48 @@ async function pollEstimateCredits(
 function buildJobDto(
   fileId: string,
   config: TranslationConfig,
+  selectedDomainKey?: string,
   glossaryTerms: Array<{ srcTerm: string; tgtTerm: string }> = [],
+  fontReplacements: FontReplacement[] = [],
 ): CreateTranslationJobDto {
+  const isFontConfigurationApplicable =
+    config.pdfTranslationFlow !== 'non_format_preserved';
+
   const dto: CreateTranslationJobDto = {
     file_id: fileId,
     src_lang: LANGUAGE_CODE_TO_API_NAME[config.srcLang],
     tgt_lang: LANGUAGE_CODE_TO_API_NAME[config.tgtLang],
     doc_tone: config.tone || undefined,
-    doc_domain: config.domain || 'auto',
+    domain_id: config.domainId || undefined,
   };
 
-  const mergedTerms = new Map<string, { src: string; tgt: string }>();
-
-  glossaryTerms.forEach((term) => {
-    const src = term.srcTerm.trim();
-    const tgt = term.tgtTerm.trim();
-    if (!src || !tgt) return;
-    mergedTerms.set(src.toLowerCase(), { src, tgt });
-  });
-
-  config.manualTerms.forEach((term) => {
-    const src = term.src.trim();
-    const tgt = term.tgt.trim();
-    if (!src || !tgt) return;
-    mergedTerms.set(src.toLowerCase(), { src, tgt });
-  });
-
-  if (mergedTerms.size > 0) {
-    dto.user_glossary = Array.from(mergedTerms.values()).map((term) => ({
-      src_lang: term.src.trim(),
-      tgt_lang: term.tgt.trim(),
-    }));
+  if (selectedDomainKey === 'other' && config.customDomain.trim()) {
+    dto.customized_domain = config.customDomain.trim();
   }
+
+  const userGlossaryEntries = buildUserGlossaryEntries({
+    glossaryInputMode: config.glossaryInputMode,
+    manualTerms: config.manualTerms,
+    glossaryTerms,
+  });
+
+  if (userGlossaryEntries.length > 0) {
+    dto.user_glossary = userGlossaryEntries;
+  }
+
+  if (isFontConfigurationApplicable && fontReplacements.length > 0) {
+    dto.font_replacements = fontReplacements;
+  }
+
+  if (isFontConfigurationApplicable && config.keepOriginalFontSize) {
+    dto.keep_original_font_size = true;
+  }
+
+  if (config.pdfTranslationFlow) {
+    dto.pdf_translation_flow = config.pdfTranslationFlow;
+  }
+
+  dto.use_system_glossary = config.useSystemGlossary;
 
   return dto;
 }
@@ -169,6 +233,11 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
         uploadProgress: 0,
         fileId: null,
         estimate: null,
+        estimateModes: null,
+        analysisFile: null,
+        fontsUsedByGroup: {},
+        fontParseSupported: null,
+        fontFlowUnavailable: false,
         jobId: null,
         error: null,
       }));
@@ -211,7 +280,7 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
         fileId: uploadResponse.file_id,
       }));
 
-      const estimateResult = await pollEstimateCredits(
+      const analysisResult = await pollFileAnalysis(
         uploadResponse.file_id,
         abortRef,
       );
@@ -221,7 +290,17 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
       setState((prev) => ({
         ...prev,
         flowStatus: 'idle',
-        estimate: estimateResult,
+        estimate: analysisResult.estimate,
+        estimateModes: analysisResult.estimate_modes ?? null,
+        analysisFile: analysisResult.file,
+        fontsUsedByGroup: normalizeFontsUsed(
+          analysisResult.file.metadata?.fontsUsed,
+        ),
+        fontParseSupported:
+          typeof analysisResult.file.metadata?.fontParseSupported === 'boolean'
+            ? analysisResult.file.metadata.fontParseSupported
+            : null,
+        fontFlowUnavailable: false,
         error: null,
       }));
 
@@ -245,6 +324,11 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
         uploadProgress: 0,
         fileId: null,
         estimate: null,
+        estimateModes: null,
+        analysisFile: null,
+        fontsUsedByGroup: {},
+        fontParseSupported: null,
+        fontFlowUnavailable: true,
         error: errorMessage,
       }));
 
@@ -255,7 +339,9 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
   const startTranslation = useCallback(
     async (
       config: TranslationConfig,
+      selectedDomainKey?: string,
       glossaryTerms: Array<{ srcTerm: string; tgtTerm: string }> = [],
+      fontReplacements: FontReplacement[] = [],
     ) => {
       abortRef.current = false;
 
@@ -273,7 +359,13 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
       try {
         setState((prev) => ({ ...prev, flowStatus: 'creating' }));
 
-        const jobDto = buildJobDto(state.fileId, config, glossaryTerms);
+        const jobDto = buildJobDto(
+          state.fileId,
+          config,
+          selectedDomainKey,
+          glossaryTerms,
+          fontReplacements,
+        );
         const idempotencyKey = `doc-${state.fileId}-${Date.now()}`;
         const jobResponse = await createTranslationJob(jobDto, idempotencyKey);
 

@@ -1,10 +1,11 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { CommandGroup, CommandItem, CommandSeparator } from "cmdk";
 import { ArrowRight, Clock, BookOpen, Loader2 } from "lucide-react";
+import { getDomainLabel, useDomains } from "@/features/domains";
 import type { NavItem } from "./use-search-data";
-import type { TranslationJobResponse } from "../../api/dashboard.api";
+import type { TranslationJobResponse } from "@/types";
 import type { Glossary } from "@/features/glossary/types";
 
 const ITEM_CLASS =
@@ -153,35 +154,42 @@ export function SearchGlossariesGroup({
   isLoading,
   onSelect,
 }: GlossariesGroupProps) {
+  const locale = useLocale();
   const t = useTranslations("dashboard.commandPalette");
+  const { getDomainById } = useDomains();
 
   return (
     <>
       <CommandSeparator className="my-1.5 h-px bg-border" />
       <CommandGroup heading={<GroupHeading label={t("glossaries")} isLoading={isLoading} />}>
         {glossaries.length > 0 ? (
-          glossaries.map((glossary) => (
-            <CommandItem
-              key={glossary.id}
-              value={`glossary-${glossary.id}`}
-              onSelect={() => onSelect(`/glossary/${glossary.id}`)}
-              className={ITEM_CLASS}
-            >
-              <div className={ICON_WRAP_CLASS}>
-                <BookOpen className="size-4 text-muted-foreground" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate font-medium text-foreground">
-                  {glossary.name}
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {glossary.srcLang} → {glossary.tgtLang}
-                  {glossary.domain ? ` · ${glossary.domain}` : ""}
-                </p>
-              </div>
-              <ArrowRight className="size-3.5 shrink-0 text-muted-foreground opacity-40" />
-            </CommandItem>
-          ))
+          glossaries.map((glossary) => {
+            const domain = getDomainById(glossary.domainId);
+            const domainLabel = domain ? getDomainLabel(domain, locale) : "";
+
+            return (
+              <CommandItem
+                key={glossary.id}
+                value={`glossary-${glossary.id}`}
+                onSelect={() => onSelect(`/glossary/${glossary.id}`)}
+                className={ITEM_CLASS}
+              >
+                <div className={ICON_WRAP_CLASS}>
+                  <BookOpen className="size-4 text-muted-foreground" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate font-medium text-foreground">
+                    {glossary.name}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {glossary.srcLang} → {glossary.tgtLang}
+                    {domainLabel ? ` · ${domainLabel}` : ""}
+                  </p>
+                </div>
+                <ArrowRight className="size-3.5 shrink-0 text-muted-foreground opacity-40" />
+              </CommandItem>
+            );
+          })
         ) : (
           !isLoading && (
             <p className="px-3 py-3 text-center text-xs text-muted-foreground">

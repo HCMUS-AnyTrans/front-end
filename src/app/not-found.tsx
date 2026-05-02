@@ -1,6 +1,6 @@
-import Link from "next/link"
-import { ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function NotFound() {
   return (
@@ -14,18 +14,22 @@ export default function NotFound() {
           Sorry, we couldn&apos;t find the page you&apos;re looking for.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-          <Button asChild size="lg" className="rounded-md px-6 py-2.5 text-sm font-semibold shadow-sm">
+          <Button
+            asChild
+            size="lg"
+            className="rounded-md px-6 py-2.5 text-sm font-semibold shadow-sm"
+          >
             <Link href="/">Go back home</Link>
           </Button>
           <Link
-            href="/contact"
+            href="/"
             className="flex items-center gap-1.5 text-sm font-semibold text-foreground hover:text-primary transition-colors"
           >
-            Contact support
+            Go back home
             <ArrowRight className="size-4" aria-hidden />
           </Link>
         </div>
       </div>
     </main>
-  )
+  );
 }

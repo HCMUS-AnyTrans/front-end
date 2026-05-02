@@ -3,14 +3,33 @@ import { apiClient } from '@/lib/api-client';
 import type {
   RequestUploadUrlDto,
   UploadUrlResponse,
+  TempUploadUrlDto,
+  PresignedUploadUrlResponse,
   UpdateFileStatusDto,
   FileResponse,
-  CreditEstimateDto,
-  CreditEstimateResponse,
+  FileAnalysisResponse,
   CreateTranslationJobDto,
   TranslationJobResponse,
   FileDownloadUrlResponse,
+  FileDownloadUrlOptions,
+  FontCheckResponse,
 } from '../types';
+
+interface TranslationJobResponseDto extends Omit<
+  TranslationJobResponse,
+  'domainId'
+> {
+  domain_id?: string;
+}
+
+function mapTranslationJobResponse(
+  dto: TranslationJobResponseDto,
+): TranslationJobResponse {
+  return {
+    ...dto,
+    domainId: dto.domain_id,
+  };
+}
 
 // ============================================================================
 // File Upload API Functions
@@ -25,6 +44,20 @@ export async function requestDocUploadUrl(
 ): Promise<UploadUrlResponse> {
   const response = await apiClient.post<UploadUrlResponse>(
     '/files/upload/doc',
+    dto,
+  );
+  return response.data;
+}
+
+/**
+ * Request a presigned upload URL for a temporary file.
+ * POST /files/upload/temp
+ */
+export async function requestTempUploadUrl(
+  dto: TempUploadUrlDto,
+): Promise<PresignedUploadUrlResponse> {
+  const response = await apiClient.post<PresignedUploadUrlResponse>(
+    '/files/upload/temp',
     dto,
   );
   return response.data;
@@ -70,6 +103,19 @@ export async function confirmFileUpload(
   return response.data;
 }
 
+/**
+ * Get a unified file analysis snapshot for upload wizard readiness.
+ * GET /files/:file_id/analysis
+ */
+export async function getFileAnalysis(
+  fileId: string,
+): Promise<FileAnalysisResponse> {
+  const response = await apiClient.get<FileAnalysisResponse>(
+    `/files/${fileId}/analysis`,
+  );
+  return response.data;
+}
+
 // ============================================================================
 // Translation API Functions
 // ============================================================================
@@ -87,26 +133,12 @@ export async function createTranslationJob(
   if (idempotencyKey) {
     headers['Idempotency-Key'] = idempotencyKey;
   }
-  const response = await apiClient.post<TranslationJobResponse>(
+  const response = await apiClient.post<TranslationJobResponseDto>(
     '/translations/doc',
     dto,
     { headers },
   );
-  return response.data;
-}
-
-/**
- * Estimate required credits for a translation request.
- * POST /translations/estimate-credits
- */
-export async function estimateTranslationCredits(
-  dto: CreditEstimateDto,
-): Promise<CreditEstimateResponse> {
-  const response = await apiClient.post<CreditEstimateResponse>(
-    '/translations/estimate-credits',
-    dto,
-  );
-  return response.data;
+  return mapTranslationJobResponse(response.data);
 }
 
 /**
@@ -116,9 +148,21 @@ export async function estimateTranslationCredits(
 export async function getTranslationJob(
   jobId: string,
 ): Promise<TranslationJobResponse> {
-  const response = await apiClient.get<TranslationJobResponse>(
+  const response = await apiClient.get<TranslationJobResponseDto>(
     `/translations/${jobId}`,
   );
+  return mapTranslationJobResponse(response.data);
+}
+
+/**
+ * Check whether parsed fonts support the target language.
+ * POST /fonts/check
+ */
+export async function checkFonts(dto: {
+  fonts: string[];
+  language: string;
+}): Promise<FontCheckResponse> {
+  const response = await apiClient.post<FontCheckResponse>('/fonts/check', dto);
   return response.data;
 }
 
@@ -132,9 +176,17 @@ export async function getTranslationJob(
  */
 export async function getFileDownloadUrl(
   fileId: string,
+  options: FileDownloadUrlOptions = {},
 ): Promise<FileDownloadUrlResponse> {
+  const pdf = options.pdf ?? false;
+
   const response = await apiClient.get<FileDownloadUrlResponse>(
     `/files/${fileId}/download`,
+    {
+      params: {
+        pdf,
+      },
+    },
   );
   return response.data;
 }

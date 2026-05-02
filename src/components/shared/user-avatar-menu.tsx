@@ -20,7 +20,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useAuthStore, useLogout } from "@/features/auth";
+import { useLogout, useUser } from "@/features/auth";
 import { useTranslations } from "next-intl";
 import type { User as AuthUser } from "@/features/auth/types";
 
@@ -54,7 +54,7 @@ export function UserAvatarMenu({
   triggerClassName,
   size = "default",
 }: UserAvatarMenuProps) {
-  const user = useAuthStore((s) => s.user);
+  const user = useUser();
   const { logout } = useLogout();
   const tSidebar = useTranslations("dashboard.sidebar");
   const tHeaderMenu = useTranslations("dashboard.headerMenu");

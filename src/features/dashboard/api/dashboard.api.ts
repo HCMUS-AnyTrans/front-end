@@ -1,4 +1,5 @@
 import { apiClient } from '@/lib/api-client';
+import type { TranslationJobResponse } from '@/types';
 import type {
   DashboardStats,
   DashboardStatsQuery,
@@ -8,6 +9,8 @@ import type {
   CreditsChartQuery,
   StorageResponse,
   WalletResponse,
+  TranslationJobsListResponse,
+  RecentJobsQuery,
 } from '../types';
 
 // ============================================================================
@@ -73,69 +76,11 @@ export async function getWalletApi(): Promise<WalletResponse> {
   return response.data;
 }
 
-// ============================================================================
-// Translation Job Types (for recent jobs)
-// ============================================================================
-
-export interface TranslationJobFile {
-  id: string;
-  name: string;
-  mime: string;
-  size_bytes: number;
-  sha256: string | null;
-  status: string;
-  type: string;
-  created_at: string;
-  store_until: string;
-  is_expired: boolean;
-}
-
-export interface PricingBreakdownItem {
-  code: string;
-  name: string;
-  unit: string;
-  price: number;
-  credits: number;
-  quantity: number;
-}
-
-export interface TranslationJobResponse {
-  job_id: string;
-  job_type: string;
-  status: string;
-  src_lang: string;
-  tgt_lang: string;
-  input_file?: TranslationJobFile;
-  output_file?: TranslationJobFile;
-  error?: string;
-  created_at: string;
-  completed_at?: string;
-  cost_credits?: number;
-  pricing_breakdown?: PricingBreakdownItem[];
-  domain?: string;
-}
-
-export interface TranslationJobsListResponse {
-  data: TranslationJobResponse[];
-  meta: {
-    page: number;
-    limit: number;
-    total: number;
-    totalPages: number;
-    hasNext: boolean;
-    hasPrev: boolean;
-  };
-}
-
-export interface RecentJobsQuery {
-  page?: number;
-  limit?: number;
-  job_type?: 'document' | 'subtitle';
-  status?: string;
-  domain?: string;
-  sortBy?: string;
-  sortOrder?: 'asc' | 'desc';
-  search?: string;
+interface TranslationJobResponseDto extends Omit<
+  TranslationJobResponse,
+  'domainId'
+> {
+  domain_id?: string;
 }
 
 /**
@@ -145,9 +90,16 @@ export interface RecentJobsQuery {
 export async function getRecentJobsApi(
   params?: RecentJobsQuery,
 ): Promise<TranslationJobsListResponse> {
-  const response = await apiClient.get<TranslationJobsListResponse>(
-    '/translations',
-    { params },
-  );
-  return response.data;
+  const response = await apiClient.get<{
+    data: TranslationJobResponseDto[];
+    meta: TranslationJobsListResponse['meta'];
+  }>('/translations', { params });
+
+  return {
+    ...response.data,
+    data: response.data.data.map((job) => ({
+      ...job,
+      domainId: job.domain_id,
+    })),
+  };
 }

@@ -317,19 +317,180 @@
     "checkout": {
       "eyebrow": "Secure checkout",
       "title": "Review your credit package",
-      "subtitle": "Complete payment with VNPay and top up instantly.",
+      "subtitle": "Complete your payment securely and top up instantly.",
       "total": "Total",
       "perCredit": "Estimated per credit",
       "discount": "Save {percent}% on this package",
       "bonus": "Bonus {percent}% credits included",
-      "payNow": "Pay with VNPay",
-      "processing": "Redirecting to VNPay...",
+      "payNow": "Proceed to payment",
+      "processing": "Redirecting to payment...",
       "paymentError": "Payment could not be created. Please try again.",
       "packageNotFound": "Package not found or no longer available.",
       "backToPricing": "Back to pricing",
       "backToDashboard": "Back to dashboard",
       "packagesError": "Unable to load credit packages right now.",
       "retry": "Try again"
+    },
+    "landing": {
+      "hero": {
+        "badge": "Encrypted processing, fast turnaround, and layout preserved",
+        "title": "Professional document translation.",
+        "titleAccent": "Keep the original formatting intact.",
+        "description": "Upload DOCX, PPTX, or PDF files and receive a polished translation within minutes. Tables, fonts, images, and page structure remain stable from start to finish.",
+        "primaryCta": "Try for free",
+        "secondaryCta": "View pricing",
+        "highlights": {
+          "languages": "40+ languages",
+          "retention": "Files auto-deleted after 24 hours",
+          "slides": "{count} workflow previews"
+        },
+        "carousel": {
+          "goToSlide": "Go to slide {index}",
+          "previousSlide": "View previous slide",
+          "nextSlide": "View next slide"
+        }
+      },
+      "benefits": {
+        "eyebrow": "Why teams choose AnyTrans",
+        "title": "Built for documents that need speed, accuracy, and stable layout.",
+        "description": "Cut down on reformatting, shorten review cycles, and keep a consistent reading experience across every document.",
+        "items": {
+          "layout": {
+            "title": "Preserve formatting",
+            "description": "Tables, fonts, headings, alignment, and images stay intact so you do not need to rebuild the layout from scratch."
+          },
+          "speed": {
+            "title": "Translate in minutes",
+            "description": "Choose the language pair, send the file, and get a complete translation much faster than a traditional manual workflow."
+          },
+          "security": {
+            "title": "Clear security controls",
+            "description": "Documents are encrypted during processing and automatically removed afterward to reduce long-term storage risk."
+          }
+        }
+      },
+      "howItWorks": {
+        "eyebrow": "Three simple steps",
+        "title": "Start fast without relearning your workflow.",
+        "description": "Upload the file, choose the language pair, and receive a complete translation with stable formatting.",
+        "steps": {
+          "upload": {
+            "title": "Upload",
+            "description": "Drop in a DOCX, PPTX, or PDF file and let the platform detect the content automatically."
+          },
+          "selectLanguage": {
+            "title": "Choose languages",
+            "description": "Set the source language, target language, and processing preferences that match your document."
+          },
+          "download": {
+            "title": "Download",
+            "description": "Receive a translated file with stable layout, ready to share with clients or move into your internal workflow."
+          }
+        }
+      },
+      "pricing": {
+        "eyebrow": "Transparent pricing",
+        "title": "Buy credits once, use them when needed.",
+        "description": "No subscription and no long-term commitment. Choose the package that fits your document volume.",
+        "popular": "Most popular",
+        "credits": "credits",
+        "bonusCredits": "+{credits} bonus",
+        "buyNow": "Buy now",
+        "plans": {
+          "starter": {
+            "name": "Starter",
+            "features": [
+              "20 credits",
+              "DOCX and PDF",
+              "10 languages",
+              "Email support"
+            ]
+          },
+          "vip": {
+            "name": "VIP",
+            "discount": "Save 10%",
+            "features": [
+              "50 + 5 bonus credits",
+              "All file formats",
+              "40+ languages",
+              "Priority layout retention",
+              "Faster support"
+            ]
+          },
+          "business": {
+            "name": "Business",
+            "discount": "Save 30%",
+            "features": [
+              "200 + 30 bonus credits",
+              "All file formats",
+              "Optimized for high-volume documents",
+              "API access",
+              "Dedicated account support"
+            ]
+          }
+        }
+      },
+      "faq": {
+        "eyebrow": "Frequently asked questions",
+        "title": "Quick answers before you get started.",
+        "items": {
+          "supportedFormats": {
+            "question": "Which file formats are supported?",
+            "answer": "The platform currently supports DOCX, PPTX, and PDF. More common formats will be added based on user demand."
+          },
+          "formatRetention": {
+            "question": "Will the original formatting be preserved?",
+            "answer": "Yes. Tables, headings, fonts, and document structure are prioritized so you can minimize post-translation cleanup."
+          },
+          "turnaroundTime": {
+            "question": "How long does a translation usually take?",
+            "answer": "Most standard documents are processed in about 2 to 5 minutes. Longer files or slide-heavy decks may take more time."
+          },
+          "creditExpiry": {
+            "question": "Do credits expire?",
+            "answer": "No. Purchased credits remain available whenever you need them, so there is no risk of losing unused balance over time."
+          }
+        }
+      },
+      "cta": {
+        "eyebrow": "Ready to start",
+        "title": "Translate documents today and keep the original format intact.",
+        "description": "Start with the trial package or move straight to a credit bundle if your demand is already clear.",
+        "primaryCta": "Try for free",
+        "secondaryCta": "View pricing"
+      },
+      "previewSlides": {
+        "uploadPreview": {
+          "eyebrow": "Upload in seconds",
+          "title": "Drag in a document and choose the language pair from one screen.",
+          "description": "The workflow is compact, clear, and easy for both operations teams and individual users.",
+          "highlights": [
+            "DOCX, PPTX, PDF",
+            "Automatic language detection",
+            "Step-by-step progress tracking"
+          ]
+        },
+        "reviewPreview": {
+          "eyebrow": "Visual comparison",
+          "title": "Keep the original and translated versions side by side for fast accuracy checks.",
+          "description": "Review headings, tables, and document rhythm before downloading the final file.",
+          "highlights": [
+            "Two-column layout",
+            "Formatting preserved",
+            "Easy pre-export review"
+          ]
+        },
+        "deliveryPreview": {
+          "eyebrow": "Export the finished translation",
+          "title": "Receive a translated file that stays close to the original and is ready to share.",
+          "description": "Ideal for contracts, proposals, presentation decks, and documents with complex layouts.",
+          "highlights": [
+            "One-click download",
+            "Image retention",
+            "Support for long documents"
+          ]
+        }
+      }
     },
     "testimonials": {
       "title": "What customers say",

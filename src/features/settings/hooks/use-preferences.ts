@@ -1,16 +1,17 @@
 'use client';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getPreferencesApi, updatePreferencesApi } from '../api/settings.api';
+import { getPreferencesApi, updatePreferencesApi } from '../api';
 import { settingsKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
-import type { UserPreferences, UpdatePreferencesDto } from '../types';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
+import type { UpdatePreferencesDto } from '../types';
 
 /**
  * Hook to fetch user preferences
  */
 export function usePreferences() {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: settingsKeys.preferences(),

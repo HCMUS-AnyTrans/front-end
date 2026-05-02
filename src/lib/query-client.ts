@@ -78,8 +78,14 @@ export const walletKeys = {
 // Translation-related query keys
 export const translationKeys = {
   all: ['translations'] as const,
+  lists: () => [...translationKeys.all, 'list'] as const,
   list: (params?: unknown) => [...translationKeys.all, 'list', params] as const,
   detail: (id: string) => [...translationKeys.all, 'detail', id] as const,
+};
+
+export const domainKeys = {
+  all: ['domains'] as const,
+  list: () => [...domainKeys.all, 'list'] as const,
 };
 
 // Settings-related query keys
@@ -124,6 +130,11 @@ export const glossaryKeys = {
     params !== undefined
       ? ([...glossaryKeys.all, 'list', params] as const)
       : ([...glossaryKeys.all, 'list'] as const),
+  templates: (domain?: string) =>
+    domain
+      ? ([...glossaryKeys.all, 'templates', domain] as const)
+      : ([...glossaryKeys.all, 'templates'] as const),
+  llmPricing: () => [...glossaryKeys.all, 'llm-pricing'] as const,
   detail: (id: string) => [...glossaryKeys.all, 'detail', id] as const,
   terms: (glossaryId: string, params?: unknown) =>
     params !== undefined

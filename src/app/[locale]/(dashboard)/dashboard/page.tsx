@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from 'next-intl/server';
 import {
   StatsCards,
   QuickActions,
@@ -6,8 +6,9 @@ import {
   DashboardGreeting,
   PaymentStatusBanner,
   RecentJobsTable,
-  UsagePanel,
-} from "@/features/dashboard";
+  CreditUsageCard,
+  StorageUsageCard,
+} from '@/features/dashboard';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -37,15 +38,19 @@ export default async function DashboardPage({ params }: Props) {
         <div className="lg:col-span-8">
           <RecentJobsTable />
         </div>
-        <div className="lg:col-span-4">
-          <UsagePanel />
+        <div className="flex flex-col gap-6 lg:col-span-4 lg:h-full">
+          <div className="lg:flex-1">
+            <CreditUsageCard />
+          </div>
+          <div className="lg:flex-1">
+            <StorageUsageCard />
+          </div>
         </div>
       </div>
 
       {/* Analytics: Activity chart (full width) */}
-      <div className="w-full">
-        <JobsChart />
-      </div>
+      <div className="w-full"></div>
+      <JobsChart />
     </div>
   );
 }

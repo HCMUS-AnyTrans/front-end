@@ -1,12 +1,16 @@
 // Feature: User Settings
 
-// Components
+// Components - shared
 export {
   SettingsLayout,
   SettingsTabContent,
   SettingsSection,
   SettingsRow,
   SettingsDivider,
+} from './components';
+
+// Components - tabs
+export {
   ProfileTab,
   PreferencesTab,
   SecurityTab,
@@ -16,7 +20,7 @@ export {
   ActivityTab,
 } from './components';
 
-// API
+// API - profile & preferences
 export {
   getProfileApi,
   updateProfileApi,
@@ -25,6 +29,10 @@ export {
   buildStorageUrl,
   getPreferencesApi,
   updatePreferencesApi,
+} from './api';
+
+// API - security & notifications
+export {
   changePasswordApi,
   getIdentitiesApi,
   unlinkIdentityApi,
@@ -35,10 +43,15 @@ export {
   deleteNotificationApi,
   getNotificationPreferencesApi,
   updateNotificationPreferencesApi,
+} from './api';
+
+// API - billing, files, activity
+export {
   getWalletApi,
   getWalletLedgerApi,
   getCreditPackagesApi,
-  createVnpayPaymentApi,
+  createPaymentApi,
+  markPaymentCancelledApi,
   getPaymentsApi,
   getFilesApi,
   getFileDownloadApi,
@@ -47,13 +60,17 @@ export {
   getActivityApi,
 } from './api';
 
-// Hooks
+// Hooks - profile & preferences
 export {
   useProfile,
   useUpdateProfile,
   useUploadAvatar,
   usePreferences,
   useUpdatePreferences,
+} from './hooks';
+
+// Hooks - security & notifications
+export {
   useIdentities,
   useUnlinkIdentity,
   useLinkIdentity,
@@ -64,11 +81,16 @@ export {
   useDeleteNotification,
   useNotificationPreferences,
   useUpdateNotificationPreferences,
+} from './hooks';
+
+// Hooks - billing, files, activity
+export {
   useWallet,
   useWalletLedger,
   useCreditPackages,
   usePayments,
-  useCreateVnpayPayment,
+  useCreatePayment,
+  useMarkPaymentCancelled,
   useFiles,
   useFileDownload,
   useDeleteFile,
@@ -76,7 +98,7 @@ export {
   useActivity,
 } from './hooks';
 
-// Types
+// Types - shared & profile/preferences
 export type {
   Pagination,
   PaginatedResponse,
@@ -89,6 +111,10 @@ export type {
   FileTTL,
   UserPreferences,
   UpdatePreferencesDto,
+} from './types';
+
+// Types - security & notifications
+export type {
   AuthProvider,
   AuthIdentity,
   ChangePasswordDto,
@@ -96,6 +122,10 @@ export type {
   Notification,
   NotificationPreference,
   UpdateNotificationPreferencesDto,
+} from './types';
+
+// Types - billing
+export type {
   Wallet,
   LedgerType,
   WalletLedger,
@@ -106,8 +136,13 @@ export type {
   Payment,
   CreditPackageType,
   CreditPackage,
-  CreateVnpayPaymentDto,
-  CreateVnpayPaymentResponse,
+  CreatePaymentDto,
+  MarkPaymentCancelledDto,
+  CreatePaymentResponse,
+} from './types';
+
+// Types - files & activity
+export type {
   FileStatus,
   FileType,
   UserFile,
@@ -124,5 +159,16 @@ export type {
   ActivityQuery,
 } from './types';
 
-// Data
-export { uiLanguageOptions, authProviderOptions } from './data';
+// Data - shared settings config
+export {
+  uiLanguageOptions,
+  authProviderOptions,
+  FILE_TTL_OPTIONS,
+  themeOptions,
+  ACCEPTED_TYPES,
+  MAX_FILE_SIZE,
+  notificationTypeIcons,
+  createLedgerTypeConfig,
+  createPaymentStatusConfig,
+  createActivityActionConfig,
+} from './data';

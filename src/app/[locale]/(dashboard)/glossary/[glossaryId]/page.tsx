@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { use } from "react";
-import { GlossaryDetail } from "@/features/glossary/components/glossary-detail";
+import { use } from 'react';
+import { GlossaryDetail } from '@/features/glossary/components/glossary-detail';
 
 interface GlossaryDetailPageProps {
   params: Promise<{ glossaryId: string }>;

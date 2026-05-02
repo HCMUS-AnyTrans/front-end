@@ -2,7 +2,11 @@
 
 import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { useAuthStore } from '../store/auth.store';
+import {
+  useIsAuthenticated,
+  useIsInitialized,
+  useUser,
+} from '../store/auth.store';
 import { buildLoginUrl } from '../utils/auth.utils';
 
 interface ProtectedRouteProps {
@@ -61,7 +65,9 @@ export function ProtectedRoute({
 }: ProtectedRouteProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const { isAuthenticated, isInitialized, user } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const isInitialized = useIsInitialized();
+  const user = useUser();
 
   useEffect(() => {
     // Wait for auth state to be initialized (hydrated from localStorage)

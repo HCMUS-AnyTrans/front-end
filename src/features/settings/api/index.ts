@@ -1,37 +1,7 @@
-export {
-  // Profile
-  getProfileApi,
-  updateProfileApi,
-  requestGeneralUploadApi,
-  uploadFileToPresignedUrl,
-  buildStorageUrl,
-  // Preferences
-  getPreferencesApi,
-  updatePreferencesApi,
-  // Security
-  changePasswordApi,
-  getIdentitiesApi,
-  unlinkIdentityApi,
-  linkIdentityApi,
-  // Notifications
-  getNotificationsApi,
-  markNotificationReadApi,
-  markAllNotificationsReadApi,
-  deleteNotificationApi,
-  getNotificationPreferencesApi,
-  updateNotificationPreferencesApi,
-  // Billing
-  getWalletApi,
-  getWalletLedgerApi,
-  getCreditPackagesApi,
-  createVnpayPaymentApi,
-  getPaymentsApi,
-  // Files
-  getFilesApi,
-  getFileDownloadApi,
-  deleteFileApi,
-  deleteFilesByJobApi,
-  getStorageUsageApi,
-  // Activity
-  getActivityApi,
-} from './settings.api';
+export * from './profile.api';
+export * from './preferences.api';
+export * from './security.api';
+export * from './notifications.api';
+export * from './billing.api';
+export * from './files.api';
+export * from './activity.api';

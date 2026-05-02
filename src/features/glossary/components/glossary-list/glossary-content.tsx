@@ -1,0 +1,188 @@
+'use client';
+
+import { useState, useDeferredValue } from 'react';
+import { useRouter } from 'next/navigation';
+import { useTranslations, useLocale } from 'next-intl';
+import { Plus } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Pagination } from '@/components/ui/pagination';
+import { useDomains } from '@/features/domains';
+import { useGlossaries } from '../../hooks/use-glossaries';
+import {
+  CreateGlossaryDialog,
+  DeleteGlossaryDialog,
+  EditGlossaryDialog,
+} from '../dialogs';
+import { GlossaryEmptyState } from './glossary-empty-state';
+import { GlossaryFilters } from './glossary-filters';
+import { GlossaryList } from './glossary-list';
+import { GlossarySkeleton } from './glossary-skeleton';
+import type { Glossary, GlossaryQueryParams } from '../../types';
+
+/**
+ * Top-level orchestrator for the glossary list page.
+ * Manages filter/pagination state and wires hooks to presentational components.
+ */
+export function GlossaryContent() {
+  const t = useTranslations('glossary');
+  const router = useRouter();
+  const locale = useLocale();
+  const { getDomainByKey, isLoading: isLoadingDomains } = useDomains();
+
+  // ─── Filter & Pagination State ──────────────────────────────────────
+  const [search, setSearch] = useState('');
+  const [domainFilter, setDomainFilter] = useState('all');
+  const [srcLangFilter, setSrcLangFilter] = useState('all');
+  const [page, setPage] = useState(1);
+  const deferredSearch = useDeferredValue(search);
+  const selectedDomain =
+    domainFilter !== 'all' ? getDomainByKey(domainFilter) : null;
+  const effectiveDomainFilter =
+    domainFilter !== 'all' && !isLoadingDomains && !selectedDomain
+      ? 'all'
+      : domainFilter;
+
+  // ─── Dialog State ───────────────────────────────────────────────────
+  const [createOpen, setCreateOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [selectedGlossary, setSelectedGlossary] = useState<Glossary | null>(
+    null,
+  );
+
+  // ─── Build Query Params ─────────────────────────────────────────────
+  const queryParams: GlossaryQueryParams | undefined =
+    domainFilter !== 'all' && !selectedDomain && isLoadingDomains
+      ? undefined
+      : {
+          page,
+          limit: 20,
+          sortBy: 'createdAt',
+          sortOrder: 'desc',
+          ...(deferredSearch && { search: deferredSearch }),
+          ...(selectedDomain ? { domainId: selectedDomain.id } : {}),
+          ...(srcLangFilter !== 'all' && { srcLang: srcLangFilter }),
+        };
+
+  const { glossaries, pagination, isLoading, isError, isFetching } =
+    useGlossaries(queryParams);
+  const visibleGlossaries = (glossaries ?? []).filter(
+    (glossary) => glossary.status !== 'failed',
+  );
+
+  const hasFilters =
+    search !== '' || effectiveDomainFilter !== 'all' || srcLangFilter !== 'all';
+
+  const isEmpty = visibleGlossaries.length === 0;
+  // isFetching but we already have data — show overlay, not skeleton
+  const isRefetching = isFetching && !isLoading && !isEmpty;
+
+  // ─── Handlers ───────────────────────────────────────────────────────
+  const handleSearchChange = (value: string) => {
+    setSearch(value);
+    setPage(1);
+  };
+
+  const handleDomainChange = (value: string) => {
+    setDomainFilter(value);
+    setPage(1);
+  };
+
+  const handleSrcLangChange = (value: string) => {
+    setSrcLangFilter(value);
+    setPage(1);
+  };
+
+  const handleGlossaryClick = (glossary: Glossary) => {
+    if (glossary.status === 'pending' || glossary.status === 'processing') {
+      return;
+    }
+
+    router.push(`/${locale}/glossary/${glossary.id}`);
+  };
+
+  const handleEdit = (glossary: Glossary) => {
+    setSelectedGlossary(glossary);
+    setEditOpen(true);
+  };
+
+  const handleDelete = (glossary: Glossary) => {
+    setSelectedGlossary(glossary);
+    setDeleteOpen(true);
+  };
+
+  const handleCreateOpen = () => setCreateOpen(true);
+
+  // ─── Render ─────────────────────────────────────────────────────────
+  return (
+    <>
+      {/* Toolbar: filters + create button */}
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row">
+        <GlossaryFilters
+          search={search}
+          onSearchChange={handleSearchChange}
+          domainFilter={effectiveDomainFilter}
+          onDomainChange={handleDomainChange}
+          srcLangFilter={srcLangFilter}
+          onSrcLangChange={handleSrcLangChange}
+        />
+        <Button
+          size="sm"
+          className="w-full shrink-0 sm:w-auto"
+          onClick={handleCreateOpen}
+        >
+          <Plus className="size-4" />
+          {t('createGlossary')}
+        </Button>
+      </div>
+
+      {/* Content */}
+      {isLoading && !glossaries ? (
+        <GlossarySkeleton showFilters={false} />
+      ) : isRefetching ? (
+        <GlossarySkeleton
+          showFilters={false}
+          count={visibleGlossaries.length || 6}
+        />
+      ) : isError || isEmpty ? (
+        <GlossaryEmptyState
+          hasFilters={hasFilters}
+          onCreateClick={handleCreateOpen}
+        />
+      ) : (
+        <>
+          <GlossaryList
+            glossaries={visibleGlossaries}
+            onGlossaryClick={handleGlossaryClick}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
+
+          {pagination && pagination.totalPages > 1 && (
+            <Pagination
+              page={pagination.page}
+              totalPages={pagination.totalPages}
+              hasNext={pagination.hasNext}
+              hasPrev={pagination.hasPrev}
+              onPageChange={setPage}
+              isFetching={isFetching}
+            />
+          )}
+        </>
+      )}
+
+      {/* Dialogs */}
+      <CreateGlossaryDialog open={createOpen} onOpenChange={setCreateOpen} />
+      <EditGlossaryDialog
+        open={editOpen}
+        onOpenChange={setEditOpen}
+        glossary={selectedGlossary}
+      />
+      <DeleteGlossaryDialog
+        open={deleteOpen}
+        onOpenChange={setDeleteOpen}
+        glossary={selectedGlossary}
+      />
+    </>
+  );
+}

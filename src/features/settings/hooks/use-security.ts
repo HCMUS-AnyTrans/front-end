@@ -6,16 +6,17 @@ import {
   unlinkIdentityApi,
   linkIdentityApi,
   changePasswordApi,
-} from '../api/settings.api';
+} from '../api';
 import { settingsKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type { ChangePasswordDto } from '../types';
 
 /**
  * Hook to fetch linked auth identities
  */
 export function useIdentities() {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: settingsKeys.identities(),

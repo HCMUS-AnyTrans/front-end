@@ -8,9 +8,9 @@ import {
   deleteNotificationApi,
   getNotificationPreferencesApi,
   updateNotificationPreferencesApi,
-} from '../api/settings.api';
+} from '../api';
 import { settingsKeys, notificationKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type {
   NotificationsQuery,
   UpdateNotificationPreferencesDto,
@@ -20,7 +20,8 @@ import type {
  * Hook to fetch notifications
  */
 export function useNotifications(query?: NotificationsQuery) {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: notificationKeys.list(query),
@@ -103,7 +104,8 @@ export function useDeleteNotification() {
  * Hook to fetch notification preferences
  */
 export function useNotificationPreferences() {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: settingsKeys.notificationPreferences(),

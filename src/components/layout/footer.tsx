@@ -1,50 +1,54 @@
-"use client"
+'use client';
 
-import { motion } from "framer-motion"
-import { useTranslations } from "next-intl"
-import { Link } from "@/i18n/navigation"
-import Image from "next/image"
-import { Mail, Phone, MapPin } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
+import Image from 'next/image';
+import { Mail, Phone, MapPin } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import {
   siteConfig,
   contactInfo as defaultContactInfo,
   socialLinks as defaultSocialLinks,
   type SocialLink,
   type ContactInfo,
-} from "@/data/site"
+} from '@/data/site';
+import {
+  FOOTER_BOTTOM_LINK_DEFS,
+  FOOTER_NAV_SECTION_DEFS,
+} from '@/data/site-marketing-nav';
 
 export interface NavItem {
-  label: string
-  href: string
+  label: string;
+  href: string;
 }
 
 export interface FooterSection {
-  title: string
-  links: NavItem[]
+  title: string;
+  links: NavItem[];
 }
 
 // Re-export types for external use
-export type FooterLink = NavItem
-export type { SocialLink, ContactInfo }
+export type FooterLink = NavItem;
+export type { SocialLink, ContactInfo };
 
 export interface FooterProps {
-  className?: string
+  className?: string;
   logo?: {
-    text: string
-    icon?: string
-    href?: string
-  }
-  description?: string
-  socialLinks?: SocialLink[]
-  contactInfo?: ContactInfo
-  copyright?: string
+    text: string;
+    icon?: string;
+    href?: string;
+  };
+  description?: string;
+  socialLinks?: SocialLink[];
+  contactInfo?: ContactInfo;
+  copyright?: string;
 }
 
 // --- Sub-components ---
 
 interface FooterLinkColumnProps {
-  section: FooterSection
+  section: FooterSection;
 }
 
 function FooterLinkColumn({ section }: FooterLinkColumnProps) {
@@ -53,7 +57,7 @@ function FooterLinkColumn({ section }: FooterLinkColumnProps) {
       <h4 className="font-semibold text-white mb-4">{section.title}</h4>
       <ul className="space-y-3">
         {section.links.map((link) => (
-          <li key={link.label}>
+          <li key={link.href}>
             <Link
               href={link.href}
               className="text-sm text-[hsl(215,16%,70%)] hover:text-white transition-colors"
@@ -64,11 +68,11 @@ function FooterLinkColumn({ section }: FooterLinkColumnProps) {
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
 interface SocialButtonProps {
-  social: SocialLink
+  social: SocialLink;
 }
 
 function SocialButton({ social }: SocialButtonProps) {
@@ -83,78 +87,49 @@ function SocialButton({ social }: SocialButtonProps) {
     >
       <social.icon className="w-5 h-5" />
     </motion.a>
-  )
+  );
 }
 
 // --- Main Component ---
 
 export function Footer({
   className,
-  logo = { text: siteConfig.name, icon: "A", href: "/" },
+  logo = { text: siteConfig.name, icon: 'A', href: '/' },
   description = siteConfig.description,
   socialLinks = defaultSocialLinks,
   contactInfo = defaultContactInfo,
   copyright,
 }: FooterProps) {
-  const t = useTranslations("marketing.footer")
-  const tLinks = useTranslations("marketing.footer.links")
-  const currentYear = new Date().getFullYear()
-  const copyrightText = copyright || t("copyright", { year: currentYear })
+  const t = useTranslations('marketing.footer');
+  const tLinks = useTranslations('marketing.footer.links');
+  const currentYear = new Date().getFullYear();
+  const copyrightText = copyright || t('copyright', { year: currentYear });
 
-  // Build footer sections with translations
-  const sections: Record<string, FooterSection> = {
-    product: {
-      title: t("product"),
-      links: [
-        { label: tLinks("features"), href: "#features" },
-        { label: tLinks("pricing"), href: "/pricing" },
-        { label: tLinks("api"), href: "/api" },
-        { label: tLinks("integrations"), href: "/integrations" },
-        { label: tLinks("changelog"), href: "/changelog" },
-      ],
-    },
-    company: {
-      title: t("company"),
-      links: [
-        { label: tLinks("about"), href: "/about" },
-        { label: tLinks("blog"), href: "/blog" },
-        { label: tLinks("careers"), href: "/careers" },
-        { label: tLinks("contact"), href: "/contact" },
-        { label: tLinks("partners"), href: "/partners" },
-      ],
-    },
-    resources: {
-      title: t("resources"),
-      links: [
-        { label: tLinks("documentation"), href: "/docs" },
-        { label: tLinks("guides"), href: "/guides" },
-        { label: tLinks("tutorials"), href: "/tutorials" },
-        { label: tLinks("caseStudies"), href: "/case-studies" },
-        { label: tLinks("support"), href: "/support" },
-      ],
-    },
-    legal: {
-      title: t("legal"),
-      links: [
-        { label: tLinks("terms"), href: "/terms" },
-        { label: tLinks("privacy"), href: "/privacy" },
-        { label: tLinks("cookies"), href: "/cookies" },
-        { label: tLinks("dmca"), href: "/dmca" },
-      ],
-    },
-  }
+  const sections: Record<string, FooterSection> =
+    FOOTER_NAV_SECTION_DEFS.reduce<Record<string, FooterSection>>(
+      (acc, def) => {
+        acc[def.id] = {
+          title: t(def.id),
+          links: def.links.map((link) => ({
+            label: tLinks(link.labelKey),
+            href: link.href,
+          })),
+        };
+        return acc;
+      },
+      {},
+    );
 
-  const bottomLinks: NavItem[] = [
-    { label: tLinks("terms"), href: "/terms" },
-    { label: tLinks("privacy"), href: "/privacy" },
-    { label: tLinks("cookies"), href: "/cookies" },
-  ]
+  const bottomLinks: NavItem[] = FOOTER_BOTTOM_LINK_DEFS.map((link) => ({
+    label: tLinks(link.labelKey),
+    href: link.href,
+  }));
 
   return (
     <footer
       className={cn(
-        "relative bg-[hsl(222,47%,11%)] text-white overflow-hidden",
-        className
+        'relative bg-[hsl(222,47%,11%)] text-white overflow-hidden',
+        className,
       )}
     >
       {/* Background Pattern */}
@@ -167,7 +142,7 @@ export function Footer({
             {/* Brand Column */}
             <div className="col-span-2">
               <Link
-                href={logo.href || "/"}
+                href={logo.href || '/'}
                 className="inline-flex items-center gap-2 group"
               >
                 <motion.div
@@ -181,7 +156,9 @@ export function Footer({
                     className="object-contain"
                   />
                 </motion.div>
-                <span className="font-bold text-xl text-white">{logo.text}</span>
+                <span className="font-bold text-xl text-white">
+                  {logo.text}
+                </span>
               </Link>
 
               <p className="mt-4 text-[hsl(215,16%,70%)] leading-relaxed max-w-xs">
@@ -201,7 +178,7 @@ export function Footer({
                 )}
                 {contactInfo.phone && (
                   <a
-                    href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
+                    href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}
                     className="flex items-center gap-3 text-sm text-[hsl(215,16%,70%)] hover:text-white transition-colors"
                   >
                     <Phone className="w-4 h-4" />
@@ -238,7 +215,7 @@ export function Footer({
             <div className="flex items-center gap-6">
               {bottomLinks.map((link) => (
                 <Link
-                  key={link.label}
+                  key={link.href}
                   href={link.href}
                   className="text-sm text-[hsl(215,16%,50%)] hover:text-white transition-colors"
                 >
@@ -250,5 +227,5 @@ export function Footer({
         </div>
       </div>
     </footer>
-  )
+  );
 }

@@ -1,16 +1,17 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { getActivityApi } from '../api/settings.api';
+import { getActivityApi } from '../api';
 import { settingsKeys } from '@/lib/query-client';
-import { useAuthStore } from '@/features/auth';
+import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type { ActivityQuery } from '../types';
 
 /**
  * Hook to fetch user activity / audit log
  */
 export function useActivity(query?: ActivityQuery) {
-  const { isAuthenticated, accessToken } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const accessToken = useAccessToken();
 
   const result = useQuery({
     queryKey: settingsKeys.activity(query),

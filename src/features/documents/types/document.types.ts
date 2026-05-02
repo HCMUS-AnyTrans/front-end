@@ -1,5 +1,3 @@
-import type { LucideIcon } from 'lucide-react';
-
 // =============== LANGUAGE TYPES ===============
 
 export type LanguageCode =
@@ -10,7 +8,11 @@ export type LanguageCode =
   | 'zh'
   | 'fr'
   | 'de'
-  | 'es';
+  | 'es'
+  | 'ru'
+  | 'ar'
+  | 'th'
+  | 'hi';
 
 export interface Language {
   code: LanguageCode;
@@ -32,15 +34,11 @@ export const LANGUAGE_CODE_TO_API_NAME: Record<LanguageCode, string> = {
   fr: 'French',
   de: 'German',
   es: 'Spanish',
+  ru: 'Russian',
+  ar: 'Arabic',
+  th: 'Thai',
+  hi: 'Hindi',
 };
-
-// =============== DOMAIN TYPES ===============
-
-export interface Domain {
-  id: string;
-  name: string;
-  icon: LucideIcon;
-}
 
 // =============== TONE TYPES ===============
 
@@ -63,6 +61,48 @@ export interface ManualTerm {
   tgt: string;
 }
 
+export type GlossaryInputMode = 'saved' | 'manual' | 'none';
+
+export interface FontReplacement {
+  from_font: string;
+  to_font: string;
+}
+
+export interface FontEnabledMap {
+  [from_font: string]: boolean;
+}
+
+export interface ParsedFontsByGroup {
+  [group: string]: string[];
+}
+
+export interface FileMetadata {
+  charCount?: number;
+  language?: string;
+  fontsUsed?: ParsedFontsByGroup;
+  fontParseSupported?: boolean;
+}
+
+export interface FontCheckItem {
+  font_name: string;
+  from_font: string;
+  to_font: string;
+  supported: boolean;
+  replacer: string | null;
+  replacement_candidates: string[];
+}
+
+export interface FontCheckResponse {
+  language: string;
+  items: FontCheckItem[];
+}
+
+export interface FontSelectionMap {
+  [from_font: string]: string;
+}
+
+export type PdfTranslationFlow = 'format_preserved' | 'non_format_preserved';
+
 // =============== FILE TYPES ===============
 
 export interface UploadedFile {
@@ -72,18 +112,6 @@ export interface UploadedFile {
   charCount: number;
   file: File;
 }
-
-export const ALLOWED_FILE_TYPES = [
-  'application/pdf',
-  'application/msword',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  'application/vnd.ms-powerpoint',
-  'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-] as const;
-
-export const ALLOWED_EXTENSIONS = ['.pdf', '.docx', '.doc', '.pptx', '.ppt'];
-
-export const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
 // =============== JOB TYPES ===============
 
@@ -112,6 +140,20 @@ export interface UploadUrlResponse {
   expires_in: number;
 }
 
+/** POST /files/upload/temp — request body */
+export interface TempUploadUrlDto {
+  file_name: string;
+  mime_type: string;
+  file_size: number;
+}
+
+/** POST /files/upload/temp — response */
+export interface PresignedUploadUrlResponse {
+  upload_url: string;
+  storage_key: string;
+  expires_in: number;
+}
+
 /** PATCH /files/:file_id/status — request body */
 export interface UpdateFileStatusDto {
   status: 'uploaded' | 'failed';
@@ -127,17 +169,9 @@ export interface FileResponse {
   status: string;
   type: string;
   created_at: string;
-  store_until: string;
-  metadata?: {
-    charCount: number;
-    language?: string;
-  } | null;
+  store_until: string | null;
+  metadata: FileMetadata | null;
   is_expired: boolean;
-}
-
-export interface CreditEstimateDto {
-  job_type: 'doc-trans' | 'sub-trans';
-  file_id: string;
 }
 
 export interface CreditEstimateItem {
@@ -156,17 +190,33 @@ export interface CreditEstimateResponse {
   breakdown: CreditEstimateItem[];
 }
 
+export interface FileAnalysisEstimateModes {
+  format_preserved: CreditEstimateResponse;
+  non_format_preserved: CreditEstimateResponse;
+}
+
+export interface FileAnalysisResponse {
+  status: 'pending' | 'ready' | 'failed';
+  file: FileResponse;
+  estimate: CreditEstimateResponse | null;
+  estimate_modes?: FileAnalysisEstimateModes | null;
+  error?: string | null;
+}
+
 /** POST /translations/doc — request body */
 export interface CreateTranslationJobDto {
   file_id: string;
   src_lang: string;
   tgt_lang: string;
   doc_tone?: string;
-  doc_domain?: string;
+  domain_id?: string;
+  customized_domain?: string;
   user_glossary?: { src_lang: string; tgt_lang: string }[];
   keep_original_font_size?: boolean;
-  keep_original_fonts?: boolean;
+  font_replacements?: FontReplacement[];
+  use_system_glossary?: boolean;
   pdf_output_format?: 'docx' | 'pptx';
+  pdf_translation_flow?: PdfTranslationFlow;
 }
 
 /** GET /translations/:job_id — response */
@@ -176,16 +226,23 @@ export interface TranslationJobResponse {
   status: JobStatus;
   input_file?: FileResponse;
   output_file?: FileResponse;
+  domainId?: string;
   src_lang?: string;
   tgt_lang?: string;
   error?: string;
   created_at?: string;
   completed_at?: string;
+  customized_domain?: string;
+  pdf_translation_flow?: PdfTranslationFlow;
 }
 
 /** GET /files/:file_id/download — response */
 export interface FileDownloadUrlResponse {
   download_url: string;
+}
+
+export interface FileDownloadUrlOptions {
+  pdf?: boolean;
 }
 
 // =============== UPLOAD FLOW STATE ===============
@@ -195,7 +252,7 @@ export interface FileDownloadUrlResponse {
  * idle → uploading → confirming → analyzing → creating → translating → succeeded/failed
  *
  * "analyzing" means the file was uploaded and confirmed; the backend is now
- * parsing metadata and we are polling estimate-credits until it succeeds.
+ * parsing metadata and we are polling file analysis until it succeeds.
  */
 export type TranslationFlowStatus =
   | 'idle'
@@ -212,10 +269,18 @@ export type TranslationFlowStatus =
 export interface TranslationConfig {
   srcLang: LanguageCode;
   tgtLang: LanguageCode;
-  domain: string;
+  domainId: string;
+  customDomain: string;
   tone: string;
+  glossaryInputMode: GlossaryInputMode;
   selectedGlossaryId: string | null;
   manualTerms: ManualTerm[];
+  useSystemGlossary: boolean;
+  keepOriginalFontSize: boolean;
+  fontConfigEnabled: boolean;
+  fontEnabledMap: FontEnabledMap;
+  fontSelections: FontSelectionMap;
+  pdfTranslationFlow: PdfTranslationFlow;
 }
 
 // =============== STEP TYPES ===============

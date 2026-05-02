@@ -5,10 +5,10 @@ import {
   requestGeneralUploadApi,
   uploadFileToPresignedUrl,
   processAvatarApi,
-} from '../api/settings.api';
+} from '../api';
 import { settingsKeys, authKeys } from '@/lib/query-client';
 import { getErrorMessage } from '@/lib/api-error';
-import { useAuthStore } from '@/features/auth';
+import { useAuthActions } from '@/features/auth';
 import type { CropData } from '../types';
 
 export interface UploadAvatarPayload {
@@ -31,7 +31,7 @@ interface UseUploadAvatarOptions {
  */
 export function useUploadAvatar(options?: UseUploadAvatarOptions) {
   const queryClient = useQueryClient();
-  const updateUser = useAuthStore((state) => state.updateUser);
+  const { updateUser } = useAuthActions();
   const { onSuccess, onError } = options || {};
 
   const mutation = useMutation({

@@ -2,8 +2,9 @@
 
 import { useState, useCallback, useDeferredValue } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useDomains } from '@/features/domains';
 import { useRecentJobs } from '@/features/dashboard/hooks';
-import type { RecentJobsQuery } from '@/features/dashboard/api/dashboard.api';
+import type { RecentJobsQuery } from '@/features/dashboard/types';
 import { ITEMS_PER_PAGE } from '../data';
 
 /**
@@ -19,6 +20,13 @@ export function useHistoryJobs() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [domainFilter, setDomainFilter] = useState<string>('all');
   const deferredSearch = useDeferredValue(search);
+  const { getDomainByKey, isLoading: isLoadingDomains } = useDomains();
+  const selectedDomain =
+    domainFilter !== 'all' ? getDomainByKey(domainFilter) : null;
+  const effectiveDomainFilter =
+    domainFilter !== 'all' && !isLoadingDomains && !selectedDomain
+      ? 'all'
+      : domainFilter;
 
   const handleSearchChange = useCallback((value: string) => {
     setSearch(value);
@@ -43,7 +51,7 @@ export function useHistoryJobs() {
     sortOrder: 'desc',
     ...(deferredSearch ? { search: deferredSearch } : {}),
     ...(statusFilter !== 'all' ? { status: statusFilter } : {}),
-    ...(domainFilter !== 'all' ? { domain: domainFilter } : {}),
+    ...(selectedDomain ? { domain_id: selectedDomain.id } : {}),
   };
 
   const { jobsData, isLoading, isFetching, isError } =
@@ -52,7 +60,7 @@ export function useHistoryJobs() {
   const jobs = jobsData?.data ?? [];
   const meta = jobsData?.meta;
   const hasFilters =
-    !!search || statusFilter !== 'all' || domainFilter !== 'all';
+    !!search || statusFilter !== 'all' || effectiveDomainFilter !== 'all';
 
   return {
     // Data
@@ -64,7 +72,7 @@ export function useHistoryJobs() {
     // Filter state
     search,
     statusFilter,
-    domainFilter,
+    domainFilter: effectiveDomainFilter,
     hasFilters,
     // Actions
     handleSearchChange,

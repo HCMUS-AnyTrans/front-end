@@ -1,149 +1,97 @@
-"use client"
+import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { Button } from '@/components/ui/button';
+import { marketingSectionHref } from '@/data/site-marketing-nav';
+import { Link } from '@/i18n/navigation';
+import { previewSlideConfigs } from '../data/landing-content';
+import { ProductPreviewCarousel } from './product-preview-carousel';
 
-import { useRef } from "react"
-import { useTranslations } from "next-intl"
-import { Link } from "@/i18n/navigation"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowRight, Play } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { TrustBadge, AvatarStack, StarRating, HeroBackground } from "@/components/shared"
-import { TranslationDemo } from "./translation-demo"
-import { cn } from "@/lib/utils"
+export function HeroSection() {
+  const t = useTranslations('marketing.landing.hero');
+  const tSlides = useTranslations('marketing.landing.previewSlides');
 
-export interface HeroSectionProps {
-  stats?: {
-    users: number
-    rating: number
-  }
-  showDemo?: boolean
-  className?: string
-}
-
-export function HeroSection({
-  stats = {
-    users: 10000,
-    rating: 4.9,
-  },
-  showDemo = true,
-  className,
-}: HeroSectionProps) {
-  const t = useTranslations("marketing.hero")
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  })
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-
-  const formatUsers = (num: number) => {
-    return num >= 1000 ? `${(num / 1000).toFixed(0)},000` : `${num}`
-  }
+  const previewSlides = previewSlideConfigs.map((slide) => ({
+    id: slide.key,
+    eyebrow: tSlides(`${slide.key}.eyebrow`),
+    title: tSlides(`${slide.key}.title`),
+    description: tSlides(`${slide.key}.description`),
+    highlights: tSlides.raw(`${slide.key}.highlights`) as string[],
+  }));
 
   return (
-    <HeroBackground
-      ref={containerRef}
-      padding="pt-20"
-      className={cn("min-h-screen flex items-center", className)}
-    >
-      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left Content */}
-          <motion.div style={{ opacity }} className="text-center lg:text-left">
-            {/* Badge */}
-            <TrustBadge
-              text={t("badge")}
-              pulse={true}
-              variant="success"
-              className="mb-6"
-            />
-
-            {/* Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-balance"
-            >
-              <span className="text-foreground">{t("title")}</span>
-              <br />
-              <span className="text-primary">{t("subtitle")}</span>
-            </motion.h1>
-
-            {/* Subheadline */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-6 text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0 text-pretty"
-            >
-              {t("description")}
-            </motion.p>
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-            >
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Button
-                  size="lg"
-                  className="w-full sm:w-auto shadow-lg shadow-primary/20 text-base px-8 h-14 group"
-                  asChild
-                >
-                  <Link href="/register" className="flex items-center gap-2">
-                    {t("cta")}
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
-              </motion.div>
-
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="w-full sm:w-auto text-base px-8 h-14 group"
-                  asChild
-                >
-                  <Link href="/demo" className="flex items-center gap-2">
-                    <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                    {t("ctaSecondary")}
-                  </Link>
-                </Button>
-              </motion.div>
-            </motion.div>
-
-            {/* Trust Bar */}
-            {stats && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="mt-10 flex flex-col sm:flex-row items-center gap-6 justify-center lg:justify-start"
-              >
-                <AvatarStack count={5} showMore size="md" />
-
-                <div className="flex flex-col sm:flex-row items-center gap-4 text-sm">
-                  <span className="text-foreground font-semibold">
-                    {t("users", { count: formatUsers(stats.users) })}
-                  </span>
-                  <StarRating rating={stats.rating} showText />
-                </div>
-              </motion.div>
-            )}
-          </motion.div>
-
-          {/* Right Visual */}
-          {showDemo && (
-            <motion.div style={{ y, opacity }} className="relative hidden lg:block">
-              <TranslationDemo />
-            </motion.div>
-          )}
-        </div>
+    <section className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24">
+      {/* Static grid background */}
+      <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.35]"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, var(--color-border) 1px, transparent 1px), linear-gradient(to bottom, var(--color-border) 1px, transparent 1px)',
+            backgroundSize: '56px 56px',
+          }}
+        />
+        <div className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-background via-background/80 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-linear-to-t from-background via-background/90 to-transparent" />
+        <div className="absolute left-1/2 top-0 h-112 w-3xl -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute right-0 top-24 h-72 w-72 rounded-full bg-secondary/15 blur-3xl" />
       </div>
-    </HeroBackground>
-  )
+
+      <div className="relative mx-auto flex max-w-6xl flex-col gap-14 px-6">
+        <div className="mx-auto max-w-3xl text-center">
+          <h1 className="mt-8 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl">
+            {t('title')}
+            <br />
+            <span className="text-primary">{t('titleAccent')}</span>
+          </h1>
+
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-muted-foreground md:text-xl">
+            {t('description')}
+          </p>
+
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button
+              size="lg"
+              className="h-12 min-w-52 rounded-full px-8 text-base shadow-lg shadow-primary/20"
+              asChild
+            >
+              <Link href="/register">
+                {t('primaryCta')}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+
+            <Button
+              size="lg"
+              variant="outline"
+              className="h-12 min-w-52 rounded-full px-8 text-base"
+              asChild
+            >
+              <Link href={marketingSectionHref('pricing')}>
+                {t('secondaryCta')}
+              </Link>
+            </Button>
+          </div>
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm text-muted-foreground">
+            <span className="rounded-full border border-border bg-background/80 px-3 py-1.5">
+              {t('highlights.languages')}
+            </span>
+            <span className="rounded-full border border-border bg-background/80 px-3 py-1.5">
+              {t('highlights.retention')}
+            </span>
+            <span className="rounded-full border border-border bg-background/80 px-3 py-1.5">
+              {t('highlights.slides', { count: previewSlides.length })}
+            </span>
+          </div>
+        </div>
+
+        <ProductPreviewCarousel
+          slides={previewSlides}
+          goToSlideLabelTemplate={t('carousel.goToSlide', { index: '{index}' })}
+          previousSlideLabel={t('carousel.previousSlide')}
+          nextSlideLabel={t('carousel.nextSlide')}
+        />
+      </div>
+    </section>
+  );
 }

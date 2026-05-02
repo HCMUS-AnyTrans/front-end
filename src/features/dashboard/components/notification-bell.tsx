@@ -19,12 +19,13 @@ import {
   useMarkAllNotificationsRead,
 } from '@/features/settings/hooks/use-notifications';
 import type { Notification, NotificationType } from '@/features/settings/types';
-import { getNotifText } from '@/features/settings/types';
+import { getNotifText } from '@/features/settings/utils/notification';
 import { cn } from '@/lib/utils';
 
 // ─── icon map ────────────────────────────────────────────────────────────────
 const TYPE_EMOJI: Record<NotificationType, string> = {
   translation_status: '📄',
+  glossary_status: '📚',
   credit_purchase: '💳',
   file_expiring: '⚠️',
   security_alert: '🔒',
@@ -57,7 +58,9 @@ function NotificationRow({
     <div
       className={cn(
         'group flex items-start gap-3 rounded-md px-3 py-2.5 transition-colors',
-        notif.isRead ? 'opacity-70 hover:opacity-100' : 'bg-primary/5 hover:bg-primary/10',
+        notif.isRead
+          ? 'opacity-70 hover:opacity-100'
+          : 'bg-primary/5 hover:bg-primary/10',
       )}
     >
       <span className="mt-0.5 shrink-0 text-base leading-none">
@@ -149,17 +152,16 @@ export function NotificationBell() {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent
-        align="end"
-        className="w-80 p-0"
-        sideOffset={8}
-      >
+      <PopoverContent align="end" className="w-80 p-0" sideOffset={8}>
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center gap-2">
             <h3 className="text-sm font-semibold">{t('title')}</h3>
             {unreadCount > 0 && (
-              <Badge variant="secondary" className="h-5 rounded-full px-1.5 text-xs">
+              <Badge
+                variant="secondary"
+                className="h-5 rounded-full px-1.5 text-xs"
+              >
                 {unreadCount}
               </Badge>
             )}

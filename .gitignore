@@ -42,3 +42,7 @@ next-env.d.ts
 
 # open code
 /.opencode
+/.agents
+skills-lock.json
+docs
+/.cursor

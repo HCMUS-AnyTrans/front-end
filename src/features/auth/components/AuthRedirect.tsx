@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuthStore } from '../store/auth.store';
+import { useIsAuthenticated, useIsInitialized } from '../store/auth.store';
 
 interface AuthRedirectProps {
   children: React.ReactNode;
@@ -21,7 +21,8 @@ export function AuthRedirect({
   redirectTo = '/dashboard',
 }: AuthRedirectProps) {
   const router = useRouter();
-  const { isAuthenticated, isInitialized } = useAuthStore();
+  const isAuthenticated = useIsAuthenticated();
+  const isInitialized = useIsInitialized();
 
   useEffect(() => {
     if (isInitialized && isAuthenticated) {

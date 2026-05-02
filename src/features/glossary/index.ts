@@ -2,7 +2,7 @@
 export * from './types';
 
 // API
-export * from './api/glossary.api';
+export * from './api';
 
 // Hooks
 export * from './hooks';
