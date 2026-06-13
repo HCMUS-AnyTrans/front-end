@@ -1,0 +1,66 @@
+{
+  "templates": {
+    "title": "Translation Templates",
+    "description": "Tạo cấu hình dịch thuật dùng lại cho tài liệu của bạn.",
+    "createTemplate": "Tạo Template",
+    "editTemplate": "Chỉnh sửa Template",
+    "backToList": "Quay lại danh sách",
+    "searchPlaceholder": "Tìm template...",
+    "filterDomain": "Lĩnh vực",
+    "allDomains": "Tất cả lĩnh vực",
+    "noTemplates": "Chưa có template",
+    "noTemplatesDescription": "Tạo template để dùng lại cấu hình ngôn ngữ, lĩnh vực, giọng điệu và hướng dẫn dịch.",
+    "noResults": "Không tìm thấy kết quả",
+    "noResultsDescription": "Thử thay đổi từ khóa hoặc bộ lọc.",
+    "loadErrorTitle": "Không thể tải template",
+    "loadErrorDescription": "Đã xảy ra lỗi khi tải danh sách template. Vui lòng thử lại.",
+    "retry": "Thử lại",
+    "view": "Xem",
+    "edit": "Sửa",
+    "delete": "Xóa",
+    "deleteTemplate": "Xóa template",
+    "deleteConfirm": "Template này sẽ bị xóa vĩnh viễn.",
+    "deleteSuccess": "Đã xóa template",
+    "createSuccess": "Đã tạo template",
+    "updateSuccess": "Đã cập nhật template",
+    "saveError": "Không thể lưu template",
+    "deleteError": "Không thể xóa template",
+    "columns": {
+      "name": "Tên",
+      "srcLang": "Ngôn ngữ nguồn",
+      "tgtLang": "Ngôn ngữ đích",
+      "domain": "Lĩnh vực",
+      "updatedAt": "Cập nhật",
+      "actions": "Thao tác"
+    },
+    "fields": {
+      "name": "Tên",
+      "sourceLanguage": "Ngôn ngữ nguồn",
+      "targetLanguage": "Ngôn ngữ đích",
+      "domain": "Lĩnh vực",
+      "customizedDomain": "Lĩnh vực tùy chỉnh",
+      "documentTone": "Giọng điệu dịch",
+      "fontAndPdf": "Phông và Format PDF",
+      "pdfTranslationFlow": "Luồng dịch PDF",
+      "preservePdfFormat": "Giữ định dạng PDF",
+      "keepOriginalFontSize": "Giữ nguyên cỡ chữ gốc",
+      "customInstruction": "Thêm hướng dẫn",
+      "globalContext": "Ngữ cảnh chung",
+      "createdAt": "Ngày tạo",
+      "updatedAt": "Ngày cập nhật"
+    },
+    "form": {
+      "namePlaceholder": "Ví dụ: Hợp đồng pháp lý",
+      "customDomainPlaceholder": "Nhập lĩnh vực tùy chỉnh",
+      "customDomainRequired": "Vui lòng nhập lĩnh vực tùy chỉnh khi chọn domain Khác.",
+      "customInstructionPlaceholder": "Nhập quy tắc dịch, thuật ngữ ưu tiên hoặc hướng dẫn văn phong...",
+      "globalContextPlaceholder": "Nhập bối cảnh hoặc tóm tắt tài liệu dùng template này...",
+      "saving": "Đang lưu...",
+      "deleting": "Đang xóa..."
+    },
+    "detail": {
+      "title": "Chi tiết template",
+      "emptyValue": "-"
+    }
+  }
+}
