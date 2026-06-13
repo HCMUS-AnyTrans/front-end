@@ -3,6 +3,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import {
   DOCUMENT_MAX_FILE_SIZE_BYTES,
   validateDocumentFile,
@@ -11,9 +12,15 @@ import { useDocumentTranslationWizardData } from './use-document-translation-wiz
 import type { TranslationStep, UploadedFile } from '../types';
 import { buildFontReplacements } from '../utils/document-font-config';
 import { getUploadPipelineStatus } from '../utils/document-wizard-selectors';
+import {
+  languageCodeToApiName,
+  useCreateTranslationTemplate,
+} from '@/features/translation-templates';
+import type { TranslationTemplatePayload } from '@/features/translation-templates';
 
 export function useDocumentTranslationWizard() {
   const t = useTranslations('documents.upload');
+  const tConfigure = useTranslations('documents.configure');
   const router = useRouter();
   const locale = useLocale();
 
@@ -51,6 +58,7 @@ export function useDocumentTranslationWizard() {
     isFetchingGlossaries,
     isLoadingDomains,
     isLoadingGlossaries,
+    isLoadingTranslationTemplates,
     isLoadingWallet,
     isPdfFile,
     jobData,
@@ -61,10 +69,13 @@ export function useDocumentTranslationWizard() {
     selectedGlossaryTerms,
     startTranslation,
     startUpload,
+    translationTemplates,
     uploadProgress,
     visibleGlossaries,
     wallet,
   } = useDocumentTranslationWizardData();
+  const { createTemplateAsync, isCreating: isCreatingTemplate } =
+    useCreateTranslationTemplate();
 
   const validateFile = useCallback(
     (selectedFile: File): string | null => {
@@ -139,7 +150,66 @@ export function useDocumentTranslationWizard() {
     goToStep(1);
   }, [goToStep]);
 
-  const handleStartTranslation = useCallback(() => {
+  const buildTemplatePayload = useCallback(
+    (templateName: string): TranslationTemplatePayload | null => {
+    const selectedDomain = getDomainById(config.domainId);
+
+    if (!selectedDomain) {
+      return null;
+    }
+
+    return {
+      name: templateName,
+      srcLang: languageCodeToApiName(config.srcLang),
+      tgtLang: languageCodeToApiName(config.tgtLang),
+      domainId: config.domainId,
+      customizedDomain:
+        selectedDomain.key === 'other' ? config.customDomain.trim() : '',
+      docTone: config.tone,
+      pdfTranslationFlow: config.pdfTranslationFlow,
+      keepOriginalFontSize: config.keepOriginalFontSize,
+      customInstruction: config.customInstruction.trim() || undefined,
+      globalContext: config.globalContext.trim() || undefined,
+    };
+  }, [config, getDomainById]);
+
+  const saveCurrentConfigAsTemplate = useCallback(async () => {
+    const templateName = config.templateName.trim();
+    if (!templateName) {
+      toast.error(tConfigure('templateNameRequired'));
+      return null;
+    }
+
+    const payload = buildTemplatePayload(templateName);
+    if (!payload) {
+      return null;
+    }
+
+    try {
+      const createdTemplate = await createTemplateAsync(payload);
+      handleConfigChange({
+        templateId: createdTemplate.id,
+        saveAsTemplate: false,
+        templateName: createdTemplate.name,
+      });
+      toast.success(tConfigure('templateSaved'));
+      return createdTemplate.id;
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : tConfigure('templateSaveFailed'),
+      );
+      return null;
+    }
+  }, [buildTemplatePayload, config.templateName, createTemplateAsync, handleConfigChange, tConfigure]);
+
+  const handleSaveTemplate = useCallback(() => {
+    void saveCurrentConfigAsTemplate();
+  }, [saveCurrentConfigAsTemplate]);
+
+  const handleStartTranslation = useCallback(async (options?: {
+    saveTemplateFirst?: boolean;
+    omitTemplateId?: boolean;
+  }) => {
     if (!file || !fileId) {
       return;
     }
@@ -148,6 +218,16 @@ export function useDocumentTranslationWizard() {
 
     if (!selectedDomain) {
       return;
+    }
+
+    let templateId = options?.omitTemplateId ? null : config.templateId;
+
+    if (options?.saveTemplateFirst) {
+      const savedTemplateId = await saveCurrentConfigAsTemplate();
+      if (!savedTemplateId) {
+        return;
+      }
+      templateId = savedTemplateId;
     }
 
     goToStep(3);
@@ -167,6 +247,7 @@ export function useDocumentTranslationWizard() {
     void startTranslation(
       {
         ...config,
+        templateId,
         glossaryInputMode,
         keepOriginalFontSize: isFontConfigurationEnabledForFlow
           ? config.keepOriginalFontSize
@@ -186,9 +267,22 @@ export function useDocumentTranslationWizard() {
     glossaryInputMode,
     goToStep,
     isFontConfigurationEnabledForFlow,
+    saveCurrentConfigAsTemplate,
     selectedGlossaryTerms,
     startTranslation,
   ]);
+
+  const handleStartWithoutTemplate = useCallback(() => {
+    void handleStartTranslation({ omitTemplateId: true });
+  }, [handleStartTranslation]);
+
+  const handleStartWithTemplateSave = useCallback(() => {
+    void handleStartTranslation({ saveTemplateFirst: true });
+  }, [handleStartTranslation]);
+
+  const handleStartTranslationClick = useCallback(() => {
+    void handleStartTranslation();
+  }, [handleStartTranslation]);
 
   const handleDownload = useCallback(() => {
     const outputFileId = jobData?.output_file?.id;
@@ -252,6 +346,8 @@ export function useDocumentTranslationWizard() {
         selectedGlossaryId: activeSelectedGlossaryId,
       },
       glossaries: visibleGlossaries,
+      translationTemplates,
+      isLoadingTranslationTemplates,
       selectedGlossaryTerms,
       isLoadingGlossaries: isLoadingGlossaries || isFetchingGlossaries,
       estimate: selectedEstimate,
@@ -273,7 +369,10 @@ export function useDocumentTranslationWizard() {
       fontFlowUnavailable,
       fontCheckUnavailable,
       isCheckingFonts,
-      isLoading: flowStatus === 'creating' || flowStatus === 'translating',
+      isLoading:
+        flowStatus === 'creating' ||
+        flowStatus === 'translating' ||
+        isCreatingTemplate,
       onConfigChange: handleConfigChange,
       onKeepOriginalFontSizeChange: handleKeepOriginalFontSizeChange,
       onFontConfigEnabledChange: handleFontConfigEnabledChange,
@@ -281,7 +380,11 @@ export function useDocumentTranslationWizard() {
       onFontSelectionChange: handleFontSelectionChange,
       onPdfTranslationFlowChange: handlePdfTranslationFlowChange,
       onBack: handleConfigBack,
-      onStart: handleStartTranslation,
+      onStart: handleStartTranslationClick,
+      onStartWithoutTemplate: handleStartWithoutTemplate,
+      onStartWithTemplateSave: handleStartWithTemplateSave,
+      onSaveTemplate: handleSaveTemplate,
+      isSavingTemplate: isCreatingTemplate,
     }),
     [
       activeSelectedGlossaryId,
@@ -301,16 +404,22 @@ export function useDocumentTranslationWizard() {
       handleFontSelectionChange,
       handleKeepOriginalFontSizeChange,
       handlePdfTranslationFlowChange,
-      handleStartTranslation,
+      handleSaveTemplate,
+      handleStartTranslationClick,
+      handleStartWithoutTemplate,
+      handleStartWithTemplateSave,
       isCheckingFonts,
+      isCreatingTemplate,
       isFetchingGlossaries,
       isLoadingDomains,
       isLoadingGlossaries,
+      isLoadingTranslationTemplates,
       isLoadingWallet,
       isPdfFile,
       selectedDomainKey,
       selectedEstimate,
       selectedGlossaryTerms,
+      translationTemplates,
       visibleGlossaries,
       wallet?.balance,
     ],

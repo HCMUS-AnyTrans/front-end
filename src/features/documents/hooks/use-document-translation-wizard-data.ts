@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useLocale } from 'next-intl';
 import { getDomainLabel, useDomains } from '@/features/domains';
 import { useGlossaries, useTerms } from '@/features/glossary';
+import { useTranslationTemplates } from '@/features/translation-templates';
 import { useWallet } from '@/features/dashboard/hooks';
 import { useDocumentTranslationConfig } from './use-document-translation-config';
 import { useDownloadFile } from './use-download-file';
@@ -72,6 +73,11 @@ export function useDocumentTranslationWizardData() {
 
   const { download, isDownloading } = useDownloadFile();
   const { wallet, isLoading: isLoadingWallet } = useWallet();
+  const {
+    templates: translationTemplates = [],
+    isLoading: isLoadingTranslationTemplates,
+    isFetching: isFetchingTranslationTemplates,
+  } = useTranslationTemplates({ page: 1, limit: 100, sortBy: 'updatedAt', sortOrder: 'desc' });
 
   const {
     config,
@@ -209,6 +215,8 @@ export function useDocumentTranslationWizardData() {
     isFontConfigurationEnabledForFlow,
     isLoadingDomains,
     isLoadingGlossaries,
+    isLoadingTranslationTemplates:
+      isLoadingTranslationTemplates || isFetchingTranslationTemplates,
     isLoadingWallet,
     isPdfFile,
     isFetchingGlossaries,
@@ -220,6 +228,7 @@ export function useDocumentTranslationWizardData() {
     selectedGlossaryTerms,
     startTranslation,
     startUpload,
+    translationTemplates,
     uploadProgress,
     visibleGlossaries,
     wallet,

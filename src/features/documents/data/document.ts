@@ -32,16 +32,21 @@ export const tones: Tone[] = [
 // =============== DEFAULT CONFIG ===============
 
 export const defaultConfig: TranslationConfig = {
+  templateId: null,
   srcLang: 'en',
   tgtLang: 'vi',
   domainId: '',
   customDomain: '',
   tone: 'professional',
+  customInstruction: '',
+  globalContext: '',
+  saveAsTemplate: false,
+  templateName: '',
   glossaryInputMode: 'saved',
   selectedGlossaryId: null,
   manualTerms: [],
   useSystemGlossary: true,
-  keepOriginalFontSize: false,
+  keepOriginalFontSize: true,
   fontConfigEnabled: true,
   fontEnabledMap: {},
   fontSelections: {},

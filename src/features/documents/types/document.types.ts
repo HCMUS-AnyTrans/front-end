@@ -217,6 +217,9 @@ export interface CreateTranslationJobDto {
   use_system_glossary?: boolean;
   pdf_output_format?: 'docx' | 'pptx';
   pdf_translation_flow?: PdfTranslationFlow;
+  custom_instruction?: string;
+  global_context?: string;
+  template_id?: string;
 }
 
 /** GET /translations/:job_id — response */
@@ -267,11 +270,16 @@ export type TranslationFlowStatus =
 // =============== CONFIG TYPES ===============
 
 export interface TranslationConfig {
+  templateId: string | null;
   srcLang: LanguageCode;
   tgtLang: LanguageCode;
   domainId: string;
   customDomain: string;
   tone: string;
+  customInstruction: string;
+  globalContext: string;
+  saveAsTemplate: boolean;
+  templateName: string;
   glossaryInputMode: GlossaryInputMode;
   selectedGlossaryId: string | null;
   manualTerms: ManualTerm[];
