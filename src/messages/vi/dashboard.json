@@ -6,7 +6,7 @@
       "dashboard": "Tổng quan",
       "documents": "Dịch",
       "glossary": "Thuật ngữ",
-      "templates": "Template",
+      "templates": "Mẫu dịch",
       "history": "Lịch sử",
       "settings": "Cài đặt",
       "help": "Trợ giúp",
@@ -17,7 +17,7 @@
       "dashboard": "Tổng quan",
       "documents": "Dịch",
       "glossary": "Thuật ngữ",
-      "templates": "Template",
+      "templates": "Mẫu dịch",
       "history": "Lịch sử",
       "settings": "Cài đặt",
       "help": "Trợ giúp"
@@ -52,7 +52,7 @@
       "noResultsHint": "Thử từ khóa khác",
       "noJobResults": "Không tìm thấy bản dịch phù hợp",
       "noGlossaryResults": "Không tìm thấy bộ thuật ngữ phù hợp",
-      "unknownFile": "File không xác định",
+      "unknownFile": "Tệp không xác định",
       "typeToSearch": "Nhập từ khóa để tìm kiếm",
       "hint": "Tìm chức năng, bản dịch và bộ thuật ngữ",
       "navigate": "để điều hướng",
@@ -151,11 +151,11 @@
       "noResultsDescription": "Hãy thử điều chỉnh từ khóa tìm kiếm hoặc bộ lọc.",
       "totalJobs": "{count} bản dịch",
       "pageInfo": "Trang {page}/{totalPages}",
-      "fileExpired": "File đã hết hạn",
+      "fileExpired": "Tệp đã hết hạn",
       "download": {
         "label": "Tải xuống",
-        "original": "File gốc",
-        "translated": "File đã dịch"
+        "original": "Tệp gốc",
+        "translated": "Tệp đã dịch"
       },
       "columns": {
         "credits": "Credits"
@@ -165,9 +165,9 @@
         "timing": "Thời gian",
         "createdAt": "Tạo lúc",
         "completedAt": "Hoàn thành lúc",
-        "inputFile": "File gốc",
-        "outputFile": "File đã dịch",
-        "fileExpired": "File đã hết hạn",
+        "inputFile": "Tệp gốc",
+        "outputFile": "Tệp đã dịch",
+        "fileExpired": "Tệp đã hết hạn",
         "creditCost": "Chi phí Credits",
         "breakdown": {
           "service": "Dịch vụ",

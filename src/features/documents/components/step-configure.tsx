@@ -1,18 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import { AppCard, AppCardContent } from '@/components/ui/app-card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { Switch } from '@/components/ui/switch';
 import {
   Select,
   SelectContent,
@@ -89,9 +80,7 @@ interface StepConfigureProps {
   onStart: () => void;
   onStartWithoutTemplate: () => void;
   onStartWithTemplateSave: () => void;
-  onSaveTemplate: () => void;
   isLoading?: boolean;
-  isSavingTemplate?: boolean;
 }
 
 export function StepConfigure({
@@ -130,11 +119,8 @@ export function StepConfigure({
   onStart,
   onStartWithoutTemplate,
   onStartWithTemplateSave,
-  onSaveTemplate,
   isLoading,
-  isSavingTemplate,
 }: StepConfigureProps) {
-  const [confirmCustomOpen, setConfirmCustomOpen] = useState(false);
   const t = useTranslations('documents.configure');
   const tTemplates = useTranslations('templates');
   const isUnknownSelectedDomain =
@@ -175,6 +161,8 @@ export function StepConfigure({
     onConfigChange({ customInstruction });
   const handleGlobalContextChange = (globalContext: string) =>
     onConfigChange({ globalContext });
+  const handleSaveAsTemplateChange = (saveAsTemplate: boolean) =>
+    onConfigChange({ saveAsTemplate });
   const handleTemplateNameChange = (templateName: string) =>
     onConfigChange({ templateName });
   const handleTemplateSelect = (value: string) => {
@@ -255,19 +243,16 @@ export function StepConfigure({
   const isCustomTemplateState = hasTemplateChanges;
   const handleStartClick = () => {
     if (isCustomTemplateState) {
-      setConfirmCustomOpen(true);
+      if (config.saveAsTemplate) {
+        onStartWithTemplateSave();
+        return;
+      }
+
+      onStartWithoutTemplate();
       return;
     }
 
     onStart();
-  };
-  const handleConfirmSaveThenStart = () => {
-    setConfirmCustomOpen(false);
-    onStartWithTemplateSave();
-  };
-  const handleConfirmStartWithoutSave = () => {
-    setConfirmCustomOpen(false);
-    onStartWithoutTemplate();
   };
 
   return (
@@ -309,21 +294,36 @@ export function StepConfigure({
                   </SelectContent>
                 </Select>
                 {isCustomTemplateState ? (
-                  <div className="space-y-2 pt-2">
-                    <Label htmlFor="template-name">
-                      {tTemplates('fields.name')}
-                    </Label>
-                    <Input
-                      id="template-name"
-                      value={config.templateName}
-                      onChange={(event) =>
-                        handleTemplateNameChange(event.target.value)
-                      }
-                      placeholder={tTemplates('form.namePlaceholder')}
-                    />
-                    <p className="text-xs text-muted-foreground">
-                      {t('customTemplateHint')}
-                    </p>
+                  <div className="space-y-3 rounded-lg border bg-muted/20 p-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="space-y-1">
+                        <p className="text-sm font-medium text-foreground">
+                          {t('saveAsTemplate')}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {t('customTemplateHint')}
+                        </p>
+                      </div>
+                      <Switch
+                        checked={config.saveAsTemplate}
+                        onCheckedChange={handleSaveAsTemplateChange}
+                      />
+                    </div>
+                    {config.saveAsTemplate ? (
+                      <div className="space-y-2">
+                        <Label htmlFor="template-name">
+                          {tTemplates('fields.name')}
+                        </Label>
+                        <Input
+                          id="template-name"
+                          value={config.templateName}
+                          onChange={(event) =>
+                            handleTemplateNameChange(event.target.value)
+                          }
+                          placeholder={tTemplates('form.namePlaceholder')}
+                        />
+                      </div>
+                    ) : null}
                   </div>
                 ) : null}
               </div>
@@ -444,13 +444,9 @@ export function StepConfigure({
           />
           <ConfigureActionsPanel
             onBack={onBack}
-            onSaveTemplate={onSaveTemplate}
             onStart={handleStartClick}
             isLoading={isLoading}
-            isSavingTemplate={isSavingTemplate}
             isStartDisabled={isStartBlocked}
-            isSaveTemplateVisible={isCustomTemplateState}
-            isSaveTemplateDisabled={isStartBlocked}
             isInsufficientCredits={isInsufficientCredits}
           />
         </div>
@@ -468,37 +464,11 @@ export function StepConfigure({
       {/* ── Mobile sticky action bar ── */}
       <ConfigureMobileActionBar
         onBack={onBack}
-        onSaveTemplate={onSaveTemplate}
         onStart={handleStartClick}
         isLoading={isLoading}
-        isSavingTemplate={isSavingTemplate}
         isStartDisabled={isStartBlocked}
-        isSaveTemplateVisible={isCustomTemplateState}
-        isSaveTemplateDisabled={isStartBlocked}
         isInsufficientCredits={isInsufficientCredits}
       />
-      <Dialog open={confirmCustomOpen} onOpenChange={setConfirmCustomOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>{t('customTemplateConfirmTitle')}</DialogTitle>
-            <DialogDescription>
-              {t('customTemplateConfirmDescription')}
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="gap-2 sm:justify-end">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handleConfirmStartWithoutSave}
-            >
-              {t('startWithoutSavingTemplate')}
-            </Button>
-            <Button type="button" onClick={handleConfirmSaveThenStart}>
-              {t('saveTemplateThenStart')}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }

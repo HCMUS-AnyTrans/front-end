@@ -7,11 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch } from 'react-hook-form';
 import { toast } from 'sonner';
 import { ArrowLeft, Loader2 } from 'lucide-react';
-import {
-  AppCard,
-  AppCardContent,
-  AppCardHeader,
-} from '@/components/ui/app-card';
+import { AppCard, AppCardContent } from '@/components/ui/app-card';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -153,12 +149,7 @@ export function TemplateForm({ mode, template, isLoading }: TemplateFormProps) {
         </div>
 
         <AppCard>
-          <AppCardHeader>
-            <h2 className="text-lg font-semibold">
-              {mode === 'create' ? t('createTemplate') : t('editTemplate')}
-            </h2>
-          </AppCardHeader>
-          <AppCardContent className="space-y-6">
+          <AppCardContent className="space-y-6 pt-4">
             <FormField
               control={form.control}
               name="name"

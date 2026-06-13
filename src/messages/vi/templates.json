@@ -1,15 +1,15 @@
 {
   "templates": {
-    "title": "Translation Templates",
+    "title": "Mẫu dịch",
     "description": "Tạo cấu hình dịch thuật dùng lại cho tài liệu của bạn.",
-    "createTemplate": "Tạo Template",
-    "editTemplate": "Chỉnh sửa Template",
+    "createTemplate": "Tạo mẫu dịch",
+    "editTemplate": "Chỉnh sửa mẫu dịch",
     "backToList": "Quay lại danh sách",
     "searchPlaceholder": "Tìm template...",
     "filterDomain": "Lĩnh vực",
     "allDomains": "Tất cả lĩnh vực",
-    "noTemplates": "Chưa có template",
-    "noTemplatesDescription": "Tạo template để dùng lại cấu hình ngôn ngữ, lĩnh vực, giọng điệu và hướng dẫn dịch.",
+    "noTemplates": "Chưa có mẫu dịch",
+    "noTemplatesDescription": "Tạo mẫu dịch để dùng lại cấu hình ngôn ngữ, lĩnh vực, giọng điệu và hướng dẫn dịch.",
     "noResults": "Không tìm thấy kết quả",
     "noResultsDescription": "Thử thay đổi từ khóa hoặc bộ lọc.",
     "loadErrorTitle": "Không thể tải template",
@@ -18,13 +18,13 @@
     "view": "Xem",
     "edit": "Sửa",
     "delete": "Xóa",
-    "deleteTemplate": "Xóa template",
-    "deleteConfirm": "Template này sẽ bị xóa vĩnh viễn.",
-    "deleteSuccess": "Đã xóa template",
-    "createSuccess": "Đã tạo template",
-    "updateSuccess": "Đã cập nhật template",
-    "saveError": "Không thể lưu template",
-    "deleteError": "Không thể xóa template",
+    "deleteTemplate": "Xóa mẫu dịch",
+    "deleteConfirm": "Mẫu dịch này sẽ bị xóa vĩnh viễn.",
+    "deleteSuccess": "Đã xóa mẫu dịch",
+    "createSuccess": "Đã tạo mẫu dịch",
+    "updateSuccess": "Đã cập nhật mẫu dịch",
+    "saveError": "Không thể lưu mẫu dịch",
+    "deleteError": "Không thể xóa mẫu dịch",
     "columns": {
       "name": "Tên",
       "srcLang": "Ngôn ngữ nguồn",
@@ -59,7 +59,7 @@
       "deleting": "Đang xóa..."
     },
     "detail": {
-      "title": "Chi tiết template",
+      "title": "Chi tiết mẫu dịch",
       "emptyValue": "-"
     }
   }

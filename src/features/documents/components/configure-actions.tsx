@@ -6,13 +6,9 @@ import { cn } from "@/lib/utils"
 
 interface ConfigureActionsProps {
   onBack: () => void
-  onSaveTemplate?: () => void
   onStart: () => void
   isLoading?: boolean
-  isSavingTemplate?: boolean
   isStartDisabled: boolean
-  isSaveTemplateVisible?: boolean
-  isSaveTemplateDisabled?: boolean
   isInsufficientCredits: boolean
   containerClassName?: string
   backButtonClassName?: string
@@ -22,13 +18,9 @@ interface ConfigureActionsProps {
 
 export function ConfigureActions({
   onBack,
-  onSaveTemplate,
   onStart,
   isLoading,
-  isSavingTemplate,
   isStartDisabled,
-  isSaveTemplateVisible,
-  isSaveTemplateDisabled,
   isInsufficientCredits,
   containerClassName,
   backButtonClassName,
@@ -43,16 +35,6 @@ export function ConfigureActions({
         <Button variant="outline" onClick={onBack} className={backButtonClassName}>
           {t("back")}
         </Button>
-        {isSaveTemplateVisible ? (
-          <Button
-            variant="outline"
-            onClick={onSaveTemplate}
-            disabled={isSaveTemplateDisabled || isSavingTemplate}
-            className={startButtonClassName}
-          >
-            {isSavingTemplate ? t("savingTemplate") : t("saveTemplate")}
-          </Button>
-        ) : null}
         <Button onClick={onStart} disabled={isStartDisabled} className={startButtonClassName}>
           {isLoading ? t("processing") : t("startTranslation")}
         </Button>

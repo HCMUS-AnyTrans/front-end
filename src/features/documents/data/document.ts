@@ -42,7 +42,7 @@ export const defaultConfig: TranslationConfig = {
   globalContext: '',
   saveAsTemplate: false,
   templateName: '',
-  glossaryInputMode: 'saved',
+  glossaryInputMode: 'none',
   selectedGlossaryId: null,
   manualTerms: [],
   useSystemGlossary: true,

@@ -202,10 +202,6 @@ export function useDocumentTranslationWizard() {
     }
   }, [buildTemplatePayload, config.templateName, createTemplateAsync, handleConfigChange, tConfigure]);
 
-  const handleSaveTemplate = useCallback(() => {
-    void saveCurrentConfigAsTemplate();
-  }, [saveCurrentConfigAsTemplate]);
-
   const handleStartTranslation = useCallback(async (options?: {
     saveTemplateFirst?: boolean;
     omitTemplateId?: boolean;
@@ -383,8 +379,6 @@ export function useDocumentTranslationWizard() {
       onStart: handleStartTranslationClick,
       onStartWithoutTemplate: handleStartWithoutTemplate,
       onStartWithTemplateSave: handleStartWithTemplateSave,
-      onSaveTemplate: handleSaveTemplate,
-      isSavingTemplate: isCreatingTemplate,
     }),
     [
       activeSelectedGlossaryId,
@@ -404,7 +398,6 @@ export function useDocumentTranslationWizard() {
       handleFontSelectionChange,
       handleKeepOriginalFontSizeChange,
       handlePdfTranslationFlowChange,
-      handleSaveTemplate,
       handleStartTranslationClick,
       handleStartWithoutTemplate,
       handleStartWithTemplateSave,
