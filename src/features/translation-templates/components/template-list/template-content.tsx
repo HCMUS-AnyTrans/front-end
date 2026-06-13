@@ -7,6 +7,7 @@ import { Plus } from 'lucide-react';
 import { AppCard } from '@/components/ui/app-card';
 import { Button } from '@/components/ui/button';
 import { Pagination } from '@/components/ui/pagination';
+import { getDocToneLabel, useDocTones } from '@/features/doc-tones';
 import { getDomainLabel, useDomains } from '@/features/domains';
 import { useTranslationTemplates } from '../../hooks';
 import type { TranslationTemplate } from '../../types';
@@ -25,6 +26,7 @@ export function TemplateContent() {
   const locale = useLocale();
   const t = useTranslations('templates');
   const { getDomainById } = useDomains();
+  const { data: docTones = [] } = useDocTones();
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [selectedTemplate, setSelectedTemplate] = useState<TranslationTemplate | null>(null);
@@ -136,6 +138,11 @@ export function TemplateContent() {
         domainLabel={
           selectedTemplate
             ? getTemplateDomainLabel(selectedTemplate, getDomainLabelById)
+            : '-'
+        }
+        docToneLabel={
+          selectedTemplate
+            ? getDocToneLabel(docTones, selectedTemplate.docTone, locale)
             : '-'
         }
         showCustomizedDomain={Boolean(

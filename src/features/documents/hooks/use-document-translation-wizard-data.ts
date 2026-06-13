@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useLocale } from 'next-intl';
 import { getDomainLabel, useDomains } from '@/features/domains';
+import { getDefaultDocToneValue, useDocTones } from '@/features/doc-tones';
 import { useGlossaries, useTerms } from '@/features/glossary';
 import { useTranslationTemplates } from '@/features/translation-templates';
 import { useWallet } from '@/features/dashboard/hooks';
@@ -31,6 +32,12 @@ export function useDocumentTranslationWizardData() {
     getDomainByKey,
     isLoading: isLoadingDomains,
   } = useDomains();
+  const {
+    data: docTones = [],
+    isLoading: isLoadingDocTones,
+    isError: isDocTonesError,
+    refetch: refetchDocTones,
+  } = useDocTones();
 
   const {
     flowStatus,
@@ -121,6 +128,16 @@ export function useDocumentTranslationWizardData() {
     [domains, locale],
   );
 
+  useEffect(() => {
+    if (docTones.length === 0) return;
+    if (docTones.some((tone) => tone.value === config.tone)) return;
+
+    const defaultDocTone = getDefaultDocToneValue(docTones);
+    if (defaultDocTone && defaultDocTone !== config.tone) {
+      handleConfigChange({ tone: defaultDocTone });
+    }
+  }, [config.tone, docTones, handleConfigChange]);
+
   const glossaryFilters = useMemo(
     () => ({
       page: 1,
@@ -191,6 +208,7 @@ export function useDocumentTranslationWizardData() {
     analysisFile,
     canPreview,
     config,
+    docTones,
     domainOptions,
     download,
     effectiveFlowStatus,
@@ -214,15 +232,18 @@ export function useDocumentTranslationWizardData() {
     isDownloading,
     isFontConfigurationEnabledForFlow,
     isLoadingDomains,
+    isLoadingDocTones,
     isLoadingGlossaries,
     isLoadingTranslationTemplates:
       isLoadingTranslationTemplates || isFetchingTranslationTemplates,
     isLoadingWallet,
+    isDocTonesError,
     isPdfFile,
     isFetchingGlossaries,
     jobData,
     resetConfig,
     resetFlow,
+    refetchDocTones,
     selectedDomainKey: selectedDomain?.key ?? null,
     selectedEstimate,
     selectedGlossaryTerms,

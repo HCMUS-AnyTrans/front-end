@@ -88,6 +88,11 @@ export const domainKeys = {
   list: () => [...domainKeys.all, 'list'] as const,
 };
 
+export const docToneKeys = {
+  all: ['doc-tones'] as const,
+  list: () => [...docToneKeys.all, 'list'] as const,
+};
+
 // Settings-related query keys
 export const settingsKeys = {
   all: ['settings'] as const,

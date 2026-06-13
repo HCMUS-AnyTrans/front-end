@@ -27,12 +27,14 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import { getDomainLabel, useDomains } from '@/features/domains';
 import {
-  sourceLanguages,
-  targetLanguages,
-  tones,
-} from '@/features/documents/data';
+  getDefaultDocToneValue,
+  getDocToneDescription,
+  getDocToneLabel,
+  useDocTones,
+} from '@/features/doc-tones';
+import { getDomainLabel, useDomains } from '@/features/domains';
+import { sourceLanguages, targetLanguages } from '@/features/documents/data';
 import { cn } from '@/lib/utils';
 import { translationTemplateSchema } from '../data';
 import {
@@ -61,6 +63,12 @@ export function TemplateForm({ mode, template, isLoading }: TemplateFormProps) {
   const tCommon = useTranslations('common');
   const tDocuments = useTranslations('documents');
   const { domains, getDomainById } = useDomains();
+  const {
+    data: docTones = [],
+    isLoading: isLoadingDocTones,
+    isError: isDocTonesError,
+    refetch: refetchDocTones,
+  } = useDocTones();
   const form = useForm<TranslationTemplateFormValues>({
     resolver: zodResolver(translationTemplateSchema),
     defaultValues: templateToFormValues(template),
@@ -79,6 +87,10 @@ export function TemplateForm({ mode, template, isLoading }: TemplateFormProps) {
   });
   const selectedDomain = getDomainById(selectedDomainId);
   const isOtherDomain = selectedDomain?.key === 'other';
+  const selectedDocTone = useWatch({
+    control: form.control,
+    name: 'docTone',
+  });
 
   useEffect(() => {
     if (selectedDomainId && !selectedDomain) {
@@ -89,6 +101,16 @@ export function TemplateForm({ mode, template, isLoading }: TemplateFormProps) {
       form.setValue('customizedDomain', '', { shouldDirty: true });
     }
   }, [form, isOtherDomain, selectedDomain, selectedDomainId]);
+
+  useEffect(() => {
+    if (docTones.length === 0) return;
+    if (docTones.some((tone) => tone.value === selectedDocTone)) return;
+
+    const defaultDocTone = getDefaultDocToneValue(docTones);
+    if (defaultDocTone && defaultDocTone !== selectedDocTone) {
+      form.setValue('docTone', defaultDocTone, { shouldDirty: true });
+    }
+  }, [docTones, form, selectedDocTone]);
 
   async function handleSubmit(values: TranslationTemplateFormValues) {
     if (isOtherDomain && !values.customizedDomain.trim()) {
@@ -275,28 +297,50 @@ export function TemplateForm({ mode, template, isLoading }: TemplateFormProps) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t('fields.documentTone')}</FormLabel>
-                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-                    {tones.map((tone) => (
-                      <button
-                        key={tone.id}
+                  {isLoadingDocTones ? (
+                    <div className="rounded-lg border bg-muted/20 p-4 text-sm text-muted-foreground">
+                      {tCommon('loading')}
+                    </div>
+                  ) : isDocTonesError ? (
+                    <div className="flex items-center justify-between gap-3 rounded-lg border bg-muted/20 p-4 text-sm text-muted-foreground">
+                      <span>{tDocuments('configure.toneLoadError')}</span>
+                      <Button
                         type="button"
-                        onClick={() => field.onChange(tone.id)}
-                        className={cn(
-                          'flex min-h-20 flex-col items-start rounded-lg border p-2.5 text-left transition-all',
-                          field.value === tone.id
-                            ? 'border-primary bg-primary/5 text-primary'
-                            : 'border-border bg-card hover:bg-muted/50',
-                        )}
+                        variant="outline"
+                        size="sm"
+                        onClick={() => void refetchDocTones()}
                       >
-                        <span className="text-sm font-medium">
-                          {tDocuments(`tones.${tone.id}`)}
-                        </span>
-                        <span className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">
-                          {tDocuments(`toneDescriptions.${tone.id}`)}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
+                        {tDocuments('configure.retry')}
+                      </Button>
+                    </div>
+                  ) : docTones.length === 0 ? (
+                    <div className="rounded-lg border bg-muted/20 p-4 text-sm text-muted-foreground">
+                      {tDocuments('configure.noTones')}
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                      {docTones.map((tone) => (
+                        <button
+                          key={tone.id || tone.value}
+                          type="button"
+                          onClick={() => field.onChange(tone.value)}
+                          className={cn(
+                            'flex min-h-20 flex-col items-start rounded-lg border p-2.5 text-left transition-all',
+                            field.value === tone.value
+                              ? 'border-primary bg-primary/5 text-primary'
+                              : 'border-border bg-card hover:bg-muted/50',
+                          )}
+                        >
+                          <span className="text-sm font-medium">
+                            {getDocToneLabel(docTones, tone.value, locale)}
+                          </span>
+                          <span className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">
+                            {getDocToneDescription(tone, locale)}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
                   <FormMessage />
                 </FormItem>
               )}

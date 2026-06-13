@@ -19,6 +19,7 @@ interface TemplateDetailDrawerProps {
   onOpenChange: (open: boolean) => void;
   locale: string;
   domainLabel: string;
+  docToneLabel: string;
   showCustomizedDomain: boolean;
 }
 
@@ -41,6 +42,7 @@ export function TemplateDetailDrawer({
   onOpenChange,
   locale,
   domainLabel,
+  docToneLabel,
   showCustomizedDomain,
 }: TemplateDetailDrawerProps) {
   const t = useTranslations('templates');
@@ -79,7 +81,7 @@ export function TemplateDetailDrawer({
           ) : null}
           <DetailRow
             label={t('fields.documentTone')}
-            value={template.docTone}
+            value={docToneLabel}
           />
           <Separator />
 

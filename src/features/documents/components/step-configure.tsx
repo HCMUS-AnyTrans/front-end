@@ -28,6 +28,7 @@ import { useStepConfigureState } from '../hooks/use-step-configure-state';
 import { getFontConfigurationApplicable } from '../utils/document-wizard-selectors';
 import { useTranslations } from 'next-intl';
 import type { TranslationTemplate } from '@/features/translation-templates';
+import type { DocTone } from '@/features/doc-tones';
 import {
   apiLanguageToCode,
   TEMPLATE_CUSTOM_VALUE,
@@ -47,6 +48,10 @@ import type { CreditEstimateResponse } from '../types';
 interface StepConfigureProps {
   config: TranslationConfig;
   onConfigChange: (updates: Partial<TranslationConfig>) => void;
+  docTones: DocTone[];
+  isLoadingDocTones: boolean;
+  isDocTonesError: boolean;
+  onRetryDocTones: () => void;
   translationTemplates: TranslationTemplate[];
   isLoadingTranslationTemplates: boolean;
   glossaries: Glossary[];
@@ -86,6 +91,10 @@ interface StepConfigureProps {
 export function StepConfigure({
   config,
   onConfigChange,
+  docTones,
+  isLoadingDocTones,
+  isDocTonesError,
+  onRetryDocTones,
   translationTemplates,
   isLoadingTranslationTemplates,
   glossaries,
@@ -348,7 +357,14 @@ export function StepConfigure({
                 onChange={handleDomainChange}
                 onCustomValueChange={handleCustomDomainChange}
               />
-              <ToneSelector value={config.tone} onChange={handleToneChange} />
+              <ToneSelector
+                tones={docTones}
+                value={config.tone}
+                isLoading={isLoadingDocTones}
+                isError={isDocTonesError}
+                onRetry={onRetryDocTones}
+                onChange={handleToneChange}
+              />
               {isPdfFile ? (
                 <PdfFlowSelector
                   value={pdfTranslationFlow}
