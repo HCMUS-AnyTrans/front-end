@@ -17,9 +17,10 @@ interface TranslationTemplateDto {
   tgt_lang: string;
   domain_id: string;
   customized_domain?: string;
-  doc_tone: string;
+  doc_tone_id: string;
   pdf_translation_flow: TranslationTemplate['pdfTranslationFlow'];
   keep_original_font_size?: boolean;
+  use_system_glossary?: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -46,9 +47,10 @@ function mapTemplateDto(dto: TranslationTemplateDto): TranslationTemplate {
     tgtLang: dto.tgt_lang,
     domainId: dto.domain_id,
     customizedDomain: dto.customized_domain,
-    docTone: dto.doc_tone,
+    docToneId: dto.doc_tone_id,
     pdfTranslationFlow: dto.pdf_translation_flow,
     keepOriginalFontSize: dto.keep_original_font_size,
+    useSystemGlossary: dto.use_system_glossary,
     createdAt: dto.created_at,
     updatedAt: dto.updated_at,
   };
@@ -63,19 +65,19 @@ function mapPayload(payload: TranslationTemplatePayload) {
     tgt_lang: payload.tgtLang,
     domain_id: payload.domainId,
     customized_domain: payload.customizedDomain,
-    doc_tone: payload.docTone,
+    doc_tone_id: payload.docToneId,
     pdf_translation_flow: payload.pdfTranslationFlow,
     keep_original_font_size: payload.keepOriginalFontSize,
+    use_system_glossary: payload.useSystemGlossary,
   };
 }
 
 export async function listTranslationTemplatesApi(
   params?: TranslationTemplateQueryParams,
 ): Promise<TranslationTemplateListResponse> {
-  const response = await apiClient.get<TranslationTemplateDto[] | PaginatedTemplateDto>(
-    '/translation-templates',
-    { params },
-  );
+  const response = await apiClient.get<
+    TranslationTemplateDto[] | PaginatedTemplateDto
+  >('/translation-templates', { params });
   const data = response.data;
 
   if (Array.isArray(data)) {
@@ -86,7 +88,10 @@ export async function listTranslationTemplatesApi(
   const pagination =
     data.pagination ??
     data.meta ??
-    (typeof data.total === 'number' && data.page && data.limit && data.totalPages
+    (typeof data.total === 'number' &&
+    data.page &&
+    data.limit &&
+    data.totalPages
       ? {
           page: data.page,
           limit: data.limit,
@@ -136,8 +141,8 @@ export async function updateTranslationTemplateApi(
 export async function deleteTranslationTemplateApi(
   templateId: string,
 ): Promise<MessageResponse | { success: boolean }> {
-  const response = await apiClient.delete<MessageResponse | { success: boolean }>(
-    `/translation-templates/${templateId}`,
-  );
+  const response = await apiClient.delete<
+    MessageResponse | { success: boolean }
+  >(`/translation-templates/${templateId}`);
   return response.data;
 }

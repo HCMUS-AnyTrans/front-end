@@ -47,6 +47,7 @@ export function TemplateDetailDrawer({
 }: TemplateDetailDrawerProps) {
   const t = useTranslations('templates');
   const tCommon = useTranslations('common');
+  const tDocuments = useTranslations('documents');
 
   if (!template) return null;
 
@@ -86,9 +87,17 @@ export function TemplateDetailDrawer({
           <Separator />
 
           <h3 className="text-base font-semibold text-foreground">
-            {t('fields.fontAndPdf')}
+            {t('fields.glossaryAndFontAndPdf')}
           </h3>
           <div className="grid gap-4 sm:grid-cols-2">
+            <DetailRow
+              label={tDocuments('configure.systemGlossaryTitle')}
+              value={
+                (template.useSystemGlossary ?? true)
+                  ? tCommon('yes')
+                  : tCommon('no')
+              }
+            />
             <DetailRow
               label={t('fields.keepOriginalFontSize')}
               value={

@@ -87,9 +87,9 @@ export function TemplateForm({ mode, template, isLoading }: TemplateFormProps) {
   });
   const selectedDomain = getDomainById(selectedDomainId);
   const isOtherDomain = selectedDomain?.key === 'other';
-  const selectedDocTone = useWatch({
+  const selectedDocToneId = useWatch({
     control: form.control,
-    name: 'docTone',
+    name: 'docToneId',
   });
 
   useEffect(() => {
@@ -104,13 +104,13 @@ export function TemplateForm({ mode, template, isLoading }: TemplateFormProps) {
 
   useEffect(() => {
     if (docTones.length === 0) return;
-    if (docTones.some((tone) => tone.value === selectedDocTone)) return;
+    if (docTones.some((tone) => tone.id === selectedDocToneId)) return;
 
     const defaultDocTone = getDefaultDocToneValue(docTones);
-    if (defaultDocTone && defaultDocTone !== selectedDocTone) {
-      form.setValue('docTone', defaultDocTone, { shouldDirty: true });
+    if (defaultDocTone && defaultDocTone !== selectedDocToneId) {
+      form.setValue('docToneId', defaultDocTone, { shouldDirty: true });
     }
-  }, [docTones, form, selectedDocTone]);
+  }, [docTones, form, selectedDocToneId]);
 
   async function handleSubmit(values: TranslationTemplateFormValues) {
     if (isOtherDomain && !values.customizedDomain.trim()) {
@@ -293,7 +293,7 @@ export function TemplateForm({ mode, template, isLoading }: TemplateFormProps) {
 
             <FormField
               control={form.control}
-              name="docTone"
+              name="docToneId"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t('fields.documentTone')}</FormLabel>
@@ -321,18 +321,18 @@ export function TemplateForm({ mode, template, isLoading }: TemplateFormProps) {
                     <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                       {docTones.map((tone) => (
                         <button
-                          key={tone.id || tone.value}
+                          key={tone.id}
                           type="button"
-                          onClick={() => field.onChange(tone.value)}
+                          onClick={() => field.onChange(tone.id)}
                           className={cn(
                             'flex min-h-20 flex-col items-start rounded-lg border p-2.5 text-left transition-all',
-                            field.value === tone.value
+                            field.value === tone.id
                               ? 'border-primary bg-primary/5 text-primary'
                               : 'border-border bg-card hover:bg-muted/50',
                           )}
                         >
                           <span className="text-sm font-medium">
-                            {getDocToneLabel(docTones, tone.value, locale)}
+                            {getDocToneLabel(docTones, tone.id, locale)}
                           </span>
                           <span className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">
                             {getDocToneDescription(tone, locale)}
@@ -347,8 +347,27 @@ export function TemplateForm({ mode, template, isLoading }: TemplateFormProps) {
             />
 
             <h3 className="text-base font-semibold text-foreground">
-              {t('fields.fontAndPdf')}
+              {t('fields.glossaryAndFontAndPdf')}
             </h3>
+            <FormField
+              control={form.control}
+              name="useSystemGlossary"
+              render={({ field }) => (
+                <FormItem className="flex items-center justify-between gap-4 rounded-lg border bg-background p-4">
+                  <div className="space-y-1">
+                    <FormLabel className="m-0">
+                      {tDocuments('configure.systemGlossaryTitle')}
+                    </FormLabel>
+                  </div>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                </FormItem>
+                )}
+            />
             <FormField
               control={form.control}
               name="keepOriginalFontSize"
@@ -391,7 +410,6 @@ export function TemplateForm({ mode, template, isLoading }: TemplateFormProps) {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="customInstruction"

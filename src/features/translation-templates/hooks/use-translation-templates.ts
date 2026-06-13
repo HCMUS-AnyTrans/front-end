@@ -6,7 +6,9 @@ import { translationTemplateKeys } from '@/lib/query-client';
 import { listTranslationTemplatesApi } from '../api';
 import type { TranslationTemplateQueryParams } from '../types';
 
-export function useTranslationTemplates(params?: TranslationTemplateQueryParams) {
+export function useTranslationTemplates(
+  params?: TranslationTemplateQueryParams,
+) {
   const isAuthenticated = useIsAuthenticated();
   const accessToken = useAccessToken();
 

@@ -208,7 +208,7 @@ export interface CreateTranslationJobDto {
   file_id: string;
   src_lang: string;
   tgt_lang: string;
-  doc_tone?: string;
+  doc_tone_id?: string;
   domain_id?: string;
   customized_domain?: string;
   user_glossary?: { src_lang: string; tgt_lang: string }[];

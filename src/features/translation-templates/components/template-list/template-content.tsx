@@ -142,7 +142,7 @@ export function TemplateContent() {
         }
         docToneLabel={
           selectedTemplate
-            ? getDocToneLabel(docTones, selectedTemplate.docTone, locale)
+            ? getDocToneLabel(docTones, selectedTemplate.docToneId, locale)
             : '-'
         }
         showCustomizedDomain={Boolean(

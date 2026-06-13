@@ -16,7 +16,8 @@ export function useDeleteTranslationTemplate(
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: (templateId: string) => deleteTranslationTemplateApi(templateId),
+    mutationFn: (templateId: string) =>
+      deleteTranslationTemplateApi(templateId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: translationTemplateKeys.all });
       options?.onSuccess?.();

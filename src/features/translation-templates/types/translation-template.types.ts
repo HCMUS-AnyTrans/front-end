@@ -10,9 +10,10 @@ export interface TranslationTemplate {
   tgtLang: string;
   domainId: string;
   customizedDomain?: string;
-  docTone: string;
+  docToneId: string;
   pdfTranslationFlow: PdfTranslationFlow;
   keepOriginalFontSize?: boolean;
+  useSystemGlossary?: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -25,9 +26,10 @@ export interface TranslationTemplatePayload {
   tgtLang: string;
   domainId: string;
   customizedDomain?: string;
-  docTone: string;
+  docToneId: string;
   pdfTranslationFlow: PdfTranslationFlow;
   keepOriginalFontSize?: boolean;
+  useSystemGlossary?: boolean;
 }
 
 export interface TranslationTemplateQueryParams {
@@ -57,9 +59,10 @@ export interface TranslationTemplateFormValues {
   tgtLang: string;
   domainId: string;
   customizedDomain: string;
-  docTone: string;
+  docToneId: string;
   pdfTranslationFlow: PdfTranslationFlow;
   keepOriginalFontSize: boolean;
+  useSystemGlossary: boolean;
   customInstruction: string;
   globalContext: string;
 }

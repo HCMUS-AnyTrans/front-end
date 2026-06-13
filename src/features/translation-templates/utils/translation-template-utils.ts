@@ -10,10 +10,14 @@ export const TEMPLATE_NONE_VALUE = 'none';
 export const TEMPLATE_CUSTOM_VALUE = 'custom';
 
 export function languageCodeToApiName(value: string): string {
-  return appLanguages.find((language) => language.code === value)?.apiName ?? value;
+  return (
+    appLanguages.find((language) => language.code === value)?.apiName ?? value
+  );
 }
 
-export function apiLanguageToCode(value: string | null | undefined): LanguageCode | null {
+export function apiLanguageToCode(
+  value: string | null | undefined,
+): LanguageCode | null {
   if (!value) return null;
   const normalized = value.trim().toLowerCase();
   const language = appLanguages.find(
@@ -26,11 +30,15 @@ export function apiLanguageToCode(value: string | null | undefined): LanguageCod
   return (language?.code as LanguageCode | undefined) ?? null;
 }
 
-export function getLanguageDisplayName(value: string | null | undefined): string {
+export function getLanguageDisplayName(
+  value: string | null | undefined,
+): string {
   if (!value) return '-';
   const code = apiLanguageToCode(value);
   if (!code) return value;
-  return appLanguages.find((language) => language.code === code)?.apiName ?? value;
+  return (
+    appLanguages.find((language) => language.code === code)?.apiName ?? value
+  );
 }
 
 export function getTemplateDomainLabel(
@@ -55,9 +63,10 @@ export function templateToFormValues(
     tgtLang: apiLanguageToCode(template?.tgtLang) ?? 'vi',
     domainId: template?.domainId ?? '',
     customizedDomain: template?.customizedDomain ?? '',
-    docTone: template?.docTone ?? 'professional',
+    docToneId: template?.docToneId ?? 'professional',
     pdfTranslationFlow: template?.pdfTranslationFlow ?? 'format_preserved',
     keepOriginalFontSize: template?.keepOriginalFontSize ?? true,
+    useSystemGlossary: template?.useSystemGlossary ?? true,
     customInstruction: template?.customInstruction ?? '',
     globalContext: template?.globalContext ?? '',
   };
@@ -72,9 +81,10 @@ export function formValuesToTemplatePayload(
     tgtLang: languageCodeToApiName(values.tgtLang),
     domainId: values.domainId,
     customizedDomain: values.customizedDomain.trim(),
-    docTone: values.docTone,
+    docToneId: values.docToneId,
     pdfTranslationFlow: values.pdfTranslationFlow,
     keepOriginalFontSize: values.keepOriginalFontSize,
+    useSystemGlossary: values.useSystemGlossary,
     customInstruction: values.customInstruction.trim() || undefined,
     globalContext: values.globalContext.trim() || undefined,
   };

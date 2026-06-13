@@ -156,26 +156,28 @@ export function useDocumentTranslationWizard() {
 
   const buildTemplatePayload = useCallback(
     (templateName: string): TranslationTemplatePayload | null => {
-    const selectedDomain = getDomainById(config.domainId);
+      const selectedDomain = getDomainById(config.domainId);
 
-    if (!selectedDomain) {
-      return null;
-    }
+      if (!selectedDomain) {
+        return null;
+      }
 
-    return {
-      name: templateName,
-      srcLang: languageCodeToApiName(config.srcLang),
-      tgtLang: languageCodeToApiName(config.tgtLang),
-      domainId: config.domainId,
-      customizedDomain:
-        selectedDomain.key === 'other' ? config.customDomain.trim() : '',
-      docTone: config.tone,
-      pdfTranslationFlow: config.pdfTranslationFlow,
-      keepOriginalFontSize: config.keepOriginalFontSize,
-      customInstruction: config.customInstruction.trim() || undefined,
-      globalContext: config.globalContext.trim() || undefined,
-    };
-  }, [config, getDomainById]);
+      return {
+        name: templateName,
+        srcLang: languageCodeToApiName(config.srcLang),
+        tgtLang: languageCodeToApiName(config.tgtLang),
+        domainId: config.domainId,
+        customizedDomain:
+          selectedDomain.key === 'other' ? config.customDomain.trim() : '',
+        docToneId: config.tone,
+        pdfTranslationFlow: config.pdfTranslationFlow,
+        keepOriginalFontSize: config.keepOriginalFontSize,
+        customInstruction: config.customInstruction.trim() || undefined,
+        globalContext: config.globalContext.trim() || undefined,
+      };
+    },
+    [config, getDomainById],
+  );
 
   const saveCurrentConfigAsTemplate = useCallback(async () => {
     const templateName = config.templateName.trim();
@@ -200,77 +202,88 @@ export function useDocumentTranslationWizard() {
       return createdTemplate.id;
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : tConfigure('templateSaveFailed'),
+        error instanceof Error
+          ? error.message
+          : tConfigure('templateSaveFailed'),
       );
       return null;
     }
-  }, [buildTemplatePayload, config.templateName, createTemplateAsync, handleConfigChange, tConfigure]);
+  }, [
+    buildTemplatePayload,
+    config.templateName,
+    createTemplateAsync,
+    handleConfigChange,
+    tConfigure,
+  ]);
 
-  const handleStartTranslation = useCallback(async (options?: {
-    saveTemplateFirst?: boolean;
-    omitTemplateId?: boolean;
-  }) => {
-    if (!file || !fileId) {
-      return;
-    }
-
-    const selectedDomain = getDomainById(config.domainId);
-
-    if (!selectedDomain) {
-      return;
-    }
-
-    let templateId = options?.omitTemplateId ? null : config.templateId;
-
-    if (options?.saveTemplateFirst) {
-      const savedTemplateId = await saveCurrentConfigAsTemplate();
-      if (!savedTemplateId) {
+  const handleStartTranslation = useCallback(
+    async (options?: {
+      saveTemplateFirst?: boolean;
+      omitTemplateId?: boolean;
+    }) => {
+      if (!file || !fileId) {
         return;
       }
-      templateId = savedTemplateId;
-    }
 
-    goToStep(3);
+      const selectedDomain = getDomainById(config.domainId);
 
-    const usableGlossaryTerms = activeSelectedGlossaryId
-      ? selectedGlossaryTerms
-      : [];
-    const fontReplacements = isFontConfigurationEnabledForFlow
-      ? buildFontReplacements(
-          fontCheckItems,
-          config.fontSelections,
-          config.fontConfigEnabled,
-          config.fontEnabledMap,
-        )
-      : [];
+      if (!selectedDomain) {
+        return;
+      }
 
-    void startTranslation(
-      {
-        ...config,
-        templateId,
-        glossaryInputMode,
-        keepOriginalFontSize: isFontConfigurationEnabledForFlow
-          ? config.keepOriginalFontSize
-          : false,
-      },
-      selectedDomain.key,
-      usableGlossaryTerms,
-      fontReplacements,
-    );
-  }, [
-    activeSelectedGlossaryId,
-    config,
-    file,
-    fileId,
-    fontCheckItems,
-    getDomainById,
-    glossaryInputMode,
-    goToStep,
-    isFontConfigurationEnabledForFlow,
-    saveCurrentConfigAsTemplate,
-    selectedGlossaryTerms,
-    startTranslation,
-  ]);
+      let templateId = options?.omitTemplateId ? null : config.templateId;
+
+      if (options?.saveTemplateFirst) {
+        const savedTemplateId = await saveCurrentConfigAsTemplate();
+        if (!savedTemplateId) {
+          return;
+        }
+        templateId = savedTemplateId;
+      }
+
+      goToStep(3);
+
+      const usableGlossaryTerms = activeSelectedGlossaryId
+        ? selectedGlossaryTerms
+        : [];
+      const fontReplacements = isFontConfigurationEnabledForFlow
+        ? buildFontReplacements(
+            fontCheckItems,
+            config.fontSelections,
+            config.fontConfigEnabled,
+            config.fontEnabledMap,
+          )
+        : [];
+
+      void startTranslation(
+        {
+          ...config,
+          templateId,
+          glossaryInputMode,
+          keepOriginalFontSize: isFontConfigurationEnabledForFlow
+            ? config.keepOriginalFontSize
+            : false,
+        },
+        selectedDomain.key,
+        usableGlossaryTerms,
+        fontReplacements,
+      );
+    },
+    [
+      activeSelectedGlossaryId,
+      config,
+      file,
+      fileId,
+      fontCheckItems,
+      getDomainById,
+      glossaryInputMode,
+      goToStep,
+      isFontConfigurationEnabledForFlow,
+      saveCurrentConfigAsTemplate,
+      selectedGlossaryTerms,
+      startTranslation,
+    ],
+  );
 
   const handleStartWithoutTemplate = useCallback(() => {
     void handleStartTranslation({ omitTemplateId: true });

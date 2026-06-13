@@ -6,9 +6,10 @@ export const translationTemplateSchema = z.object({
   tgtLang: z.string().min(1),
   domainId: z.string().min(1),
   customizedDomain: z.string().max(100),
-  docTone: z.string().min(1),
+  docToneId: z.string().min(1),
   pdfTranslationFlow: z.enum(['format_preserved', 'non_format_preserved']),
   keepOriginalFontSize: z.boolean(),
+  useSystemGlossary: z.boolean(),
   customInstruction: z.string(),
   globalContext: z.string(),
 });

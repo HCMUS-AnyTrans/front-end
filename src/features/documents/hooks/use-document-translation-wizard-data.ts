@@ -84,7 +84,12 @@ export function useDocumentTranslationWizardData() {
     templates: translationTemplates = [],
     isLoading: isLoadingTranslationTemplates,
     isFetching: isFetchingTranslationTemplates,
-  } = useTranslationTemplates({ page: 1, limit: 100, sortBy: 'updatedAt', sortOrder: 'desc' });
+  } = useTranslationTemplates({
+    page: 1,
+    limit: 100,
+    sortBy: 'updatedAt',
+    sortOrder: 'desc',
+  });
 
   const {
     config,
@@ -130,7 +135,7 @@ export function useDocumentTranslationWizardData() {
 
   useEffect(() => {
     if (docTones.length === 0) return;
-    if (docTones.some((tone) => tone.value === config.tone)) return;
+    if (docTones.some((tone) => tone.id === config.tone)) return;
 
     const defaultDocTone = getDefaultDocToneValue(docTones);
     if (defaultDocTone && defaultDocTone !== config.tone) {

@@ -2,7 +2,7 @@ export { getDocTonesApi } from './api/doc-tones.api';
 export { useDocTones } from './hooks/use-doc-tones';
 export {
   getDefaultDocToneValue,
-  getDocToneByValue,
+  getDocToneById,
   getDocToneDescription,
   getDocToneLabel,
   getDocToneLocale,

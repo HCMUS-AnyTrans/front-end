@@ -5,7 +5,9 @@ import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import { translationTemplateKeys } from '@/lib/query-client';
 import { getTranslationTemplateApi } from '../api';
 
-export function useTranslationTemplateDetail(templateId: string | null | undefined) {
+export function useTranslationTemplateDetail(
+  templateId: string | null | undefined,
+) {
   const isAuthenticated = useIsAuthenticated();
   const accessToken = useAccessToken();
 

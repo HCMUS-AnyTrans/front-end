@@ -168,7 +168,7 @@ function buildJobDto(
     file_id: fileId,
     src_lang: LANGUAGE_CODE_TO_API_NAME[config.srcLang],
     tgt_lang: LANGUAGE_CODE_TO_API_NAME[config.tgtLang],
-    doc_tone: config.tone || undefined,
+    doc_tone_id: config.tone || undefined,
     domain_id: config.domainId || undefined,
   };
 

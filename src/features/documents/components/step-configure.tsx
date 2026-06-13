@@ -197,9 +197,10 @@ export function StepConfigure({
       tgtLang: apiLanguageToCode(template.tgtLang) ?? config.tgtLang,
       domainId: template.domainId,
       customDomain: template.customizedDomain ?? '',
-      tone: template.docTone,
+      tone: template.docToneId,
       pdfTranslationFlow: template.pdfTranslationFlow,
       keepOriginalFontSize: template.keepOriginalFontSize ?? true,
+      useSystemGlossary: template.useSystemGlossary ?? true,
       customInstruction: template.customInstruction ?? '',
       globalContext: template.globalContext ?? '',
       saveAsTemplate: false,
@@ -239,10 +240,11 @@ export function StepConfigure({
         apiLanguageToCode(selectedTemplate.tgtLang) !== config.tgtLang ||
         selectedTemplate.domainId !== config.domainId ||
         (selectedTemplate.customizedDomain ?? '') !== config.customDomain ||
-        selectedTemplate.docTone !== config.tone ||
+        selectedTemplate.docToneId !== config.tone ||
         selectedTemplate.pdfTranslationFlow !== config.pdfTranslationFlow ||
         (selectedTemplate.keepOriginalFontSize ?? true) !==
           config.keepOriginalFontSize ||
+        (selectedTemplate.useSystemGlossary ?? true) !== config.useSystemGlossary ||
         (selectedTemplate.customInstruction ?? '') !== config.customInstruction ||
         (selectedTemplate.globalContext ?? '') !== config.globalContext),
   );

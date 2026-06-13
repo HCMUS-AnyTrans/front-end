@@ -54,10 +54,10 @@ export function ToneSelector({
           <button
             key={tone.id || tone.value}
             type="button"
-            onClick={() => onChange(tone.value)}
+            onClick={() => onChange(tone.id)}
             className={cn(
               "flex min-h-20 flex-col items-start rounded-lg border p-2.5 text-left transition-all",
-              value === tone.value
+              (value === tone.id || value === tone.value)
                 ? "border-primary bg-primary/5"
                 : "border-border bg-card hover:bg-muted/50"
             )}
@@ -65,10 +65,10 @@ export function ToneSelector({
             <span
               className={cn(
                 "text-sm font-medium",
-                value === tone.value ? "text-primary" : "text-foreground"
+                (value === tone.id || value === tone.value) ? "text-primary" : "text-foreground"
               )}
             >
-              {getDocToneLabel(tones, tone.value, locale)}
+              {getDocToneLabel(tones, tone.id, locale)}
             </span>
             <span className="mt-0.5 text-xs text-muted-foreground line-clamp-1">
               {getDocToneDescription(tone, locale)}

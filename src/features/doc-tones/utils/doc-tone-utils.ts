@@ -6,29 +6,26 @@ export function getDocToneLocale(locale: string): SupportedToneLocale {
   return locale === 'vi' ? 'vi' : 'en';
 }
 
-export function getDocToneByValue(
+export function getDocToneById(
   docTones: DocTone[],
-  value: string | null | undefined,
+  id: string | null | undefined,
 ): DocTone | null {
-  if (!value) return null;
-  return docTones.find((tone) => tone.value === value) ?? null;
+  if (!id) return null;
+  return docTones.find((tone) => tone.id === id) ?? null;
 }
 
 export function getDocToneLabel(
   docTones: DocTone[],
-  value: string | null | undefined,
+  id: string | null | undefined,
   locale: string,
 ): string {
-  if (!value) return '-';
-  const tone = getDocToneByValue(docTones, value);
-  if (!tone) return value;
-  return tone.name[getDocToneLocale(locale)] || tone.name.en || value;
+  if (!id) return '-';
+  const tone = getDocToneById(docTones, id);
+  if (!tone) return id;
+  return tone.name[getDocToneLocale(locale)] || tone.name.en || id;
 }
 
-export function getDocToneDescription(
-  tone: DocTone,
-  locale: string,
-): string {
+export function getDocToneDescription(tone: DocTone, locale: string): string {
   return tone.description[getDocToneLocale(locale)] || tone.description.en;
 }
 
@@ -47,5 +44,5 @@ export function getDefaultDocToneValue(docTones: DocTone[]): string | null {
     );
   });
 
-  return professionalTone?.value ?? docTones[0]?.value ?? null;
+  return professionalTone?.id ?? docTones[0]?.id ?? null;
 }
