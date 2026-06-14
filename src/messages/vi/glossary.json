@@ -2,6 +2,12 @@
   "glossary": {
     "title": "Từ điển thuật ngữ",
     "description": "Quản lý bộ từ điển thuật ngữ chuyên ngành để dịch chính xác hơn.",
+    "banner": {
+      "eyebrow": "Quản lý thuật ngữ",
+      "glossaries": "Bảng thuật ngữ",
+      "languagePairs": "Cặp ngôn ngữ",
+      "terms": "Tổng số thuật ngữ"
+    },
     "searchPlaceholder": "Tìm kiếm thuật ngữ...",
     "filterDomain": "Lĩnh vực",
     "allDomains": "Tất cả lĩnh vực",
