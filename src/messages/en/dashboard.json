@@ -62,7 +62,7 @@
       "select": "to select",
       "close": "to close",
       "dashboardDesc": "Overview of your translation activity",
-      "documentsDesc": "Translate documents and subtitles",
+      "documentsDesc": "Translate documents",
       "glossaryDesc": "Manage your terminology dictionaries",
       "historyDesc": "View all your translation jobs",
       "settingsDesc": "Account, preferences and security",
@@ -126,20 +126,20 @@
     },
     "charts": {
       "jobsByDay": "Activity Overview",
-      "creditAllocation": "Credit Allocation",
+      "creditAllocation": "Credit Usage",
       "loadErrorTitle": "Unable to load chart",
       "loadErrorDescription": "Something went wrong while loading chart data. Please try again.",
       "retry": "Retry",
       "noUsageInfo": "No credit usage information yet",
       "noUsageDescription": "Usage data will appear after you spend credits on translation.",
       "topLanguages": {
-        "title": "Top translated languages",
+        "title": "Top source languages by credits",
         "vietnamese": "Vietnamese",
         "english": "English",
         "japanese": "Japanese",
         "credits": "credits"
       },
-      "documents": "Documents",
+      "jobs": "Jobs",
       "remaining": "Remaining"
     },
     "status": {

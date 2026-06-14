@@ -4,26 +4,38 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { LanguageFlag } from '@/components/shared/language-flag';
 import { CardTitle } from '@/components/ui/card';
+import { useCreditsChart } from '../../hooks';
 import {
   DashboardCard,
   DashboardCardContent,
   DashboardCardHeader,
 } from '../dashboard-card';
+import {
+  CreditUsageCardError,
+  CreditUsageCardLoading,
+} from './credit-usage-card.fallback';
+import type { LanguageCreditUsage } from '../../types';
 
 type TopLanguage = {
   rank: 1 | 2 | 3;
-  languageKey: 'vietnamese' | 'english' | 'japanese';
-  credits: number;
-};
-
-const TOP_LANGUAGES: TopLanguage[] = [
-  { rank: 1, languageKey: 'vietnamese', credits: 40 },
-  { rank: 2, languageKey: 'english', credits: 20 },
-  { rank: 3, languageKey: 'japanese', credits: 5 },
-];
+} & LanguageCreditUsage;
 
 export function CreditUsageCard() {
   const tCharts = useTranslations('dashboard.charts');
+  const { creditsData, isLoading, isError, refetch, isFetching } =
+    useCreditsChart();
+
+  if (isLoading) return <CreditUsageCardLoading />;
+  if (isError)
+    return (
+      <CreditUsageCardError onRetry={() => refetch()} isRetrying={isFetching} />
+    );
+
+  const topLanguages: TopLanguage[] =
+    creditsData?.languages.slice(0, 3).map((language, index) => ({
+      ...language,
+      rank: (index + 1) as TopLanguage['rank'],
+    })) ?? [];
 
   return (
     <DashboardCard className="h-full rounded-xl border-border/70 bg-card/95">
@@ -35,14 +47,19 @@ export function CreditUsageCard() {
         </div>
       </DashboardCardHeader>
       <DashboardCardContent className="space-y-3 px-4 pb-5 pt-0 sm:px-5">
-        {TOP_LANGUAGES.map((language) => (
-          <TopLanguageRow
-            key={language.rank}
-            language={language}
-            label={tCharts(`topLanguages.${language.languageKey}`)}
-            creditsLabel={tCharts('topLanguages.credits')}
-          />
-        ))}
+        {topLanguages.length > 0 ? (
+          topLanguages.map((language) => (
+            <TopLanguageRow
+              key={`${language.rank}-${language.language}`}
+              language={language}
+              creditsLabel={tCharts('topLanguages.credits')}
+            />
+          ))
+        ) : (
+          <div className="flex min-h-32 items-center justify-center rounded-xl border border-dashed border-border bg-muted/30 px-4 text-center text-sm text-muted-foreground">
+            {tCharts('noUsageInfo')}
+          </div>
+        )}
       </DashboardCardContent>
     </DashboardCard>
   );
@@ -50,11 +67,9 @@ export function CreditUsageCard() {
 
 function TopLanguageRow({
   language,
-  label,
   creditsLabel,
 }: {
   language: TopLanguage;
-  label: string;
   creditsLabel: string;
 }) {
   const isFirst = language.rank === 1;
@@ -75,12 +90,12 @@ function TopLanguageRow({
         className="h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
       />
       <LanguageFlag
-        value={language.languageKey}
+        value={language.language}
         className=" w-10 shrink-0 border border-border object-cover"
         fallbackClassName="w-11 shrink-0 border border-border"
       />
       <span className="min-w-0 flex-1 truncate text-sm font-semibold text-foreground sm:text-base">
-        {label}
+        {language.language}
       </span>
       <span
         className={

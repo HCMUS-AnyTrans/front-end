@@ -1,9 +1,5 @@
 import type { PaginationMeta } from '@/types';
-import type {
-  CreditBreakdown,
-  CreditUsage,
-  StorageBreakdownItem,
-} from './dashboard.types';
+import type { LanguageCreditUsage } from './dashboard.types';
 import type { TranslationJobResponse } from '@/types';
 
 /**
@@ -12,7 +8,7 @@ import type { TranslationJobResponse } from '@/types';
 export interface JobChartDataPoint {
   date: string;
   day: string;
-  document: number;
+  jobs: number;
 }
 
 /**
@@ -24,12 +20,11 @@ export interface TranslationJobsListResponse {
 }
 
 /**
- * A credit allocation response for the dashboard pie chart.
+ * A top source language credit usage response for the dashboard chart.
  */
 export interface CreditsChartResponse {
   totalCredits: number;
-  breakdown: CreditBreakdown[];
-  usage: CreditUsage;
+  languages: LanguageCreditUsage[];
 }
 
 /**
@@ -41,9 +36,6 @@ export interface StorageResponse {
   unit: string;
   percentage: number;
   fileCount: number;
-  breakdown: {
-    documents: StorageBreakdownItem;
-  };
 }
 
 /**

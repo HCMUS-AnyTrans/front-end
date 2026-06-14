@@ -45,14 +45,14 @@ export async function getJobsChartApi(
 }
 
 /**
- * Get credit usage breakdown by category
- * GET /dashboard/charts/credits
+ * Get credit usage by source language
+ * GET /dashboard/charts/languages
  */
 export async function getCreditsChartApi(
   query?: CreditsChartQuery,
 ): Promise<CreditsChartResponse> {
   const response = await apiClient.get<CreditsChartResponse>(
-    '/dashboard/charts/credits',
+    '/dashboard/charts/languages',
     { params: query },
   );
   return response.data;

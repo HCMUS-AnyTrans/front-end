@@ -24,8 +24,8 @@ export function JobsChart() {
   const { chartData, isLoading, isError, refetch, isFetching } = useJobsChart();
 
   const chartConfig = {
-    document: {
-      label: t('documents'),
+    jobs: {
+      label: t('jobs'),
       color: 'var(--color-chart-1)',
     },
   } satisfies ChartConfig;
@@ -89,11 +89,11 @@ export function JobsChart() {
               }
             />
             <Area
-              dataKey="document"
+              dataKey="jobs"
               type="linear"
-              fill="var(--color-document)"
+              fill="var(--color-jobs)"
               fillOpacity={0.4}
-              stroke="var(--color-document)"
+              stroke="var(--color-jobs)"
             />
           </AreaChart>
         </ChartContainer>
@@ -101,7 +101,7 @@ export function JobsChart() {
           <div className="flex items-center gap-2">
             <div className="h-2.5 w-2.5 rounded-sm bg-chart-1" />
             <span className="text-xs text-muted-foreground">
-              {t('documents')}
+              {t('jobs')}
             </span>
           </div>
         </div>

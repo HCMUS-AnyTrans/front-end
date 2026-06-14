@@ -36,7 +36,6 @@ export interface DashboardStats {
   creditsTrend: TrendDirection;
 
   totalJobs: number;
-  documentJobs: number;
   jobsChange: string;
   jobsTrend: TrendDirection;
 
@@ -62,25 +61,10 @@ export interface ActivityItem {
 }
 
 /**
- * A credit breakdown item returned by the credit allocation endpoint.
+ * A top source language item returned by the language credit usage endpoint.
  */
-export interface CreditBreakdown {
-  name: string;
-  value: number;
+export interface LanguageCreditUsage {
+  language: string;
+  credits: number;
   percentage: number;
-}
-
-/**
- * A usage summary for credit consumption.
- */
-export interface CreditUsage {
-  documentsUsed: number;
-}
-
-/**
- * A storage breakdown item grouped by dashboard-supported file categories.
- */
-export interface StorageBreakdownItem {
-  count: number;
-  size: number;
 }

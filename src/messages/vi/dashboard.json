@@ -62,7 +62,7 @@
       "select": "để chọn",
       "close": "để đóng",
       "dashboardDesc": "Tổng quan hoạt động dịch thuật",
-      "documentsDesc": "Dịch tài liệu và phụ đề",
+      "documentsDesc": "Dịch tài liệu",
       "glossaryDesc": "Quản lý bộ từ điển thuật ngữ",
       "historyDesc": "Xem tất cả bản dịch của bạn",
       "settingsDesc": "Tài khoản, tùy chọn và bảo mật",
@@ -126,20 +126,20 @@
     },
     "charts": {
       "jobsByDay": "Tổng quan hoạt động",
-      "creditAllocation": "Phân bổ credits",
+      "creditAllocation": "Sử dụng credits",
       "loadErrorTitle": "Không thể tải biểu đồ",
       "loadErrorDescription": "Đã xảy ra lỗi khi lấy dữ liệu biểu đồ. Vui lòng thử lại.",
       "retry": "Thử lại",
       "noUsageInfo": "Chưa có thông tin sử dụng credit",
       "noUsageDescription": "Dữ liệu sẽ hiển thị khi bạn sử dụng credits cho dịch thuật.",
       "topLanguages": {
-        "title": "Top ngôn ngữ dịch nhiều nhất",
+        "title": "Top ngôn ngữ được dịch nhiều nhất",
         "vietnamese": "Tiếng Việt",
         "english": "Tiếng Anh",
         "japanese": "Tiếng Nhật",
         "credits": "credits"
       },
-      "documents": "Tài liệu",
+      "jobs": "Bản dịch",
       "remaining": "Còn lại"
     },
     "status": {
