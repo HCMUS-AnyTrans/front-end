@@ -61,7 +61,7 @@ export function FilesJobItem({
                 <span>&bull;</span>
                 <span className="flex items-center gap-1">
                   <Image
-                    src="/shared/credit.svg"
+                    src="/shared/credit.png"
                     alt="Credits"
                     width={12}
                     height={12}

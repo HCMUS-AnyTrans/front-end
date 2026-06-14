@@ -90,7 +90,7 @@ export function HistoryTableRow({
         {job.cost_credits !== undefined ? (
           <div className="flex items-center justify-end gap-1.5">
             <Image
-              src="/shared/credit.svg"
+              src="/shared/credit.png"
               alt="Credits"
               width={16}
               height={16}
@@ -142,4 +142,3 @@ export function HistoryTableRow({
     </TableRow>
   );
 }
-

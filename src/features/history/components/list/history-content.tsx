@@ -64,7 +64,7 @@ export function HistoryContent() {
           className="relative min-h-[264px] overflow-hidden p-6 sm:min-h-[260px] sm:p-8 lg:min-h-[264px] lg:p-10"
         >
           <Image
-            src="/history/history-banner.svg"
+            src="/history/history-banner.png"
             alt="History Banner"
             fill
             priority

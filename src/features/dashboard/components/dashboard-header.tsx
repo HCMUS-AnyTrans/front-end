@@ -122,7 +122,7 @@ export function DashboardHeader() {
                 title="Credits"
               >
                 <Image
-                  src="/shared/credit.svg"
+                  src="/shared/credit.png"
                   alt="Credits"
                   width={16}
                   height={16}
@@ -146,7 +146,7 @@ export function DashboardHeader() {
               >
                 <button type="button" className="flex w-full items-center">
                   <Image
-                    src="/shared/credit.svg"
+                    src="/shared/credit.png"
                     alt="Credits"
                     width={16}
                     height={16}

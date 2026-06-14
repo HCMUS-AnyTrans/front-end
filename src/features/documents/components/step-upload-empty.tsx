@@ -34,7 +34,7 @@ export function StepUploadEmpty({
       aria-disabled={isBusy}
     >
       <Image
-        src="/translation/upload-banner.svg"
+        src="/translation/upload-banner.png"
         alt=""
         fill
         priority
@@ -45,7 +45,7 @@ export function StepUploadEmpty({
 
       <div className="relative z-10 flex w-full max-w-3xl flex-col items-center">
         <Image
-          src="/translation/upload-icon.svg"
+          src="/translation/upload-icon.png"
           alt=""
           width={168}
           height={136}

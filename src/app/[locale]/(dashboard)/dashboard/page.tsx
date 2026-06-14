@@ -29,7 +29,7 @@ export default async function DashboardPage({ params }: Props) {
           className="relative overflow-hidden p-5 sm:p-7 lg:p-9"
         >
           <Image
-            src="/dashboard/dashboard-icon-banner.svg"
+            src="/dashboard/dashboard-icon-banner.png"
             alt=""
             width={520}
             height={220}

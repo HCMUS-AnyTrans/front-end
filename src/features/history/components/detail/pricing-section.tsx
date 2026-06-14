@@ -25,7 +25,7 @@ export function HistoryJobDetailPricingSection({
         </p>
         <div className="flex items-center gap-1.5">
           <Image
-            src="/shared/credit.svg"
+            src="/shared/credit.png"
             alt="Credits"
             width={14}
             height={14}

@@ -30,7 +30,7 @@ export function QuickActions() {
           onClick={() => setOpenBuyCredits(true)}
         >
           <Image
-            src="/shared/credit.svg"
+            src="/shared/credit.png"
             alt="Credits"
             width={16}
             height={16}

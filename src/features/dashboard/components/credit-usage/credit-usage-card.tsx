@@ -83,7 +83,7 @@ function TopLanguageRow({
       }
     >
       <Image
-        src={`/dashboard/top-${language.rank}.svg`}
+        src={`/dashboard/top-${language.rank}.png`}
         alt={`Top ${language.rank}`}
         width={42}
         height={42}

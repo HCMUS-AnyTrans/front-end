@@ -41,7 +41,7 @@ export function StorageUsageCard() {
       <DashboardCardContent>
         <div className="flex items-center gap-5">
           <Image
-            src="/dashboard/storage.svg"
+            src="/dashboard/storage.png"
             alt="Storage usage"
             width={112}
             height={112}
