@@ -132,6 +132,13 @@
       "retry": "Retry",
       "noUsageInfo": "No credit usage information yet",
       "noUsageDescription": "Usage data will appear after you spend credits on translation.",
+      "topLanguages": {
+        "title": "Top translated languages",
+        "vietnamese": "Vietnamese",
+        "english": "English",
+        "japanese": "Japanese",
+        "credits": "credits"
+      },
       "documents": "Documents",
       "remaining": "Remaining"
     },

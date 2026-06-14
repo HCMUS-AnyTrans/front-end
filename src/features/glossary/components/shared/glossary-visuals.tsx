@@ -1,26 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import type { ComponentType } from 'react';
-import * as FlagIcons from 'country-flag-icons/react/3x2';
+import { LanguageFlag } from '@/components/shared';
 import { cn } from '@/lib/utils';
-
-type FlagIcon = ComponentType<{ className?: string }>;
-
-const LANGUAGE_FLAG_CODES: Record<string, string> = {
-  en: 'GB',
-  vi: 'VN',
-  ja: 'JP',
-  ko: 'KR',
-  zh: 'CN',
-  fr: 'FR',
-  de: 'DE',
-  es: 'ES',
-  ru: 'RU',
-  ar: 'SA',
-  th: 'TH',
-  hi: 'IN',
-};
 
 const DOMAIN_ICON_PATHS: Record<string, string> = {
   administrative: '/glossary/administrative.png',
@@ -39,8 +21,6 @@ const DOMAIN_ICON_PATHS: Record<string, string> = {
   tourism: '/glossary/tourism.png',
 };
 
-const flagIcons = FlagIcons as Record<string, FlagIcon>;
-
 export function GlossaryLanguageFlag({
   code,
   className,
@@ -48,13 +28,12 @@ export function GlossaryLanguageFlag({
   code: string;
   className?: string;
 }) {
-  const flagCode = LANGUAGE_FLAG_CODES[code];
-  const Flag = flagCode ? flagIcons[flagCode] : null;
-
-  return Flag ? (
-    <Flag className={cn('h-4 w-5 shrink-0', className)} />
-  ) : (
-    <span className={cn('size-4 shrink-0', className)} aria-hidden="true" />
+  return (
+    <LanguageFlag
+      value={code}
+      className={cn('h-4 w-5 shrink-0', className)}
+      fallbackClassName={cn('size-4 shrink-0', className)}
+    />
   );
 }
 

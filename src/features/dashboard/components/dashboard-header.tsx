@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
-import { Search, ChevronDown, Coins, CreditCard, X } from 'lucide-react';
+import { Search, ChevronDown, CreditCard, X } from 'lucide-react';
 import { SearchDropdown, type SearchDropdownHandle } from './command-palette';
 import { Link } from '@/i18n/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -121,7 +121,13 @@ export function DashboardHeader() {
                 className="hover:bg-secondary/10 hover:border-secondary hover:text-secondary text-secondary hidden h-9 items-center gap-2 rounded-full border border-input px-3 text-sm md:flex"
                 title="Credits"
               >
-                <Coins className="size-4 " />
+                <Image
+                  src="/dashboard/credit.svg"
+                  alt="Credits"
+                  width={16}
+                  height={16}
+                  className="size-4"
+                />
                 <span className="font-semibold   tabular-nums">
                   {(wallet?.balance ?? 0).toLocaleString(
                     locale === 'vi' ? 'vi-VN' : 'en-US',
@@ -139,7 +145,13 @@ export function DashboardHeader() {
                 }}
               >
                 <button type="button" className="flex w-full items-center">
-                  <Coins className="mr-2 size-4 text-primary" />
+                  <Image
+                    src="/dashboard/credit.svg"
+                    alt="Credits"
+                    width={16}
+                    height={16}
+                    className="mr-2 size-4"
+                  />
                   {tHeaderMenu('buyMoreCredits')}
                 </button>
               </DropdownMenuItem>

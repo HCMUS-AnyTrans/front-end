@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Button } from '@/components/ui/button';
-import { FileUp, Coins } from 'lucide-react';
+import { FileUp } from 'lucide-react';
 import { BuyCreditsDialog } from '@/features/settings/components/billing/buy-credits-dialog';
 
 export function QuickActions() {
@@ -28,7 +29,13 @@ export function QuickActions() {
           className="w-full cursor-pointer gap-2 bg-secondary-500 text-white hover:bg-secondary-400 hover:text-white sm:w-auto"
           onClick={() => setOpenBuyCredits(true)}
         >
-          <Coins className="size-4" />
+          <Image
+            src="/dashboard/credit.svg"
+            alt="Credits"
+            width={16}
+            height={16}
+            className="size-4"
+          />
           {t('buyCredits')}
         </Button>
       </div>

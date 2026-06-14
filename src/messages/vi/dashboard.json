@@ -132,6 +132,13 @@
       "retry": "Thử lại",
       "noUsageInfo": "Chưa có thông tin sử dụng credit",
       "noUsageDescription": "Dữ liệu sẽ hiển thị khi bạn sử dụng credits cho dịch thuật.",
+      "topLanguages": {
+        "title": "Top ngôn ngữ dịch nhiều nhất",
+        "vietnamese": "Tiếng Việt",
+        "english": "Tiếng Anh",
+        "japanese": "Tiếng Nhật",
+        "credits": "credits"
+      },
       "documents": "Tài liệu",
       "remaining": "Còn lại"
     },
