@@ -69,7 +69,7 @@ export function HistoryContent() {
             fill
             preload
             unoptimized
-            className="absolute inset-0 h-full w-full object-cover object-[65%_center] dark:opacity-60 lg:object-center"
+            className="absolute inset-0 h-full w-full object-cover object-[65%_center] opacity-80 dark:opacity-60 lg:object-center"
           />
           <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-card via-card/85 to-card/45 dark:block" />
           <div className="relative z-10 flex max-w-xl flex-col gap-5">

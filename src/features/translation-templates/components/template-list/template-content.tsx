@@ -98,7 +98,7 @@ export function TemplateContent() {
             fill
             preload
             unoptimized
-            className="absolute inset-0 h-full w-full object-cover object-[65%_center] dark:opacity-60 lg:object-center"
+            className="absolute inset-0 h-full w-full object-cover object-[65%_center] opacity-80 dark:opacity-60 lg:object-center"
           />
           <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-card via-card/85 to-card/45 dark:block" />
           <div className="relative z-10 flex max-w-xl flex-col gap-5">
@@ -140,7 +140,7 @@ export function TemplateContent() {
           search={search}
           onSearchChange={handleSearchChange}
         />
-        <Button size="sm" className="w-full shrink-0 sm:w-auto" onClick={handleCreate}>
+        <Button className="h-10 w-full shrink-0 rounded-md px-4 sm:w-auto" onClick={handleCreate}>
           <Plus className="size-4" />
           {t('createTemplate')}
         </Button>

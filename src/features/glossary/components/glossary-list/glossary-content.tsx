@@ -130,12 +130,12 @@ export function GlossaryContent() {
           className="relative min-h-[264px] overflow-hidden p-6 sm:min-h-[260px] sm:p-8 lg:min-h-[264px] lg:p-10 dark:bg-[linear-gradient(135deg,#0e1e38_0%,#061024_100%)] dark:border-primary/15"
         >
           <Image
-            src="/glossary/glossay-banner.png"
+            src="/glossary/glossary-banner.png"
             alt="Glossary Banner"
             fill
             preload
             unoptimized
-            className="absolute inset-0 h-full w-full object-cover object-[65%_center] dark:opacity-60 lg:object-center"
+            className="absolute inset-0 h-full w-full object-cover object-[65%_center] opacity-80 dark:opacity-60 lg:object-center"
           />
           <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-card via-card/85 to-card/45 dark:block" />
           <div className="relative z-10 flex max-w-xl flex-col gap-5">

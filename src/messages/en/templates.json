@@ -32,8 +32,7 @@
     "deleteError": "Unable to delete template",
     "columns": {
       "name": "Name",
-      "srcLang": "Source",
-      "tgtLang": "Target",
+      "languages": "Languages",
       "domain": "Domain",
       "updatedAt": "Updated",
       "actions": "Actions"

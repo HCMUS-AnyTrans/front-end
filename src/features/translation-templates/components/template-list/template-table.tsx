@@ -39,10 +39,7 @@ export function TemplateTable({
               {t('name')}
             </TableHead>
             <TableHead className="hidden h-11 px-4 text-sm font-medium text-muted-foreground sm:table-cell lg:px-6">
-              {t('srcLang')}
-            </TableHead>
-            <TableHead className="hidden h-11 px-4 text-sm font-medium text-muted-foreground sm:table-cell lg:px-6">
-              {t('tgtLang')}
+              {t('languages')}
             </TableHead>
             <TableHead className="hidden h-11 px-4 text-sm font-medium text-muted-foreground md:table-cell lg:px-6">
               {t('domain')}

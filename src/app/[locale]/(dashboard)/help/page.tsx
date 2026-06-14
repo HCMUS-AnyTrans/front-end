@@ -82,7 +82,7 @@ export default function HelpPage() {
             fill
             preload
             unoptimized
-            className="absolute inset-0 h-full w-full object-cover object-[65%_center] opacity-40 dark:opacity-40 lg:object-center"
+            className="absolute inset-0 h-full w-full object-cover object-[65%_center] opacity-60 dark:opacity-40 lg:object-center"
           />
           <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-[#0e1e38] via-[#0e1e38]/85 to-transparent dark:block" />
 

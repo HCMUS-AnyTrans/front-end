@@ -63,7 +63,7 @@ export function RecentJobsContent({
               >
                 <TableCell className="max-w-[180px] px-3 py-3.5 sm:max-w-[220px] lg:px-4">
                   <div className="flex items-center gap-2.5">
-                    <FileTypeIcon fileName={fileName} className="size-5" />
+                    <FileTypeIcon fileName={fileName} className="size-6" />
                     <span className="truncate text-[15px] font-semibold text-foreground">
                       {fileName}
                     </span>

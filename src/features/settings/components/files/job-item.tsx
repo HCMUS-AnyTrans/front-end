@@ -35,7 +35,7 @@ export function FilesJobItem({
     <div className="flex items-start justify-between gap-3 py-2">
       <div className="flex min-w-0 items-start gap-3">
         <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted">
-          <FileTypeIcon fileName={fileName} className="size-5" />
+          <FileTypeIcon fileName={fileName} className="size-6" />
         </div>
         <div className="min-w-0 flex-1 space-y-1">
           <div className="flex flex-wrap items-center gap-2">

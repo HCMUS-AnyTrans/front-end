@@ -62,7 +62,7 @@ export function HistoryTableRow({
     >
       <TableCell className="max-w-[180px] px-4 py-3.5 sm:max-w-[220px] lg:px-6">
         <div className="flex items-center gap-2">
-          <FileTypeIcon fileName={fileName} className="size-4" />
+          <FileTypeIcon fileName={fileName} className="size-7" />
           <span className="truncate text-sm font-medium text-foreground">
             {fileName}
           </span>

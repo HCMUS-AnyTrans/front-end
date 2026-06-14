@@ -32,8 +32,7 @@
     "deleteError": "Không thể xóa mẫu dịch",
     "columns": {
       "name": "Tên",
-      "srcLang": "Ngôn ngữ nguồn",
-      "tgtLang": "Ngôn ngữ đích",
+      "languages": "Ngôn ngữ",
       "domain": "Lĩnh vực",
       "updatedAt": "Cập nhật",
       "actions": "Thao tác"
