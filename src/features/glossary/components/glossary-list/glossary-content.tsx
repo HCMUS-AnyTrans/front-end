@@ -130,7 +130,7 @@ export function GlossaryContent() {
           className="relative min-h-[264px] overflow-hidden p-6 sm:min-h-[260px] sm:p-8 lg:min-h-[264px] lg:p-10"
         >
           <Image
-            src="/glossary/glossay-banner.png"
+            src="/shared/banner/glossay-banner.png"
             alt="Glossary Banner"
             fill
             priority

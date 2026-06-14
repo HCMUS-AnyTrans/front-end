@@ -16,7 +16,7 @@ export default function TemplatesPage() {
           className="relative min-h-[200px] overflow-hidden p-6 sm:min-h-[200px] sm:p-8 lg:min-h-[200px] lg:p-10"
         >
           <Image
-            src="/template/template-banner.png"
+            src="/shared/banner/template-banner.png"
             alt=""
             fill
             priority
