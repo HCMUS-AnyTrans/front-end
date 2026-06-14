@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   FileText,
   BookOpen,
+  ClipboardList,
   History,
   Settings as SettingsIcon,
   HelpCircle,
@@ -28,11 +29,15 @@ interface NavItem {
   icon: LucideIcon;
 }
 
-const navItems: NavItem[] = [
+const mainNavItems: NavItem[] = [
   { titleKey: "dashboard", href: "/dashboard", icon: LayoutDashboard },
   { titleKey: "documents", href: "/documents", icon: FileText },
   { titleKey: "glossary", href: "/glossary", icon: BookOpen },
+  { titleKey: "templates", href: "/templates", icon: ClipboardList },
   { titleKey: "history", href: "/history", icon: History },
+];
+
+const secondaryNavItems: NavItem[] = [
   { titleKey: "settings", href: "/settings", icon: SettingsIcon },
   { titleKey: "help", href: "/help", icon: HelpCircle },
 ];
@@ -47,42 +52,48 @@ export function AppSidebar() {
   const pathnameWithoutLocale = pathname.replace(/^\/(vi|en)/, "");
   const previewSource = searchParams.get("from");
 
+  const renderNavItem = (item: NavItem) => {
+    const isPreviewFromHistory =
+      pathnameWithoutLocale === "/documents/preview" && previewSource === "history";
+    const isActive = isPreviewFromHistory
+      ? item.href === "/history"
+      : pathnameWithoutLocale === item.href ||
+        pathnameWithoutLocale.startsWith(item.href + "/");
+    const title = t(item.titleKey);
+
+    return (
+      <SidebarMenuItem
+        key={item.href}
+        className="group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:justify-center"
+      >
+        <SidebarMenuButton
+          asChild
+          isActive={isActive}
+          tooltip={title}
+          className="text-sidebar-foreground"
+        >
+          <Link href={item.href}>
+            <item.icon className="size-5" />
+            {open && <span>{title}</span>}
+          </Link>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    );
+  };
+
   return (
     <Sidebar
       collapsible="icon"
       className="h-svh border-r border-sidebar-border bg-sidebar pt-(--dashboard-header-height)"
     >
       {/* Main Navigation */}
-      <SidebarContent className={`pt-4 ${open ? "px-2" : "px-0"}`}>
+      <SidebarContent className={`flex h-full flex-col pt-4 ${open ? "px-2" : "px-0"}`}>
         <SidebarMenu className="gap-1">
-          {navItems.map((item) => {
-            const isPreviewFromHistory =
-              pathnameWithoutLocale === "/documents/preview" && previewSource === "history";
-            const isActive = isPreviewFromHistory
-              ? item.href === "/history"
-              : pathnameWithoutLocale === item.href ||
-                pathnameWithoutLocale.startsWith(item.href + "/");
-            const title = t(item.titleKey);
+          {mainNavItems.map(renderNavItem)}
+        </SidebarMenu>
 
-            return (
-              <SidebarMenuItem
-                key={item.href}
-                className="group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:justify-center"
-              >
-                <SidebarMenuButton
-                  asChild
-                  isActive={isActive}
-                  tooltip={title}
-                  className="text-sidebar-foreground"
-                >
-                  <Link href={item.href}>
-                    <item.icon className="size-5" />
-                    {open && <span>{title}</span>}
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            );
-          })}
+        <SidebarMenu className="mt-auto gap-1 pb-4">
+          {secondaryNavItems.map(renderNavItem)}
         </SidebarMenu>
       </SidebarContent>
 

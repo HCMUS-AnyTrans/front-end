@@ -2,6 +2,7 @@
 
 import { useQueryClient } from '@tanstack/react-query';
 import { useState, useCallback, useRef } from 'react';
+import { toast } from 'sonner';
 import {
   requestDocUploadUrl,
   uploadFileToPresignedUrl,
@@ -167,7 +168,7 @@ function buildJobDto(
     file_id: fileId,
     src_lang: LANGUAGE_CODE_TO_API_NAME[config.srcLang],
     tgt_lang: LANGUAGE_CODE_TO_API_NAME[config.tgtLang],
-    doc_tone: config.tone || undefined,
+    doc_tone_id: config.tone || undefined,
     domain_id: config.domainId || undefined,
   };
 
@@ -189,12 +190,22 @@ function buildJobDto(
     dto.font_replacements = fontReplacements;
   }
 
-  if (isFontConfigurationApplicable && config.keepOriginalFontSize) {
-    dto.keep_original_font_size = true;
-  }
+  dto.keep_original_font_size = config.keepOriginalFontSize;
 
   if (config.pdfTranslationFlow) {
     dto.pdf_translation_flow = config.pdfTranslationFlow;
+  }
+
+  if (config.templateId) {
+    dto.template_id = config.templateId;
+  }
+
+  if (config.customInstruction.trim()) {
+    dto.custom_instruction = config.customInstruction.trim();
+  }
+
+  if (config.globalContext.trim()) {
+    dto.global_context = config.globalContext.trim();
   }
 
   dto.use_system_glossary = config.useSystemGlossary;
@@ -383,6 +394,7 @@ export function useUploadAndTranslate(): UseUploadAndTranslateReturn {
         if (abortRef.current) return;
 
         const errorMessage = extractErrorMessage(err);
+        toast.error(errorMessage);
 
         setState((prev) => ({
           ...prev,

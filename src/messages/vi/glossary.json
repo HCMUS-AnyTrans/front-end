@@ -122,7 +122,7 @@
       "documentCreditUnavailable": "Hiện không thể tải chi phí credit.",
       "documentInsufficientCredits": "Không đủ credits. Cần thêm {missing} credits.",
       "documentEmptyTitle": "Thêm tài liệu để bắt đầu",
-      "documentEmptyDescription": "Tải lên một hoặc nhiều tài liệu tham chiếu. File đã chọn sẽ hiển thị ở đây để bạn xem lại.",
+      "documentEmptyDescription": "Tải lên một hoặc nhiều tài liệu tham chiếu. Tệp đã chọn sẽ hiển thị ở đây để bạn xem lại.",
       "documentSelectedFiles": "Tệp đã chọn",
       "documentSelectedFilesCount": "{count}/{max}",
       "documentRemoveFile": "Xóa tệp",
@@ -133,7 +133,7 @@
           "description": "Tạo glossary trước rồi tự thêm thuật ngữ sau."
         },
         "template": {
-          "title": "Template",
+          "title": "Mẫu",
           "description": "Bắt đầu từ một template có sẵn theo domain đã chọn."
         },
         "document": {

@@ -42,7 +42,7 @@ export function deriveGlossaryInputMode(
     return 'saved';
   }
 
-  return config.glossaryInputMode ?? 'saved';
+  return config.glossaryInputMode ?? 'none';
 }
 
 export function shouldConfirmManualToSavedSwitch({

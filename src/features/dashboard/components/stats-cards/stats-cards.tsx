@@ -66,7 +66,7 @@ export function StatsCards() {
   return (
     <div className="grid grid-cols-2 gap-2 sm:gap-4 md:grid-cols-4 md:gap-6">
       {statCards.map((stat) => (
-        <DashboardCard key={stat.title} interactive>
+        <DashboardCard key={stat.title}>
           <DashboardCardContent
             padding="all"
             className="flex flex-col gap-1.5 p-3 sm:gap-3 sm:p-4 md:gap-4 md:p-6"

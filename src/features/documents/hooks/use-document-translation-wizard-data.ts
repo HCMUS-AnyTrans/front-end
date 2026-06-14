@@ -3,7 +3,9 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useLocale } from 'next-intl';
 import { getDomainLabel, useDomains } from '@/features/domains';
+import { getDefaultDocToneValue, useDocTones } from '@/features/doc-tones';
 import { useGlossaries, useTerms } from '@/features/glossary';
+import { useTranslationTemplates } from '@/features/translation-templates';
 import { useWallet } from '@/features/dashboard/hooks';
 import { useDocumentTranslationConfig } from './use-document-translation-config';
 import { useDownloadFile } from './use-download-file';
@@ -30,6 +32,12 @@ export function useDocumentTranslationWizardData() {
     getDomainByKey,
     isLoading: isLoadingDomains,
   } = useDomains();
+  const {
+    data: docTones = [],
+    isLoading: isLoadingDocTones,
+    isError: isDocTonesError,
+    refetch: refetchDocTones,
+  } = useDocTones();
 
   const {
     flowStatus,
@@ -72,6 +80,16 @@ export function useDocumentTranslationWizardData() {
 
   const { download, isDownloading } = useDownloadFile();
   const { wallet, isLoading: isLoadingWallet } = useWallet();
+  const {
+    templates: translationTemplates = [],
+    isLoading: isLoadingTranslationTemplates,
+    isFetching: isFetchingTranslationTemplates,
+  } = useTranslationTemplates({
+    page: 1,
+    limit: 100,
+    sortBy: 'updatedAt',
+    sortOrder: 'desc',
+  });
 
   const {
     config,
@@ -114,6 +132,16 @@ export function useDocumentTranslationWizardData() {
       })),
     [domains, locale],
   );
+
+  useEffect(() => {
+    if (docTones.length === 0) return;
+    if (docTones.some((tone) => tone.id === config.tone)) return;
+
+    const defaultDocTone = getDefaultDocToneValue(docTones);
+    if (defaultDocTone && defaultDocTone !== config.tone) {
+      handleConfigChange({ tone: defaultDocTone });
+    }
+  }, [config.tone, docTones, handleConfigChange]);
 
   const glossaryFilters = useMemo(
     () => ({
@@ -185,6 +213,7 @@ export function useDocumentTranslationWizardData() {
     analysisFile,
     canPreview,
     config,
+    docTones,
     domainOptions,
     download,
     effectiveFlowStatus,
@@ -208,18 +237,24 @@ export function useDocumentTranslationWizardData() {
     isDownloading,
     isFontConfigurationEnabledForFlow,
     isLoadingDomains,
+    isLoadingDocTones,
     isLoadingGlossaries,
+    isLoadingTranslationTemplates:
+      isLoadingTranslationTemplates || isFetchingTranslationTemplates,
     isLoadingWallet,
+    isDocTonesError,
     isPdfFile,
     isFetchingGlossaries,
     jobData,
     resetConfig,
     resetFlow,
+    refetchDocTones,
     selectedDomainKey: selectedDomain?.key ?? null,
     selectedEstimate,
     selectedGlossaryTerms,
     startTranslation,
     startUpload,
+    translationTemplates,
     uploadProgress,
     visibleGlossaries,
     wallet,
