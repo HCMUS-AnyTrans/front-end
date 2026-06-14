@@ -29,7 +29,7 @@ export function BenefitsSection() {
                 key={benefit.key}
                 className="group rounded-[1.75rem] border border-border bg-card p-7 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-5 text-xl font-semibold text-foreground">

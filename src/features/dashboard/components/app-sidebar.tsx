@@ -146,7 +146,7 @@ export function AppSidebar() {
 
       {open ? (
         <SidebarFooter className="px-4 pb-5">
-          <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-white/10 p-4 text-white shadow-[0_18px_40px_rgba(0,0,0,0.18)] backdrop-blur">
+          <div className="relative overflow-hidden rounded-xl border border-white/15 bg-white/10 p-4 text-white shadow-[0_18px_40px_rgba(0,0,0,0.18)] backdrop-blur">
             <div className="relative z-10 max-w-[130px] space-y-1.5">
               <p className="text-sm font-semibold leading-5">
                 {t('creditTitle')}

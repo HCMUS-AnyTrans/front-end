@@ -131,7 +131,7 @@ export function GlossaryContent() {
   // ─── Render ─────────────────────────────────────────────────────────
   return (
     <>
-      <AppCard className="overflow-hidden rounded-2xl border-0 bg-[#eaf4ff] shadow-sm dark:bg-card">
+      <AppCard className="overflow-hidden rounded-xl border-0 bg-[#eaf4ff] shadow-sm dark:bg-card">
         <AppCardContent
           padding="none"
           className="relative min-h-[264px] overflow-hidden p-6 sm:min-h-[260px] sm:p-8 lg:min-h-[264px] lg:p-10"
@@ -157,7 +157,7 @@ export function GlossaryContent() {
               </div>
             </div>
 
-            <div className="grid max-w-[580px] grid-cols-1 overflow-hidden rounded-2xl border border-white/70 bg-white/75 shadow-sm backdrop-blur dark:border-border dark:bg-background/75 sm:grid-cols-3">
+            <div className="grid max-w-[580px] grid-cols-1 overflow-hidden rounded-xl border border-white/70 bg-white/75 shadow-sm backdrop-blur dark:border-border dark:bg-background/75 sm:grid-cols-3">
               <GlossaryStat
                 icon={<BookOpenText className="size-5" />}
                 value={stats.glossaries}
@@ -271,7 +271,9 @@ function GlossaryStat({
         <div className="text-lg font-bold leading-none text-foreground">
           {value}
         </div>
-        <div className="mt-1 text-xs font-medium text-muted-foreground">{label}</div>
+        <div className="mt-1 text-xs font-medium text-muted-foreground">
+          {label}
+        </div>
       </div>
     </div>
   );

@@ -105,7 +105,7 @@ export function StepUpload({
       {/* ── Dropzone / File Preview ── */}
       <div
         className={cn(
-          'relative overflow-hidden rounded-2xl border bg-card transition-all duration-200',
+          'relative overflow-hidden rounded-xl border bg-card transition-all duration-200',
           isDragging
             ? 'border-primary bg-primary/5 shadow-[0_0_0_4px_var(--ring-glow)]'
             : file

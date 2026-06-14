@@ -1,38 +1,35 @@
-"use client";
+'use client';
 
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva, type VariantProps } from 'class-variance-authority';
 import {
   AppCard,
   AppCardContent,
   AppCardHeader,
-} from "@/components/ui/app-card";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/app-card';
+import { cn } from '@/lib/utils';
 
-const dashboardCardVariants = cva(
-  "rounded-md",
-  {
-    variants: {
-      height: {
-        default: "",
-        fixed: "h-[220px]",
-      },
-    },
-    defaultVariants: {
-      height: "default",
-    },
-  }
-);
-
-const dashboardCardContentVariants = cva("", {
+const dashboardCardVariants = cva('rounded-xl', {
   variants: {
-    padding: {
-      default: "px-6 pb-6 pt-0",
-      all: "p-6",
-      none: "p-0",
+    height: {
+      default: '',
+      fixed: 'h-[220px]',
     },
   },
   defaultVariants: {
-    padding: "default",
+    height: 'default',
+  },
+});
+
+const dashboardCardContentVariants = cva('', {
+  variants: {
+    padding: {
+      default: 'px-6 pb-6 pt-0',
+      all: 'p-6',
+      none: 'p-0',
+    },
+  },
+  defaultVariants: {
+    padding: 'default',
   },
 });
 

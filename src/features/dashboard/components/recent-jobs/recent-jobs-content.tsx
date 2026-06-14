@@ -119,7 +119,7 @@ function LanguageLabel({ value }: { value: string }) {
     <span className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
       <LanguageFlag
         value={value}
-        className="h-4 w-5 shrink-0 border border-border shadow-sm"
+        className="w-8 shrink-0 border border-border"
         fallbackClassName="h-4 w-5 shrink-0 rounded-sm"
       />
       <span>{value}</span>

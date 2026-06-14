@@ -64,7 +64,7 @@ export function StatsCards() {
       {statCards.map((stat) => (
         <DashboardCard
           key={stat.title}
-          className="rounded-2xl border-border/70 bg-card/95"
+          className="rounded-xl border-border/70 bg-card/95"
         >
           <DashboardCardContent
             padding="all"

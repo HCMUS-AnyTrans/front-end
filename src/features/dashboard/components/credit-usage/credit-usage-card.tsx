@@ -26,7 +26,7 @@ export function CreditUsageCard() {
   const tCharts = useTranslations('dashboard.charts');
 
   return (
-    <DashboardCard className="h-full rounded-2xl border-border/70 bg-card/95 shadow-sm">
+    <DashboardCard className="h-full rounded-xl border-border/70 bg-card/95">
       <DashboardCardHeader className="flex flex-row items-center justify-between gap-3 pb-3">
         <div className="flex items-center gap-2">
           <CardTitle className="text-base font-semibold text-card-foreground">
@@ -63,8 +63,8 @@ function TopLanguageRow({
     <div
       className={
         isFirst
-          ? 'relative flex items-center gap-3 overflow-hidden rounded-2xl border border-amber-300 bg-amber-50/70 px-3 py-3 dark:border-amber-500/40 dark:bg-amber-500/10'
-          : 'flex items-center gap-3 rounded-2xl border border-border bg-background/60 px-3 py-3'
+          ? 'relative flex items-center gap-3 overflow-hidden rounded-xl border border-amber-300 bg-amber-50/70 px-3 py-3 dark:border-amber-500/40 dark:bg-amber-500/10'
+          : 'flex items-center gap-3 rounded-xl border border-border bg-background/60 px-3 py-3'
       }
     >
       <Image
@@ -76,8 +76,8 @@ function TopLanguageRow({
       />
       <LanguageFlag
         value={language.languageKey}
-        className="h-9 w-11 shrink-0 border border-border object-cover sm:h-10 sm:w-12"
-        fallbackClassName="h-9 w-11 shrink-0 border border-border sm:h-10 sm:w-12"
+        className=" w-10 shrink-0 border border-border object-cover"
+        fallbackClassName="w-11 shrink-0 border border-border"
       />
       <span className="min-w-0 flex-1 truncate text-sm font-semibold text-foreground sm:text-base">
         {label}

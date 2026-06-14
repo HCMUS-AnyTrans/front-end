@@ -52,8 +52,8 @@ export function GlossaryCard({
     <div
       className={
         isBlocked
-          ? 'group relative rounded-2xl border bg-card p-5 opacity-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
-          : 'group relative cursor-pointer rounded-2xl border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+          ? 'group relative rounded-xl border bg-card p-5 opacity-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+          : 'group relative cursor-pointer rounded-xl border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
       }
       onClick={() => {
         if (!isBlocked) {

@@ -32,7 +32,7 @@ export function StorageUsageCard() {
   if (!storage) return <StorageUsageCardLoading />;
 
   return (
-    <DashboardCard className="h-full rounded-2xl border-border/70 bg-card/95 shadow-sm">
+    <DashboardCard className="h-full rounded-xl border-border/70 bg-card/95">
       <DashboardCardHeader>
         <CardTitle className="text-base font-semibold text-card-foreground">
           {tStorage('title')}
