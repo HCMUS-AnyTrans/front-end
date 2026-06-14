@@ -2,6 +2,11 @@
   "templates": {
     "title": "Mẫu dịch",
     "description": "Tạo cấu hình dịch thuật dùng lại cho tài liệu của bạn.",
+    "banner": {
+      "templates": "Mẫu dịch",
+      "instructions": "Có hướng dẫn",
+      "domains": "Lĩnh vực"
+    },
     "createTemplate": "Tạo mẫu dịch",
     "editTemplate": "Chỉnh sửa mẫu dịch",
     "backToList": "Quay lại danh sách",

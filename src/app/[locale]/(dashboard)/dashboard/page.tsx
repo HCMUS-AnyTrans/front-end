@@ -31,10 +31,10 @@ export default async function DashboardPage({ params }: Props) {
           <Image
             src="/dashboard/dashboard-icon-banner.png"
             alt=""
-            width={520}
-            height={220}
-            priority
-            className="pointer-events-none absolute left-1/2 top-0 h-auto w-[360px] max-w-none -translate-x-1/2 opacity-80 dark:opacity-35 sm:w-[440px] lg:w-[560px]"
+            fill
+            preload
+            unoptimized
+            className="absolute inset-0 h-full w-full object-cover object-[65%_center] dark:opacity-35 lg:object-center opacity-40"
           />
           <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-br from-primary/10 via-transparent to-background/60 dark:block" />
           <div className="relative z-10 flex flex-col gap-5 sm:gap-6 lg:gap-7">

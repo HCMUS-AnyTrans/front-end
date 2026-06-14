@@ -92,8 +92,10 @@ export function HistoryTableRow({
             <Image
               src="/shared/credit.png"
               alt="Credits"
-              width={16}
-              height={16}
+              width={64}
+              height={64}
+              quality={100}
+              sizes="64px"
               className="size-4 shrink-0"
             />
             <span className="text-sm font-medium tabular-nums text-foreground">

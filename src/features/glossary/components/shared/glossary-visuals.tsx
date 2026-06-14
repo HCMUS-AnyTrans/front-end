@@ -40,7 +40,7 @@ export function GlossaryLanguageFlag({
 export function GlossaryDomainIcon({
   domainKey,
   className,
-  size = 32,
+  size = 256,
 }: {
   domainKey?: string | null;
   className?: string;
@@ -54,6 +54,8 @@ export function GlossaryDomainIcon({
       alt=""
       width={size}
       height={size}
+      quality={100}
+      sizes={`${size}px`}
       className={cn('shrink-0 object-contain', className)}
     />
   );

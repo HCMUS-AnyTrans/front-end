@@ -56,8 +56,10 @@ export function SocialLoginButtons({
         <Image
           src="/authen/google.svg"
           alt="Google icon"
-          width={24}
-          height={24}
+          width={64}
+          height={64}
+          unoptimized
+          sizes="64px"
           className="w-6 h-6"
         />
         <span className="text-sm font-medium">

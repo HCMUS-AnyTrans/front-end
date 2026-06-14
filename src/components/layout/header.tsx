@@ -186,8 +186,8 @@ export function Header({
                   src="/shared/logo.svg"
                   alt={logo.text}
                   fill
+                  unoptimized
                   className="object-contain"
-                  priority
                 />
               </div>
               <span className="font-bold text-xl text-primary">

@@ -18,7 +18,7 @@ export function FileTypeIcon({ fileName, className }: FileTypeIconProps) {
     return (
       <span className={cn('relative inline-block shrink-0', className)}>
         <Image
-          src="/pdf-svg.svg"
+          src="/shared/pdf-svg.svg"
           alt="PDF file"
           fill
           unoptimized
@@ -33,7 +33,7 @@ export function FileTypeIcon({ fileName, className }: FileTypeIconProps) {
     return (
       <span className={cn('relative inline-block shrink-0', className)}>
         <Image
-          src="/doc-svg.svg"
+          src="/shared/doc-svg.svg"
           alt="DOC file"
           fill
           unoptimized
@@ -48,7 +48,7 @@ export function FileTypeIcon({ fileName, className }: FileTypeIconProps) {
     return (
       <span className={cn('relative inline-block shrink-0', className)}>
         <Image
-          src="/pptx-svg.svg"
+          src="/shared/pptx-svg.svg"
           alt="PPT file"
           fill
           unoptimized

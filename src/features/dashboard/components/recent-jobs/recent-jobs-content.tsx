@@ -93,8 +93,10 @@ export function RecentJobsContent({
                       <Image
                         src="/shared/credit.png"
                         alt="Credits"
-                        width={16}
-                        height={16}
+                        width={256}
+                        height={128}
+                        quality={100}
+                        sizes="128px"
                         className="size-4 shrink-0"
                       />
                       <span className="text-[15px] font-bold tabular-nums text-foreground">

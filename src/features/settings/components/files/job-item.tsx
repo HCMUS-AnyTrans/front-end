@@ -63,8 +63,10 @@ export function FilesJobItem({
                   <Image
                     src="/shared/credit.png"
                     alt="Credits"
-                    width={12}
-                    height={12}
+                    width={64}
+                    height={64}
+                    quality={100}
+                    sizes="64px"
                     className="size-3 shrink-0"
                   />
                   {job.cost_credits}

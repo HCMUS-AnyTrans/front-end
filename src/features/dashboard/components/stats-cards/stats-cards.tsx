@@ -73,8 +73,10 @@ export function StatsCards() {
             <Image
               src={stat.iconSrc}
               alt={stat.iconAlt}
-              width={56}
-              height={56}
+              width={256}
+              height={256}
+              quality={100}
+              sizes="256px"
               className="h-10 w-10 shrink-0 object-contain sm:h-12 sm:w-12 md:h-14 md:w-14"
             />
 

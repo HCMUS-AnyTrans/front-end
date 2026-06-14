@@ -92,13 +92,14 @@ export function AppSidebar() {
       <SidebarHeader
         className={open ? 'px-6 pb-4 pt-7' : 'items-center px-2 pb-4 pt-7'}
       >
-        <Link href="/dashboard" className="flex min-w-0 items-center gap-3">
+        <Link href="/" className="flex min-w-0 items-center gap-3">
           <div className="relative h-9 w-9 shrink-0 overflow-hidden">
             <Image
               src="/shared/logo.svg"
               alt="AnyTrans Logo"
               fill
-              priority
+              preload
+              unoptimized
               className="object-contain"
             />
           </div>
@@ -193,8 +194,10 @@ export function AppSidebar() {
             <Image
               src="/dashboard/sidebar-credit.png"
               alt="Credits"
-              width={128}
-              height={128}
+              width={512}
+              height={512}
+              quality={100}
+              sizes="512px"
               className="absolute -bottom-5 -right-4 h-24 w-24 object-contain"
             />
           </div>

@@ -20,6 +20,7 @@ export function LanguageSwitcher() {
           src="shared/vietnam-flag.svg"
           alt="Tiếng Việt"
           fill
+          unoptimized
           className="object-contain"
         />
       ) : (
@@ -27,6 +28,7 @@ export function LanguageSwitcher() {
           src="shared/uk-flag.svg"
           alt="English"
           fill
+          unoptimized
           className="object-contain"
         />
       )}

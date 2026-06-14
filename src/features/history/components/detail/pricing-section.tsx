@@ -27,8 +27,10 @@ export function HistoryJobDetailPricingSection({
           <Image
             src="/shared/credit.png"
             alt="Credits"
-            width={14}
-            height={14}
+            width={64}
+            height={64}
+            quality={100}
+            sizes="64px"
             className="size-3.5 shrink-0"
           />
           <span className="font-semibold tabular-nums text-foreground">

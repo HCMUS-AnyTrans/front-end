@@ -2,6 +2,11 @@
   "templates": {
     "title": "Translation Templates",
     "description": "Create reusable translation configurations for your documents.",
+    "banner": {
+      "templates": "Templates",
+      "instructions": "With instructions",
+      "domains": "Domains"
+    },
     "createTemplate": "Create Template",
     "editTemplate": "Edit Template",
     "backToList": "Back to templates",

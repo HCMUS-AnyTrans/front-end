@@ -37,9 +37,9 @@ export function StepUploadEmpty({
         src="/translation/upload-banner.png"
         alt=""
         fill
-        priority
-        sizes="(max-width: 1024px) 100vw, 960px"
-        className="pointer-events-none object-cover object-top opacity-95"
+        preload
+        unoptimized
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top opacity-95"
       />
       <div className="pointer-events-none absolute inset-0 hidden bg-card/70 dark:block" />
 
@@ -47,8 +47,11 @@ export function StepUploadEmpty({
         <Image
           src="/translation/upload-icon.png"
           alt=""
-          width={168}
-          height={136}
+          width={512}
+          height={512}
+          sizes="512px"
+          quality={100}
+          className="size-48 mb-6 shrink-0 opacity-80"
         />
 
         <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">

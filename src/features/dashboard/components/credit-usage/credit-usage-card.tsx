@@ -85,8 +85,10 @@ function TopLanguageRow({
       <Image
         src={`/dashboard/top-${language.rank}.png`}
         alt={`Top ${language.rank}`}
-        width={42}
-        height={42}
+        width={256}
+        height={256}
+        quality={100}
+        sizes="256px"
         className="h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
       />
       <LanguageFlag
