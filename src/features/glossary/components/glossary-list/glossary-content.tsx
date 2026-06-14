@@ -2,6 +2,7 @@
 
 import { useState, useDeferredValue } from 'react';
 import type { ReactNode } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { BookOpenText, FileText, Globe2, Plus } from 'lucide-react';
@@ -133,8 +134,16 @@ export function GlossaryContent() {
       <AppCard className="overflow-hidden rounded-2xl border-0 bg-[#eaf4ff] shadow-sm">
         <AppCardContent
           padding="none"
-          className="relative min-h-[264px] overflow-hidden bg-[url('/glossary/glossay-banner.png')] bg-cover bg-[65%_center] p-6 sm:min-h-[260px] sm:p-8 lg:min-h-[264px] lg:bg-center lg:p-10"
+          className="relative min-h-[264px] overflow-hidden p-6 sm:min-h-[260px] sm:p-8 lg:min-h-[264px] lg:p-10"
         >
+          <Image
+            src="/glossary/glossay-banner.png"
+            alt="Glossary Banner"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[65%_center] lg:object-center"
+          />
           <div className="relative z-10 flex max-w-xl flex-col gap-5">
             <div className="space-y-3">
               <div className="space-y-2">

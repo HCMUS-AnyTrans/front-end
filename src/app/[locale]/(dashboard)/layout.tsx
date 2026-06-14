@@ -29,10 +29,10 @@ export default function DashboardLayout({
       <TranslationSocketProvider />
       <GlossarySocketProvider />
       <SidebarProvider defaultOpen={defaultOpen}>
-        <DashboardHeader />
         <AppSidebar />
-        <SidebarInset className="h-svh overflow-hidden bg-muted/30">
-          <main className="flex-1 overflow-y-auto bg-muted/30 pt-[var(--dashboard-header-height)] [scrollbar-gutter:stable]">
+        <SidebarInset className="h-svh overflow-hidden bg-[#f6f8ff] md:border-l md:border-slate-200/80 md:shadow-[-18px_0_44px_rgba(15,23,42,0.08)]">
+          <DashboardHeader />
+          <main className="flex-1 overflow-y-auto bg-[#f6f8ff] [scrollbar-gutter:stable]">
             <div className="px-4 md:px-(--dashboard-content-margin)">
               {children}
             </div>

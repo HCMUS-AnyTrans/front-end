@@ -49,11 +49,11 @@ export function DashboardHeader() {
   }, [handleKeyDown]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex h-(--dashboard-header-height) items-center justify-between border-b border-border bg-background px-4 lg:px-6">
+    <header className="sticky top-0 z-40 flex h-(--dashboard-header-height) items-center justify-between border-b border-slate-200/70 bg-white/75 px-4 backdrop-blur supports-[backdrop-filter]:bg-white/65 lg:px-6">
       {/* ── Logo ── */}
       <div className="flex min-w-0 items-center gap-2 md:gap-6">
         <SidebarTrigger className="md:hidden" />
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2 md:hidden">
           <div className="relative h-8 w-8 shrink-0">
             <Image
               src="/logo.svg"

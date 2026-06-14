@@ -6,16 +6,21 @@
       "dashboard": "Dashboard",
       "documents": "Translate",
       "glossary": "Glossary",
+      "templates": "Templates",
       "history": "History",
       "settings": "Settings",
       "help": "Help",
       "profile": "Profile",
-      "logout": "Logout"
+      "logout": "Logout",
+      "creditTitle": "Need more credits?",
+      "creditDescription": "Upgrade your plan to translate more.",
+      "creditCta": "View plans →"
     },
     "pages": {
       "dashboard": "Dashboard",
       "documents": "Translate",
       "glossary": "Glossary",
+      "templates": "Templates",
       "history": "History",
       "settings": "Settings",
       "help": "Help"
@@ -126,6 +131,7 @@
       "loadErrorDescription": "Something went wrong while loading chart data. Please try again.",
       "retry": "Retry",
       "noUsageInfo": "No credit usage information yet",
+      "noUsageDescription": "Usage data will appear after you spend credits on translation.",
       "documents": "Documents",
       "remaining": "Remaining"
     },

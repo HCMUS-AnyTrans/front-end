@@ -6,16 +6,21 @@
       "dashboard": "Tổng quan",
       "documents": "Dịch",
       "glossary": "Thuật ngữ",
+      "templates": "Mẫu dịch",
       "history": "Lịch sử",
       "settings": "Cài đặt",
       "help": "Trợ giúp",
       "profile": "Hồ sơ",
-      "logout": "Đăng xuất"
+      "logout": "Đăng xuất",
+      "creditTitle": "Bạn cần thêm credits?",
+      "creditDescription": "Nâng cấp gói để dịch nhiều hơn.",
+      "creditCta": "Xem gói →"
     },
     "pages": {
       "dashboard": "Tổng quan",
       "documents": "Dịch",
       "glossary": "Thuật ngữ",
+      "templates": "Mẫu dịch",
       "history": "Lịch sử",
       "settings": "Cài đặt",
       "help": "Trợ giúp"
@@ -126,6 +131,7 @@
       "loadErrorDescription": "Đã xảy ra lỗi khi lấy dữ liệu biểu đồ. Vui lòng thử lại.",
       "retry": "Thử lại",
       "noUsageInfo": "Chưa có thông tin sử dụng credit",
+      "noUsageDescription": "Dữ liệu sẽ hiển thị khi bạn sử dụng credits cho dịch thuật.",
       "documents": "Tài liệu",
       "remaining": "Còn lại"
     },

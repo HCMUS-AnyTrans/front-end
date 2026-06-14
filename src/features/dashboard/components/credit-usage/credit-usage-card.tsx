@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { CardTitle } from "@/components/ui/card";
 import {
@@ -46,37 +47,13 @@ export function CreditUsageCard() {
   }
 
   if (creditsData.usage.documentsUsed === 0) {
-    return (
-      <DashboardCard>
-        <DashboardCardHeader>
-          <CardTitle className="text-base font-semibold text-foreground">
-            {tCharts("creditAllocation")}
-          </CardTitle>
-        </DashboardCardHeader>
-        <DashboardCardContent className="flex flex-col items-center justify-center gap-2 py-6 text-center">
-          <Info className="size-6 text-muted-foreground/50" />
-          <p className="text-xs text-muted-foreground">{tCharts("noUsageInfo")}</p>
-        </DashboardCardContent>
-      </DashboardCard>
-    );
+    return <CreditUsageEmptyState />;
   }
 
   const breakdown = creditsData.breakdown;
 
   if (breakdown.length === 0) {
-    return (
-      <DashboardCard>
-        <DashboardCardHeader>
-          <CardTitle className="text-base font-semibold text-foreground">
-            {tCharts("creditAllocation")}
-          </CardTitle>
-        </DashboardCardHeader>
-        <DashboardCardContent className="flex flex-col items-center justify-center gap-2 py-6 text-center">
-          <Info className="size-6 text-muted-foreground/50" />
-          <p className="text-xs text-muted-foreground">{tCharts("noUsageInfo")}</p>
-        </DashboardCardContent>
-      </DashboardCard>
-    );
+    return <CreditUsageEmptyState />;
   }
 
   const creditUsageData = breakdown.map((item, index) => ({
@@ -92,16 +69,19 @@ export function CreditUsageCard() {
   } satisfies ChartConfig;
 
   return (
-    <DashboardCard>
+    <DashboardCard className="h-full rounded-2xl border-border/70 bg-white/95 shadow-sm">
       <DashboardCardHeader>
-        <CardTitle className="text-base font-semibold text-foreground">
-          {tCharts("creditAllocation")}
-        </CardTitle>
+        <div className="flex items-center gap-2">
+          <CardTitle className="text-base font-semibold text-slate-950">
+            {tCharts("creditAllocation")}
+          </CardTitle>
+          <Info className="size-4 text-slate-400" />
+        </div>
       </DashboardCardHeader>
       <DashboardCardContent>
         <ChartContainer
           config={chartConfig}
-          className="mx-auto h-[80px] w-full max-w-[140px] sm:h-[100px] sm:max-w-[180px] md:h-[120px]"
+          className="mx-auto h-[112px] w-full max-w-[180px] sm:h-[132px] sm:max-w-[220px] md:h-[148px]"
         >
           <PieChart>
             <ChartTooltip
@@ -131,11 +111,11 @@ export function CreditUsageCard() {
             </Pie>
           </PieChart>
         </ChartContainer>
-        <div className="mt-2 flex flex-col gap-1.5">
+        <div className="mt-4 flex flex-col gap-2">
           {creditUsageData.map((item) => (
             <div
               key={item.name}
-              className="flex items-center justify-between text-xs"
+              className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-xs"
             >
               <div className="flex items-center gap-2">
                 <div
@@ -154,6 +134,40 @@ export function CreditUsageCard() {
               </span>
             </div>
           ))}
+        </div>
+      </DashboardCardContent>
+    </DashboardCard>
+  );
+}
+
+function CreditUsageEmptyState() {
+  const tCharts = useTranslations("dashboard.charts");
+
+  return (
+    <DashboardCard className="h-full rounded-2xl border-border/70 bg-white/95 shadow-sm">
+      <DashboardCardHeader>
+        <div className="flex items-center gap-2">
+          <CardTitle className="text-base font-semibold text-slate-950">
+            {tCharts("creditAllocation")}
+          </CardTitle>
+          <Info className="size-4 text-slate-400" />
+        </div>
+      </DashboardCardHeader>
+      <DashboardCardContent className="flex min-h-[176px] flex-col items-center justify-center gap-3 px-6 pb-7 pt-1 text-center">
+        <Image
+          src="/dashboard/chart.png"
+          alt="Credit usage chart"
+          width={180}
+          height={108}
+          className="h-auto w-[150px] object-contain sm:w-[170px]"
+        />
+        <div className="space-y-1.5">
+          <p className="text-sm font-semibold text-slate-700">
+            {tCharts("noUsageInfo")}
+          </p>
+          <p className="mx-auto max-w-[260px] text-xs leading-5 text-slate-500">
+            {tCharts("noUsageDescription")}
+          </p>
         </div>
       </DashboardCardContent>
     </DashboardCard>
