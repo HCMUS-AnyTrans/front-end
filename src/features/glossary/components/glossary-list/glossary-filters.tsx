@@ -43,11 +43,11 @@ export function GlossaryFilters({
           placeholder={t('searchPlaceholder')}
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="h-10 rounded-xl bg-background pl-9"
+          className="h-10 rounded-md bg-background pl-9"
         />
       </div>
       <Select value={domainFilter} onValueChange={onDomainChange}>
-        <SelectTrigger className="h-10 min-h-10 w-full rounded-xl bg-background px-3 py-0 hover:bg-background lg:w-[220px]">
+        <SelectTrigger className="h-10 min-h-10 w-full rounded-md bg-background px-3 py-0 hover:bg-background lg:w-[220px]">
           <SelectValue placeholder={t('allDomains')} />
         </SelectTrigger>
         <SelectContent className="bg-popover">
@@ -62,7 +62,7 @@ export function GlossaryFilters({
         </SelectContent>
       </Select>
       <Select value={srcLangFilter} onValueChange={onSrcLangChange}>
-        <SelectTrigger className="h-10 min-h-10 w-full rounded-xl bg-background px-3 py-0 hover:bg-background lg:w-[200px]">
+        <SelectTrigger className="h-10 min-h-10 w-full rounded-md bg-background px-3 py-0 hover:bg-background lg:w-[200px]">
           <SelectValue placeholder={t('allLanguages')} />
         </SelectTrigger>
         <SelectContent className="bg-popover">

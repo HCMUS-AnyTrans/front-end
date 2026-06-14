@@ -66,7 +66,7 @@ export function AppSidebar() {
         <Link href="/dashboard" className="flex min-w-0 items-center gap-3">
           <div className="relative h-9 w-9 shrink-0 overflow-hidden">
             <Image
-              src="/logo.svg"
+              src="/shared/logo.svg"
               alt="AnyTrans Logo"
               fill
               priority

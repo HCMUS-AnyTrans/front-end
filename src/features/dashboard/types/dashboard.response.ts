@@ -12,11 +12,21 @@ export interface JobChartDataPoint {
 }
 
 /**
+ * Summary metadata returned with the translation jobs list.
+ */
+export interface TranslationSummary {
+  totalJobs: number;
+  completedJobs: number;
+  credits: number;
+}
+
+/**
  * A paginated response for recent translation jobs.
  */
 export interface TranslationJobsListResponse {
   data: TranslationJobResponse[];
   meta: PaginationMeta;
+  summary: TranslationSummary;
 }
 
 /**

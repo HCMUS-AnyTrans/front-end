@@ -1,13 +1,13 @@
-"use client"
+'use client';
 
-import { Suspense } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { useTranslations } from "next-intl"
-import { VerifyEmailHandler, AuthHero } from "@/features/auth"
+import { Suspense } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import { VerifyEmailHandler, AuthHero } from '@/features/auth';
 
 function VerifyEmailContent() {
-  const t = useTranslations("auth.verifyEmail")
+  const t = useTranslations('auth.verifyEmail');
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -16,7 +16,7 @@ function VerifyEmailContent() {
         <Link href="/" className="flex items-center gap-2 group">
           <div className="relative w-10 h-10">
             <Image
-              src="/logo.svg"
+              src="/shared/logo.svg"
               alt="Logo"
               fill
               className="object-contain"
@@ -37,10 +37,10 @@ function VerifyEmailContent() {
                 {/* Header */}
                 <div className="space-y-4">
                   <h1 className="text-4xl font-semibold text-foreground">
-                    {t("title")}
+                    {t('title')}
                   </h1>
                   <p className="text-base text-muted-foreground">
-                    {t("subtitle")}
+                    {t('subtitle')}
                   </p>
                 </div>
 
@@ -59,7 +59,7 @@ function VerifyEmailContent() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function LoadingFallback() {
@@ -69,7 +69,7 @@ function LoadingFallback() {
         <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
       </div>
     </div>
-  )
+  );
 }
 
 export default function VerifyEmailPage() {
@@ -77,5 +77,5 @@ export default function VerifyEmailPage() {
     <Suspense fallback={<LoadingFallback />}>
       <VerifyEmailContent />
     </Suspense>
-  )
+  );
 }

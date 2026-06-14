@@ -163,6 +163,11 @@
       "totalJobs": "{count} jobs total",
       "pageInfo": "Page {page} of {totalPages}",
       "fileExpired": "File expired",
+      "banner": {
+        "totalJobs": "Total jobs",
+        "completedJobs": "Completed",
+        "usedCredits": "Credits used"
+      },
       "download": {
         "label": "Download",
         "original": "Original file",

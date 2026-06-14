@@ -93,6 +93,7 @@ export async function getRecentJobsApi(
   const response = await apiClient.get<{
     data: TranslationJobResponseDto[];
     meta: TranslationJobsListResponse['meta'];
+    summary: TranslationJobsListResponse['summary'];
   }>('/translations', { params });
 
   return {

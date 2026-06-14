@@ -150,7 +150,7 @@
     },
     "history": {
       "title": "Lịch sử dịch thuật",
-      "description": "Xem tất cả các bản dịch và trạng thái của chúng.",
+      "description": "Xem lại lịch sử của tất cả các bản dịch và trạng thái của chúng.",
       "searchPlaceholder": "Tìm kiếm theo tên file...",
       "filterStatus": "Trạng thái",
       "allStatuses": "Tất cả trạng thái",
@@ -163,6 +163,11 @@
       "totalJobs": "{count} bản dịch",
       "pageInfo": "Trang {page}/{totalPages}",
       "fileExpired": "File đã hết hạn",
+      "banner": {
+        "totalJobs": "Tổng bản dịch",
+        "completedJobs": "Đã hoàn thành",
+        "usedCredits": "Credits đã dùng"
+      },
       "download": {
         "label": "Tải xuống",
         "original": "File gốc",

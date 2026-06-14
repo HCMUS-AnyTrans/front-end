@@ -54,7 +54,7 @@ export function useHistoryJobs() {
     ...(selectedDomain ? { domain_id: selectedDomain.id } : {}),
   };
 
-  const { jobsData, isLoading, isFetching, isError } =
+  const { jobsData, summary, isLoading, isFetching, isError } =
     useRecentJobs(queryParams);
 
   const jobs = jobsData?.data ?? [];
@@ -66,6 +66,7 @@ export function useHistoryJobs() {
     // Data
     jobs,
     meta,
+    summary,
     isLoading,
     isFetching,
     isError,

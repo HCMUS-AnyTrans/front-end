@@ -183,7 +183,7 @@ export function Header({
             >
               <div className="relative w-10 h-10">
                 <Image
-                  src="/logo.svg"
+                  src="/shared/logo.svg"
                   alt={logo.text}
                   fill
                   className="object-contain"

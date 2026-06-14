@@ -67,22 +67,15 @@ export function GlossaryContent() {
           ...(srcLangFilter !== 'all' && { srcLang: srcLangFilter }),
         };
 
-  const { glossaries, pagination, isLoading, isError, isFetching } =
+  const { glossaries, pagination, summary, isLoading, isError, isFetching } =
     useGlossaries(queryParams);
   const visibleGlossaries = (glossaries ?? []).filter(
     (glossary) => glossary.status !== 'failed',
   );
   const stats = {
-    glossaries: pagination?.total ?? visibleGlossaries.length,
-    languagePairs: new Set(
-      visibleGlossaries.map(
-        (glossary) => `${glossary.srcLang}:${glossary.tgtLang}`,
-      ),
-    ).size,
-    terms: visibleGlossaries.reduce(
-      (total, glossary) => total + glossary.termCount,
-      0,
-    ),
+    glossaries: summary?.totalGlossaries ?? 0,
+    languagePairs: summary?.totalPairs ?? 0,
+    terms: summary?.totalTerms ?? 0,
   };
 
   const hasFilters =
@@ -131,7 +124,7 @@ export function GlossaryContent() {
   // ─── Render ─────────────────────────────────────────────────────────
   return (
     <>
-      <AppCard className="overflow-hidden rounded-xl border-0 bg-[#eaf4ff] shadow-sm dark:bg-card">
+      <AppCard className="overflow-hidden rounded-xl border dark:bg-card">
         <AppCardContent
           padding="none"
           className="relative min-h-[264px] overflow-hidden p-6 sm:min-h-[260px] sm:p-8 lg:min-h-[264px] lg:p-10"
@@ -190,7 +183,7 @@ export function GlossaryContent() {
           onSrcLangChange={handleSrcLangChange}
         />
         <Button
-          className="h-10 w-full shrink-0 rounded-xl px-4 sm:w-auto"
+          className="h-10 w-full shrink-0 rounded-md px-4 sm:w-auto"
           onClick={handleCreateOpen}
         >
           <Plus className="size-4" />

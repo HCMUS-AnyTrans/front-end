@@ -56,7 +56,7 @@ export function DashboardHeader() {
         <Link href="/" className="flex items-center gap-2 md:hidden">
           <div className="relative h-8 w-8 shrink-0">
             <Image
-              src="/logo.svg"
+              src="/shared/logo.svg"
               alt="AnyTrans Logo"
               fill
               className="object-contain"
@@ -122,7 +122,7 @@ export function DashboardHeader() {
                 title="Credits"
               >
                 <Image
-                  src="/dashboard/credit.svg"
+                  src="/shared/credit.svg"
                   alt="Credits"
                   width={16}
                   height={16}
@@ -146,7 +146,7 @@ export function DashboardHeader() {
               >
                 <button type="button" className="flex w-full items-center">
                   <Image
-                    src="/dashboard/credit.svg"
+                    src="/shared/credit.svg"
                     alt="Credits"
                     width={16}
                     height={16}
