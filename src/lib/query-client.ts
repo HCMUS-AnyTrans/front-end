@@ -88,6 +88,11 @@ export const domainKeys = {
   list: () => [...domainKeys.all, 'list'] as const,
 };
 
+export const docToneKeys = {
+  all: ['doc-tones'] as const,
+  list: () => [...docToneKeys.all, 'list'] as const,
+};
+
 // Settings-related query keys
 export const settingsKeys = {
   all: ['settings'] as const,
@@ -140,4 +145,15 @@ export const glossaryKeys = {
     params !== undefined
       ? ([...glossaryKeys.all, 'terms', glossaryId, params] as const)
       : ([...glossaryKeys.all, 'terms', glossaryId] as const),
+};
+
+// Translation template-related query keys
+export const translationTemplateKeys = {
+  all: ['translation-templates'] as const,
+  list: (params?: unknown) =>
+    params !== undefined
+      ? ([...translationTemplateKeys.all, 'list', params] as const)
+      : ([...translationTemplateKeys.all, 'list'] as const),
+  detail: (id: string) =>
+    [...translationTemplateKeys.all, 'detail', id] as const,
 };

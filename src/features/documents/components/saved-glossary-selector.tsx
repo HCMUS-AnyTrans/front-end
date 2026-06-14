@@ -1,10 +1,14 @@
 'use client';
 
+import { useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { getDomainLabel, useDomains } from '@/features/domains';
 import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import type { Glossary } from '@/features/glossary';
+
+const SAVED_GLOSSARY_PAGE_SIZE = 4;
 
 interface SavedGlossarySelectorProps {
   glossaries: Glossary[];
@@ -26,6 +30,20 @@ export function SavedGlossarySelector({
   const tGlossary = useTranslations('glossary');
   const { getDomainById } = useDomains();
   const hasSavedGlossaries = glossaries.length > 0;
+  const [page, setPage] = useState(1);
+  const totalPages = Math.max(
+    1,
+    Math.ceil(glossaries.length / SAVED_GLOSSARY_PAGE_SIZE),
+  );
+  const safePage = Math.min(page, totalPages);
+  const visibleGlossaries = useMemo(
+    () =>
+      glossaries.slice(
+        (safePage - 1) * SAVED_GLOSSARY_PAGE_SIZE,
+        safePage * SAVED_GLOSSARY_PAGE_SIZE,
+      ),
+    [glossaries, safePage],
+  );
 
   return (
     <div
@@ -41,8 +59,8 @@ export function SavedGlossarySelector({
           </Label>
         ) : null}
         {hasSavedGlossaries ? (
-          <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2">
-            {glossaries.map((glossary) => {
+          <div className="grid grid-cols-2 gap-2">
+            {visibleGlossaries.map((glossary) => {
               const isSelected = selectedGlossaryId === glossary.id;
               const domain = getDomainById(glossary.domainId);
               const domainLabel = domain ? getDomainLabel(domain, locale) : '';
@@ -81,9 +99,33 @@ export function SavedGlossarySelector({
           </div>
         ) : null}
 
-        {!isLoadingGlossaries && hasSavedGlossaries && selectedGlossaryId === null ? (
-          <div className="rounded-lg border border-dashed bg-muted/20 px-4 py-3 text-sm text-muted-foreground">
-            {t('savedGlossarySelectionHint')}
+        {hasSavedGlossaries && totalPages > 1 ? (
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-xs text-muted-foreground">
+              {t('savedGlossaryPageStatus', { page: safePage, totalPages })}
+            </span>
+            <div className="flex items-center gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setPage((current) => Math.max(1, current - 1))}
+                disabled={safePage <= 1 || isLoadingGlossaries}
+              >
+                {t('savedGlossaryPrev')}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() =>
+                  setPage((current) => Math.min(totalPages, current + 1))
+                }
+                disabled={safePage >= totalPages || isLoadingGlossaries}
+              >
+                {t('savedGlossaryNext')}
+              </Button>
+            </div>
           </div>
         ) : null}
 

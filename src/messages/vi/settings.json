@@ -44,7 +44,7 @@
       "emailResults": "Gửi kết quả qua email",
       "emailResultsDescription": "Tự động gửi email khi dịch hoàn tất",
       "fileTtl": "Thời gian lưu file",
-      "fileTtlDescription": "File sẽ tự động xóa sau thời gian này",
+      "fileTtlDescription": "Tệp sẽ tự động xóa sau thời gian này",
       "days": "{count} ngày",
       "hours": "{count} giờ",
       "hourUnit": "giờ",
@@ -98,7 +98,7 @@
           "description": "Thông báo khi nạp credits thành công"
         },
         "file_expiring": {
-          "label": "File sắp hết hạn",
+          "label": "Tệp sắp hết hạn",
           "description": "Nhắc nhở khi file sắp bị xóa"
         },
         "security_alert": {
@@ -176,8 +176,8 @@
       "originalFile": "Gốc",
       "translatedFile": "Đã dịch",
       "download": "Tải xuống",
-      "downloadOriginal": "File gốc",
-      "downloadTranslated": "File đã dịch",
+      "downloadOriginal": "Tệp gốc",
+      "downloadTranslated": "Tệp đã dịch",
       "confirmDelete": "Xác nhận xóa",
       "confirmDeleteMessage": "Bạn có chắc chắn muốn xóa tệp \"{name}\"? Hành động này không thể hoàn tác.",
       "confirmDeleteJob": "Xóa tệp dịch thuật",

@@ -13,6 +13,7 @@ import {
   setTranslationConnectionState,
 } from '../store/translation.store';
 import type { TranslationJobResponse } from '../types';
+import { normalizeDocumentErrorMessage } from '../hooks/utils';
 
 interface JobStatusSocketEvent {
   jobId: string;
@@ -95,7 +96,10 @@ export function TranslationSocketProvider() {
           });
         } else {
           toast.error(tResult('failed'), {
-            description: event.error ?? tResult('unknownError'),
+            description: normalizeDocumentErrorMessage(
+              event.error,
+              tResult('unknownError'),
+            ),
           });
         }
 

@@ -81,7 +81,6 @@ export function ConfigureEstimateCard({
                 </div>
               ))}
             </div>
-            <p className="text-xs text-muted-foreground">{t("estimate.note")}</p>
           </>
         ) : null}
 

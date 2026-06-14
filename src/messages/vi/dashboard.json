@@ -55,7 +55,7 @@
       "noResultsHint": "Thử từ khóa khác",
       "noJobResults": "Không tìm thấy bản dịch phù hợp",
       "noGlossaryResults": "Không tìm thấy bộ thuật ngữ phù hợp",
-      "unknownFile": "File không xác định",
+      "unknownFile": "Tệp không xác định",
       "typeToSearch": "Nhập từ khóa để tìm kiếm",
       "hint": "Tìm chức năng, bản dịch và bộ thuật ngữ",
       "navigate": "để điều hướng",
@@ -170,8 +170,8 @@
       },
       "download": {
         "label": "Tải xuống",
-        "original": "File gốc",
-        "translated": "File đã dịch"
+        "original": "Tệp gốc",
+        "translated": "Tệp đã dịch"
       },
       "columns": {
         "credits": "Credits"
@@ -181,9 +181,9 @@
         "timing": "Thời gian",
         "createdAt": "Tạo lúc",
         "completedAt": "Hoàn thành lúc",
-        "inputFile": "File gốc",
-        "outputFile": "File đã dịch",
-        "fileExpired": "File đã hết hạn",
+        "inputFile": "Tệp gốc",
+        "outputFile": "Tệp đã dịch",
+        "fileExpired": "Tệp đã hết hạn",
         "creditCost": "Chi phí Credits",
         "breakdown": {
           "service": "Dịch vụ",

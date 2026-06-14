@@ -27,7 +27,7 @@ export function ConfigureActionsPanel({
           isLoading={isLoading}
           isStartDisabled={isStartDisabled}
           isInsufficientCredits={isInsufficientCredits}
-          containerClassName="space-y-3"
+          containerClassName="grid grid-cols-2 gap-2"
           backButtonClassName="w-full"
           startButtonClassName="w-full"
         />

@@ -55,6 +55,35 @@ export function AppSidebar() {
   const pathnameWithoutLocale = pathname.replace(/^\/(vi|en)/, '');
   const previewSource = searchParams.get('from');
 
+  const renderNavItem = (item: NavItem) => {
+    const isPreviewFromHistory =
+      pathnameWithoutLocale === "/documents/preview" && previewSource === "history";
+    const isActive = isPreviewFromHistory
+      ? item.href === "/history"
+      : pathnameWithoutLocale === item.href ||
+        pathnameWithoutLocale.startsWith(item.href + "/");
+    const title = t(item.titleKey);
+
+    return (
+      <SidebarMenuItem
+        key={item.href}
+        className="group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:justify-center"
+      >
+        <SidebarMenuButton
+          asChild
+          isActive={isActive}
+          tooltip={title}
+          className="text-sidebar-foreground"
+        >
+          <Link href={item.href}>
+            <item.icon className="size-5" />
+            {open && <span>{title}</span>}
+          </Link>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    );
+  };
+
   return (
     <Sidebar
       collapsible="icon"

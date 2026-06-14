@@ -2,6 +2,7 @@
 
 import { AlertCircle, XCircle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { normalizeDocumentErrorMessage } from '../hooks/utils';
 
 interface StepReviewFailedCardProps {
   error: string | null;
@@ -14,7 +15,10 @@ export function StepReviewFailedCard({
   jobError,
   t,
 }: StepReviewFailedCardProps) {
-  const errorMessage = error || jobError || t('unknownError');
+  const errorMessage = normalizeDocumentErrorMessage(
+    error || jobError,
+    t('unknownError'),
+  );
 
   return (
     <Card className="mx-auto max-w-sm sm:max-w-lg">
