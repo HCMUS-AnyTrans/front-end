@@ -52,7 +52,7 @@ export function EnterpriseBlock({
           <div className="flex items-center gap-6">
             <div
               className={cn(
-                'w-16 h-16 rounded-2xl flex items-center justify-center',
+                'w-16 h-16 rounded-xl flex items-center justify-center',
                 isDark ? 'bg-primary' : 'bg-primary/10',
               )}
             >

@@ -2,12 +2,22 @@ import type { PaginationMeta } from '@/types';
 import type { Glossary, GlossaryTemplate, Term } from './glossary.types';
 
 /**
+ * Summary metadata returned with the glossary list.
+ */
+export interface GlossarySummary {
+  totalGlossaries: number;
+  totalPairs: number;
+  totalTerms: number;
+}
+
+/**
  * Paginated list of glossaries.
  * Maps to backend GlossaryListResponseDto.
  */
 export interface GlossaryListResponse {
   items: Glossary[];
   pagination: PaginationMeta;
+  summary: GlossarySummary;
 }
 
 /**

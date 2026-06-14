@@ -9,6 +9,7 @@
       }
     },
     "upload": {
+      "title": "Tải tài liệu của bạn",
       "dropzone": "Kéo thả tài liệu vào đây",
       "or": "hoặc",
       "dragHint": "hoặc kéo và thả",

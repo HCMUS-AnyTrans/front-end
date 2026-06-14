@@ -183,7 +183,7 @@ export function Header({
             >
               <div className="relative w-10 h-10">
                 <Image
-                  src="/logo.svg"
+                  src="/shared/logo.svg"
                   alt={logo.text}
                   fill
                   className="object-contain"
@@ -288,7 +288,7 @@ export function Header({
             exit={{ opacity: 0, y: -20 }}
             className="fixed inset-x-0 top-16 z-40 md:hidden"
           >
-            <div className="bg-background/98 backdrop-blur-lg shadow-xl border-b border-border mx-4 rounded-2xl mt-2 overflow-hidden">
+            <div className="bg-background/98 backdrop-blur-lg shadow-xl border-b border-border mx-4 rounded-xl mt-2 overflow-hidden">
               <nav className="flex flex-col p-4 gap-1">
                 {navItems.map((item, index) => (
                   <motion.div

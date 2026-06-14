@@ -129,7 +129,7 @@
   --radius: 0.75rem;
   --dashboard-header-height: clamp(48px, calc(56 * 100vw / 1920), 56px);
   --dashboard-sidebar-width: clamp(208px, calc(260 * 100vw / 1920), 260px);
-  --dashboard-content-margin: clamp(18px, calc(180 * 100vw / 1920), 180px);
+  --dashboard-content-margin: clamp(6px, calc(60 * 100vw / 1920), 60px);
 
   /* ── Brand: primary (hue 260) ── */
   --primary: oklch(0.4 0.15 260);

@@ -1,32 +1,28 @@
-"use client"
+'use client';
 
-import { useTranslations } from "next-intl"
-import { PricingCard } from "./pricing-card"
-import { Button } from "@/components/ui/button"
-import { Skeleton } from "@/components/ui/skeleton"
-import { useCreditPackages } from "@/features/settings"
-import { sortActiveCreditPackages } from "@/lib/credit-package"
-import { cn } from "@/lib/utils"
-import type { Plan } from "../data"
+import { useTranslations } from 'next-intl';
+import { PricingCard } from './pricing-card';
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useCreditPackages } from '@/features/settings';
+import { sortActiveCreditPackages } from '@/lib/credit-package';
+import { cn } from '@/lib/utils';
+import type { Plan } from '../data';
 
 export interface PricingGridProps {
-  className?: string
+  className?: string;
 }
 
 export function PricingGrid({ className }: PricingGridProps) {
-  const t = useTranslations("marketing.pricingPage")
-  const features = t.raw("features") as string[]
-  const {
-    packages,
-    isLoading,
-    isError,
-    refetch,
-  } = useCreditPackages()
+  const t = useTranslations('marketing.pricingPage');
+  const features = t.raw('features') as string[];
+  const { packages, isLoading, isError, refetch } = useCreditPackages();
 
-  const packageList = sortActiveCreditPackages(packages)
+  const packageList = sortActiveCreditPackages(packages);
 
   const plans: Plan[] = packageList.map((pkg) => {
-    const isPopular = pkg.tags.includes("best-value") || pkg.tags.includes("popular")
+    const isPopular =
+      pkg.tags.includes('best-value') || pkg.tags.includes('popular');
     return {
       id: pkg.id,
       name: pkg.name,
@@ -36,14 +32,14 @@ export function PricingGrid({ className }: PricingGridProps) {
       discount: pkg.discount,
       bonus: pkg.bonus,
       popular: isPopular,
-    }
-  })
+    };
+  });
 
   if (isLoading) {
     return (
-      <div className={cn("grid md:grid-cols-3 gap-8", className)}>
+      <div className={cn('grid md:grid-cols-3 gap-8', className)}>
         {[1, 2, 3].map((item) => (
-          <div key={item} className="rounded-2xl border bg-card p-8">
+          <div key={item} className="rounded-xl border bg-card p-8">
             <Skeleton className="h-5 w-24" />
             <Skeleton className="mt-4 h-10 w-40" />
             <Skeleton className="mt-6 h-8 w-28" />
@@ -56,33 +52,37 @@ export function PricingGrid({ className }: PricingGridProps) {
           </div>
         ))}
       </div>
-    )
+    );
   }
 
   if (isError) {
     return (
-      <div className={cn("rounded-2xl border bg-card p-8 text-center", className)}>
-        <p className="text-sm text-muted-foreground">{t("packagesError")}</p>
+      <div
+        className={cn('rounded-xl border bg-card p-8 text-center', className)}
+      >
+        <p className="text-sm text-muted-foreground">{t('packagesError')}</p>
         <Button variant="outline" className="mt-4" onClick={() => refetch()}>
-          {t("retry")}
+          {t('retry')}
         </Button>
       </div>
-    )
+    );
   }
 
   if (plans.length === 0) {
     return (
-      <div className={cn("rounded-2xl border bg-card p-8 text-center", className)}>
-        <p className="text-sm text-muted-foreground">{t("packagesEmpty")}</p>
+      <div
+        className={cn('rounded-xl border bg-card p-8 text-center', className)}
+      >
+        <p className="text-sm text-muted-foreground">{t('packagesEmpty')}</p>
       </div>
-    )
+    );
   }
 
   return (
-    <div className={cn("grid md:grid-cols-3 gap-8", className)}>
+    <div className={cn('grid md:grid-cols-3 gap-8', className)}>
       {plans.map((plan) => (
         <PricingCard key={plan.id} plan={plan} features={features} />
       ))}
     </div>
-  )
+  );
 }

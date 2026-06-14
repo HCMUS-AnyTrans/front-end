@@ -7,14 +7,14 @@ import { useAccessToken, useIsAuthenticated } from '@/features/auth';
 import type { CreditsChartQuery } from '../types';
 
 /**
- * Hook to fetch credit usage breakdown
+ * Hook to fetch credit usage by source language.
  */
 export function useCreditsChart(query?: CreditsChartQuery) {
   const isAuthenticated = useIsAuthenticated();
   const accessToken = useAccessToken();
 
   const result = useQuery({
-    queryKey: dashboardKeys.creditsChart(query),
+    queryKey: dashboardKeys.languagesChart(query),
     queryFn: () => getCreditsChartApi(query),
     enabled: isAuthenticated && !!accessToken,
     staleTime: 60 * 1000,

@@ -9,6 +9,7 @@
       }
     },
     "upload": {
+      "title": "Upload your document",
       "dropzone": "Drag and drop your document here",
       "or": "or",
       "dragHint": "or drag and drop",

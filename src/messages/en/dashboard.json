@@ -6,18 +6,21 @@
       "dashboard": "Dashboard",
       "documents": "Translate",
       "glossary": "Glossary",
-      "templates": "Template",
+      "templates": "Templates",
       "history": "History",
       "settings": "Settings",
       "help": "Help",
       "profile": "Profile",
-      "logout": "Logout"
+      "logout": "Logout",
+      "creditTitle": "Need more credits?",
+      "creditDescription": "Upgrade your plan to translate more.",
+      "creditCta": "View plans →"
     },
     "pages": {
       "dashboard": "Dashboard",
       "documents": "Translate",
       "glossary": "Glossary",
-      "templates": "Template",
+      "templates": "Templates",
       "history": "History",
       "settings": "Settings",
       "help": "Help"
@@ -59,7 +62,7 @@
       "select": "to select",
       "close": "to close",
       "dashboardDesc": "Overview of your translation activity",
-      "documentsDesc": "Translate documents and subtitles",
+      "documentsDesc": "Translate documents",
       "glossaryDesc": "Manage your terminology dictionaries",
       "historyDesc": "View all your translation jobs",
       "settingsDesc": "Account, preferences and security",
@@ -123,12 +126,20 @@
     },
     "charts": {
       "jobsByDay": "Activity Overview",
-      "creditAllocation": "Credit Allocation",
+      "creditAllocation": "Credit Usage",
       "loadErrorTitle": "Unable to load chart",
       "loadErrorDescription": "Something went wrong while loading chart data. Please try again.",
       "retry": "Retry",
       "noUsageInfo": "No credit usage information yet",
-      "documents": "Documents",
+      "noUsageDescription": "Usage data will appear after you spend credits on translation.",
+      "topLanguages": {
+        "title": "Top source languages by credits",
+        "vietnamese": "Vietnamese",
+        "english": "English",
+        "japanese": "Japanese",
+        "credits": "credits"
+      },
+      "jobs": "Jobs",
       "remaining": "Remaining"
     },
     "status": {
@@ -152,6 +163,11 @@
       "totalJobs": "{count} jobs total",
       "pageInfo": "Page {page} of {totalPages}",
       "fileExpired": "File expired",
+      "banner": {
+        "totalJobs": "Total jobs",
+        "completedJobs": "Completed",
+        "usedCredits": "Credits used"
+      },
       "download": {
         "label": "Download",
         "original": "Original file",

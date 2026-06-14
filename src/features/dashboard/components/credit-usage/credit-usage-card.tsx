@@ -1,161 +1,114 @@
-"use client";
+'use client';
 
-import { useTranslations, useLocale } from "next-intl";
-import { CardTitle } from "@/components/ui/card";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-  type ChartConfig,
-} from "@/components/ui/chart";
-import { Pie, PieChart, Cell } from "recharts";
-import { Info } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { useCreditsChart } from "../../hooks";
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import { LanguageFlag } from '@/components/shared/language-flag';
+import { CardTitle } from '@/components/ui/card';
+import { useCreditsChart } from '../../hooks';
 import {
   DashboardCard,
   DashboardCardContent,
   DashboardCardHeader,
-} from "../dashboard-card";
+} from '../dashboard-card';
 import {
   CreditUsageCardError,
   CreditUsageCardLoading,
-} from "./credit-usage-card.fallback";
+} from './credit-usage-card.fallback';
+import type { LanguageCreditUsage } from '../../types';
 
-const FILL_COLORS = ["var(--color-chart-1)", "var(--color-chart-3)"];
+type TopLanguage = {
+  rank: 1 | 2 | 3;
+} & LanguageCreditUsage;
 
 export function CreditUsageCard() {
-  const tCharts = useTranslations("dashboard.charts");
-  const locale = useLocale();
-  const isMobile = useIsMobile();
+  const tCharts = useTranslations('dashboard.charts');
   const { creditsData, isLoading, isError, refetch, isFetching } =
     useCreditsChart();
 
   if (isLoading) return <CreditUsageCardLoading />;
-  if (isError) {
+  if (isError)
     return (
-      <CreditUsageCardError
-        onRetry={() => void refetch()}
-        isRetrying={isFetching}
-      />
+      <CreditUsageCardError onRetry={() => refetch()} isRetrying={isFetching} />
     );
-  }
 
-  if (!creditsData) {
-    return <CreditUsageCardLoading />;
-  }
-
-  if (creditsData.usage.documentsUsed === 0) {
-    return (
-      <DashboardCard>
-        <DashboardCardHeader>
-          <CardTitle className="text-base font-semibold text-foreground">
-            {tCharts("creditAllocation")}
-          </CardTitle>
-        </DashboardCardHeader>
-        <DashboardCardContent className="flex flex-col items-center justify-center gap-2 py-6 text-center">
-          <Info className="size-6 text-muted-foreground/50" />
-          <p className="text-xs text-muted-foreground">{tCharts("noUsageInfo")}</p>
-        </DashboardCardContent>
-      </DashboardCard>
-    );
-  }
-
-  const breakdown = creditsData.breakdown;
-
-  if (breakdown.length === 0) {
-    return (
-      <DashboardCard>
-        <DashboardCardHeader>
-          <CardTitle className="text-base font-semibold text-foreground">
-            {tCharts("creditAllocation")}
-          </CardTitle>
-        </DashboardCardHeader>
-        <DashboardCardContent className="flex flex-col items-center justify-center gap-2 py-6 text-center">
-          <Info className="size-6 text-muted-foreground/50" />
-          <p className="text-xs text-muted-foreground">{tCharts("noUsageInfo")}</p>
-        </DashboardCardContent>
-      </DashboardCard>
-    );
-  }
-
-  const creditUsageData = breakdown.map((item, index) => ({
-    name: item.name === "Documents" ? tCharts("documents") : item.name,
-    value: item.value,
-    fill: FILL_COLORS[index] || FILL_COLORS[0],
-  }));
-
-  const total = creditUsageData.reduce((acc, d) => acc + d.value, 0);
-
-  const chartConfig = {
-    value: { label: "Credits", color: "var(--color-chart-1)" },
-  } satisfies ChartConfig;
+  const topLanguages: TopLanguage[] =
+    creditsData?.languages.slice(0, 3).map((language, index) => ({
+      ...language,
+      rank: (index + 1) as TopLanguage['rank'],
+    })) ?? [];
 
   return (
-    <DashboardCard>
-      <DashboardCardHeader>
-        <CardTitle className="text-base font-semibold text-foreground">
-          {tCharts("creditAllocation")}
-        </CardTitle>
-      </DashboardCardHeader>
-      <DashboardCardContent>
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto h-[80px] w-full max-w-[140px] sm:h-[100px] sm:max-w-[180px] md:h-[120px]"
-        >
-          <PieChart>
-            <ChartTooltip
-              content={
-                <ChartTooltipContent
-                  formatter={(value, name) => [
-                    `${value?.toLocaleString(locale === "vi" ? "vi-VN" : "en-US")} ${name}`,
-                    "",
-                  ]}
-                />
-              }
-            />
-            <Pie
-              data={creditUsageData}
-              dataKey="value"
-              nameKey="name"
-              cx="50%"
-              cy="50%"
-              innerRadius={isMobile ? 24 : 28}
-              outerRadius={isMobile ? 40 : 48}
-              strokeWidth={2}
-              stroke="var(--background)"
-            >
-              {creditUsageData.map((entry) => (
-                <Cell key={entry.name} fill={entry.fill} />
-              ))}
-            </Pie>
-          </PieChart>
-        </ChartContainer>
-        <div className="mt-2 flex flex-col gap-1.5">
-          {creditUsageData.map((item) => (
-            <div
-              key={item.name}
-              className="flex items-center justify-between text-xs"
-            >
-              <div className="flex items-center gap-2">
-                <div
-                  className="h-2 w-2 rounded-sm"
-                  style={{ backgroundColor: item.fill }}
-                />
-                <span className="text-muted-foreground">{item.name}</span>
-              </div>
-              <span className="font-medium tabular-nums text-foreground">
-                {item.value.toLocaleString(locale === "vi" ? "vi-VN" : "en-US")}
-                {total > 0 && (
-                  <span className="ml-1 text-muted-foreground">
-                    ({Math.round((item.value / total) * 100)}%)
-                  </span>
-                )}
-              </span>
-            </div>
-          ))}
+    <DashboardCard className="h-full rounded-xl border-border/70 bg-card/95">
+      <DashboardCardHeader className="flex flex-row items-center justify-between gap-3 pb-3">
+        <div className="flex items-center gap-2">
+          <CardTitle className="text-base font-semibold text-card-foreground">
+            {tCharts('topLanguages.title')}
+          </CardTitle>
         </div>
+      </DashboardCardHeader>
+      <DashboardCardContent className="space-y-3 px-4 pb-5 pt-0 sm:px-5">
+        {topLanguages.length > 0 ? (
+          topLanguages.map((language) => (
+            <TopLanguageRow
+              key={`${language.rank}-${language.language}`}
+              language={language}
+              creditsLabel={tCharts('topLanguages.credits')}
+            />
+          ))
+        ) : (
+          <div className="flex min-h-32 items-center justify-center rounded-xl border border-dashed border-border bg-muted/30 px-4 text-center text-sm text-muted-foreground">
+            {tCharts('noUsageInfo')}
+          </div>
+        )}
       </DashboardCardContent>
     </DashboardCard>
+  );
+}
+
+function TopLanguageRow({
+  language,
+  creditsLabel,
+}: {
+  language: TopLanguage;
+  creditsLabel: string;
+}) {
+  const isFirst = language.rank === 1;
+
+  return (
+    <div
+      className={
+        isFirst
+          ? 'relative flex items-center gap-3 overflow-hidden rounded-xl border border-amber-300 bg-amber-50/70 px-3 py-3 dark:border-amber-500/40 dark:bg-amber-500/10'
+          : 'flex items-center gap-3 rounded-xl border border-border bg-background/60 px-3 py-3'
+      }
+    >
+      <Image
+        src={`/dashboard/top-${language.rank}.svg`}
+        alt={`Top ${language.rank}`}
+        width={42}
+        height={42}
+        className="h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
+      />
+      <LanguageFlag
+        value={language.language}
+        className=" w-10 shrink-0 border border-border object-cover"
+        fallbackClassName="w-11 shrink-0 border border-border"
+      />
+      <span className="min-w-0 flex-1 truncate text-sm font-semibold text-foreground sm:text-base">
+        {language.language}
+      </span>
+      <span
+        className={
+          isFirst
+            ? 'shrink-0 text-lg font-bold tabular-nums text-orange-600 sm:text-xl'
+            : 'shrink-0 text-lg font-bold tabular-nums text-primary sm:text-xl'
+        }
+      >
+        {language.credits}{' '}
+        <span className="text-sm font-semibold sm:text-base">
+          {creditsLabel}
+        </span>
+      </span>
+    </div>
   );
 }

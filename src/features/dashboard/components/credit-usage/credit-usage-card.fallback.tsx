@@ -45,7 +45,7 @@ export function CreditUsageCardError({
     <DashboardCard>
       <DashboardCardHeader>
         <CardTitle className="text-base font-semibold text-foreground">
-          {tCharts("creditAllocation")}
+          {tCharts("topLanguages.title")}
         </CardTitle>
       </DashboardCardHeader>
       <DashboardCardContent className="flex flex-col items-center justify-center gap-3 py-6 text-center">

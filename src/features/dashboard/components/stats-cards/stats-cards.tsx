@@ -30,87 +30,82 @@ export function StatsCards() {
       ),
       change: stats.creditsChange,
       trend: stats.creditsTrend,
-      iconSrc: '/stats-card-icon/dollar.png',
+      iconSrc: '/dashboard/credit-stat-icon.png',
       iconAlt: 'Total credits',
-      iconBg: 'bg-secondary/10',
     },
     {
       title: t('totalJobs'),
       value: stats.totalJobs.toString(),
       change: stats.jobsChange,
       trend: stats.jobsTrend,
-      iconSrc: '/stats-card-icon/google-docs.png',
+      iconSrc: '/dashboard/document-stat-icon.png',
       iconAlt: 'Total jobs',
-      iconBg: 'bg-primary/10',
     },
     {
       title: t('processing'),
       value: stats.processingJobs.toString(),
       change: stats.processingChange,
       trend: stats.processingTrend,
-      iconSrc: '/stats-card-icon/alarm-clock.png',
+      iconSrc: '/dashboard/time-stat-icon.png',
       iconAlt: 'Processing jobs',
-      iconBg: 'bg-accent/10',
     },
     {
       title: t('completedThisMonth'),
       value: stats.completedThisMonth.toString(),
       change: stats.completedChange,
       trend: stats.completedTrend,
-      iconSrc: '/stats-card-icon/check.png',
+      iconSrc: '/dashboard/complete-stat-icon.png',
       iconAlt: 'Completed jobs',
-      iconBg: 'bg-success/10',
     },
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-2 sm:gap-4 md:grid-cols-4 md:gap-6">
+    <div className="grid grid-cols-2 gap-2 sm:gap-2 md:grid-cols-4 md:gap-4">
       {statCards.map((stat) => (
-        <DashboardCard key={stat.title}>
+        <DashboardCard
+          key={stat.title}
+          className="rounded-xl border-border/70 bg-card/95"
+        >
           <DashboardCardContent
             padding="all"
-            className="flex flex-col gap-1.5 p-3 sm:gap-3 sm:p-4 md:gap-4 md:p-6"
+            className="flex items-center gap-3 p-3 sm:gap-4 sm:p-4 md:p-5"
           >
-            <div className="flex items-start justify-between">
-              <div
-                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg sm:h-12 sm:w-12 sm:rounded-xl ${stat.iconBg}`}
-              >
-                <Image
-                  src={stat.iconSrc}
-                  alt={stat.iconAlt}
-                  width={24}
-                  height={24}
-                  className="h-4 w-4 object-contain sm:h-6 sm:w-6"
-                />
-              </div>
+            <Image
+              src={stat.iconSrc}
+              alt={stat.iconAlt}
+              width={56}
+              height={56}
+              className="h-10 w-10 shrink-0 object-contain sm:h-12 sm:w-12 md:h-14 md:w-14"
+            />
 
-              <div className="flex items-center gap-0.5 rounded-full border border-border px-1.5 py-0.5 sm:gap-1 sm:px-2 sm:py-1">
-                {stat.trend === 'up' ? (
-                  <TrendingUp className="size-3 text-success sm:size-3.5" />
-                ) : stat.trend === 'down' ? (
-                  <TrendingDown className="size-3 text-accent sm:size-3.5" />
-                ) : null}
-                <span
-                  className={`text-xs font-semibold ${
-                    stat.trend === 'up'
-                      ? 'text-success'
-                      : stat.trend === 'down'
-                        ? 'text-accent'
-                        : 'text-muted-foreground'
-                  }`}
-                >
-                  {stat.change}
-                </span>
-              </div>
-            </div>
-
-            <div className="min-w-0">
-              <p className="truncate text-xs font-medium text-muted-foreground sm:text-sm">
+            <div className="flex flex-1 flex-col min-w-0">
+              <span className="truncate text-[10px] font-medium uppercase tracking-wider text-muted-foreground sm:text-xs">
                 {stat.title}
-              </p>
-              <p className="mt-0.5 text-lg font-bold tracking-tight text-foreground tabular-nums sm:mt-1 sm:text-xl md:text-2xl lg:text-3xl">
-                {stat.value}
-              </p>
+              </span>
+              <div className="mt-0.5 flex items-baseline gap-1.5 sm:mt-1 sm:gap-2">
+                <span className="text-lg font-bold tracking-tight text-foreground tabular-nums sm:text-xl md:text-2xl">
+                  {stat.value}
+                </span>
+
+                <div className="flex items-center gap-0.5 rounded-full px-1 py-0 sm:gap-1">
+                  {stat.trend === 'up' ? (
+                    <TrendingUp className="size-2.5 text-success sm:size-3" />
+                  ) : stat.trend === 'down' ? (
+                    <TrendingDown className="size-2.5 text-accent sm:size-3" />
+                  ) : null}
+                  <span
+                    className={`text-[10px] font-bold ${
+                      stat.trend === 'up'
+                        ? 'text-success'
+                        : stat.trend === 'down'
+                          ? 'text-accent'
+                          : 'text-muted-foreground'
+                    }`}
+                  >
+                    {stat.change}
+                  </span>
+                </div>
+              </div>
             </div>
           </DashboardCardContent>
         </DashboardCard>

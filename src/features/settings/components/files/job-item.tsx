@@ -1,7 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { ArrowRight, Coins, Trash2 } from 'lucide-react';
+import { ArrowRight, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { FileTypeIcon } from '@/components/shared/file-type-icon';
@@ -59,7 +60,13 @@ export function FilesJobItem({
               <>
                 <span>&bull;</span>
                 <span className="flex items-center gap-1">
-                  <Coins className="size-3 text-warning" />
+                  <Image
+                    src="/shared/credit.svg"
+                    alt="Credits"
+                    width={12}
+                    height={12}
+                    className="size-3 shrink-0"
+                  />
                   {job.cost_credits}
                 </span>
               </>

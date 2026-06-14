@@ -1,24 +1,24 @@
-"use client"
+'use client';
 
-import { useTranslations } from "next-intl"
-import { cn } from "@/lib/utils"
-import { coreValues, type CoreValue } from "../data"
+import { useTranslations } from 'next-intl';
+import { cn } from '@/lib/utils';
+import { coreValues, type CoreValue } from '../data';
 
 interface ValueCardProps {
-  value: CoreValue
-  title: string
-  description: string
+  value: CoreValue;
+  title: string;
+  description: string;
 }
 
 function ValueCard({ value, title, description }: ValueCardProps) {
-  const Icon = value.icon
+  const Icon = value.icon;
 
   return (
     <div
       className={cn(
-        "group relative p-6 lg:p-8 rounded-2xl border border-border bg-card",
-        "hover:shadow-lg hover:border-primary/30 transition-colors duration-300",
-        value.gridClass
+        'group relative p-6 lg:p-8 rounded-xl border border-border bg-card',
+        'hover:shadow-lg hover:border-primary/30 transition-colors duration-300',
+        value.gridClass,
       )}
     >
       {/* Icon */}
@@ -30,30 +30,27 @@ function ValueCard({ value, title, description }: ValueCardProps) {
       <h3 className="text-xl font-bold text-foreground mb-2">{title}</h3>
       <p className="text-muted-foreground leading-relaxed">{description}</p>
     </div>
-  )
+  );
 }
 
 export interface CoreValuesProps {
-  className?: string
+  className?: string;
 }
 
 export function CoreValues({ className }: CoreValuesProps) {
-  const t = useTranslations("marketing.about.values")
+  const t = useTranslations('marketing.about.values');
 
   // Map value ids to translation keys
   const valueKeys: Record<string, string> = {
-    innovation: "innovation",
-    quality: "quality",
-    customer: "customer",
-    teamwork: "teamwork",
-  }
+    innovation: 'innovation',
+    quality: 'quality',
+    customer: 'customer',
+    teamwork: 'teamwork',
+  };
 
   return (
     <section
-      className={cn(
-        "relative py-20 lg:py-28 overflow-hidden",
-        className
-      )}
+      className={cn('relative py-20 lg:py-28 overflow-hidden', className)}
     >
       {/* Background */}
       <div className="absolute inset-0 bg-muted/30 dark:bg-muted/10" />
@@ -61,12 +58,11 @@ export function CoreValues({ className }: CoreValuesProps) {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
-
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            {t("title")}
+            {t('title')}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t("subtitle")}
+            {t('subtitle')}
           </p>
         </div>
 
@@ -83,5 +79,5 @@ export function CoreValues({ className }: CoreValuesProps) {
         </div>
       </div>
     </section>
-  )
+  );
 }

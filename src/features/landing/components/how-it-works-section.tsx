@@ -36,7 +36,7 @@ export function HowItWorksSection() {
                 className="relative rounded-[1.75rem] border border-border bg-background/90 p-7 shadow-sm backdrop-blur"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10 text-accent">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-accent/10 text-accent">
                     <Icon className="h-6 w-6" />
                   </div>
                 </div>

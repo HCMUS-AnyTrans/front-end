@@ -86,7 +86,7 @@ export function TermTableSkeleton({
       </div>
 
       {/* Add term form */}
-      <div className="mb-6 rounded-2xl border bg-card p-5">
+      <div className="mb-6 rounded-xl border bg-card p-5">
         <Skeleton className="mb-4 h-4 w-24" />
         <div className="flex flex-col gap-3 sm:flex-row">
           <Skeleton className="h-10 flex-1" />

@@ -8,7 +8,7 @@ interface GlossarySkeletonProps {
 
 function GlossaryCardSkeleton() {
   return (
-    <div className="rounded-2xl border bg-card p-5 space-y-4">
+    <div className="rounded-xl border bg-card p-5 space-y-4">
       {/* Header: icon + name/domain + menu button */}
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3">

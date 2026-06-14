@@ -25,6 +25,7 @@ export function useRecentJobs(params?: RecentJobsQuery) {
 
   return {
     jobsData: result.data,
+    summary: result.data?.summary,
     isFetched: result.isFetched,
     isLoading: result.isLoading,
     isFetching: result.isFetching,

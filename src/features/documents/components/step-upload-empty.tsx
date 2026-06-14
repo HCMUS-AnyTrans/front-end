@@ -1,20 +1,20 @@
 'use client';
 
+import Image from 'next/image';
 import { HardDrive, ShieldCheck, Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
+import { FileTypeIcon } from '@/components/shared/file-type-icon';
 import { cn } from '@/lib/utils';
 import { DOCUMENT_FILE_TYPE_LABELS } from '@/shared/utils/document-upload';
 
 interface StepUploadEmptyProps {
-  isDragging: boolean;
   isBusy: boolean;
   onOpenPicker: () => void;
   onDropzoneKeyDown: (e: React.KeyboardEvent<HTMLDivElement>) => void;
 }
 
 export function StepUploadEmpty({
-  isDragging,
   isBusy,
   onOpenPicker,
   onDropzoneKeyDown,
@@ -28,67 +28,76 @@ export function StepUploadEmpty({
       onClick={onOpenPicker}
       onKeyDown={onDropzoneKeyDown}
       className={cn(
-        'relative flex flex-col items-center px-6 py-10 text-center outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:py-14',
+        'relative flex min-h-[360px] flex-col items-center justify-center px-6 py-2 sm:py-1 text-center outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:min-h-[380px]',
         isBusy ? 'cursor-not-allowed opacity-60' : 'cursor-pointer',
       )}
       aria-disabled={isBusy}
     >
-      <div className="relative mb-5">
-        <div
-          className={cn(
-            'absolute -inset-2.5 rounded-2xl border-2 border-dashed transition-all duration-300',
-            isDragging
-              ? 'border-primary opacity-70 scale-110'
-              : 'border-primary/20 opacity-60',
-          )}
+      <Image
+        src="/translation/upload-banner.svg"
+        alt=""
+        fill
+        priority
+        sizes="(max-width: 1024px) 100vw, 960px"
+        className="pointer-events-none object-cover object-top opacity-95"
+      />
+      <div className="pointer-events-none absolute inset-0 hidden bg-card/70 dark:block" />
+
+      <div className="relative z-10 flex w-full max-w-3xl flex-col items-center">
+        <Image
+          src="/translation/upload-icon.svg"
+          alt=""
+          width={168}
+          height={136}
         />
-        <div className="relative flex size-16 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary shadow-sm sm:size-20">
-          <Upload className="size-7 sm:size-9" />
+
+        <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+          {t('title')}
+        </h3>
+        <p className="mt-2 max-w-lg text-sm leading-6 text-muted-foreground sm:text-base">
+          {t('dropzone')}
+        </p>
+
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+          {DOCUMENT_FILE_TYPE_LABELS.map((ext) => (
+            <span
+              key={ext}
+              className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-background/85 px-3 py-1.5 text-xs font-semibold text-foreground backdrop-blur"
+            >
+              <FileTypeIcon
+                fileName={`document.${ext.toLowerCase()}`}
+                className="size-4"
+              />
+              {ext}
+            </span>
+          ))}
         </div>
-      </div>
 
-      <h3 className="text-base font-semibold text-foreground sm:text-xl">
-        {t('dropzone')}
-      </h3>
-      <p className="mt-1.5 max-w-xs text-sm text-muted-foreground">
-        {t('dragHint')}
-      </p>
+        <Button
+          type="button"
+          size="lg"
+          className="mt-6 h-12 min-w-60 gap-2 rounded-xl bg-primary px-8 text-base font-semibold  hover:bg-primary/90"
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpenPicker();
+          }}
+          disabled={isBusy}
+        >
+          <Upload className="size-5" />
+          {t('browse')}
+        </Button>
 
-      <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5">
-        {DOCUMENT_FILE_TYPE_LABELS.map((ext) => (
-          <span
-            key={ext}
-            className="rounded-md border border-border bg-muted/60 px-2 py-0.5 text-xs font-medium text-muted-foreground"
-          >
-            {ext}
+        <div className="mt-6 flex w-full max-w-2xl items-center justify-center border-t border-border pt-2 text-sm text-muted-foreground">
+          <span className="flex items-center gap-2 px-4">
+            <HardDrive className="size-4 shrink-0 text-muted-foreground" />
+            {t('maxSize')}
           </span>
-        ))}
-      </div>
-
-      <Button
-        type="button"
-        size="lg"
-        className="mt-6 gap-2 shadow-sm"
-        onClick={(e) => {
-          e.stopPropagation();
-          onOpenPicker();
-        }}
-        disabled={isBusy}
-      >
-        <Upload className="size-4" />
-        {t('browse')}
-      </Button>
-
-      <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-xs text-muted-foreground">
-        <span className="flex items-center gap-1.5">
-          <HardDrive className="size-3.5 shrink-0" />
-          {t('maxSize')}
-        </span>
-        <span className="hidden text-border sm:block">-</span>
-        <span className="flex items-center gap-1.5">
-          <ShieldCheck className="size-3.5 shrink-0" />
-          {t('secureHint')}
-        </span>
+          <span className="hidden h-10 w-px bg-border sm:block" />
+          <span className="flex items-center gap-2 px-4">
+            <ShieldCheck className="size-4 shrink-0 text-muted-foreground" />
+            {t('secureHint')}
+          </span>
+        </div>
       </div>
     </div>
   );

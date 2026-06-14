@@ -64,8 +64,8 @@ export const dashboardKeys = {
   stats: (query?: unknown) => [...dashboardKeys.all, 'stats', query] as const,
   jobsChart: (query?: unknown) =>
     [...dashboardKeys.all, 'jobs-chart', query] as const,
-  creditsChart: (query?: unknown) =>
-    [...dashboardKeys.all, 'credits-chart', query] as const,
+  languagesChart: (query?: unknown) =>
+    [...dashboardKeys.all, 'languages-chart', query] as const,
   storage: () => [...dashboardKeys.all, 'storage'] as const,
 };
 

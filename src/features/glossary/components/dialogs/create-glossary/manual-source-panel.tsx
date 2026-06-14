@@ -9,7 +9,7 @@ export function GlossaryManualSourcePanel() {
   return (
     <div className="flex h-full flex-col justify-center rounded-xl border border-dashed bg-background/70 p-6">
       <div className="mx-auto max-w-md space-y-4 text-center">
-        <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+        <div className="mx-auto flex size-14 items-center justify-center rounded-xl bg-primary/10 text-primary">
           <PencilLine className="size-6" />
         </div>
         <div className="space-y-2">

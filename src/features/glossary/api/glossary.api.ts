@@ -20,6 +20,7 @@ type GlossaryTemplateDto = GlossaryTemplateListResponse['items'][number];
 interface GlossaryListResponseDto {
   items: GlossaryDto[];
   pagination: GlossaryListResponse['pagination'];
+  summary: GlossaryListResponse['summary'];
 }
 
 function mapGlossaryDto(dto: GlossaryDto): Glossary {

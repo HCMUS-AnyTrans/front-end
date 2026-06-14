@@ -28,6 +28,7 @@ export function useGlossaries(params?: GlossaryQueryParams) {
   return {
     glossaries: result.data?.items,
     pagination: result.data?.pagination,
+    summary: result.data?.summary,
     isLoading: result.isLoading,
     isFetching: result.isFetching,
     isError: result.isError,
