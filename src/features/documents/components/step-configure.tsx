@@ -32,7 +32,6 @@ import type { DocTone } from '@/features/doc-tones';
 import {
   apiLanguageToCode,
   TEMPLATE_CUSTOM_VALUE,
-  TEMPLATE_NONE_VALUE,
 } from '@/features/translation-templates';
 import type {
   TranslationConfig,
@@ -176,10 +175,6 @@ export function StepConfigure({
     onConfigChange({ templateName });
   const handleTemplateSelect = (value: string) => {
     if (value === TEMPLATE_CUSTOM_VALUE) {
-      return;
-    }
-
-    if (value === TEMPLATE_NONE_VALUE) {
       onConfigChange({
         templateId: null,
         saveAsTemplate: false,
@@ -250,8 +245,8 @@ export function StepConfigure({
   );
   const templateSelectValue = hasTemplateChanges
     ? TEMPLATE_CUSTOM_VALUE
-    : config.templateId ?? TEMPLATE_NONE_VALUE;
-  const isCustomTemplateState = hasTemplateChanges;
+    : config.templateId ?? TEMPLATE_CUSTOM_VALUE;
+  const isCustomTemplateState = !config.templateId || hasTemplateChanges;
   const handleStartClick = () => {
     if (isCustomTemplateState) {
       if (config.saveAsTemplate) {
@@ -284,14 +279,9 @@ export function StepConfigure({
                     <SelectValue placeholder={t('templatePlaceholder')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value={TEMPLATE_NONE_VALUE}>
-                      {t('noTemplate')}
+                    <SelectItem value={TEMPLATE_CUSTOM_VALUE}>
+                      {t('customTemplate')}
                     </SelectItem>
-                    {isCustomTemplateState ? (
-                      <SelectItem value={TEMPLATE_CUSTOM_VALUE}>
-                        {t('customTemplate')}
-                      </SelectItem>
-                    ) : null}
                     {config.templateId && !selectedTemplate ? (
                       <SelectItem value={config.templateId}>
                         {config.templateName || t('savedCustomTemplate')}
