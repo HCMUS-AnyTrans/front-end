@@ -105,12 +105,12 @@ export function StepUpload({
       {/* ── Dropzone / File Preview ── */}
       <div
         className={cn(
-          'relative overflow-hidden rounded-xl border bg-card transition-all duration-200',
+          'relative overflow-hidden rounded-xl border transition-all duration-200',
           isDragging
             ? 'border-primary bg-primary/5 shadow-[0_0_0_4px_var(--ring-glow)]'
             : file
               ? 'border-border bg-card'
-              : 'border-primary/20 hover:border-primary/40 hover:bg-primary/2 dark:hover:bg-primary/10',
+              : 'border-border/70 bg-[#eef5ff] hover:bg-[#e6f0ff] dark:bg-[linear-gradient(135deg,#0e1e38_0%,#061024_100%)] dark:border-primary/15 dark:hover:bg-[linear-gradient(135deg,#112344_0%,#08142b_100%)]',
         )}
         onDrop={handleDrop}
         onDragOver={handleDragOver}

@@ -87,7 +87,7 @@ export function AppSidebar() {
   return (
     <Sidebar
       collapsible="icon"
-      className="h-svh border-r-0 [&_[data-sidebar=sidebar]]:bg-[linear-gradient(180deg,#06255c_0%,#063e8f_52%,#0755b7_100%)] [&_[data-sidebar=sidebar]]:text-white data-[sidebar=sidebar]:bg-[linear-gradient(180deg,#06255c_0%,#063e8f_52%,#0755b7_100%)] data-[sidebar=sidebar]:text-white"
+      className="h-svh border-r-0 [&_[data-sidebar=sidebar]]:bg-[linear-gradient(180deg,#06255c_0%,#063e8f_52%,#0755b7_100%)] [&_[data-sidebar=sidebar]]:text-white data-[sidebar=sidebar]:bg-[linear-gradient(180deg,#06255c_0%,#063e8f_52%,#0755b7_100%)] data-[sidebar=sidebar]:text-white dark:[&_[data-sidebar=sidebar]]:bg-[linear-gradient(180deg,#0c1930_0%,#112647_50%,#1a3a68_100%)] dark:data-[sidebar=sidebar]:bg-[linear-gradient(180deg,#0c1930_0%,#112647_50%,#1a3a68_100%)]"
     >
       <SidebarHeader
         className={open ? 'px-6 pb-4 pt-7' : 'items-center px-2 pb-4 pt-7'}
@@ -185,7 +185,7 @@ export function AppSidebar() {
                 {t('creditDescription')}
               </p>
               <Link
-                href="/settings"
+                href="/settings?tab=billing"
                 className="inline-flex text-xs font-medium text-white/90 hover:text-white"
               >
                 {t('creditCta')}

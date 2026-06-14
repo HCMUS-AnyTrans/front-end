@@ -23,7 +23,7 @@ export default async function DashboardPage({ params }: Props) {
   return (
     <div className="flex w-full flex-col gap-4 overflow-x-hidden py-4 sm:gap-6 md:py-6 lg:py-8">
       {/* Header */}
-      <AppCard className="overflow-hidden rounded-xl border-border/70 bg-[#eef5ff] dark:bg-card">
+      <AppCard className="overflow-hidden rounded-xl border-border/70 bg-[#eef5ff] dark:bg-[linear-gradient(135deg,#0e1e38_0%,#061024_100%)] dark:border-primary/15">
         <AppCardContent
           padding="none"
           className="relative overflow-hidden p-5 sm:p-7 lg:p-9"
@@ -34,7 +34,7 @@ export default async function DashboardPage({ params }: Props) {
             fill
             preload
             unoptimized
-            className="absolute inset-0 h-full w-full object-cover object-[65%_center] dark:opacity-35 lg:object-center opacity-40"
+            className="absolute inset-0 h-full w-full object-cover object-[65%_center] opacity-40 dark:opacity-15 dark:mix-blend-luminosity lg:object-center"
           />
           <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-br from-primary/10 via-transparent to-background/60 dark:block" />
           <div className="relative z-10 flex flex-col gap-5 sm:gap-6 lg:gap-7">
@@ -67,7 +67,6 @@ export default async function DashboardPage({ params }: Props) {
       </div>
 
       {/* Analytics: Activity chart (full width) */}
-      <div className="w-full"></div>
       <JobsChart />
     </div>
   );

@@ -87,10 +87,10 @@ export function TemplateContent() {
 
   return (
     <>
-      <AppCard className="overflow-hidden rounded-xl border dark:bg-card mb-6">
+      <AppCard className="overflow-hidden rounded-xl border dark:bg-card">
         <AppCardContent
           padding="none"
-          className="relative min-h-[264px] overflow-hidden p-6 sm:min-h-[260px] sm:p-8 lg:min-h-[264px] lg:p-10"
+          className="relative min-h-[264px] overflow-hidden p-6 sm:min-h-[260px] sm:p-8 lg:min-h-[264px] lg:p-10 dark:bg-[linear-gradient(135deg,#0e1e38_0%,#061024_100%)] dark:border-primary/15"
         >
           <Image
             src="/template/template-banner.png"
@@ -98,7 +98,7 @@ export function TemplateContent() {
             fill
             preload
             unoptimized
-            className="absolute inset-0 h-full w-full object-cover object-[65%_center] dark:opacity-35 lg:object-center"
+            className="absolute inset-0 h-full w-full object-cover object-[65%_center] dark:opacity-60 lg:object-center"
           />
           <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-card via-card/85 to-card/45 dark:block" />
           <div className="relative z-10 flex max-w-xl flex-col gap-5">
@@ -113,7 +113,7 @@ export function TemplateContent() {
               </div>
             </div>
 
-            <div className="grid max-w-[580px] grid-cols-1 overflow-hidden rounded-xl border border-white/70 bg-white/75 shadow-sm backdrop-blur dark:border-border dark:bg-background/75 sm:grid-cols-3">
+            <div className="grid max-w-[580px] grid-cols-1 overflow-hidden rounded-xl border border-white/60 bg-white/45 shadow-xs backdrop-blur-md dark:border-white/10 dark:bg-black/15 sm:grid-cols-3">
               <TemplateStat
                 icon={<ClipboardList className="size-5" />}
                 value={stats.templates}
@@ -135,7 +135,7 @@ export function TemplateContent() {
         </AppCardContent>
       </AppCard>
 
-      <div className="mb-6 flex flex-col gap-3 sm:flex-row">
+      <div className="flex flex-col gap-3 sm:flex-row">
         <TemplateFilters
           search={search}
           onSearchChange={handleSearchChange}
@@ -229,7 +229,7 @@ function TemplateStat({
 }) {
   return (
     <div
-      className={`flex items-center gap-3 border-b border-border px-4 py-3 last:border-b-0 sm:border-b-0 sm:border-r ${className ?? ''}`}
+      className={`flex items-center gap-3 border-b border-white/40 px-4 py-3 last:border-b-0 sm:border-b-0 sm:border-r dark:border-white/10 ${className ?? ''}`}
     >
       <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
         {icon}
