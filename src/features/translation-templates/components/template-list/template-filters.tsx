@@ -16,16 +16,14 @@ export function TemplateFilters({
   const t = useTranslations('templates');
 
   return (
-    <div className="flex flex-1">
-      <div className="relative flex-1">
-        <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-        <Input
-          placeholder={t('searchPlaceholder')}
-          value={search}
-          onChange={(event) => onSearchChange(event.target.value)}
-          className="bg-background pl-9"
-        />
-      </div>
+    <div className="relative flex-1">
+      <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+      <Input
+        placeholder={t('searchPlaceholder')}
+        value={search}
+        onChange={(event) => onSearchChange(event.target.value)}
+        className="h-10 rounded-md bg-background pl-9"
+      />
     </div>
   );
 }

@@ -79,12 +79,12 @@ export function TemplateContent() {
 
   return (
     <>
-      <div className="mb-6 flex flex-col gap-3 sm:flex-row">
+      <div className="flex flex-col gap-3 sm:flex-row">
         <TemplateFilters
           search={search}
           onSearchChange={handleSearchChange}
         />
-        <Button size="sm" className="w-full shrink-0 sm:w-auto" onClick={handleCreate}>
+        <Button className="h-10 w-full shrink-0 rounded-md px-4 sm:w-auto" onClick={handleCreate}>
           <Plus className="size-4" />
           {t('createTemplate')}
         </Button>

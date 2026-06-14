@@ -31,8 +31,8 @@ export default async function DashboardPage({ params }: Props) {
           <Image
             src="/dashboard/dashboard-icon-banner.png"
             alt=""
-            width={520}
-            height={220}
+            width={1920}
+            height={1080}
             priority
             className="pointer-events-none absolute left-1/2 top-0 h-auto w-[360px] max-w-none -translate-x-1/2 opacity-80 dark:opacity-35 sm:w-[440px] lg:w-[560px]"
           />
