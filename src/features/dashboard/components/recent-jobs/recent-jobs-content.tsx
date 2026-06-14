@@ -64,7 +64,7 @@ export function RecentJobsContent({
                 <TableCell className="max-w-[180px] px-3 py-3.5 sm:max-w-[220px] lg:px-4">
                   <div className="flex items-center gap-2.5">
                     <FileTypeIcon fileName={fileName} className="size-5" />
-                    <span className="truncate text-[15px] font-semibold text-slate-900">
+                    <span className="truncate text-[15px] font-semibold text-foreground">
                       {fileName}
                     </span>
                   </div>
@@ -97,7 +97,7 @@ export function RecentJobsContent({
                         height={16}
                         className="size-4 shrink-0"
                       />
-                      <span className="text-[15px] font-bold tabular-nums text-slate-900">
+                      <span className="text-[15px] font-bold tabular-nums text-foreground">
                         {job.cost_credits}
                       </span>
                     </div>
@@ -116,10 +116,10 @@ export function RecentJobsContent({
 
 function LanguageLabel({ value }: { value: string }) {
   return (
-    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-800">
+    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
       <LanguageFlag
         value={value}
-        className="h-4 w-5 shrink-0 border border-slate-200 shadow-sm"
+        className="h-4 w-5 shrink-0 border border-border shadow-sm"
         fallbackClassName="h-4 w-5 shrink-0 rounded-sm"
       />
       <span>{value}</span>

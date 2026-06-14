@@ -131,7 +131,7 @@ export function GlossaryContent() {
   // ─── Render ─────────────────────────────────────────────────────────
   return (
     <>
-      <AppCard className="overflow-hidden rounded-2xl border-0 bg-[#eaf4ff] shadow-sm">
+      <AppCard className="overflow-hidden rounded-2xl border-0 bg-[#eaf4ff] shadow-sm dark:bg-card">
         <AppCardContent
           padding="none"
           className="relative min-h-[264px] overflow-hidden p-6 sm:min-h-[260px] sm:p-8 lg:min-h-[264px] lg:p-10"
@@ -142,21 +142,22 @@ export function GlossaryContent() {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[65%_center] lg:object-center"
+            className="object-cover object-[65%_center] dark:opacity-35 lg:object-center"
           />
+          <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-card via-card/85 to-card/45 dark:block" />
           <div className="relative z-10 flex max-w-xl flex-col gap-5">
             <div className="space-y-3">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+                <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                   {t('title')}
                 </h2>
-                <p className="max-w-sm text-sm leading-6 text-slate-600 sm:text-base">
+                <p className="max-w-sm text-sm leading-6 text-muted-foreground sm:text-base">
                   {t('description')}
                 </p>
               </div>
             </div>
 
-            <div className="grid max-w-[580px] grid-cols-1 overflow-hidden rounded-2xl border border-white/70 bg-white/75 shadow-sm backdrop-blur sm:grid-cols-3">
+            <div className="grid max-w-[580px] grid-cols-1 overflow-hidden rounded-2xl border border-white/70 bg-white/75 shadow-sm backdrop-blur dark:border-border dark:bg-background/75 sm:grid-cols-3">
               <GlossaryStat
                 icon={<BookOpenText className="size-5" />}
                 value={stats.glossaries}
@@ -261,16 +262,16 @@ function GlossaryStat({
 }) {
   return (
     <div
-      className={`flex items-center gap-3 border-b border-slate-200/80 px-4 py-3 last:border-b-0 sm:border-b-0 sm:border-r ${className ?? ''}`}
+      className={`flex items-center gap-3 border-b border-border px-4 py-3 last:border-b-0 sm:border-b-0 sm:border-r ${className ?? ''}`}
     >
       <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
         {icon}
       </div>
       <div className="min-w-0">
-        <div className="text-lg font-bold leading-none text-slate-950">
+        <div className="text-lg font-bold leading-none text-foreground">
           {value}
         </div>
-        <div className="mt-1 text-xs font-medium text-slate-600">{label}</div>
+        <div className="mt-1 text-xs font-medium text-muted-foreground">{label}</div>
       </div>
     </div>
   );

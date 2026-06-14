@@ -41,6 +41,7 @@ export function StepUploadEmpty({
         sizes="(max-width: 1024px) 100vw, 960px"
         className="pointer-events-none object-cover object-top opacity-95"
       />
+      <div className="pointer-events-none absolute inset-0 hidden bg-card/70 dark:block" />
 
       <div className="relative z-10 flex w-full max-w-3xl flex-col items-center">
         <Image
@@ -50,10 +51,10 @@ export function StepUploadEmpty({
           height={136}
         />
 
-        <h3 className="text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">
+        <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
           {t('title')}
         </h3>
-        <p className="mt-2 max-w-lg text-sm leading-6 text-slate-600 sm:text-base">
+        <p className="mt-2 max-w-lg text-sm leading-6 text-muted-foreground sm:text-base">
           {t('dropzone')}
         </p>
 
@@ -61,7 +62,7 @@ export function StepUploadEmpty({
           {DOCUMENT_FILE_TYPE_LABELS.map((ext) => (
             <span
               key={ext}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/85 px-3 py-1.5 text-xs font-semibold text-slate-700  backdrop-blur"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-background/85 px-3 py-1.5 text-xs font-semibold text-foreground backdrop-blur"
             >
               <FileTypeIcon
                 fileName={`document.${ext.toLowerCase()}`}
@@ -86,14 +87,14 @@ export function StepUploadEmpty({
           {t('browse')}
         </Button>
 
-        <div className="mt-6 flex w-full max-w-2xl items-center justify-center border-t border-slate-200 pt-2 text-sm text-slate-500">
+        <div className="mt-6 flex w-full max-w-2xl items-center justify-center border-t border-border pt-2 text-sm text-muted-foreground">
           <span className="flex items-center gap-2 px-4">
-            <HardDrive className="size-4 shrink-0 text-slate-500" />
+            <HardDrive className="size-4 shrink-0 text-muted-foreground" />
             {t('maxSize')}
           </span>
-          <span className="hidden h-10 w-px bg-slate-200 sm:block" />
+          <span className="hidden h-10 w-px bg-border sm:block" />
           <span className="flex items-center gap-2 px-4">
-            <ShieldCheck className="size-4 shrink-0 text-slate-500" />
+            <ShieldCheck className="size-4 shrink-0 text-muted-foreground" />
             {t('secureHint')}
           </span>
         </div>

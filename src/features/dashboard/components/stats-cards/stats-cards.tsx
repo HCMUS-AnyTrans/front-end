@@ -64,7 +64,7 @@ export function StatsCards() {
       {statCards.map((stat) => (
         <DashboardCard
           key={stat.title}
-          className="rounded-2xl border-border/70 bg-white/95"
+          className="rounded-2xl border-border/70 bg-card/95"
         >
           <DashboardCardContent
             padding="all"
@@ -79,11 +79,11 @@ export function StatsCards() {
             />
 
             <div className="flex flex-1 flex-col min-w-0">
-              <span className="truncate text-[10px] font-medium uppercase tracking-wider text-slate-500 sm:text-xs">
+              <span className="truncate text-[10px] font-medium uppercase tracking-wider text-muted-foreground sm:text-xs">
                 {stat.title}
               </span>
               <div className="mt-0.5 flex items-baseline gap-1.5 sm:mt-1 sm:gap-2">
-                <span className="text-lg font-bold tracking-tight text-slate-950 tabular-nums sm:text-xl md:text-2xl">
+                <span className="text-lg font-bold tracking-tight text-foreground tabular-nums sm:text-xl md:text-2xl">
                   {stat.value}
                 </span>
 

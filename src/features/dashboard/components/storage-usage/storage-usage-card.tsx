@@ -32,9 +32,9 @@ export function StorageUsageCard() {
   if (!storage) return <StorageUsageCardLoading />;
 
   return (
-    <DashboardCard className="h-full rounded-2xl border-border/70 bg-white/95 shadow-sm">
+    <DashboardCard className="h-full rounded-2xl border-border/70 bg-card/95 shadow-sm">
       <DashboardCardHeader>
-        <CardTitle className="text-base font-semibold text-slate-950">
+        <CardTitle className="text-base font-semibold text-card-foreground">
           {tStorage('title')}
         </CardTitle>
       </DashboardCardHeader>
@@ -49,15 +49,15 @@ export function StorageUsageCard() {
           />
           <div className="min-w-0 flex-1 space-y-3">
             <div className="flex min-w-0 items-end justify-between gap-2">
-              <span className="text-xl font-bold tabular-nums text-slate-950 sm:text-2xl">
+              <span className="text-xl font-bold tabular-nums text-foreground sm:text-2xl">
                 {storage.used} {storage.unit}
               </span>
-              <span className="text-xs text-slate-500 tabular-nums">
+              <span className="text-xs text-muted-foreground tabular-nums">
                 / {storage.total} {storage.unit} ({storage.percentage}%)
               </span>
             </div>
-            <Progress value={storage.percentage} className="h-2 bg-slate-200" />
-            <p className="text-xs text-slate-500">
+            <Progress value={storage.percentage} className="h-2 bg-muted" />
+            <p className="text-xs text-muted-foreground">
               {tStorage('remaining', {
                 value: (storage.total - storage.used).toFixed(1),
               })}
