@@ -5,20 +5,20 @@ import { LanguageFlag } from '@/components/shared';
 import { cn } from '@/lib/utils';
 
 const DOMAIN_ICON_PATHS: Record<string, string> = {
-  administrative: '/glossary/administrative.png',
-  auto: '/glossary/auto.png',
-  commerce: '/glossary/comerce.png',
-  engineering: '/glossary/engineering.png',
-  finance: '/glossary/finance.png',
-  general: '/glossary/general.png',
-  it_software: '/glossary/it-software.png',
-  legal: '/glossary/legal.png',
-  marketing_advertising: '/glossary/marketing-advertising.png',
-  media_entertainment: '/glossary/media-entertainment.png',
-  medical: '/glossary/medical.png',
-  other: '/glossary/other.png',
-  science_academic: '/glossary/science-academic.png',
-  tourism: '/glossary/tourism.png',
+  administrative: '/glossary/administrative.svg',
+  auto: '/glossary/auto.svg',
+  commerce: '/glossary/comerce.svg',
+  engineering: '/glossary/engineering.svg',
+  finance: '/glossary/finance.svg',
+  general: '/glossary/general.svg',
+  it_software: '/glossary/it-software.svg',
+  legal: '/glossary/legal.svg',
+  marketing_advertising: '/glossary/marketing-advertising.svg',
+  media_entertainment: '/glossary/media-entertainment.svg',
+  medical: '/glossary/medical.svg',
+  other: '/glossary/other.svg',
+  science_academic: '/glossary/science-academic.svg',
+  tourism: '/glossary/tourism.svg',
 };
 
 export function GlossaryLanguageFlag({
@@ -31,7 +31,7 @@ export function GlossaryLanguageFlag({
   return (
     <LanguageFlag
       value={code}
-      className={cn('h-4 w-5 shrink-0', className)}
+      className={cn('h-6 w-8 shrink-0', className)}
       fallbackClassName={cn('size-4 shrink-0', className)}
     />
   );
