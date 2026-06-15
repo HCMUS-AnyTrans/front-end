@@ -34,6 +34,7 @@ interface PaginatedTemplateDto {
   totalPages?: number;
   pagination?: TranslationTemplateListResponse['pagination'];
   meta?: TranslationTemplateListResponse['pagination'];
+  summary?: TranslationTemplateListResponse['summary'];
 }
 
 function mapTemplateDto(dto: TranslationTemplateDto): TranslationTemplate {
@@ -105,6 +106,7 @@ export async function listTranslationTemplatesApi(
   return {
     items: items.map(mapTemplateDto),
     pagination,
+    summary: data.summary,
   };
 }
 

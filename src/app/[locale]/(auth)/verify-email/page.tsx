@@ -19,8 +19,9 @@ function VerifyEmailContent() {
               src="/shared/logo.svg"
               alt="Logo"
               fill
+              unoptimized
               className="object-contain"
-              priority
+              preload
             />
           </div>
           <span className="font-bold text-2xl text-primary">AnyTrans</span>

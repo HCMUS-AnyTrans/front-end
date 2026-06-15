@@ -35,7 +35,9 @@ export function AuthHero({
           alt={imageAlt}
           fill
           className="object-cover"
-          priority
+          preload
+          quality={100}
+          unoptimized={imageSrc.endsWith('.svg')}
         />
       </div>
 

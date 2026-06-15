@@ -62,7 +62,7 @@ export function HistoryTableRow({
     >
       <TableCell className="max-w-[180px] px-4 py-3.5 sm:max-w-[220px] lg:px-6">
         <div className="flex items-center gap-2">
-          <FileTypeIcon fileName={fileName} className="size-4" />
+          <FileTypeIcon fileName={fileName} className="size-7" />
           <span className="truncate text-sm font-medium text-foreground">
             {fileName}
           </span>
@@ -90,10 +90,12 @@ export function HistoryTableRow({
         {job.cost_credits !== undefined ? (
           <div className="flex items-center justify-end gap-1.5">
             <Image
-              src="/shared/credit.svg"
+              src="/shared/credit.png"
               alt="Credits"
-              width={16}
-              height={16}
+              width={64}
+              height={64}
+              quality={100}
+              sizes="64px"
               className="size-4 shrink-0"
             />
             <span className="text-sm font-medium tabular-nums text-foreground">
@@ -142,4 +144,3 @@ export function HistoryTableRow({
     </TableRow>
   );
 }
-

@@ -1,0 +1,71 @@
+{
+  "help": {
+    "title": "Help Center",
+    "description": "Find quick reference guides, frequently asked questions, or get technical support.",
+    "searchPlaceholder": "Search help articles...",
+    "faqTitle": "Frequently Asked Questions",
+    "noResults": "No results found",
+    "categories": {
+      "all": "All",
+      "general": "General",
+      "translation": "Translation",
+      "glossary": "Glossary",
+      "billing": "Billing"
+    },
+    "faqs": [
+      {
+        "category": "general",
+        "q": "What is AnyTrans?",
+        "a": "AnyTrans is a professional document translation platform powered by state-of-the-art AI. Our core feature is preserving the original formatting, fonts, images, tables, and layouts of your documents perfectly after translation."
+      },
+      {
+        "category": "general",
+        "q": "How do I translate my first document?",
+        "a": "It's easy! Go to the 'Translate' page, drag & drop your document into the upload dropzone, select the source and target languages, customize any optional translation settings (such as Glossaries or custom Templates), and click 'Next' to start."
+      },
+      {
+        "category": "translation",
+        "q": "What file formats are supported?",
+        "a": "We support a wide range of popular formats, including PDF (.pdf), Microsoft Word (.docx), PowerPoint (.pptx), Excel (.xlsx), Plain Text (.txt), and Subtitle files (.srt)."
+      },
+      {
+        "category": "translation",
+        "q": "Will the translated document layout be preserved?",
+        "a": "Yes, our document rendering model extracts layout blocks intelligently. Any images, tables, charts, font styles, and columns will remain in their original positions inside the translated file."
+      },
+      {
+        "category": "glossary",
+        "q": "How do Glossaries work?",
+        "a": "A Glossary is a personal terminology dictionary where you define fixed translations for specific brand names, technical jargon, or acronyms. The AI prioritizes your glossary pairs to ensure consistency and precision across all translations."
+      },
+      {
+        "category": "glossary",
+        "q": "Can I import glossary terms from spreadsheets?",
+        "a": "Yes! You can easily upload an existing spreadsheet dictionary (.csv, .xlsx) to instantly populate your glossary database without entering terms manually."
+      },
+      {
+        "category": "billing",
+        "q": "How are credits calculated?",
+        "a": "AnyTrans translations are funded using Credits. Every page or word translated costs a small, fixed amount of credits. A transparent cost estimate is displayed for your approval prior to commencing any translation task."
+      },
+      {
+        "category": "billing",
+        "q": "How do I buy more credits?",
+        "a": "Go to Settings > Billing or click the 'Buy Credits' button on the dashboard header. Choose your desired package and pay securely with local bank QR transfers via PayOS/VNPay instantly."
+      }
+    ],
+    "support": {
+      "title": "Still need help?",
+      "description": "If you are facing custom layout bugs, transaction errors, or have feature requests.",
+      "email": "support@anytrans.me",
+      "hours": "8:00 AM - 10:00 PM Daily",
+      "button": "Contact Support"
+    },
+    "resources": {
+      "title": "Quick Resources",
+      "translate": "Translate documents",
+      "preferences": "Manage display preferences",
+      "billing": "Billing history"
+    }
+  }
+}

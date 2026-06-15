@@ -41,6 +41,12 @@ export interface TranslationTemplateQueryParams {
   sortOrder?: 'asc' | 'desc';
 }
 
+export interface TranslationTemplateSummary {
+  totalTemplates: number;
+  withInstructions: number;
+  uniqueDomains: number;
+}
+
 export interface TranslationTemplateListResponse {
   items: TranslationTemplate[];
   pagination?: {
@@ -51,6 +57,7 @@ export interface TranslationTemplateListResponse {
     hasNext: boolean;
     hasPrev: boolean;
   };
+  summary?: TranslationTemplateSummary;
 }
 
 export interface TranslationTemplateFormValues {

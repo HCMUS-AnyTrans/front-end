@@ -63,7 +63,7 @@ export function RecentJobsContent({
               >
                 <TableCell className="max-w-[180px] px-3 py-3.5 sm:max-w-[220px] lg:px-4">
                   <div className="flex items-center gap-2.5">
-                    <FileTypeIcon fileName={fileName} className="size-5" />
+                    <FileTypeIcon fileName={fileName} className="size-6" />
                     <span className="truncate text-[15px] font-semibold text-foreground">
                       {fileName}
                     </span>
@@ -91,10 +91,12 @@ export function RecentJobsContent({
                   {job.cost_credits !== undefined ? (
                     <div className="flex items-center justify-end gap-1.5">
                       <Image
-                        src="/shared/credit.svg"
+                        src="/shared/credit.png"
                         alt="Credits"
-                        width={16}
-                        height={16}
+                        width={256}
+                        height={128}
+                        quality={100}
+                        sizes="128px"
                         className="size-4 shrink-0"
                       />
                       <span className="text-[15px] font-bold tabular-nums text-foreground">
@@ -113,4 +115,3 @@ export function RecentJobsContent({
     </div>
   );
 }
-

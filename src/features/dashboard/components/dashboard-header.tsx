@@ -59,8 +59,8 @@ export function DashboardHeader() {
               src="/shared/logo.svg"
               alt="AnyTrans Logo"
               fill
+              unoptimized
               className="object-contain"
-              priority
             />
           </div>
           <span className="text-lg font-bold tracking-tight text-primary">
@@ -122,10 +122,12 @@ export function DashboardHeader() {
                 title="Credits"
               >
                 <Image
-                  src="/shared/credit.svg"
+                  src="/shared/credit.png"
                   alt="Credits"
-                  width={16}
-                  height={16}
+                  width={64}
+                  height={64}
+                  quality={100}
+                  sizes="64px"
                   className="size-4"
                 />
                 <span className="font-semibold   tabular-nums">
@@ -146,10 +148,12 @@ export function DashboardHeader() {
               >
                 <button type="button" className="flex w-full items-center">
                   <Image
-                    src="/shared/credit.svg"
+                    src="/shared/credit.png"
                     alt="Credits"
-                    width={16}
-                    height={16}
+                    width={64}
+                    height={64}
+                    quality={100}
+                    sizes="64px"
                     className="mr-2 size-4"
                   />
                   {tHeaderMenu('buyMoreCredits')}

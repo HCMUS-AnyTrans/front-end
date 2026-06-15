@@ -3,9 +3,9 @@
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { TableCell, TableRow } from '@/components/ui/table';
-import { Eye, Pencil, Trash2 } from 'lucide-react';
+import { ArrowRight, Eye, Pencil, Trash2 } from 'lucide-react';
+import { LanguageLabel } from '@/components/shared/language-label';
 import type { TranslationTemplate } from '../../types';
-import { getLanguageDisplayName } from '../../utils/translation-template-utils';
 import { formatHistoryTableDate } from '@/features/history/utils/history-display';
 
 interface TemplateTableRowProps {
@@ -37,11 +37,12 @@ export function TemplateTableRow({
           {template.name}
         </span>
       </TableCell>
-      <TableCell className="hidden px-4 py-3.5 text-sm text-muted-foreground sm:table-cell lg:px-6">
-        {getLanguageDisplayName(template.srcLang)}
-      </TableCell>
-      <TableCell className="hidden px-4 py-3.5 text-sm text-muted-foreground sm:table-cell lg:px-6">
-        {getLanguageDisplayName(template.tgtLang)}
+      <TableCell className="hidden px-4 py-3.5 sm:table-cell lg:px-6">
+        <div className="flex items-center gap-2 text-sm">
+          <LanguageLabel value={template.srcLang} />
+          <ArrowRight className="size-3.5 shrink-0 text-muted-foreground/70" />
+          <LanguageLabel value={template.tgtLang} />
+        </div>
       </TableCell>
       <TableCell className="hidden max-w-[180px] px-4 py-3.5 md:table-cell lg:px-6">
         <span className="block truncate text-sm text-muted-foreground">

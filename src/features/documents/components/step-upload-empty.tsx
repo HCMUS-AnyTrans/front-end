@@ -34,21 +34,24 @@ export function StepUploadEmpty({
       aria-disabled={isBusy}
     >
       <Image
-        src="/translation/upload-banner.svg"
+        src="/translation/upload-banner.png"
         alt=""
         fill
-        priority
-        sizes="(max-width: 1024px) 100vw, 960px"
-        className="pointer-events-none object-cover object-top opacity-95"
+        preload
+        unoptimized
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top opacity-30 dark:opacity-10 dark:mix-blend-luminosity"
       />
-      <div className="pointer-events-none absolute inset-0 hidden bg-card/70 dark:block" />
+      <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-br from-[#0e1e38]/20 via-transparent to-background/40 dark:block" />
 
       <div className="relative z-10 flex w-full max-w-3xl flex-col items-center">
         <Image
-          src="/translation/upload-icon.svg"
+          src="/translation/upload-icon.png"
           alt=""
-          width={168}
-          height={136}
+          width={512}
+          height={512}
+          sizes="512px"
+          quality={100}
+          className="size-48 mb-6 shrink-0 opacity-80"
         />
 
         <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
@@ -62,7 +65,7 @@ export function StepUploadEmpty({
           {DOCUMENT_FILE_TYPE_LABELS.map((ext) => (
             <span
               key={ext}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-background/85 px-3 py-1.5 text-xs font-semibold text-foreground backdrop-blur"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-white/70 bg-white/75 shadow-xs backdrop-blur dark:border-border dark:bg-background/75 px-3 py-1.5 text-xs font-semibold text-foreground"
             >
               <FileTypeIcon
                 fileName={`document.${ext.toLowerCase()}`}
@@ -87,7 +90,7 @@ export function StepUploadEmpty({
           {t('browse')}
         </Button>
 
-        <div className="mt-6 flex w-full max-w-2xl items-center justify-center border-t border-border pt-2 text-sm text-muted-foreground">
+        <div className="my-6 flex w-full max-w-2xl items-center justify-center border-t border-border pt-2 text-sm text-muted-foreground">
           <span className="flex items-center gap-2 px-4">
             <HardDrive className="size-4 shrink-0 text-muted-foreground" />
             {t('maxSize')}

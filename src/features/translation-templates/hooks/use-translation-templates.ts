@@ -24,6 +24,7 @@ export function useTranslationTemplates(
   return {
     templates: result.data?.items,
     pagination: result.data?.pagination,
+    summary: result.data?.summary,
     isLoading: result.isLoading,
     isFetching: result.isFetching,
     isError: result.isError,

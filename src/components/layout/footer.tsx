@@ -153,6 +153,7 @@ export function Footer({
                     src="/shared/logo.svg"
                     alt={logo.text}
                     fill
+                    unoptimized
                     className="object-contain"
                   />
                 </motion.div>

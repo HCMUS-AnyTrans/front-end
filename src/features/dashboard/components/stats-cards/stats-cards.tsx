@@ -64,7 +64,7 @@ export function StatsCards() {
       {statCards.map((stat) => (
         <DashboardCard
           key={stat.title}
-          className="rounded-xl border-border/70 bg-card/95"
+          className="rounded-xl border border-white/60 bg-white/45 shadow-xs backdrop-blur-md transition-all duration-300 hover:bg-white/60 dark:border-white/10 dark:bg-black/40 dark:hover:bg-black/50"
         >
           <DashboardCardContent
             padding="all"
@@ -73,8 +73,10 @@ export function StatsCards() {
             <Image
               src={stat.iconSrc}
               alt={stat.iconAlt}
-              width={56}
-              height={56}
+              width={256}
+              height={256}
+              quality={100}
+              sizes="256px"
               className="h-10 w-10 shrink-0 object-contain sm:h-12 sm:w-12 md:h-14 md:w-14"
             />
 
