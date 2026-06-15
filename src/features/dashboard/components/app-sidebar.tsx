@@ -133,7 +133,7 @@ export function AppSidebar() {
                   asChild
                   isActive={isActive}
                   tooltip={title}
-                  className="h-12 rounded-xl text-white/80 hover:bg-white/10 hover:text-white data-[active=true]:bg-[linear-gradient(135deg,#2f8cff_0%,#1e63d8_100%)] data-[active=true]:text-white data-[active=true]:shadow-[0_14px_32px_rgba(0,85,210,0.35)] [&>svg]:text-current"
+                  className="h-12 rounded-xl text-white/80 hover:bg-white/10 hover:text-white data-[active=true]:bg-transparent data-[active=true]:bg-[linear-gradient(135deg,#2f8cff_0%,#1e63d8_100%)] data-[active=true]:text-white data-[active=true]:shadow-[0_14px_32px_rgba(0,85,210,0.35)] [&>svg]:text-current"
                 >
                   <Link href={item.href}>
                     <item.icon className="size-5" />
@@ -161,7 +161,7 @@ export function AppSidebar() {
                   asChild
                   isActive={isActive}
                   tooltip={title}
-                  className="h-12 rounded-xl text-white/80 hover:bg-white/10 hover:text-white data-[active=true]:bg-[linear-gradient(135deg,#2f8cff_0%,#1e63d8_100%)] data-[active=true]:text-white data-[active=true]:shadow-[0_14px_32px_rgba(0,85,210,0.35)] [&>svg]:text-current"
+                  className="h-12 rounded-xl text-white/80 hover:bg-white/10 hover:text-white data-[active=true]:bg-transparent data-[active=true]:bg-[linear-gradient(135deg,#2f8cff_0%,#1e63d8_100%)] data-[active=true]:text-white data-[active=true]:shadow-[0_14px_32px_rgba(0,85,210,0.35)] [&>svg]:text-current"
                 >
                   <Link href={item.href}>
                     <item.icon className="size-5" />
