@@ -26,6 +26,8 @@
     "minutesAgo": "{count} phút trước",
     "hoursAgo": "{count} giờ trước",
     "daysAgo": "{count} ngày trước",
-    "pageOf": "Trang {page}/{totalPages}"
+    "pageOf": "Trang {page}/{totalPages}",
+    "noResults": "Không tìm thấy kết quả.",
+    "use": "Sử dụng"
   }
 }

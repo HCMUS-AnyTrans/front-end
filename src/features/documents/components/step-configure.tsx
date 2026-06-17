@@ -1,5 +1,8 @@
 'use client';
-
+ 
+import { useState } from 'react';
+import { FileText } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { AppCard, AppCardContent } from '@/components/ui/app-card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -19,6 +22,7 @@ import { ToneSelector } from './tone-selector';
 import { PdfFlowSelector } from './pdf-flow-selector';
 import { GlossarySection } from './glossary-section';
 import { FontConfigurationSection } from './font-configuration-section';
+import { CustomInstructionTemplateDialog } from '@/features/custom-instruction-templates/components/custom-instruction-template-dialog';
 import { ConfigureEstimateCard } from './configure-estimate-card';
 import { ConfigureEstimateSummary } from './configure-estimate-summary';
 import { ConfigureActionsPanel } from './configure-actions-panel';
@@ -153,6 +157,7 @@ export function StepConfigure({
       isFontConfigurationApplicable,
       isLoading,
     });
+  const [templateDialogOpen, setTemplateDialogOpen] = useState(false);
   const { addManualTerm, updateManualTerm, removeManualTerm } = useManualTerms({
     manualTerms: config.manualTerms,
     onConfigChange,
@@ -374,9 +379,20 @@ export function StepConfigure({
                 </h3>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="custom-instruction">
-                  {t('customInstructionLabel')}
-                </Label>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="custom-instruction">
+                    {t('customInstructionLabel')}
+                  </Label>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setTemplateDialogOpen(true)}
+                  >
+                    <FileText />
+                    {t('templateInstructionBtn')}
+                  </Button>
+                </div>
                 <Textarea
                   id="custom-instruction"
                   rows={6}
@@ -459,6 +475,12 @@ export function StepConfigure({
           />
         </div>
       </div>
+
+      <CustomInstructionTemplateDialog
+        open={templateDialogOpen}
+        onOpenChange={setTemplateDialogOpen}
+        onSelect={handleCustomInstructionChange}
+      />
 
       {/* ── Mobile/tablet: estimate summary inline ── */}
       {!isEstimating && estimate && (

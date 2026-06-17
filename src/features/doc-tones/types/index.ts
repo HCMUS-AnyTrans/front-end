@@ -9,4 +9,5 @@ export interface DocTone {
     vi: string;
   };
   value: string;
+  displayOrder: number;
 }

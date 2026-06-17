@@ -50,6 +50,7 @@
       "preservePdfFormat": "Preserve PDF format",
       "keepOriginalFontSize": "Keep original font size",
       "customInstruction": "Custom instruction",
+      "templateInstructionBtn": "Templates",
       "globalContext": "Global context",
       "createdAt": "Created at",
       "updatedAt": "Updated at"

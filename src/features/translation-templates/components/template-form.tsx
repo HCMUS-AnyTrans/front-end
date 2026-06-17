@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch } from 'react-hook-form';
 import { toast } from 'sonner';
-import { ArrowLeft, Loader2 } from 'lucide-react';
+import { ArrowLeft, FileText, Loader2 } from 'lucide-react';
 import { AppCard, AppCardContent } from '@/components/ui/app-card';
 import { Button } from '@/components/ui/button';
 import {
@@ -34,6 +34,7 @@ import {
   useDocTones,
 } from '@/features/doc-tones';
 import { getDomainLabel, useDomains } from '@/features/domains';
+import { CustomInstructionTemplateDialog } from '@/features/custom-instruction-templates/components/custom-instruction-template-dialog';
 import { sourceLanguages, targetLanguages } from '@/features/documents/data';
 import { cn } from '@/lib/utils';
 import { translationTemplateSchema } from '../data';
@@ -59,6 +60,7 @@ interface TemplateFormProps {
 export function TemplateForm({ mode, template, isLoading }: TemplateFormProps) {
   const router = useRouter();
   const locale = useLocale();
+  const [templateDialogOpen, setTemplateDialogOpen] = useState(false);
   const t = useTranslations('templates');
   const tCommon = useTranslations('common');
   const tDocuments = useTranslations('documents');
@@ -415,7 +417,18 @@ export function TemplateForm({ mode, template, isLoading }: TemplateFormProps) {
               name="customInstruction"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('fields.customInstruction')}</FormLabel>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>{t('fields.customInstruction')}</FormLabel>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setTemplateDialogOpen(true)}
+                    >
+                      <FileText />
+                      {t('fields.templateInstructionBtn')}
+                    </Button>
+                  </div>
                   <FormControl>
                     <Textarea
                       rows={4}
@@ -448,6 +461,12 @@ export function TemplateForm({ mode, template, isLoading }: TemplateFormProps) {
           </AppCardContent>
         </AppCard>
       </form>
+
+      <CustomInstructionTemplateDialog
+        open={templateDialogOpen}
+        onOpenChange={setTemplateDialogOpen}
+        onSelect={(instruction) => form.setValue('customInstruction', instruction)}
+      />
     </Form>
   );
 }
