@@ -37,8 +37,11 @@ export function SecurityProviderRow({
           <Image
             src={provider.icon}
             alt={`${provider.name} icon`}
-            width={20}
-            height={20}
+            width={64}
+            height={64}
+            quality={100}
+            unoptimized={provider.icon.endsWith('.svg')}
+            sizes="64px"
             className="h-5 w-5 object-contain"
           />
         </div>

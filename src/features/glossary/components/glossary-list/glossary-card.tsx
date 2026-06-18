@@ -3,11 +3,11 @@
 import { useLocale, useTranslations } from 'next-intl';
 import {
   ArrowRightLeft,
+  Book,
+  Calendar,
   MoreHorizontal,
   Pencil,
   Trash2,
-  Book,
-  Calendar,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -18,6 +18,10 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { getDomainLabel, useDomains } from '@/features/domains';
 import type { Glossary } from '../../types';
+import {
+  GlossaryDomainIcon,
+  GlossaryLanguageFlag,
+} from '../shared/glossary-visuals';
 
 interface GlossaryCardProps {
   glossary: Glossary;
@@ -40,7 +44,6 @@ export function GlossaryCard({
 
   const { getDomainById } = useDomains();
   const domainInfo = getDomainById(glossary.domainId);
-  const DomainIcon = domainInfo?.icon;
   const domainLabel = domainInfo ? getDomainLabel(domainInfo, locale) : '';
 
   const formattedDate = new Date(glossary.createdAt).toLocaleDateString();
@@ -49,8 +52,8 @@ export function GlossaryCard({
     <div
       className={
         isBlocked
-          ? 'group relative rounded-2xl border bg-card p-5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 opacity-90'
-          : 'group relative cursor-pointer rounded-2xl border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+          ? 'group relative rounded-xl border bg-card p-5 opacity-90 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+          : 'group relative cursor-pointer rounded-xl border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
       }
       onClick={() => {
         if (!isBlocked) {
@@ -68,12 +71,13 @@ export function GlossaryCard({
         }
       }}
     >
-      {/* Header: domain icon + name/domain label + context menu */}
       <div className="mb-4 flex items-start justify-between">
         <div className="flex items-center gap-3">
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-muted text-muted-foreground transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-            {DomainIcon && <DomainIcon className="size-5" />}
-          </div>
+          <GlossaryDomainIcon
+            domainKey={domainInfo?.key}
+            className="size-10 object-contain"
+          />
+
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2 pr-2">
               <h3 className="line-clamp-1 text-base font-semibold leading-tight">
@@ -127,27 +131,27 @@ export function GlossaryCard({
                 onDelete(glossary);
               }}
             >
-              <Trash2 className="size-4" />
+              <Trash2 className="text-destructive size-4" />
               {tCommon('delete')}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
 
-      {/* Language pair */}
       <div className="mb-6 flex items-center gap-3 rounded-xl border bg-muted/50 p-3">
-        <div className="flex-1 text-center text-sm font-medium text-foreground">
+        <div className="flex flex-1 items-center justify-center gap-2 text-center text-sm font-medium text-foreground">
+          <GlossaryLanguageFlag code={glossary.srcLang} />
           {t(`languages.${glossary.srcLang}`)}
         </div>
         <div className="flex size-6 shrink-0 items-center justify-center rounded-full border bg-card shadow-sm text-muted-foreground">
           <ArrowRightLeft className="size-3" />
         </div>
-        <div className="flex-1 text-center text-sm font-medium text-foreground">
+        <div className="flex flex-1 items-center justify-center gap-2 text-center text-sm font-medium text-foreground">
+          <GlossaryLanguageFlag code={glossary.tgtLang} />
           {t(`languages.${glossary.tgtLang}`)}
         </div>
       </div>
 
-      {/* Footer: term count + created date */}
       <div className="flex items-center justify-between border-t pt-4">
         <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
           <Book className="size-3.5" />

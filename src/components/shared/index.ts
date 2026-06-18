@@ -15,6 +15,9 @@ export type {
 export { BannerCTA } from './banner-cta';
 export type { BannerCTAProps } from './banner-cta';
 export { CreditPackageCard } from './credit-package-card';
+export { LanguageFlag } from './language-flag';
+export type { LanguageFlagProps } from './language-flag';
+export { LanguageLabel } from './language-label';
 export type {
   CreditPackageCardProps,
   CreditPackageCardBadge,

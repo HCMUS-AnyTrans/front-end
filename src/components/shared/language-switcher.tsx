@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { useLanguageSync } from "@/features/settings/hooks";
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { useLanguageSync } from '@/features/settings/hooks';
 
 export function LanguageSwitcher() {
   const { locale, toggleLanguage } = useLanguageSync();
@@ -13,25 +13,27 @@ export function LanguageSwitcher() {
       size="icon"
       onClick={toggleLanguage}
       className="relative hover:bg-transparent dark:hover:bg-transparent"
-      title={locale === "vi" ? "Switch to English" : "Chuyển sang Tiếng Việt"}
+      title={locale === 'vi' ? 'Switch to English' : 'Chuyển sang Tiếng Việt'}
     >
-      {locale === "vi" ? (
+      {locale === 'vi' ? (
         <Image
-          src="/vietnam-flag.svg"
+          src="shared/vietnam-flag.svg"
           alt="Tiếng Việt"
           fill
+          unoptimized
           className="object-contain"
         />
       ) : (
         <Image
-          src="/uk-flag.svg"
+          src="shared/uk-flag.svg"
           alt="English"
           fill
+          unoptimized
           className="object-contain"
         />
       )}
       <span className="sr-only">
-        {locale === "vi" ? "Switch to English" : "Chuyển sang Tiếng Việt"}
+        {locale === 'vi' ? 'Switch to English' : 'Chuyển sang Tiếng Việt'}
       </span>
     </Button>
   );

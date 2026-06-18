@@ -6,16 +6,21 @@
       "dashboard": "Tổng quan",
       "documents": "Dịch",
       "glossary": "Thuật ngữ",
+      "templates": "Mẫu dịch",
       "history": "Lịch sử",
       "settings": "Cài đặt",
       "help": "Trợ giúp",
       "profile": "Hồ sơ",
-      "logout": "Đăng xuất"
+      "logout": "Đăng xuất",
+      "creditTitle": "Bạn cần thêm credits?",
+      "creditDescription": "Nâng cấp gói để dịch nhiều hơn.",
+      "creditCta": "Xem gói →"
     },
     "pages": {
       "dashboard": "Tổng quan",
       "documents": "Dịch",
       "glossary": "Thuật ngữ",
+      "templates": "Mẫu dịch",
       "history": "Lịch sử",
       "settings": "Cài đặt",
       "help": "Trợ giúp"
@@ -28,7 +33,7 @@
       "totalCredits": "Tổng credits",
       "totalJobs": "Tổng bản dịch",
       "processing": "Đang xử lý",
-      "completedThisMonth": "Hoàn thành tháng này",
+      "completedThisMonth": "Hoàn thành tháng",
       "loadErrorTitle": "Không thể tải thống kê",
       "loadErrorDescription": "Đã xảy ra lỗi khi lấy dữ liệu tổng quan. Vui lòng thử lại.",
       "retry": "Thử lại",
@@ -50,14 +55,14 @@
       "noResultsHint": "Thử từ khóa khác",
       "noJobResults": "Không tìm thấy bản dịch phù hợp",
       "noGlossaryResults": "Không tìm thấy bộ thuật ngữ phù hợp",
-      "unknownFile": "File không xác định",
+      "unknownFile": "Tệp không xác định",
       "typeToSearch": "Nhập từ khóa để tìm kiếm",
       "hint": "Tìm chức năng, bản dịch và bộ thuật ngữ",
       "navigate": "để điều hướng",
       "select": "để chọn",
       "close": "để đóng",
       "dashboardDesc": "Tổng quan hoạt động dịch thuật",
-      "documentsDesc": "Dịch tài liệu và phụ đề",
+      "documentsDesc": "Dịch tài liệu",
       "glossaryDesc": "Quản lý bộ từ điển thuật ngữ",
       "historyDesc": "Xem tất cả bản dịch của bạn",
       "settingsDesc": "Tài khoản, tùy chọn và bảo mật",
@@ -121,12 +126,20 @@
     },
     "charts": {
       "jobsByDay": "Tổng quan hoạt động",
-      "creditAllocation": "Phân bổ credits",
+      "creditAllocation": "Sử dụng credits",
       "loadErrorTitle": "Không thể tải biểu đồ",
       "loadErrorDescription": "Đã xảy ra lỗi khi lấy dữ liệu biểu đồ. Vui lòng thử lại.",
       "retry": "Thử lại",
       "noUsageInfo": "Chưa có thông tin sử dụng credit",
-      "documents": "Tài liệu",
+      "noUsageDescription": "Dữ liệu sẽ hiển thị khi bạn sử dụng credits cho dịch thuật.",
+      "topLanguages": {
+        "title": "Top ngôn ngữ được dịch nhiều nhất",
+        "vietnamese": "Tiếng Việt",
+        "english": "Tiếng Anh",
+        "japanese": "Tiếng Nhật",
+        "credits": "credits"
+      },
+      "jobs": "Bản dịch",
       "remaining": "Còn lại"
     },
     "status": {
@@ -137,7 +150,7 @@
     },
     "history": {
       "title": "Lịch sử dịch thuật",
-      "description": "Xem tất cả các bản dịch và trạng thái của chúng.",
+      "description": "Xem lại lịch sử của tất cả các bản dịch và trạng thái của chúng.",
       "searchPlaceholder": "Tìm kiếm theo tên file...",
       "filterStatus": "Trạng thái",
       "allStatuses": "Tất cả trạng thái",
@@ -150,10 +163,15 @@
       "totalJobs": "{count} bản dịch",
       "pageInfo": "Trang {page}/{totalPages}",
       "fileExpired": "File đã hết hạn",
+      "banner": {
+        "totalJobs": "Tổng bản dịch",
+        "completedJobs": "Đã hoàn thành",
+        "usedCredits": "Credits đã dùng"
+      },
       "download": {
         "label": "Tải xuống",
-        "original": "File gốc",
-        "translated": "File đã dịch"
+        "original": "Tệp gốc",
+        "translated": "Tệp đã dịch"
       },
       "columns": {
         "credits": "Credits"
@@ -163,9 +181,9 @@
         "timing": "Thời gian",
         "createdAt": "Tạo lúc",
         "completedAt": "Hoàn thành lúc",
-        "inputFile": "File gốc",
-        "outputFile": "File đã dịch",
-        "fileExpired": "File đã hết hạn",
+        "inputFile": "Tệp gốc",
+        "outputFile": "Tệp đã dịch",
+        "fileExpired": "Tệp đã hết hạn",
         "creditCost": "Chi phí Credits",
         "breakdown": {
           "service": "Dịch vụ",

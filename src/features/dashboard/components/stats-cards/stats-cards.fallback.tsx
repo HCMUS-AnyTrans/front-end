@@ -11,7 +11,10 @@ export function StatsCardsLoading() {
     <div className="grid grid-cols-2 gap-2 sm:gap-4 md:grid-cols-4 md:gap-6">
       {Array.from({ length: 4 }).map((_, i) => {
         return (
-          <DashboardCard key={i}>
+          <DashboardCard
+            key={i}
+            className="rounded-xl border border-white/60 bg-white/45 shadow-xs backdrop-blur-md dark:border-white/10 dark:bg-black/40"
+          >
             <DashboardCardContent
               padding="all"
               className="flex flex-col gap-2 p-3 sm:gap-3 sm:p-4 md:gap-4 md:p-6"

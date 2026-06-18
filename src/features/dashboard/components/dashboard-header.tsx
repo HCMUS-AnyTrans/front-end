@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
-import { Search, ChevronDown, Coins, CreditCard, X } from 'lucide-react';
+import { Search, ChevronDown, CreditCard, X } from 'lucide-react';
 import { SearchDropdown, type SearchDropdownHandle } from './command-palette';
 import { Link } from '@/i18n/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -49,18 +49,18 @@ export function DashboardHeader() {
   }, [handleKeyDown]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex h-(--dashboard-header-height) items-center justify-between border-b border-border bg-background px-4 lg:px-6">
+    <header className="sticky top-0 z-40 flex h-(--dashboard-header-height) items-center justify-between border-b border-border bg-background/75 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/65 lg:px-6">
       {/* ── Logo ── */}
       <div className="flex min-w-0 items-center gap-2 md:gap-6">
         <SidebarTrigger className="md:hidden" />
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2 md:hidden">
           <div className="relative h-8 w-8 shrink-0">
             <Image
-              src="/logo.svg"
+              src="/shared/logo.svg"
               alt="AnyTrans Logo"
               fill
+              unoptimized
               className="object-contain"
-              priority
             />
           </div>
           <span className="text-lg font-bold tracking-tight text-primary">
@@ -121,7 +121,15 @@ export function DashboardHeader() {
                 className="hover:bg-secondary/10 hover:border-secondary hover:text-secondary text-secondary hidden h-9 items-center gap-2 rounded-full border border-input px-3 text-sm md:flex"
                 title="Credits"
               >
-                <Coins className="size-4 " />
+                <Image
+                  src="/shared/credit.png"
+                  alt="Credits"
+                  width={64}
+                  height={64}
+                  quality={100}
+                  sizes="64px"
+                  className="size-4"
+                />
                 <span className="font-semibold   tabular-nums">
                   {(wallet?.balance ?? 0).toLocaleString(
                     locale === 'vi' ? 'vi-VN' : 'en-US',
@@ -139,7 +147,15 @@ export function DashboardHeader() {
                 }}
               >
                 <button type="button" className="flex w-full items-center">
-                  <Coins className="mr-2 size-4 text-primary" />
+                  <Image
+                    src="/shared/credit.png"
+                    alt="Credits"
+                    width={64}
+                    height={64}
+                    quality={100}
+                    sizes="64px"
+                    className="mr-2 size-4"
+                  />
                   {tHeaderMenu('buyMoreCredits')}
                 </button>
               </DropdownMenuItem>

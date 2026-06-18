@@ -2,6 +2,12 @@
   "glossary": {
     "title": "Glossary",
     "description": "Manage your specialized terminology dictionaries for more accurate translations.",
+    "banner": {
+      "eyebrow": "Glossary Management",
+      "glossaries": "Glossaries",
+      "languagePairs": "Language pairs",
+      "terms": "Total terms"
+    },
     "searchPlaceholder": "Search glossaries...",
     "filterDomain": "Domain",
     "allDomains": "All domains",

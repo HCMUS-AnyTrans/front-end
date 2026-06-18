@@ -1,10 +1,13 @@
 'use client';
 
 import { useState, useDeferredValue } from 'react';
+import type { ReactNode } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
-import { Plus } from 'lucide-react';
+import { BookOpenText, FileText, Globe2, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { AppCard, AppCardContent } from '@/components/ui/app-card';
 import { Pagination } from '@/components/ui/pagination';
 import { useDomains } from '@/features/domains';
 import { useGlossaries } from '../../hooks/use-glossaries';
@@ -64,11 +67,16 @@ export function GlossaryContent() {
           ...(srcLangFilter !== 'all' && { srcLang: srcLangFilter }),
         };
 
-  const { glossaries, pagination, isLoading, isError, isFetching } =
+  const { glossaries, pagination, summary, isLoading, isError, isFetching } =
     useGlossaries(queryParams);
   const visibleGlossaries = (glossaries ?? []).filter(
     (glossary) => glossary.status !== 'failed',
   );
+  const stats = {
+    glossaries: summary?.totalGlossaries ?? 0,
+    languagePairs: summary?.totalPairs ?? 0,
+    terms: summary?.totalTerms ?? 0,
+  };
 
   const hasFilters =
     search !== '' || effectiveDomainFilter !== 'all' || srcLangFilter !== 'all';
@@ -116,8 +124,56 @@ export function GlossaryContent() {
   // ─── Render ─────────────────────────────────────────────────────────
   return (
     <>
+      <AppCard className="overflow-hidden rounded-xl border dark:bg-card">
+        <AppCardContent
+          padding="none"
+          className="relative min-h-[264px] overflow-hidden p-6 sm:min-h-[260px] sm:p-8 lg:min-h-[264px] lg:p-10 dark:bg-[linear-gradient(135deg,#0e1e38_0%,#061024_100%)] dark:border-primary/15"
+        >
+          <Image
+            src="/glossary/glossary-banner.png"
+            alt="Glossary Banner"
+            fill
+            preload
+            unoptimized
+            className="absolute inset-0 h-full w-full object-cover object-[65%_center] opacity-80 dark:opacity-60 lg:object-center"
+          />
+          <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-card via-card/85 to-card/45 dark:block" />
+          <div className="relative z-10 flex max-w-xl flex-col gap-5">
+            <div className="space-y-3">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                  {t('title')}
+                </h2>
+                <p className="max-w-sm text-sm leading-6 text-muted-foreground sm:text-base">
+                  {t('description')}
+                </p>
+              </div>
+            </div>
+
+            <div className="grid max-w-[580px] grid-cols-1 overflow-hidden rounded-xl border border-white/60 bg-white/45 shadow-xs backdrop-blur-md dark:border-white/10 dark:bg-black/15 sm:grid-cols-3">
+              <GlossaryStat
+                icon={<BookOpenText className="size-5" />}
+                value={stats.glossaries}
+                label={t('banner.glossaries')}
+              />
+              <GlossaryStat
+                icon={<Globe2 className="size-5" />}
+                value={stats.languagePairs}
+                label={t('banner.languagePairs')}
+              />
+              <GlossaryStat
+                icon={<FileText className="size-5" />}
+                value={stats.terms}
+                label={t('banner.terms')}
+                className="sm:border-r-0"
+              />
+            </div>
+          </div>
+        </AppCardContent>
+      </AppCard>
+
       {/* Toolbar: filters + create button */}
-      <div className="mb-6 flex flex-col gap-3 sm:flex-row">
+      <div className="flex flex-col gap-3 sm:flex-row">
         <GlossaryFilters
           search={search}
           onSearchChange={handleSearchChange}
@@ -127,8 +183,7 @@ export function GlossaryContent() {
           onSrcLangChange={handleSrcLangChange}
         />
         <Button
-          size="sm"
-          className="w-full shrink-0 sm:w-auto"
+          className="h-10 w-full shrink-0 rounded-md px-4 sm:w-auto"
           onClick={handleCreateOpen}
         >
           <Plus className="size-4" />
@@ -184,5 +239,35 @@ export function GlossaryContent() {
         glossary={selectedGlossary}
       />
     </>
+  );
+}
+
+function GlossaryStat({
+  icon,
+  value,
+  label,
+  className,
+}: {
+  icon: ReactNode;
+  value: number;
+  label: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`flex items-center gap-3 border-b border-white/40 px-4 py-3 last:border-b-0 sm:border-b-0 sm:border-r dark:border-white/10 ${className ?? ''}`}
+    >
+      <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+        {icon}
+      </div>
+      <div className="min-w-0">
+        <div className="text-lg font-bold leading-none text-foreground">
+          {value}
+        </div>
+        <div className="mt-1 text-xs font-medium text-muted-foreground">
+          {label}
+        </div>
+      </div>
+    </div>
   );
 }

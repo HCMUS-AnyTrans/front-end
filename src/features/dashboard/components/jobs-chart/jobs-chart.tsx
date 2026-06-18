@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
-import { useTranslations } from "next-intl";
-import { CardTitle } from "@/components/ui/card";
+import { useTranslations } from 'next-intl';
+import { CardTitle } from '@/components/ui/card';
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from "@/components/ui/chart";
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { useJobsChart } from "../../hooks";
+} from '@/components/ui/chart';
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { useJobsChart } from '../../hooks';
 import {
   DashboardCard,
   DashboardCardContent,
   DashboardCardHeader,
-} from "../dashboard-card";
-import { JobsChartError, JobsChartLoading } from "./jobs-chart.fallback";
+} from '../dashboard-card';
+import { JobsChartError, JobsChartLoading } from './jobs-chart.fallback';
 
 export function JobsChart() {
-  const t = useTranslations("dashboard.charts");
+  const t = useTranslations('dashboard.charts');
   const isMobile = useIsMobile();
   const { chartData, isLoading, isError, refetch, isFetching } = useJobsChart();
 
   const chartConfig = {
-    document: {
-      label: t("documents"),
-      color: "var(--color-chart-1)",
+    jobs: {
+      label: t('jobs'),
+      color: 'var(--color-chart-1)',
     },
   } satisfies ChartConfig;
 
@@ -39,11 +39,14 @@ export function JobsChart() {
     <DashboardCard className="h-full">
       <DashboardCardHeader>
         <CardTitle className="text-base font-semibold text-foreground">
-          {t("jobsByDay")}
+          {t('jobsByDay')}
         </CardTitle>
       </DashboardCardHeader>
       <DashboardCardContent>
-        <ChartContainer config={chartConfig} className="h-[140px] w-full sm:h-[160px] md:h-[180px]">
+        <ChartContainer
+          config={chartConfig}
+          className="h-[140px] w-full sm:h-[160px] md:h-[180px]"
+        >
           <AreaChart
             data={chartData}
             margin={{
@@ -86,11 +89,11 @@ export function JobsChart() {
               }
             />
             <Area
-              dataKey="document"
+              dataKey="jobs"
               type="linear"
-              fill="var(--color-document)"
+              fill="var(--color-jobs)"
               fillOpacity={0.4}
-              stroke="var(--color-document)"
+              stroke="var(--color-jobs)"
             />
           </AreaChart>
         </ChartContainer>
@@ -98,7 +101,7 @@ export function JobsChart() {
           <div className="flex items-center gap-2">
             <div className="h-2.5 w-2.5 rounded-sm bg-chart-1" />
             <span className="text-xs text-muted-foreground">
-              {t("documents")}
+              {t('jobs')}
             </span>
           </div>
         </div>

@@ -1,0 +1,72 @@
+{
+  "templates": {
+    "title": "Translation Templates",
+    "description": "Create reusable translation configurations for your documents.",
+    "banner": {
+      "templates": "Templates",
+      "instructions": "With instructions",
+      "domains": "Domains"
+    },
+    "createTemplate": "Create Template",
+    "editTemplate": "Edit Template",
+    "backToList": "Back to templates",
+    "searchPlaceholder": "Search templates...",
+    "filterDomain": "Domain",
+    "allDomains": "All domains",
+    "noTemplates": "No templates yet",
+    "noTemplatesDescription": "Create a template to reuse language, domain, tone, and instruction settings.",
+    "noResults": "No results found",
+    "noResultsDescription": "Try adjusting your search or filters.",
+    "loadErrorTitle": "Unable to load templates",
+    "loadErrorDescription": "Something went wrong while loading templates. Please try again.",
+    "retry": "Retry",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteTemplate": "Delete template",
+    "deleteConfirm": "This template will be permanently deleted.",
+    "deleteSuccess": "Template deleted",
+    "createSuccess": "Template created",
+    "updateSuccess": "Template updated",
+    "saveError": "Unable to save template",
+    "deleteError": "Unable to delete template",
+    "columns": {
+      "name": "Name",
+      "languages": "Languages",
+      "domain": "Domain",
+      "updatedAt": "Updated",
+      "actions": "Actions"
+    },
+    "fields": {
+      "name": "Name",
+      "sourceLanguage": "Source language",
+      "targetLanguage": "Target language",
+      "domain": "Domain",
+      "customizedDomain": "Customized domain",
+      "documentTone": "Document tone",
+      "glossary": "Glossary",
+      "glossaryAndFontAndPdf": "Glossary, Font and PDF Format",
+      "pdfTranslationFlow": "PDF translation flow",
+      "preservePdfFormat": "Preserve PDF format",
+      "keepOriginalFontSize": "Keep original font size",
+      "customInstruction": "Custom instruction",
+      "templateInstructionBtn": "Templates",
+      "globalContext": "Global context",
+      "createdAt": "Created at",
+      "updatedAt": "Updated at"
+    },
+    "form": {
+      "namePlaceholder": "e.g. Legal contract EN to VI",
+      "customDomainPlaceholder": "Enter a custom domain",
+      "customDomainRequired": "Custom domain is required when domain is Other.",
+      "customInstructionPlaceholder": "Add translation rules, terminology preferences, or style guidance...",
+      "globalContextPlaceholder": "Add background context or a summary of documents using this template...",
+      "saving": "Saving...",
+      "deleting": "Deleting..."
+    },
+    "detail": {
+      "title": "Template details",
+      "emptyValue": "-"
+    }
+  }
+}

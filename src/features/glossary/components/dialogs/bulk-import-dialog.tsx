@@ -324,7 +324,7 @@ export function BulkImportDialog({
               {/* Upload drop zone */}
               <div
                 className={cn(
-                  'group relative flex flex-col items-center gap-3 rounded-2xl border-2 border-dashed px-6 py-7 text-center transition-all duration-150',
+                  'group relative flex flex-col items-center gap-3 rounded-xl border-2 border-dashed px-6 py-7 text-center transition-all duration-150',
                   isDragOver
                     ? 'border-primary bg-primary/5'
                     : 'border-border bg-muted/30 hover:border-primary/50 hover:bg-primary/2',

@@ -1,34 +1,32 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
-import { Toaster } from "sonner";
-import "./globals.css";
-import { ThemeProvider, Providers } from "@/components/providers";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono, Playfair_Display } from 'next/font/google';
+import { Toaster } from 'sonner';
+import './globals.css';
+import { ThemeProvider, Providers } from '@/components/providers';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair-display",
-  subsets: ["latin"],
+  variable: '--font-playfair-display',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "AnyTrans - Professional Document Translation",
+  title: 'AnyTrans - Professional Document Translation',
   description:
-    "Fast, accurate document translation powered by AI. Preserves original formatting.",
+    'Fast, accurate document translation powered by AI. Preserves original formatting.',
   icons: {
-    icon: [
-      { url: "/logo.svg", type: "image/svg+xml" },
-    ],
+    icon: [{ url: '/shared/logo.svg', type: 'image/svg+xml' }],
     apple: [
-      { url: "/logo.svg", sizes: "180x180", type: "image/svg+xml" },
+      { url: '/shared/logo.svg', sizes: '180x180', type: 'image/svg+xml' },
     ],
   },
 };

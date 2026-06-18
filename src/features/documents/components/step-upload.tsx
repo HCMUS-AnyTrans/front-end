@@ -101,16 +101,16 @@ export function StepUpload({
   );
 
   return (
-    <div className="mx-auto max-w-2xl">
+    <div className="mx-auto max-w-4xl">
       {/* ── Dropzone / File Preview ── */}
       <div
         className={cn(
-          'relative overflow-hidden rounded-2xl border-2 transition-all duration-200',
+          'relative overflow-hidden rounded-xl border transition-all duration-200',
           isDragging
             ? 'border-primary bg-primary/5 shadow-[0_0_0_4px_var(--ring-glow)]'
             : file
               ? 'border-border bg-card'
-              : 'border-dashed border-border bg-card hover:border-primary/50 hover:bg-primary/2',
+              : 'border-border/70 bg-[#eef5ff] hover:bg-[#e6f0ff] dark:bg-[linear-gradient(135deg,#0e1e38_0%,#061024_100%)] dark:border-primary/15 dark:hover:bg-[linear-gradient(135deg,#112344_0%,#08142b_100%)]',
         )}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
@@ -118,12 +118,11 @@ export function StepUpload({
         onDragLeave={handleDragLeave}
       >
         {!file && (
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,var(--primary-faint),transparent)]" />
+          <div className="pointer-events-none absolute inset-2 rounded-[22px] border-2 border-dashed border-primary/30" />
         )}
 
         {!file ? (
           <StepUploadEmpty
-            isDragging={isDragging}
             isBusy={isBusy}
             onOpenPicker={openPicker}
             onDropzoneKeyDown={handleDropzoneKeyDown}

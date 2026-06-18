@@ -1,0 +1,72 @@
+{
+  "templates": {
+    "title": "Mẫu dịch",
+    "description": "Tạo cấu hình dịch thuật dùng lại cho tài liệu của bạn.",
+    "banner": {
+      "templates": "Mẫu dịch",
+      "instructions": "Có hướng dẫn",
+      "domains": "Lĩnh vực"
+    },
+    "createTemplate": "Tạo mẫu dịch",
+    "editTemplate": "Chỉnh sửa mẫu dịch",
+    "backToList": "Quay lại danh sách",
+    "searchPlaceholder": "Tìm template...",
+    "filterDomain": "Lĩnh vực",
+    "allDomains": "Tất cả lĩnh vực",
+    "noTemplates": "Chưa có mẫu dịch",
+    "noTemplatesDescription": "Tạo mẫu dịch để dùng lại cấu hình ngôn ngữ, lĩnh vực, giọng điệu và hướng dẫn dịch.",
+    "noResults": "Không tìm thấy kết quả",
+    "noResultsDescription": "Thử thay đổi từ khóa hoặc bộ lọc.",
+    "loadErrorTitle": "Không thể tải template",
+    "loadErrorDescription": "Đã xảy ra lỗi khi tải danh sách template. Vui lòng thử lại.",
+    "retry": "Thử lại",
+    "view": "Xem",
+    "edit": "Sửa",
+    "delete": "Xóa",
+    "deleteTemplate": "Xóa mẫu dịch",
+    "deleteConfirm": "Mẫu dịch này sẽ bị xóa vĩnh viễn.",
+    "deleteSuccess": "Đã xóa mẫu dịch",
+    "createSuccess": "Đã tạo mẫu dịch",
+    "updateSuccess": "Đã cập nhật mẫu dịch",
+    "saveError": "Không thể lưu mẫu dịch",
+    "deleteError": "Không thể xóa mẫu dịch",
+    "columns": {
+      "name": "Tên",
+      "languages": "Ngôn ngữ",
+      "domain": "Lĩnh vực",
+      "updatedAt": "Cập nhật",
+      "actions": "Thao tác"
+    },
+    "fields": {
+      "name": "Tên",
+      "sourceLanguage": "Ngôn ngữ nguồn",
+      "targetLanguage": "Ngôn ngữ đích",
+      "domain": "Lĩnh vực",
+      "customizedDomain": "Lĩnh vực tùy chỉnh",
+      "documentTone": "Giọng điệu dịch",
+      "glossary": "Bảng thuật ngữ",
+      "glossaryAndFontAndPdf": "Bảng thuật ngữ, Phông và Format PDF",
+      "pdfTranslationFlow": "Luồng dịch PDF",
+      "preservePdfFormat": "Giữ định dạng PDF",
+      "keepOriginalFontSize": "Giữ nguyên cỡ chữ gốc",
+      "customInstruction": "Thêm hướng dẫn",
+      "templateInstructionBtn": "Mẫu hướng dẫn",
+      "globalContext": "Ngữ cảnh chung",
+      "createdAt": "Ngày tạo",
+      "updatedAt": "Ngày cập nhật"
+    },
+    "form": {
+      "namePlaceholder": "Ví dụ: Hợp đồng pháp lý",
+      "customDomainPlaceholder": "Nhập lĩnh vực tùy chỉnh",
+      "customDomainRequired": "Vui lòng nhập lĩnh vực tùy chỉnh khi chọn domain Khác.",
+      "customInstructionPlaceholder": "Nhập quy tắc dịch, thuật ngữ ưu tiên hoặc hướng dẫn văn phong...",
+      "globalContextPlaceholder": "Nhập bối cảnh hoặc tóm tắt tài liệu dùng template này...",
+      "saving": "Đang lưu...",
+      "deleting": "Đang xóa..."
+    },
+    "detail": {
+      "title": "Chi tiết mẫu dịch",
+      "emptyValue": "-"
+    }
+  }
+}

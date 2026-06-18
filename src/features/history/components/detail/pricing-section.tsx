@@ -1,7 +1,7 @@
 'use client';
 
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { Coins } from 'lucide-react';
 import type { TranslationJobResponse } from '@/types';
 
 interface HistoryJobDetailPricingSectionProps {
@@ -24,7 +24,15 @@ export function HistoryJobDetailPricingSection({
           {t('detail.creditCost')}
         </p>
         <div className="flex items-center gap-1.5">
-          <Coins className="size-3.5 text-warning" />
+          <Image
+            src="/shared/credit.png"
+            alt="Credits"
+            width={64}
+            height={64}
+            quality={100}
+            sizes="64px"
+            className="size-3.5 shrink-0"
+          />
           <span className="font-semibold tabular-nums text-foreground">
             {job.cost_credits}
           </span>

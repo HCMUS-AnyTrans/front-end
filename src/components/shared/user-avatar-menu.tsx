@@ -10,6 +10,7 @@ import {
   FolderOpen,
   History,
   LayoutDashboard,
+  FileText,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -91,6 +92,12 @@ export function UserAvatarMenu({
                 {tSidebar("dashboard")}
               </Link>
             </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/documents">
+                <FileText className="mr-2 size-4" />
+                {tSidebar("documents")}
+              </Link>
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
           </>
         )}
@@ -152,6 +159,7 @@ export function UserAvatarMenu({
 /** Menu items config for rendering in mobile/list layouts */
 export const userMenuItemsConfig = [
   { href: "/dashboard", icon: LayoutDashboard, labelKey: "dashboard", ns: "sidebar" as const },
+  { href: "/documents", icon: FileText, labelKey: "documents", ns: "sidebar" as const },
   { href: "/settings?tab=profile", icon: User, labelKey: "profile", ns: "sidebar" as const },
   { href: "/settings?tab=billing", icon: CreditCard, labelKey: "payment", ns: "headerMenu" as const },
   { href: "/settings?tab=notifications", icon: Bell, labelKey: "notifications", ns: "headerMenu" as const },
@@ -187,7 +195,7 @@ export function UserMenuList({
 
   const items = showDashboardLink
     ? userMenuItemsConfig
-    : userMenuItemsConfig.filter((i) => i.href !== "/dashboard");
+    : userMenuItemsConfig.filter((i) => i.href !== "/dashboard" && i.href !== "/documents");
 
   return (
     <div className="flex flex-col gap-1">

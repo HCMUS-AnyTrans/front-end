@@ -15,7 +15,7 @@ export interface JobsChartQuery {
 }
 
 /**
- * Query parameters for the credits allocation chart.
+ * Query parameters for the source language credit usage chart.
  */
 export interface CreditsChartQuery {
   period?: 'week' | 'month' | 'quarter' | 'year';
@@ -27,7 +27,6 @@ export interface CreditsChartQuery {
 export interface RecentJobsQuery {
   page?: number;
   limit?: number;
-  job_type?: 'document' | 'subtitle';
   status?: string;
   domain_id?: string;
   sortBy?: string;

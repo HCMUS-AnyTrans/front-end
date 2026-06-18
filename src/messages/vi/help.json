@@ -1,0 +1,71 @@
+{
+  "help": {
+    "title": "Trung tâm trợ giúp",
+    "description": "Tìm kiếm tài liệu hướng dẫn nhanh, câu hỏi thường gặp hoặc liên hệ bộ phận kỹ thuật.",
+    "searchPlaceholder": "Tìm kiếm câu hỏi...",
+    "faqTitle": "Câu hỏi thường gặp",
+    "noResults": "Không tìm thấy kết quả phù hợp",
+    "categories": {
+      "all": "Tất cả",
+      "general": "Tổng quan",
+      "translation": "Dịch thuật",
+      "glossary": "Thuật ngữ",
+      "billing": "Thanh toán"
+    },
+    "faqs": [
+      {
+        "category": "general",
+        "q": "AnyTrans là gì?",
+        "a": "AnyTrans là nền tảng dịch thuật tài liệu chuyên nghiệp sử dụng công nghệ AI tiên tiến nhất hiện nay. Điểm nổi bật của AnyTrans là khả năng giữ nguyên hoàn hảo định dạng gốc, phông chữ, bảng biểu và cấu trúc phân trang của tài liệu sau khi dịch."
+      },
+      {
+        "category": "general",
+        "q": "Làm cách nào để bắt đầu dịch tài liệu?",
+        "a": "Rất đơn giản! Bạn chỉ cần nhấn vào mục 'Dịch thuật' trên thanh menu, kéo thả tệp tài liệu của bạn vào khu vực tải lên, chọn ngôn ngữ nguồn và đích, sau đó cấu hình các bộ lọc hoặc hướng dẫn nâng cao tùy ý rồi nhấn nút 'Bắt đầu'."
+      },
+      {
+        "category": "translation",
+        "q": "AnyTrans hỗ trợ những định dạng tệp nào?",
+        "a": "Chúng tôi hỗ trợ đầy đủ các định dạng phổ biến nhất hiện nay bao gồm tệp PDF (.pdf), Word (.docx), PowerPoint (.pptx), Excel (.xlsx), tệp văn bản thường (.txt), và các tệp phụ đề SRT (.srt)."
+      },
+      {
+        "category": "translation",
+        "q": "Bố cục tài liệu dịch có bị lệch không?",
+        "a": "Không. AI của AnyTrans được huấn luyện chuyên sâu để hiểu bố cục hình ảnh và vị trí văn bản trong tệp. Tất cả các yếu tố đồ họa, bảng biểu, liên kết và khoảng cách dòng đều sẽ được căn chỉnh khớp hoàn hảo như tệp gốc."
+      },
+      {
+        "category": "glossary",
+        "q": "Thuật ngữ (Glossary) hoạt động như thế nào?",
+        "a": "Glossary cho phép bạn tạo một từ điển riêng cho các thuật ngữ đặc thù, tên thương hiệu hoặc từ viết tắt. Khi tiến hành dịch thuật, AI sẽ ưu tiên áp dụng đúng các cụm từ trong Glossary đã chọn để đảm bảo tính chính xác và nhất quán tuyệt đối."
+      },
+      {
+        "category": "glossary",
+        "q": "Tôi có thể nhập tệp Glossary từ bên ngoài không?",
+        "a": "Có, bạn hoàn toàn có thể nhập tệp thuật ngữ có định dạng CSV hoặc Excel để tạo nhanh từ điển Glossary của mình mà không cần phải nhập thủ công từng thuật ngữ."
+      },
+      {
+        "category": "billing",
+        "q": "Hệ thống Credit hoạt động ra sao?",
+        "a": "AnyTrans sử dụng hệ thống Credit để thanh toán chi phí dịch thuật. Mỗi trang tài liệu dịch hoặc số lượng từ dịch sẽ tương ứng với một lượng Credit nhỏ. Trước khi bắt đầu một tiến trình dịch, hệ thống sẽ đưa ra ước lượng Credit chính xác để bạn xác nhận."
+      },
+      {
+        "category": "billing",
+        "q": "Làm cách nào để nạp thêm Credit?",
+        "a": "Bạn có thể vào mục Cài đặt > Thanh toán hoặc nhấn nhanh nút 'Nạp Credit' ở thanh điều hướng phía trên. Tại đây, hãy chọn gói Credit bạn cần và thực hiện thanh toán chuyển khoản quét mã QR tự động qua cổng PayOS/VNPay cực kỳ an toàn và tức thì."
+      }
+    ],
+    "support": {
+      "title": "Bạn cần hỗ trợ thêm?",
+      "description": "Nếu bạn gặp sự cố kỹ thuật hoặc lỗi giao dịch, hãy tạo yêu cầu hỗ trợ trực tiếp tới chúng tôi.",
+      "email": "support@anytrans.me",
+      "hours": "8:00 - 22:00 hàng ngày",
+      "button": "Gửi Email Hỗ Trợ"
+    },
+    "resources": {
+      "title": "Liên kết hữu ích",
+      "translate": "Bắt đầu dịch thuật",
+      "preferences": "Cấu hình ngôn ngữ & giao diện",
+      "billing": "Lịch sử mua credit"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -11,8 +12,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { ArrowRight, Coins, Eye } from 'lucide-react';
+import { ArrowRight, Eye } from 'lucide-react';
 import { FileTypeIcon } from '@/components/shared/file-type-icon';
+import { LanguageLabel } from '@/components/shared/language-label';
 import { getJobStatusConfig } from '@/features/dashboard/data';
 import { canPreviewTranslationJob } from '@/features/documents/utils/preview-capabilities';
 import type { TranslationJobResponse } from '@/types';
@@ -60,7 +62,7 @@ export function HistoryTableRow({
     >
       <TableCell className="max-w-[180px] px-4 py-3.5 sm:max-w-[220px] lg:px-6">
         <div className="flex items-center gap-2">
-          <FileTypeIcon fileName={fileName} className="size-4" />
+          <FileTypeIcon fileName={fileName} className="size-7" />
           <span className="truncate text-sm font-medium text-foreground">
             {fileName}
           </span>
@@ -68,14 +70,10 @@ export function HistoryTableRow({
       </TableCell>
 
       <TableCell className="hidden px-4 py-3.5 sm:table-cell lg:px-6">
-        <div className="flex items-center gap-1 text-sm">
-          <span className="text-xs font-medium text-foreground">
-            {job.src_lang}
-          </span>
+        <div className="flex items-center gap-2 text-sm">
+          <LanguageLabel value={job.src_lang} />
           <ArrowRight className="size-3 shrink-0 text-muted-foreground" />
-          <span className="text-xs font-medium text-foreground">
-            {job.tgt_lang}
-          </span>
+          <LanguageLabel value={job.tgt_lang} />
         </div>
       </TableCell>
 
@@ -90,8 +88,16 @@ export function HistoryTableRow({
 
       <TableCell className="hidden px-4 py-3.5 text-right md:table-cell lg:px-6">
         {job.cost_credits !== undefined ? (
-          <div className="flex items-center justify-end gap-1">
-            <Coins className="size-3.5 text-warning" />
+          <div className="flex items-center justify-end gap-1.5">
+            <Image
+              src="/shared/credit.png"
+              alt="Credits"
+              width={64}
+              height={64}
+              quality={100}
+              sizes="64px"
+              className="size-4 shrink-0"
+            />
             <span className="text-sm font-medium tabular-nums text-foreground">
               {job.cost_credits}
             </span>

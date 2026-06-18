@@ -56,7 +56,7 @@ export function GlossaryTemplatePanel({
   if (templates.length === 0) {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-3 rounded-xl border border-dashed bg-background/70 p-6 text-center">
-        <div className="flex size-14 items-center justify-center rounded-2xl bg-muted text-muted-foreground">
+        <div className="flex size-14 items-center justify-center rounded-xl bg-muted text-muted-foreground">
           <LayoutTemplate className="size-6" />
         </div>
         <div className="space-y-2">

@@ -1,6 +1,20 @@
 'use client';
-
+ 
+import { useState } from 'react';
+import { FileText } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { AppCard, AppCardContent } from '@/components/ui/app-card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 import { LanguageSelector } from './language-selector';
 import { DomainSelector } from './domain-selector';
 import type { DomainOption } from './domain-selector';
@@ -8,6 +22,7 @@ import { ToneSelector } from './tone-selector';
 import { PdfFlowSelector } from './pdf-flow-selector';
 import { GlossarySection } from './glossary-section';
 import { FontConfigurationSection } from './font-configuration-section';
+import { CustomInstructionTemplateDialog } from '@/features/custom-instruction-templates/components/custom-instruction-template-dialog';
 import { ConfigureEstimateCard } from './configure-estimate-card';
 import { ConfigureEstimateSummary } from './configure-estimate-summary';
 import { ConfigureActionsPanel } from './configure-actions-panel';
@@ -15,6 +30,13 @@ import { ConfigureMobileActionBar } from './configure-mobile-action-bar';
 import { useManualTerms } from '../hooks/use-manual-terms';
 import { useStepConfigureState } from '../hooks/use-step-configure-state';
 import { getFontConfigurationApplicable } from '../utils/document-wizard-selectors';
+import { useTranslations } from 'next-intl';
+import type { TranslationTemplate } from '@/features/translation-templates';
+import type { DocTone } from '@/features/doc-tones';
+import {
+  apiLanguageToCode,
+  TEMPLATE_CUSTOM_VALUE,
+} from '@/features/translation-templates';
 import type {
   TranslationConfig,
   LanguageCode,
@@ -29,6 +51,12 @@ import type { CreditEstimateResponse } from '../types';
 interface StepConfigureProps {
   config: TranslationConfig;
   onConfigChange: (updates: Partial<TranslationConfig>) => void;
+  docTones: DocTone[];
+  isLoadingDocTones: boolean;
+  isDocTonesError: boolean;
+  onRetryDocTones: () => void;
+  translationTemplates: TranslationTemplate[];
+  isLoadingTranslationTemplates: boolean;
   glossaries: Glossary[];
   selectedGlossaryTerms: Term[];
   isLoadingGlossaries: boolean;
@@ -58,12 +86,20 @@ interface StepConfigureProps {
   onPdfTranslationFlowChange: (flow: PdfTranslationFlow) => void;
   onBack: () => void;
   onStart: () => void;
+  onStartWithoutTemplate: () => void;
+  onStartWithTemplateSave: () => void;
   isLoading?: boolean;
 }
 
 export function StepConfigure({
   config,
   onConfigChange,
+  docTones,
+  isLoadingDocTones,
+  isDocTonesError,
+  onRetryDocTones,
+  translationTemplates,
+  isLoadingTranslationTemplates,
   glossaries,
   selectedGlossaryTerms,
   isLoadingGlossaries,
@@ -93,8 +129,12 @@ export function StepConfigure({
   onPdfTranslationFlowChange,
   onBack,
   onStart,
+  onStartWithoutTemplate,
+  onStartWithTemplateSave,
   isLoading,
 }: StepConfigureProps) {
+  const t = useTranslations('documents.configure');
+  const tTemplates = useTranslations('templates');
   const isUnknownSelectedDomain =
     Boolean(config.domainId) && !isLoadingDomains && !selectedDomainKey;
   const isFontConfigurationApplicable = getFontConfigurationApplicable({
@@ -117,6 +157,7 @@ export function StepConfigure({
       isFontConfigurationApplicable,
       isLoading,
     });
+  const [templateDialogOpen, setTemplateDialogOpen] = useState(false);
   const { addManualTerm, updateManualTerm, removeManualTerm } = useManualTerms({
     manualTerms: config.manualTerms,
     onConfigChange,
@@ -129,6 +170,43 @@ export function StepConfigure({
   const handleCustomDomainChange = (customDomain: string) =>
     onConfigChange({ customDomain });
   const handleToneChange = (tone: string) => onConfigChange({ tone });
+  const handleCustomInstructionChange = (customInstruction: string) =>
+    onConfigChange({ customInstruction });
+  const handleGlobalContextChange = (globalContext: string) =>
+    onConfigChange({ globalContext });
+  const handleSaveAsTemplateChange = (saveAsTemplate: boolean) =>
+    onConfigChange({ saveAsTemplate });
+  const handleTemplateNameChange = (templateName: string) =>
+    onConfigChange({ templateName });
+  const handleTemplateSelect = (value: string) => {
+    if (value === TEMPLATE_CUSTOM_VALUE) {
+      onConfigChange({
+        templateId: null,
+        saveAsTemplate: false,
+        templateName: '',
+      });
+      return;
+    }
+
+    const template = translationTemplates.find((item) => item.id === value);
+    if (!template) return;
+
+    onConfigChange({
+      templateId: template.id,
+      srcLang: apiLanguageToCode(template.srcLang) ?? config.srcLang,
+      tgtLang: apiLanguageToCode(template.tgtLang) ?? config.tgtLang,
+      domainId: template.domainId,
+      customDomain: template.customizedDomain ?? '',
+      tone: template.docToneId,
+      pdfTranslationFlow: template.pdfTranslationFlow,
+      keepOriginalFontSize: template.keepOriginalFontSize ?? true,
+      useSystemGlossary: template.useSystemGlossary ?? true,
+      customInstruction: template.customInstruction ?? '',
+      globalContext: template.globalContext ?? '',
+      saveAsTemplate: false,
+      templateName: '',
+    });
+  };
   const handleGlossarySelect = (id: string | null) =>
     onConfigChange({ selectedGlossaryId: id, glossaryInputMode: 'saved' });
   const handleGlossaryInputModeChange = (
@@ -153,12 +231,111 @@ export function StepConfigure({
 
   const isStartBlocked =
     isStartDisabled || isLoadingDomains || isUnknownSelectedDomain;
+  const selectedTemplate = config.templateId
+    ? translationTemplates.find((template) => template.id === config.templateId)
+    : null;
+  const hasTemplateChanges = Boolean(
+    selectedTemplate &&
+      (apiLanguageToCode(selectedTemplate.srcLang) !== config.srcLang ||
+        apiLanguageToCode(selectedTemplate.tgtLang) !== config.tgtLang ||
+        selectedTemplate.domainId !== config.domainId ||
+        (selectedTemplate.customizedDomain ?? '') !== config.customDomain ||
+        selectedTemplate.docToneId !== config.tone ||
+        selectedTemplate.pdfTranslationFlow !== config.pdfTranslationFlow ||
+        (selectedTemplate.keepOriginalFontSize ?? true) !==
+          config.keepOriginalFontSize ||
+        (selectedTemplate.useSystemGlossary ?? true) !== config.useSystemGlossary ||
+        (selectedTemplate.customInstruction ?? '') !== config.customInstruction ||
+        (selectedTemplate.globalContext ?? '') !== config.globalContext),
+  );
+  const templateSelectValue = hasTemplateChanges
+    ? TEMPLATE_CUSTOM_VALUE
+    : config.templateId ?? TEMPLATE_CUSTOM_VALUE;
+  const isCustomTemplateState = !config.templateId || hasTemplateChanges;
+  const handleStartClick = () => {
+    if (isCustomTemplateState) {
+      if (config.saveAsTemplate) {
+        onStartWithTemplateSave();
+        return;
+      }
+
+      onStartWithoutTemplate();
+      return;
+    }
+
+    onStart();
+  };
 
   return (
     <div className="mx-auto max-w-6xl space-y-5 pb-24 xl:pb-0">
       <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_340px]">
         {/* Left: config sections */}
         <div className="space-y-4">
+          <AppCard>
+            <AppCardContent className="space-y-4 pt-6">
+              <div className="space-y-2">
+                <Label>{t('templateLabel')}</Label>
+                <Select
+                  value={templateSelectValue}
+                  onValueChange={handleTemplateSelect}
+                  disabled={isLoadingTranslationTemplates}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder={t('templatePlaceholder')} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={TEMPLATE_CUSTOM_VALUE}>
+                      {t('customTemplate')}
+                    </SelectItem>
+                    {config.templateId && !selectedTemplate ? (
+                      <SelectItem value={config.templateId}>
+                        {config.templateName || t('savedCustomTemplate')}
+                      </SelectItem>
+                    ) : null}
+                    {translationTemplates.map((template) => (
+                      <SelectItem key={template.id} value={template.id}>
+                        {template.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {isCustomTemplateState ? (
+                  <div className="space-y-3 rounded-lg border bg-muted/20 p-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="space-y-1">
+                        <p className="text-sm font-medium text-foreground">
+                          {t('saveAsTemplate')}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {t('customTemplateHint')}
+                        </p>
+                      </div>
+                      <Switch
+                        checked={config.saveAsTemplate}
+                        onCheckedChange={handleSaveAsTemplateChange}
+                      />
+                    </div>
+                    {config.saveAsTemplate ? (
+                      <div className="space-y-2">
+                        <Label htmlFor="template-name">
+                          {tTemplates('fields.name')}
+                        </Label>
+                        <Input
+                          id="template-name"
+                          value={config.templateName}
+                          onChange={(event) =>
+                            handleTemplateNameChange(event.target.value)
+                          }
+                          placeholder={tTemplates('form.namePlaceholder')}
+                        />
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
+            </AppCardContent>
+          </AppCard>
+
           <LanguageSelector
             srcLang={config.srcLang}
             tgtLang={config.tgtLang}
@@ -177,13 +354,65 @@ export function StepConfigure({
                 onChange={handleDomainChange}
                 onCustomValueChange={handleCustomDomainChange}
               />
-              <ToneSelector value={config.tone} onChange={handleToneChange} />
+              <ToneSelector
+                tones={docTones}
+                value={config.tone}
+                isLoading={isLoadingDocTones}
+                isError={isDocTonesError}
+                onRetry={onRetryDocTones}
+                onChange={handleToneChange}
+              />
               {isPdfFile ? (
                 <PdfFlowSelector
                   value={pdfTranslationFlow}
                   onChange={onPdfTranslationFlowChange}
                 />
               ) : null}
+            </AppCardContent>
+          </AppCard>
+
+          <AppCard>
+            <AppCardContent className="space-y-5 pt-6">
+              <div className="space-y-1">
+                <h3 className="text-base font-semibold text-foreground">
+                  {t('customRulesTitle')}
+                </h3>
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="custom-instruction">
+                    {t('customInstructionLabel')}
+                  </Label>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setTemplateDialogOpen(true)}
+                  >
+                    <FileText />
+                    {t('templateInstructionBtn')}
+                  </Button>
+                </div>
+                <Textarea
+                  id="custom-instruction"
+                  rows={6}
+                  value={config.customInstruction}
+                  onChange={(event) =>
+                    handleCustomInstructionChange(event.target.value)
+                  }
+                  placeholder={t('customInstructionPlaceholder')}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="global-context">{t('globalContextLabel')}</Label>
+                <Textarea
+                  id="global-context"
+                  rows={6}
+                  value={config.globalContext}
+                  onChange={(event) => handleGlobalContextChange(event.target.value)}
+                  placeholder={t('globalContextPlaceholder')}
+                />
+              </div>
             </AppCardContent>
           </AppCard>
 
@@ -239,13 +468,19 @@ export function StepConfigure({
           />
           <ConfigureActionsPanel
             onBack={onBack}
-            onStart={onStart}
+            onStart={handleStartClick}
             isLoading={isLoading}
             isStartDisabled={isStartBlocked}
             isInsufficientCredits={isInsufficientCredits}
           />
         </div>
       </div>
+
+      <CustomInstructionTemplateDialog
+        open={templateDialogOpen}
+        onOpenChange={setTemplateDialogOpen}
+        onSelect={handleCustomInstructionChange}
+      />
 
       {/* ── Mobile/tablet: estimate summary inline ── */}
       {!isEstimating && estimate && (
@@ -259,7 +494,7 @@ export function StepConfigure({
       {/* ── Mobile sticky action bar ── */}
       <ConfigureMobileActionBar
         onBack={onBack}
-        onStart={onStart}
+        onStart={handleStartClick}
         isLoading={isLoading}
         isStartDisabled={isStartBlocked}
         isInsufficientCredits={isInsufficientCredits}

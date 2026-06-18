@@ -197,12 +197,6 @@ export function GlossarySection({
             </ModeCard>
           </div>
 
-          {glossaryInputMode === "none" ? (
-            <div className="rounded-lg border border-dashed bg-muted/20 px-4 py-3 text-sm text-muted-foreground">
-              {t("glossarySourceNoneSelected")}
-            </div>
-          ) : null}
-
           {totalAppliedTerms > 0 ? (
             <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border bg-background/70 px-3 py-2.5">
               <span className="text-xs text-muted-foreground">{t("termsAppliedLabel")}</span>

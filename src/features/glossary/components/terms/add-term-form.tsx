@@ -41,7 +41,7 @@ export function AddTermForm({
   }
 
   return (
-    <div className="rounded-2xl border bg-card p-5 mb-6">
+    <div className="rounded-xl border bg-card p-5 mb-6">
       <h3 className="text-sm font-semibold mb-4">{t('addNewTerm')}</h3>
       {isTermLimitReached ? (
         <p className="mb-4 text-sm text-muted-foreground">
