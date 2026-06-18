@@ -50,6 +50,7 @@
       "preservePdfFormat": "Giữ định dạng PDF",
       "keepOriginalFontSize": "Giữ nguyên cỡ chữ gốc",
       "customInstruction": "Thêm hướng dẫn",
+      "templateInstructionBtn": "Mẫu hướng dẫn",
       "globalContext": "Ngữ cảnh chung",
       "createdAt": "Ngày tạo",
       "updatedAt": "Ngày cập nhật"
