@@ -157,6 +157,14 @@
         "nonFormatPreservedTitle": "Not format-preserved",
         "nonFormatPreservedDescription": "Uses an alternate PDF translation flow and exports a new PDF without preserving the original layout."
       },
+      "pdfOutputFormat": {
+        "label": "Output format",
+        "description": "Choose the output format for the PDF.",
+        "docxTitle": "DOCX",
+        "docxDescription": "Editable Word document with preserved formatting.",
+        "pptxTitle": "PPTX",
+        "pptxDescription": "Editable PowerPoint presentation with preserved formatting."
+      },
       "back": "Back",
       "saveTemplate": "Save template",
       "savingTemplate": "Saving...",

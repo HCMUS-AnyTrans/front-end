@@ -157,6 +157,14 @@
         "nonFormatPreservedTitle": "Không giữ định dạng",
         "nonFormatPreservedDescription": "Dùng luồng dịch PDF thay thế và xuất ra PDF mới, không giữ bố cục gốc."
       },
+      "pdfOutputFormat": {
+        "label": "Định dạng đầu ra",
+        "description": "Chọn định dạng đầu ra cho tệp PDF.",
+        "docxTitle": "DOCX",
+        "docxDescription": "Tài liệu Word có thể chỉnh sửa, giữ nguyên định dạng.",
+        "pptxTitle": "PPTX",
+        "pptxDescription": "Bài trình chiếu PowerPoint có thể chỉnh sửa, giữ nguyên định dạng."
+      },
       "back": "Quay lại",
       "saveTemplate": "Lưu mẫu dịch",
       "savingTemplate": "Đang lưu...",

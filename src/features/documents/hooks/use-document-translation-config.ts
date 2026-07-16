@@ -103,6 +103,16 @@ export function useDocumentTranslationConfig({
     [],
   );
 
+  const handlePdfOutputFormatChange = useCallback(
+    (format: TranslationConfig['pdfOutputFormat']) => {
+      setConfig((prev) => ({
+        ...prev,
+        pdfOutputFormat: format,
+      }));
+    },
+    [],
+  );
+
   const handleFontEnabledChange = useCallback(
     (fromFont: string, enabled: boolean) => {
       setConfig((prev) => ({
@@ -219,6 +229,7 @@ export function useDocumentTranslationConfig({
     handleFontConfigEnabledChange,
     handleKeepOriginalFontSizeChange,
     handlePdfTranslationFlowChange,
+    handlePdfOutputFormatChange,
     handleFontEnabledChange,
     resetConfig,
   };
