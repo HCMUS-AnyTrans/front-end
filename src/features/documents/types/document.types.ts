@@ -102,6 +102,7 @@ export interface FontSelectionMap {
 }
 
 export type PdfTranslationFlow = 'format_preserved' | 'non_format_preserved';
+export type PdfOutputFormat = 'docx' | 'pptx';
 
 // =============== FILE TYPES ===============
 
@@ -215,7 +216,7 @@ export interface CreateTranslationJobDto {
   keep_original_font_size?: boolean;
   font_replacements?: FontReplacement[];
   use_system_glossary?: boolean;
-  pdf_output_format?: 'docx' | 'pptx';
+  pdf_output_format?: PdfOutputFormat;
   pdf_translation_flow?: PdfTranslationFlow;
   custom_instruction?: string;
   global_context?: string;
@@ -289,6 +290,7 @@ export interface TranslationConfig {
   fontEnabledMap: FontEnabledMap;
   fontSelections: FontSelectionMap;
   pdfTranslationFlow: PdfTranslationFlow;
+  pdfOutputFormat: PdfOutputFormat;
 }
 
 // =============== STEP TYPES ===============

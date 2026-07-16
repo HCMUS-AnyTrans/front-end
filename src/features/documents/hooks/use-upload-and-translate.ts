@@ -196,6 +196,10 @@ function buildJobDto(
     dto.pdf_translation_flow = config.pdfTranslationFlow;
   }
 
+  if (config.pdfOutputFormat) {
+    dto.pdf_output_format = config.pdfOutputFormat;
+  }
+
   if (config.templateId) {
     dto.template_id = config.templateId;
   }
