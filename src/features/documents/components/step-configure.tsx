@@ -20,6 +20,7 @@ import { DomainSelector } from './domain-selector';
 import type { DomainOption } from './domain-selector';
 import { ToneSelector } from './tone-selector';
 import { PdfFlowSelector } from './pdf-flow-selector';
+import { PdfOutputFormatSelector } from './pdf-output-format-selector';
 import { GlossarySection } from './glossary-section';
 import { FontConfigurationSection } from './font-configuration-section';
 import { CustomInstructionTemplateDialog } from '@/features/custom-instruction-templates/components/custom-instruction-template-dialog';
@@ -44,6 +45,7 @@ import type {
   FontCheckItem,
   FontEnabledMap,
   PdfTranslationFlow,
+  PdfOutputFormat,
 } from '../types';
 import type { Glossary, Term } from '@/features/glossary';
 import type { CreditEstimateResponse } from '../types';
@@ -70,6 +72,7 @@ interface StepConfigureProps {
   isLoadingDomains?: boolean;
   isPdfFile: boolean;
   pdfTranslationFlow: PdfTranslationFlow;
+  pdfOutputFormat: PdfOutputFormat;
   fontsUsedByGroup: ParsedFontsByGroup;
   fontCheckItems: FontCheckItem[];
   keepOriginalFontSize: boolean;
@@ -84,6 +87,7 @@ interface StepConfigureProps {
   onFontEnabledChange: (fromFont: string, enabled: boolean) => void;
   onFontSelectionChange: (fromFont: string, toFont: string) => void;
   onPdfTranslationFlowChange: (flow: PdfTranslationFlow) => void;
+  onPdfOutputFormatChange: (format: PdfOutputFormat) => void;
   onBack: () => void;
   onStart: () => void;
   onStartWithoutTemplate: () => void;
@@ -113,6 +117,8 @@ export function StepConfigure({
   isLoadingDomains,
   isPdfFile,
   pdfTranslationFlow,
+  pdfOutputFormat,
+  onPdfOutputFormatChange,
   fontsUsedByGroup,
   fontCheckItems,
   keepOriginalFontSize,
@@ -366,6 +372,12 @@ export function StepConfigure({
                 <PdfFlowSelector
                   value={pdfTranslationFlow}
                   onChange={onPdfTranslationFlowChange}
+                />
+              ) : null}
+              {isPdfFile && pdfTranslationFlow === 'format_preserved' ? (
+                <PdfOutputFormatSelector
+                  value={pdfOutputFormat}
+                  onChange={onPdfOutputFormatChange}
                 />
               ) : null}
             </AppCardContent>

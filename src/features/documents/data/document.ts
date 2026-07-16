@@ -30,4 +30,5 @@ export const defaultConfig: TranslationConfig = {
   fontEnabledMap: {},
   fontSelections: {},
   pdfTranslationFlow: 'format_preserved',
+  pdfOutputFormat: 'docx',
 };

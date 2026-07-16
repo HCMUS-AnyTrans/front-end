@@ -102,6 +102,7 @@ export function useDocumentTranslationWizardData() {
     handleFontConfigEnabledChange,
     handleKeepOriginalFontSizeChange,
     handlePdfTranslationFlowChange,
+    handlePdfOutputFormatChange,
     handleFontEnabledChange,
     resetConfig,
   } = useDocumentTranslationConfig({
@@ -233,6 +234,7 @@ export function useDocumentTranslationWizardData() {
     handleFontSelectionChange,
     handleKeepOriginalFontSizeChange,
     handlePdfTranslationFlowChange,
+    handlePdfOutputFormatChange,
     isCheckingFonts,
     isDownloading,
     isFontConfigurationEnabledForFlow,
